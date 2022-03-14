@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>819008749583-je43bvpml1m0seae7ho57a2hhqid5oh1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.819008749583-je43bvpml1m0seae7ho57a2hhqid5oh1</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>819008749583-im71e8ki7pls4on7s5tiihjsai42sji9.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA4P0GefTOZO5C9ID5sCsHMhRBnKx0aQ6U</string>
+	<key>GCM_SENDER_ID</key>
+	<string>819008749583</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.flutterflow.evifinance</string>
+	<key>PROJECT_ID</key>
+	<string>evi-finance-db1</string>
+	<key>STORAGE_BUCKET</key>
+	<string>evi-finance-db1.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:819008749583:ios:faf7be54229ad62268637a</string>
+</dict>
+</plist>
