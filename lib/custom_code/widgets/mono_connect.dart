@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 import 'package:mono_flutter/mono_flutter.dart';
 //import '../backend/backend.dart';
+import 'package:evi_finance/backend/schema/users_record.dart';
 
 class MonoConnect extends StatefulWidget {
   const MonoConnect({
@@ -32,13 +33,12 @@ class _MonoConnectState extends State<MonoConnect> {
         onClosed: () {
           print('Modal closed');
         },
-        onSuccess: (code) {
+        onSuccess: (code) async {
           print('Mono Success $code');
-          final testCreateData = createTestRecordData(
-            auth: 'Are you happy?',
-            masdf: '$code',
+          final usersUpdateData = createUsersRecordData(
+            tempAuthCode: '$code',
           );
-          TestRecord.collection.doc().set(testCreateData);
+          await currentUserReference.update(usersUpdateData);
 
           //Navigator.pop(context, code);
           //final aMono = code;
