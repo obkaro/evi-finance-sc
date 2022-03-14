@@ -238,6 +238,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
 
                                   final usersCreateData = createUsersRecordData(
                                     email: inputEmailController.text,
+                                    createdTime: getCurrentTimestamp,
                                   );
                                   await UsersRecord.collection
                                       .doc(user.uid)

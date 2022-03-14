@@ -115,7 +115,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     obscureText: !inputPasswordVisibility,
                                     decoration: InputDecoration(
                                       labelText: 'Password',
-                                      hintText: 'Passworf',
+                                      hintText: 'Input your password',
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Colors.black,
