@@ -1,8 +1,11 @@
+import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../link_mono/link_mono_widget.dart';
 import '../link_mono_copy/link_mono_copy_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,6 +17,7 @@ class TransactionsWidget extends StatefulWidget {
 }
 
 class _TransactionsWidgetState extends State<TransactionsWidget> {
+  ApiCallResponse permKey;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -59,12 +63,11 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => LinkMonoWidget(),
-                                    ),
-                                  );
+                                  final usersUpdateData = {
+                                    'income': FieldValue.delete(),
+                                  };
+                                  await currentUserReference
+                                      .update(usersUpdateData);
                                 },
                                 text: 'Link Account',
                                 options: FFButtonOptions(
@@ -94,6 +97,26 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                     builder: (context) => LinkMonoCopyWidget(),
                                   ),
                                 );
+                                permKey = await GetPermanentAuthCall.call(
+                                  tempKey: currentUserDocument?.tempAuthCode,
+                                );
+
+                                final userAuthCodesCreateData =
+                                    createUserAuthCodesRecordData(
+                                  user: currentUserReference,
+                                  authCode: valueOrDefault<String>(
+                                    getJsonField(
+                                      (permKey?.jsonBody ?? ''),
+                                      r'''$.id''',
+                                    ).toString(),
+                                    'no key detected',
+                                  ),
+                                );
+                                await UserAuthCodesRecord.collection
+                                    .doc()
+                                    .set(userAuthCodesCreateData);
+
+                                setState(() {});
                               },
                               text: 'Link Account',
                               options: FFButtonOptions(

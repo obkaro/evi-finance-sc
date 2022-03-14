@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 
 import 'schema/users_record.dart';
 import 'schema/test_record.dart';
+import 'schema/user_auth_codes_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,6 +15,7 @@ export 'schema/serializers.dart';
 
 export 'schema/users_record.dart';
 export 'schema/test_record.dart';
+export 'schema/user_auth_codes_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord(
@@ -43,6 +45,23 @@ Future<List<TestRecord>> queryTestRecordOnce(
         int limit = -1,
         bool singleRecord = false}) =>
     queryCollectionOnce(TestRecord.collection, TestRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+/// Functions to query UserAuthCodesRecords (as a Stream and as a Future).
+Stream<List<UserAuthCodesRecord>> queryUserAuthCodesRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(
+        UserAuthCodesRecord.collection, UserAuthCodesRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<UserAuthCodesRecord>> queryUserAuthCodesRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(
+        UserAuthCodesRecord.collection, UserAuthCodesRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(

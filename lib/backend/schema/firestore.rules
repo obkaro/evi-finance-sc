@@ -11,6 +11,13 @@ service cloud.firestore {
     match /Test/{document} {
       allow create: if true;
       allow read: if true;
+      allow write: if request.auth != null;
+      allow delete: if false;
+    }
+
+    match /userAuthCodes/{document} {
+      allow create: if true;
+      allow read: if true;
       allow write: if true;
       allow delete: if true;
     }

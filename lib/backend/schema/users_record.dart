@@ -38,6 +38,9 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   double get income;
 
   @nullable
+  String get tempAuthCode;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -48,7 +51,8 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..uid = ''
     ..phoneNumber = ''
     ..age = 0
-    ..income = 0.0;
+    ..income = 0.0
+    ..tempAuthCode = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -80,6 +84,7 @@ Map<String, dynamic> createUsersRecordData({
   String phoneNumber,
   int age,
   double income,
+  String tempAuthCode,
 }) =>
     serializers.toFirestore(
         UsersRecord.serializer,
@@ -91,4 +96,5 @@ Map<String, dynamic> createUsersRecordData({
           ..createdTime = createdTime
           ..phoneNumber = phoneNumber
           ..age = age
-          ..income = income));
+          ..income = income
+          ..tempAuthCode = tempAuthCode));
