@@ -30,3 +30,66 @@ class GetPermanentAuthCall {
     );
   }
 }
+
+class GetAccountInformationCall {
+  static Future<ApiCallResponse> call({
+    String id = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get account information',
+      apiUrl: 'https://api.withmono.com/accounts/${id}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Accept': 'application/json',
+        'mono-sec-key': 'test_sk_HJ0AmMz9uE0T6wYUioPM',
+      },
+      params: {},
+      returnBody: true,
+    );
+  }
+
+  static dynamic status(dynamic response) => getJsonField(
+        response,
+        r'''$.meta.data_status''',
+      );
+  static dynamic method(dynamic response) => getJsonField(
+        response,
+        r'''$.meta.auth_method''',
+      );
+  static dynamic accountName(dynamic response) => getJsonField(
+        response,
+        r'''$.account.name''',
+      );
+  static dynamic currency(dynamic response) => getJsonField(
+        response,
+        r'''$.account.currency''',
+      );
+  static dynamic accountType(dynamic response) => getJsonField(
+        response,
+        r'''$.account.type''',
+      );
+  static dynamic accountNumber(dynamic response) => getJsonField(
+        response,
+        r'''$.account.accountNumber''',
+      );
+  static dynamic accountBalance(dynamic response) => getJsonField(
+        response,
+        r'''$.account.balance''',
+      );
+  static dynamic institution(dynamic response) => getJsonField(
+        response,
+        r'''$.account.institution.name''',
+      );
+  static dynamic institutionCode(dynamic response) => getJsonField(
+        response,
+        r'''$.account.institution.bankCode''',
+      );
+  static dynamic bankingType(dynamic response) => getJsonField(
+        response,
+        r'''$.account.institution.type''',
+      );
+  static dynamic bvn(dynamic response) => getJsonField(
+        response,
+        r'''$.bvn''',
+      );
+}

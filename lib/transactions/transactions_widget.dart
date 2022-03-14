@@ -21,6 +21,7 @@ class TransactionsWidget extends StatefulWidget {
 }
 
 class _TransactionsWidgetState extends State<TransactionsWidget> {
+  UserAuthCodesRecord def;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -157,6 +158,80 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                   ),
                                   borderRadius: 12,
                                 ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                              child: Text(
+                                'Hello World',
+                                style: FlutterFlowTheme.of(context).title3,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                              child: Text(
+                                'Hello World',
+                                style: FlutterFlowTheme.of(context).title3,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                              child: Text(
+                                'Hello World',
+                                style: FlutterFlowTheme.of(context).title3,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                              child: Text(
+                                'Hello World',
+                                style: FlutterFlowTheme.of(context).title3,
+                              ),
+                            ),
+                            FFButtonWidget(
+                              onPressed: () async {
+                                final userAuthCodesCreateData =
+                                    createUserAuthCodesRecordData(
+                                  user: currentUserReference,
+                                  authCode: 'abc',
+                                );
+                                var userAuthCodesRecordReference =
+                                    UserAuthCodesRecord.collection.doc();
+                                await userAuthCodesRecordReference
+                                    .set(userAuthCodesCreateData);
+                                def = UserAuthCodesRecord.getDocumentFromData(
+                                    userAuthCodesCreateData,
+                                    userAuthCodesRecordReference);
+
+                                final usersUpdateData = createUsersRecordData(
+                                  authCodeRef: def.reference,
+                                );
+                                await currentUserReference
+                                    .update(usersUpdateData);
+
+                                setState(() {});
+                              },
+                              text: 'Refresh',
+                              options: FFButtonOptions(
+                                width: 130,
+                                height: 40,
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                    ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: 12,
                               ),
                             ),
                           ],

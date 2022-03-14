@@ -41,6 +41,9 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   String get tempAuthCode;
 
   @nullable
+  DocumentReference get authCodeRef;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -85,6 +88,7 @@ Map<String, dynamic> createUsersRecordData({
   int age,
   double income,
   String tempAuthCode,
+  DocumentReference authCodeRef,
 }) =>
     serializers.toFirestore(
         UsersRecord.serializer,
@@ -97,4 +101,5 @@ Map<String, dynamic> createUsersRecordData({
           ..phoneNumber = phoneNumber
           ..age = age
           ..income = income
-          ..tempAuthCode = tempAuthCode));
+          ..tempAuthCode = tempAuthCode
+          ..authCodeRef = authCodeRef));
