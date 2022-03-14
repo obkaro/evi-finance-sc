@@ -63,13 +63,13 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  final usersUpdateData = {
-                                    'income': FieldValue.delete(),
-                                  };
+                                  final usersUpdateData = createUsersRecordData(
+                                    tempAuthCode: 'asdasf',
+                                  );
                                   await currentUserReference
                                       .update(usersUpdateData);
                                 },
-                                text: 'Link Account',
+                                text: 'Write temp',
                                 options: FFButtonOptions(
                                   width: 130,
                                   height: 40,
