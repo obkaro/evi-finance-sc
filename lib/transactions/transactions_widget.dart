@@ -156,7 +156,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                       .doc()
                                       .set(tempCodeCreateData);
                                 },
-                                text: 'Create rec temp',
+                                text: 'Create trec',
                                 options: FFButtonOptions(
                                   width: 130,
                                   height: 40,
