@@ -1,6 +1,8 @@
+import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../home_page/home_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,15 +14,17 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  TextEditingController textController1;
-  TextEditingController textController2;
+  TextEditingController inputEmailController;
+  TextEditingController inputPasswordController;
+  bool inputPasswordVisibility;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
+    inputEmailController = TextEditingController();
+    inputPasswordController = TextEditingController();
+    inputPasswordVisibility = false;
   }
 
   @override
@@ -69,11 +73,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 20),
                                   child: TextFormField(
-                                    controller: textController1,
+                                    controller: inputEmailController,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: 'label',
-                                      hintText: 'Username',
+                                      labelText: 'Email',
+                                      hintText: 'Enter your email',
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Colors.black,
@@ -97,6 +101,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     ),
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
+                                    keyboardType: TextInputType.emailAddress,
                                   ),
                                 ),
                               ),
@@ -106,10 +111,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 20),
                                   child: TextFormField(
-                                    controller: textController2,
-                                    obscureText: false,
+                                    controller: inputPasswordController,
+                                    obscureText: !inputPasswordVisibility,
                                     decoration: InputDecoration(
-                                      labelText: 'label',
+                                      labelText: 'Password',
                                       hintText: 'Passworf',
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
@@ -131,6 +136,19 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           topRight: Radius.circular(4.0),
                                         ),
                                       ),
+                                      suffixIcon: InkWell(
+                                        onTap: () => setState(
+                                          () => inputPasswordVisibility =
+                                              !inputPasswordVisibility,
+                                        ),
+                                        child: Icon(
+                                          inputPasswordVisibility
+                                              ? Icons.visibility_outlined
+                                              : Icons.visibility_off_outlined,
+                                          color: Color(0xFF757575),
+                                          size: 22,
+                                        ),
+                                      ),
                                     ),
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
@@ -138,8 +156,22 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 ),
                               ),
                               FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  final user = await signInWithEmail(
+                                    context,
+                                    inputEmailController.text,
+                                    inputPasswordController.text,
+                                  );
+                                  if (user == null) {
+                                    return;
+                                  }
+
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomePageWidget(),
+                                    ),
+                                  );
                                 },
                                 text: 'Login',
                                 options: FFButtonOptions(

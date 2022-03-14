@@ -59,8 +59,8 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                               PageTransition(
                                 type: PageTransitionType.scale,
                                 alignment: Alignment.bottomCenter,
-                                duration: Duration(milliseconds: 300),
-                                reverseDuration: Duration(milliseconds: 300),
+                                duration: Duration(milliseconds: 500),
+                                reverseDuration: Duration(milliseconds: 500),
                                 child: LoginWidget(),
                               ),
                             );
@@ -89,8 +89,8 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                             context,
                             PageTransition(
                               type: PageTransitionType.topToBottom,
-                              duration: Duration(milliseconds: 300),
-                              reverseDuration: Duration(milliseconds: 300),
+                              duration: Duration(milliseconds: 200),
+                              reverseDuration: Duration(milliseconds: 200),
                               child: SignUpWidget(),
                             ),
                           );
