@@ -1,5 +1,8 @@
+import '../auth/auth_util.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../land_page/land_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -28,7 +31,28 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 fontSize: 22,
               ),
         ),
-        actions: [],
+        actions: [
+          FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30,
+            borderWidth: 1,
+            buttonSize: 60,
+            icon: Icon(
+              Icons.exit_to_app_rounded,
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: () async {
+              await signOut();
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LandPageWidget(),
+                ),
+              );
+            },
+          ),
+        ],
         centerTitle: false,
         elevation: 2,
       ),
