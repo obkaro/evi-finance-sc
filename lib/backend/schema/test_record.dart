@@ -10,10 +10,18 @@ abstract class TestRecord implements Built<TestRecord, TestRecordBuilder> {
   static Serializer<TestRecord> get serializer => _$testRecordSerializer;
 
   @nullable
+  String get auth;
+
+  @nullable
+  String get masdf;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
-  static void _initializeBuilder(TestRecordBuilder builder) => builder;
+  static void _initializeBuilder(TestRecordBuilder builder) => builder
+    ..auth = ''
+    ..masdf = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Test');
@@ -35,5 +43,12 @@ abstract class TestRecord implements Built<TestRecord, TestRecordBuilder> {
           {...mapFromFirestore(data), kDocumentReferenceField: reference});
 }
 
-Map<String, dynamic> createTestRecordData() =>
-    serializers.toFirestore(TestRecord.serializer, TestRecord((t) => t));
+Map<String, dynamic> createTestRecordData({
+  String auth,
+  String masdf,
+}) =>
+    serializers.toFirestore(
+        TestRecord.serializer,
+        TestRecord((t) => t
+          ..auth = auth
+          ..masdf = masdf));
