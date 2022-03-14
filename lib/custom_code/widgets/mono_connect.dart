@@ -12,10 +12,12 @@ class MonoConnect extends StatefulWidget {
     Key key,
     this.width,
     this.height,
+    this.code,
   }) : super(key: key);
 
   final double width;
   final double height;
+  final String code;
 
   @override
   _MonoConnectState createState() => _MonoConnectState();
@@ -37,6 +39,7 @@ class _MonoConnectState extends State<MonoConnect> {
             masdf: '$code',
           );
           TestRecord.collection.doc().set(testCreateData);
+
           //Navigator.pop(context, code);
           //final aMono = code;
         },

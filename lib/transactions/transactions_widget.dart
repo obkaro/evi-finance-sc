@@ -64,7 +64,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   final usersUpdateData = createUsersRecordData(
-                                    tempAuthCode: 'asdasf',
+                                    tempAuthCode: 'badc',
                                   );
                                   await currentUserReference
                                       .update(usersUpdateData);
@@ -89,52 +89,91 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                 ),
                               ),
                             ),
-                            FFButtonWidget(
-                              onPressed: () async {
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => LinkMonoCopyWidget(),
-                                  ),
-                                );
-                                permKey = await GetPermanentAuthCall.call(
-                                  tempKey: currentUserDocument?.tempAuthCode,
-                                );
-
-                                final userAuthCodesCreateData =
-                                    createUserAuthCodesRecordData(
-                                  user: currentUserReference,
-                                  authCode: valueOrDefault<String>(
-                                    getJsonField(
-                                      (permKey?.jsonBody ?? ''),
-                                      r'''$.id''',
-                                    ).toString(),
-                                    'no key detected',
-                                  ),
-                                );
-                                await UserAuthCodesRecord.collection
-                                    .doc()
-                                    .set(userAuthCodesCreateData);
-
-                                setState(() {});
-                              },
-                              text: 'Link Account',
-                              options: FFButtonOptions(
-                                width: 130,
-                                height: 40,
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          LinkMonoCopyWidget(),
                                     ),
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
+                                  );
+                                  permKey = await GetPermanentAuthCall.call(
+                                    tempKey: currentUserDocument?.tempAuthCode,
+                                  );
+
+                                  final userAuthCodesCreateData =
+                                      createUserAuthCodesRecordData(
+                                    user: currentUserReference,
+                                    authCode: valueOrDefault<String>(
+                                      getJsonField(
+                                        (permKey?.jsonBody ?? ''),
+                                        r'''$.id''',
+                                      ).toString(),
+                                      'no key detected',
+                                    ),
+                                  );
+                                  await UserAuthCodesRecord.collection
+                                      .doc()
+                                      .set(userAuthCodesCreateData);
+
+                                  setState(() {});
+                                },
+                                text: 'Link Account',
+                                options: FFButtonOptions(
+                                  width: 130,
+                                  height: 40,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white,
+                                      ),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: 12,
                                 ),
-                                borderRadius: 12,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  final tempCodeCreateData =
+                                      createTempCodeRecordData(
+                                    user: currentUserReference,
+                                    code: 'batty',
+                                  );
+                                  await TempCodeRecord.collection
+                                      .doc()
+                                      .set(tempCodeCreateData);
+                                },
+                                text: 'Create rec temp',
+                                options: FFButtonOptions(
+                                  width: 130,
+                                  height: 40,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white,
+                                      ),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: 12,
+                                ),
                               ),
                             ),
                           ],
