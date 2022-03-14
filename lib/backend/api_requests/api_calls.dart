@@ -19,7 +19,7 @@ class GetPermanentAuthCall {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'mono-sec-key': 'test_pk_8MSZBepR1V75hvZ2bPlu',
+        'mono-sec-key': 'test_sk_HJ0AmMz9uE0T6wYUioPM',
       },
       params: {
         'tempKey': tempKey,
