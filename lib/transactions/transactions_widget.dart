@@ -1,5 +1,4 @@
 import '../auth/auth_util.dart';
-import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -10,14 +9,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TransactionsWidget extends StatefulWidget {
-  const TransactionsWidget({Key key}) : super(key: key);
+  const TransactionsWidget({
+    Key key,
+    this.userAuthCooode,
+  }) : super(key: key);
+
+  final UsersRecord userAuthCooode;
 
   @override
   _TransactionsWidgetState createState() => _TransactionsWidgetState();
 }
 
 class _TransactionsWidgetState extends State<TransactionsWidget> {
-  ApiCallResponse permKey;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -101,26 +104,6 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                           LinkMonoCopyWidget(),
                                     ),
                                   );
-                                  permKey = await GetPermanentAuthCall.call(
-                                    tempKey: currentUserDocument?.tempAuthCode,
-                                  );
-
-                                  final userAuthCodesCreateData =
-                                      createUserAuthCodesRecordData(
-                                    user: currentUserReference,
-                                    authCode: valueOrDefault<String>(
-                                      getJsonField(
-                                        (permKey?.jsonBody ?? ''),
-                                        r'''$.id''',
-                                      ).toString(),
-                                      'no key detected',
-                                    ),
-                                  );
-                                  await UserAuthCodesRecord.collection
-                                      .doc()
-                                      .set(userAuthCodesCreateData);
-
-                                  setState(() {});
                                 },
                                 text: 'Link Account',
                                 options: FFButtonOptions(

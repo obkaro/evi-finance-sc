@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 import 'package:mono_flutter/mono_flutter.dart';
 //import '../backend/backend.dart';
-import 'package:evi_finance/backend/schema/users_record.dart';
+//import 'package:evi_finance/backend/schema/users_record.dart';
+import 'package:evi_finance/auth/auth_util.dart';
+import 'package:evi_finance/backend/api_requests/api_calls.dart';
 
 class MonoConnect extends StatefulWidget {
   const MonoConnect({
@@ -35,13 +37,37 @@ class _MonoConnectState extends State<MonoConnect> {
         },
         onSuccess: (code) async {
           print('Mono Success $code');
+
+          //Write temporary key to database
           final usersUpdateData = createUsersRecordData(
             tempAuthCode: '$code',
           );
           await currentUserReference.update(usersUpdateData);
 
-          //Navigator.pop(context, code);
-          //final aMono = code;
+          //Print temporary key
+          print(currentUserDocument?.tempAuthCode);
+
+          //Use temporary key to get permanent key, save to variable: permKey
+          dynamic permKey = await GetPermanentAuthCall.call(
+              tempKey: (currentUserDocument?.tempAuthCode));
+
+          //Write permanent key to database
+          final userAuthCodesCreateData = createUserAuthCodesRecordData(
+            user: currentUserReference,
+            authCode: valueOrDefault<String>(
+              getJsonField(
+                (permKey?.jsonBody ?? ''),
+                r'''$.id''',
+              ).toString(),
+              'no key detected',
+            ),
+          );
+
+          await UserAuthCodesRecord.collection
+              .doc()
+              .set(userAuthCodesCreateData);
+
+          //setState(() {});
         },
       ),
     );
