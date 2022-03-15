@@ -126,9 +126,9 @@ class _NavBarPageState extends State<NavBarPage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (i) => setState(() => _currentPage = tabs.keys.toList()[i]),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         selectedItemColor: FlutterFlowTheme.of(context).primaryColor,
-        unselectedItemColor: Color(0x8A000000),
+        unselectedItemColor: Color(0xFF5D5B5B),
         showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,

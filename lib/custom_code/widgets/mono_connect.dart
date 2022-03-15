@@ -4,11 +4,13 @@ import '../../flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 // Begin custom widget code
+// Begin custom widget code
 import 'package:mono_flutter/mono_flutter.dart';
 //import '../backend/backend.dart';
 //import 'package:evi_finance/backend/schema/users_record.dart';
 import 'package:evi_finance/auth/auth_util.dart';
 import 'package:evi_finance/backend/api_requests/api_calls.dart';
+import 'package:evi_finance/dashboard/dashboard_widget.dart';
 
 class MonoConnect extends StatefulWidget {
   const MonoConnect({
@@ -52,21 +54,31 @@ class _MonoConnectState extends State<MonoConnect> {
               tempKey: (currentUserDocument?.tempAuthCode));
 
           //Write permanent key to database
-          final userAuthCodesCreateData = createUserAuthCodesRecordData(
-            user: currentUserReference,
-            authCode: valueOrDefault<String>(
-              getJsonField(
-                (permKey?.jsonBody ?? ''),
-                r'''$.id''',
-              ).toString(),
-              'no key detected',
-            ),
+          final accountsCreateData = createAccountsRecordData(
+            authID: '$permKey',
+            accountOwner: currentUserReference,
           );
 
-          await UserAuthCodesRecord.collection
-              .doc()
-              .set(userAuthCodesCreateData);
+          var accountsRecordReference = AccountsRecord.collection.doc();
+          await accountsRecordReference.set(accountsCreateData);
+          AccountsRecord newacct = AccountsRecord.getDocumentFromData(
+              accountsCreateData, accountsRecordReference);
 
+          final usersUpdateData2 = {
+            'accountsList': FieldValue.arrayUnion([newacct.reference]),
+          };
+
+          await currentUserReference.update(usersUpdateData2);
+
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DashboardWidget(
+                command: 'get_acct_info',
+                newAccount: newacct.reference,
+              ),
+            ),
+          );
           //setState(() {});
         },
       ),
