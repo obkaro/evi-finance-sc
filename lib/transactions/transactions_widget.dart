@@ -9,19 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TransactionsWidget extends StatefulWidget {
-  const TransactionsWidget({
-    Key key,
-    this.userAuthCooode,
-  }) : super(key: key);
-
-  final UsersRecord userAuthCooode;
+  const TransactionsWidget({Key key}) : super(key: key);
 
   @override
   _TransactionsWidgetState createState() => _TransactionsWidgetState();
 }
 
 class _TransactionsWidgetState extends State<TransactionsWidget> {
-  UserAuthCodesRecord def;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -130,15 +124,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
                               child: FFButtonWidget(
-                                onPressed: () async {
-                                  final tempCodeCreateData =
-                                      createTempCodeRecordData(
-                                    user: currentUserReference,
-                                    code: 'batty',
-                                  );
-                                  await TempCodeRecord.collection
-                                      .doc()
-                                      .set(tempCodeCreateData);
+                                onPressed: () {
+                                  print('Button pressed ...');
                                 },
                                 text: 'Create trec',
                                 options: FFButtonOptions(
@@ -193,27 +180,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                               ),
                             ),
                             FFButtonWidget(
-                              onPressed: () async {
-                                final userAuthCodesCreateData =
-                                    createUserAuthCodesRecordData(
-                                  user: currentUserReference,
-                                  authCode: 'abc',
-                                );
-                                var userAuthCodesRecordReference =
-                                    UserAuthCodesRecord.collection.doc();
-                                await userAuthCodesRecordReference
-                                    .set(userAuthCodesCreateData);
-                                def = UserAuthCodesRecord.getDocumentFromData(
-                                    userAuthCodesCreateData,
-                                    userAuthCodesRecordReference);
-
-                                final usersUpdateData = createUsersRecordData(
-                                  authCodeRef: def.reference,
-                                );
-                                await currentUserReference
-                                    .update(usersUpdateData);
-
-                                setState(() {});
+                              onPressed: () {
+                                print('Button pressed ...');
                               },
                               text: 'Refresh',
                               options: FFButtonOptions(

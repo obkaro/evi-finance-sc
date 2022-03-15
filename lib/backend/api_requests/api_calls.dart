@@ -92,4 +92,8 @@ class GetAccountInformationCall {
         response,
         r'''$.bvn''',
       );
+  static dynamic authID(dynamic response) => getJsonField(
+        response,
+        r'''$.account.id''',
+      );
 }

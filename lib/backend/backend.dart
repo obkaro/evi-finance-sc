@@ -5,9 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 
 import 'schema/users_record.dart';
-import 'schema/test_record.dart';
-import 'schema/user_auth_codes_record.dart';
-import 'schema/temp_code_record.dart';
+import 'schema/accounts_record.dart';
+import 'schema/transactions_record.dart';
+import 'schema/budgets_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,9 +15,9 @@ export 'schema/index.dart';
 export 'schema/serializers.dart';
 
 export 'schema/users_record.dart';
-export 'schema/test_record.dart';
-export 'schema/user_auth_codes_record.dart';
-export 'schema/temp_code_record.dart';
+export 'schema/accounts_record.dart';
+export 'schema/transactions_record.dart';
+export 'schema/budgets_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord(
@@ -34,51 +34,51 @@ Future<List<UsersRecord>> queryUsersRecordOnce(
     queryCollectionOnce(UsersRecord.collection, UsersRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
-/// Functions to query TestRecords (as a Stream and as a Future).
-Stream<List<TestRecord>> queryTestRecord(
+/// Functions to query AccountsRecords (as a Stream and as a Future).
+Stream<List<AccountsRecord>> queryAccountsRecord(
         {Query Function(Query) queryBuilder,
         int limit = -1,
         bool singleRecord = false}) =>
-    queryCollection(TestRecord.collection, TestRecord.serializer,
+    queryCollection(AccountsRecord.collection, AccountsRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
-Future<List<TestRecord>> queryTestRecordOnce(
+Future<List<AccountsRecord>> queryAccountsRecordOnce(
         {Query Function(Query) queryBuilder,
         int limit = -1,
         bool singleRecord = false}) =>
-    queryCollectionOnce(TestRecord.collection, TestRecord.serializer,
+    queryCollectionOnce(AccountsRecord.collection, AccountsRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
-/// Functions to query UserAuthCodesRecords (as a Stream and as a Future).
-Stream<List<UserAuthCodesRecord>> queryUserAuthCodesRecord(
+/// Functions to query TransactionsRecords (as a Stream and as a Future).
+Stream<List<TransactionsRecord>> queryTransactionsRecord(
         {Query Function(Query) queryBuilder,
         int limit = -1,
         bool singleRecord = false}) =>
     queryCollection(
-        UserAuthCodesRecord.collection, UserAuthCodesRecord.serializer,
+        TransactionsRecord.collection, TransactionsRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
-Future<List<UserAuthCodesRecord>> queryUserAuthCodesRecordOnce(
+Future<List<TransactionsRecord>> queryTransactionsRecordOnce(
         {Query Function(Query) queryBuilder,
         int limit = -1,
         bool singleRecord = false}) =>
     queryCollectionOnce(
-        UserAuthCodesRecord.collection, UserAuthCodesRecord.serializer,
+        TransactionsRecord.collection, TransactionsRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
-/// Functions to query TempCodeRecords (as a Stream and as a Future).
-Stream<List<TempCodeRecord>> queryTempCodeRecord(
+/// Functions to query BudgetsRecords (as a Stream and as a Future).
+Stream<List<BudgetsRecord>> queryBudgetsRecord(
         {Query Function(Query) queryBuilder,
         int limit = -1,
         bool singleRecord = false}) =>
-    queryCollection(TempCodeRecord.collection, TempCodeRecord.serializer,
+    queryCollection(BudgetsRecord.collection, BudgetsRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
-Future<List<TempCodeRecord>> queryTempCodeRecordOnce(
+Future<List<BudgetsRecord>> queryBudgetsRecordOnce(
         {Query Function(Query) queryBuilder,
         int limit = -1,
         bool singleRecord = false}) =>
-    queryCollectionOnce(TempCodeRecord.collection, TempCodeRecord.serializer,
+    queryCollectionOnce(BudgetsRecord.collection, BudgetsRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(

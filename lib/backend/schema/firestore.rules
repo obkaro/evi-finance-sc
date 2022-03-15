@@ -8,25 +8,25 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-    match /Test/{document} {
+    match /accounts/{document} {
       allow create: if true;
       allow read: if true;
-      allow write: if request.auth != null;
-      allow delete: if false;
+      allow write: if true;
+      allow delete: if true;
     }
 
-    match /userAuthCodes/{document} {
+    match /transactions/{document} {
       allow create: if true;
       allow read: if true;
-      allow write: if request.auth != null;
-      allow delete: if false;
+      allow write: if true;
+      allow delete: if true;
     }
 
-    match /tempCode/{document} {
+    match /budgets/{document} {
       allow create: if true;
       allow read: if true;
-      allow write: if request.auth != null;
-      allow delete: if false;
+      allow write: if true;
+      allow delete: if true;
     }
   }
 }
