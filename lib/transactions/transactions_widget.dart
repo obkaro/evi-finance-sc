@@ -147,38 +147,6 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
-                              child: Text(
-                                'Hello World',
-                                style: FlutterFlowTheme.of(context).title3,
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
-                              child: Text(
-                                'Hello World',
-                                style: FlutterFlowTheme.of(context).title3,
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
-                              child: Text(
-                                'Hello World',
-                                style: FlutterFlowTheme.of(context).title3,
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
-                              child: Text(
-                                'Hello World',
-                                style: FlutterFlowTheme.of(context).title3,
-                              ),
-                            ),
                             FFButtonWidget(
                               onPressed: () {
                                 print('Button pressed ...');
