@@ -78,12 +78,13 @@ class _DashboardWidgetState extends State<DashboardWidget> {
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       width: 320,
                       height: 375,
                       decoration: BoxDecoration(),
-                      alignment: AlignmentDirectional(-1, 0),
+                      alignment: AlignmentDirectional(-0.0, 0),
                       child: StreamBuilder<List<AccountsRecord>>(
                         stream: queryAccountsRecord(
                           queryBuilder: (accountsRecord) =>
