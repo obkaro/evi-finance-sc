@@ -1,11 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../dashboard/dashboard_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../land_page/land_page_widget.dart';
+import '../main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -223,7 +223,8 @@ class _UserDetailsWidgetState extends State<UserDetailsWidget> {
                               await Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => DashboardWidget(),
+                                  builder: (context) =>
+                                      NavBarPage(initialPage: 'Dashboard'),
                                 ),
                               );
                             },
