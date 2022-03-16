@@ -10,6 +10,7 @@ import 'package:mono_flutter/mono_flutter.dart';
 //import 'package:evi_finance/backend/schema/users_record.dart';
 import 'package:evi_finance/auth/auth_util.dart';
 import 'package:evi_finance/backend/api_requests/api_calls.dart';
+import 'package:evi_finance/backend/api_requests/api_manager.dart';
 import 'package:evi_finance/dashboard/dashboard_widget.dart';
 
 class MonoConnect extends StatefulWidget {
@@ -50,12 +51,20 @@ class _MonoConnectState extends State<MonoConnect> {
           print(currentUserDocument?.tempAuthCode);
 
           //Use temporary key to get permanent key, save to variable: permKey
-          dynamic permKey = await GetPermanentAuthCall.call(
+          ApiCallResponse permKey = await GetPermanentAuthCall.call(
               tempKey: (currentUserDocument?.tempAuthCode));
+
+          print(getJsonField(
+            (permKey?.jsonBody ?? ''),
+            r'''$.id''',
+          ).toString());
 
           //Write permanent key to database
           final accountsCreateData = createAccountsRecordData(
-            authID: '$permKey',
+            authID: getJsonField(
+              (permKey?.jsonBody ?? ''),
+              r'''$.id''',
+            ).toString(),
             accountOwner: currentUserReference,
           );
 

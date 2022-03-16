@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../dashboard/dashboard_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -18,6 +19,7 @@ class TestWidget extends StatefulWidget {
 class _TestWidgetState extends State<TestWidget> {
   AccountsRecord newacct;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  ApiCallResponse permmkey;
 
   @override
   void initState() {
@@ -72,9 +74,27 @@ class _TestWidgetState extends State<TestWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [],
+          child: InkWell(
+            onTap: () async {
+              permmkey = await GetPermanentAuthCall.call(
+                tempKey: currentUserDocument?.tempAuthCode,
+              );
+
+              final accountsCreateData = createAccountsRecordData(
+                authID: getJsonField(
+                  (permmkey?.jsonBody ?? ''),
+                  r'''$.id''',
+                ).toString(),
+                accountOwner: currentUserReference,
+              );
+              await AccountsRecord.collection.doc().set(accountsCreateData);
+
+              setState(() {});
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [],
+            ),
           ),
         ),
       ),
