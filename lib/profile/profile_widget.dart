@@ -1,3 +1,4 @@
+import '../accounts/accounts_widget.dart';
 import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -56,16 +57,14 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
-                                await signOut();
-                                await Navigator.pushAndRemoveUntil(
+                                await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LandPageWidget(),
+                                    builder: (context) => AccountsWidget(),
                                   ),
-                                  (r) => false,
                                 );
                               },
-                              text: 'Logout',
+                              text: 'Accounts',
                               options: FFButtonOptions(
                                 width: 130,
                                 height: 40,
@@ -82,6 +81,40 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   width: 1,
                                 ),
                                 borderRadius: 12,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  await signOut();
+                                  await Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => LandPageWidget(),
+                                    ),
+                                    (r) => false,
+                                  );
+                                },
+                                text: 'Logout',
+                                options: FFButtonOptions(
+                                  width: 130,
+                                  height: 40,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white,
+                                      ),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: 12,
+                                ),
                               ),
                             ),
                           ],
