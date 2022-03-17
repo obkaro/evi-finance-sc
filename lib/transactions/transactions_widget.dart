@@ -18,6 +18,7 @@ class TransactionsWidget extends StatefulWidget {
 }
 
 class _TransactionsWidgetState extends State<TransactionsWidget> {
+  DocumentReference bcde;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -157,7 +158,16 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                             ),
                             FFButtonWidget(
                               onPressed: () async {
-                                await actions.flutterMono();
+                                final usersUpdateData = {
+                                  'accountsList': FieldValue.arrayUnion([bcde]),
+                                };
+                                await currentUserReference
+                                    .update(usersUpdateData);
+                                bcde = await actions.flutterMono(
+                                  '\$context',
+                                );
+
+                                setState(() {});
                               },
                               text: 'Link',
                               options: FFButtonOptions(
