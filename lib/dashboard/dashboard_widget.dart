@@ -128,8 +128,13 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                                 child: Text(
-                                  columnAccountsRecord.accountBalance
-                                      .toString(),
+                                  formatNumber(
+                                    columnAccountsRecord.accountBalance,
+                                    formatType: FormatType.custom,
+                                    currency: '',
+                                    format: '',
+                                    locale: '',
+                                  ),
                                   style: FlutterFlowTheme.of(context).title2,
                                 ),
                               ),

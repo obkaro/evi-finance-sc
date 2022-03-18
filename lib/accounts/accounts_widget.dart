@@ -42,9 +42,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          newacctB = await actions.flutterMono(
-            'type context here',
-          );
+          newacctB = await actions.flutterMono();
           acctInfoResponse = await GetAccountInfoCall.call(
             authID: newacctB.authID,
           );
@@ -66,6 +64,34 @@ class _AccountsWidgetState extends State<AccountsWidget> {
               (acctInfoResponse?.jsonBody ?? ''),
               r'''$.account.institution.name''',
             ).toString(),
+            accountType: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.type''',
+            ).toString(),
+            bankCode: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.institution.bankCode''',
+            ),
+            institutionType: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.institution.type''',
+            ).toString(),
+            authMethod: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.meta.auth_method''',
+            ).toString(),
+            bvn: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.bvn''',
+            ),
+            currency: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.currency''',
+            ).toString(),
+            accountNumber: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.accountNumber''',
+            ),
           );
           await newacctB.reference.update(accountsUpdateData);
 
