@@ -95,16 +95,30 @@ Future flutterMono(
 
                       await currentUserReference.update(usersUpdateData2);
 
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DashboardWidget(
-                            command: 'get_acct_info',
-                            newAccount: newacct.reference,
-                          ),
-                        ),
+                      ApiCallResponse acctInfoResponse =
+                          await GetAccountInfoCall.call(
+                        authID: newacct.authID,
                       );
-                      //setState(() {});
+
+                      final accountsUpdateData = createAccountsRecordData(
+                        accountName: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.account.name''',
+                        ).toString(),
+                        accountBalance: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.account.balance''',
+                        ),
+                        // dataStatus: getJsonField(
+                        //   (acctInfoResponse?.jsonBody ?? ''),
+                        //   r'''$.meta.data_status''',
+                        // ).toString(),
+                        // institutionName: getJsonField(
+                        //   (acctInfoResponse?.jsonBody ?? ''),
+                        //   r'''$.account.institution.name''',
+                        // ).toString(),
+                      );
+                      await newacct.reference.update(accountsUpdateData);
                     },
                   ),
                 ))
