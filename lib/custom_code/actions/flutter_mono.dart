@@ -109,14 +109,42 @@ Future flutterMono(
                           (acctInfoResponse?.jsonBody ?? ''),
                           r'''$.account.balance''',
                         ),
-                        // dataStatus: getJsonField(
+                        dataStatus: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.meta.data_status''',
+                        ).toString(),
+                        institutionName: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.account.institution.name''',
+                        ).toString(),
+                        accountType: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.account.type''',
+                        ).toString(),
+                        bankCode: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.account.institution.bankCode''',
+                        ),
+                        // institutionType: getJsonField(
                         //   (acctInfoResponse?.jsonBody ?? ''),
-                        //   r'''$.meta.data_status''',
+                        //   r'''$.account.institution.type''',
                         // ).toString(),
-                        // institutionName: getJsonField(
+                        // authMethod: getJsonField(
                         //   (acctInfoResponse?.jsonBody ?? ''),
-                        //   r'''$.account.institution.name''',
+                        //   r'''$.meta.auth_method''',
                         // ).toString(),
+                        // bvn: getJsonField(
+                        //   (acctInfoResponse?.jsonBody ?? ''),
+                        //   r'''$.account.bvn''',
+                        // ),
+                        // currency: getJsonField(
+                        //   (acctInfoResponse?.jsonBody ?? ''),
+                        //   r'''$.account.currency''',
+                        // ).toString(),
+                        // accountNumber: getJsonField(
+                        //   (acctInfoResponse?.jsonBody ?? ''),
+                        //   r'''$.account.accountNumber''',
+                        // ),
                       );
                       await newacct.reference.update(accountsUpdateData);
                     },
