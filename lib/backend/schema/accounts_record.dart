@@ -24,9 +24,6 @@ abstract class AccountsRecord
   String get accountType;
 
   @nullable
-  int get bankCode;
-
-  @nullable
   String get institutionType;
 
   @nullable
@@ -45,10 +42,13 @@ abstract class AccountsRecord
   int get accountBalance;
 
   @nullable
-  int get accountNumber;
+  String get bankCode;
 
   @nullable
-  int get bvn;
+  String get accountNumber;
+
+  @nullable
+  String get bvn;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -58,15 +58,15 @@ abstract class AccountsRecord
     ..accountName = ''
     ..dataStatus = ''
     ..accountType = ''
-    ..bankCode = 0
     ..institutionType = ''
     ..authMethod = ''
     ..currency = ''
     ..authID = ''
     ..institutionName = ''
     ..accountBalance = 0
-    ..accountNumber = 0
-    ..bvn = 0;
+    ..bankCode = ''
+    ..accountNumber = ''
+    ..bvn = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('accounts');
@@ -94,15 +94,15 @@ Map<String, dynamic> createAccountsRecordData({
   DocumentReference accountOwner,
   String dataStatus,
   String accountType,
-  int bankCode,
   String institutionType,
   String authMethod,
   String currency,
   String authID,
   String institutionName,
   int accountBalance,
-  int accountNumber,
-  int bvn,
+  String bankCode,
+  String accountNumber,
+  String bvn,
 }) =>
     serializers.toFirestore(
         AccountsRecord.serializer,
@@ -111,12 +111,12 @@ Map<String, dynamic> createAccountsRecordData({
           ..accountOwner = accountOwner
           ..dataStatus = dataStatus
           ..accountType = accountType
-          ..bankCode = bankCode
           ..institutionType = institutionType
           ..authMethod = authMethod
           ..currency = currency
           ..authID = authID
           ..institutionName = institutionName
           ..accountBalance = accountBalance
+          ..bankCode = bankCode
           ..accountNumber = accountNumber
           ..bvn = bvn));

@@ -71,7 +71,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
             bankCode: getJsonField(
               (acctInfoResponse?.jsonBody ?? ''),
               r'''$.account.institution.bankCode''',
-            ),
+            ).toString(),
             institutionType: getJsonField(
               (acctInfoResponse?.jsonBody ?? ''),
               r'''$.account.institution.type''',
@@ -83,7 +83,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
             bvn: getJsonField(
               (acctInfoResponse?.jsonBody ?? ''),
               r'''$.account.bvn''',
-            ),
+            ).toString(),
             currency: getJsonField(
               (acctInfoResponse?.jsonBody ?? ''),
               r'''$.account.currency''',
@@ -91,7 +91,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
             accountNumber: getJsonField(
               (acctInfoResponse?.jsonBody ?? ''),
               r'''$.account.accountNumber''',
-            ),
+            ).toString(),
           );
           await newacctB.reference.update(accountsUpdateData);
 
