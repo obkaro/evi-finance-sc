@@ -15,16 +15,10 @@ abstract class AccountsRecord
   String get accountName;
 
   @nullable
-  double get accountBalance;
-
-  @nullable
   DocumentReference get accountOwner;
 
   @nullable
   String get dataStatus;
-
-  @nullable
-  double get accountNumber;
 
   @nullable
   String get accountType;
@@ -39,13 +33,7 @@ abstract class AccountsRecord
   String get authMethod;
 
   @nullable
-  double get bvn;
-
-  @nullable
   String get currency;
-
-  @nullable
-  String get id;
 
   @nullable
   String get authID;
@@ -54,23 +42,31 @@ abstract class AccountsRecord
   String get institutionName;
 
   @nullable
+  int get accountBalance;
+
+  @nullable
+  int get accountNumber;
+
+  @nullable
+  int get bvn;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(AccountsRecordBuilder builder) => builder
     ..accountName = ''
-    ..accountBalance = 0.0
     ..dataStatus = ''
-    ..accountNumber = 0.0
     ..accountType = ''
     ..bankCode = 0
     ..institutionType = ''
     ..authMethod = ''
-    ..bvn = 0.0
     ..currency = ''
-    ..id = ''
     ..authID = ''
-    ..institutionName = '';
+    ..institutionName = ''
+    ..accountBalance = 0
+    ..accountNumber = 0
+    ..bvn = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('accounts');
@@ -95,34 +91,32 @@ abstract class AccountsRecord
 
 Map<String, dynamic> createAccountsRecordData({
   String accountName,
-  double accountBalance,
   DocumentReference accountOwner,
   String dataStatus,
-  double accountNumber,
   String accountType,
   int bankCode,
   String institutionType,
   String authMethod,
-  double bvn,
   String currency,
-  String id,
   String authID,
   String institutionName,
+  int accountBalance,
+  int accountNumber,
+  int bvn,
 }) =>
     serializers.toFirestore(
         AccountsRecord.serializer,
         AccountsRecord((a) => a
           ..accountName = accountName
-          ..accountBalance = accountBalance
           ..accountOwner = accountOwner
           ..dataStatus = dataStatus
-          ..accountNumber = accountNumber
           ..accountType = accountType
           ..bankCode = bankCode
           ..institutionType = institutionType
           ..authMethod = authMethod
-          ..bvn = bvn
           ..currency = currency
-          ..id = id
           ..authID = authID
-          ..institutionName = institutionName));
+          ..institutionName = institutionName
+          ..accountBalance = accountBalance
+          ..accountNumber = accountNumber
+          ..bvn = bvn));

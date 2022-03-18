@@ -1,5 +1,4 @@
 import '../auth/auth_util.dart';
-import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../dashboard/dashboard_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -17,9 +16,8 @@ class TestWidget extends StatefulWidget {
 }
 
 class _TestWidgetState extends State<TestWidget> {
-  AccountsRecord newacct;
+  AccountsRecord createdRecord;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  ApiCallResponse permmkey;
 
   @override
   void initState() {
@@ -32,11 +30,11 @@ class _TestWidgetState extends State<TestWidget> {
       );
       var accountsRecordReference = AccountsRecord.collection.doc();
       await accountsRecordReference.set(accountsCreateData);
-      newacct = AccountsRecord.getDocumentFromData(
+      createdRecord = AccountsRecord.getDocumentFromData(
           accountsCreateData, accountsRecordReference);
 
       final usersUpdateData = {
-        'accountsList': FieldValue.arrayUnion([newacct.reference]),
+        'accountsList': FieldValue.arrayUnion([createdRecord.reference]),
       };
       await currentUserReference.update(usersUpdateData);
       await Navigator.push(
@@ -44,7 +42,7 @@ class _TestWidgetState extends State<TestWidget> {
         MaterialPageRoute(
           builder: (context) => DashboardWidget(
             command: 'get_acct_info',
-            newAccount: newacct.reference,
+            newAccount: createdRecord.reference,
           ),
         ),
       );
@@ -71,30 +69,24 @@ class _TestWidgetState extends State<TestWidget> {
         elevation: 2,
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print('FloatingActionButton pressed ...');
+        },
+        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+        elevation: 8,
+      ),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: InkWell(
-            onTap: () async {
-              permmkey = await GetPermanentAuthCall.call(
-                tempKey: currentUserDocument?.tempAuthCode,
-              );
-
-              final accountsCreateData = createAccountsRecordData(
-                authID: getJsonField(
-                  (permmkey?.jsonBody ?? ''),
-                  r'''$.id''',
-                ).toString(),
-                accountOwner: currentUserReference,
-              );
-              await AccountsRecord.collection.doc().set(accountsCreateData);
-
-              setState(() {});
-            },
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [],
-            ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text(
+                createdRecord.authID,
+                style: FlutterFlowTheme.of(context).bodyText1,
+              ),
+            ],
           ),
         ),
       ),
