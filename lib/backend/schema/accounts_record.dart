@@ -51,6 +51,9 @@ abstract class AccountsRecord
   String get bvn;
 
   @nullable
+  DateTime get dateLinked;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -103,6 +106,7 @@ Map<String, dynamic> createAccountsRecordData({
   String bankCode,
   String accountNumber,
   String bvn,
+  DateTime dateLinked,
 }) =>
     serializers.toFirestore(
         AccountsRecord.serializer,
@@ -119,4 +123,5 @@ Map<String, dynamic> createAccountsRecordData({
           ..accountBalance = accountBalance
           ..bankCode = bankCode
           ..accountNumber = accountNumber
-          ..bvn = bvn));
+          ..bvn = bvn
+          ..dateLinked = dateLinked));

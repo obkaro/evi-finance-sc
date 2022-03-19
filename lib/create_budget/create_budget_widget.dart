@@ -1,8 +1,10 @@
 import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/actions/index.dart' as actions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,7 +17,7 @@ class CreateBudgetWidget extends StatefulWidget {
 }
 
 class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
-  BudgetsRecord newBudget;
+  ApiCallResponse trasactionJsonResponse;
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
@@ -192,6 +194,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                         mainAxisSpacing: 10,
                         childAspectRatio: 1,
                       ),
+                      primary: false,
                       scrollDirection: Axis.vertical,
                       itemCount: gridViewBudgetCategoriesRecordList.length,
                       itemBuilder: (context, gridViewIndex) {
@@ -263,46 +266,86 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    final budgetsCreateData = createBudgetsRecordData(
-                      budgetName: textController1.text,
-                      budgetOwner: currentUserReference,
-                      budgetAmount: int.parse(textController3.text),
-                      budgetSpent: 0,
-                    );
-                    var budgetsRecordReference = BudgetsRecord.collection.doc();
-                    await budgetsRecordReference.set(budgetsCreateData);
-                    newBudget = BudgetsRecord.getDocumentFromData(
-                        budgetsCreateData, budgetsRecordReference);
-
-                    final budgetCategoriesCreateData =
-                        createBudgetCategoriesRecordData(
-                      budgetOwner: currentUserReference,
-                      categoryBudget: newBudget.reference,
-                      categoryName: '',
-                    );
-                    await BudgetCategoriesRecord.collection
-                        .doc()
-                        .set(budgetCategoriesCreateData);
-
-                    setState(() {});
-                  },
-                  text: 'Create',
-                  options: FFButtonOptions(
-                    width: 130,
-                    height: 40,
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily: 'Poppins',
-                          color: Colors.white,
-                        ),
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
-                    ),
-                    borderRadius: 12,
+                child: StreamBuilder<List<AccountsRecord>>(
+                  stream: queryAccountsRecord(
+                    queryBuilder: (accountsRecord) => accountsRecord
+                        .where('accountOwner', isEqualTo: currentUserReference),
+                    singleRecord: true,
                   ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: CircularProgressIndicator(
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                          ),
+                        ),
+                      );
+                    }
+                    List<AccountsRecord> buttonAccountsRecordList =
+                        snapshot.data;
+                    // Return an empty Container when the document does not exist.
+                    if (snapshot.data.isEmpty) {
+                      return Container();
+                    }
+                    final buttonAccountsRecord =
+                        buttonAccountsRecordList.isNotEmpty
+                            ? buttonAccountsRecordList.first
+                            : null;
+                    return FFButtonWidget(
+                      onPressed: () async {
+                        trasactionJsonResponse = await GetTransactionsCall.call(
+                          authID: buttonAccountsRecord.authID,
+                        );
+                        await actions.writeTransactions(
+                          (trasactionJsonResponse?.jsonBody ?? ''),
+                        );
+
+                        final transactionsCreateData =
+                            createTransactionsRecordData(
+                          account: buttonAccountsRecord.reference,
+                          trasactionDate: getCurrentTimestamp,
+                          monoCategory: getJsonField(
+                            (trasactionJsonResponse?.jsonBody ?? ''),
+                            r'''$.data.category''',
+                          ).toString(),
+                          transactionOwner: currentUserReference,
+                          balanceAfter: getJsonField(
+                            (trasactionJsonResponse?.jsonBody ?? ''),
+                            r'''$.data.balance''',
+                          ),
+                          transactionAmount: getJsonField(
+                            (trasactionJsonResponse?.jsonBody ?? ''),
+                            r'''$.data.amount''',
+                          ),
+                        );
+                        await TransactionsRecord.collection
+                            .doc()
+                            .set(transactionsCreateData);
+
+                        setState(() {});
+                      },
+                      text: 'Create',
+                      options: FFButtonOptions(
+                        width: 130,
+                        height: 40,
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        textStyle:
+                            FlutterFlowTheme.of(context).subtitle2.override(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                ),
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: 12,
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
