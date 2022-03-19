@@ -21,38 +21,43 @@ extension CustomContext on BuildContext {
 Future flutterMono(
   // Add your function code here!
   //Key key,
-  BuildContext context, {
+  BuildContext context,
+//   {
 
-  /// Public Key from your https://app.withmono.com/apps
-  //Key key,
+//   /// Public Key from your https://app.withmono.com/apps
+//   //Key key,
 
-  /// Success callback
-  Function(String code) onSuccess,
+//   /// Success callback
+//   Function(String code) onSuccess,
 
-  /// Mono popup Close callback
-  Function onClosed,
+//   /// Mono popup Close callback
+//   Function onClosed,
 
-  /// final Widget error;
-  Widget error,
-}) async =>
+//   /// final Widget error;
+//   Widget error,
+// }
+) async =>
     showDialog(
         //BuildContext context,
         //builder: (context) =>
         context: context,
-        builder: (_) => Column(
+        builder: (_) =>
+            // context: context
+            // builder: (BuildContext context) =>
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
                     child: Container(
-                  width: context.screenWidth(.9),
-                  height: context.screenHeight(.73),
+                  width: context.screenWidth(.95),
+                  height: context.screenHeight(.8),
                   child: MonoWebView(
                     apiKey: 'test_pk_8MSZBepR1V75hvZ2bPlu',
                     onClosed: () {
                       print('Modal closed');
                     },
                     onSuccess: (code) async {
-                      print('Mono Success $code');
+                      //print('Mono Success $code');
 
                       //Write temporary key to database
                       final usersUpdateData = createUsersRecordData(
@@ -61,7 +66,7 @@ Future flutterMono(
                       await currentUserReference.update(usersUpdateData);
 
                       //Print temporary key
-                      print(currentUserDocument?.tempAuthCode);
+                      //print(currentUserDocument?.tempAuthCode);
 
                       //Use temporary key to get permanent key, save to variable: permKey
                       ApiCallResponse permKey = await GetPermanentAuthCall.call(
@@ -73,7 +78,7 @@ Future flutterMono(
                       ).toString());
 
                       //Write permanent key to database
-                      final accountsCreateData = createAccountsRecordData(
+                      var accountsCreateData = createAccountsRecordData(
                         authID: getJsonField(
                           (permKey?.jsonBody ?? ''),
                           r'''$.id''',
@@ -81,7 +86,7 @@ Future flutterMono(
                         accountOwner: currentUserReference,
                       );
 
-                      var accountsRecordReference =
+                      final accountsRecordReference =
                           AccountsRecord.collection.doc();
                       await accountsRecordReference.set(accountsCreateData);
                       AccountsRecord newacct =
@@ -95,16 +100,59 @@ Future flutterMono(
 
                       await currentUserReference.update(usersUpdateData2);
 
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DashboardWidget(
-                            command: 'get_acct_info',
-                            newAccount: newacct.reference,
-                          ),
-                        ),
+                      ApiCallResponse acctInfoResponse =
+                          await GetAccountInfoCall.call(
+                        authID: newacct.authID,
                       );
-                      //setState(() {});
+
+                      final accountsUpdateData = createAccountsRecordData(
+                        accountName: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.account.name''',
+                        ).toString(),
+                        accountBalance: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.account.balance''',
+                        ),
+                        dataStatus: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.meta.data_status''',
+                        ).toString(),
+                        institutionName: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.account.institution.name''',
+                        ).toString(),
+                        accountType: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.account.type''',
+                        ).toString(),
+                        bankCode: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.account.institution.bankCode''',
+                        ).toString(),
+                        institutionType: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.account.institution.type''',
+                        ).toString(),
+                        authMethod: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.meta.auth_method''',
+                        ).toString(),
+                        bvn: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.account.bvn''',
+                        ).toString(),
+                        currency: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.account.currency''',
+                        ).toString(),
+                        accountNumber: getJsonField(
+                          (acctInfoResponse?.jsonBody ?? ''),
+                          r'''$.account.accountNumber''',
+                        ).toString(),
+                      );
+                      await newacct.reference.update(accountsUpdateData);
+                      //return newacct;
                     },
                   ),
                 ))
