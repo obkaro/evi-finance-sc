@@ -131,6 +131,7 @@ class _TaskCreateDialogCopyWidgetState
                   await BudgetCategoriesRecord.collection
                       .doc()
                       .set(budgetCategoriesCreateData);
+                  Navigator.pop(context);
                 },
                 text: 'Save',
                 options: FFButtonOptions(

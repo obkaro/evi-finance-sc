@@ -76,7 +76,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                       .primaryBackground,
                                 ),
                                 child: Text(
-                                  'Hello World',
+                                  widget.createdBudget.budgetName,
                                   style: FlutterFlowTheme.of(context).title3,
                                 ),
                               ),
@@ -143,81 +143,105 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                           final gridViewConstBudgetCategoriesRecord =
                               gridViewConstBudgetCategoriesRecordList[
                                   gridViewIndex];
-                          return InkWell(
-                            onTap: () async {
-                              await showModalBottomSheet(
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
-                                context: context,
-                                builder: (context) {
-                                  return Padding(
-                                    padding: MediaQuery.of(context).viewInsets,
-                                    child: TaskCreateDialogWidget(
-                                      constCategory:
-                                          gridViewConstBudgetCategoriesRecord
-                                              .reference,
+                          return StreamBuilder<ConstBudgetCategoriesRecord>(
+                            stream: ConstBudgetCategoriesRecord.getDocument(
+                                gridViewConstBudgetCategoriesRecord.reference),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: CircularProgressIndicator(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
                                     ),
-                                  );
-                                },
-                              );
-                            },
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
-                                child:
-                                    StreamBuilder<ConstBudgetCategoriesRecord>(
-                                  stream:
-                                      ConstBudgetCategoriesRecord.getDocument(
-                                          gridViewConstBudgetCategoriesRecord
-                                              .reference),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50,
-                                          height: 50,
-                                          child: CircularProgressIndicator(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                          ),
+                                  ),
+                                );
+                              }
+                              final containerConstBudgetCategoriesRecord =
+                                  snapshot.data;
+                              return InkWell(
+                                onTap: () async {
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (context) {
+                                      return Padding(
+                                        padding:
+                                            MediaQuery.of(context).viewInsets,
+                                        child: TaskCreateDialogWidget(
+                                          constCategory:
+                                              gridViewConstBudgetCategoriesRecord
+                                                  .reference,
                                         ),
                                       );
-                                    }
-                                    final rowConstBudgetCategoriesRecord =
-                                        snapshot.data;
-                                    return Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Icon(
-                                          Icons.add_rounded,
-                                          color: Colors.white,
-                                          size: 24,
-                                        ),
-                                        Text(
-                                          rowConstBudgetCategoriesRecord
-                                              .categoryName,
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Poppins',
-                                                color: Colors.white,
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        5, 5, 5, 5),
+                                    child: StreamBuilder<
+                                        ConstBudgetCategoriesRecord>(
+                                      stream: ConstBudgetCategoriesRecord
+                                          .getDocument(
+                                              gridViewConstBudgetCategoriesRecord
+                                                  .reference),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50,
+                                              height: 50,
+                                              child: CircularProgressIndicator(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
                                               ),
-                                        ),
-                                      ],
-                                    );
-                                  },
+                                            ),
+                                          );
+                                        }
+                                        final rowConstBudgetCategoriesRecord =
+                                            snapshot.data;
+                                        return Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Icon(
+                                              Icons.add_rounded,
+                                              color: Colors.white,
+                                              size: 24,
+                                            ),
+                                            Text(
+                                              containerConstBudgetCategoriesRecord
+                                                  .categoryName,
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                      ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
+                              );
+                            },
                           );
                         },
                       );
@@ -238,7 +262,9 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                             builder: (context) {
                               return Padding(
                                 padding: MediaQuery.of(context).viewInsets,
-                                child: TaskCreateDialogCopyWidget(),
+                                child: TaskCreateDialogCopyWidget(
+                                  budget: widget.createdBudget,
+                                ),
                               );
                             },
                           );
