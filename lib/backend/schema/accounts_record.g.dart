@@ -50,12 +50,6 @@ class _$AccountsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.bankCode;
-    if (value != null) {
-      result
-        ..add('bankCode')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
     value = object.institutionType;
     if (value != null) {
       result
@@ -97,17 +91,33 @@ class _$AccountsRecordSerializer
         ..add('accountBalance')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
+    value = object.bankCode;
+    if (value != null) {
+      result
+        ..add('bankCode')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.accountNumber;
     if (value != null) {
       result
         ..add('accountNumber')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
     }
     value = object.bvn;
     if (value != null) {
       result
         ..add('bvn')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.dateLinked;
+    if (value != null) {
+      result
+        ..add('dateLinked')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
     }
     value = object.reference;
     if (value != null) {
@@ -150,10 +160,6 @@ class _$AccountsRecordSerializer
           result.accountType = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'bankCode':
-          result.bankCode = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
-          break;
         case 'institutionType':
           result.institutionType = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -178,13 +184,21 @@ class _$AccountsRecordSerializer
           result.accountBalance = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
+        case 'bankCode':
+          result.bankCode = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'accountNumber':
           result.accountNumber = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(String)) as String;
           break;
         case 'bvn':
           result.bvn = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'dateLinked':
+          result.dateLinked = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
           break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
@@ -209,8 +223,6 @@ class _$AccountsRecord extends AccountsRecord {
   @override
   final String accountType;
   @override
-  final int bankCode;
-  @override
   final String institutionType;
   @override
   final String authMethod;
@@ -223,9 +235,13 @@ class _$AccountsRecord extends AccountsRecord {
   @override
   final int accountBalance;
   @override
-  final int accountNumber;
+  final String bankCode;
   @override
-  final int bvn;
+  final String accountNumber;
+  @override
+  final String bvn;
+  @override
+  final DateTime dateLinked;
   @override
   final DocumentReference<Object> reference;
 
@@ -237,15 +253,16 @@ class _$AccountsRecord extends AccountsRecord {
       this.accountOwner,
       this.dataStatus,
       this.accountType,
-      this.bankCode,
       this.institutionType,
       this.authMethod,
       this.currency,
       this.authID,
       this.institutionName,
       this.accountBalance,
+      this.bankCode,
       this.accountNumber,
       this.bvn,
+      this.dateLinked,
       this.reference})
       : super._();
 
@@ -265,15 +282,16 @@ class _$AccountsRecord extends AccountsRecord {
         accountOwner == other.accountOwner &&
         dataStatus == other.dataStatus &&
         accountType == other.accountType &&
-        bankCode == other.bankCode &&
         institutionType == other.institutionType &&
         authMethod == other.authMethod &&
         currency == other.currency &&
         authID == other.authID &&
         institutionName == other.institutionName &&
         accountBalance == other.accountBalance &&
+        bankCode == other.bankCode &&
         accountNumber == other.accountNumber &&
         bvn == other.bvn &&
+        dateLinked == other.dateLinked &&
         reference == other.reference;
   }
 
@@ -293,21 +311,24 @@ class _$AccountsRecord extends AccountsRecord {
                                                 $jc(
                                                     $jc(
                                                         $jc(
-                                                            0,
-                                                            accountName
+                                                            $jc(
+                                                                0,
+                                                                accountName
+                                                                    .hashCode),
+                                                            accountOwner
                                                                 .hashCode),
-                                                        accountOwner.hashCode),
-                                                    dataStatus.hashCode),
-                                                accountType.hashCode),
-                                            bankCode.hashCode),
-                                        institutionType.hashCode),
-                                    authMethod.hashCode),
-                                currency.hashCode),
-                            authID.hashCode),
-                        institutionName.hashCode),
-                    accountBalance.hashCode),
-                accountNumber.hashCode),
-            bvn.hashCode),
+                                                        dataStatus.hashCode),
+                                                    accountType.hashCode),
+                                                institutionType.hashCode),
+                                            authMethod.hashCode),
+                                        currency.hashCode),
+                                    authID.hashCode),
+                                institutionName.hashCode),
+                            accountBalance.hashCode),
+                        bankCode.hashCode),
+                    accountNumber.hashCode),
+                bvn.hashCode),
+            dateLinked.hashCode),
         reference.hashCode));
   }
 
@@ -318,15 +339,16 @@ class _$AccountsRecord extends AccountsRecord {
           ..add('accountOwner', accountOwner)
           ..add('dataStatus', dataStatus)
           ..add('accountType', accountType)
-          ..add('bankCode', bankCode)
           ..add('institutionType', institutionType)
           ..add('authMethod', authMethod)
           ..add('currency', currency)
           ..add('authID', authID)
           ..add('institutionName', institutionName)
           ..add('accountBalance', accountBalance)
+          ..add('bankCode', bankCode)
           ..add('accountNumber', accountNumber)
           ..add('bvn', bvn)
+          ..add('dateLinked', dateLinked)
           ..add('reference', reference))
         .toString();
   }
@@ -352,10 +374,6 @@ class AccountsRecordBuilder
   String _accountType;
   String get accountType => _$this._accountType;
   set accountType(String accountType) => _$this._accountType = accountType;
-
-  int _bankCode;
-  int get bankCode => _$this._bankCode;
-  set bankCode(int bankCode) => _$this._bankCode = bankCode;
 
   String _institutionType;
   String get institutionType => _$this._institutionType;
@@ -384,13 +402,22 @@ class AccountsRecordBuilder
   set accountBalance(int accountBalance) =>
       _$this._accountBalance = accountBalance;
 
-  int _accountNumber;
-  int get accountNumber => _$this._accountNumber;
-  set accountNumber(int accountNumber) => _$this._accountNumber = accountNumber;
+  String _bankCode;
+  String get bankCode => _$this._bankCode;
+  set bankCode(String bankCode) => _$this._bankCode = bankCode;
 
-  int _bvn;
-  int get bvn => _$this._bvn;
-  set bvn(int bvn) => _$this._bvn = bvn;
+  String _accountNumber;
+  String get accountNumber => _$this._accountNumber;
+  set accountNumber(String accountNumber) =>
+      _$this._accountNumber = accountNumber;
+
+  String _bvn;
+  String get bvn => _$this._bvn;
+  set bvn(String bvn) => _$this._bvn = bvn;
+
+  DateTime _dateLinked;
+  DateTime get dateLinked => _$this._dateLinked;
+  set dateLinked(DateTime dateLinked) => _$this._dateLinked = dateLinked;
 
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
@@ -408,15 +435,16 @@ class AccountsRecordBuilder
       _accountOwner = $v.accountOwner;
       _dataStatus = $v.dataStatus;
       _accountType = $v.accountType;
-      _bankCode = $v.bankCode;
       _institutionType = $v.institutionType;
       _authMethod = $v.authMethod;
       _currency = $v.currency;
       _authID = $v.authID;
       _institutionName = $v.institutionName;
       _accountBalance = $v.accountBalance;
+      _bankCode = $v.bankCode;
       _accountNumber = $v.accountNumber;
       _bvn = $v.bvn;
+      _dateLinked = $v.dateLinked;
       _reference = $v.reference;
       _$v = null;
     }
@@ -442,15 +470,16 @@ class AccountsRecordBuilder
             accountOwner: accountOwner,
             dataStatus: dataStatus,
             accountType: accountType,
-            bankCode: bankCode,
             institutionType: institutionType,
             authMethod: authMethod,
             currency: currency,
             authID: authID,
             institutionName: institutionName,
             accountBalance: accountBalance,
+            bankCode: bankCode,
             accountNumber: accountNumber,
             bvn: bvn,
+            dateLinked: dateLinked,
             reference: reference);
     replace(_$result);
     return _$result;

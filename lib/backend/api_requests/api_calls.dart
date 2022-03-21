@@ -93,3 +93,21 @@ class GetAccountInfoCall {
         r'''$.account.institution.type''',
       );
 }
+
+class GetTransactionsCall {
+  static Future<ApiCallResponse> call({
+    String authID = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getTransactions',
+      apiUrl: 'https://api.withmono.com/accounts/${authID}/transactions',
+      callType: ApiCallType.GET,
+      headers: {
+        'Accept': 'application/json',
+        'mono-sec-key': 'test_sk_HJ0AmMz9uE0T6wYUioPM',
+      },
+      params: {},
+      returnBody: true,
+    );
+  }
+}

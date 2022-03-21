@@ -15,10 +15,40 @@ abstract class TransactionsRecord
   DateTime get trasactionDate;
 
   @nullable
+  DocumentReference get account;
+
+  @nullable
+  String get monoCategory;
+
+  @nullable
+  DocumentReference get transactionOwner;
+
+  @nullable
+  int get balanceAfter;
+
+  @nullable
+  String get transactionMonoID;
+
+  @nullable
+  int get transactionAmount;
+
+  @nullable
+  String get transactionType;
+
+  @nullable
+  String get transactionNarration;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
-  static void _initializeBuilder(TransactionsRecordBuilder builder) => builder;
+  static void _initializeBuilder(TransactionsRecordBuilder builder) => builder
+    ..monoCategory = ''
+    ..balanceAfter = 0
+    ..transactionMonoID = ''
+    ..transactionAmount = 0
+    ..transactionType = ''
+    ..transactionNarration = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('transactions');
@@ -44,6 +74,24 @@ abstract class TransactionsRecord
 
 Map<String, dynamic> createTransactionsRecordData({
   DateTime trasactionDate,
+  DocumentReference account,
+  String monoCategory,
+  DocumentReference transactionOwner,
+  int balanceAfter,
+  String transactionMonoID,
+  int transactionAmount,
+  String transactionType,
+  String transactionNarration,
 }) =>
-    serializers.toFirestore(TransactionsRecord.serializer,
-        TransactionsRecord((t) => t..trasactionDate = trasactionDate));
+    serializers.toFirestore(
+        TransactionsRecord.serializer,
+        TransactionsRecord((t) => t
+          ..trasactionDate = trasactionDate
+          ..account = account
+          ..monoCategory = monoCategory
+          ..transactionOwner = transactionOwner
+          ..balanceAfter = balanceAfter
+          ..transactionMonoID = transactionMonoID
+          ..transactionAmount = transactionAmount
+          ..transactionType = transactionType
+          ..transactionNarration = transactionNarration));

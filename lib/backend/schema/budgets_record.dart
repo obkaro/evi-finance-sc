@@ -14,11 +14,43 @@ abstract class BudgetsRecord
   String get budgetName;
 
   @nullable
+  DocumentReference get budgetOwner;
+
+  @nullable
+  int get budgetAmount;
+
+  @nullable
+  int get budgetSpent;
+
+  @nullable
+  String get budgetDescription;
+
+  @nullable
+  DateTime get budgetStart;
+
+  @nullable
+  DateTime get budgetEnd;
+
+  @nullable
+  DateTime get budgetDateCreated;
+
+  @nullable
+  BuiltList<DocumentReference> get budgetLinkedAccounts;
+
+  @nullable
+  BuiltList<DocumentReference> get budgetSubCategories;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
-  static void _initializeBuilder(BudgetsRecordBuilder builder) =>
-      builder..budgetName = '';
+  static void _initializeBuilder(BudgetsRecordBuilder builder) => builder
+    ..budgetName = ''
+    ..budgetAmount = 0
+    ..budgetSpent = 0
+    ..budgetDescription = ''
+    ..budgetLinkedAccounts = ListBuilder()
+    ..budgetSubCategories = ListBuilder();
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('budgets');
@@ -43,6 +75,24 @@ abstract class BudgetsRecord
 
 Map<String, dynamic> createBudgetsRecordData({
   String budgetName,
+  DocumentReference budgetOwner,
+  int budgetAmount,
+  int budgetSpent,
+  String budgetDescription,
+  DateTime budgetStart,
+  DateTime budgetEnd,
+  DateTime budgetDateCreated,
 }) =>
-    serializers.toFirestore(BudgetsRecord.serializer,
-        BudgetsRecord((b) => b..budgetName = budgetName));
+    serializers.toFirestore(
+        BudgetsRecord.serializer,
+        BudgetsRecord((b) => b
+          ..budgetName = budgetName
+          ..budgetOwner = budgetOwner
+          ..budgetAmount = budgetAmount
+          ..budgetSpent = budgetSpent
+          ..budgetDescription = budgetDescription
+          ..budgetStart = budgetStart
+          ..budgetEnd = budgetEnd
+          ..budgetDateCreated = budgetDateCreated
+          ..budgetLinkedAccounts = null
+          ..budgetSubCategories = null));

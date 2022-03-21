@@ -11,7 +11,7 @@ import 'flutter_flow/internationalization.dart';
 import 'package:evi_finance/land_page/land_page_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dashboard/dashboard_widget.dart';
-import 'transactions/transactions_widget.dart';
+import 'budgets/budgets_widget.dart';
 import 'profile/profile_widget.dart';
 
 void main() async {
@@ -105,7 +105,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPage = 'Transactions';
+  String _currentPage = 'Budgets';
 
   @override
   void initState() {
@@ -117,7 +117,7 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'Dashboard': DashboardWidget(),
-      'Transactions': TransactionsWidget(),
+      'Budgets': BudgetsWidget(),
       'Profile': ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
