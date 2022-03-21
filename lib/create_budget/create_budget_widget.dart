@@ -1,12 +1,12 @@
 import '../auth/auth_util.dart';
-import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
+import '../create_budget_copy/create_budget_copy_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../custom_code/actions/index.dart' as actions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CreateBudgetWidget extends StatefulWidget {
@@ -17,11 +17,12 @@ class CreateBudgetWidget extends StatefulWidget {
 }
 
 class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
-  ApiCallResponse trasactionJsonResponse;
+  BudgetsRecord createdBudget;
+  DateTime datePicked1;
+  DateTime datePicked2;
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
-  TextEditingController textController4;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -56,85 +57,26 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-                child: Form(
-                  key: formKey,
-                  autovalidateMode: AutovalidateMode.disabled,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      TextFormField(
-                        controller: textController1,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText: 'Budget Name',
-                          hintText: 'Input budget name',
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyText1,
-                      ),
-                      TextFormField(
-                        controller: textController2,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText: 'Description',
-                          hintText: 'Input budget description',
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          contentPadding:
-                              EdgeInsetsDirectional.fromSTEB(0, 30, 0, 40),
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyText1,
-                        keyboardType: TextInputType.multiline,
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                        child: TextFormField(
-                          controller: textController3,
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 20),
+                  child: Form(
+                    key: formKey,
+                    autovalidateMode: AutovalidateMode.disabled,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        TextFormField(
+                          controller: textController1,
                           obscureText: false,
                           decoration: InputDecoration(
-                            hintText: 'Input total amount',
+                            labelText: 'Budget Name',
+                            hintText: 'Input budget name',
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
@@ -157,198 +99,226 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                             ),
                           ),
                           style: FlutterFlowTheme.of(context).bodyText1,
-                          keyboardType: TextInputType.number,
                         ),
-                      ),
-                    ],
+                        TextFormField(
+                          controller: textController2,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: 'Description',
+                            hintText: 'Input budget description',
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4.0),
+                                topRight: Radius.circular(4.0),
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4.0),
+                                topRight: Radius.circular(4.0),
+                              ),
+                            ),
+                            contentPadding:
+                                EdgeInsetsDirectional.fromSTEB(0, 30, 0, 40),
+                          ),
+                          style: FlutterFlowTheme.of(context).bodyText1,
+                          keyboardType: TextInputType.multiline,
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                          child: TextFormField(
+                            controller: textController3,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              hintText: 'Input target amount',
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 1,
+                                ),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(4.0),
+                                  topRight: Radius.circular(4.0),
+                                ),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 1,
+                                ),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(4.0),
+                                  topRight: Radius.circular(4.0),
+                                ),
+                              ),
+                            ),
+                            style: FlutterFlowTheme.of(context).bodyText1,
+                            keyboardType: TextInputType.number,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: StreamBuilder<List<BudgetCategoriesRecord>>(
-                  stream: queryBudgetCategoriesRecord(
-                    queryBuilder: (budgetCategoriesRecord) =>
-                        budgetCategoriesRecord.where('budgetOwner',
-                            isEqualTo: currentUserReference),
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: CircularProgressIndicator(
-                            color: FlutterFlowTheme.of(context).primaryColor,
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          await DatePicker.showDatePicker(
+                            context,
+                            showTitleActions: true,
+                            onConfirm: (date) {
+                              setState(() => datePicked1 = date);
+                            },
+                            currentTime: getCurrentTimestamp,
+                            minTime: DateTime(0, 0, 0),
+                          );
+                        },
+                        text: 'Set Start Date',
+                        options: FFButtonOptions(
+                          width: 130,
+                          height: 40,
+                          color: Color(0x00FF0054),
+                          textStyle: FlutterFlowTheme.of(context)
+                              .subtitle2
+                              .override(
+                                fontFamily: 'Poppins',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                              ),
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
                           ),
+                          borderRadius: 12,
                         ),
-                      );
-                    }
-                    List<BudgetCategoriesRecord>
-                        gridViewBudgetCategoriesRecordList = snapshot.data;
-                    return GridView.builder(
-                      padding: EdgeInsets.zero,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 1,
                       ),
-                      primary: false,
-                      scrollDirection: Axis.vertical,
-                      itemCount: gridViewBudgetCategoriesRecordList.length,
-                      itemBuilder: (context, gridViewIndex) {
-                        final gridViewBudgetCategoriesRecord =
-                            gridViewBudgetCategoriesRecordList[gridViewIndex];
-                        return Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFEEEEEE),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                gridViewBudgetCategoriesRecord.categoryName,
-                                textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                              TextFormField(
-                                controller: textController4 ??=
-                                    TextEditingController(
-                                  text: formatNumber(
-                                    gridViewBudgetCategoriesRecord
-                                        .allocatedAmount,
-                                    formatType: FormatType.custom,
-                                    currency: '',
-                                    format: '',
-                                    locale: '',
-                                  ),
-                                ),
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'amount',
-                                  hintText: '[Some hint text...]',
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(4.0),
-                                      topRight: Radius.circular(4.0),
-                                    ),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(4.0),
-                                      topRight: Radius.circular(4.0),
-                                    ),
-                                  ),
-                                ),
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                                textAlign: TextAlign.center,
-                                keyboardType: TextInputType.number,
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                child: StreamBuilder<List<AccountsRecord>>(
-                  stream: queryAccountsRecord(
-                    queryBuilder: (accountsRecord) => accountsRecord
-                        .where('accountOwner', isEqualTo: currentUserReference),
-                    singleRecord: true,
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: CircularProgressIndicator(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                          ),
-                        ),
-                      );
-                    }
-                    List<AccountsRecord> buttonAccountsRecordList =
-                        snapshot.data;
-                    // Return an empty Container when the document does not exist.
-                    if (snapshot.data.isEmpty) {
-                      return Container();
-                    }
-                    final buttonAccountsRecord =
-                        buttonAccountsRecordList.isNotEmpty
-                            ? buttonAccountsRecordList.first
-                            : null;
-                    return FFButtonWidget(
+                    ),
+                    FFButtonWidget(
                       onPressed: () async {
-                        trasactionJsonResponse = await GetTransactionsCall.call(
-                          authID: buttonAccountsRecord.authID,
+                        await DatePicker.showDatePicker(
+                          context,
+                          showTitleActions: true,
+                          onConfirm: (date) {
+                            setState(() => datePicked2 = date);
+                          },
+                          currentTime: getCurrentTimestamp,
+                          minTime: DateTime(0, 0, 0),
                         );
-                        await actions.writeTransactions(
-                          (trasactionJsonResponse?.jsonBody ?? ''),
-                        );
-
-                        final transactionsCreateData =
-                            createTransactionsRecordData(
-                          account: buttonAccountsRecord.reference,
-                          trasactionDate: getCurrentTimestamp,
-                          monoCategory: getJsonField(
-                            (trasactionJsonResponse?.jsonBody ?? ''),
-                            r'''$.data.category''',
-                          ).toString(),
-                          transactionOwner: currentUserReference,
-                          balanceAfter: getJsonField(
-                            (trasactionJsonResponse?.jsonBody ?? ''),
-                            r'''$.data.balance''',
-                          ),
-                          transactionAmount: getJsonField(
-                            (trasactionJsonResponse?.jsonBody ?? ''),
-                            r'''$.data.amount''',
-                          ),
-                        );
-                        await TransactionsRecord.collection
-                            .doc()
-                            .set(transactionsCreateData);
-
-                        setState(() {});
                       },
-                      text: 'Create',
+                      text: 'Set End Date',
                       options: FFButtonOptions(
                         width: 130,
                         height: 40,
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                        textStyle:
-                            FlutterFlowTheme.of(context).subtitle2.override(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
-                                ),
+                        color: Color(0x00FF0054),
+                        textStyle: FlutterFlowTheme.of(context)
+                            .subtitle2
+                            .override(
+                              fontFamily: 'Poppins',
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                            ),
                         borderSide: BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         ),
                         borderRadius: 12,
                       ),
-                    );
-                  },
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                  child: StreamBuilder<List<AccountsRecord>>(
+                    stream: queryAccountsRecord(
+                      queryBuilder: (accountsRecord) => accountsRecord.where(
+                          'accountOwner',
+                          isEqualTo: currentUserReference),
+                      singleRecord: true,
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: CircularProgressIndicator(
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                            ),
+                          ),
+                        );
+                      }
+                      List<AccountsRecord> buttonAccountsRecordList =
+                          snapshot.data;
+                      // Return an empty Container when the document does not exist.
+                      if (snapshot.data.isEmpty) {
+                        return Container();
+                      }
+                      final buttonAccountsRecord =
+                          buttonAccountsRecordList.isNotEmpty
+                              ? buttonAccountsRecordList.first
+                              : null;
+                      return FFButtonWidget(
+                        onPressed: () async {
+                          final budgetsCreateData = createBudgetsRecordData(
+                            budgetName: textController1.text,
+                            budgetOwner: currentUserReference,
+                            budgetAmount: int.parse(textController3.text),
+                            budgetDescription: textController2.text,
+                            budgetDateCreated: getCurrentTimestamp,
+                            budgetStart: datePicked1,
+                            budgetEnd: datePicked2,
+                          );
+                          var budgetsRecordReference =
+                              BudgetsRecord.collection.doc();
+                          await budgetsRecordReference.set(budgetsCreateData);
+                          createdBudget = BudgetsRecord.getDocumentFromData(
+                              budgetsCreateData, budgetsRecordReference);
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CreateBudgetCopyWidget(
+                                createdBudget: createdBudget,
+                              ),
+                            ),
+                          );
+
+                          setState(() {});
+                        },
+                        text: 'Create',
+                        options: FFButtonOptions(
+                          width: 130,
+                          height: 40,
+                          color: FlutterFlowTheme.of(context).primaryColor,
+                          textStyle:
+                              FlutterFlowTheme.of(context).subtitle2.override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                  ),
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
+                          ),
+                          borderRadius: 12,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
