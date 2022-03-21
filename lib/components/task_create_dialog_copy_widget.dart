@@ -8,7 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TaskCreateDialogCopyWidget extends StatefulWidget {
-  const TaskCreateDialogCopyWidget({Key key}) : super(key: key);
+  const TaskCreateDialogCopyWidget({
+    Key key,
+    this.budget,
+  }) : super(key: key);
+
+  final BudgetsRecord budget;
 
   @override
   _TaskCreateDialogCopyWidgetState createState() =>
@@ -120,6 +125,8 @@ class _TaskCreateDialogCopyWidgetState
                       createBudgetCategoriesRecordData(
                     categoryName: textController1.text,
                     allocatedAmount: int.parse(textController2.text),
+                    budgetOwner: currentUserReference,
+                    categoryBudget: widget.budget.reference,
                   );
                   await BudgetCategoriesRecord.collection
                       .doc()

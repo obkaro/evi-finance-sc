@@ -11,9 +11,11 @@ class TaskCreateDialogWidget extends StatefulWidget {
   const TaskCreateDialogWidget({
     Key key,
     this.constCategory,
+    this.budget,
   }) : super(key: key);
 
   final DocumentReference constCategory;
+  final BudgetsRecord budget;
 
   @override
   _TaskCreateDialogWidgetState createState() => _TaskCreateDialogWidgetState();
@@ -117,6 +119,7 @@ class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
                         categoryName:
                             containerConstBudgetCategoriesRecord.categoryName,
                         allocatedAmount: int.parse(textController.text),
+                        categoryBudget: widget.budget.reference,
                       );
                       await BudgetCategoriesRecord.collection
                           .doc()
