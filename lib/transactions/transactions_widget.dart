@@ -108,7 +108,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 10, 0, 0),
                                     child: AutoSizeText(
-                                      '${dateTimeFormat('jm', columnTransactionsRecord.trasactionDate)}${dateTimeFormat('MEd', columnTransactionsRecord.trasactionDate)}'
+                                      '${dateTimeFormat('jm', columnTransactionsRecord.trasactionDate)} ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}'
                                           .maybeHandleOverflow(
                                         maxChars: 15,
                                         replacement: '…',
