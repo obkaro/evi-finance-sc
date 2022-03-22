@@ -10,8 +10,14 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AccountsRecord.serializer)
       ..add(BudgetCategoriesRecord.serializer)
       ..add(BudgetsRecord.serializer)
+      ..add(ConstBudgetCategoriesRecord.serializer)
       ..add(TransactionsRecord.serializer)
       ..add(UsersRecord.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType(DocumentReference, const [const FullType(Object)])
+          ]),
+          () => new ListBuilder<DocumentReference<Object>>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType(DocumentReference, const [const FullType(Object)])

@@ -242,35 +242,35 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                               : null;
                       return FFButtonWidget(
                         onPressed: () async {
-                          trasactionJsonResponse =
-                              await GetTransactionsCall.call(
-                            authID: widget.command,
-                          );
-                          await actions.writeTransactions(
-                            (trasactionJsonResponse?.jsonBody ?? ''),
-                          );
+                          // trasactionJsonResponse =
+                          //     await GetTransactionsCall.call(
+                          //   authID: widget.command,
+                          // );
+                          // await actions.writeTransactions(
+                          //   (trasactionJsonResponse?.jsonBody ?? ''),
+                          // );
 
-                          final transactionsCreateData =
-                              createTransactionsRecordData(
-                            account: buttonAccountsRecord.reference,
-                            trasactionDate: getCurrentTimestamp,
-                            monoCategory: getJsonField(
-                              (trasactionJsonResponse?.jsonBody ?? ''),
-                              r'''$.data.category''',
-                            ).toString(),
-                            transactionOwner: currentUserReference,
-                            balanceAfter: getJsonField(
-                              (trasactionJsonResponse?.jsonBody ?? ''),
-                              r'''$.data.balance''',
-                            ),
-                            transactionAmount: getJsonField(
-                              (trasactionJsonResponse?.jsonBody ?? ''),
-                              r'''$.data.amount''',
-                            ),
-                          );
-                          await TransactionsRecord.collection
-                              .doc()
-                              .set(transactionsCreateData);
+                          // final transactionsCreateData =
+                          //     createTransactionsRecordData(
+                          //   account: buttonAccountsRecord.reference,
+                          //   trasactionDate: getCurrentTimestamp,
+                          //   monoCategory: getJsonField(
+                          //     (trasactionJsonResponse?.jsonBody ?? ''),
+                          //     r'''$.data.category''',
+                          //   ).toString(),
+                          //   transactionOwner: currentUserReference,
+                          //   balanceAfter: getJsonField(
+                          //     (trasactionJsonResponse?.jsonBody ?? ''),
+                          //     r'''$.data.balance''',
+                          //   ),
+                          //   transactionAmount: getJsonField(
+                          //     (trasactionJsonResponse?.jsonBody ?? ''),
+                          //     r'''$.data.amount''',
+                          //   ),
+                          // );
+                          // await TransactionsRecord.collection
+                          //     .doc()
+                          //     .set(transactionsCreateData);
 
                           setState(() {});
                         },

@@ -90,6 +90,15 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
               const FullType(DocumentReference, const [const FullType(Object)])
             ])));
     }
+    value = object.budgetList;
+    if (value != null) {
+      result
+        ..add('budgetList')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(BuiltList, const [
+              const FullType(DocumentReference, const [const FullType(Object)])
+            ])));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -155,6 +164,13 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
                     DocumentReference, const [const FullType(Object)])
               ])) as BuiltList<Object>);
           break;
+        case 'budgetList':
+          result.budgetList.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltList, const [
+                const FullType(
+                    DocumentReference, const [const FullType(Object)])
+              ])) as BuiltList<Object>);
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -190,6 +206,8 @@ class _$UsersRecord extends UsersRecord {
   @override
   final BuiltList<DocumentReference<Object>> accountsList;
   @override
+  final BuiltList<DocumentReference<Object>> budgetList;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder) updates]) =>
@@ -206,6 +224,7 @@ class _$UsersRecord extends UsersRecord {
       this.income,
       this.tempAuthCode,
       this.accountsList,
+      this.budgetList,
       this.reference})
       : super._();
 
@@ -230,6 +249,7 @@ class _$UsersRecord extends UsersRecord {
         income == other.income &&
         tempAuthCode == other.tempAuthCode &&
         accountsList == other.accountsList &&
+        budgetList == other.budgetList &&
         reference == other.reference;
   }
 
@@ -244,16 +264,18 @@ class _$UsersRecord extends UsersRecord {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, email.hashCode),
-                                            displayName.hashCode),
-                                        photoUrl.hashCode),
-                                    uid.hashCode),
-                                createdTime.hashCode),
-                            phoneNumber.hashCode),
-                        age.hashCode),
-                    income.hashCode),
-                tempAuthCode.hashCode),
-            accountsList.hashCode),
+                                        $jc(
+                                            $jc($jc(0, email.hashCode),
+                                                displayName.hashCode),
+                                            photoUrl.hashCode),
+                                        uid.hashCode),
+                                    createdTime.hashCode),
+                                phoneNumber.hashCode),
+                            age.hashCode),
+                        income.hashCode),
+                    tempAuthCode.hashCode),
+                accountsList.hashCode),
+            budgetList.hashCode),
         reference.hashCode));
   }
 
@@ -270,6 +292,7 @@ class _$UsersRecord extends UsersRecord {
           ..add('income', income)
           ..add('tempAuthCode', tempAuthCode)
           ..add('accountsList', accountsList)
+          ..add('budgetList', budgetList)
           ..add('reference', reference))
         .toString();
   }
@@ -320,6 +343,12 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   set accountsList(ListBuilder<DocumentReference<Object>> accountsList) =>
       _$this._accountsList = accountsList;
 
+  ListBuilder<DocumentReference<Object>> _budgetList;
+  ListBuilder<DocumentReference<Object>> get budgetList =>
+      _$this._budgetList ??= new ListBuilder<DocumentReference<Object>>();
+  set budgetList(ListBuilder<DocumentReference<Object>> budgetList) =>
+      _$this._budgetList = budgetList;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -342,6 +371,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _income = $v.income;
       _tempAuthCode = $v.tempAuthCode;
       _accountsList = $v.accountsList?.toBuilder();
+      _budgetList = $v.budgetList?.toBuilder();
       _reference = $v.reference;
       _$v = null;
     }
@@ -375,12 +405,15 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
               income: income,
               tempAuthCode: tempAuthCode,
               accountsList: _accountsList?.build(),
+              budgetList: _budgetList?.build(),
               reference: reference);
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'accountsList';
         _accountsList?.build();
+        _$failedField = 'budgetList';
+        _budgetList?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'UsersRecord', _$failedField, e.toString());
