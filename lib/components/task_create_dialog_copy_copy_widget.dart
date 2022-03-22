@@ -8,29 +8,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TaskCreateDialogCopyWidget extends StatefulWidget {
-  const TaskCreateDialogCopyWidget({
+class TaskCreateDialogCopyCopyWidget extends StatefulWidget {
+  const TaskCreateDialogCopyCopyWidget({
     Key key,
     this.budget,
+    this.categoryToEdit,
   }) : super(key: key);
 
   final BudgetsRecord budget;
+  final BudgetCategoriesRecord categoryToEdit;
 
   @override
-  _TaskCreateDialogCopyWidgetState createState() =>
-      _TaskCreateDialogCopyWidgetState();
+  _TaskCreateDialogCopyCopyWidgetState createState() =>
+      _TaskCreateDialogCopyCopyWidgetState();
 }
 
-class _TaskCreateDialogCopyWidgetState
-    extends State<TaskCreateDialogCopyWidget> {
-  TextEditingController textController1;
-  TextEditingController textController2;
+class _TaskCreateDialogCopyCopyWidgetState
+    extends State<TaskCreateDialogCopyCopyWidget> {
+  TextEditingController textController;
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
+    textController = TextEditingController(
+        text: widget.categoryToEdit.allocatedAmount.toString());
   }
 
   @override
@@ -59,37 +60,12 @@ class _TaskCreateDialogCopyWidgetState
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            TextFormField(
-              controller: textController1,
-              obscureText: false,
-              decoration: InputDecoration(
-                labelText: 'Category Name',
-                hintText: 'Enter Category Name',
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    width: 1,
-                  ),
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(4.0),
-                    topRight: Radius.circular(4.0),
-                  ),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    width: 1,
-                  ),
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(4.0),
-                    topRight: Radius.circular(4.0),
-                  ),
-                ),
-              ),
-              style: FlutterFlowTheme.of(context).bodyText1,
+            Text(
+              widget.categoryToEdit.categoryName,
+              style: FlutterFlowTheme.of(context).title3,
             ),
             TextFormField(
-              controller: textController2,
+              controller: textController,
               obscureText: false,
               decoration: InputDecoration(
                 labelText: 'Amount',
@@ -122,16 +98,12 @@ class _TaskCreateDialogCopyWidgetState
               padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
               child: FFButtonWidget(
                 onPressed: () async {
-                  final budgetCategoriesCreateData =
+                  final budgetCategoriesUpdateData =
                       createBudgetCategoriesRecordData(
-                    categoryName: textController1.text,
-                    allocatedAmount: int.parse(textController2.text),
-                    budgetOwner: currentUserReference,
-                    categoryBudget: widget.budget.reference,
+                    allocatedAmount: int.parse(textController.text),
                   );
-                  await BudgetCategoriesRecord.collection
-                      .doc()
-                      .set(budgetCategoriesCreateData);
+                  await widget.categoryToEdit.reference
+                      .update(budgetCategoriesUpdateData);
                   Navigator.pop(context);
                 },
                 text: 'Save',
