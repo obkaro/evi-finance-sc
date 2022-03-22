@@ -37,7 +37,7 @@ class _TaskCreateDialogCopyWidgetState
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 400,
+      height: 325,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
         boxShadow: [

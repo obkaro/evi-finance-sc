@@ -122,10 +122,12 @@ class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
                             containerConstBudgetCategoriesRecord.categoryName,
                         allocatedAmount: int.parse(textController.text),
                         categoryBudget: widget.budget.reference,
+                        budgetOwner: currentUserReference,
                       );
                       await BudgetCategoriesRecord.collection
                           .doc()
                           .set(budgetCategoriesCreateData);
+                      Navigator.pop(context);
                     },
                     text: 'Save',
                     options: FFButtonOptions(

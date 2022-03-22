@@ -25,12 +25,15 @@ class TaskCreateDialogCopyCopyWidget extends StatefulWidget {
 
 class _TaskCreateDialogCopyCopyWidgetState
     extends State<TaskCreateDialogCopyCopyWidget> {
-  TextEditingController textController;
+  TextEditingController textController1;
+  TextEditingController textController2;
 
   @override
   void initState() {
     super.initState();
-    textController = TextEditingController(
+    textController1 =
+        TextEditingController(text: widget.categoryToEdit.categoryName);
+    textController2 = TextEditingController(
         text: widget.categoryToEdit.allocatedAmount.toString());
   }
 
@@ -38,7 +41,7 @@ class _TaskCreateDialogCopyCopyWidgetState
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 400,
+      height: 325,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
         boxShadow: [
@@ -60,12 +63,41 @@ class _TaskCreateDialogCopyCopyWidgetState
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text(
-              widget.categoryToEdit.categoryName,
-              style: FlutterFlowTheme.of(context).title3,
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+              child: TextFormField(
+                controller: textController1,
+                obscureText: false,
+                decoration: InputDecoration(
+                  labelText: 'Amount',
+                  hintText: 'Enter Amount',
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      width: 1,
+                    ),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(4.0),
+                      topRight: Radius.circular(4.0),
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      width: 1,
+                    ),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(4.0),
+                      topRight: Radius.circular(4.0),
+                    ),
+                  ),
+                ),
+                style: FlutterFlowTheme.of(context).bodyText1,
+                keyboardType: TextInputType.number,
+              ),
             ),
             TextFormField(
-              controller: textController,
+              controller: textController2,
               obscureText: false,
               decoration: InputDecoration(
                 labelText: 'Amount',
@@ -100,7 +132,8 @@ class _TaskCreateDialogCopyCopyWidgetState
                 onPressed: () async {
                   final budgetCategoriesUpdateData =
                       createBudgetCategoriesRecordData(
-                    allocatedAmount: int.parse(textController.text),
+                    allocatedAmount: int.parse(textController2.text),
+                    categoryName: textController1.text,
                   );
                   await widget.categoryToEdit.reference
                       .update(budgetCategoriesUpdateData);

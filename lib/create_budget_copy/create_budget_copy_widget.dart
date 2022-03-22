@@ -26,7 +26,6 @@ class CreateBudgetCopyWidget extends StatefulWidget {
 }
 
 class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
-  TextEditingController textController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -40,38 +39,62 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
         title: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            InkWell(
-              onTap: () async {
-                var confirmDialogResponse = await showDialog<bool>(
-                      context: context,
-                      builder: (alertDialogContext) {
-                        return AlertDialog(
-                          title: Text('Are you sure?'),
-                          content: Text('Changes will not be saved'),
-                          actions: [
-                            TextButton(
-                              onPressed: () =>
-                                  Navigator.pop(alertDialogContext, false),
-                              child: Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () =>
-                                  Navigator.pop(alertDialogContext, true),
-                              child: Text('Confirm'),
-                            ),
-                          ],
-                        );
-                      },
-                    ) ??
-                    false;
-                await widget.createdBudget.reference.delete();
-                Navigator.pop(context);
-              },
-              child: Icon(
-                Icons.arrow_back_rounded,
-                color: Colors.white,
-                size: 24,
+            StreamBuilder<List<BudgetCategoriesRecord>>(
+              stream: queryBudgetCategoriesRecord(
+                queryBuilder: (budgetCategoriesRecord) =>
+                    budgetCategoriesRecord.where('categoryBudget',
+                        isEqualTo: widget.createdBudget.reference),
               ),
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: SpinKitFadingFour(
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        size: 50,
+                      ),
+                    ),
+                  );
+                }
+                List<BudgetCategoriesRecord> iconBudgetCategoriesRecordList =
+                    snapshot.data;
+                return InkWell(
+                  onTap: () async {
+                    var confirmDialogResponse = await showDialog<bool>(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('Are you sure?'),
+                              content: Text('Changes will not be saved'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, false),
+                                  child: Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, true),
+                                  child: Text('Confirm'),
+                                ),
+                              ],
+                            );
+                          },
+                        ) ??
+                        false;
+                    await widget.createdBudget.reference.delete();
+                    Navigator.pop(context);
+                  },
+                  child: Icon(
+                    Icons.arrow_back_rounded,
+                    color: Colors.white,
+                    size: 24,
+                  ),
+                );
+              },
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
@@ -189,57 +212,65 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                           final gridViewConstBudgetCategoriesRecord =
                               gridViewConstBudgetCategoriesRecordList[
                                   gridViewIndex];
-                          return Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFEEEEEE),
+                          return Material(
+                            color: Colors.transparent,
+                            elevation: 2,
+                            shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: InkWell(
-                              onTap: () async {
-                                await showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  backgroundColor: Colors.transparent,
-                                  context: context,
-                                  builder: (context) {
-                                    return Padding(
-                                      padding:
-                                          MediaQuery.of(context).viewInsets,
-                                      child: TaskCreateDialogWidget(
-                                        constCategory:
-                                            gridViewConstBudgetCategoriesRecord
-                                                .reference,
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 20),
-                                    child: Icon(
-                                      Icons.settings_outlined,
-                                      color: Colors.black,
-                                      size: 36,
-                                    ),
-                                  ),
-                                  AutoSizeText(
-                                    gridViewConstBudgetCategoriesRecord
-                                        .categoryName,
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          fontSize: 12,
+                            child: Container(
+                              width: 100,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: InkWell(
+                                onTap: () async {
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (context) {
+                                      return Padding(
+                                        padding:
+                                            MediaQuery.of(context).viewInsets,
+                                        child: TaskCreateDialogWidget(
+                                          constCategory:
+                                              gridViewConstBudgetCategoriesRecord
+                                                  .reference,
                                         ),
-                                  ),
-                                ],
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 0, 20),
+                                      child: Icon(
+                                        Icons.settings_outlined,
+                                        color: Colors.black,
+                                        size: 36,
+                                      ),
+                                    ),
+                                    AutoSizeText(
+                                      gridViewConstBudgetCategoriesRecord
+                                          .categoryName,
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 12,
+                                          ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           );
@@ -351,39 +382,17 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                       .primaryBackground,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      5, 0, 5, 5),
-                                  child: TextFormField(
-                                    controller: textController ??=
-                                        TextEditingController(
-                                      text: columnBudgetCategoriesRecord
-                                          .allocatedAmount
-                                          .toString(),
-                                    ),
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      hintText: '[Some hint text...]',
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                    ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                    textAlign: TextAlign.end,
-                                    keyboardType: TextInputType.number,
+                                alignment: AlignmentDirectional(0, 0),
+                                child: Text(
+                                  formatNumber(
+                                    columnBudgetCategoriesRecord
+                                        .allocatedAmount,
+                                    formatType: FormatType.custom,
+                                    currency: '',
+                                    format: '',
+                                    locale: '',
                                   ),
+                                  style: FlutterFlowTheme.of(context).bodyText1,
                                 ),
                               ),
                               FlutterFlowIconButton(
