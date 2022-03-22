@@ -8,6 +8,8 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
+import '../custom_code/actions/index.dart' as actions;
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -85,6 +87,9 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                           },
                         ) ??
                         false;
+                    await actions.deleteCategories(
+                      iconBudgetCategoriesRecordList.toList(),
+                    );
                     await widget.createdBudget.reference.delete();
                     Navigator.pop(context);
                   },
@@ -155,16 +160,44 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                 color: FlutterFlowTheme.of(context)
                                     .primaryBackground,
                               ),
-                              child: Text(
-                                formatNumber(
-                                  widget.createdBudget.budgetAmount,
-                                  formatType: FormatType.custom,
-                                  currency: '',
-                                  format: '',
-                                  locale: '',
+                              child:
+                                  StreamBuilder<List<BudgetCategoriesRecord>>(
+                                stream: queryBudgetCategoriesRecord(
+                                  queryBuilder: (budgetCategoriesRecord) =>
+                                      budgetCategoriesRecord.where(
+                                          'categoryBudget',
+                                          isEqualTo:
+                                              widget.createdBudget.reference),
                                 ),
-                                textAlign: TextAlign.end,
-                                style: FlutterFlowTheme.of(context).title3,
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: SpinKitFadingFour(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          size: 50,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  List<BudgetCategoriesRecord>
+                                      textBudgetCategoriesRecordList =
+                                      snapshot.data;
+                                  return Text(
+                                    functions
+                                        .calculateTotalInt(
+                                            textBudgetCategoriesRecordList
+                                                .toList(),
+                                            widget.createdBudget)
+                                        .toString(),
+                                    textAlign: TextAlign.end,
+                                    style: FlutterFlowTheme.of(context).title3,
+                                  );
+                                },
                               ),
                             ),
                           ],
@@ -515,13 +548,17 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                           },
                         ) ??
                         false;
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            NavBarPage(initialPage: 'Budgets'),
-                      ),
-                    );
+                    if (confirmDialogResponse) {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              NavBarPage(initialPage: 'Budgets'),
+                        ),
+                      );
+                    } else {
+                      Navigator.pop(context);
+                    }
                   },
                   text: 'Create',
                   options: FFButtonOptions(
