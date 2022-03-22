@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/lat_lng.dart';
 import 'dart:convert';
 
@@ -20,6 +22,8 @@ class FFAppState {
   SharedPreferences prefs;
 
   List<dynamic> aa = [];
+
+  List<DocumentReference> categoryList = [];
 }
 
 LatLng _latLngFromString(String val) {

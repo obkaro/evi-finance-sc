@@ -10,6 +10,7 @@ import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/internationalization.dart';
 import 'package:evi_finance/land_page/land_page_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dashboard/dashboard_widget.dart';
 import 'budgets/budgets_widget.dart';
 import 'profile/profile_widget.dart';

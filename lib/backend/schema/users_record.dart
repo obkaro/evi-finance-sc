@@ -44,6 +44,9 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   BuiltList<DocumentReference> get accountsList;
 
   @nullable
+  BuiltList<DocumentReference> get budgetList;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -56,7 +59,8 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..age = 0
     ..income = 0.0
     ..tempAuthCode = ''
-    ..accountsList = ListBuilder();
+    ..accountsList = ListBuilder()
+    ..budgetList = ListBuilder();
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -102,4 +106,5 @@ Map<String, dynamic> createUsersRecordData({
           ..age = age
           ..income = income
           ..tempAuthCode = tempAuthCode
-          ..accountsList = null));
+          ..accountsList = null
+          ..budgetList = null));

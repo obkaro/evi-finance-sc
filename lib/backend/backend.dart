@@ -9,6 +9,7 @@ import 'schema/accounts_record.dart';
 import 'schema/transactions_record.dart';
 import 'schema/budgets_record.dart';
 import 'schema/budget_categories_record.dart';
+import 'schema/const_budget_categories_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,6 +21,7 @@ export 'schema/accounts_record.dart';
 export 'schema/transactions_record.dart';
 export 'schema/budgets_record.dart';
 export 'schema/budget_categories_record.dart';
+export 'schema/const_budget_categories_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord(
@@ -98,6 +100,23 @@ Future<List<BudgetCategoriesRecord>> queryBudgetCategoriesRecordOnce(
         bool singleRecord = false}) =>
     queryCollectionOnce(
         BudgetCategoriesRecord.collection, BudgetCategoriesRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+/// Functions to query ConstBudgetCategoriesRecords (as a Stream and as a Future).
+Stream<List<ConstBudgetCategoriesRecord>> queryConstBudgetCategoriesRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(ConstBudgetCategoriesRecord.collection,
+        ConstBudgetCategoriesRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<ConstBudgetCategoriesRecord>> queryConstBudgetCategoriesRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(ConstBudgetCategoriesRecord.collection,
+        ConstBudgetCategoriesRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(
