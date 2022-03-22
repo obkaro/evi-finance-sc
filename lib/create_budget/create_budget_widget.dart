@@ -299,7 +299,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
 
                           setState(() {});
                         },
-                        text: 'Create',
+                        text: 'Next',
                         options: FFButtonOptions(
                           width: 130,
                           height: 40,
