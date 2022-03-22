@@ -77,6 +77,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .primaryBackground,
+                                    borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: Text(
                                     widget.createdBudget.budgetName,
@@ -109,92 +110,105 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                       ),
                     ),
                   ),
-                  StreamBuilder<List<ConstBudgetCategoriesRecord>>(
-                    stream: queryConstBudgetCategoriesRecord(),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: SpinKitFadingFour(
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              size: 50,
-                            ),
-                          ),
-                        );
-                      }
-                      List<ConstBudgetCategoriesRecord>
-                          gridViewConstBudgetCategoriesRecordList =
-                          snapshot.data;
-                      return GridView.builder(
-                        padding: EdgeInsets.zero,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 20,
-                          mainAxisSpacing: 20,
-                          childAspectRatio: 1,
-                        ),
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount:
-                            gridViewConstBudgetCategoriesRecordList.length,
-                        itemBuilder: (context, gridViewIndex) {
-                          final gridViewConstBudgetCategoriesRecord =
-                              gridViewConstBudgetCategoriesRecordList[
-                                  gridViewIndex];
-                          return Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFEEEEEE),
-                            ),
-                            child: InkWell(
-                              onTap: () async {
-                                await showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  backgroundColor: Colors.transparent,
-                                  context: context,
-                                  builder: (context) {
-                                    return Padding(
-                                      padding:
-                                          MediaQuery.of(context).viewInsets,
-                                      child: TaskCreateDialogWidget(
-                                        constCategory:
-                                            gridViewConstBudgetCategoriesRecord
-                                                .reference,
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 20),
-                                    child: Icon(
-                                      Icons.settings_outlined,
-                                      color: Colors.black,
-                                      size: 48,
-                                    ),
-                                  ),
-                                  Text(
-                                    gridViewConstBudgetCategoriesRecord
-                                        .categoryName,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                  ),
-                                ],
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 350,
+                    decoration: BoxDecoration(),
+                    child: StreamBuilder<List<ConstBudgetCategoriesRecord>>(
+                      stream: queryConstBudgetCategoriesRecord(),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: SpinKitFadingFour(
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                size: 50,
                               ),
                             ),
                           );
-                        },
-                      );
-                    },
+                        }
+                        List<ConstBudgetCategoriesRecord>
+                            gridViewConstBudgetCategoriesRecordList =
+                            snapshot.data;
+                        return GridView.builder(
+                          padding: EdgeInsets.zero,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 1,
+                          ),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount:
+                              gridViewConstBudgetCategoriesRecordList.length,
+                          itemBuilder: (context, gridViewIndex) {
+                            final gridViewConstBudgetCategoriesRecord =
+                                gridViewConstBudgetCategoriesRecordList[
+                                    gridViewIndex];
+                            return Container(
+                              width: 100,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFEEEEEE),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: InkWell(
+                                onTap: () async {
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (context) {
+                                      return Padding(
+                                        padding:
+                                            MediaQuery.of(context).viewInsets,
+                                        child: TaskCreateDialogWidget(
+                                          constCategory:
+                                              gridViewConstBudgetCategoriesRecord
+                                                  .reference,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 0, 20),
+                                      child: Icon(
+                                        Icons.settings_outlined,
+                                        color: Colors.black,
+                                        size: 36,
+                                      ),
+                                    ),
+                                    AutoSizeText(
+                                      gridViewConstBudgetCategoriesRecord
+                                          .categoryName,
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 12,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
