@@ -35,7 +35,7 @@ class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 400,
+      height: 300,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
         boxShadow: [

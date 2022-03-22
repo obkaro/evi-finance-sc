@@ -98,11 +98,11 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                           actionPane: const SlidableScrollActionPane(),
                           secondaryActions: [
                             IconSlideAction(
-                              caption: 'Share',
+                              caption: 'Delete',
                               color: Color(0xFFFF0003),
                               icon: Icons.delete_rounded,
-                              onTap: () {
-                                print('SlidableActionWidget pressed ...');
+                              onTap: () async {
+                                await columnBudgetsRecord.reference.delete();
                               },
                             ),
                           ],
