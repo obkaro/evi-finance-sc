@@ -12,6 +12,7 @@ import 'package:evi_finance/land_page/land_page_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dashboard/dashboard_widget.dart';
+import 'transactions/transactions_widget.dart';
 import 'budgets/budgets_widget.dart';
 import 'profile/profile_widget.dart';
 
@@ -118,6 +119,7 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'Dashboard': DashboardWidget(),
+      'Transactions': TransactionsWidget(),
       'Budgets': BudgetsWidget(),
       'Profile': ProfileWidget(),
     };
@@ -144,7 +146,15 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.account_balance_wallet,
+              Icons.compare_arrows_rounded,
+              size: 24,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.pie_chart,
               size: 24,
             ),
             label: 'Transactions',

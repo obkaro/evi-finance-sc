@@ -1,6 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../create_budget_copy/create_budget_copy_widget.dart';
+import '../create_budget_categories/create_budget_categories_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -101,37 +101,40 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                           ),
                           style: FlutterFlowTheme.of(context).bodyText1,
                         ),
-                        TextFormField(
-                          controller: textController2,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Description',
-                            hintText: 'Input budget description',
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1,
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                          child: TextFormField(
+                            controller: textController2,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'Description',
+                              hintText: 'Input budget description',
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 1,
+                                ),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(4.0),
+                                  topRight: Radius.circular(4.0),
+                                ),
                               ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 1,
+                                ),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(4.0),
+                                  topRight: Radius.circular(4.0),
+                                ),
                               ),
+                              contentPadding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 30, 0, 40),
                             ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            contentPadding:
-                                EdgeInsetsDirectional.fromSTEB(0, 30, 0, 40),
+                            style: FlutterFlowTheme.of(context).bodyText1,
+                            keyboardType: TextInputType.multiline,
                           ),
-                          style: FlutterFlowTheme.of(context).bodyText1,
-                          keyboardType: TextInputType.multiline,
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
@@ -171,7 +174,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
@@ -199,9 +202,9 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
                               ),
+                          elevation: 0,
                           borderSide: BorderSide(
                             color: Colors.transparent,
-                            width: 1,
                           ),
                           borderRadius: 12,
                         ),
@@ -230,9 +233,9 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                               fontFamily: 'Poppins',
                               color: FlutterFlowTheme.of(context).primaryColor,
                             ),
+                        elevation: 0,
                         borderSide: BorderSide(
                           color: Colors.transparent,
-                          width: 1,
                         ),
                         borderRadius: 12,
                       ),
@@ -240,7 +243,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
                   child: StreamBuilder<List<AccountsRecord>>(
                     stream: queryAccountsRecord(
                       queryBuilder: (accountsRecord) => accountsRecord.where(
@@ -291,7 +294,8 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CreateBudgetCopyWidget(
+                              builder: (context) =>
+                                  CreateBudgetCategoriesWidget(
                                 createdBudget: createdBudget,
                               ),
                             ),

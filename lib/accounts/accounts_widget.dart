@@ -204,7 +204,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                 listViewAccountsRecord
                                                     .accountBalance,
                                                 formatType: FormatType.custom,
-                                                currency: '',
+                                                currency: '₦',
                                                 format: '',
                                                 locale: '',
                                               ),

@@ -24,3 +24,13 @@ int calculateTotalInt(
 
   return remaining;
 }
+
+List<String> getCategoryNames(List<BudgetCategoriesRecord> listForNames) {
+  // Add your function code here!
+  List<String> list;
+
+  for (var i = 0; i < listForNames.length; i++) {
+    list.add(listForNames[i].categoryName);
+  }
+  return list;
+}
