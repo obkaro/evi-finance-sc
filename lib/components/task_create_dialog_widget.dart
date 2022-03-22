@@ -15,7 +15,7 @@ class TaskCreateDialogWidget extends StatefulWidget {
     this.budget,
   }) : super(key: key);
 
-  final DocumentReference constCategory;
+  final ConstBudgetCategoriesRecord constCategory;
   final BudgetsRecord budget;
 
   @override
@@ -33,153 +33,131 @@ class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<ConstBudgetCategoriesRecord>(
-      stream: ConstBudgetCategoriesRecord.getDocument(widget.constCategory),
-      builder: (context, snapshot) {
-        // Customize what your widget looks like when it's loading.
-        if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 50,
-              height: 50,
-              child: SpinKitFadingFour(
-                color: FlutterFlowTheme.of(context).primaryColor,
-                size: 50,
+    return Container(
+      width: double.infinity,
+      height: 400,
+      decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).primaryBackground,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 5,
+            color: Color(0x3B1D2429),
+            offset: Offset(0, -3),
+          )
+        ],
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(0),
+          bottomRight: Radius.circular(0),
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+              child: Text(
+                widget.constCategory.categoryName,
+                textAlign: TextAlign.start,
+                style: FlutterFlowTheme.of(context).title3,
               ),
             ),
-          );
-        }
-        final containerConstBudgetCategoriesRecord = snapshot.data;
-        return Container(
-          width: double.infinity,
-          height: 400,
-          decoration: BoxDecoration(
-            color: FlutterFlowTheme.of(context).primaryBackground,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 5,
-                color: Color(0x3B1D2429),
-                offset: Offset(0, -3),
-              )
-            ],
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(0),
-              bottomRight: Radius.circular(0),
-              topLeft: Radius.circular(16),
-              topRight: Radius.circular(16),
+            TextFormField(
+              controller: textController,
+              obscureText: false,
+              decoration: InputDecoration(
+                labelText: 'Amount',
+                hintText: 'Enter Amount',
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    width: 1,
+                  ),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(4.0),
+                    topRight: Radius.circular(4.0),
+                  ),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    width: 1,
+                  ),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(4.0),
+                    topRight: Radius.circular(4.0),
+                  ),
+                ),
+              ),
+              style: FlutterFlowTheme.of(context).bodyText1,
+              keyboardType: TextInputType.number,
             ),
-          ),
-          child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                  child: Text(
-                    containerConstBudgetCategoriesRecord.categoryName,
-                    textAlign: TextAlign.start,
-                    style: FlutterFlowTheme.of(context).title3,
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+              child: FFButtonWidget(
+                onPressed: () async {
+                  final budgetCategoriesCreateData =
+                      createBudgetCategoriesRecordData(
+                    categoryName: widget.constCategory.categoryName,
+                    allocatedAmount: int.parse(textController.text),
+                    categoryBudget: widget.budget.reference,
+                    budgetOwner: currentUserReference,
+                  );
+                  await BudgetCategoriesRecord.collection
+                      .doc()
+                      .set(budgetCategoriesCreateData);
+                  Navigator.pop(context);
+                },
+                text: 'Save',
+                options: FFButtonOptions(
+                  width: double.infinity,
+                  height: 60,
+                  color: FlutterFlowTheme.of(context).primaryColor,
+                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: 'Lexend Deca',
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                      ),
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
                   ),
+                  borderRadius: 12,
                 ),
-                TextFormField(
-                  controller: textController,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelText: 'Amount',
-                    hintText: 'Enter Amount',
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        width: 1,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        width: 1,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4.0),
-                        topRight: Radius.circular(4.0),
-                      ),
-                    ),
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyText1,
-                  keyboardType: TextInputType.number,
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      final budgetCategoriesCreateData =
-                          createBudgetCategoriesRecordData(
-                        categoryName:
-                            containerConstBudgetCategoriesRecord.categoryName,
-                        allocatedAmount: int.parse(textController.text),
-                        categoryBudget: widget.budget.reference,
-                        budgetOwner: currentUserReference,
-                      );
-                      await BudgetCategoriesRecord.collection
-                          .doc()
-                          .set(budgetCategoriesCreateData);
-                      Navigator.pop(context);
-                    },
-                    text: 'Save',
-                    options: FFButtonOptions(
-                      width: double.infinity,
-                      height: 60,
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      textStyle:
-                          FlutterFlowTheme.of(context).subtitle2.override(
-                                fontFamily: 'Lexend Deca',
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                              ),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      ),
-                      borderRadius: 12,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      Navigator.pop(context);
-                    },
-                    text: 'Cancel',
-                    options: FFButtonOptions(
-                      width: double.infinity,
-                      height: 60,
-                      color: Color(0x00FFFFFF),
-                      textStyle:
-                          FlutterFlowTheme.of(context).subtitle2.override(
-                                fontFamily: 'Lexend Deca',
-                                color: Color(0xFF57636C),
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                              ),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      ),
-                      borderRadius: 40,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        );
-      },
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+              child: FFButtonWidget(
+                onPressed: () async {
+                  Navigator.pop(context);
+                },
+                text: 'Cancel',
+                options: FFButtonOptions(
+                  width: double.infinity,
+                  height: 60,
+                  color: Color(0x00FFFFFF),
+                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: 'Lexend Deca',
+                        color: Color(0xFF57636C),
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                      ),
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
+                  ),
+                  borderRadius: 40,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

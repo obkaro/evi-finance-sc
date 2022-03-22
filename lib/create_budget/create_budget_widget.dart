@@ -191,7 +191,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                         options: FFButtonOptions(
                           width: 130,
                           height: 40,
-                          color: Color(0x00FF0054),
+                          color: FlutterFlowTheme.of(context).primaryBackground,
                           textStyle: FlutterFlowTheme.of(context)
                               .subtitle2
                               .override(
@@ -223,7 +223,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                       options: FFButtonOptions(
                         width: 130,
                         height: 40,
-                        color: Color(0x00FF0054),
+                        color: FlutterFlowTheme.of(context).primaryBackground,
                         textStyle: FlutterFlowTheme.of(context)
                             .subtitle2
                             .override(

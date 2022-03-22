@@ -175,7 +175,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 350,
+                  height: 375,
                   decoration: BoxDecoration(),
                   child: StreamBuilder<List<ConstBudgetCategoriesRecord>>(
                     stream: queryConstBudgetCategoriesRecord(),
@@ -214,7 +214,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                   gridViewIndex];
                           return Material(
                             color: Colors.transparent,
-                            elevation: 2,
+                            elevation: 1,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -225,6 +225,10 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                 color: FlutterFlowTheme.of(context)
                                     .primaryBackground,
                                 borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: Color(0xFFDFD8D8),
+                                  width: 1,
+                                ),
                               ),
                               child: InkWell(
                                 onTap: () async {
@@ -238,8 +242,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                             MediaQuery.of(context).viewInsets,
                                         child: TaskCreateDialogWidget(
                                           constCategory:
-                                              gridViewConstBudgetCategoriesRecord
-                                                  .reference,
+                                              gridViewConstBudgetCategoriesRecord,
                                         ),
                                       );
                                     },
@@ -253,8 +256,9 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 0, 0, 20),
                                       child: Icon(
-                                        Icons.settings_outlined,
-                                        color: Colors.black,
+                                        Icons.add_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
                                         size: 36,
                                       ),
                                     ),
@@ -478,6 +482,28 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                 ),
                 FFButtonWidget(
                   onPressed: () async {
+                    var confirmDialogResponse = await showDialog<bool>(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('Confirm create'),
+                              content: Text('Are you done?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, false),
+                                  child: Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, true),
+                                  child: Text('Confirm'),
+                                ),
+                              ],
+                            );
+                          },
+                        ) ??
+                        false;
                     await Navigator.push(
                       context,
                       MaterialPageRoute(
