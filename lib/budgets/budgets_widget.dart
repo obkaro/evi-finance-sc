@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../budget_single/budget_single_widget.dart';
 import '../create_budget/create_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -94,43 +95,55 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                           color: FlutterFlowTheme.of(context).primaryBackground,
                         ),
                         alignment: AlignmentDirectional(0, 0),
-                        child: Slidable(
-                          actionPane: const SlidableScrollActionPane(),
-                          secondaryActions: [
-                            IconSlideAction(
-                              caption: 'Delete',
-                              color: Color(0xFFFF0003),
-                              icon: Icons.delete_rounded,
-                              onTap: () async {
-                                await columnBudgetsRecord.reference.delete();
-                              },
-                            ),
-                          ],
-                          child: ListTile(
-                            title: Text(
-                              columnBudgetsRecord.budgetName,
-                              style: FlutterFlowTheme.of(context).title3,
-                            ),
-                            subtitle: Text(
-                              formatNumber(
-                                columnBudgetsRecord.budgetAmount,
-                                formatType: FormatType.custom,
-                                currency: '₦',
-                                format: '',
-                                locale: '',
+                        child: InkWell(
+                          onTap: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BudgetSingleWidget(
+                                  budget: columnBudgetsRecord,
+                                ),
                               ),
-                              style: FlutterFlowTheme.of(context).subtitle2,
+                            );
+                          },
+                          child: Slidable(
+                            actionPane: const SlidableScrollActionPane(),
+                            secondaryActions: [
+                              IconSlideAction(
+                                caption: 'Delete',
+                                color: Color(0xFFFF0003),
+                                icon: Icons.delete_rounded,
+                                onTap: () async {
+                                  await columnBudgetsRecord.reference.delete();
+                                },
+                              ),
+                            ],
+                            child: ListTile(
+                              title: Text(
+                                columnBudgetsRecord.budgetName,
+                                style: FlutterFlowTheme.of(context).title3,
+                              ),
+                              subtitle: Text(
+                                formatNumber(
+                                  columnBudgetsRecord.budgetAmount,
+                                  formatType: FormatType.custom,
+                                  currency: '₦',
+                                  format: '',
+                                  locale: '',
+                                ),
+                                style: FlutterFlowTheme.of(context).subtitle2,
+                              ),
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                color: Color(0xFF303030),
+                                size: 20,
+                              ),
+                              tileColor: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              dense: false,
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                  20, 10, 20, 10),
                             ),
-                            trailing: Icon(
-                              Icons.arrow_forward_ios,
-                              color: Color(0xFF303030),
-                              size: 20,
-                            ),
-                            tileColor:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            dense: false,
-                            contentPadding:
-                                EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
                           ),
                         ),
                       ),

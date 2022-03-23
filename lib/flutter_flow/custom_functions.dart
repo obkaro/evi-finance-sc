@@ -34,3 +34,18 @@ List<String> getCategoryNames(List<BudgetCategoriesRecord> listForNames) {
   }
   return list;
 }
+
+double calcBudgetChart(BudgetsRecord budget) {
+  // Add your function code here!
+  return 1 - (budget.budgetSpent / budget.budgetAmount);
+}
+
+int calcRemBudget(BudgetsRecord budget) {
+  // Add your function code here!
+  return budget.budgetAmount - budget.budgetSpent;
+}
+
+double calcCategoryPercent(BudgetCategoriesRecord category) {
+  // Add your function code here!
+  return 1 - (category.spentAmount / category.allocatedAmount);
+}

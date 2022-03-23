@@ -1,0 +1,91 @@
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
+import '../flutter_flow/flutter_flow_theme.dart';
+import '../flutter_flow/flutter_flow_util.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class SetTransCategoryWidget extends StatefulWidget {
+  const SetTransCategoryWidget({
+    Key key,
+    this.transaction,
+  }) : super(key: key);
+
+  final TransactionsRecord transaction;
+
+  @override
+  _SetTransCategoryWidgetState createState() => _SetTransCategoryWidgetState();
+}
+
+class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<BudgetCategoriesRecord>>(
+      future: queryBudgetCategoriesRecordOnce(
+        queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord.where(
+            'categoryBudget',
+            isEqualTo: FFAppState().selectedBudgetTrans),
+      ),
+      builder: (context, snapshot) {
+        // Customize what your widget looks like when it's loading.
+        if (!snapshot.hasData) {
+          return Center(
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: SpinKitFadingFour(
+                color: FlutterFlowTheme.of(context).primaryColor,
+                size: 50,
+              ),
+            ),
+          );
+        }
+        List<BudgetCategoriesRecord> columnBudgetCategoriesRecordList =
+            snapshot.data;
+        return Column(
+          mainAxisSize: MainAxisSize.max,
+          children: List.generate(columnBudgetCategoriesRecordList.length,
+              (columnIndex) {
+            final columnBudgetCategoriesRecord =
+                columnBudgetCategoriesRecordList[columnIndex];
+            return InkWell(
+              onTap: () async {
+                final budgetCategoriesUpdateData = {
+                  'linkedTransactions':
+                      FieldValue.arrayUnion([widget.transaction.reference]),
+                };
+                await widget.transaction.linkedCategory
+                    .update(budgetCategoriesUpdateData);
+              },
+              child: ListTile(
+                title: Text(
+                  columnBudgetCategoriesRecord.categoryName,
+                  style: FlutterFlowTheme.of(context).title3,
+                ),
+                subtitle: Text(
+                  formatNumber(
+                    columnBudgetCategoriesRecord.allocatedAmount,
+                    formatType: FormatType.custom,
+                    currency: 'N',
+                    format: '',
+                    locale: '',
+                  ),
+                  style: FlutterFlowTheme.of(context).subtitle2,
+                ),
+                trailing: Icon(
+                  Icons.check_rounded,
+                  color: FlutterFlowTheme.of(context).primaryColor,
+                  size: 20,
+                ),
+                tileColor: Color(0xFFF5F5F5),
+                dense: false,
+              ),
+            );
+          }),
+        );
+      },
+    );
+  }
+}

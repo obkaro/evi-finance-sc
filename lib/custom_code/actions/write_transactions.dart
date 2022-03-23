@@ -30,6 +30,10 @@ Future<List<DocumentReference>> writeTransactions(
       transactionOwner: currentUserReference,
       balanceAfter: transaction.data[i].balance,
       transactionAmount: transaction.data[i].amount,
+      transactionMonoID: transaction.data[i].id,
+      transactionType: transaction.data[i].type,
+      transactionNarration: transaction.data[i].narration,
+      monoCategory: transaction.data[i].monoCategory,
     );
     await TransactionsRecord.collection.doc().set(transactionsCreateData);
   }
@@ -58,6 +62,7 @@ class Transaction {
   final String narration;
   final String date;
   final int balance;
+  final String monoCategory;
 
   Transaction(
       {this.id,
@@ -65,16 +70,17 @@ class Transaction {
       this.amount,
       this.balance,
       this.date,
-      this.narration});
+      this.narration,
+      this.monoCategory});
 
   factory Transaction.fromJson(Map<String, dynamic> parsedJson) {
     return Transaction(
-      id: parsedJson['_id'],
-      type: parsedJson['type'],
-      amount: parsedJson['amount'],
-      narration: parsedJson['narration'],
-      date: parsedJson['date'],
-      balance: parsedJson['balance'],
-    );
+        id: parsedJson['_id'],
+        type: parsedJson['type'],
+        amount: parsedJson['amount'],
+        narration: parsedJson['narration'],
+        date: parsedJson['date'],
+        balance: parsedJson['balance'],
+        monoCategory: parsedJson['category']);
   }
 }
