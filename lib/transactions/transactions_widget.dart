@@ -283,10 +283,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                             ),
                           ),
                         ),
-                        Divider(
-                          thickness: 0.5,
-                          color: Color(0xFF9E9E9E),
-                        ),
+                        Divider(),
                       ],
                     );
                   }),
