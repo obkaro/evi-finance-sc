@@ -301,7 +301,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                           await BudgetCategoriesRecord.collection
                               .doc()
                               .set(budgetCategoriesCreateData);
-                          await Navigator.push(
+                          await Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
@@ -309,6 +309,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                 createdBudget: createdBudget,
                               ),
                             ),
+                            (r) => false,
                           );
 
                           setState(() {});
