@@ -4,7 +4,6 @@ import '../components/set_budget_comp_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -69,291 +68,323 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                child: StreamBuilder<AccountsRecord>(
-                  stream:
-                      AccountsRecord.getDocument(widget.transaction.account),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: SpinKitFadingFour(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            size: 50,
-                          ),
-                        ),
-                      );
-                    }
-                    final columnAccountsRecord = snapshot.data;
-                    return SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  widget.transaction.transactionType,
-                                  style: FlutterFlowTheme.of(context).title1,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                      child: StreamBuilder<AccountsRecord>(
+                        stream: AccountsRecord.getDocument(
+                            widget.transaction.account),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: SpinKitFadingFour(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  size: 50,
                                 ),
-                              ],
-                            ),
-                          ),
-                          Divider(),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Amount',
-                                style: FlutterFlowTheme.of(context).title3,
                               ),
-                            ],
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  formatNumber(
-                                    widget.transaction.transactionAmount,
-                                    formatType: FormatType.custom,
-                                    currency: 'N',
-                                    format: '',
-                                    locale: '',
-                                  ),
-                                  style: FlutterFlowTheme.of(context).title1,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Narration',
-                                style: FlutterFlowTheme.of(context).title3,
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  widget.transaction.transactionNarration,
-                                  style: FlutterFlowTheme.of(context).title1,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Account',
-                                style: FlutterFlowTheme.of(context).title3,
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  columnAccountsRecord.accountName,
-                                  style: FlutterFlowTheme.of(context).title1,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Balance',
-                                style: FlutterFlowTheme.of(context).title3,
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  formatNumber(
-                                    widget.transaction.balanceAfter,
-                                    formatType: FormatType.custom,
-                                    currency: 'N',
-                                    format: '',
-                                    locale: '',
-                                  ),
-                                  style: FlutterFlowTheme.of(context).title1,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Category',
-                                style: FlutterFlowTheme.of(context).title3,
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  widget.transaction.monoCategory,
-                                  style: FlutterFlowTheme.of(context).title1,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(),
+                            );
+                          }
+                          final columnAccountsRecord = snapshot.data;
+                          return SingleChildScrollView(
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 20, 0, 10),
+                                      0, 0, 0, 10),
+                                  child: Container(
+                                    width: 120,
+                                    height: 120,
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Image.network(
+                                      'https://picsum.photos/seed/768/600',
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 10),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      FFButtonWidget(
-                                        onPressed: () async {
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            context: context,
-                                            builder: (context) {
-                                              return Padding(
-                                                padding: MediaQuery.of(context)
-                                                    .viewInsets,
-                                                child: SetBudgetCompWidget(),
-                                              );
-                                            },
-                                          );
-                                        },
-                                        text: 'Set Budget',
-                                        options: FFButtonOptions(
-                                          width: 130,
-                                          height: 40,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: Colors.white,
-                                                  ),
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1,
-                                          ),
-                                          borderRadius: 12,
-                                        ),
+                                      Text(
+                                        widget.transaction.transactionType,
+                                        style:
+                                            FlutterFlowTheme.of(context).title1,
                                       ),
-                                      if (FFAppState()
-                                              .transactionBudgetSelected ??
-                                          true)
-                                        FFButtonWidget(
-                                          onPressed: () async {
-                                            final budgetCategoriesUpdateData =
-                                                createBudgetCategoriesRecordData(
-                                              categoryName: '',
-                                            );
-                                            await widget
-                                                .transaction.linkedCategory
-                                                .update(
-                                                    budgetCategoriesUpdateData);
-                                          },
-                                          text: 'Set Category',
-                                          options: FFButtonOptions(
-                                            width: 130,
-                                            height: 40,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily: 'Poppins',
-                                                      color: Colors.white,
-                                                    ),
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1,
-                                            ),
-                                            borderRadius: 12,
-                                          ),
-                                        ),
                                     ],
                                   ),
                                 ),
-                                FFButtonWidget(
-                                  onPressed: () async {
-                                    Navigator.pop(context);
-                                  },
-                                  text: 'Done',
-                                  icon: Icon(
-                                    Icons.done_rounded,
-                                    size: 15,
-                                  ),
-                                  options: FFButtonOptions(
-                                    width: 130,
-                                    height: 40,
-                                    color: Color(0xFF1B998B),
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          color: Colors.white,
-                                        ),
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1,
+                                Divider(),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      'Amount',
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle2,
                                     ),
-                                    borderRadius: 12,
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 10),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        formatNumber(
+                                          widget.transaction.transactionAmount,
+                                          formatType: FormatType.custom,
+                                          currency: 'N',
+                                          format: '',
+                                          locale: '',
+                                        ),
+                                        style:
+                                            FlutterFlowTheme.of(context).title1,
+                                      ),
+                                    ],
                                   ),
+                                ),
+                                Divider(),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      'Narration',
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle2,
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 10),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        widget.transaction.transactionNarration,
+                                        style:
+                                            FlutterFlowTheme.of(context).title1,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Divider(),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      'Account',
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle2,
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 10),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        columnAccountsRecord.accountName,
+                                        style:
+                                            FlutterFlowTheme.of(context).title1,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Divider(),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      'Balance',
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle2,
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 10),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        formatNumber(
+                                          widget.transaction.balanceAfter,
+                                          formatType: FormatType.custom,
+                                          currency: 'N',
+                                          format: '',
+                                          locale: '',
+                                        ),
+                                        style:
+                                            FlutterFlowTheme.of(context).title1,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Divider(),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      'Category',
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle2,
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 10),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        widget.transaction.monoCategory,
+                                        style:
+                                            FlutterFlowTheme.of(context).title1,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Divider(),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(),
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      'Linked Category',
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle2,
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 10),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      StreamBuilder<BudgetCategoriesRecord>(
+                                        stream:
+                                            BudgetCategoriesRecord.getDocument(
+                                                widget.transaction
+                                                    .linkedCategory),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50,
+                                                height: 50,
+                                                child: SpinKitFadingFour(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  size: 50,
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          final textBudgetCategoriesRecord =
+                                              snapshot.data;
+                                          return Text(
+                                            textBudgetCategoriesRecord
+                                                .categoryName,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1,
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 20, 0, 10),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          FFButtonWidget(
+                                            onPressed: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets,
+                                                    child:
+                                                        SetBudgetCompWidget(),
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            text: 'Edit',
+                                            icon: Icon(
+                                              Icons.edit_rounded,
+                                              size: 15,
+                                            ),
+                                            options: FFButtonOptions(
+                                              width: 130,
+                                              height: 40,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                      ),
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1,
+                                              ),
+                                              borderRadius: 12,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ),
-                        ],
+                          );
+                        },
                       ),
-                    );
-                  },
+                    ),
+                  ],
                 ),
               ),
             ),

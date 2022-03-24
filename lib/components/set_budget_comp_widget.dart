@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/set_trans_category_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SetBudgetCompWidget extends StatefulWidget {
-  const SetBudgetCompWidget({Key key}) : super(key: key);
+  const SetBudgetCompWidget({
+    Key key,
+    this.transaction,
+  }) : super(key: key);
+
+  final TransactionsRecord transaction;
 
   @override
   _SetBudgetCompWidgetState createState() => _SetBudgetCompWidgetState();
@@ -49,9 +55,20 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget> {
               final columnBudgetsRecord = columnBudgetsRecordList[columnIndex];
               return InkWell(
                 onTap: () async {
-                  setState(() => FFAppState().selectedBudgetTrans =
-                      columnBudgetsRecord.reference);
-                  setState(() => FFAppState().transactionBudgetSelected = true);
+                  await showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (context) {
+                      return Padding(
+                        padding: MediaQuery.of(context).viewInsets,
+                        child: SetTransCategoryWidget(
+                          transaction: widget.transaction,
+                          recievedBudget: columnBudgetsRecord.reference,
+                        ),
+                      );
+                    },
+                  );
                   Navigator.pop(context);
                 },
                 child: ListTile(

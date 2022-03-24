@@ -11,9 +11,11 @@ class SetTransCategoryWidget extends StatefulWidget {
   const SetTransCategoryWidget({
     Key key,
     this.transaction,
+    this.recievedBudget,
   }) : super(key: key);
 
   final TransactionsRecord transaction;
+  final DocumentReference recievedBudget;
 
   @override
   _SetTransCategoryWidgetState createState() => _SetTransCategoryWidgetState();
@@ -24,9 +26,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
   Widget build(BuildContext context) {
     return FutureBuilder<List<BudgetCategoriesRecord>>(
       future: queryBudgetCategoriesRecordOnce(
-        queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord.where(
-            'categoryBudget',
-            isEqualTo: FFAppState().selectedBudgetTrans),
+        queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
+            .where('categoryBudget', isEqualTo: widget.recievedBudget),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -56,8 +57,9 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
                   'linkedTransactions':
                       FieldValue.arrayUnion([widget.transaction.reference]),
                 };
-                await widget.transaction.linkedCategory
+                await columnBudgetCategoriesRecord.reference
                     .update(budgetCategoriesUpdateData);
+                Navigator.pop(context);
               },
               child: ListTile(
                 title: Text(
