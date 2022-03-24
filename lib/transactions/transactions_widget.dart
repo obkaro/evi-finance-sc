@@ -201,7 +201,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0, 10, 0, 0),
-                                            child: AutoSizeText(
+                                            child: Text(
                                               '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('EEEE', columnTransactionsRecord.trasactionDate)}, ${dateTimeFormat('d/M', columnTransactionsRecord.trasactionDate)}'
                                                   .maybeHandleOverflow(
                                                 maxChars: 15,
@@ -210,18 +210,24 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                               textAlign: TextAlign.start,
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .subtitle1,
+                                                      .bodyText1,
                                             ),
                                           ),
-                                          AutoSizeText(
-                                            columnTransactionsRecord
-                                                .transactionNarration
-                                                .maybeHandleOverflow(
-                                              maxChars: 15,
-                                              replacement: '…',
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 10, 0, 0),
+                                            child: AutoSizeText(
+                                              columnTransactionsRecord
+                                                  .transactionNarration
+                                                  .maybeHandleOverflow(
+                                                maxChars: 25,
+                                                replacement: '…',
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2,
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText2,
                                           ),
                                         ],
                                       ),
@@ -277,10 +283,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                             ),
                           ),
                         ),
-                        Divider(
-                          thickness: 0.5,
-                          color: Color(0xFF9E9E9E),
-                        ),
+                        Divider(),
                       ],
                     );
                   }),
