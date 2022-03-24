@@ -291,6 +291,16 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                           await budgetsRecordReference.set(budgetsCreateData);
                           createdBudget = BudgetsRecord.getDocumentFromData(
                               budgetsCreateData, budgetsRecordReference);
+
+                          final budgetCategoriesCreateData =
+                              createBudgetCategoriesRecordData(
+                            categoryName: 'Uncategorized',
+                            categoryBudget: createdBudget.reference,
+                            budgetOwner: currentUserReference,
+                          );
+                          await BudgetCategoriesRecord.collection
+                              .doc()
+                              .set(budgetCategoriesCreateData);
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
