@@ -1,4 +1,6 @@
 import '../backend/backend.dart';
+import '../create_budget_categories/create_budget_categories_widget.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -37,7 +39,29 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                 fontSize: 22,
               ),
         ),
-        actions: [],
+        actions: [
+          FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30,
+            borderWidth: 1,
+            buttonSize: 60,
+            icon: Icon(
+              Icons.edit_rounded,
+              color: Colors.white,
+              size: 32,
+            ),
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CreateBudgetCategoriesWidget(
+                    createdBudget: widget.budget,
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
         centerTitle: false,
         elevation: 2,
       ),

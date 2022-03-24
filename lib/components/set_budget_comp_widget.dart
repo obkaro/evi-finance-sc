@@ -55,7 +55,6 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget> {
               final columnBudgetsRecord = columnBudgetsRecordList[columnIndex];
               return InkWell(
                 onTap: () async {
-                  Navigator.pop(context);
                   await showModalBottomSheet(
                     isScrollControlled: true,
                     backgroundColor: Colors.transparent,

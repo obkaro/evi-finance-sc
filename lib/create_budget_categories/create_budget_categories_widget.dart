@@ -1,4 +1,3 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/task_create_dialog_copy_copy_widget.dart';
 import '../components/task_create_dialog_copy_widget.dart';
@@ -383,8 +382,8 @@ class _CreateBudgetCategoriesWidgetState
                     StreamBuilder<List<BudgetCategoriesRecord>>(
                       stream: queryBudgetCategoriesRecord(
                         queryBuilder: (budgetCategoriesRecord) =>
-                            budgetCategoriesRecord.where('budgetOwner',
-                                isEqualTo: currentUserReference),
+                            budgetCategoriesRecord.where('categoryBudget',
+                                isEqualTo: widget.createdBudget.reference),
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.

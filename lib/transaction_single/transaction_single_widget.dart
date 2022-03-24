@@ -175,23 +175,29 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Wrap(
-                                        spacing: 0,
-                                        runSpacing: 0,
-                                        alignment: WrapAlignment.start,
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.start,
-                                        direction: Axis.horizontal,
-                                        runAlignment: WrapAlignment.start,
-                                        verticalDirection:
-                                            VerticalDirection.down,
-                                        clipBehavior: Clip.none,
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Text(
-                                            widget.transaction
-                                                .transactionNarration,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title3,
+                                          Wrap(
+                                            spacing: 0,
+                                            runSpacing: 0,
+                                            alignment: WrapAlignment.start,
+                                            crossAxisAlignment:
+                                                WrapCrossAlignment.start,
+                                            direction: Axis.horizontal,
+                                            runAlignment: WrapAlignment.start,
+                                            verticalDirection:
+                                                VerticalDirection.down,
+                                            clipBehavior: Clip.none,
+                                            children: [
+                                              Text(
+                                                widget.transaction
+                                                    .transactionNarration,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .title3,
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
