@@ -122,7 +122,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                       Text(
                                         widget.transaction.transactionType,
                                         style:
-                                            FlutterFlowTheme.of(context).title1,
+                                            FlutterFlowTheme.of(context).title3,
                                       ),
                                     ],
                                   ),
@@ -153,7 +153,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           locale: '',
                                         ),
                                         style:
-                                            FlutterFlowTheme.of(context).title1,
+                                            FlutterFlowTheme.of(context).title3,
                                       ),
                                     ],
                                   ),
@@ -175,10 +175,25 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Text(
-                                        widget.transaction.transactionNarration,
-                                        style:
-                                            FlutterFlowTheme.of(context).title1,
+                                      Wrap(
+                                        spacing: 0,
+                                        runSpacing: 0,
+                                        alignment: WrapAlignment.start,
+                                        crossAxisAlignment:
+                                            WrapCrossAlignment.start,
+                                        direction: Axis.horizontal,
+                                        runAlignment: WrapAlignment.start,
+                                        verticalDirection:
+                                            VerticalDirection.down,
+                                        clipBehavior: Clip.none,
+                                        children: [
+                                          Text(
+                                            widget.transaction
+                                                .transactionNarration,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -203,7 +218,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                       Text(
                                         columnAccountsRecord.accountName,
                                         style:
-                                            FlutterFlowTheme.of(context).title1,
+                                            FlutterFlowTheme.of(context).title3,
                                       ),
                                     ],
                                   ),
@@ -234,7 +249,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           locale: '',
                                         ),
                                         style:
-                                            FlutterFlowTheme.of(context).title1,
+                                            FlutterFlowTheme.of(context).title3,
                                       ),
                                     ],
                                   ),
@@ -259,7 +274,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                       Text(
                                         widget.transaction.monoCategory,
                                         style:
-                                            FlutterFlowTheme.of(context).title1,
+                                            FlutterFlowTheme.of(context).title3,
                                       ),
                                     ],
                                   ),
@@ -314,7 +329,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                   .categoryName,
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .title1,
+                                                      .title3,
                                             );
                                           },
                                         ),
