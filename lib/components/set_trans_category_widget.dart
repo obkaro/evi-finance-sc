@@ -28,89 +28,95 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
       width: MediaQuery.of(context).size.width,
       height: 300,
       decoration: BoxDecoration(
-        color: Color(0xFFEEEEEE),
+        color: FlutterFlowTheme.of(context).primaryBackground,
       ),
-      child: FutureBuilder<List<BudgetCategoriesRecord>>(
-        future: queryBudgetCategoriesRecordOnce(
-          queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
-              .where('categoryBudget', isEqualTo: widget.recievedBudget),
-        ),
-        builder: (context, snapshot) {
-          // Customize what your widget looks like when it's loading.
-          if (!snapshot.hasData) {
-            return Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: SpinKitFadingFour(
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                  size: 50,
+      child: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+        child: FutureBuilder<List<BudgetCategoriesRecord>>(
+          future: queryBudgetCategoriesRecordOnce(
+            queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
+                .where('categoryBudget', isEqualTo: widget.recievedBudget),
+          ),
+          builder: (context, snapshot) {
+            // Customize what your widget looks like when it's loading.
+            if (!snapshot.hasData) {
+              return Center(
+                child: SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: SpinKitFadingFour(
+                    color: FlutterFlowTheme.of(context).primaryColor,
+                    size: 50,
+                  ),
                 ),
+              );
+            }
+            List<BudgetCategoriesRecord> columnBudgetCategoriesRecordList =
+                snapshot.data;
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: List.generate(columnBudgetCategoriesRecordList.length,
+                    (columnIndex) {
+                  final columnBudgetCategoriesRecord =
+                      columnBudgetCategoriesRecordList[columnIndex];
+                  return InkWell(
+                    onTap: () async {
+                      final transactionsUpdateData =
+                          createTransactionsRecordData(
+                        linkedCategory: columnBudgetCategoriesRecord.reference,
+                      );
+                      await widget.transaction.reference
+                          .update(transactionsUpdateData);
+                      Navigator.pop(context);
+
+                      final budgetCategoriesUpdateData = {
+                        'spentAmount': FieldValue.increment(
+                            widget.transaction.transactionAmount),
+                        'linkedTransactions': FieldValue.arrayUnion(
+                            [widget.transaction.reference]),
+                      };
+                      await columnBudgetCategoriesRecord.reference
+                          .update(budgetCategoriesUpdateData);
+
+                      final budgetsUpdateData = {
+                        'budgetSpent': FieldValue.increment(
+                            widget.transaction.transactionAmount),
+                      };
+                      await widget.recievedBudget.update(budgetsUpdateData);
+                    },
+                    child: ListTile(
+                      title: Text(
+                        columnBudgetCategoriesRecord.categoryName,
+                        style: FlutterFlowTheme.of(context).title3,
+                      ),
+                      subtitle: Text(
+                        formatNumber(
+                          columnBudgetCategoriesRecord.allocatedAmount,
+                          formatType: FormatType.custom,
+                          currency: 'N',
+                          format: '',
+                          locale: '',
+                        ),
+                        style: FlutterFlowTheme.of(context).subtitle2,
+                      ),
+                      trailing: Icon(
+                        Icons.check_circle_rounded,
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        size: 32,
+                      ),
+                      tileColor: Color(0xFFF5F5F5),
+                      dense: false,
+                      contentPadding:
+                          EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                    ),
+                  );
+                }),
               ),
             );
-          }
-          List<BudgetCategoriesRecord> columnBudgetCategoriesRecordList =
-              snapshot.data;
-          return SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: List.generate(columnBudgetCategoriesRecordList.length,
-                  (columnIndex) {
-                final columnBudgetCategoriesRecord =
-                    columnBudgetCategoriesRecordList[columnIndex];
-                return InkWell(
-                  onTap: () async {
-                    final transactionsUpdateData = createTransactionsRecordData(
-                      linkedCategory: columnBudgetCategoriesRecord.reference,
-                    );
-                    await widget.transaction.reference
-                        .update(transactionsUpdateData);
-                    Navigator.pop(context);
-
-                    final budgetCategoriesUpdateData = {
-                      'spentAmount': FieldValue.increment(
-                          widget.transaction.transactionAmount),
-                      'linkedTransactions':
-                          FieldValue.arrayUnion([widget.transaction.reference]),
-                    };
-                    await columnBudgetCategoriesRecord.reference
-                        .update(budgetCategoriesUpdateData);
-
-                    final budgetsUpdateData = {
-                      'budgetSpent': FieldValue.increment(
-                          widget.transaction.transactionAmount),
-                    };
-                    await widget.recievedBudget.update(budgetsUpdateData);
-                  },
-                  child: ListTile(
-                    title: Text(
-                      columnBudgetCategoriesRecord.categoryName,
-                      style: FlutterFlowTheme.of(context).title3,
-                    ),
-                    subtitle: Text(
-                      formatNumber(
-                        columnBudgetCategoriesRecord.allocatedAmount,
-                        formatType: FormatType.custom,
-                        currency: 'N',
-                        format: '',
-                        locale: '',
-                      ),
-                      style: FlutterFlowTheme.of(context).subtitle2,
-                    ),
-                    trailing: Icon(
-                      Icons.check_rounded,
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 20,
-                    ),
-                    tileColor: Color(0xFFF5F5F5),
-                    dense: false,
-                  ),
-                );
-              }),
-            ),
-          );
-        },
+          },
+        ),
       ),
     );
   }

@@ -59,6 +59,7 @@ class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
         padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
         child: Column(
           mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),

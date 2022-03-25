@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/select_account_widget.dart';
+import '../components/set_budget_comp_widget.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -84,7 +85,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                               controller: textController1,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: 'Amount (₦)',
+                                labelText: 'Amount (N)',
                                 hintText: 'Transaction amount',
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -157,7 +158,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                   padding: EdgeInsets.zero,
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
+                                    crossAxisCount: 4,
                                     crossAxisSpacing: 10,
                                     mainAxisSpacing: 10,
                                     childAspectRatio: 1,
@@ -169,85 +170,108 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                     final gridViewAccountsRecord =
                                         gridViewAccountsRecordList[
                                             gridViewIndex];
-                                    return FutureBuilder<List<AccountsRecord>>(
-                                      future: queryAccountsRecordOnce(
-                                        queryBuilder: (accountsRecord) =>
-                                            accountsRecord
-                                                .where(
-                                                    'accountOwner',
-                                                    isEqualTo:
-                                                        currentUserReference)
-                                                .where('institutionName',
-                                                    isEqualTo: gridViewAccountsRecord
-                                                                .institutionName !=
-                                                            ''
-                                                        ? gridViewAccountsRecord
-                                                            .institutionName
-                                                        : null),
-                                      ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50,
-                                              height: 50,
-                                              child: SpinKitFadingFour(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                size: 50,
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                        List<AccountsRecord>
-                                            circleImageAccountsRecordList =
-                                            snapshot.data;
-                                        return InkWell(
-                                          onTap: () async {
-                                            if ((circleImageAccountsRecordList
-                                                    .length) >
-                                                1) {
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                context: context,
-                                                builder: (context) {
-                                                  return Padding(
-                                                    padding:
-                                                        MediaQuery.of(context)
-                                                            .viewInsets,
-                                                    child:
-                                                        SelectAccountWidget(),
-                                                  );
-                                                },
-                                              );
-                                            } else {
-                                              final transactionsUpdateData =
-                                                  createTransactionsRecordData(
-                                                account: gridViewAccountsRecord
-                                                    .reference,
-                                              );
-                                              await createdTransaction.reference
-                                                  .update(
-                                                      transactionsUpdateData);
-                                            }
-                                          },
-                                          child: Container(
-                                            width: 120,
-                                            height: 120,
-                                            clipBehavior: Clip.antiAlias,
+                                    return Stack(
+                                      alignment: AlignmentDirectional(0, 0),
+                                      children: [
+                                        if ((gridViewAccountsRecord
+                                                .reference) ==
+                                            (createdTransaction.account))
+                                          Container(
+                                            width: 100,
+                                            height: 100,
                                             decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Image.network(
-                                              'https://picsum.photos/seed/34/600',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
                                             ),
                                           ),
-                                        );
-                                      },
+                                        StreamBuilder<List<AccountsRecord>>(
+                                          stream: queryAccountsRecord(
+                                            queryBuilder: (accountsRecord) =>
+                                                accountsRecord
+                                                    .where('accountOwner',
+                                                        isEqualTo:
+                                                            currentUserReference)
+                                                    .where('institutionName',
+                                                        isEqualTo:
+                                                            gridViewAccountsRecord
+                                                                .institutionName),
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50,
+                                                  height: 50,
+                                                  child: SpinKitFadingFour(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryColor,
+                                                    size: 50,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<AccountsRecord>
+                                                circleImageAccountsRecordList =
+                                                snapshot.data;
+                                            return InkWell(
+                                              onTap: () async {
+                                                if ((circleImageAccountsRecordList
+                                                        .length) >
+                                                    1) {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Padding(
+                                                        padding: MediaQuery.of(
+                                                                context)
+                                                            .viewInsets,
+                                                        child:
+                                                            SelectAccountWidget(
+                                                          accountsList:
+                                                              gridViewAccountsRecord,
+                                                          transaction:
+                                                              createdTransaction,
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                } else {
+                                                  final transactionsUpdateData =
+                                                      createTransactionsRecordData(
+                                                    account:
+                                                        gridViewAccountsRecord
+                                                            .reference,
+                                                  );
+                                                  await createdTransaction
+                                                      .reference
+                                                      .update(
+                                                          transactionsUpdateData);
+                                                }
+                                              },
+                                              child: Container(
+                                                width: 65,
+                                                height: 65,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Image.network(
+                                                  'https://picsum.photos/seed/34/600',
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ],
                                     );
                                   },
                                 );
@@ -295,7 +319,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                     ),
                                 iconColor: Color(0xFF323B45),
                                 iconSize: 18,
-                                elevation: 4,
+                                elevation: 2,
                               ),
                               chipSpacing: 10,
                               multiselect: false,
@@ -377,6 +401,20 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                               },
                             );
                           }
+
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            context: context,
+                            builder: (context) {
+                              return Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: SetBudgetCompWidget(
+                                  transaction: createdTransaction,
+                                ),
+                              );
+                            },
+                          );
                         },
                         text: 'Save',
                         options: FFButtonOptions(
