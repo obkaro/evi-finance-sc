@@ -69,6 +69,7 @@ class _SelectAccountWidgetState extends State<SelectAccountWidget> {
                       );
                       await widget.transaction.reference
                           .update(transactionsUpdateData);
+                      Navigator.pop(context);
                     },
                     child: ListTile(
                       title: Text(
