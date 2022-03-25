@@ -249,15 +249,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(0, 0, 0, 10),
                                                 child: Text(
-                                                  formatNumber(
-                                                    columnBudgetCategoriesRecord
-                                                        .allocatedAmount,
-                                                    formatType:
-                                                        FormatType.custom,
-                                                    currency: 'N',
-                                                    format: '',
-                                                    locale: '',
-                                                  ),
+                                                  '${functions.subInt(columnBudgetCategoriesRecord.allocatedAmount, columnBudgetCategoriesRecord.spentAmount).toString()} of ${columnBudgetCategoriesRecord.allocatedAmount.toString()} left',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1,
