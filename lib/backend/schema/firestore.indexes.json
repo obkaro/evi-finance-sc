@@ -13,20 +13,6 @@
           "order": "ASCENDING"
         }
       ]
-    },
-    {
-      "collectionGroup": "accounts",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "accountOwner",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "dateLinked",
-          "order": "ASCENDING"
-        }
-      ]
     }
   ]
 }

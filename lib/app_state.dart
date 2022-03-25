@@ -23,6 +23,8 @@ class FFAppState {
   DocumentReference selectedBudgetTrans;
 
   bool transactionBudgetSelected = false;
+
+  DocumentReference selectTransAccount;
 }
 
 LatLng _latLngFromString(String val) {
