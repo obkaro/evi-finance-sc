@@ -242,11 +242,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                 },
                                               ),
                                             Text(
-                                              '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('EEEE', columnTransactionsRecord.trasactionDate)}, ${dateTimeFormat('d/M', columnTransactionsRecord.trasactionDate)}'
-                                                  .maybeHandleOverflow(
-                                                maxChars: 15,
-                                                replacement: '…',
-                                              ),
+                                              '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('EEEE', columnTransactionsRecord.trasactionDate)}, ${dateTimeFormat('d/M', columnTransactionsRecord.trasactionDate)}',
                                               textAlign: TextAlign.start,
                                               style:
                                                   FlutterFlowTheme.of(context)

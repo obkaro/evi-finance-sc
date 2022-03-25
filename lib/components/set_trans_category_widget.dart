@@ -71,6 +71,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
                     final budgetCategoriesUpdateData = {
                       'spentAmount': FieldValue.increment(
                           widget.transaction.transactionAmount),
+                      'linkedTransactions':
+                          FieldValue.arrayUnion([widget.transaction.reference]),
                     };
                     await columnBudgetCategoriesRecord.reference
                         .update(budgetCategoriesUpdateData);
