@@ -119,6 +119,13 @@ class _$AccountsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
+    value = object.accountLogo;
+    if (value != null) {
+      result
+        ..add('accountLogo')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -200,6 +207,10 @@ class _$AccountsRecordSerializer
           result.dateLinked = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
           break;
+        case 'accountLogo':
+          result.accountLogo = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -243,6 +254,8 @@ class _$AccountsRecord extends AccountsRecord {
   @override
   final DateTime dateLinked;
   @override
+  final String accountLogo;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$AccountsRecord([void Function(AccountsRecordBuilder) updates]) =>
@@ -263,6 +276,7 @@ class _$AccountsRecord extends AccountsRecord {
       this.accountNumber,
       this.bvn,
       this.dateLinked,
+      this.accountLogo,
       this.reference})
       : super._();
 
@@ -292,6 +306,7 @@ class _$AccountsRecord extends AccountsRecord {
         accountNumber == other.accountNumber &&
         bvn == other.bvn &&
         dateLinked == other.dateLinked &&
+        accountLogo == other.accountLogo &&
         reference == other.reference;
   }
 
@@ -312,23 +327,26 @@ class _$AccountsRecord extends AccountsRecord {
                                                     $jc(
                                                         $jc(
                                                             $jc(
-                                                                0,
-                                                                accountName
+                                                                $jc(
+                                                                    0,
+                                                                    accountName
+                                                                        .hashCode),
+                                                                accountOwner
                                                                     .hashCode),
-                                                            accountOwner
+                                                            dataStatus
                                                                 .hashCode),
-                                                        dataStatus.hashCode),
-                                                    accountType.hashCode),
-                                                institutionType.hashCode),
-                                            authMethod.hashCode),
-                                        currency.hashCode),
-                                    authID.hashCode),
-                                institutionName.hashCode),
-                            accountBalance.hashCode),
-                        bankCode.hashCode),
-                    accountNumber.hashCode),
-                bvn.hashCode),
-            dateLinked.hashCode),
+                                                        accountType.hashCode),
+                                                    institutionType.hashCode),
+                                                authMethod.hashCode),
+                                            currency.hashCode),
+                                        authID.hashCode),
+                                    institutionName.hashCode),
+                                accountBalance.hashCode),
+                            bankCode.hashCode),
+                        accountNumber.hashCode),
+                    bvn.hashCode),
+                dateLinked.hashCode),
+            accountLogo.hashCode),
         reference.hashCode));
   }
 
@@ -349,6 +367,7 @@ class _$AccountsRecord extends AccountsRecord {
           ..add('accountNumber', accountNumber)
           ..add('bvn', bvn)
           ..add('dateLinked', dateLinked)
+          ..add('accountLogo', accountLogo)
           ..add('reference', reference))
         .toString();
   }
@@ -419,6 +438,10 @@ class AccountsRecordBuilder
   DateTime get dateLinked => _$this._dateLinked;
   set dateLinked(DateTime dateLinked) => _$this._dateLinked = dateLinked;
 
+  String _accountLogo;
+  String get accountLogo => _$this._accountLogo;
+  set accountLogo(String accountLogo) => _$this._accountLogo = accountLogo;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -445,6 +468,7 @@ class AccountsRecordBuilder
       _accountNumber = $v.accountNumber;
       _bvn = $v.bvn;
       _dateLinked = $v.dateLinked;
+      _accountLogo = $v.accountLogo;
       _reference = $v.reference;
       _$v = null;
     }
@@ -480,6 +504,7 @@ class AccountsRecordBuilder
             accountNumber: accountNumber,
             bvn: bvn,
             dateLinked: dateLinked,
+            accountLogo: accountLogo,
             reference: reference);
     replace(_$result);
     return _$result;
