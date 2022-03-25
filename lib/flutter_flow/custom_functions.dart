@@ -49,3 +49,8 @@ double calcCategoryPercent(BudgetCategoriesRecord category) {
   // Add your function code here!
   return 1 - (category.spentAmount / category.allocatedAmount);
 }
+
+int returnNegative(int positiveNum) {
+  // Add your function code here!
+  return 0 - positiveNum;
+}
