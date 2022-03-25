@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -13,10 +14,12 @@ class TaskCreateDialogCopyCopyWidget extends StatefulWidget {
     Key key,
     this.budget,
     this.categoryToEdit,
+    this.categoriesTotal,
   }) : super(key: key);
 
   final BudgetsRecord budget;
   final BudgetCategoriesRecord categoryToEdit;
+  final int categoriesTotal;
 
   @override
   _TaskCreateDialogCopyCopyWidgetState createState() =>
@@ -160,14 +163,38 @@ class _TaskCreateDialogCopyCopyWidgetState
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      final budgetCategoriesUpdateData =
-                          createBudgetCategoriesRecordData(
-                        allocatedAmount: int.parse(textController2.text),
-                        categoryName: textController1.text,
-                      );
-                      await widget.categoryToEdit.reference
-                          .update(budgetCategoriesUpdateData);
-                      Navigator.pop(context);
+                      if ((functions.checkEditCatTotal(
+                              widget.categoriesTotal,
+                              int.parse(textController2.text),
+                              widget.categoryToEdit.allocatedAmount)) <=
+                          (widget.budget.budgetAmount)) {
+                        final budgetCategoriesUpdateData =
+                            createBudgetCategoriesRecordData(
+                          allocatedAmount: int.parse(textController2.text),
+                          categoryName: textController1.text,
+                        );
+                        await widget.categoryToEdit.reference
+                            .update(budgetCategoriesUpdateData);
+                        Navigator.pop(context);
+                      } else {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('Budget Amount Exceeded'),
+                              content: Text(
+                                  'Please enter a value lower than the target budget, or increase the target budget value'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('Okay'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
                     },
                     text: 'Save',
                     options: FFButtonOptions(

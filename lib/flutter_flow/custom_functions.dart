@@ -81,3 +81,20 @@ int subInt(
   // Add your function code here!
   return value1 - value2;
 }
+
+int checkCreateCatTotal(
+  int amountFromWidget,
+  int currentCategoryTotal,
+) {
+  // Add your function code here!
+  return amountFromWidget + currentCategoryTotal;
+}
+
+int checkEditCatTotal(
+  int currentTotal,
+  int widgetStateAmount,
+  int categoryTotal,
+) {
+  // Add your function code here!
+  return widgetStateAmount + (currentTotal - categoryTotal);
+}
