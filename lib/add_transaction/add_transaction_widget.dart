@@ -173,87 +173,51 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                     return Stack(
                                       alignment: AlignmentDirectional(0, 0),
                                       children: [
-                                        if ((gridViewAccountsRecord
-                                                .reference) ==
-                                            (createdTransaction.account))
-                                          InkWell(
-                                            onTap: () async {
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                context: context,
-                                                builder: (context) {
-                                                  return Padding(
-                                                    padding:
-                                                        MediaQuery.of(context)
-                                                            .viewInsets,
-                                                    child: SelectAccountWidget(
-                                                      accountsList:
-                                                          gridViewAccountsRecord,
-                                                      transaction:
-                                                          createdTransaction,
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                            },
-                                            child: Container(
-                                              width: 100,
-                                              height: 100,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                              ),
-                                            ),
-                                          ),
-                                        StreamBuilder<List<AccountsRecord>>(
-                                          stream: queryAccountsRecord(
-                                            queryBuilder: (accountsRecord) =>
-                                                accountsRecord
-                                                    .where('accountOwner',
-                                                        isEqualTo:
-                                                            currentUserReference)
-                                                    .where('institutionName',
-                                                        isEqualTo:
-                                                            gridViewAccountsRecord
-                                                                .institutionName),
-                                          ),
-                                          builder: (context, snapshot) {
-                                            // Customize what your widget looks like when it's loading.
-                                            if (!snapshot.hasData) {
-                                              return Center(
-                                                child: SizedBox(
-                                                  width: 50,
-                                                  height: 50,
-                                                  child: SpinKitFadingFour(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                    size: 50,
+                                        InkWell(
+                                          onTap: () async {
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              context: context,
+                                              builder: (context) {
+                                                return Padding(
+                                                  padding:
+                                                      MediaQuery.of(context)
+                                                          .viewInsets,
+                                                  child: SelectAccountWidget(
+                                                    accountsList:
+                                                        gridViewAccountsRecord,
+                                                    transaction:
+                                                        createdTransaction,
                                                   ),
-                                                ),
-                                              );
-                                            }
-                                            List<AccountsRecord>
-                                                circleImageAccountsRecordList =
-                                                snapshot.data;
-                                            return Container(
-                                              width: 65,
-                                              height: 65,
-                                              clipBehavior: Clip.antiAlias,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Image.network(
-                                                'https://picsum.photos/seed/34/600',
-                                                fit: BoxFit.cover,
-                                              ),
+                                                );
+                                              },
                                             );
                                           },
+                                          child: Container(
+                                            width: 100,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 65,
+                                          height: 65,
+                                          clipBehavior: Clip.antiAlias,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Image.network(
+                                            'https://picsum.photos/seed/34/600',
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ],
                                     );
