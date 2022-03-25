@@ -155,18 +155,14 @@ class _TaskCreateDialogCopyWidgetState
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      final budgetCategoriesCreateData = {
-                        ...createBudgetCategoriesRecordData(
-                          categoryName: textController1.text,
-                          allocatedAmount: int.parse(textController2.text),
-                          budgetOwner: currentUserReference,
-                          categoryBudget: widget.budget.reference,
-                          spentAmount: 0,
-                        ),
-                        'linkedTransactions': [
-                          currentUserDocument?.emptyTransaction
-                        ],
-                      };
+                      final budgetCategoriesCreateData =
+                          createBudgetCategoriesRecordData(
+                        categoryName: textController1.text,
+                        allocatedAmount: int.parse(textController2.text),
+                        budgetOwner: currentUserReference,
+                        categoryBudget: widget.budget.reference,
+                        spentAmount: 0,
+                      );
                       await BudgetCategoriesRecord.collection
                           .doc()
                           .set(budgetCategoriesCreateData);

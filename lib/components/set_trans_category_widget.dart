@@ -61,15 +61,25 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
                     columnBudgetCategoriesRecordList[columnIndex];
                 return InkWell(
                   onTap: () async {
+                    final transactionsUpdateData = createTransactionsRecordData(
+                      linkedCategory: columnBudgetCategoriesRecord.reference,
+                    );
+                    await widget.transaction.reference
+                        .update(transactionsUpdateData);
+                    Navigator.pop(context);
+
                     final budgetCategoriesUpdateData = {
-                      'linkedTransactions':
-                          FieldValue.arrayUnion([widget.transaction.reference]),
                       'spentAmount': FieldValue.increment(
                           widget.transaction.transactionAmount),
                     };
                     await columnBudgetCategoriesRecord.reference
                         .update(budgetCategoriesUpdateData);
-                    Navigator.pop(context);
+
+                    final budgetsUpdateData = {
+                      'budgetSpent': FieldValue.increment(
+                          widget.transaction.transactionAmount),
+                    };
+                    await widget.recievedBudget.update(budgetsUpdateData);
                   },
                   child: ListTile(
                     title: Text(
