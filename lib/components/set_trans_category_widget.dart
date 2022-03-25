@@ -51,50 +51,52 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
           }
           List<BudgetCategoriesRecord> columnBudgetCategoriesRecordList =
               snapshot.data;
-          return Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: List.generate(columnBudgetCategoriesRecordList.length,
-                (columnIndex) {
-              final columnBudgetCategoriesRecord =
-                  columnBudgetCategoriesRecordList[columnIndex];
-              return InkWell(
-                onTap: () async {
-                  final budgetCategoriesUpdateData = {
-                    'linkedTransactions':
-                        FieldValue.arrayUnion([widget.transaction.reference]),
-                    'spentAmount': FieldValue.increment(
-                        widget.transaction.transactionAmount),
-                  };
-                  await columnBudgetCategoriesRecord.reference
-                      .update(budgetCategoriesUpdateData);
-                  Navigator.pop(context);
-                },
-                child: ListTile(
-                  title: Text(
-                    columnBudgetCategoriesRecord.categoryName,
-                    style: FlutterFlowTheme.of(context).title3,
-                  ),
-                  subtitle: Text(
-                    formatNumber(
-                      columnBudgetCategoriesRecord.allocatedAmount,
-                      formatType: FormatType.custom,
-                      currency: 'N',
-                      format: '',
-                      locale: '',
+          return SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: List.generate(columnBudgetCategoriesRecordList.length,
+                  (columnIndex) {
+                final columnBudgetCategoriesRecord =
+                    columnBudgetCategoriesRecordList[columnIndex];
+                return InkWell(
+                  onTap: () async {
+                    final budgetCategoriesUpdateData = {
+                      'linkedTransactions':
+                          FieldValue.arrayUnion([widget.transaction.reference]),
+                      'spentAmount': FieldValue.increment(
+                          widget.transaction.transactionAmount),
+                    };
+                    await columnBudgetCategoriesRecord.reference
+                        .update(budgetCategoriesUpdateData);
+                    Navigator.pop(context);
+                  },
+                  child: ListTile(
+                    title: Text(
+                      columnBudgetCategoriesRecord.categoryName,
+                      style: FlutterFlowTheme.of(context).title3,
                     ),
-                    style: FlutterFlowTheme.of(context).subtitle2,
+                    subtitle: Text(
+                      formatNumber(
+                        columnBudgetCategoriesRecord.allocatedAmount,
+                        formatType: FormatType.custom,
+                        currency: 'N',
+                        format: '',
+                        locale: '',
+                      ),
+                      style: FlutterFlowTheme.of(context).subtitle2,
+                    ),
+                    trailing: Icon(
+                      Icons.check_rounded,
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      size: 20,
+                    ),
+                    tileColor: Color(0xFFF5F5F5),
+                    dense: false,
                   ),
-                  trailing: Icon(
-                    Icons.check_rounded,
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    size: 20,
-                  ),
-                  tileColor: Color(0xFFF5F5F5),
-                  dense: false,
-                ),
-              );
-            }),
+                );
+              }),
+            ),
           );
         },
       ),

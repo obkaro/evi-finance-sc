@@ -161,6 +161,7 @@ class _TaskCreateDialogCopyWidgetState
                         allocatedAmount: int.parse(textController2.text),
                         budgetOwner: currentUserReference,
                         categoryBudget: widget.budget.reference,
+                        spentAmount: 0,
                       );
                       await BudgetCategoriesRecord.collection
                           .doc()
