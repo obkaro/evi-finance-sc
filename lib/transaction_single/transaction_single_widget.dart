@@ -308,10 +308,18 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                     children: [
                                       if (widget.transaction.linkedCategory !=
                                           null)
-                                        StreamBuilder<BudgetCategoriesRecord>(
-                                          stream: BudgetCategoriesRecord
-                                              .getDocument(widget
-                                                  .transaction.linkedCategory),
+                                        StreamBuilder<
+                                            List<BudgetCategoriesRecord>>(
+                                          stream: queryBudgetCategoriesRecord(
+                                            queryBuilder:
+                                                (budgetCategoriesRecord) =>
+                                                    budgetCategoriesRecord.where(
+                                                        'linkedTransactions',
+                                                        arrayContains: widget
+                                                            .transaction
+                                                            .reference),
+                                            singleRecord: true,
+                                          ),
                                           builder: (context, snapshot) {
                                             // Customize what your widget looks like when it's loading.
                                             if (!snapshot.hasData) {
@@ -328,8 +336,19 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                 ),
                                               );
                                             }
-                                            final textBudgetCategoriesRecord =
+                                            List<BudgetCategoriesRecord>
+                                                textBudgetCategoriesRecordList =
                                                 snapshot.data;
+                                            // Return an empty Container when the document does not exist.
+                                            if (snapshot.data.isEmpty) {
+                                              return Container();
+                                            }
+                                            final textBudgetCategoriesRecord =
+                                                textBudgetCategoriesRecordList
+                                                        .isNotEmpty
+                                                    ? textBudgetCategoriesRecordList
+                                                        .first
+                                                    : null;
                                             return Text(
                                               textBudgetCategoriesRecord
                                                   .categoryName,
