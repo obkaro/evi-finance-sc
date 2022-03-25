@@ -28,7 +28,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
       width: MediaQuery.of(context).size.width,
       height: 300,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).primaryBackground,
+        color: Color(0xFFEEEEEE),
       ),
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),

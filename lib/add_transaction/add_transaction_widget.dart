@@ -176,15 +176,38 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                         if ((gridViewAccountsRecord
                                                 .reference) ==
                                             (createdTransaction.account))
-                                          Container(
-                                            width: 100,
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
+                                          InkWell(
+                                            onTap: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets,
+                                                    child: SelectAccountWidget(
+                                                      accountsList:
+                                                          gridViewAccountsRecord,
+                                                      transaction:
+                                                          createdTransaction,
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: Container(
+                                              width: 100,
+                                              height: 100,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
                                             ),
                                           ),
                                         StreamBuilder<List<AccountsRecord>>(
@@ -218,55 +241,16 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                             List<AccountsRecord>
                                                 circleImageAccountsRecordList =
                                                 snapshot.data;
-                                            return InkWell(
-                                              onTap: () async {
-                                                if ((circleImageAccountsRecordList
-                                                        .length) >
-                                                    1) {
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return Padding(
-                                                        padding: MediaQuery.of(
-                                                                context)
-                                                            .viewInsets,
-                                                        child:
-                                                            SelectAccountWidget(
-                                                          accountsList:
-                                                              gridViewAccountsRecord,
-                                                          transaction:
-                                                              createdTransaction,
-                                                        ),
-                                                      );
-                                                    },
-                                                  );
-                                                } else {
-                                                  final transactionsUpdateData =
-                                                      createTransactionsRecordData(
-                                                    account:
-                                                        gridViewAccountsRecord
-                                                            .reference,
-                                                  );
-                                                  await createdTransaction
-                                                      .reference
-                                                      .update(
-                                                          transactionsUpdateData);
-                                                }
-                                              },
-                                              child: Container(
-                                                width: 65,
-                                                height: 65,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Image.network(
-                                                  'https://picsum.photos/seed/34/600',
-                                                  fit: BoxFit.cover,
-                                                ),
+                                            return Container(
+                                              width: 65,
+                                              height: 65,
+                                              clipBehavior: Clip.antiAlias,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Image.network(
+                                                'https://picsum.photos/seed/34/600',
+                                                fit: BoxFit.cover,
                                               ),
                                             );
                                           },
