@@ -129,14 +129,18 @@ class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      final budgetCategoriesCreateData =
-                          createBudgetCategoriesRecordData(
-                        categoryName: widget.constCategory.categoryName,
-                        allocatedAmount: int.parse(textController.text),
-                        categoryBudget: widget.budget.reference,
-                        budgetOwner: currentUserReference,
-                        spentAmount: 0,
-                      );
+                      final budgetCategoriesCreateData = {
+                        ...createBudgetCategoriesRecordData(
+                          categoryName: widget.constCategory.categoryName,
+                          allocatedAmount: int.parse(textController.text),
+                          categoryBudget: widget.budget.reference,
+                          budgetOwner: currentUserReference,
+                          spentAmount: 0,
+                        ),
+                        'linkedTransactions': [
+                          currentUserDocument?.emptyTransaction
+                        ],
+                      };
                       await BudgetCategoriesRecord.collection
                           .doc()
                           .set(budgetCategoriesCreateData);
