@@ -365,8 +365,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                     padding:
                                                         MediaQuery.of(context)
                                                             .viewInsets,
-                                                    child:
-                                                        SetBudgetCompWidget(),
+                                                    child: SetBudgetCompWidget(
+                                                      transaction:
+                                                          widget.transaction,
+                                                    ),
                                                   );
                                                 },
                                               );
