@@ -71,6 +71,7 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget> {
                         );
                       },
                     );
+                    Navigator.pop(context);
                   },
                   child: ListTile(
                     title: Text(
