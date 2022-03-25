@@ -135,6 +135,7 @@ class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
                         allocatedAmount: int.parse(textController.text),
                         categoryBudget: widget.budget.reference,
                         budgetOwner: currentUserReference,
+                        spentAmount: 0,
                       );
                       await BudgetCategoriesRecord.collection
                           .doc()

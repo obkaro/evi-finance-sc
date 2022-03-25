@@ -48,53 +48,56 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget> {
             );
           }
           List<BudgetsRecord> columnBudgetsRecordList = snapshot.data;
-          return Column(
-            mainAxisSize: MainAxisSize.max,
-            children:
-                List.generate(columnBudgetsRecordList.length, (columnIndex) {
-              final columnBudgetsRecord = columnBudgetsRecordList[columnIndex];
-              return InkWell(
-                onTap: () async {
-                  await showModalBottomSheet(
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    context: context,
-                    builder: (context) {
-                      return Padding(
-                        padding: MediaQuery.of(context).viewInsets,
-                        child: SetTransCategoryWidget(
-                          transaction: widget.transaction,
-                          recievedBudget: columnBudgetsRecord.reference,
-                        ),
-                      );
-                    },
-                  );
-                },
-                child: ListTile(
-                  title: Text(
-                    columnBudgetsRecord.budgetName,
-                    style: FlutterFlowTheme.of(context).title3,
-                  ),
-                  subtitle: Text(
-                    formatNumber(
-                      columnBudgetsRecord.budgetAmount,
-                      formatType: FormatType.custom,
-                      currency: 'N',
-                      format: '',
-                      locale: '',
+          return SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children:
+                  List.generate(columnBudgetsRecordList.length, (columnIndex) {
+                final columnBudgetsRecord =
+                    columnBudgetsRecordList[columnIndex];
+                return InkWell(
+                  onTap: () async {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.of(context).viewInsets,
+                          child: SetTransCategoryWidget(
+                            transaction: widget.transaction,
+                            recievedBudget: columnBudgetsRecord.reference,
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: ListTile(
+                    title: Text(
+                      columnBudgetsRecord.budgetName,
+                      style: FlutterFlowTheme.of(context).title3,
                     ),
-                    style: FlutterFlowTheme.of(context).subtitle2,
+                    subtitle: Text(
+                      formatNumber(
+                        columnBudgetsRecord.budgetAmount,
+                        formatType: FormatType.custom,
+                        currency: 'N',
+                        format: '',
+                        locale: '',
+                      ),
+                      style: FlutterFlowTheme.of(context).subtitle2,
+                    ),
+                    trailing: Icon(
+                      Icons.check_rounded,
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      size: 20,
+                    ),
+                    tileColor: Color(0xFFF5F5F5),
+                    dense: false,
                   ),
-                  trailing: Icon(
-                    Icons.check_rounded,
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    size: 20,
-                  ),
-                  tileColor: Color(0xFFF5F5F5),
-                  dense: false,
-                ),
-              );
-            }),
+                );
+              }),
+            ),
           );
         },
       ),
