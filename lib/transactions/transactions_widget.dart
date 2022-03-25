@@ -1,3 +1,4 @@
+import '../add_transaction/add_transaction_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
@@ -98,8 +99,13 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print('FloatingActionButton pressed ...');
+        onPressed: () async {
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddTransactionWidget(),
+            ),
+          );
         },
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         elevation: 8,
@@ -242,7 +248,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                 },
                                               ),
                                             Text(
-                                              '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('EEEE', columnTransactionsRecord.trasactionDate)}, ${dateTimeFormat('d/M', columnTransactionsRecord.trasactionDate)}',
+                                              '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
                                               textAlign: TextAlign.start,
                                               style:
                                                   FlutterFlowTheme.of(context)

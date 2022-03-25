@@ -54,6 +54,9 @@ abstract class AccountsRecord
   DateTime get dateLinked;
 
   @nullable
+  String get accountLogo;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -69,7 +72,8 @@ abstract class AccountsRecord
     ..accountBalance = 0
     ..bankCode = ''
     ..accountNumber = ''
-    ..bvn = '';
+    ..bvn = ''
+    ..accountLogo = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('accounts');
@@ -107,6 +111,7 @@ Map<String, dynamic> createAccountsRecordData({
   String accountNumber,
   String bvn,
   DateTime dateLinked,
+  String accountLogo,
 }) =>
     serializers.toFirestore(
         AccountsRecord.serializer,
@@ -124,4 +129,5 @@ Map<String, dynamic> createAccountsRecordData({
           ..bankCode = bankCode
           ..accountNumber = accountNumber
           ..bvn = bvn
-          ..dateLinked = dateLinked));
+          ..dateLinked = dateLinked
+          ..accountLogo = accountLogo));

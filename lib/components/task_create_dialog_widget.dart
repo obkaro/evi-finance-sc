@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -13,10 +14,12 @@ class TaskCreateDialogWidget extends StatefulWidget {
     Key key,
     this.constCategory,
     this.budget,
+    this.categoriesTotal,
   }) : super(key: key);
 
   final ConstBudgetCategoriesRecord constCategory;
   final BudgetsRecord budget;
+  final int categoriesTotal;
 
   @override
   _TaskCreateDialogWidgetState createState() => _TaskCreateDialogWidgetState();
@@ -129,18 +132,41 @@ class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      final budgetCategoriesCreateData =
-                          createBudgetCategoriesRecordData(
-                        categoryName: widget.constCategory.categoryName,
-                        allocatedAmount: int.parse(textController.text),
-                        budgetOwner: currentUserReference,
-                        categoryBudget: widget.budget.reference,
-                        spentAmount: 0,
-                      );
-                      await BudgetCategoriesRecord.collection
-                          .doc()
-                          .set(budgetCategoriesCreateData);
-                      Navigator.pop(context);
+                      if ((functions.checkCreateCatTotal(
+                              int.parse(textController.text),
+                              widget.categoriesTotal)) <=
+                          (widget.budget.budgetAmount)) {
+                        final budgetCategoriesCreateData =
+                            createBudgetCategoriesRecordData(
+                          categoryName: widget.constCategory.categoryName,
+                          allocatedAmount: int.parse(textController.text),
+                          budgetOwner: currentUserReference,
+                          categoryBudget: widget.budget.reference,
+                          spentAmount: 0,
+                        );
+                        await BudgetCategoriesRecord.collection
+                            .doc()
+                            .set(budgetCategoriesCreateData);
+                        Navigator.pop(context);
+                      } else {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('Budget Amount Exceeded'),
+                              content: Text(
+                                  'Please enter a value lower than the target budget, or increase the target budget value'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('Okay'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
                     },
                     text: 'Save',
                     options: FFButtonOptions(
