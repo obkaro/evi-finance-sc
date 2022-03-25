@@ -173,6 +173,42 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                     return Stack(
                                       alignment: AlignmentDirectional(0, 0),
                                       children: [
+                                        if ((createdTransaction.account) ==
+                                            (gridViewAccountsRecord.reference))
+                                          InkWell(
+                                            onTap: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets,
+                                                    child: SelectAccountWidget(
+                                                      accountsList:
+                                                          gridViewAccountsRecord,
+                                                      transaction:
+                                                          createdTransaction,
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: Container(
+                                              width: 100,
+                                              height: 100,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                            ),
+                                          ),
                                         InkWell(
                                           onTap: () async {
                                             await showModalBottomSheet(
@@ -196,27 +232,16 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                             );
                                           },
                                           child: Container(
-                                            width: 100,
-                                            height: 100,
+                                            width: 65,
+                                            height: 65,
+                                            clipBehavior: Clip.antiAlias,
                                             decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
+                                              shape: BoxShape.circle,
                                             ),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 65,
-                                          height: 65,
-                                          clipBehavior: Clip.antiAlias,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Image.network(
-                                            'https://picsum.photos/seed/34/600',
-                                            fit: BoxFit.cover,
+                                            child: Image.network(
+                                              'https://picsum.photos/seed/34/600',
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -267,7 +292,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                     ),
                                 iconColor: Color(0xFF323B45),
                                 iconSize: 18,
-                                elevation: 2,
+                                elevation: 1,
                               ),
                               chipSpacing: 10,
                               multiselect: false,
@@ -330,6 +355,19 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                             );
                             await createdTransaction.reference
                                 .update(transactionsUpdateData);
+                            await showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              builder: (context) {
+                                return Padding(
+                                  padding: MediaQuery.of(context).viewInsets,
+                                  child: SetBudgetCompWidget(
+                                    transaction: createdTransaction,
+                                  ),
+                                );
+                              },
+                            );
                           } else {
                             await showDialog(
                               context: context,
@@ -349,20 +387,6 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                               },
                             );
                           }
-
-                          await showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            context: context,
-                            builder: (context) {
-                              return Padding(
-                                padding: MediaQuery.of(context).viewInsets,
-                                child: SetBudgetCompWidget(
-                                  transaction: createdTransaction,
-                                ),
-                              );
-                            },
-                          );
                         },
                         text: 'Save',
                         options: FFButtonOptions(
