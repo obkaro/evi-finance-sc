@@ -127,7 +127,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                 formatNumber(
                                   columnBudgetsRecord.budgetAmount,
                                   formatType: FormatType.custom,
-                                  currency: '₦',
+                                  currency: 'N',
                                   format: '',
                                   locale: '',
                                 ),
