@@ -1,6 +1,20 @@
 {
   "indexes": [
     {
+      "collectionGroup": "accounts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "accountOwner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "dateLinked",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "budgetCategories",
       "queryScope": "COLLECTION",
       "fields": [
