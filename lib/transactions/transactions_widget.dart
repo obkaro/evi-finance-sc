@@ -98,22 +98,58 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
         elevation: 2,
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AddTransactionWidget(),
+      floatingActionButton: StreamBuilder<List<AccountsRecord>>(
+        stream: queryAccountsRecord(
+          queryBuilder: (accountsRecord) => accountsRecord
+              .where('accountOwner', isEqualTo: currentUserReference)
+              .orderBy('dateLinked'),
+          singleRecord: true,
+        ),
+        builder: (context, snapshot) {
+          // Customize what your widget looks like when it's loading.
+          if (!snapshot.hasData) {
+            return Center(
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: SpinKitFadingFour(
+                  color: FlutterFlowTheme.of(context).primaryColor,
+                  size: 50,
+                ),
+              ),
+            );
+          }
+          List<AccountsRecord> floatingActionButtonAccountsRecordList =
+              snapshot.data;
+          // Return an empty Container when the document does not exist.
+          if (snapshot.data.isEmpty) {
+            return Container();
+          }
+          final floatingActionButtonAccountsRecord =
+              floatingActionButtonAccountsRecordList.isNotEmpty
+                  ? floatingActionButtonAccountsRecordList.first
+                  : null;
+          return FloatingActionButton(
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddTransactionWidget(
+                    defaultAccount:
+                        floatingActionButtonAccountsRecord.reference,
+                  ),
+                ),
+              );
+            },
+            backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+            elevation: 8,
+            child: Icon(
+              Icons.add_rounded,
+              color: Colors.white,
+              size: 36,
             ),
           );
         },
-        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-        elevation: 8,
-        child: Icon(
-          Icons.add_rounded,
-          color: Colors.white,
-          size: 36,
-        ),
       ),
       body: SafeArea(
         child: GestureDetector(

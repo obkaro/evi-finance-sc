@@ -13,7 +13,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddTransactionWidget extends StatefulWidget {
-  const AddTransactionWidget({Key key}) : super(key: key);
+  const AddTransactionWidget({
+    Key key,
+    this.defaultAccount,
+  }) : super(key: key);
+
+  final DocumentReference defaultAccount;
 
   @override
   _AddTransactionWidgetState createState() => _AddTransactionWidgetState();
@@ -32,7 +37,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       final transactionsCreateData = createTransactionsRecordData(
-        account: FFAppState().selectTransAccount,
+        account: widget.defaultAccount,
       );
       var transactionsRecordReference = TransactionsRecord.collection.doc();
       await transactionsRecordReference.set(transactionsCreateData);
