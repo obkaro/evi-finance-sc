@@ -49,10 +49,10 @@ double calcCategoryPercent(BudgetCategoriesRecord category) {
   // Add your function code here!
   double percent = 1 - (category.spentAmount / category.allocatedAmount);
 
-  if (percent > 1) {
+  while (percent > 1) {
     percent--;
   }
-  if (percent < 0) {
+  while (percent < 0) {
     percent++;
   }
 
