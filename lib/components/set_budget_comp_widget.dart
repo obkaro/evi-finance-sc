@@ -23,84 +23,89 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 375,
-      height: 300,
+      width: MediaQuery.of(context).size.width,
+      height: 320,
       decoration: BoxDecoration(
-        color: Color(0xFFEEEEEE),
+        color: FlutterFlowTheme.of(context).primaryBackground,
       ),
-      child: FutureBuilder<List<BudgetsRecord>>(
-        future: queryBudgetsRecordOnce(
-          queryBuilder: (budgetsRecord) => budgetsRecord.where('budgetOwner',
-              isEqualTo: currentUserReference),
-        ),
-        builder: (context, snapshot) {
-          // Customize what your widget looks like when it's loading.
-          if (!snapshot.hasData) {
-            return Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: SpinKitFadingFour(
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                  size: 50,
+      child: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+        child: FutureBuilder<List<BudgetsRecord>>(
+          future: queryBudgetsRecordOnce(
+            queryBuilder: (budgetsRecord) => budgetsRecord.where('budgetOwner',
+                isEqualTo: currentUserReference),
+          ),
+          builder: (context, snapshot) {
+            // Customize what your widget looks like when it's loading.
+            if (!snapshot.hasData) {
+              return Center(
+                child: SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: SpinKitFadingFour(
+                    color: FlutterFlowTheme.of(context).primaryColor,
+                    size: 50,
+                  ),
                 ),
+              );
+            }
+            List<BudgetsRecord> columnBudgetsRecordList = snapshot.data;
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: List.generate(columnBudgetsRecordList.length,
+                    (columnIndex) {
+                  final columnBudgetsRecord =
+                      columnBudgetsRecordList[columnIndex];
+                  return InkWell(
+                    onTap: () async {
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        builder: (context) {
+                          return Padding(
+                            padding: MediaQuery.of(context).viewInsets,
+                            child: SetTransCategoryWidget(
+                              transaction: widget.transaction,
+                              recievedBudget: columnBudgetsRecord.reference,
+                            ),
+                          );
+                        },
+                      );
+                      Navigator.pop(context);
+                    },
+                    child: ListTile(
+                      title: Text(
+                        columnBudgetsRecord.budgetName,
+                        style: FlutterFlowTheme.of(context).title3,
+                      ),
+                      subtitle: Text(
+                        formatNumber(
+                          columnBudgetsRecord.budgetAmount,
+                          formatType: FormatType.custom,
+                          currency: 'N',
+                          format: '',
+                          locale: '',
+                        ),
+                        style: FlutterFlowTheme.of(context).subtitle2,
+                      ),
+                      trailing: Icon(
+                        Icons.check_circle_rounded,
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        size: 32,
+                      ),
+                      tileColor: Color(0xFFF5F5F5),
+                      dense: false,
+                      contentPadding:
+                          EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                    ),
+                  );
+                }),
               ),
             );
-          }
-          List<BudgetsRecord> columnBudgetsRecordList = snapshot.data;
-          return SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children:
-                  List.generate(columnBudgetsRecordList.length, (columnIndex) {
-                final columnBudgetsRecord =
-                    columnBudgetsRecordList[columnIndex];
-                return InkWell(
-                  onTap: () async {
-                    await showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      builder: (context) {
-                        return Padding(
-                          padding: MediaQuery.of(context).viewInsets,
-                          child: SetTransCategoryWidget(
-                            transaction: widget.transaction,
-                            recievedBudget: columnBudgetsRecord.reference,
-                          ),
-                        );
-                      },
-                    );
-                    Navigator.pop(context);
-                  },
-                  child: ListTile(
-                    title: Text(
-                      columnBudgetsRecord.budgetName,
-                      style: FlutterFlowTheme.of(context).title3,
-                    ),
-                    subtitle: Text(
-                      formatNumber(
-                        columnBudgetsRecord.budgetAmount,
-                        formatType: FormatType.custom,
-                        currency: 'N',
-                        format: '',
-                        locale: '',
-                      ),
-                      style: FlutterFlowTheme.of(context).subtitle2,
-                    ),
-                    trailing: Icon(
-                      Icons.check_rounded,
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 20,
-                    ),
-                    tileColor: Color(0xFFF5F5F5),
-                    dense: false,
-                  ),
-                );
-              }),
-            ),
-          );
-        },
+          },
+        ),
       ),
     );
   }
