@@ -307,38 +307,41 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                                               MainAxisAlignment
                                                                   .center,
                                                           children: [
-                                                            ToggleIcon(
-                                                              onPressed:
-                                                                  () async {
-                                                                final accountsUpdateData =
-                                                                    createAccountsRecordData(
-                                                                  isSelectedT:
-                                                                      !columnAccountsRecord
-                                                                          .isSelectedT,
-                                                                );
-                                                                await columnAccountsRecord
-                                                                    .reference
-                                                                    .update(
-                                                                        accountsUpdateData);
-                                                              },
-                                                              value: columnAccountsRecord
-                                                                  .isSelectedT,
-                                                              onIcon: Icon(
-                                                                Icons
-                                                                    .check_circle_rounded,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryColor,
-                                                                size: 25,
+                                                            if (columnAccountsRecord
+                                                                    .isSelectedT ??
+                                                                true)
+                                                              ToggleIcon(
+                                                                onPressed:
+                                                                    () async {
+                                                                  final accountsUpdateData =
+                                                                      createAccountsRecordData(
+                                                                    isSelectedT:
+                                                                        !columnAccountsRecord
+                                                                            .isSelectedT,
+                                                                  );
+                                                                  await columnAccountsRecord
+                                                                      .reference
+                                                                      .update(
+                                                                          accountsUpdateData);
+                                                                },
+                                                                value: columnAccountsRecord
+                                                                    .isSelectedT,
+                                                                onIcon: Icon(
+                                                                  Icons
+                                                                      .check_circle_rounded,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryColor,
+                                                                  size: 25,
+                                                                ),
+                                                                offIcon: Icon(
+                                                                  Icons
+                                                                      .radio_button_off_rounded,
+                                                                  color: Color(
+                                                                      0xFF434343),
+                                                                  size: 25,
+                                                                ),
                                                               ),
-                                                              offIcon: Icon(
-                                                                Icons
-                                                                    .radio_button_off_rounded,
-                                                                color: Color(
-                                                                    0xFF434343),
-                                                                size: 25,
-                                                              ),
-                                                            ),
                                                           ],
                                                         ),
                                                       ],
