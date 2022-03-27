@@ -135,7 +135,7 @@ class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
                     onPressed: () async {
                       if ((functions.checkCreateCatTotal(
                               int.parse(textController.text),
-                              widget.categoriesTotal)) <=
+                              widget.categoriesTotal)) >
                           (widget.budget.budgetAmount)) {
                         final budgetCategoriesCreateData =
                             createBudgetCategoriesRecordData(
