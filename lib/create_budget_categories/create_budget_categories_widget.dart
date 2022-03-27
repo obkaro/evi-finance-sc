@@ -91,15 +91,21 @@ class _CreateBudgetCategoriesWidgetState
                         ) ??
                         false;
                     if (confirmDialogResponse) {
-                      Navigator.pop(context);
+                      await actions.deleteCategories(
+                        createBudgetCategoriesBudgetCategoriesRecordList
+                            .toList(),
+                      );
+                      await widget.createdBudget.reference.delete();
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              NavBarPage(initialPage: 'Budgets'),
+                        ),
+                      );
                     } else {
                       return;
                     }
-
-                    await actions.deleteCategories(
-                      createBudgetCategoriesBudgetCategoriesRecordList.toList(),
-                    );
-                    await widget.createdBudget.reference.delete();
                   },
                   child: Icon(
                     Icons.arrow_back_rounded,
