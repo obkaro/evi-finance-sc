@@ -206,7 +206,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                     .accountBalance,
                                                 formatType: FormatType.custom,
                                                 currency: '₦',
-                                                format: '#,##,000',
+                                                format: '#,###,###',
                                                 locale: '',
                                               ),
                                               style:
