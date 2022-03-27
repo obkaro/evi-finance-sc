@@ -236,7 +236,7 @@ class _CreateBudgetCategoriesWidgetState
                                     widget.createdBudget.budgetAmount,
                                     formatType: FormatType.custom,
                                     currency: 'N',
-                                    format: '#,##,000',
+                                    format: '#,###,###',
                                     locale: '',
                                   ),
                                   textAlign: TextAlign.end,
@@ -565,7 +565,7 @@ class _CreateBudgetCategoriesWidgetState
                                                 .allocatedAmount,
                                             formatType: FormatType.custom,
                                             currency: 'N',
-                                            format: '#,##,000',
+                                            format: '#,###,###',
                                             locale: '',
                                           ),
                                           style: FlutterFlowTheme.of(context)

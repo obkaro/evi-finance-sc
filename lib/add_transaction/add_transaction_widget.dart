@@ -407,30 +407,73 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             if (createdTransaction.account != null) {
-                              final transactionsUpdateData =
-                                  createTransactionsRecordData(
-                                trasactionDate: getCurrentTimestamp,
-                                transactionOwner: currentUserReference,
-                                transactionAmount:
-                                    int.parse(textController1.text),
-                                transactionNarration: textController2.text,
-                                transactionType: choiceChipsValue,
-                              );
-                              await createdTransaction.reference
-                                  .update(transactionsUpdateData);
-                              await showModalBottomSheet(
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
-                                context: context,
-                                builder: (context) {
-                                  return Padding(
-                                    padding: MediaQuery.of(context).viewInsets,
-                                    child: SetBudgetCompWidget(
-                                      transaction: createdTransaction,
-                                    ),
+                              if (choiceChipsValue != null &&
+                                  choiceChipsValue != '') {
+                                if (textController1.text != null &&
+                                    textController1.text != '') {
+                                  final transactionsUpdateData =
+                                      createTransactionsRecordData(
+                                    trasactionDate: getCurrentTimestamp,
+                                    transactionOwner: currentUserReference,
+                                    transactionAmount:
+                                        int.parse(textController1.text),
+                                    transactionNarration: textController2.text,
+                                    transactionType: choiceChipsValue,
                                   );
-                                },
-                              );
+                                  await createdTransaction.reference
+                                      .update(transactionsUpdateData);
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (context) {
+                                      return Padding(
+                                        padding:
+                                            MediaQuery.of(context).viewInsets,
+                                        child: SetBudgetCompWidget(
+                                          transaction: createdTransaction,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('No Account Selected'),
+                                        content: Text(
+                                            'Please enter an amount for this transaction'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Okay'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Credit or Debit'),
+                                      content: Text(
+                                          'Please select credit or debit for this transaction'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Okay'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
                             } else {
                               await showDialog(
                                 context: context,
