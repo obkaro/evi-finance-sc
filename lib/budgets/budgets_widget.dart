@@ -128,7 +128,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                   columnBudgetsRecord.budgetAmount,
                                   formatType: FormatType.custom,
                                   currency: 'N',
-                                  format: '',
+                                  format: '#,##,000',
                                   locale: '',
                                 ),
                                 style: FlutterFlowTheme.of(context).subtitle2,

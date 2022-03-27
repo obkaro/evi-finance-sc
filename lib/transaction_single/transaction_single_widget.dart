@@ -149,7 +149,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           widget.transaction.transactionAmount,
                                           formatType: FormatType.custom,
                                           currency: 'N',
-                                          format: '',
+                                          format: '#,##,000',
                                           locale: '',
                                         ),
                                         style:
@@ -251,7 +251,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           widget.transaction.balanceAfter,
                                           formatType: FormatType.custom,
                                           currency: 'N',
-                                          format: '',
+                                          format: '#,##,000',
                                           locale: '',
                                         ),
                                         style:
