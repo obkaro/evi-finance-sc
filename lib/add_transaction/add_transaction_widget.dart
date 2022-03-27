@@ -130,36 +130,15 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                               'Selected Account:',
                               style: FlutterFlowTheme.of(context).subtitle1,
                             ),
-                            StreamBuilder<AccountsRecord>(
-                              stream: AccountsRecord.getDocument(
-                                  createdTransaction.account),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitFadingFour(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 50,
-                                      ),
-                                    ),
-                                  );
-                                }
-                                final textAccountsRecord = snapshot.data;
-                                return Text(
-                                  textAccountsRecord.institutionName,
-                                  style: FlutterFlowTheme.of(context)
-                                      .subtitle1
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                      ),
-                                );
-                              },
+                            Text(
+                              FFAppState().selectedAcctName,
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                  ),
                             ),
                           ],
                         ),
@@ -233,6 +212,10 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                                       .reference
                                                       .update(
                                                           accountsUpdateData);
+                                                  setState(() => FFAppState()
+                                                          .selectedAcctName =
+                                                      columnAccountsRecord
+                                                          .accountName);
 
                                                   final transactionsUpdateData =
                                                       createTransactionsRecordData(
@@ -339,41 +322,38 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                                               MainAxisAlignment
                                                                   .center,
                                                           children: [
-                                                            if (columnAccountsRecord
-                                                                    .isSelectedT ??
-                                                                true)
-                                                              ToggleIcon(
-                                                                onPressed:
-                                                                    () async {
-                                                                  final accountsUpdateData =
-                                                                      createAccountsRecordData(
-                                                                    isSelectedT:
-                                                                        !columnAccountsRecord
-                                                                            .isSelectedT,
-                                                                  );
-                                                                  await columnAccountsRecord
-                                                                      .reference
-                                                                      .update(
-                                                                          accountsUpdateData);
-                                                                },
-                                                                value: columnAccountsRecord
-                                                                    .isSelectedT,
-                                                                onIcon: Icon(
-                                                                  Icons
-                                                                      .check_circle_rounded,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryColor,
-                                                                  size: 25,
-                                                                ),
-                                                                offIcon: Icon(
-                                                                  Icons
-                                                                      .radio_button_off_rounded,
-                                                                  color: Color(
-                                                                      0xFF434343),
-                                                                  size: 25,
-                                                                ),
+                                                            ToggleIcon(
+                                                              onPressed:
+                                                                  () async {
+                                                                final accountsUpdateData =
+                                                                    createAccountsRecordData(
+                                                                  isSelectedT:
+                                                                      !columnAccountsRecord
+                                                                          .isSelectedT,
+                                                                );
+                                                                await columnAccountsRecord
+                                                                    .reference
+                                                                    .update(
+                                                                        accountsUpdateData);
+                                                              },
+                                                              value: columnAccountsRecord
+                                                                  .isSelectedT,
+                                                              onIcon: Icon(
+                                                                Icons
+                                                                    .check_circle_rounded,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                                size: 25,
                                                               ),
+                                                              offIcon: Icon(
+                                                                Icons
+                                                                    .radio_button_off_rounded,
+                                                                color: Color(
+                                                                    0xFF434343),
+                                                                size: 25,
+                                                              ),
+                                                            ),
                                                           ],
                                                         ),
                                                       ],

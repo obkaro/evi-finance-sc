@@ -21,6 +21,8 @@ class FFAppState {
   SharedPreferences prefs;
 
   DocumentReference selectedAccount;
+
+  String selectedAcctName = '';
 }
 
 LatLng _latLngFromString(String val) {
