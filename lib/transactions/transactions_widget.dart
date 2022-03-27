@@ -275,7 +275,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                   .transactionAmount,
                                               formatType: FormatType.custom,
                                               currency: 'N',
-                                              format: '',
+                                              format: '#,##,000',
                                               locale: '',
                                             ).maybeHandleOverflow(
                                               maxChars: 15,

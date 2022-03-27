@@ -1,9 +1,9 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/select_account_widget.dart';
 import '../components/set_budget_comp_widget.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
+import '../flutter_flow/flutter_flow_toggle_icon.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -131,141 +131,213 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: FutureBuilder<List<AccountsRecord>>(
-                              future: queryAccountsRecordOnce(
-                                queryBuilder: (accountsRecord) =>
-                                    accountsRecord.where('accountOwner',
-                                        isEqualTo: currentUserReference),
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitFadingFour(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 50,
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                              child: StreamBuilder<List<AccountsRecord>>(
+                                stream: queryAccountsRecord(
+                                  queryBuilder: (accountsRecord) =>
+                                      accountsRecord.where('accountOwner',
+                                          isEqualTo: currentUserReference),
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: SpinKitFadingFour(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          size: 50,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }
-                                List<AccountsRecord>
-                                    gridViewAccountsRecordList = snapshot.data;
-                                return GridView.builder(
-                                  padding: EdgeInsets.zero,
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 4,
-                                    crossAxisSpacing: 10,
-                                    mainAxisSpacing: 10,
-                                    childAspectRatio: 1,
-                                  ),
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: gridViewAccountsRecordList.length,
-                                  itemBuilder: (context, gridViewIndex) {
-                                    final gridViewAccountsRecord =
-                                        gridViewAccountsRecordList[
-                                            gridViewIndex];
-                                    return Stack(
-                                      alignment: AlignmentDirectional(0, 0),
-                                      children: [
-                                        if ((gridViewAccountsRecord
-                                                .isSelectedT) ==
-                                            true)
-                                          InkWell(
+                                    );
+                                  }
+                                  List<AccountsRecord>
+                                      columnAccountsRecordList = snapshot.data;
+                                  return SingleChildScrollView(
+                                    primary: false,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: List.generate(
+                                          columnAccountsRecordList.length,
+                                          (columnIndex) {
+                                        final columnAccountsRecord =
+                                            columnAccountsRecordList[
+                                                columnIndex];
+                                        return Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 0, 10),
+                                          child: InkWell(
                                             onTap: () async {
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                context: context,
-                                                builder: (context) {
-                                                  return Padding(
-                                                    padding:
-                                                        MediaQuery.of(context)
-                                                            .viewInsets,
-                                                    child: SelectAccountWidget(
-                                                      accountsList:
-                                                          gridViewAccountsRecord,
-                                                      transaction:
-                                                          createdTransaction,
-                                                    ),
-                                                  );
-                                                },
-                                              );
+                                              if ((columnAccountsRecord
+                                                      .isSelectedT) ==
+                                                  true) {
+                                                final accountsUpdateData =
+                                                    createAccountsRecordData(
+                                                  isSelectedT: false,
+                                                );
+                                                await columnAccountsRecord
+                                                    .reference
+                                                    .update(accountsUpdateData);
+                                              } else {
+                                                final accountsUpdateData =
+                                                    createAccountsRecordData(
+                                                  isSelectedT: true,
+                                                );
+                                                await columnAccountsRecord
+                                                    .reference
+                                                    .update(accountsUpdateData);
+
+                                                final transactionsUpdateData =
+                                                    createTransactionsRecordData(
+                                                  account: columnAccountsRecord
+                                                      .reference,
+                                                );
+                                                await createdTransaction
+                                                    .reference
+                                                    .update(
+                                                        transactionsUpdateData);
+                                              }
                                             },
                                             child: Container(
-                                              width: 100,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
                                               height: 100,
                                               decoration: BoxDecoration(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .primaryColor,
+                                                        .secondaryBackground,
                                                 borderRadius:
                                                     BorderRadius.circular(12),
                                               ),
+                                              alignment:
+                                                  AlignmentDirectional(0, 0),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(20, 10, 20, 10),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        10,
+                                                                        0,
+                                                                        10),
+                                                            child: Text(
+                                                              columnAccountsRecord
+                                                                  .institutionName,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .subtitle1,
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        0,
+                                                                        10),
+                                                            child: Text(
+                                                              formatNumber(
+                                                                columnAccountsRecord
+                                                                    .accountBalance,
+                                                                formatType:
+                                                                    FormatType
+                                                                        .custom,
+                                                                currency: 'N',
+                                                                format:
+                                                                    '#,##,000',
+                                                                locale: '',
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        ToggleIcon(
+                                                          onPressed: () async {
+                                                            final accountsUpdateData =
+                                                                createAccountsRecordData(
+                                                              isSelectedT:
+                                                                  !columnAccountsRecord
+                                                                      .isSelectedT,
+                                                            );
+                                                            await columnAccountsRecord
+                                                                .reference
+                                                                .update(
+                                                                    accountsUpdateData);
+                                                          },
+                                                          value:
+                                                              columnAccountsRecord
+                                                                  .isSelectedT,
+                                                          onIcon: Icon(
+                                                            Icons
+                                                                .check_circle_rounded,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryColor,
+                                                            size: 25,
+                                                          ),
+                                                          offIcon: Icon(
+                                                            Icons
+                                                                .radio_button_off_rounded,
+                                                            color: Color(
+                                                                0xFF434343),
+                                                            size: 25,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                        InkWell(
-                                          onTap: () async {
-                                            final transactionsUpdateData =
-                                                createTransactionsRecordData(
-                                              account: gridViewAccountsRecord
-                                                  .reference,
-                                            );
-                                            await createdTransaction.reference
-                                                .update(transactionsUpdateData);
-
-                                            final usersUpdateData =
-                                                createUsersRecordData(
-                                              defaultAccount:
-                                                  gridViewAccountsRecord
-                                                      .reference,
-                                            );
-                                            await currentUserReference
-                                                .update(usersUpdateData);
-
-                                            final accountsUpdateData =
-                                                createAccountsRecordData(
-                                              isSelectedT: true,
-                                            );
-                                            await gridViewAccountsRecord
-                                                .reference
-                                                .update(accountsUpdateData);
-                                          },
-                                          child: Container(
-                                            width: 65,
-                                            height: 65,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Image.network(
-                                              'https://picsum.photos/seed/34/600',
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
+                                        );
+                                      }),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,

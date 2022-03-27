@@ -159,7 +159,8 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                   width: 100,
                                   height: 100,
                                   decoration: BoxDecoration(
-                                    color: Color(0xFFEEEEEE),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
                                   ),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -205,7 +206,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                     .accountBalance,
                                                 formatType: FormatType.custom,
                                                 currency: '₦',
-                                                format: '',
+                                                format: '#,##,000',
                                                 locale: '',
                                               ),
                                               style:

@@ -151,7 +151,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                         widget.budget.budgetSpent,
                                         formatType: FormatType.custom,
                                         currency: 'N',
-                                        format: '',
+                                        format: '#,##,000',
                                         locale: '',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -173,7 +173,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                         widget.budget.budgetAmount,
                                         formatType: FormatType.custom,
                                         currency: 'N',
-                                        format: '',
+                                        format: '#,##,000',
                                         locale: '',
                                       ),
                                       style: FlutterFlowTheme.of(context)
