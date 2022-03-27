@@ -126,6 +126,13 @@ class _$AccountsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.isSelectedT;
+    if (value != null) {
+      result
+        ..add('isSelectedT')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -211,6 +218,10 @@ class _$AccountsRecordSerializer
           result.accountLogo = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'isSelectedT':
+          result.isSelectedT = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -256,6 +267,8 @@ class _$AccountsRecord extends AccountsRecord {
   @override
   final String accountLogo;
   @override
+  final bool isSelectedT;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$AccountsRecord([void Function(AccountsRecordBuilder) updates]) =>
@@ -277,6 +290,7 @@ class _$AccountsRecord extends AccountsRecord {
       this.bvn,
       this.dateLinked,
       this.accountLogo,
+      this.isSelectedT,
       this.reference})
       : super._();
 
@@ -307,6 +321,7 @@ class _$AccountsRecord extends AccountsRecord {
         bvn == other.bvn &&
         dateLinked == other.dateLinked &&
         accountLogo == other.accountLogo &&
+        isSelectedT == other.isSelectedT &&
         reference == other.reference;
   }
 
@@ -328,25 +343,29 @@ class _$AccountsRecord extends AccountsRecord {
                                                         $jc(
                                                             $jc(
                                                                 $jc(
-                                                                    0,
-                                                                    accountName
+                                                                    $jc(
+                                                                        0,
+                                                                        accountName
+                                                                            .hashCode),
+                                                                    accountOwner
                                                                         .hashCode),
-                                                                accountOwner
+                                                                dataStatus
                                                                     .hashCode),
-                                                            dataStatus
+                                                            accountType
                                                                 .hashCode),
-                                                        accountType.hashCode),
-                                                    institutionType.hashCode),
-                                                authMethod.hashCode),
-                                            currency.hashCode),
-                                        authID.hashCode),
-                                    institutionName.hashCode),
-                                accountBalance.hashCode),
-                            bankCode.hashCode),
-                        accountNumber.hashCode),
-                    bvn.hashCode),
-                dateLinked.hashCode),
-            accountLogo.hashCode),
+                                                        institutionType
+                                                            .hashCode),
+                                                    authMethod.hashCode),
+                                                currency.hashCode),
+                                            authID.hashCode),
+                                        institutionName.hashCode),
+                                    accountBalance.hashCode),
+                                bankCode.hashCode),
+                            accountNumber.hashCode),
+                        bvn.hashCode),
+                    dateLinked.hashCode),
+                accountLogo.hashCode),
+            isSelectedT.hashCode),
         reference.hashCode));
   }
 
@@ -368,6 +387,7 @@ class _$AccountsRecord extends AccountsRecord {
           ..add('bvn', bvn)
           ..add('dateLinked', dateLinked)
           ..add('accountLogo', accountLogo)
+          ..add('isSelectedT', isSelectedT)
           ..add('reference', reference))
         .toString();
   }
@@ -442,6 +462,10 @@ class AccountsRecordBuilder
   String get accountLogo => _$this._accountLogo;
   set accountLogo(String accountLogo) => _$this._accountLogo = accountLogo;
 
+  bool _isSelectedT;
+  bool get isSelectedT => _$this._isSelectedT;
+  set isSelectedT(bool isSelectedT) => _$this._isSelectedT = isSelectedT;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -469,6 +493,7 @@ class AccountsRecordBuilder
       _bvn = $v.bvn;
       _dateLinked = $v.dateLinked;
       _accountLogo = $v.accountLogo;
+      _isSelectedT = $v.isSelectedT;
       _reference = $v.reference;
       _$v = null;
     }
@@ -505,6 +530,7 @@ class AccountsRecordBuilder
             bvn: bvn,
             dateLinked: dateLinked,
             accountLogo: accountLogo,
+            isSelectedT: isSelectedT,
             reference: reference);
     replace(_$result);
     return _$result;
