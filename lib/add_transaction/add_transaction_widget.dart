@@ -127,7 +127,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Select Account',
+                              'Selected Account:',
                               style: FlutterFlowTheme.of(context).subtitle1,
                             ),
                             StreamBuilder<AccountsRecord>(
