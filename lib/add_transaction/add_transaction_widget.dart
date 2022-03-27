@@ -3,7 +3,6 @@ import '../backend/backend.dart';
 import '../components/set_budget_comp_widget.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
-import '../flutter_flow/flutter_flow_toggle_icon.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -127,7 +126,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Selected Account:',
+                              'Selected Account No:',
                               style: FlutterFlowTheme.of(context).subtitle1,
                             ),
                             Text(
@@ -215,7 +214,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                                   setState(() => FFAppState()
                                                           .selectedAcctName =
                                                       columnAccountsRecord
-                                                          .accountName);
+                                                          .accountNumber);
 
                                                   final transactionsUpdateData =
                                                       createTransactionsRecordData(
@@ -321,40 +320,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
                                                                   .center,
-                                                          children: [
-                                                            ToggleIcon(
-                                                              onPressed:
-                                                                  () async {
-                                                                final accountsUpdateData =
-                                                                    createAccountsRecordData(
-                                                                  isSelectedT:
-                                                                      !columnAccountsRecord
-                                                                          .isSelectedT,
-                                                                );
-                                                                await columnAccountsRecord
-                                                                    .reference
-                                                                    .update(
-                                                                        accountsUpdateData);
-                                                              },
-                                                              value: columnAccountsRecord
-                                                                  .isSelectedT,
-                                                              onIcon: Icon(
-                                                                Icons
-                                                                    .check_circle_rounded,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryColor,
-                                                                size: 25,
-                                                              ),
-                                                              offIcon: Icon(
-                                                                Icons
-                                                                    .radio_button_off_rounded,
-                                                                color: Color(
-                                                                    0xFF434343),
-                                                                size: 25,
-                                                              ),
-                                                            ),
-                                                          ],
+                                                          children: [],
                                                         ),
                                                       ],
                                                     ),
