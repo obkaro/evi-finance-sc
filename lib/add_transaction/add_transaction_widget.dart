@@ -180,8 +180,8 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                     return Stack(
                                       alignment: AlignmentDirectional(0, 0),
                                       children: [
-                                        if (gridViewAccountsRecord
-                                                .isSelectedT ??
+                                        if ((gridViewAccountsRecord
+                                                .isSelectedT) ==
                                             true)
                                           InkWell(
                                             onTap: () async {
