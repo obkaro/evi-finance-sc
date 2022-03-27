@@ -57,6 +57,9 @@ abstract class AccountsRecord
   String get accountLogo;
 
   @nullable
+  bool get isSelectedT;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -73,7 +76,8 @@ abstract class AccountsRecord
     ..bankCode = ''
     ..accountNumber = ''
     ..bvn = ''
-    ..accountLogo = '';
+    ..accountLogo = ''
+    ..isSelectedT = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('accounts');
@@ -112,6 +116,7 @@ Map<String, dynamic> createAccountsRecordData({
   String bvn,
   DateTime dateLinked,
   String accountLogo,
+  bool isSelectedT,
 }) =>
     serializers.toFirestore(
         AccountsRecord.serializer,
@@ -130,4 +135,5 @@ Map<String, dynamic> createAccountsRecordData({
           ..accountNumber = accountNumber
           ..bvn = bvn
           ..dateLinked = dateLinked
-          ..accountLogo = accountLogo));
+          ..accountLogo = accountLogo
+          ..isSelectedT = isSelectedT));
