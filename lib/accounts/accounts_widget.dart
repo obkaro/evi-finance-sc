@@ -43,7 +43,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          newacctB = await actions.flutterMono(context);
+          newacctB = await actions.flutterMono();
           acctInfoResponse = await GetAccountInfoCall.call(
             authID: newacctB.authID,
           );
