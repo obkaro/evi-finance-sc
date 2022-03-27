@@ -191,42 +191,20 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                                     0, 0, 0, 10),
                                             child: InkWell(
                                               onTap: () async {
-                                                if ((columnAccountsRecord
-                                                        .isSelectedT) ==
-                                                    true) {
-                                                  final accountsUpdateData =
-                                                      createAccountsRecordData(
-                                                    isSelectedT: false,
-                                                  );
-                                                  await columnAccountsRecord
-                                                      .reference
-                                                      .update(
-                                                          accountsUpdateData);
-                                                } else {
-                                                  final accountsUpdateData =
-                                                      createAccountsRecordData(
-                                                    isSelectedT: true,
-                                                  );
-                                                  await columnAccountsRecord
-                                                      .reference
-                                                      .update(
-                                                          accountsUpdateData);
-                                                  setState(() => FFAppState()
-                                                          .selectedAcctName =
-                                                      columnAccountsRecord
-                                                          .accountNumber);
+                                                setState(() => FFAppState()
+                                                        .selectedAcctName =
+                                                    columnAccountsRecord
+                                                        .accountNumber);
 
-                                                  final transactionsUpdateData =
-                                                      createTransactionsRecordData(
-                                                    account:
-                                                        columnAccountsRecord
-                                                            .reference,
-                                                  );
-                                                  await createdTransaction
-                                                      .reference
-                                                      .update(
-                                                          transactionsUpdateData);
-                                                }
+                                                final transactionsUpdateData =
+                                                    createTransactionsRecordData(
+                                                  account: columnAccountsRecord
+                                                      .reference,
+                                                );
+                                                await createdTransaction
+                                                    .reference
+                                                    .update(
+                                                        transactionsUpdateData);
                                               },
                                               child: Material(
                                                 color: Colors.transparent,
