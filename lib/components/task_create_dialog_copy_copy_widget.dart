@@ -166,7 +166,7 @@ class _TaskCreateDialogCopyCopyWidgetState
                       if ((functions.checkEditCatTotal(
                               widget.categoriesTotal,
                               int.parse(textController2.text),
-                              widget.categoryToEdit.allocatedAmount)) <=
+                              widget.categoryToEdit.allocatedAmount)) >
                           (widget.budget.budgetAmount)) {
                         final budgetCategoriesUpdateData =
                             createBudgetCategoriesRecordData(

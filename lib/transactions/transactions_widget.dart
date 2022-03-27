@@ -317,7 +317,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                               replacement: '…',
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .subtitle1,
+                                                .bodyText1,
                                           ),
                                           AutoSizeText(
                                             columnTransactionsRecord

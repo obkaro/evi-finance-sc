@@ -160,7 +160,7 @@ class _TaskCreateDialogCopyWidgetState
                     onPressed: () async {
                       if ((functions.checkCreateCatTotal(
                               int.parse(textController2.text),
-                              widget.categoriesTotal)) <=
+                              widget.categoriesTotal)) >
                           (widget.budget.budgetAmount)) {
                         final budgetCategoriesCreateData =
                             createBudgetCategoriesRecordData(
