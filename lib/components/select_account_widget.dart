@@ -69,6 +69,11 @@ class _SelectAccountWidgetState extends State<SelectAccountWidget> {
                       );
                       await widget.transaction.reference
                           .update(transactionsUpdateData);
+
+                      final usersUpdateData = createUsersRecordData(
+                        defaultAccount: columnAccountsRecord.reference,
+                      );
+                      await currentUserReference.update(usersUpdateData);
                       Navigator.pop(context);
                     },
                     child: ListTile(
