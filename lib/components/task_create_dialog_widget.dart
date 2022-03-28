@@ -15,11 +15,13 @@ class TaskCreateDialogWidget extends StatefulWidget {
     this.constCategory,
     this.budget,
     this.categoriesTotal,
+    this.budgetAllocatedRemaining,
   }) : super(key: key);
 
   final ConstBudgetCategoriesRecord constCategory;
   final BudgetsRecord budget;
   final int categoriesTotal;
+  final int budgetAllocatedRemaining;
 
   @override
   _TaskCreateDialogWidgetState createState() => _TaskCreateDialogWidgetState();
