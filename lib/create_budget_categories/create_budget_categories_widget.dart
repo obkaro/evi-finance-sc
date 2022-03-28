@@ -511,6 +511,11 @@ class _CreateBudgetCategoriesWidgetState
                                                       createBudgetCategoriesBudgetCategoriesRecordList
                                                           .toList(),
                                                       columnBudgetsRecord),
+                                              budgetRemaining:
+                                                  functions.calculateRemBudget(
+                                                      createBudgetCategoriesBudgetCategoriesRecordList
+                                                          .toList(),
+                                                      columnBudgetsRecord),
                                             ),
                                           );
                                         },
@@ -583,7 +588,7 @@ class _CreateBudgetCategoriesWidgetState
                                       return Visibility(
                                         visible: (columnBudgetCategoriesRecord
                                                 .categoryName) !=
-                                            (widget.uncategorized.categoryName),
+                                            'Uncategorized',
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -689,6 +694,11 @@ class _CreateBudgetCategoriesWidgetState
                                                             categoryToEdit:
                                                                 columnBudgetCategoriesRecord,
                                                             categoriesTotal: functions
+                                                                .calculateRemBudget(
+                                                                    createBudgetCategoriesBudgetCategoriesRecordList
+                                                                        .toList(),
+                                                                    columnBudgetsRecord),
+                                                            budgetRemaining: functions
                                                                 .calculateRemBudget(
                                                                     createBudgetCategoriesBudgetCategoriesRecordList
                                                                         .toList(),

@@ -11,7 +11,7 @@ Future deleteCategories(List<BudgetCategoriesRecord> createdCategories) async {
   // Add your function code here!
   for (var i = 0; i < createdCategories.length; i++) {
     while (createdCategories[i].categoryName != 'Uncategorized') {
-      await createdCategories[i].reference.delete();
+      createdCategories[i].reference.delete();
     }
   }
 }
