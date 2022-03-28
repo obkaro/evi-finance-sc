@@ -135,10 +135,10 @@ class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      if ((functions.checkCreateCatTotal(
+                      if ((functions.budgetRemMinusAmt(
                               int.parse(textController.text),
-                              widget.categoriesTotal)) >
-                          (widget.budget.budgetAmount)) {
+                              widget.categoriesTotal)) <
+                          0) {
                         final budgetCategoriesCreateData =
                             createBudgetCategoriesRecordData(
                           categoryName: widget.constCategory.categoryName,

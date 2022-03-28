@@ -211,7 +211,7 @@ class _CreateBudgetCategoriesWidgetState
                                       ),
                                       child: Text(
                                         functions
-                                            .calculateTotalInt(
+                                            .calculateRemBudget(
                                                 createBudgetCategoriesBudgetCategoriesRecordList
                                                     .toList(),
                                                 columnBudgetsRecord)
@@ -430,8 +430,8 @@ class _CreateBudgetCategoriesWidgetState
                                                               gridViewConstBudgetCategoriesRecord,
                                                           budget: widget
                                                               .createdBudget,
-                                                          categoriesTotal: functions
-                                                              .calculateTotalInt(
+                                                          budgetAllocatedRemaining:
+                                                              functions.calculateRemBudget(
                                                                   createBudgetCategoriesBudgetCategoriesRecordList
                                                                       .toList(),
                                                                   columnBudgetsRecord),
@@ -507,7 +507,7 @@ class _CreateBudgetCategoriesWidgetState
                                             child: TaskCreateDialogCopyWidget(
                                               budget: widget.createdBudget,
                                               categoriesTotal:
-                                                  functions.calculateTotalInt(
+                                                  functions.calculateRemBudget(
                                                       createBudgetCategoriesBudgetCategoriesRecordList
                                                           .toList(),
                                                       columnBudgetsRecord),
@@ -683,7 +683,7 @@ class _CreateBudgetCategoriesWidgetState
                                                           categoryToEdit:
                                                               columnBudgetCategoriesRecord,
                                                           categoriesTotal: functions
-                                                              .calculateTotalInt(
+                                                              .calculateRemBudget(
                                                                   createBudgetCategoriesBudgetCategoriesRecordList
                                                                       .toList(),
                                                                   columnBudgetsRecord),
@@ -871,7 +871,7 @@ class _CreateBudgetCategoriesWidgetState
                                         final budgetCategoriesUpdateData =
                                             createBudgetCategoriesRecordData(
                                           allocatedAmount:
-                                              functions.calculateTotalInt(
+                                              functions.calculateRemBudget(
                                                   createBudgetCategoriesBudgetCategoriesRecordList
                                                       .toList(),
                                                   widget.createdBudget),
