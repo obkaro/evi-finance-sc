@@ -14,10 +14,12 @@ class TaskCreateDialogCopyWidget extends StatefulWidget {
     Key key,
     this.budget,
     this.categoriesTotal,
+    this.budgetRemaining,
   }) : super(key: key);
 
   final BudgetsRecord budget;
   final int categoriesTotal;
+  final int budgetRemaining;
 
   @override
   _TaskCreateDialogCopyWidgetState createState() =>
@@ -160,8 +162,8 @@ class _TaskCreateDialogCopyWidgetState
                     onPressed: () async {
                       if ((functions.budgetRemMinusAmt(
                               int.parse(textController2.text),
-                              widget.categoriesTotal)) >
-                          (widget.budget.budgetAmount)) {
+                              widget.budgetRemaining)) >
+                          0) {
                         final budgetCategoriesCreateData =
                             createBudgetCategoriesRecordData(
                           categoryName: textController1.text,

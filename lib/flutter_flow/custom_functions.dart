@@ -91,10 +91,10 @@ int budgetRemMinusAmt(
 }
 
 int checkEditCatTotal(
-  int currentTotal,
+  int budgetRemaining,
   int widgetStateAmount,
   int categoryTotal,
 ) {
   // Add your function code here!
-  return widgetStateAmount + (currentTotal - categoryTotal);
+  return widgetStateAmount + (budgetRemaining - categoryTotal);
 }
