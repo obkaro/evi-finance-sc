@@ -138,7 +138,7 @@ class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
                       onPressed: () async {
                         if ((functions.budgetRemMinusAmt(
                                 int.parse(textController.text),
-                                widget.budgetAllocatedRemaining)) >
+                                widget.budgetAllocatedRemaining)) >=
                             0) {
                           final budgetCategoriesCreateData =
                               createBudgetCategoriesRecordData(

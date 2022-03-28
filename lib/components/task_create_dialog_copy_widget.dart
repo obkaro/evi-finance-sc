@@ -162,7 +162,7 @@ class _TaskCreateDialogCopyWidgetState
                     onPressed: () async {
                       if ((functions.budgetRemMinusAmt(
                               int.parse(textController2.text),
-                              widget.budgetRemaining)) >
+                              widget.budgetRemaining)) >=
                           0) {
                         final budgetCategoriesCreateData =
                             createBudgetCategoriesRecordData(
