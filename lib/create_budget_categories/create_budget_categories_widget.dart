@@ -774,9 +774,9 @@ class _CreateBudgetCategoriesWidgetState
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
                                                     title:
-                                                        Text('Confirm create'),
-                                                    content:
-                                                        Text('Are you done?'),
+                                                        Text('Confirm Reset'),
+                                                    content: Text(
+                                                        'This will delete all categories'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
@@ -798,12 +798,9 @@ class _CreateBudgetCategoriesWidgetState
                                               ) ??
                                               false;
                                       if (confirmDialogResponse) {
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => NavBarPage(
-                                                initialPage: 'Budgets'),
-                                          ),
+                                        await actions.deleteCategories(
+                                          createBudgetCategoriesBudgetCategoriesRecordList
+                                              .toList(),
                                         );
                                       } else {
                                         return;
@@ -821,6 +818,7 @@ class _CreateBudgetCategoriesWidgetState
                                             fontFamily: 'Poppins',
                                             color: Color(0xFF5D5B5B),
                                           ),
+                                      elevation: 0,
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 1,
@@ -860,14 +858,6 @@ class _CreateBudgetCategoriesWidgetState
                                               ) ??
                                               false;
                                       if (confirmDialogResponse) {
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => NavBarPage(
-                                                initialPage: 'Budgets'),
-                                          ),
-                                        );
-
                                         final budgetCategoriesUpdateData =
                                             createBudgetCategoriesRecordData(
                                           allocatedAmount:
@@ -878,6 +868,13 @@ class _CreateBudgetCategoriesWidgetState
                                         );
                                         await widget.uncategorized.reference
                                             .update(budgetCategoriesUpdateData);
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => NavBarPage(
+                                                initialPage: 'Budgets'),
+                                          ),
+                                        );
                                       } else {
                                         return;
                                       }
