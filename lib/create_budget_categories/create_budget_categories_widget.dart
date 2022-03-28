@@ -133,69 +133,22 @@ class _CreateBudgetCategoriesWidgetState
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  width: 100,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  alignment: AlignmentDirectional(1, 0),
-                                  child: Text(
-                                    'Remaining (Uncategorized):',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText2,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: 100,
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                ),
-                                child: Text(
-                                  functions
-                                      .calculateTotalInt(
-                                          createBudgetCategoriesBudgetCategoriesRecordList
-                                              .toList(),
-                                          widget.createdBudget)
-                                      .toString(),
-                                  textAlign: TextAlign.end,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        color: Color(0xFFFF0003),
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 10, 0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
                                   child: Container(
                                     width: 100,
                                     height: 30,
@@ -204,172 +157,247 @@ class _CreateBudgetCategoriesWidgetState
                                           .primaryBackground,
                                       borderRadius: BorderRadius.circular(12),
                                     ),
+                                    alignment: AlignmentDirectional(1, 0),
                                     child: Text(
-                                      widget.createdBudget.budgetName,
+                                      'Remaining (Uncategorized):',
                                       style: FlutterFlowTheme.of(context)
-                                          .subtitle1,
+                                          .bodyText2,
                                     ),
                                   ),
                                 ),
-                              ),
-                              FlutterFlowIconButton(
-                                borderColor: Colors.transparent,
-                                borderRadius: 30,
-                                borderWidth: 1,
-                                buttonSize: 60,
-                                icon: Icon(
-                                  Icons.do_disturb_on_rounded,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  size: 24,
-                                ),
-                                onPressed: () async {
-                                  final budgetsUpdateData = {
-                                    'budgetAmount': FieldValue.increment(-1000),
-                                  };
-                                  await widget.createdBudget.reference
-                                      .update(budgetsUpdateData);
-                                },
-                              ),
-                              Container(
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                ),
-                                child: Text(
-                                  formatNumber(
-                                    widget.createdBudget.budgetAmount,
-                                    formatType: FormatType.custom,
-                                    currency: 'N',
-                                    format: '#,###,###',
-                                    locale: '',
+                                Container(
+                                  width: 100,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
                                   ),
-                                  textAlign: TextAlign.end,
-                                  style: FlutterFlowTheme.of(context).subtitle1,
+                                  child: Text(
+                                    functions
+                                        .calculateTotalInt(
+                                            createBudgetCategoriesBudgetCategoriesRecordList
+                                                .toList(),
+                                            widget.createdBudget)
+                                        .toString(),
+                                    textAlign: TextAlign.end,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          color: Color(0xFFFF0003),
+                                        ),
+                                  ),
                                 ),
-                              ),
-                              FlutterFlowIconButton(
-                                borderColor: Colors.transparent,
-                                borderRadius: 30,
-                                borderWidth: 1,
-                                buttonSize: 60,
-                                icon: Icon(
-                                  Icons.add_circle_rounded,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  size: 24,
+                              ],
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 10, 0),
+                                    child: Container(
+                                      width: 100,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: Text(
+                                        widget.createdBudget.budgetName,
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle1,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                onPressed: () async {
-                                  final budgetsUpdateData = {
-                                    'budgetAmount': FieldValue.increment(1000),
-                                  };
-                                  await widget.createdBudget.reference
-                                      .update(budgetsUpdateData);
-                                },
+                                FlutterFlowIconButton(
+                                  borderColor: Colors.transparent,
+                                  borderRadius: 30,
+                                  borderWidth: 1,
+                                  buttonSize: 60,
+                                  icon: Icon(
+                                    Icons.do_disturb_on_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    size: 24,
+                                  ),
+                                  onPressed: () async {
+                                    final budgetsUpdateData = {
+                                      'budgetAmount':
+                                          FieldValue.increment(-1000),
+                                    };
+                                    await widget.createdBudget.reference
+                                        .update(budgetsUpdateData);
+                                  },
+                                ),
+                                Container(
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                  ),
+                                  child: StreamBuilder<List<BudgetsRecord>>(
+                                    stream: queryBudgetsRecord(
+                                      queryBuilder: (budgetsRecord) =>
+                                          budgetsRecord
+                                              .where('budgetOwner',
+                                                  isEqualTo:
+                                                      currentUserReference)
+                                              .where('budgetName',
+                                                  isEqualTo:
+                                                      widget.createdBudget
+                                                          .budgetName)
+                                              .where(
+                                                  'budgetDescription',
+                                                  isEqualTo:
+                                                      widget.createdBudget
+                                                          .budgetDescription)
+                                              .where(
+                                                  'budgetDateCreated',
+                                                  isEqualTo: widget
+                                                      .createdBudget
+                                                      .budgetDateCreated),
+                                      singleRecord: true,
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: SpinKitFadingFour(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 50,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<BudgetsRecord>
+                                          textBudgetsRecordList = snapshot.data;
+                                      final textBudgetsRecord =
+                                          textBudgetsRecordList.isNotEmpty
+                                              ? textBudgetsRecordList.first
+                                              : null;
+                                      return Text(
+                                        formatNumber(
+                                          textBudgetsRecord.budgetAmount,
+                                          formatType: FormatType.custom,
+                                          currency: 'N',
+                                          format: '#,###,###',
+                                          locale: '',
+                                        ),
+                                        textAlign: TextAlign.end,
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle1,
+                                      );
+                                    },
+                                  ),
+                                ),
+                                FlutterFlowIconButton(
+                                  borderColor: Colors.transparent,
+                                  borderRadius: 30,
+                                  borderWidth: 1,
+                                  buttonSize: 60,
+                                  icon: Icon(
+                                    Icons.add_circle_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    size: 24,
+                                  ),
+                                  onPressed: () async {
+                                    final budgetsUpdateData = {
+                                      'budgetAmount':
+                                          FieldValue.increment(1000),
+                                    };
+                                    await widget.createdBudget.reference
+                                        .update(budgetsUpdateData);
+                                  },
+                                ),
+                              ],
+                            ),
+                            Divider(),
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'Select from options',
+                                style: FlutterFlowTheme.of(context).bodyText1,
                               ),
                             ],
                           ),
-                          Divider(),
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              'Select from options',
-                              style: FlutterFlowTheme.of(context).bodyText1,
-                            ),
-                          ],
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 300,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-                            child: StreamBuilder<
-                                List<ConstBudgetCategoriesRecord>>(
-                              stream: queryConstBudgetCategoriesRecord(
-                                queryBuilder: (constBudgetCategoriesRecord) =>
-                                    constBudgetCategoriesRecord
-                                        .where('categoryName',
-                                            whereNotIn:
-                                                createBudgetCategoriesBudgetCategoriesRecordList
-                                                    .map((e) => e.categoryName)
-                                                    .toList())
-                                        .orderBy('categoryName'),
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitFadingFour(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 50,
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 300,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  10, 10, 10, 10),
+                              child: StreamBuilder<
+                                  List<ConstBudgetCategoriesRecord>>(
+                                stream: queryConstBudgetCategoriesRecord(
+                                  queryBuilder: (constBudgetCategoriesRecord) =>
+                                      constBudgetCategoriesRecord
+                                          .where('categoryName',
+                                              whereNotIn:
+                                                  createBudgetCategoriesBudgetCategoriesRecordList
+                                                      .map(
+                                                          (e) => e.categoryName)
+                                                      .toList())
+                                          .orderBy('categoryName'),
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: SpinKitFadingFour(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          size: 50,
+                                        ),
                                       ),
+                                    );
+                                  }
+                                  List<ConstBudgetCategoriesRecord>
+                                      gridViewConstBudgetCategoriesRecordList =
+                                      snapshot.data;
+                                  return GridView.builder(
+                                    padding: EdgeInsets.zero,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3,
+                                      crossAxisSpacing: 10,
+                                      mainAxisSpacing: 10,
+                                      childAspectRatio: 1,
                                     ),
-                                  );
-                                }
-                                List<ConstBudgetCategoriesRecord>
-                                    gridViewConstBudgetCategoriesRecordList =
-                                    snapshot.data;
-                                return GridView.builder(
-                                  padding: EdgeInsets.zero,
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    crossAxisSpacing: 10,
-                                    mainAxisSpacing: 10,
-                                    childAspectRatio: 1,
-                                  ),
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount:
-                                      gridViewConstBudgetCategoriesRecordList
-                                          .length,
-                                  itemBuilder: (context, gridViewIndex) {
-                                    final gridViewConstBudgetCategoriesRecord =
-                                        gridViewConstBudgetCategoriesRecordList[
-                                            gridViewIndex];
-                                    return InkWell(
-                                      onTap: () async {
-                                        await showModalBottomSheet(
-                                          isScrollControlled: true,
-                                          backgroundColor: Colors.transparent,
-                                          context: context,
-                                          builder: (context) {
-                                            return Padding(
-                                              padding: MediaQuery.of(context)
-                                                  .viewInsets,
-                                              child: TaskCreateDialogWidget(
-                                                constCategory:
-                                                    gridViewConstBudgetCategoriesRecord,
-                                                budget: widget.createdBudget,
-                                                categoriesTotal:
-                                                    functions.calculateTotalInt(
-                                                        createBudgetCategoriesBudgetCategoriesRecordList
-                                                            .toList(),
-                                                        widget.createdBudget),
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      },
-                                      child: Material(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount:
+                                        gridViewConstBudgetCategoriesRecordList
+                                            .length,
+                                    itemBuilder: (context, gridViewIndex) {
+                                      final gridViewConstBudgetCategoriesRecord =
+                                          gridViewConstBudgetCategoriesRecordList[
+                                              gridViewIndex];
+                                      return Material(
                                         color: Colors.transparent,
                                         elevation: 0.5,
                                         shape: RoundedRectangleBorder(
@@ -388,446 +416,481 @@ class _CreateBudgetCategoriesWidgetState
                                               width: 0.1,
                                             ),
                                           ),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 20),
-                                                child: Icon(
-                                                  Icons.add_rounded,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryColor,
-                                                  size: 36,
+                                          child: InkWell(
+                                            onTap: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets,
+                                                    child:
+                                                        TaskCreateDialogWidget(
+                                                      constCategory:
+                                                          gridViewConstBudgetCategoriesRecord,
+                                                      budget:
+                                                          widget.createdBudget,
+                                                      categoriesTotal: functions
+                                                          .calculateTotalInt(
+                                                              createBudgetCategoriesBudgetCategoriesRecordList
+                                                                  .toList(),
+                                                              widget
+                                                                  .createdBudget),
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 0, 20),
+                                                  child: Icon(
+                                                    Icons.add_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryColor,
+                                                    size: 36,
+                                                  ),
                                                 ),
-                                              ),
-                                              AutoSizeText(
-                                                gridViewConstBudgetCategoriesRecord
-                                                    .categoryName,
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          fontSize: 12,
-                                                        ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                await showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  backgroundColor: Colors.transparent,
-                                  context: context,
-                                  builder: (context) {
-                                    return Padding(
-                                      padding:
-                                          MediaQuery.of(context).viewInsets,
-                                      child: TaskCreateDialogCopyWidget(
-                                        budget: widget.createdBudget,
-                                        categoriesTotal:
-                                            functions.calculateTotalInt(
-                                                createBudgetCategoriesBudgetCategoriesRecordList
-                                                    .toList(),
-                                                widget.createdBudget),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                              text: 'Custom',
-                              icon: Icon(
-                                Icons.add_rounded,
-                                size: 15,
-                              ),
-                              options: FFButtonOptions(
-                                width: 130,
-                                height: 50,
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
-                                    ),
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
-                                ),
-                                borderRadius: 12,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                        child: StreamBuilder<List<BudgetCategoriesRecord>>(
-                          stream: queryBudgetCategoriesRecord(
-                            queryBuilder: (budgetCategoriesRecord) =>
-                                budgetCategoriesRecord
-                                    .where('categoryBudget',
-                                        isEqualTo:
-                                            widget.createdBudget.reference)
-                                    .where('categoryName',
-                                        isNotEqualTo: 'Uncategorized'),
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: SpinKitFadingFour(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    size: 50,
-                                  ),
-                                ),
-                              );
-                            }
-                            List<BudgetCategoriesRecord>
-                                columnBudgetCategoriesRecordList =
-                                snapshot.data;
-                            return Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: List.generate(
-                                  columnBudgetCategoriesRecordList.length,
-                                  (columnIndex) {
-                                final columnBudgetCategoriesRecord =
-                                    columnBudgetCategoriesRecordList[
-                                        columnIndex];
-                                return Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 10),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: 36,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                          ),
-                                          child: Align(
-                                            alignment:
-                                                AlignmentDirectional(-1, 0),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 10, 0),
-                                              child: AutoSizeText(
-                                                columnBudgetCategoriesRecord
-                                                    .categoryName,
-                                                textAlign: TextAlign.start,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1,
-                                              ),
+                                                AutoSizeText(
+                                                  gridViewConstBudgetCategoriesRecord
+                                                      .categoryName,
+                                                  textAlign: TextAlign.center,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 12,
+                                                      ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Container(
-                                        width: 75,
-                                        height: 36,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        alignment: AlignmentDirectional(0, 0),
-                                        child: Text(
-                                          formatNumber(
-                                            columnBudgetCategoriesRecord
-                                                .allocatedAmount,
-                                            formatType: FormatType.custom,
-                                            currency: 'N',
-                                            format: '#,###,###',
-                                            locale: '',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      if ((columnBudgetCategoriesRecord
-                                              .categoryName) !=
-                                          'Uncategorized')
-                                        FlutterFlowIconButton(
-                                          borderColor: Colors.transparent,
-                                          borderRadius: 30,
-                                          borderWidth: 1,
-                                          buttonSize: 60,
-                                          icon: Icon(
-                                            Icons.edit_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 24,
-                                          ),
-                                          onPressed: () async {
-                                            await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              context: context,
-                                              builder: (context) {
-                                                return Padding(
-                                                  padding:
-                                                      MediaQuery.of(context)
-                                                          .viewInsets,
-                                                  child:
-                                                      TaskCreateDialogCopyCopyWidget(
-                                                    budget:
-                                                        widget.createdBudget,
-                                                    categoryToEdit:
-                                                        columnBudgetCategoriesRecord,
-                                                    categoriesTotal: functions
-                                                        .calculateTotalInt(
-                                                            createBudgetCategoriesBudgetCategoriesRecordList
-                                                                .toList(),
-                                                            widget
-                                                                .createdBudget),
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          },
-                                        ),
-                                      if ((columnBudgetCategoriesRecord
-                                              .categoryName) !=
-                                          'Uncategorized')
-                                        FlutterFlowIconButton(
-                                          borderColor: Colors.transparent,
-                                          borderRadius: 30,
-                                          borderWidth: 1,
-                                          buttonSize: 60,
-                                          icon: Icon(
-                                            Icons.delete_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 24,
-                                          ),
-                                          onPressed: () async {
-                                            var confirmDialogResponse =
-                                                await showDialog<bool>(
-                                                      context: context,
-                                                      builder:
-                                                          (alertDialogContext) {
-                                                        return AlertDialog(
-                                                          title: Text(
-                                                              'Are you sure?'),
-                                                          content: Text(
-                                                              'This cannot be undone'),
-                                                          actions: [
-                                                            TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.pop(
-                                                                      alertDialogContext,
-                                                                      false),
-                                                              child: Text(
-                                                                  'Cancel'),
-                                                            ),
-                                                            TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.pop(
-                                                                      alertDialogContext,
-                                                                      true),
-                                                              child: Text(
-                                                                  'Confirm'),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    ) ??
-                                                    false;
-                                            if (confirmDialogResponse) {
-                                              await columnBudgetCategoriesRecord
-                                                  .reference
-                                                  .delete();
-                                            } else {
-                                              return;
-                                            }
-                                          },
-                                        ),
-                                    ],
-                                  ),
-                                );
-                              }),
-                            );
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            FFButtonWidget(
-                              onPressed: () async {
-                                var confirmDialogResponse =
-                                    await showDialog<bool>(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('Confirm create'),
-                                              content: Text('Are you done?'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext,
-                                                          false),
-                                                  child: Text('Cancel'),
-                                                ),
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext,
-                                                          true),
-                                                  child: Text('Confirm'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        ) ??
-                                        false;
-                                if (confirmDialogResponse) {
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          NavBarPage(initialPage: 'Budgets'),
-                                    ),
+                                      );
+                                    },
                                   );
-                                } else {
-                                  return;
-                                }
-                              },
-                              text: 'Reset',
-                              options: FFButtonOptions(
-                                width: 130,
-                                height: 50,
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      color: Color(0xFF5D5B5B),
-                                    ),
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
-                                ),
-                                borderRadius: 12,
+                                },
                               ),
                             ),
-                            FFButtonWidget(
-                              onPressed: () async {
-                                var confirmDialogResponse =
-                                    await showDialog<bool>(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('Confirm create'),
-                                              content: Text('Are you done?'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext,
-                                                          false),
-                                                  child: Text('Cancel'),
-                                                ),
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext,
-                                                          true),
-                                                  child: Text('Confirm'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        ) ??
-                                        false;
-                                if (confirmDialogResponse) {
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          NavBarPage(initialPage: 'Budgets'),
-                                    ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (context) {
+                                      return Padding(
+                                        padding:
+                                            MediaQuery.of(context).viewInsets,
+                                        child: TaskCreateDialogCopyWidget(
+                                          budget: widget.createdBudget,
+                                          categoriesTotal:
+                                              functions.calculateTotalInt(
+                                                  createBudgetCategoriesBudgetCategoriesRecordList
+                                                      .toList(),
+                                                  widget.createdBudget),
+                                        ),
+                                      );
+                                    },
                                   );
-
-                                  final budgetCategoriesUpdateData =
-                                      createBudgetCategoriesRecordData(
-                                    allocatedAmount: functions.calculateTotalInt(
-                                        createBudgetCategoriesBudgetCategoriesRecordList
-                                            .toList(),
-                                        widget.createdBudget),
-                                  );
-                                  await widget.uncategorized.reference
-                                      .update(budgetCategoriesUpdateData);
-                                } else {
-                                  return;
-                                }
-                              },
-                              text: 'Save',
-                              options: FFButtonOptions(
-                                width: 130,
-                                height: 50,
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
-                                    ),
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
+                                },
+                                text: 'Custom',
+                                icon: Icon(
+                                  Icons.add_rounded,
+                                  size: 15,
                                 ),
-                                borderRadius: 12,
+                                options: FFButtonOptions(
+                                  width: 130,
+                                  height: 50,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white,
+                                      ),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: 12,
+                                ),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                          child: StreamBuilder<List<BudgetCategoriesRecord>>(
+                            stream: queryBudgetCategoriesRecord(
+                              queryBuilder: (budgetCategoriesRecord) =>
+                                  budgetCategoriesRecord
+                                      .where('categoryBudget',
+                                          isEqualTo:
+                                              widget.createdBudget.reference)
+                                      .where('categoryName',
+                                          isNotEqualTo: 'Uncategorized'),
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: SpinKitFadingFour(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      size: 50,
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<BudgetCategoriesRecord>
+                                  columnBudgetCategoriesRecordList =
+                                  snapshot.data;
+                              return Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: List.generate(
+                                    columnBudgetCategoriesRecordList.length,
+                                    (columnIndex) {
+                                  final columnBudgetCategoriesRecord =
+                                      columnBudgetCategoriesRecordList[
+                                          columnIndex];
+                                  return Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 10),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 36,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                            ),
+                                            child: Align(
+                                              alignment:
+                                                  AlignmentDirectional(-1, 0),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 0, 10, 0),
+                                                child: AutoSizeText(
+                                                  columnBudgetCategoriesRecord
+                                                      .categoryName,
+                                                  textAlign: TextAlign.start,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 75,
+                                          height: 36,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          alignment: AlignmentDirectional(0, 0),
+                                          child: Text(
+                                            formatNumber(
+                                              columnBudgetCategoriesRecord
+                                                  .allocatedAmount,
+                                              formatType: FormatType.custom,
+                                              currency: 'N',
+                                              format: '#,###,###',
+                                              locale: '',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
+                                          ),
+                                        ),
+                                        if ((columnBudgetCategoriesRecord
+                                                .categoryName) !=
+                                            'Uncategorized')
+                                          FlutterFlowIconButton(
+                                            borderColor: Colors.transparent,
+                                            borderRadius: 30,
+                                            borderWidth: 1,
+                                            buttonSize: 60,
+                                            icon: Icon(
+                                              Icons.edit_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 24,
+                                            ),
+                                            onPressed: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets,
+                                                    child:
+                                                        TaskCreateDialogCopyCopyWidget(
+                                                      budget:
+                                                          widget.createdBudget,
+                                                      categoryToEdit:
+                                                          columnBudgetCategoriesRecord,
+                                                      categoriesTotal: functions
+                                                          .calculateTotalInt(
+                                                              createBudgetCategoriesBudgetCategoriesRecordList
+                                                                  .toList(),
+                                                              widget
+                                                                  .createdBudget),
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            },
+                                          ),
+                                        if ((columnBudgetCategoriesRecord
+                                                .categoryName) !=
+                                            'Uncategorized')
+                                          FlutterFlowIconButton(
+                                            borderColor: Colors.transparent,
+                                            borderRadius: 30,
+                                            borderWidth: 1,
+                                            buttonSize: 60,
+                                            icon: Icon(
+                                              Icons.delete_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 24,
+                                            ),
+                                            onPressed: () async {
+                                              var confirmDialogResponse =
+                                                  await showDialog<bool>(
+                                                        context: context,
+                                                        builder:
+                                                            (alertDialogContext) {
+                                                          return AlertDialog(
+                                                            title: Text(
+                                                                'Are you sure?'),
+                                                            content: Text(
+                                                                'This cannot be undone'),
+                                                            actions: [
+                                                              TextButton(
+                                                                onPressed: () =>
+                                                                    Navigator.pop(
+                                                                        alertDialogContext,
+                                                                        false),
+                                                                child: Text(
+                                                                    'Cancel'),
+                                                              ),
+                                                              TextButton(
+                                                                onPressed: () =>
+                                                                    Navigator.pop(
+                                                                        alertDialogContext,
+                                                                        true),
+                                                                child: Text(
+                                                                    'Confirm'),
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
+                                                      ) ??
+                                                      false;
+                                              if (confirmDialogResponse) {
+                                                await columnBudgetCategoriesRecord
+                                                    .reference
+                                                    .delete();
+                                              } else {
+                                                return;
+                                              }
+                                            },
+                                          ),
+                                      ],
+                                    ),
+                                  );
+                                }),
+                              );
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  var confirmDialogResponse =
+                                      await showDialog<bool>(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text('Confirm create'),
+                                                content: Text('Are you done?'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext,
+                                                            false),
+                                                    child: Text('Cancel'),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext,
+                                                            true),
+                                                    child: Text('Confirm'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ) ??
+                                          false;
+                                  if (confirmDialogResponse) {
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            NavBarPage(initialPage: 'Budgets'),
+                                      ),
+                                    );
+                                  } else {
+                                    return;
+                                  }
+                                },
+                                text: 'Reset',
+                                options: FFButtonOptions(
+                                  width: 130,
+                                  height: 50,
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: Color(0xFF5D5B5B),
+                                      ),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: 12,
+                                ),
+                              ),
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  var confirmDialogResponse =
+                                      await showDialog<bool>(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text('Confirm create'),
+                                                content: Text('Are you done?'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext,
+                                                            false),
+                                                    child: Text('Cancel'),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext,
+                                                            true),
+                                                    child: Text('Confirm'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ) ??
+                                          false;
+                                  if (confirmDialogResponse) {
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            NavBarPage(initialPage: 'Budgets'),
+                                      ),
+                                    );
+
+                                    final budgetCategoriesUpdateData =
+                                        createBudgetCategoriesRecordData(
+                                      allocatedAmount: functions.calculateTotalInt(
+                                          createBudgetCategoriesBudgetCategoriesRecordList
+                                              .toList(),
+                                          widget.createdBudget),
+                                    );
+                                    await widget.uncategorized.reference
+                                        .update(budgetCategoriesUpdateData);
+                                  } else {
+                                    return;
+                                  }
+                                },
+                                text: 'Save',
+                                options: FFButtonOptions(
+                                  width: 130,
+                                  height: 50,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white,
+                                      ),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );
