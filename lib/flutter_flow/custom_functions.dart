@@ -9,7 +9,7 @@ import '../backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../auth/auth_util.dart';
 
-int calculateTotalInt(
+int calculateRemBudget(
   List<BudgetCategoriesRecord> categoriesToCalc,
   BudgetsRecord budget,
 ) {
@@ -82,12 +82,12 @@ int subInt(
   return value1 - value2;
 }
 
-int checkCreateCatTotal(
+int budgetRemMinusAmt(
   int amountFromWidget,
-  int currentCategoryTotal,
+  int budgetRemaining,
 ) {
   // Add your function code here!
-  return amountFromWidget + currentCategoryTotal;
+  return budgetRemaining - amountFromWidget;
 }
 
 int checkEditCatTotal(

@@ -158,7 +158,7 @@ class _TaskCreateDialogCopyWidgetState
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      if ((functions.checkCreateCatTotal(
+                      if ((functions.budgetRemMinusAmt(
                               int.parse(textController2.text),
                               widget.categoriesTotal)) >
                           (widget.budget.budgetAmount)) {
