@@ -59,139 +59,141 @@ class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
       ),
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-              child: Text(
-                widget.constCategory.categoryName,
-                textAlign: TextAlign.start,
-                style: FlutterFlowTheme.of(context).title3,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
-              child: TextFormField(
-                controller: textController,
-                obscureText: false,
-                decoration: InputDecoration(
-                  labelText: 'Amount',
-                  hintText: 'Enter Amount',
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      width: 1,
-                    ),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(4.0),
-                      topRight: Radius.circular(4.0),
-                    ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      width: 1,
-                    ),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(4.0),
-                      topRight: Radius.circular(4.0),
-                    ),
-                  ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                child: Text(
+                  widget.constCategory.categoryName,
+                  textAlign: TextAlign.start,
+                  style: FlutterFlowTheme.of(context).title3,
                 ),
-                style: FlutterFlowTheme.of(context).bodyText1,
-                keyboardType: TextInputType.number,
               ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FFButtonWidget(
-                    onPressed: () async {
-                      Navigator.pop(context);
-                    },
-                    text: 'Cancel',
-                    options: FFButtonOptions(
-                      width: 130,
-                      height: 40,
-                      color: FlutterFlowTheme.of(context).primaryBackground,
-                      textStyle:
-                          FlutterFlowTheme.of(context).subtitle2.override(
-                                fontFamily: 'Lexend Deca',
-                                color: Color(0xFF57636C),
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                child: TextFormField(
+                  controller: textController,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    labelText: 'Amount',
+                    hintText: 'Enter Amount',
+                    enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: Colors.transparent,
+                        color: FlutterFlowTheme.of(context).primaryText,
                         width: 1,
                       ),
-                      borderRadius: 40,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(4.0),
+                        topRight: Radius.circular(4.0),
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        width: 1,
+                      ),
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(4.0),
+                        topRight: Radius.circular(4.0),
+                      ),
                     ),
                   ),
-                  FFButtonWidget(
-                    onPressed: () async {
-                      if ((functions.budgetRemMinusAmt(
-                              int.parse(textController.text),
-                              widget.categoriesTotal)) <
-                          0) {
-                        final budgetCategoriesCreateData =
-                            createBudgetCategoriesRecordData(
-                          categoryName: widget.constCategory.categoryName,
-                          allocatedAmount: int.parse(textController.text),
-                          budgetOwner: currentUserReference,
-                          categoryBudget: widget.budget.reference,
-                          spentAmount: 0,
-                        );
-                        await BudgetCategoriesRecord.collection
-                            .doc()
-                            .set(budgetCategoriesCreateData);
+                  style: FlutterFlowTheme.of(context).bodyText1,
+                  keyboardType: TextInputType.number,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FFButtonWidget(
+                      onPressed: () async {
                         Navigator.pop(context);
-                      } else {
-                        await showDialog(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: Text('Budget Amount Exceeded'),
-                              content: Text(
-                                  'Please enter a value lower than the target budget, or increase the target budget value'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext),
-                                  child: Text('Okay'),
+                      },
+                      text: 'Cancel',
+                      options: FFButtonOptions(
+                        width: 130,
+                        height: 40,
+                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        textStyle:
+                            FlutterFlowTheme.of(context).subtitle2.override(
+                                  fontFamily: 'Lexend Deca',
+                                  color: Color(0xFF57636C),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
                                 ),
-                              ],
-                            );
-                          },
-                        );
-                      }
-                    },
-                    text: 'Save',
-                    options: FFButtonOptions(
-                      width: 130,
-                      height: 40,
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      textStyle:
-                          FlutterFlowTheme.of(context).subtitle2.override(
-                                fontFamily: 'Poppins',
-                                color: Colors.white,
-                              ),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: 40,
                       ),
-                      borderRadius: 12,
                     ),
-                  ),
-                ],
+                    FFButtonWidget(
+                      onPressed: () async {
+                        if ((functions.budgetRemMinusAmt(
+                                int.parse(textController.text),
+                                widget.budgetAllocatedRemaining)) <
+                            0) {
+                          final budgetCategoriesCreateData =
+                              createBudgetCategoriesRecordData(
+                            categoryName: widget.constCategory.categoryName,
+                            allocatedAmount: int.parse(textController.text),
+                            budgetOwner: currentUserReference,
+                            categoryBudget: widget.budget.reference,
+                            spentAmount: 0,
+                          );
+                          await BudgetCategoriesRecord.collection
+                              .doc()
+                              .set(budgetCategoriesCreateData);
+                          Navigator.pop(context);
+                        } else {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('Budget Amount Exceeded'),
+                                content: Text(
+                                    'Please enter a value lower than the target budget, or increase the target budget value'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Okay'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      },
+                      text: 'Save',
+                      options: FFButtonOptions(
+                        width: 130,
+                        height: 40,
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        textStyle:
+                            FlutterFlowTheme.of(context).subtitle2.override(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                ),
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: 12,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
