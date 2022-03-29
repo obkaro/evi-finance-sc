@@ -7,7 +7,7 @@ import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 
 // Begin custom action code
-Future deleteCategories(List<BudgetCategoriesRecord> createdCategories) async {
+void deleteCategories(List<BudgetCategoriesRecord> createdCategories) {
   // Add your function code here!
   for (var i = 0; i < createdCategories.length; i++) {
     while (createdCategories[i].categoryName != 'Uncategorized') {
