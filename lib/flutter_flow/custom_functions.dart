@@ -21,7 +21,7 @@ int calculateRemBudget(
     total += categoriesToCalc[i].allocatedAmount;
   }
   int remaining = budget.budgetAmount - total;
-
+  total = 0;
   return remaining;
 }
 
