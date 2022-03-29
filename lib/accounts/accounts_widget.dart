@@ -1,3 +1,4 @@
+import '../account_single/account_single_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
@@ -165,68 +166,81 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         10, 10, 10, 10),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              listViewAccountsRecord
-                                                  .accountName,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .title3,
+                                    child: InkWell(
+                                      onTap: () async {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                AccountSingleWidget(
+                                              account: listViewAccountsRecord,
                                             ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 10, 0, 0),
-                                              child: Text(
+                                          ),
+                                        );
+                                      },
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
                                                 listViewAccountsRecord
-                                                    .institutionName,
+                                                    .accountName,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .subtitle2,
+                                                        .title3,
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Text(
-                                              formatNumber(
-                                                listViewAccountsRecord
-                                                    .accountBalance,
-                                                formatType: FormatType.custom,
-                                                currency: '₦',
-                                                format: '#,###,###',
-                                                locale: '',
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 10, 0, 0),
+                                                child: Text(
+                                                  listViewAccountsRecord
+                                                      .institutionName,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .subtitle2,
+                                                ),
                                               ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .title3,
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 10, 0, 0),
-                                              child: Text(
-                                                listViewAccountsRecord
-                                                    .dataStatus,
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                formatNumber(
+                                                  listViewAccountsRecord
+                                                      .accountBalance,
+                                                  formatType: FormatType.custom,
+                                                  currency: '₦',
+                                                  format: '#,###,###',
+                                                  locale: '',
+                                                ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .subtitle2,
+                                                        .title3,
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 10, 0, 0),
+                                                child: Text(
+                                                  listViewAccountsRecord
+                                                      .dataStatus,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .subtitle2,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );
