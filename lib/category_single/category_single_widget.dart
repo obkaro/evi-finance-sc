@@ -84,9 +84,10 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                           radius: 112.5,
                           lineWidth: 24,
                           animation: true,
-                          progressColor: Color(0xFF1B998B),
-                          backgroundColor:
+                          progressColor:
                               FlutterFlowTheme.of(context).primaryColor,
+                          backgroundColor:
+                              FlutterFlowTheme.of(context).tertiaryColor,
                           startAngle: 0),
                     ),
                   ],
