@@ -387,6 +387,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                             authID: widget.account.authID,
                                           );
                                           _shouldSetState = true;
+                                          await actions.flutterMonoReauth(
+                                            'abcd',
+                                          );
                                           if (((dataSyncResponse?.statusCode ??
                                                   200)) ==
                                               400) {
