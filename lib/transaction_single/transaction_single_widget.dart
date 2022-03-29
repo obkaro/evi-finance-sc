@@ -120,7 +120,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        widget.transaction.transactionType,
+                                        columnAccountsRecord.institutionName,
                                         style:
                                             FlutterFlowTheme.of(context).title3,
                                       ),
