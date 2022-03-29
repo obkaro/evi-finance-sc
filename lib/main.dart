@@ -14,6 +14,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dashboard/dashboard_widget.dart';
 import 'transactions/transactions_widget.dart';
 import 'budgets/budgets_widget.dart';
+import 'category_single/category_single_widget.dart';
 import 'profile/profile_widget.dart';
 
 void main() async {
@@ -121,6 +122,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'Dashboard': DashboardWidget(),
       'Transactions': TransactionsWidget(),
       'Budgets': BudgetsWidget(),
+      'CategorySingle': CategorySingleWidget(),
       'Profile': ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
@@ -158,6 +160,14 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24,
             ),
             label: 'Transactions',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.compare_arrows_rounded,
+              size: 24,
+            ),
+            label: 'Home',
             tooltip: '',
           ),
           BottomNavigationBarItem(
