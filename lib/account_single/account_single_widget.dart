@@ -1,10 +1,10 @@
-import '../accounts/accounts_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../main.dart';
 import '../transaction_single/transaction_single_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
@@ -343,7 +343,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        AccountsWidget(),
+                                                        NavBarPage(
+                                                            initialPage:
+                                                                'Profile'),
                                                   ),
                                                 );
                                               } else {
