@@ -26,6 +26,8 @@ class AccountSingleWidget extends StatefulWidget {
 }
 
 class _AccountSingleWidgetState extends State<AccountSingleWidget> {
+  ApiCallResponse dataSyncResponse;
+  ApiCallResponse reauthCode;
   ApiCallResponse jsonResp;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -378,8 +380,58 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                         },
                                       ),
                                       FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                        onPressed: () async {
+                                          var _shouldSetState = false;
+                                          dataSyncResponse =
+                                              await DataSyncMonoCall.call(
+                                            authID: widget.account.authID,
+                                          );
+                                          _shouldSetState = true;
+                                          if (((dataSyncResponse?.statusCode ??
+                                                  200)) ==
+                                              400) {
+                                            reauthCode =
+                                                await ReauthMonoCall.call(
+                                              authID: widget.account.authID,
+                                            );
+                                            _shouldSetState = true;
+                                            await actions.flutterMonoReauth(
+                                              getJsonField(
+                                                (reauthCode?.jsonBody ?? ''),
+                                                r'''$.token''',
+                                              ).toString(),
+                                            );
+                                          } else {
+                                            if (((dataSyncResponse
+                                                        ?.statusCode ??
+                                                    200)) ==
+                                                500) {
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text('Sync Error'),
+                                                    content: Text(
+                                                        'Please wait 10 minutes, then try again'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            } else {
+                                              if (_shouldSetState)
+                                                setState(() {});
+                                              return;
+                                            }
+                                          }
+
+                                          if (_shouldSetState) setState(() {});
                                         },
                                         text: 'Refresh',
                                         icon: Icon(
