@@ -162,7 +162,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
