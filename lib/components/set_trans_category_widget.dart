@@ -69,7 +69,6 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
                       );
                       await widget.transaction.reference
                           .update(transactionsUpdateData);
-                      Navigator.pop(context);
 
                       final budgetCategoriesUpdateData = {
                         'spentAmount': FieldValue.increment(
@@ -85,6 +84,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
                             widget.transaction.transactionAmount),
                       };
                       await widget.recievedBudget.update(budgetsUpdateData);
+                      Navigator.pop(context);
                     },
                     child: ListTile(
                       title: Text(

@@ -1,4 +1,5 @@
 import '../backend/backend.dart';
+import '../category_single/category_single_widget.dart';
 import '../create_budget_categories/create_budget_categories_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -222,54 +223,70 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                       width: MediaQuery.of(context).size.width,
                                       height: 100,
                                       decoration: BoxDecoration(),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 10),
-                                                child: Text(
-                                                  columnBudgetCategoriesRecord
-                                                      .categoryName,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .title3,
-                                                ),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CategorySingleWidget(
+                                                category:
+                                                    columnBudgetCategoriesRecord,
                                               ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 10),
-                                                child: Text(
-                                                  '${functions.subInt(columnBudgetCategoriesRecord.allocatedAmount, columnBudgetCategoriesRecord.spentAmount).toString()} of ${columnBudgetCategoriesRecord.allocatedAmount.toString()} left',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1,
+                                            ),
+                                          );
+                                        },
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 0, 10),
+                                                  child: Text(
+                                                    columnBudgetCategoriesRecord
+                                                        .categoryName,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .title3,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          LinearPercentIndicator(
-                                            percent:
-                                                functions.calcCategoryPercent(
-                                                    columnBudgetCategoriesRecord),
-                                            width: 325,
-                                            lineHeight: 10,
-                                            animation: true,
-                                            progressColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryColor,
-                                            backgroundColor: Color(0xFF1B998B),
-                                          ),
-                                        ],
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 0, 10),
+                                                  child: Text(
+                                                    '${functions.subInt(columnBudgetCategoriesRecord.allocatedAmount, columnBudgetCategoriesRecord.spentAmount).toString()} of ${columnBudgetCategoriesRecord.allocatedAmount.toString()} left',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            LinearPercentIndicator(
+                                              percent:
+                                                  functions.calcCategoryPercent(
+                                                      columnBudgetCategoriesRecord),
+                                              width: 325,
+                                              lineHeight: 10,
+                                              animation: true,
+                                              progressColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              backgroundColor:
+                                                  Color(0xFF1B998B),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     );
                                   }),
