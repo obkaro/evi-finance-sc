@@ -37,7 +37,7 @@ class _MonoConnectState extends State<MonoConnect> {
   Widget build(BuildContext context) {
     return Container(
       child: MonoWebView(
-        apiKey: 'test_pk_8MSZBepR1V75hvZ2bPlu',
+        apiKey: 'live_pk_dNWUp8sYwG5mGXq3mFOT',
         onClosed: () {
           print('Modal closed');
         },
