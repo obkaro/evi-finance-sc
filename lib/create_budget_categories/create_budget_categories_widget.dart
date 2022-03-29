@@ -68,44 +68,13 @@ class _CreateBudgetCategoriesWidgetState
               children: [
                 InkWell(
                   onTap: () async {
-                    var confirmDialogResponse = await showDialog<bool>(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: Text('Are you sure?'),
-                              content: Text('Changes will not be saved'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext, false),
-                                  child: Text('Cancel'),
-                                ),
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext, true),
-                                  child: Text('Confirm'),
-                                ),
-                              ],
-                            );
-                          },
-                        ) ??
-                        false;
-                    if (confirmDialogResponse) {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              NavBarPage(initialPage: 'Budgets'),
-                        ),
-                      );
-                      await actions.deleteCategories(
-                        createBudgetCategoriesBudgetCategoriesRecordList
-                            .toList(),
-                      );
-                      await widget.createdBudget.reference.delete();
-                    } else {
-                      return;
-                    }
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            NavBarPage(initialPage: 'Budgets'),
+                      ),
+                    );
                   },
                   child: Icon(
                     Icons.arrow_back_rounded,
@@ -782,137 +751,204 @@ class _CreateBudgetCategoriesWidgetState
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  FFButtonWidget(
-                                    onPressed: () async {
-                                      var confirmDialogResponse =
-                                          await showDialog<bool>(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title:
-                                                        Text('Confirm Reset'),
-                                                    content: Text(
-                                                        'This will delete all categories'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext,
-                                                                false),
-                                                        child: Text('Cancel'),
-                                                      ),
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext,
-                                                                true),
-                                                        child: Text('Confirm'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              ) ??
-                                              false;
-                                      if (confirmDialogResponse) {
-                                        await actions.deleteCategories(
-                                          createBudgetCategoriesBudgetCategoriesRecordList
-                                              .toList(),
-                                        );
-                                      } else {
-                                        return;
-                                      }
-                                    },
-                                    text: 'Reset',
-                                    options: FFButtonOptions(
-                                      width: 130,
-                                      height: 50,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .subtitle2
-                                          .override(
-                                            fontFamily: 'Poppins',
-                                            color: Color(0xFF5D5B5B),
-                                          ),
-                                      elevation: 0,
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1,
-                                      ),
-                                      borderRadius: 12,
+                                  StreamBuilder<List<BudgetCategoriesRecord>>(
+                                    stream: queryBudgetCategoriesRecord(
+                                      queryBuilder: (budgetCategoriesRecord) =>
+                                          budgetCategoriesRecord
+                                              .where('budgetOwner',
+                                                  isEqualTo:
+                                                      currentUserReference)
+                                              .where('categoryBudget',
+                                                  isEqualTo: widget
+                                                      .createdBudget.reference)
+                                              .where('categoryName',
+                                                  isNotEqualTo:
+                                                      'Uncategorized'),
                                     ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: SpinKitFadingFour(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 50,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<BudgetCategoriesRecord>
+                                          buttonBudgetCategoriesRecordList =
+                                          snapshot.data;
+                                      return FFButtonWidget(
+                                        onPressed: () async {
+                                          var confirmDialogResponse =
+                                              await showDialog<bool>(
+                                                    context: context,
+                                                    builder:
+                                                        (alertDialogContext) {
+                                                      return AlertDialog(
+                                                        title: Text(
+                                                            'Confirm Reset'),
+                                                        content: Text(
+                                                            'This will delete all categories'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext,
+                                                                    false),
+                                                            child:
+                                                                Text('Cancel'),
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext,
+                                                                    true),
+                                                            child:
+                                                                Text('Confirm'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  ) ??
+                                                  false;
+                                          if (confirmDialogResponse) {
+                                            await actions.deleteCategories(
+                                              buttonBudgetCategoriesRecordList
+                                                  .toList(),
+                                            );
+                                          } else {
+                                            return;
+                                          }
+                                        },
+                                        text: 'Reset',
+                                        options: FFButtonOptions(
+                                          width: 130,
+                                          height: 50,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: Color(0xFF5D5B5B),
+                                                  ),
+                                          elevation: 0,
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius: 12,
+                                        ),
+                                      );
+                                    },
                                   ),
-                                  FFButtonWidget(
-                                    onPressed: () async {
-                                      var confirmDialogResponse =
-                                          await showDialog<bool>(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title:
-                                                        Text('Confirm create'),
-                                                    content:
-                                                        Text('Are you done?'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext,
-                                                                false),
-                                                        child: Text('Cancel'),
-                                                      ),
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext,
-                                                                true),
-                                                        child: Text('Confirm'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              ) ??
-                                              false;
-                                      if (confirmDialogResponse) {
-                                        final budgetCategoriesUpdateData =
-                                            createBudgetCategoriesRecordData(
-                                          allocatedAmount:
-                                              functions.calculateRemBudget(
-                                                  createBudgetCategoriesBudgetCategoriesRecordList
-                                                      .toList(),
-                                                  widget.createdBudget),
-                                        );
-                                        await widget.uncategorized.reference
-                                            .update(budgetCategoriesUpdateData);
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => NavBarPage(
-                                                initialPage: 'Budgets'),
-                                          ),
-                                        );
-                                      } else {
-                                        return;
-                                      }
-                                    },
-                                    text: 'Save',
-                                    options: FFButtonOptions(
-                                      width: 130,
-                                      height: 50,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .subtitle2
-                                          .override(
-                                            fontFamily: 'Poppins',
-                                            color: Colors.white,
-                                          ),
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1,
-                                      ),
-                                      borderRadius: 12,
+                                  StreamBuilder<List<BudgetCategoriesRecord>>(
+                                    stream: queryBudgetCategoriesRecord(
+                                      queryBuilder: (budgetCategoriesRecord) =>
+                                          budgetCategoriesRecord
+                                              .where('budgetOwner',
+                                                  isEqualTo:
+                                                      currentUserReference)
+                                              .where('categoryBudget',
+                                                  isEqualTo: widget
+                                                      .createdBudget.reference)
+                                              .where('categoryName',
+                                                  isEqualTo: 'Uncategorized'),
+                                      singleRecord: true,
                                     ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: SpinKitFadingFour(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 50,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<BudgetCategoriesRecord>
+                                          buttonBudgetCategoriesRecordList =
+                                          snapshot.data;
+                                      // Return an empty Container when the document does not exist.
+                                      if (snapshot.data.isEmpty) {
+                                        return Container();
+                                      }
+                                      final buttonBudgetCategoriesRecord =
+                                          buttonBudgetCategoriesRecordList
+                                                  .isNotEmpty
+                                              ? buttonBudgetCategoriesRecordList
+                                                  .first
+                                              : null;
+                                      return FFButtonWidget(
+                                        onPressed: () async {
+                                          final budgetCategoriesUpdateData =
+                                              createBudgetCategoriesRecordData(
+                                            allocatedAmount:
+                                                functions.calculateRemBudget(
+                                                    createBudgetCategoriesBudgetCategoriesRecordList
+                                                        .toList(),
+                                                    widget.createdBudget),
+                                          );
+                                          await buttonBudgetCategoriesRecord
+                                              .reference
+                                              .update(
+                                                  budgetCategoriesUpdateData);
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => NavBarPage(
+                                                  initialPage: 'Budgets'),
+                                            ),
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Saved',
+                                                style: TextStyle(),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  Color(0x00000000),
+                                            ),
+                                          );
+                                        },
+                                        text: 'Save',
+                                        options: FFButtonOptions(
+                                          width: 130,
+                                          height: 50,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: Colors.white,
+                                                  ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius: 12,
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ],
                               ),
