@@ -20,7 +20,7 @@ extension CustomContext on BuildContext {
       MediaQuery.of(this).size.width * percent;
 }
 
-Future flutterMono(
+Future flutterMonoReauth(
   BuildContext context,
 ) async =>
     showDialog(
