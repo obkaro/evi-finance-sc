@@ -33,7 +33,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
       key: scaffoldKey,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         title: Text(
           widget.category.categoryName,
           style: FlutterFlowTheme.of(context).title2.override(
