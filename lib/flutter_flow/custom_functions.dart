@@ -57,7 +57,7 @@ int calcRemBudget(BudgetsRecord budget) {
 
 double calcCategoryPercent(BudgetCategoriesRecord category) {
   // Add your function code here!
-  double percent = (category.spentAmount / category.allocatedAmount);
+  double percent = 1 - (category.spentAmount / category.allocatedAmount);
 
   while (percent > 1) {
     percent--;
