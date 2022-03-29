@@ -37,7 +37,7 @@ List<String> getCategoryNames(List<BudgetCategoriesRecord> listForNames) {
 
 double calcBudgetChart(BudgetsRecord budget) {
   // Add your function code here!
-  double budgPercent = 1 - (budget.budgetSpent / budget.budgetAmount);
+  double budgPercent = (budget.budgetSpent / budget.budgetAmount);
 
   while (budgPercent > 1) {
     budgPercent--;
