@@ -156,7 +156,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
           child: StreamBuilder<List<TransactionsRecord>>(
             stream: queryTransactionsRecord(
               queryBuilder: (transactionsRecord) => transactionsRecord
-                  .where('transactionOwner', isEqualTo: currentUserReference),
+                  .where('transactionOwner', isEqualTo: currentUserReference)
+                  .orderBy('trasactionDate', descending: true),
             ),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.

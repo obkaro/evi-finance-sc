@@ -1,6 +1,20 @@
 {
   "indexes": [
     {
+      "collectionGroup": "transactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "transactionOwner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "trasactionDate",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "budgetCategories",
       "queryScope": "COLLECTION",
       "fields": [
