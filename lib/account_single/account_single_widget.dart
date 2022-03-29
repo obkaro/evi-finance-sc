@@ -1,9 +1,12 @@
+import '../accounts/accounts_widget.dart';
 import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../transaction_single/transaction_single_widget.dart';
+import '../custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +26,7 @@ class AccountSingleWidget extends StatefulWidget {
 }
 
 class _AccountSingleWidgetState extends State<AccountSingleWidget> {
+  ApiCallResponse jsonResp;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -224,6 +228,37 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                             Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
+                                FFButtonWidget(
+                                  onPressed: () async {
+                                    jsonResp = await GetTransactionsCall.call(
+                                      authID: widget.account.authID,
+                                    );
+                                    await actions.writeTransactions(
+                                      (jsonResp?.jsonBody ?? ''),
+                                      widget.account,
+                                    );
+
+                                    setState(() {});
+                                  },
+                                  text: 'Init',
+                                  options: FFButtonOptions(
+                                    width: 130,
+                                    height: 40,
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          color: Colors.white,
+                                        ),
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    ),
+                                    borderRadius: 12,
+                                  ),
+                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 20, 0, 10),
@@ -232,32 +267,113 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
-                                        },
-                                        text: 'Unlink',
-                                        icon: Icon(
-                                          Icons.delete,
-                                          size: 15,
+                                      StreamBuilder<List<TransactionsRecord>>(
+                                        stream: queryTransactionsRecord(
+                                          queryBuilder: (transactionsRecord) =>
+                                              transactionsRecord.where(
+                                                  'account',
+                                                  isEqualTo:
+                                                      widget.account.reference),
                                         ),
-                                        options: FFButtonOptions(
-                                          width: 130,
-                                          height: 40,
-                                          color: Color(0xFFFF0003),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: Colors.white,
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50,
+                                                height: 50,
+                                                child: SpinKitFadingFour(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  size: 50,
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          List<TransactionsRecord>
+                                              buttonTransactionsRecordList =
+                                              snapshot.data;
+                                          return FFButtonWidget(
+                                            onPressed: () async {
+                                              var confirmDialogResponse =
+                                                  await showDialog<bool>(
+                                                        context: context,
+                                                        builder:
+                                                            (alertDialogContext) {
+                                                          return AlertDialog(
+                                                            title: Text(
+                                                                'Unlink and Delete Account'),
+                                                            content: Text(
+                                                                'This will delete all account associated account data and cannot be undone'),
+                                                            actions: [
+                                                              TextButton(
+                                                                onPressed: () =>
+                                                                    Navigator.pop(
+                                                                        alertDialogContext,
+                                                                        false),
+                                                                child: Text(
+                                                                    'Cancel'),
+                                                              ),
+                                                              TextButton(
+                                                                onPressed: () =>
+                                                                    Navigator.pop(
+                                                                        alertDialogContext,
+                                                                        true),
+                                                                child: Text(
+                                                                    'Confirm'),
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
+                                                      ) ??
+                                                      false;
+                                              if (confirmDialogResponse) {
+                                                await actions
+                                                    .deleteTransactions(
+                                                  buttonTransactionsRecordList
+                                                      .toList(),
+                                                );
+                                                await UnlinkMonoCall.call(
+                                                  authID: widget.account.authID,
+                                                );
+                                                await widget.account.reference
+                                                    .delete();
+                                                await Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        AccountsWidget(),
                                                   ),
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1,
-                                          ),
-                                          borderRadius: 12,
-                                        ),
+                                                );
+                                              } else {
+                                                return;
+                                              }
+                                            },
+                                            text: 'Unlink',
+                                            icon: Icon(
+                                              Icons.delete,
+                                              size: 15,
+                                            ),
+                                            options: FFButtonOptions(
+                                              width: 130,
+                                              height: 40,
+                                              color: Color(0xFFFF0003),
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                      ),
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1,
+                                              ),
+                                              borderRadius: 12,
+                                            ),
+                                          );
+                                        },
                                       ),
                                       FFButtonWidget(
                                         onPressed: () {

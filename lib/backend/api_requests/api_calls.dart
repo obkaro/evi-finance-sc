@@ -111,3 +111,22 @@ class GetTransactionsCall {
     );
   }
 }
+
+class UnlinkMonoCall {
+  static Future<ApiCallResponse> call({
+    String authID = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'unlinkMono',
+      apiUrl: 'https://api.withmono.com/accounts/${authID}/unlink',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'mono-sec-key': 'test_sk_HJ0AmMz9uE0T6wYUioPM',
+      },
+      params: {},
+      bodyType: BodyType.NONE,
+      returnBody: true,
+    );
+  }
+}
