@@ -113,10 +113,11 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                     radius: 112.5,
                                     lineWidth: 24,
                                     animation: true,
-                                    progressColor: Color(0xFF1B998B),
+                                    progressColor: FlutterFlowTheme.of(context)
+                                        .primaryColor,
                                     backgroundColor:
                                         FlutterFlowTheme.of(context)
-                                            .primaryColor,
+                                            .tertiaryColor,
                                     center: Text(
                                       '${functions.calcRemBudget(widget.budget).toString()} Left',
                                       style: FlutterFlowTheme.of(context)
