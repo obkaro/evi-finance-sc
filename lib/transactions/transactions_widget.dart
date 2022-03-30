@@ -1,14 +1,10 @@
 import '../add_transaction/add_transaction_widget.dart';
 import '../auth/auth_util.dart';
-import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
-import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../transaction_single/transaction_single_widget.dart';
-import '../custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,7 +17,6 @@ class TransactionsWidget extends StatefulWidget {
 }
 
 class _TransactionsWidgetState extends State<TransactionsWidget> {
-  ApiCallResponse transactionJsonResponse;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -39,61 +34,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                 fontSize: 22,
               ),
         ),
-        actions: [
-          StreamBuilder<List<AccountsRecord>>(
-            stream: queryAccountsRecord(
-              queryBuilder: (accountsRecord) => accountsRecord.where('authID',
-                  isEqualTo: '6233e7b007436f2f60484689'),
-              singleRecord: true,
-            ),
-            builder: (context, snapshot) {
-              // Customize what your widget looks like when it's loading.
-              if (!snapshot.hasData) {
-                return Center(
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: SpinKitFadingFour(
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 50,
-                    ),
-                  ),
-                );
-              }
-              List<AccountsRecord> iconButtonAccountsRecordList = snapshot.data;
-              // Return an empty Container when the document does not exist.
-              if (snapshot.data.isEmpty) {
-                return Container();
-              }
-              final iconButtonAccountsRecord =
-                  iconButtonAccountsRecordList.isNotEmpty
-                      ? iconButtonAccountsRecordList.first
-                      : null;
-              return FlutterFlowIconButton(
-                borderColor: Colors.transparent,
-                borderRadius: 30,
-                borderWidth: 1,
-                buttonSize: 60,
-                icon: Icon(
-                  Icons.refresh_rounded,
-                  color: Colors.white,
-                  size: 32,
-                ),
-                onPressed: () async {
-                  transactionJsonResponse = await GetTransactionsCall.call(
-                    authID: '6233e7b007436f2f60484689',
-                  );
-                  await actions.writeTransactions(
-                    (transactionJsonResponse?.jsonBody ?? ''),
-                    iconButtonAccountsRecord,
-                  );
-
-                  setState(() {});
-                },
-              );
-            },
-          ),
-        ],
+        actions: [],
         centerTitle: false,
         elevation: 2,
       ),
@@ -210,26 +151,6 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 10, 0),
-                                      child: Container(
-                                        width: 50,
-                                        height: 50,
-                                        decoration: BoxDecoration(),
-                                        child: Container(
-                                          width: 120,
-                                          height: 120,
-                                          clipBehavior: Clip.antiAlias,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Image.asset(
-                                            'assets/images/evi-app-icon.png',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
                                     Expanded(
                                       child: Container(
                                         width: 100,

@@ -133,6 +133,13 @@ class _$AccountsRecordSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.reauthRequired;
+    if (value != null) {
+      result
+        ..add('reauthRequired')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -222,6 +229,10 @@ class _$AccountsRecordSerializer
           result.isSelectedT = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
+        case 'reauthRequired':
+          result.reauthRequired = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -269,6 +280,8 @@ class _$AccountsRecord extends AccountsRecord {
   @override
   final bool isSelectedT;
   @override
+  final bool reauthRequired;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$AccountsRecord([void Function(AccountsRecordBuilder) updates]) =>
@@ -291,6 +304,7 @@ class _$AccountsRecord extends AccountsRecord {
       this.dateLinked,
       this.accountLogo,
       this.isSelectedT,
+      this.reauthRequired,
       this.reference})
       : super._();
 
@@ -322,6 +336,7 @@ class _$AccountsRecord extends AccountsRecord {
         dateLinked == other.dateLinked &&
         accountLogo == other.accountLogo &&
         isSelectedT == other.isSelectedT &&
+        reauthRequired == other.reauthRequired &&
         reference == other.reference;
   }
 
@@ -344,28 +359,30 @@ class _$AccountsRecord extends AccountsRecord {
                                                             $jc(
                                                                 $jc(
                                                                     $jc(
-                                                                        0,
-                                                                        accountName
+                                                                        $jc(
+                                                                            0,
+                                                                            accountName
+                                                                                .hashCode),
+                                                                        accountOwner
                                                                             .hashCode),
-                                                                    accountOwner
+                                                                    dataStatus
                                                                         .hashCode),
-                                                                dataStatus
+                                                                accountType
                                                                     .hashCode),
-                                                            accountType
+                                                            institutionType
                                                                 .hashCode),
-                                                        institutionType
-                                                            .hashCode),
-                                                    authMethod.hashCode),
-                                                currency.hashCode),
-                                            authID.hashCode),
-                                        institutionName.hashCode),
-                                    accountBalance.hashCode),
-                                bankCode.hashCode),
-                            accountNumber.hashCode),
-                        bvn.hashCode),
-                    dateLinked.hashCode),
-                accountLogo.hashCode),
-            isSelectedT.hashCode),
+                                                        authMethod.hashCode),
+                                                    currency.hashCode),
+                                                authID.hashCode),
+                                            institutionName.hashCode),
+                                        accountBalance.hashCode),
+                                    bankCode.hashCode),
+                                accountNumber.hashCode),
+                            bvn.hashCode),
+                        dateLinked.hashCode),
+                    accountLogo.hashCode),
+                isSelectedT.hashCode),
+            reauthRequired.hashCode),
         reference.hashCode));
   }
 
@@ -388,6 +405,7 @@ class _$AccountsRecord extends AccountsRecord {
           ..add('dateLinked', dateLinked)
           ..add('accountLogo', accountLogo)
           ..add('isSelectedT', isSelectedT)
+          ..add('reauthRequired', reauthRequired)
           ..add('reference', reference))
         .toString();
   }
@@ -466,6 +484,11 @@ class AccountsRecordBuilder
   bool get isSelectedT => _$this._isSelectedT;
   set isSelectedT(bool isSelectedT) => _$this._isSelectedT = isSelectedT;
 
+  bool _reauthRequired;
+  bool get reauthRequired => _$this._reauthRequired;
+  set reauthRequired(bool reauthRequired) =>
+      _$this._reauthRequired = reauthRequired;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -494,6 +517,7 @@ class AccountsRecordBuilder
       _dateLinked = $v.dateLinked;
       _accountLogo = $v.accountLogo;
       _isSelectedT = $v.isSelectedT;
+      _reauthRequired = $v.reauthRequired;
       _reference = $v.reference;
       _$v = null;
     }
@@ -531,6 +555,7 @@ class AccountsRecordBuilder
             dateLinked: dateLinked,
             accountLogo: accountLogo,
             isSelectedT: isSelectedT,
+            reauthRequired: reauthRequired,
             reference: reference);
     replace(_$result);
     return _$result;

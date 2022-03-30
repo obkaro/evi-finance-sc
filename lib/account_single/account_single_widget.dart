@@ -9,6 +9,7 @@ import '../transaction_single/transaction_single_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,9 +27,12 @@ class AccountSingleWidget extends StatefulWidget {
 }
 
 class _AccountSingleWidgetState extends State<AccountSingleWidget> {
+  ApiCallResponse accountRespons;
+  ApiCallResponse accountResponse;
   ApiCallResponse dataSyncResponse;
   ApiCallResponse reauthCode;
-  ApiCallResponse jsonResp;
+  ApiCallResponse transactionJsonResponse;
+  ApiCallResponse transactionJsonRespons;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -230,37 +234,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                             Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                FFButtonWidget(
-                                  onPressed: () async {
-                                    jsonResp = await GetTransactionsCall.call(
-                                      authID: widget.account.authID,
-                                    );
-                                    await actions.writeTransactions(
-                                      (jsonResp?.jsonBody ?? ''),
-                                      widget.account,
-                                    );
-
-                                    setState(() {});
-                                  },
-                                  text: 'Init',
-                                  options: FFButtonOptions(
-                                    width: 130,
-                                    height: 40,
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          color: Colors.white,
-                                        ),
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1,
-                                    ),
-                                    borderRadius: 12,
-                                  ),
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 20, 0, 10),
@@ -379,86 +352,214 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                           );
                                         },
                                       ),
-                                      FFButtonWidget(
-                                        onPressed: () async {
-                                          var _shouldSetState = false;
-                                          dataSyncResponse =
-                                              await DataSyncMonoCall.call(
-                                            authID: widget.account.authID,
-                                          );
-                                          _shouldSetState = true;
-                                          // await actions.flutterMonoReauth(
-                                          //   'abcd',
-                                          // );
-                                          if (((dataSyncResponse?.statusCode ??
-                                                  200)) ==
-                                              400) {
-                                            reauthCode =
-                                                await ReauthMonoCall.call(
-                                              authID: widget.account.authID,
+                                      StreamBuilder<List<TransactionsRecord>>(
+                                        stream: queryTransactionsRecord(
+                                          queryBuilder: (transactionsRecord) =>
+                                              transactionsRecord.where(
+                                                  'account',
+                                                  isEqualTo:
+                                                      widget.account.reference),
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50,
+                                                height: 50,
+                                                child: SpinKitFadingFour(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  size: 50,
+                                                ),
+                                              ),
                                             );
-                                            _shouldSetState = true;
-                                            await actions.flutterMonoReauth(
-                                                getJsonField(
-                                                  (reauthCode?.jsonBody ?? ''),
-                                                  r'''$.token''',
-                                                ).toString(),
-                                                context);
-                                          } else {
-                                            if (((dataSyncResponse
-                                                        ?.statusCode ??
-                                                    200)) ==
-                                                500) {
-                                              await showDialog(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title: Text('Sync Error'),
-                                                    content: Text(
-                                                        'Please wait 10 minutes, then try again'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext),
-                                                        child: Text('Ok'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                            } else {
-                                              if (_shouldSetState)
-                                                setState(() {});
-                                              return;
-                                            }
                                           }
+                                          List<TransactionsRecord>
+                                              buttonTransactionsRecordList =
+                                              snapshot.data;
+                                          return FFButtonWidget(
+                                            onPressed: () async {
+                                              dataSyncResponse =
+                                                  await DataSyncMonoCall.call(
+                                                authID: widget.account.authID,
+                                              );
+                                              if (((dataSyncResponse
+                                                          ?.statusCode ??
+                                                      200)) ==
+                                                  400) {
+                                                reauthCode =
+                                                    await ReauthMonoCall.call(
+                                                  authID: widget.account.authID,
+                                                );
+                                                await actions.flutterMonoReauth(
+                                                    getJsonField(
+                                                      (reauthCode?.jsonBody ??
+                                                          ''),
+                                                      r'''$.token''',
+                                                    ).toString(),
+                                                    context);
+                                                accountResponse =
+                                                    await GetAccountInfoCall
+                                                        .call(
+                                                  authID: widget.account.authID,
+                                                );
+                                                transactionJsonResponse =
+                                                    await GetTransactionsCall
+                                                        .call(
+                                                  authID: widget.account.authID,
+                                                );
+                                                await actions.writeTransactions(
+                                                  (transactionJsonResponse
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                  widget.account,
+                                                  buttonTransactionsRecordList
+                                                      .toList(),
+                                                );
 
-                                          if (_shouldSetState) setState(() {});
-                                        },
-                                        text: 'Refresh',
-                                        icon: Icon(
-                                          Icons.refresh_rounded,
-                                          size: 15,
-                                        ),
-                                        options: FFButtonOptions(
-                                          width: 130,
-                                          height: 40,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: Colors.white,
+                                                final accountsUpdateData =
+                                                    createAccountsRecordData(
+                                                  dataStatus: getJsonField(
+                                                    (accountResponse
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$.meta.data_status''',
+                                                  ).toString(),
+                                                  accountBalance: getJsonField(
+                                                    (accountResponse
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$.account.balance''',
                                                   ),
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1,
-                                          ),
-                                          borderRadius: 12,
-                                        ),
+                                                );
+                                                await widget.account.reference
+                                                    .update(accountsUpdateData);
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'Synchronization Successful',
+                                                      style: TextStyle(),
+                                                    ),
+                                                    duration: Duration(
+                                                        milliseconds: 4000),
+                                                    backgroundColor:
+                                                        Color(0x00000000),
+                                                  ),
+                                                );
+                                              } else {
+                                                if (((dataSyncResponse
+                                                            ?.statusCode ??
+                                                        200)) ==
+                                                    500) {
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (alertDialogContext) {
+                                                      return AlertDialog(
+                                                        title:
+                                                            Text('Sync Error'),
+                                                        content: Text(
+                                                            'Please wait 10 minutes, then try again'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext),
+                                                            child: Text('Ok'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                } else {
+                                                  accountRespons =
+                                                      await GetAccountInfoCall
+                                                          .call(
+                                                    authID:
+                                                        widget.account.authID,
+                                                  );
+
+                                                  final accountsUpdateData =
+                                                      createAccountsRecordData(
+                                                    dataStatus: getJsonField(
+                                                      (accountRespons
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                      r'''$.meta.data_status''',
+                                                    ).toString(),
+                                                    accountBalance:
+                                                        getJsonField(
+                                                      (accountRespons
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                      r'''$.account.balance''',
+                                                    ),
+                                                  );
+                                                  await widget.account.reference
+                                                      .update(
+                                                          accountsUpdateData);
+                                                  transactionJsonRespons =
+                                                      await GetTransactionsCall
+                                                          .call(
+                                                    authID:
+                                                        widget.account.authID,
+                                                  );
+                                                  await actions
+                                                      .writeTransactions(
+                                                    (transactionJsonRespons
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    widget.account,
+                                                    buttonTransactionsRecordList
+                                                        .toList(),
+                                                  );
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                        'Synchronization Successful',
+                                                        style: TextStyle(),
+                                                      ),
+                                                      duration: Duration(
+                                                          milliseconds: 4000),
+                                                      backgroundColor:
+                                                          Color(0x00000000),
+                                                    ),
+                                                  );
+                                                }
+                                              }
+
+                                              setState(() {});
+                                            },
+                                            text: 'Refresh',
+                                            icon: Icon(
+                                              Icons.refresh_rounded,
+                                              size: 15,
+                                            ),
+                                            options: FFButtonOptions(
+                                              width: 130,
+                                              height: 40,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                      ),
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1,
+                                              ),
+                                              borderRadius: 12,
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ],
                                   ),
@@ -536,20 +637,16 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                     .fromSTEB(0, 10, 0, 10),
                                                 child: InkWell(
                                                   onTap: () async {
-                                                    await actions
-                                                        .flutterMonoReauth(
-                                                            'abcd', context);
-
-                                                    // await Navigator.push(
-                                                    //   context,
-                                                    //   MaterialPageRoute(
-                                                    //     builder: (context) =>
-                                                    //         TransactionSingleWidget(
-                                                    //       transaction:
-                                                    //           columnTransactionsRecord,
-                                                    //     ),
-                                                    //   ),
-                                                    // );
+                                                    await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            TransactionSingleWidget(
+                                                          transaction:
+                                                              columnTransactionsRecord,
+                                                        ),
+                                                      ),
+                                                    );
                                                   },
                                                   child: Row(
                                                     mainAxisSize:
