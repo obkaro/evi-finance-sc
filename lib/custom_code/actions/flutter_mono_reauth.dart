@@ -1,5 +1,5 @@
 // Automatic FlutterFlow imports
-import 'package:mono_flutter/mono_html.dart';
+//import 'package:mono_flutter/mono_html.dart';
 
 import '../../backend/backend.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
@@ -77,5 +77,3 @@ Future flutterMonoReauth(
                 ))
               ],
             ));
-
-class Amala extends MonoHtml {}
