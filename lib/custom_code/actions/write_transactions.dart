@@ -6,11 +6,14 @@ import 'index.dart'; // Imports other custom actions
 import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom action code
+// Begin custom action code
 import 'package:evi_finance/auth/auth_util.dart';
 
 Future<List<DocumentReference>> writeTransactions(
-    dynamic transactionJsonResponse,
-    AccountsRecord buttonAccountsRecord) async {
+  dynamic transactionJsonResponse,
+  AccountsRecord buttonAccountsRecord,
+  List<TransactionsRecord> accountTransactions,
+) async {
   // Add your function code here!
 
   print(transactionJsonResponse);
@@ -20,22 +23,25 @@ Future<List<DocumentReference>> writeTransactions(
 
   print(transaction.data[1].narration);
 
-  for (var i = 0; i < transaction.data.length; i++) {
-    var currentTransaction = transaction.data[i];
+  final List<String> existingIDS =
+      accountTransactions.map((e) => e.transactionMonoID).toList();
 
-    final transactionsCreateData = createTransactionsRecordData(
-      account: buttonAccountsRecord.reference,
-      trasactionDate: getCurrentTimestamp,
-      //monoCategory: transaction.data[i].,
-      transactionOwner: currentUserReference,
-      balanceAfter: transaction.data[i].balance,
-      transactionAmount: transaction.data[i].amount,
-      transactionMonoID: transaction.data[i].id,
-      transactionType: transaction.data[i].type,
-      transactionNarration: transaction.data[i].narration,
-      monoCategory: transaction.data[i].monoCategory,
-    );
-    await TransactionsRecord.collection.doc().set(transactionsCreateData);
+  for (var i = 0; i < transaction.data.length; i++) {
+    if (!existingIDS.contains(transaction.data[i].id)) {
+      final transactionsCreateData = createTransactionsRecordData(
+        account: buttonAccountsRecord.reference,
+        trasactionDate: getCurrentTimestamp,
+        //monoCategory: transaction.data[i].,
+        transactionOwner: currentUserReference,
+        balanceAfter: transaction.data[i].balance,
+        transactionAmount: transaction.data[i].amount,
+        transactionMonoID: transaction.data[i].id,
+        transactionType: transaction.data[i].type,
+        transactionNarration: transaction.data[i].narration,
+        monoCategory: transaction.data[i].monoCategory,
+      );
+      await TransactionsRecord.collection.doc().set(transactionsCreateData);
+    }
   }
 }
 
