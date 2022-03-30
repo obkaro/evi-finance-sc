@@ -84,6 +84,14 @@ class _$TransactionsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.linkedCategory;
+    if (value != null) {
+      result
+        ..add('linkedCategory')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType(Object)])));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -147,6 +155,12 @@ class _$TransactionsRecordSerializer
           result.transactionNarration = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'linkedCategory':
+          result.linkedCategory = serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      DocumentReference, const [const FullType(Object)]))
+              as DocumentReference<Object>;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -180,6 +194,8 @@ class _$TransactionsRecord extends TransactionsRecord {
   @override
   final String transactionNarration;
   @override
+  final DocumentReference<Object> linkedCategory;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$TransactionsRecord(
@@ -196,6 +212,7 @@ class _$TransactionsRecord extends TransactionsRecord {
       this.transactionAmount,
       this.transactionType,
       this.transactionNarration,
+      this.linkedCategory,
       this.reference})
       : super._();
 
@@ -221,6 +238,7 @@ class _$TransactionsRecord extends TransactionsRecord {
         transactionAmount == other.transactionAmount &&
         transactionType == other.transactionType &&
         transactionNarration == other.transactionNarration &&
+        linkedCategory == other.linkedCategory &&
         reference == other.reference;
   }
 
@@ -234,15 +252,17 @@ class _$TransactionsRecord extends TransactionsRecord {
                         $jc(
                             $jc(
                                 $jc(
-                                    $jc($jc(0, trasactionDate.hashCode),
-                                        account.hashCode),
-                                    monoCategory.hashCode),
-                                transactionOwner.hashCode),
-                            balanceAfter.hashCode),
-                        transactionMonoID.hashCode),
-                    transactionAmount.hashCode),
-                transactionType.hashCode),
-            transactionNarration.hashCode),
+                                    $jc(
+                                        $jc($jc(0, trasactionDate.hashCode),
+                                            account.hashCode),
+                                        monoCategory.hashCode),
+                                    transactionOwner.hashCode),
+                                balanceAfter.hashCode),
+                            transactionMonoID.hashCode),
+                        transactionAmount.hashCode),
+                    transactionType.hashCode),
+                transactionNarration.hashCode),
+            linkedCategory.hashCode),
         reference.hashCode));
   }
 
@@ -258,6 +278,7 @@ class _$TransactionsRecord extends TransactionsRecord {
           ..add('transactionAmount', transactionAmount)
           ..add('transactionType', transactionType)
           ..add('transactionNarration', transactionNarration)
+          ..add('linkedCategory', linkedCategory)
           ..add('reference', reference))
         .toString();
   }
@@ -309,6 +330,11 @@ class TransactionsRecordBuilder
   set transactionNarration(String transactionNarration) =>
       _$this._transactionNarration = transactionNarration;
 
+  DocumentReference<Object> _linkedCategory;
+  DocumentReference<Object> get linkedCategory => _$this._linkedCategory;
+  set linkedCategory(DocumentReference<Object> linkedCategory) =>
+      _$this._linkedCategory = linkedCategory;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -330,6 +356,7 @@ class TransactionsRecordBuilder
       _transactionAmount = $v.transactionAmount;
       _transactionType = $v.transactionType;
       _transactionNarration = $v.transactionNarration;
+      _linkedCategory = $v.linkedCategory;
       _reference = $v.reference;
       _$v = null;
     }
@@ -360,6 +387,7 @@ class TransactionsRecordBuilder
             transactionAmount: transactionAmount,
             transactionType: transactionType,
             transactionNarration: transactionNarration,
+            linkedCategory: linkedCategory,
             reference: reference);
     replace(_$result);
     return _$result;

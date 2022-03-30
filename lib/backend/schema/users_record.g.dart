@@ -99,6 +99,22 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
               const FullType(DocumentReference, const [const FullType(Object)])
             ])));
     }
+    value = object.activeBudget;
+    if (value != null) {
+      result
+        ..add('activeBudget')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType(Object)])));
+    }
+    value = object.defaultAccount;
+    if (value != null) {
+      result
+        ..add('defaultAccount')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType(Object)])));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -171,6 +187,18 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
                     DocumentReference, const [const FullType(Object)])
               ])) as BuiltList<Object>);
           break;
+        case 'activeBudget':
+          result.activeBudget = serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      DocumentReference, const [const FullType(Object)]))
+              as DocumentReference<Object>;
+          break;
+        case 'defaultAccount':
+          result.defaultAccount = serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      DocumentReference, const [const FullType(Object)]))
+              as DocumentReference<Object>;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -208,6 +236,10 @@ class _$UsersRecord extends UsersRecord {
   @override
   final BuiltList<DocumentReference<Object>> budgetList;
   @override
+  final DocumentReference<Object> activeBudget;
+  @override
+  final DocumentReference<Object> defaultAccount;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder) updates]) =>
@@ -225,6 +257,8 @@ class _$UsersRecord extends UsersRecord {
       this.tempAuthCode,
       this.accountsList,
       this.budgetList,
+      this.activeBudget,
+      this.defaultAccount,
       this.reference})
       : super._();
 
@@ -250,6 +284,8 @@ class _$UsersRecord extends UsersRecord {
         tempAuthCode == other.tempAuthCode &&
         accountsList == other.accountsList &&
         budgetList == other.budgetList &&
+        activeBudget == other.activeBudget &&
+        defaultAccount == other.defaultAccount &&
         reference == other.reference;
   }
 
@@ -265,17 +301,21 @@ class _$UsersRecord extends UsersRecord {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc($jc(0, email.hashCode),
-                                                displayName.hashCode),
-                                            photoUrl.hashCode),
-                                        uid.hashCode),
-                                    createdTime.hashCode),
-                                phoneNumber.hashCode),
-                            age.hashCode),
-                        income.hashCode),
-                    tempAuthCode.hashCode),
-                accountsList.hashCode),
-            budgetList.hashCode),
+                                            $jc(
+                                                $jc(
+                                                    $jc($jc(0, email.hashCode),
+                                                        displayName.hashCode),
+                                                    photoUrl.hashCode),
+                                                uid.hashCode),
+                                            createdTime.hashCode),
+                                        phoneNumber.hashCode),
+                                    age.hashCode),
+                                income.hashCode),
+                            tempAuthCode.hashCode),
+                        accountsList.hashCode),
+                    budgetList.hashCode),
+                activeBudget.hashCode),
+            defaultAccount.hashCode),
         reference.hashCode));
   }
 
@@ -293,6 +333,8 @@ class _$UsersRecord extends UsersRecord {
           ..add('tempAuthCode', tempAuthCode)
           ..add('accountsList', accountsList)
           ..add('budgetList', budgetList)
+          ..add('activeBudget', activeBudget)
+          ..add('defaultAccount', defaultAccount)
           ..add('reference', reference))
         .toString();
   }
@@ -349,6 +391,16 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   set budgetList(ListBuilder<DocumentReference<Object>> budgetList) =>
       _$this._budgetList = budgetList;
 
+  DocumentReference<Object> _activeBudget;
+  DocumentReference<Object> get activeBudget => _$this._activeBudget;
+  set activeBudget(DocumentReference<Object> activeBudget) =>
+      _$this._activeBudget = activeBudget;
+
+  DocumentReference<Object> _defaultAccount;
+  DocumentReference<Object> get defaultAccount => _$this._defaultAccount;
+  set defaultAccount(DocumentReference<Object> defaultAccount) =>
+      _$this._defaultAccount = defaultAccount;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -372,6 +424,8 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _tempAuthCode = $v.tempAuthCode;
       _accountsList = $v.accountsList?.toBuilder();
       _budgetList = $v.budgetList?.toBuilder();
+      _activeBudget = $v.activeBudget;
+      _defaultAccount = $v.defaultAccount;
       _reference = $v.reference;
       _$v = null;
     }
@@ -406,6 +460,8 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
               tempAuthCode: tempAuthCode,
               accountsList: _accountsList?.build(),
               budgetList: _budgetList?.build(),
+              activeBudget: activeBudget,
+              defaultAccount: defaultAccount,
               reference: reference);
     } catch (_) {
       String _$failedField;

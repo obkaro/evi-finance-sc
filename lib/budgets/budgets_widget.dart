@@ -1,9 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../budget_single/budget_single_widget.dart';
 import '../create_budget/create_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -77,62 +79,77 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                 );
               }
               List<BudgetsRecord> columnBudgetsRecordList = snapshot.data;
-              return Column(
-                mainAxisSize: MainAxisSize.max,
-                children: List.generate(columnBudgetsRecordList.length,
-                    (columnIndex) {
-                  final columnBudgetsRecord =
-                      columnBudgetsRecordList[columnIndex];
-                  return Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEEEEEE),
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 5,
-                            color: Color(0x41241B1F),
-                            spreadRadius: 1,
-                          )
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: List.generate(columnBudgetsRecordList.length,
+                      (columnIndex) {
+                    final columnBudgetsRecord =
+                        columnBudgetsRecordList[columnIndex];
+                    return Material(
+                      color: Colors.transparent,
+                      elevation: 1,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                        ),
+                        alignment: AlignmentDirectional(0, 0),
+                        child: InkWell(
+                          onTap: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BudgetSingleWidget(
+                                  budget: columnBudgetsRecord,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Slidable(
+                            actionPane: const SlidableScrollActionPane(),
+                            secondaryActions: [
+                              IconSlideAction(
+                                caption: 'Delete',
+                                color: Color(0xFFFF0003),
+                                icon: Icons.delete_rounded,
+                                onTap: () async {
+                                  await columnBudgetsRecord.reference.delete();
+                                },
+                              ),
+                            ],
+                            child: ListTile(
+                              title: Text(
                                 columnBudgetsRecord.budgetName,
                                 style: FlutterFlowTheme.of(context).title3,
                               ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
+                              subtitle: Text(
                                 formatNumber(
                                   columnBudgetsRecord.budgetAmount,
                                   formatType: FormatType.custom,
-                                  currency: '',
-                                  format: '',
+                                  currency: 'N',
+                                  format: '#,###,###',
                                   locale: '',
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyText1,
+                                style: FlutterFlowTheme.of(context).subtitle2,
                               ),
-                            ],
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                color: Color(0xFF303030),
+                                size: 20,
+                              ),
+                              tileColor: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              dense: false,
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                  20, 10, 20, 10),
+                            ),
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  );
-                }),
+                    );
+                  }),
+                ),
               );
             },
           ),

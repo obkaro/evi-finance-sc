@@ -1,6 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../create_budget_copy/create_budget_copy_widget.dart';
+import '../create_budget_categories/create_budget_categories_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -18,6 +18,7 @@ class CreateBudgetWidget extends StatefulWidget {
 }
 
 class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
+  BudgetCategoriesRecord uncategorized;
   BudgetsRecord createdBudget;
   DateTime datePicked1;
   DateTime datePicked2;
@@ -59,267 +60,280 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 20),
-                  child: Form(
+            padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Form(
                     key: formKey,
                     autovalidateMode: AutovalidateMode.disabled,
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        TextFormField(
-                          controller: textController1,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Budget Name',
-                            hintText: 'Input budget name',
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1,
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                          child: TextFormField(
+                            controller: textController1,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'Budget Name',
+                              hintText: 'Input budget name',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
                               ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                             ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
+                            style: FlutterFlowTheme.of(context).bodyText1,
                           ),
-                          style: FlutterFlowTheme.of(context).bodyText1,
-                        ),
-                        TextFormField(
-                          controller: textController2,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Description',
-                            hintText: 'Input budget description',
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            contentPadding:
-                                EdgeInsetsDirectional.fromSTEB(0, 30, 0, 40),
-                          ),
-                          style: FlutterFlowTheme.of(context).bodyText1,
-                          keyboardType: TextInputType.multiline,
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                          child: TextFormField(
+                            controller: textController2,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'Description',
+                              hintText: 'Input budget description',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            style: FlutterFlowTheme.of(context).bodyText1,
+                            maxLines: 4,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: TextFormField(
                             controller: textController3,
                             obscureText: false,
                             decoration: InputDecoration(
                               hintText: 'Input target amount',
-                              enabledBorder: UnderlineInputBorder(
+                              enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Colors.black,
+                                  color: Color(0x00000000),
                                   width: 1,
                                 ),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(4.0),
-                                  topRight: Radius.circular(4.0),
-                                ),
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              focusedBorder: UnderlineInputBorder(
+                              focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Colors.black,
+                                  color: Color(0x00000000),
                                   width: 1,
                                 ),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(4.0),
-                                  topRight: Radius.circular(4.0),
-                                ),
+                                borderRadius: BorderRadius.circular(12),
                               ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                             ),
                             style: FlutterFlowTheme.of(context).bodyText1,
                             keyboardType: TextInputType.number,
                           ),
                         ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            FFButtonWidget(
+                              onPressed: () async {
+                                await DatePicker.showDatePicker(
+                                  context,
+                                  showTitleActions: true,
+                                  onConfirm: (date) {
+                                    setState(() => datePicked1 = date);
+                                  },
+                                  currentTime: getCurrentTimestamp,
+                                  minTime: DateTime(0, 0, 0),
+                                );
+                              },
+                              text: 'Set Start Date',
+                              options: FFButtonOptions(
+                                width: 130,
+                                height: 40,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                    ),
+                                elevation: 0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                ),
+                                borderRadius: 12,
+                              ),
+                            ),
+                            FFButtonWidget(
+                              onPressed: () async {
+                                await DatePicker.showDatePicker(
+                                  context,
+                                  showTitleActions: true,
+                                  onConfirm: (date) {
+                                    setState(() => datePicked2 = date);
+                                  },
+                                  currentTime: getCurrentTimestamp,
+                                  minTime: DateTime(0, 0, 0),
+                                );
+                              },
+                              text: 'Set End Date',
+                              options: FFButtonOptions(
+                                width: 130,
+                                height: 40,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                    ),
+                                elevation: 0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                ),
+                                borderRadius: 12,
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          await DatePicker.showDatePicker(
-                            context,
-                            showTitleActions: true,
-                            onConfirm: (date) {
-                              setState(() => datePicked1 = date);
-                            },
-                            currentTime: getCurrentTimestamp,
-                            minTime: DateTime(0, 0, 0),
-                          );
-                        },
-                        text: 'Set Start Date',
-                        options: FFButtonOptions(
-                          width: 130,
-                          height: 40,
-                          color: Color(0x00FF0054),
-                          textStyle: FlutterFlowTheme.of(context)
-                              .subtitle2
-                              .override(
-                                fontFamily: 'Poppins',
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                    child: StreamBuilder<List<AccountsRecord>>(
+                      stream: queryAccountsRecord(
+                        queryBuilder: (accountsRecord) => accountsRecord.where(
+                            'accountOwner',
+                            isEqualTo: currentUserReference),
+                        singleRecord: true,
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: SpinKitFadingFour(
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
+                                size: 50,
                               ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: 12,
-                        ),
-                      ),
-                    ),
-                    FFButtonWidget(
-                      onPressed: () async {
-                        await DatePicker.showDatePicker(
-                          context,
-                          showTitleActions: true,
-                          onConfirm: (date) {
-                            setState(() => datePicked2 = date);
+                            ),
+                          );
+                        }
+                        List<AccountsRecord> buttonAccountsRecordList =
+                            snapshot.data;
+                        // Return an empty Container when the document does not exist.
+                        if (snapshot.data.isEmpty) {
+                          return Container();
+                        }
+                        final buttonAccountsRecord =
+                            buttonAccountsRecordList.isNotEmpty
+                                ? buttonAccountsRecordList.first
+                                : null;
+                        return FFButtonWidget(
+                          onPressed: () async {
+                            final budgetsCreateData = createBudgetsRecordData(
+                              budgetName: textController1.text,
+                              budgetOwner: currentUserReference,
+                              budgetAmount: int.parse(textController3.text),
+                              budgetDescription: textController2.text,
+                              budgetDateCreated: getCurrentTimestamp,
+                              budgetStart: datePicked1,
+                              budgetEnd: datePicked2,
+                            );
+                            var budgetsRecordReference =
+                                BudgetsRecord.collection.doc();
+                            await budgetsRecordReference.set(budgetsCreateData);
+                            createdBudget = BudgetsRecord.getDocumentFromData(
+                                budgetsCreateData, budgetsRecordReference);
+
+                            final budgetCategoriesCreateData =
+                                createBudgetCategoriesRecordData(
+                              categoryName: 'Uncategorized',
+                              categoryBudget: createdBudget.reference,
+                              budgetOwner: currentUserReference,
+                            );
+                            var budgetCategoriesRecordReference =
+                                BudgetCategoriesRecord.collection.doc();
+                            await budgetCategoriesRecordReference
+                                .set(budgetCategoriesCreateData);
+                            uncategorized =
+                                BudgetCategoriesRecord.getDocumentFromData(
+                                    budgetCategoriesCreateData,
+                                    budgetCategoriesRecordReference);
+                            await Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    CreateBudgetCategoriesWidget(
+                                  createdBudget: createdBudget,
+                                  uncategorized: uncategorized,
+                                ),
+                              ),
+                              (r) => false,
+                            );
+
+                            setState(() {});
                           },
-                          currentTime: getCurrentTimestamp,
-                          minTime: DateTime(0, 0, 0),
+                          text: 'Next',
+                          options: FFButtonOptions(
+                            width: double.infinity,
+                            height: 50,
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                            textStyle:
+                                FlutterFlowTheme.of(context).subtitle2.override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                    ),
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            ),
+                            borderRadius: 12,
+                          ),
                         );
                       },
-                      text: 'Set End Date',
-                      options: FFButtonOptions(
-                        width: 130,
-                        height: 40,
-                        color: Color(0x00FF0054),
-                        textStyle: FlutterFlowTheme.of(context)
-                            .subtitle2
-                            .override(
-                              fontFamily: 'Poppins',
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                            ),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
-                        ),
-                        borderRadius: 12,
-                      ),
                     ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                  child: StreamBuilder<List<AccountsRecord>>(
-                    stream: queryAccountsRecord(
-                      queryBuilder: (accountsRecord) => accountsRecord.where(
-                          'accountOwner',
-                          isEqualTo: currentUserReference),
-                      singleRecord: true,
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: SpinKitFadingFour(
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              size: 50,
-                            ),
-                          ),
-                        );
-                      }
-                      List<AccountsRecord> buttonAccountsRecordList =
-                          snapshot.data;
-                      // Return an empty Container when the document does not exist.
-                      if (snapshot.data.isEmpty) {
-                        return Container();
-                      }
-                      final buttonAccountsRecord =
-                          buttonAccountsRecordList.isNotEmpty
-                              ? buttonAccountsRecordList.first
-                              : null;
-                      return FFButtonWidget(
-                        onPressed: () async {
-                          final budgetsCreateData = createBudgetsRecordData(
-                            budgetName: textController1.text,
-                            budgetOwner: currentUserReference,
-                            budgetAmount: int.parse(textController3.text),
-                            budgetDescription: textController2.text,
-                            budgetDateCreated: getCurrentTimestamp,
-                            budgetStart: datePicked1,
-                            budgetEnd: datePicked2,
-                          );
-                          var budgetsRecordReference =
-                              BudgetsRecord.collection.doc();
-                          await budgetsRecordReference.set(budgetsCreateData);
-                          createdBudget = BudgetsRecord.getDocumentFromData(
-                              budgetsCreateData, budgetsRecordReference);
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CreateBudgetCopyWidget(
-                                createdBudget: createdBudget,
-                              ),
-                            ),
-                          );
-
-                          setState(() {});
-                        },
-                        text: 'Create',
-                        options: FFButtonOptions(
-                          width: 130,
-                          height: 40,
-                          color: FlutterFlowTheme.of(context).primaryColor,
-                          textStyle:
-                              FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.white,
-                                  ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: 12,
-                        ),
-                      );
-                    },
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

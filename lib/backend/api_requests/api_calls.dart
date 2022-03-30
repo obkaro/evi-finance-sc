@@ -19,7 +19,7 @@ class GetPermanentAuthCall {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'mono-sec-key': 'test_sk_HJ0AmMz9uE0T6wYUioPM',
+        'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid',
       },
       params: {
         'tempKey': tempKey,
@@ -41,7 +41,7 @@ class GetAccountInfoCall {
       callType: ApiCallType.GET,
       headers: {
         'Accept': 'application/json',
-        'mono-sec-key': 'test_sk_HJ0AmMz9uE0T6wYUioPM',
+        'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid',
       },
       params: {},
       returnBody: true,
@@ -104,9 +104,68 @@ class GetTransactionsCall {
       callType: ApiCallType.GET,
       headers: {
         'Accept': 'application/json',
-        'mono-sec-key': 'test_sk_HJ0AmMz9uE0T6wYUioPM',
+        'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid',
       },
       params: {},
+      returnBody: true,
+    );
+  }
+}
+
+class UnlinkMonoCall {
+  static Future<ApiCallResponse> call({
+    String authID = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'unlinkMono',
+      apiUrl: 'https://api.withmono.com/accounts/${authID}/unlink',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid',
+      },
+      params: {},
+      bodyType: BodyType.NONE,
+      returnBody: true,
+    );
+  }
+}
+
+class DataSyncMonoCall {
+  static Future<ApiCallResponse> call({
+    String authID = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'dataSyncMono',
+      apiUrl: 'https://api.withmono.com/accounts/${authID}/sync',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid',
+      },
+      params: {},
+      bodyType: BodyType.NONE,
+      returnBody: true,
+    );
+  }
+}
+
+class ReauthMonoCall {
+  static Future<ApiCallResponse> call({
+    String authID = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'reauthMono',
+      apiUrl: 'https://api.withmono.com/accounts/id/reauthorise',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid',
+      },
+      params: {
+        'authID': authID,
+      },
+      bodyType: BodyType.NONE,
       returnBody: true,
     );
   }

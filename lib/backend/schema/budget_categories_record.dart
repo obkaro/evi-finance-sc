@@ -27,6 +27,9 @@ abstract class BudgetCategoriesRecord
   DocumentReference get budgetOwner;
 
   @nullable
+  BuiltList<DocumentReference> get linkedTransactions;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -34,7 +37,8 @@ abstract class BudgetCategoriesRecord
       builder
         ..categoryName = ''
         ..allocatedAmount = 0
-        ..spentAmount = 0;
+        ..spentAmount = 0
+        ..linkedTransactions = ListBuilder();
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('budgetCategories');
@@ -73,4 +77,5 @@ Map<String, dynamic> createBudgetCategoriesRecordData({
           ..categoryBudget = categoryBudget
           ..allocatedAmount = allocatedAmount
           ..spentAmount = spentAmount
-          ..budgetOwner = budgetOwner));
+          ..budgetOwner = budgetOwner
+          ..linkedTransactions = null));

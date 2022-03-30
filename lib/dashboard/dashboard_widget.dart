@@ -1,5 +1,4 @@
 import '../auth/auth_util.dart';
-import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -7,7 +6,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../land_page/land_page_widget.dart';
 import '../link_mono_copy/link_mono_copy_widget.dart';
-import '../custom_code/actions/index.dart' as actions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -28,7 +26,6 @@ class DashboardWidget extends StatefulWidget {
 }
 
 class _DashboardWidgetState extends State<DashboardWidget> {
-  ApiCallResponse trasactionJsonResponse;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -206,93 +203,6 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       ),
                     ),
                   ],
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                  child: StreamBuilder<List<AccountsRecord>>(
-                    stream: queryAccountsRecord(
-                      queryBuilder: (accountsRecord) => accountsRecord.where(
-                          'accountOwner',
-                          isEqualTo: currentUserReference),
-                      singleRecord: true,
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: SpinKitFadingFour(
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              size: 50,
-                            ),
-                          ),
-                        );
-                      }
-                      List<AccountsRecord> buttonAccountsRecordList =
-                          snapshot.data;
-                      // Return an empty Container when the document does not exist.
-                      if (snapshot.data.isEmpty) {
-                        return Container();
-                      }
-                      final buttonAccountsRecord =
-                          buttonAccountsRecordList.isNotEmpty
-                              ? buttonAccountsRecordList.first
-                              : null;
-                      return FFButtonWidget(
-                        onPressed: () async {
-                          // trasactionJsonResponse =
-                          //     await GetTransactionsCall.call(
-                          //   authID: widget.command,
-                          // );
-                          // await actions.writeTransactions(
-                          //   (trasactionJsonResponse?.jsonBody ?? ''),
-                          // );
-
-                          // final transactionsCreateData =
-                          //     createTransactionsRecordData(
-                          //   account: buttonAccountsRecord.reference,
-                          //   trasactionDate: getCurrentTimestamp,
-                          //   monoCategory: getJsonField(
-                          //     (trasactionJsonResponse?.jsonBody ?? ''),
-                          //     r'''$.data.category''',
-                          //   ).toString(),
-                          //   transactionOwner: currentUserReference,
-                          //   balanceAfter: getJsonField(
-                          //     (trasactionJsonResponse?.jsonBody ?? ''),
-                          //     r'''$.data.balance''',
-                          //   ),
-                          //   transactionAmount: getJsonField(
-                          //     (trasactionJsonResponse?.jsonBody ?? ''),
-                          //     r'''$.data.amount''',
-                          //   ),
-                          // );
-                          // await TransactionsRecord.collection
-                          //     .doc()
-                          //     .set(transactionsCreateData);
-
-                          setState(() {});
-                        },
-                        text: 'Create',
-                        options: FFButtonOptions(
-                          width: 130,
-                          height: 40,
-                          color: FlutterFlowTheme.of(context).primaryColor,
-                          textStyle:
-                              FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.white,
-                                  ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: 12,
-                        ),
-                      );
-                    },
-                  ),
                 ),
               ],
             ),

@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -13,10 +14,14 @@ class TaskCreateDialogWidget extends StatefulWidget {
     Key key,
     this.constCategory,
     this.budget,
+    this.categoriesTotal,
+    this.budgetAllocatedRemaining,
   }) : super(key: key);
 
-  final DocumentReference constCategory;
+  final ConstBudgetCategoriesRecord constCategory;
   final BudgetsRecord budget;
+  final int categoriesTotal;
+  final int budgetAllocatedRemaining;
 
   @override
   _TaskCreateDialogWidgetState createState() => _TaskCreateDialogWidgetState();
@@ -33,56 +38,43 @@ class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<ConstBudgetCategoriesRecord>(
-      stream: ConstBudgetCategoriesRecord.getDocument(widget.constCategory),
-      builder: (context, snapshot) {
-        // Customize what your widget looks like when it's loading.
-        if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 50,
-              height: 50,
-              child: SpinKitFadingFour(
-                color: FlutterFlowTheme.of(context).primaryColor,
-                size: 50,
-              ),
-            ),
-          );
-        }
-        final containerConstBudgetCategoriesRecord = snapshot.data;
-        return Container(
-          width: double.infinity,
-          height: 400,
-          decoration: BoxDecoration(
-            color: FlutterFlowTheme.of(context).primaryBackground,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 5,
-                color: Color(0x3B1D2429),
-                offset: Offset(0, -3),
-              )
-            ],
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(0),
-              bottomRight: Radius.circular(0),
-              topLeft: Radius.circular(16),
-              topRight: Radius.circular(16),
-            ),
-          ),
-          child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                  child: Text(
-                    containerConstBudgetCategoriesRecord.categoryName,
-                    textAlign: TextAlign.start,
-                    style: FlutterFlowTheme.of(context).title3,
-                  ),
+    return Container(
+      width: double.infinity,
+      height: 225,
+      decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).primaryBackground,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 5,
+            color: Color(0x3B1D2429),
+            offset: Offset(0, -3),
+          )
+        ],
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(0),
+          bottomRight: Radius.circular(0),
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                child: Text(
+                  widget.constCategory.categoryName,
+                  textAlign: TextAlign.start,
+                  style: FlutterFlowTheme.of(context).title3,
                 ),
-                TextFormField(
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                child: TextFormField(
                   controller: textController,
                   obscureText: false,
                   decoration: InputDecoration(
@@ -112,72 +104,98 @@ class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
                   style: FlutterFlowTheme.of(context).bodyText1,
                   keyboardType: TextInputType.number,
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      final budgetCategoriesCreateData =
-                          createBudgetCategoriesRecordData(
-                        categoryName:
-                            containerConstBudgetCategoriesRecord.categoryName,
-                        allocatedAmount: int.parse(textController.text),
-                        categoryBudget: widget.budget.reference,
-                      );
-                      await BudgetCategoriesRecord.collection
-                          .doc()
-                          .set(budgetCategoriesCreateData);
-                    },
-                    text: 'Save',
-                    options: FFButtonOptions(
-                      width: double.infinity,
-                      height: 60,
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      textStyle:
-                          FlutterFlowTheme.of(context).subtitle2.override(
-                                fontFamily: 'Lexend Deca',
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                              ),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FFButtonWidget(
+                      onPressed: () async {
+                        Navigator.pop(context);
+                      },
+                      text: 'Cancel',
+                      options: FFButtonOptions(
+                        width: 130,
+                        height: 40,
+                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        textStyle:
+                            FlutterFlowTheme.of(context).subtitle2.override(
+                                  fontFamily: 'Lexend Deca',
+                                  color: Color(0xFF57636C),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: 40,
                       ),
-                      borderRadius: 12,
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      Navigator.pop(context);
-                    },
-                    text: 'Cancel',
-                    options: FFButtonOptions(
-                      width: double.infinity,
-                      height: 60,
-                      color: Color(0x00FFFFFF),
-                      textStyle:
-                          FlutterFlowTheme.of(context).subtitle2.override(
-                                fontFamily: 'Lexend Deca',
-                                color: Color(0xFF57636C),
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                              ),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
+                    FFButtonWidget(
+                      onPressed: () async {
+                        if ((functions.budgetRemMinusAmt(
+                                int.parse(textController.text),
+                                widget.budgetAllocatedRemaining)) >=
+                            0) {
+                          final budgetCategoriesCreateData =
+                              createBudgetCategoriesRecordData(
+                            categoryName: widget.constCategory.categoryName,
+                            allocatedAmount: int.parse(textController.text),
+                            budgetOwner: currentUserReference,
+                            categoryBudget: widget.budget.reference,
+                            spentAmount: 0,
+                          );
+                          await BudgetCategoriesRecord.collection
+                              .doc()
+                              .set(budgetCategoriesCreateData);
+                          Navigator.pop(context);
+                        } else {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('Budget Amount Exceeded'),
+                                content: Text(
+                                    'Please enter a value lower than the target budget, or increase the target budget value'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Okay'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      },
+                      text: 'Save',
+                      options: FFButtonOptions(
+                        width: 130,
+                        height: 40,
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        textStyle:
+                            FlutterFlowTheme.of(context).subtitle2.override(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                ),
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: 12,
                       ),
-                      borderRadius: 40,
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

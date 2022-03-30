@@ -60,6 +60,15 @@ class _$BudgetCategoriesRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType(Object)])));
     }
+    value = object.linkedTransactions;
+    if (value != null) {
+      result
+        ..add('linkedTransactions')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(BuiltList, const [
+              const FullType(DocumentReference, const [const FullType(Object)])
+            ])));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -107,6 +116,13 @@ class _$BudgetCategoriesRecordSerializer
                       DocumentReference, const [const FullType(Object)]))
               as DocumentReference<Object>;
           break;
+        case 'linkedTransactions':
+          result.linkedTransactions.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltList, const [
+                const FullType(
+                    DocumentReference, const [const FullType(Object)])
+              ])) as BuiltList<Object>);
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -132,6 +148,8 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
   @override
   final DocumentReference<Object> budgetOwner;
   @override
+  final BuiltList<DocumentReference<Object>> linkedTransactions;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$BudgetCategoriesRecord(
@@ -144,6 +162,7 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
       this.allocatedAmount,
       this.spentAmount,
       this.budgetOwner,
+      this.linkedTransactions,
       this.reference})
       : super._();
 
@@ -165,6 +184,7 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
         allocatedAmount == other.allocatedAmount &&
         spentAmount == other.spentAmount &&
         budgetOwner == other.budgetOwner &&
+        linkedTransactions == other.linkedTransactions &&
         reference == other.reference;
   }
 
@@ -173,10 +193,14 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, categoryName.hashCode), categoryBudget.hashCode),
-                    allocatedAmount.hashCode),
-                spentAmount.hashCode),
-            budgetOwner.hashCode),
+                $jc(
+                    $jc(
+                        $jc($jc(0, categoryName.hashCode),
+                            categoryBudget.hashCode),
+                        allocatedAmount.hashCode),
+                    spentAmount.hashCode),
+                budgetOwner.hashCode),
+            linkedTransactions.hashCode),
         reference.hashCode));
   }
 
@@ -188,6 +212,7 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
           ..add('allocatedAmount', allocatedAmount)
           ..add('spentAmount', spentAmount)
           ..add('budgetOwner', budgetOwner)
+          ..add('linkedTransactions', linkedTransactions)
           ..add('reference', reference))
         .toString();
   }
@@ -220,6 +245,14 @@ class BudgetCategoriesRecordBuilder
   set budgetOwner(DocumentReference<Object> budgetOwner) =>
       _$this._budgetOwner = budgetOwner;
 
+  ListBuilder<DocumentReference<Object>> _linkedTransactions;
+  ListBuilder<DocumentReference<Object>> get linkedTransactions =>
+      _$this._linkedTransactions ??=
+          new ListBuilder<DocumentReference<Object>>();
+  set linkedTransactions(
+          ListBuilder<DocumentReference<Object>> linkedTransactions) =>
+      _$this._linkedTransactions = linkedTransactions;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -237,6 +270,7 @@ class BudgetCategoriesRecordBuilder
       _allocatedAmount = $v.allocatedAmount;
       _spentAmount = $v.spentAmount;
       _budgetOwner = $v.budgetOwner;
+      _linkedTransactions = $v.linkedTransactions?.toBuilder();
       _reference = $v.reference;
       _$v = null;
     }
@@ -256,14 +290,28 @@ class BudgetCategoriesRecordBuilder
 
   @override
   _$BudgetCategoriesRecord build() {
-    final _$result = _$v ??
-        new _$BudgetCategoriesRecord._(
-            categoryName: categoryName,
-            categoryBudget: categoryBudget,
-            allocatedAmount: allocatedAmount,
-            spentAmount: spentAmount,
-            budgetOwner: budgetOwner,
-            reference: reference);
+    _$BudgetCategoriesRecord _$result;
+    try {
+      _$result = _$v ??
+          new _$BudgetCategoriesRecord._(
+              categoryName: categoryName,
+              categoryBudget: categoryBudget,
+              allocatedAmount: allocatedAmount,
+              spentAmount: spentAmount,
+              budgetOwner: budgetOwner,
+              linkedTransactions: _linkedTransactions?.build(),
+              reference: reference);
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'linkedTransactions';
+        _linkedTransactions?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'BudgetCategoriesRecord', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
