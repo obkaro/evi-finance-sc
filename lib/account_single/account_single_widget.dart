@@ -387,9 +387,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                             authID: widget.account.authID,
                                           );
                                           _shouldSetState = true;
-                                          await actions.flutterMonoReauth(
-                                            'abcd',
-                                          );
+                                          // await actions.flutterMonoReauth(
+                                          //   'abcd',
+                                          // );
                                           if (((dataSyncResponse?.statusCode ??
                                                   200)) ==
                                               400) {
@@ -399,11 +399,11 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                             );
                                             _shouldSetState = true;
                                             await actions.flutterMonoReauth(
-                                              getJsonField(
-                                                (reauthCode?.jsonBody ?? ''),
-                                                r'''$.token''',
-                                              ).toString(),
-                                            );
+                                                getJsonField(
+                                                  (reauthCode?.jsonBody ?? ''),
+                                                  r'''$.token''',
+                                                ).toString(),
+                                                context);
                                           } else {
                                             if (((dataSyncResponse
                                                         ?.statusCode ??
@@ -536,16 +536,20 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                     .fromSTEB(0, 10, 0, 10),
                                                 child: InkWell(
                                                   onTap: () async {
-                                                    await Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            TransactionSingleWidget(
-                                                          transaction:
-                                                              columnTransactionsRecord,
-                                                        ),
-                                                      ),
-                                                    );
+                                                    await actions
+                                                        .flutterMonoReauth(
+                                                            'abcd', context);
+
+                                                    // await Navigator.push(
+                                                    //   context,
+                                                    //   MaterialPageRoute(
+                                                    //     builder: (context) =>
+                                                    //         TransactionSingleWidget(
+                                                    //       transaction:
+                                                    //           columnTransactionsRecord,
+                                                    //     ),
+                                                    //   ),
+                                                    // );
                                                   },
                                                   child: Row(
                                                     mainAxisSize:
