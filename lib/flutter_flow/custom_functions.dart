@@ -9,7 +9,7 @@ import '../backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../auth/auth_util.dart';
 
-int calculateRemBudget(
+int calculateRemBudgetCat(
   List<BudgetCategoriesRecord> categoriesToCalc,
   BudgetsRecord budget,
 ) {
@@ -93,8 +93,14 @@ int budgetRemMinusAmt(
 int checkEditCatTotal(
   int budgetRemaining,
   int widgetStateAmount,
-  int categoryTotal,
+  int originalCategoryAmt,
 ) {
   // Add your function code here!
-  return widgetStateAmount + (budgetRemaining - categoryTotal);
+
+  //Originally implemented in bottom sheet for edit budget category
+  //This function checks if the new category amount exceeds the allocated budget
+  //by adding the existing category amount back into the remaining budget amount
+  //and then subtracting the new amount from it. If it results -ve, the new amount is too big
+
+  return (budgetRemaining + originalCategoryAmt) - widgetStateAmount;
 }

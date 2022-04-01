@@ -38,7 +38,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
             child: SizedBox(
               width: 50,
               height: 50,
-              child: SpinKitFadingFour(
+              child: SpinKitRing(
                 color: FlutterFlowTheme.of(context).primaryColor,
                 size: 50,
               ),
@@ -84,7 +84,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                               child: SizedBox(
                                 width: 50,
                                 height: 50,
-                                child: SpinKitFadingFour(
+                                child: SpinKitRing(
                                   color:
                                       FlutterFlowTheme.of(context).primaryColor,
                                   size: 50,
@@ -94,24 +94,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                           }
                           final columnAccountsRecord = snapshot.data;
                           return SingleChildScrollView(
+                            primary: false,
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 10),
-                                  child: Container(
-                                    width: 120,
-                                    height: 120,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Image.network(
-                                      'https://picsum.photos/seed/768/600',
-                                    ),
-                                  ),
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 10),
@@ -121,8 +107,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                     children: [
                                       Text(
                                         columnAccountsRecord.institutionName,
-                                        style:
-                                            FlutterFlowTheme.of(context).title3,
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle1,
                                       ),
                                     ],
                                   ),
@@ -134,7 +120,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                     Text(
                                       'Amount',
                                       style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
+                                          .bodyText2,
                                     ),
                                   ],
                                 ),
@@ -152,8 +138,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           format: '#,###,###',
                                           locale: '',
                                         ),
-                                        style:
-                                            FlutterFlowTheme.of(context).title3,
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle1,
                                       ),
                                     ],
                                   ),
@@ -165,7 +151,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                     Text(
                                       'Narration',
                                       style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
+                                          .bodyText2,
                                     ),
                                   ],
                                 ),
@@ -195,7 +181,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                     .transactionNarration,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .title3,
+                                                        .subtitle1,
                                               ),
                                             ],
                                           ),
@@ -211,7 +197,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                     Text(
                                       'Account',
                                       style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
+                                          .bodyText2,
                                     ),
                                   ],
                                 ),
@@ -223,8 +209,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                     children: [
                                       Text(
                                         columnAccountsRecord.accountName,
-                                        style:
-                                            FlutterFlowTheme.of(context).title3,
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle1,
                                       ),
                                     ],
                                   ),
@@ -236,7 +222,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                     Text(
                                       'Balance',
                                       style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
+                                          .bodyText2,
                                     ),
                                   ],
                                 ),
@@ -254,33 +240,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           format: '#,###,###',
                                           locale: '',
                                         ),
-                                        style:
-                                            FlutterFlowTheme.of(context).title3,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Divider(),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Text(
-                                      'Category',
-                                      style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 10),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        widget.transaction.monoCategory,
-                                        style:
-                                            FlutterFlowTheme.of(context).title3,
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle1,
                                       ),
                                     ],
                                   ),
@@ -294,9 +255,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Text(
-                                      'Linked Category',
+                                      'Category',
                                       style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
+                                          .bodyText2,
                                     ),
                                   ],
                                 ),
@@ -327,7 +288,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                 child: SizedBox(
                                                   width: 50,
                                                   height: 50,
-                                                  child: SpinKitFadingFour(
+                                                  child: SpinKitRing(
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primaryColor,
@@ -354,7 +315,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                   .categoryName,
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .title3,
+                                                      .subtitle1,
                                             );
                                           },
                                         ),
@@ -370,7 +331,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
+                                            MainAxisAlignment.start,
                                         children: [
                                           FFButtonWidget(
                                             onPressed: () async {
@@ -399,7 +360,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                             ),
                                             options: FFButtonOptions(
                                               width: 130,
-                                              height: 40,
+                                              height: 50,
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,

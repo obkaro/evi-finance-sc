@@ -49,7 +49,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
             child: SizedBox(
               width: 50,
               height: 50,
-              child: SpinKitFadingFour(
+              child: SpinKitRing(
                 color: FlutterFlowTheme.of(context).primaryColor,
                 size: 50,
               ),
@@ -257,7 +257,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                               child: SizedBox(
                                                 width: 50,
                                                 height: 50,
-                                                child: SpinKitFadingFour(
+                                                child: SpinKitRing(
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryColor,
@@ -367,7 +367,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                               child: SizedBox(
                                                 width: 50,
                                                 height: 50,
-                                                child: SpinKitFadingFour(
+                                                child: SpinKitRing(
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryColor,
@@ -597,7 +597,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                     child: SizedBox(
                                       width: 50,
                                       height: 50,
-                                      child: SpinKitFadingFour(
+                                      child: SpinKitRing(
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
                                         size: 50,
@@ -717,7 +717,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                           height:
                                                                               50,
                                                                           child:
-                                                                              SpinKitFadingFour(
+                                                                              SpinKitRing(
                                                                             color:
                                                                                 FlutterFlowTheme.of(context).primaryColor,
                                                                             size:

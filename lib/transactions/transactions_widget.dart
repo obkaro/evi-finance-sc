@@ -52,7 +52,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
               child: SizedBox(
                 width: 50,
                 height: 50,
-                child: SpinKitFadingFour(
+                child: SpinKitRing(
                   color: FlutterFlowTheme.of(context).primaryColor,
                   size: 50,
                 ),
@@ -107,7 +107,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                   child: SizedBox(
                     width: 50,
                     height: 50,
-                    child: SpinKitFadingFour(
+                    child: SpinKitRing(
                       color: FlutterFlowTheme.of(context).primaryColor,
                       size: 50,
                     ),
@@ -179,8 +179,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                       child: SizedBox(
                                                         width: 50,
                                                         height: 50,
-                                                        child:
-                                                            SpinKitFadingFour(
+                                                        child: SpinKitRing(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryColor,

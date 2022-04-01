@@ -1,8 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/task_create_dialog_copy_copy_widget.dart';
-import '../components/task_create_dialog_copy_widget.dart';
-import '../components/task_create_dialog_widget.dart';
+import '../components/create_custom_category_widget.dart';
+import '../components/edit_category_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -49,7 +48,7 @@ class _CreateBudgetCategoriesWidgetState
             child: SizedBox(
               width: 50,
               height: 50,
-              child: SpinKitFadingFour(
+              child: SpinKitRing(
                 color: FlutterFlowTheme.of(context).primaryColor,
                 size: 50,
               ),
@@ -130,7 +129,7 @@ class _CreateBudgetCategoriesWidgetState
                             child: SizedBox(
                               width: 50,
                               height: 50,
-                              child: SpinKitFadingFour(
+                              child: SpinKitRing(
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
                                 size: 50,
@@ -180,7 +179,7 @@ class _CreateBudgetCategoriesWidgetState
                                       ),
                                       child: Text(
                                         functions
-                                            .calculateRemBudget(
+                                            .calculateRemBudgetCat(
                                                 createBudgetCategoriesBudgetCategoriesRecordList
                                                     .toList(),
                                                 columnBudgetsRecord)
@@ -331,7 +330,7 @@ class _CreateBudgetCategoriesWidgetState
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: SpinKitFadingFour(
+                                            child: SpinKitRing(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
@@ -394,16 +393,15 @@ class _CreateBudgetCategoriesWidgetState
                                                                 context)
                                                             .viewInsets,
                                                         child:
-                                                            TaskCreateDialogWidget(
-                                                          constCategory:
-                                                              gridViewConstBudgetCategoriesRecord,
+                                                            CreateCustomCategoryWidget(
                                                           budget: widget
                                                               .createdBudget,
-                                                          budgetAllocatedRemaining:
-                                                              functions.calculateRemBudget(
+                                                          budgetRemaining:
+                                                              functions.calculateRemBudgetCat(
                                                                   createBudgetCategoriesBudgetCategoriesRecordList
                                                                       .toList(),
-                                                                  columnBudgetsRecord),
+                                                                  widget
+                                                                      .createdBudget),
                                                         ),
                                                       );
                                                     },
@@ -473,18 +471,13 @@ class _CreateBudgetCategoriesWidgetState
                                           return Padding(
                                             padding: MediaQuery.of(context)
                                                 .viewInsets,
-                                            child: TaskCreateDialogCopyWidget(
+                                            child: CreateCustomCategoryWidget(
                                               budget: widget.createdBudget,
-                                              categoriesTotal:
-                                                  functions.calculateRemBudget(
+                                              budgetRemaining: functions
+                                                  .calculateRemBudgetCat(
                                                       createBudgetCategoriesBudgetCategoriesRecordList
                                                           .toList(),
-                                                      columnBudgetsRecord),
-                                              budgetRemaining:
-                                                  functions.calculateRemBudget(
-                                                      createBudgetCategoriesBudgetCategoriesRecordList
-                                                          .toList(),
-                                                      columnBudgetsRecord),
+                                                      widget.createdBudget),
                                             ),
                                           );
                                         },
@@ -535,7 +528,7 @@ class _CreateBudgetCategoriesWidgetState
                                       child: SizedBox(
                                         width: 50,
                                         height: 50,
-                                        child: SpinKitFadingFour(
+                                        child: SpinKitRing(
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
                                           size: 50,
@@ -657,21 +650,17 @@ class _CreateBudgetCategoriesWidgetState
                                                                       context)
                                                                   .viewInsets,
                                                           child:
-                                                              TaskCreateDialogCopyCopyWidget(
+                                                              EditCategoryWidget(
                                                             budget: widget
                                                                 .createdBudget,
                                                             categoryToEdit:
                                                                 columnBudgetCategoriesRecord,
-                                                            categoriesTotal: functions
-                                                                .calculateRemBudget(
-                                                                    createBudgetCategoriesBudgetCategoriesRecordList
-                                                                        .toList(),
-                                                                    columnBudgetsRecord),
                                                             budgetRemaining: functions
-                                                                .calculateRemBudget(
+                                                                .calculateRemBudgetCat(
                                                                     createBudgetCategoriesBudgetCategoriesRecordList
                                                                         .toList(),
-                                                                    columnBudgetsRecord),
+                                                                    widget
+                                                                        .createdBudget),
                                                           ),
                                                         );
                                                       },
@@ -772,7 +761,7 @@ class _CreateBudgetCategoriesWidgetState
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: SpinKitFadingFour(
+                                            child: SpinKitRing(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
@@ -871,7 +860,7 @@ class _CreateBudgetCategoriesWidgetState
                                           child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            child: SpinKitFadingFour(
+                                            child: SpinKitRing(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
@@ -898,7 +887,7 @@ class _CreateBudgetCategoriesWidgetState
                                           final budgetCategoriesUpdateData =
                                               createBudgetCategoriesRecordData(
                                             allocatedAmount:
-                                                functions.calculateRemBudget(
+                                                functions.calculateRemBudgetCat(
                                                     createBudgetCategoriesBudgetCategoriesRecordList
                                                         .toList(),
                                                     widget.createdBudget),

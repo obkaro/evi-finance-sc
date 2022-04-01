@@ -25,7 +25,7 @@ class _LandPageWidgetState extends State<LandPageWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
         title: Text(
-          'Page Title',
+          'Welcome',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: Colors.white,
@@ -44,78 +44,96 @@ class _LandPageWidgetState extends State<LandPageWidget> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            await Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.scale,
-                                alignment: Alignment.bottomCenter,
-                                duration: Duration(milliseconds: 500),
-                                reverseDuration: Duration(milliseconds: 500),
-                                child: LoginWidget(),
-                              ),
-                            );
-                          },
-                          text: 'Login',
-                          options: FFButtonOptions(
-                            width: 130,
-                            height: 40,
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                await Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.topToBottom,
+                                    duration: Duration(milliseconds: 200),
+                                    reverseDuration:
+                                        Duration(milliseconds: 200),
+                                    child: SignUpWidget(),
+                                  ),
+                                );
+                              },
+                              text: 'Sign Up',
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: 50,
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
                                       fontFamily: 'Poppins',
                                       color: Colors.white,
                                     ),
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: 12,
+                              ),
                             ),
-                            borderRadius: 12,
                           ),
-                        ),
-                      ),
-                      FFButtonWidget(
-                        onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            PageTransition(
-                              type: PageTransitionType.topToBottom,
-                              duration: Duration(milliseconds: 200),
-                              reverseDuration: Duration(milliseconds: 200),
-                              child: SignUpWidget(),
-                            ),
-                          );
-                        },
-                        text: 'Sign Up',
-                        options: FFButtonOptions(
-                          width: 130,
-                          height: 40,
-                          color: FlutterFlowTheme.of(context).primaryColor,
-                          textStyle:
-                              FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.white,
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                await Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.scale,
+                                    alignment: Alignment.bottomCenter,
+                                    duration: Duration(milliseconds: 500),
+                                    reverseDuration:
+                                        Duration(milliseconds: 500),
+                                    child: LoginWidget(),
                                   ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
+                                );
+                              },
+                              text: 'Login',
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: 50,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                    ),
+                                elevation: 0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: 12,
+                              ),
+                            ),
                           ),
-                          borderRadius: 12,
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
