@@ -71,7 +71,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                   child: SizedBox(
                     width: 50,
                     height: 50,
-                    child: SpinKitFadingFour(
+                    child: SpinKitRing(
                       color: FlutterFlowTheme.of(context).primaryColor,
                       size: 50,
                     ),

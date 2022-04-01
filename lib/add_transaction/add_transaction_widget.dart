@@ -164,7 +164,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                         child: SizedBox(
                                           width: 50,
                                           height: 50,
-                                          child: SpinKitFadingFour(
+                                          child: SpinKitRing(
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
                                             size: 50,
@@ -359,6 +359,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                 ),
                                 chipSpacing: 10,
                                 multiselect: false,
+                                alignment: WrapAlignment.start,
                               ),
                             ),
                           ),

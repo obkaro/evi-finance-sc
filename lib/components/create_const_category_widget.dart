@@ -9,25 +9,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TaskCreateDialogWidget extends StatefulWidget {
-  const TaskCreateDialogWidget({
+class CreateConstCategoryWidget extends StatefulWidget {
+  const CreateConstCategoryWidget({
     Key key,
     this.constCategory,
     this.budget,
-    this.categoriesTotal,
     this.budgetAllocatedRemaining,
   }) : super(key: key);
 
   final ConstBudgetCategoriesRecord constCategory;
   final BudgetsRecord budget;
-  final int categoriesTotal;
   final int budgetAllocatedRemaining;
 
   @override
-  _TaskCreateDialogWidgetState createState() => _TaskCreateDialogWidgetState();
+  _CreateConstCategoryWidgetState createState() =>
+      _CreateConstCategoryWidgetState();
 }
 
-class _TaskCreateDialogWidgetState extends State<TaskCreateDialogWidget> {
+class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
   TextEditingController textController;
 
   @override

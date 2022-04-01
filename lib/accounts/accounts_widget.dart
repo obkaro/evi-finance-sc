@@ -138,7 +138,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                 child: SizedBox(
                                   width: 50,
                                   height: 50,
-                                  child: SpinKitFadingFour(
+                                  child: SpinKitRing(
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
                                     size: 50,
