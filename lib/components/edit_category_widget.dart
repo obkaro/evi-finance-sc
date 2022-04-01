@@ -9,33 +9,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TaskCreateDialogCopyWidget extends StatefulWidget {
-  const TaskCreateDialogCopyWidget({
+class EditCategoryWidget extends StatefulWidget {
+  const EditCategoryWidget({
     Key key,
     this.budget,
-    this.categoriesTotal,
+    this.categoryToEdit,
     this.budgetRemaining,
   }) : super(key: key);
 
   final BudgetsRecord budget;
-  final int categoriesTotal;
+  final BudgetCategoriesRecord categoryToEdit;
   final int budgetRemaining;
 
   @override
-  _TaskCreateDialogCopyWidgetState createState() =>
-      _TaskCreateDialogCopyWidgetState();
+  _EditCategoryWidgetState createState() => _EditCategoryWidgetState();
 }
 
-class _TaskCreateDialogCopyWidgetState
-    extends State<TaskCreateDialogCopyWidget> {
+class _EditCategoryWidgetState extends State<EditCategoryWidget> {
   TextEditingController textController1;
   TextEditingController textController2;
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
+    textController1 =
+        TextEditingController(text: widget.categoryToEdit.categoryName);
+    textController2 = TextEditingController(
+        text: widget.categoryToEdit.allocatedAmount.toString());
   }
 
   @override
@@ -70,8 +70,8 @@ class _TaskCreateDialogCopyWidgetState
                 controller: textController1,
                 obscureText: false,
                 decoration: InputDecoration(
-                  labelText: 'Category Name',
-                  hintText: 'Enter Category Name',
+                  labelText: 'Amount',
+                  hintText: 'Enter Amount',
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: FlutterFlowTheme.of(context).primaryText,
@@ -94,6 +94,7 @@ class _TaskCreateDialogCopyWidgetState
                   ),
                 ),
                 style: FlutterFlowTheme.of(context).bodyText1,
+                keyboardType: TextInputType.number,
               ),
             ),
             Padding(
@@ -160,21 +161,18 @@ class _TaskCreateDialogCopyWidgetState
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      if ((functions.budgetRemMinusAmt(
+                      if ((functions.checkEditCatTotal(
+                              widget.budgetRemaining,
                               int.parse(textController2.text),
-                              widget.budgetRemaining)) >=
+                              widget.categoryToEdit.allocatedAmount)) >=
                           0) {
-                        final budgetCategoriesCreateData =
+                        final budgetCategoriesUpdateData =
                             createBudgetCategoriesRecordData(
-                          categoryName: textController1.text,
                           allocatedAmount: int.parse(textController2.text),
-                          budgetOwner: currentUserReference,
-                          categoryBudget: widget.budget.reference,
-                          spentAmount: 0,
+                          categoryName: textController1.text,
                         );
-                        await BudgetCategoriesRecord.collection
-                            .doc()
-                            .set(budgetCategoriesCreateData);
+                        await widget.categoryToEdit.reference
+                            .update(budgetCategoriesUpdateData);
                         Navigator.pop(context);
                       } else {
                         await showDialog(

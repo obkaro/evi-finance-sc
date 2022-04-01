@@ -11,9 +11,8 @@ import 'flutter_flow/internationalization.dart';
 import 'package:evi_finance/land_page/land_page_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'dashboard/dashboard_widget.dart';
-import 'transactions/transactions_widget.dart';
 import 'budgets/budgets_widget.dart';
+import 'transactions/transactions_widget.dart';
 import 'profile/profile_widget.dart';
 
 void main() async {
@@ -81,11 +80,14 @@ class _MyAppState extends State<MyApp> {
       themeMode: _themeMode,
       home: initialUser == null || displaySplashImage
           ? Container(
-              color: FlutterFlowTheme.of(context).primaryBackground,
-              child: Builder(
-                builder: (context) => Image.asset(
-                  'assets/images/evi-app-icon.png',
-                  fit: BoxFit.none,
+              color: Colors.white,
+              child: Center(
+                child: Builder(
+                  builder: (context) => Image.asset(
+                    'assets/images/Group_20_(2).png',
+                    width: 200,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             )
@@ -118,9 +120,8 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'Dashboard': DashboardWidget(),
-      'Transactions': TransactionsWidget(),
       'Budgets': BudgetsWidget(),
+      'Transactions': TransactionsWidget(),
       'Profile': ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
@@ -138,10 +139,10 @@ class _NavBarPageState extends State<NavBarPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_rounded,
+              Icons.pie_chart,
               size: 24,
             ),
-            label: 'Dashboard',
+            label: 'Transactions',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -150,14 +151,6 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24,
             ),
             label: 'Home',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.pie_chart,
-              size: 24,
-            ),
-            label: 'Transactions',
             tooltip: '',
           ),
           BottomNavigationBarItem(
