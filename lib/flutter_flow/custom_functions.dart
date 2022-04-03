@@ -104,3 +104,8 @@ int checkEditCatTotal(
 
   return (budgetRemaining + originalCategoryAmt) - widgetStateAmount;
 }
+
+int koboToNaira(int koboValue) {
+  // Add your function code here!
+  return (koboValue / 100).round();
+}

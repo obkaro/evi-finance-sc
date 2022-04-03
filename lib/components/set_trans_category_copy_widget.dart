@@ -31,7 +31,13 @@ class _SetTransCategoryCopyWidgetState
       width: MediaQuery.of(context).size.width,
       height: 300,
       decoration: BoxDecoration(
-        color: Color(0xFFEEEEEE),
+        color: FlutterFlowTheme.of(context).secondaryBackground,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(0),
+          bottomRight: Radius.circular(0),
+          topLeft: Radius.circular(12),
+          topRight: Radius.circular(12),
+        ),
       ),
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
@@ -69,6 +75,7 @@ class _SetTransCategoryCopyWidgetState
                       final transactionsUpdateData =
                           createTransactionsRecordData(
                         linkedCategory: columnBudgetCategoriesRecord.reference,
+                        isCategorized: true,
                       );
                       await widget.transaction.reference
                           .update(transactionsUpdateData);

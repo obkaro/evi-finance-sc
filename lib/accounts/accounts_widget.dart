@@ -115,145 +115,161 @@ class _AccountsWidgetState extends State<AccountsWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: StreamBuilder<List<AccountsRecord>>(
-                          stream: queryAccountsRecord(
-                            queryBuilder: (accountsRecord) =>
-                                accountsRecord.where('accountOwner',
-                                    isEqualTo: currentUserReference),
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: SpinKitRing(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    size: 50,
-                                  ),
-                                ),
-                              );
-                            }
-                            List<AccountsRecord> listViewAccountsRecordList =
-                                snapshot.data;
-                            return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemCount: listViewAccountsRecordList.length,
-                              itemBuilder: (context, listViewIndex) {
-                                final listViewAccountsRecord =
-                                    listViewAccountsRecordList[listViewIndex];
-                                return Container(
-                                  width: 100,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        10, 10, 10, 10),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                AccountSingleWidget(
-                                              account: listViewAccountsRecord,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                listViewAccountsRecord
-                                                    .accountName,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title3,
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 10, 0, 0),
-                                                child: Text(
-                                                  listViewAccountsRecord
-                                                      .institutionName,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .subtitle2,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                formatNumber(
-                                                  listViewAccountsRecord
-                                                      .accountBalance,
-                                                  formatType: FormatType.custom,
-                                                  currency: '₦',
-                                                  format: '#,###,###',
-                                                  locale: '',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title3,
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 10, 0, 0),
-                                                child: Text(
-                                                  listViewAccountsRecord
-                                                      .dataStatus,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .subtitle2,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: StreamBuilder<List<AccountsRecord>>(
+                            stream: queryAccountsRecord(
+                              queryBuilder: (accountsRecord) =>
+                                  accountsRecord.where('accountOwner',
+                                      isEqualTo: currentUserReference),
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: SpinKitRing(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      size: 50,
                                     ),
                                   ),
                                 );
-                              },
-                            );
-                          },
+                              }
+                              List<AccountsRecord> listViewAccountsRecordList =
+                                  snapshot.data;
+                              return ListView.builder(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemCount: listViewAccountsRecordList.length,
+                                itemBuilder: (context, listViewIndex) {
+                                  final listViewAccountsRecord =
+                                      listViewAccountsRecordList[listViewIndex];
+                                  return Container(
+                                    width: 100,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          10, 10, 10, 10),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AccountSingleWidget(
+                                                account: listViewAccountsRecord,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              flex: 4,
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    listViewAccountsRecord
+                                                        .accountName,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .title3,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 10, 0, 0),
+                                                    child: Text(
+                                                      listViewAccountsRecord
+                                                          .institutionName,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 3,
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                    formatNumber(
+                                                      listViewAccountsRecord
+                                                          .accountBalance,
+                                                      formatType:
+                                                          FormatType.custom,
+                                                      currency: 'N',
+                                                      format: '###,###,###.##',
+                                                      locale: '',
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .title3,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 10, 0, 0),
+                                                    child: Text(
+                                                      listViewAccountsRecord
+                                                          .dataStatus,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

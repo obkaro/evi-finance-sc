@@ -8,7 +8,7 @@ import 'auth/auth_util.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/internationalization.dart';
-import 'package:evi_finance/land_page/land_page_widget.dart';
+import 'package:evi/land_page/land_page_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'budgets/budgets_widget.dart';
@@ -36,8 +36,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Locale _locale;
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
-  Stream<EviFinanceFirebaseUser> userStream;
-  EviFinanceFirebaseUser initialUser;
+  Stream<EviFirebaseUser> userStream;
+  EviFirebaseUser initialUser;
   bool displaySplashImage = true;
   final authUserSub = authenticatedUserStream.listen((_) {});
 
@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    userStream = eviFinanceFirebaseUserStream()
+    userStream = eviFirebaseUserStream()
       ..listen((user) => initialUser ?? setState(() => initialUser = user));
     Future.delayed(
         Duration(seconds: 1), () => setState(() => displaySplashImage = false));
@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Evi Finance ',
+      title: 'Evi',
       localizationsDelegates: [
         FFLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,

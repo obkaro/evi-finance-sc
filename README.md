@@ -1,4 +1,4 @@
-# Evi Finance 
+# Evi
 
 A new Flutter project.
 
