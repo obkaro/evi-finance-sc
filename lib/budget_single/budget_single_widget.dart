@@ -1,6 +1,6 @@
 import '../backend/backend.dart';
 import '../category_single/category_single_widget.dart';
-import '../create_budget_categories/create_budget_categories_widget.dart';
+import '../edit_budget_categories/edit_budget_categories_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -62,24 +62,60 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                   ),
             ),
             actions: [
-              FlutterFlowIconButton(
-                borderColor: Colors.transparent,
-                borderRadius: 30,
-                borderWidth: 1,
-                buttonSize: 60,
-                icon: Icon(
-                  Icons.edit_rounded,
-                  color: Colors.white,
-                  size: 32,
+              StreamBuilder<List<BudgetCategoriesRecord>>(
+                stream: queryBudgetCategoriesRecord(
+                  queryBuilder: (budgetCategoriesRecord) =>
+                      budgetCategoriesRecord
+                          .where('categoryBudget',
+                              isEqualTo: widget.budget.reference)
+                          .where('categoryName', isEqualTo: 'Uncategorized'),
+                  singleRecord: true,
                 ),
-                onPressed: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CreateBudgetCategoriesWidget(
-                        createdBudget: widget.budget,
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: SpinKitRing(
+                          color: FlutterFlowTheme.of(context).primaryColor,
+                          size: 50,
+                        ),
                       ),
+                    );
+                  }
+                  List<BudgetCategoriesRecord>
+                      iconButtonBudgetCategoriesRecordList = snapshot.data;
+                  // Return an empty Container when the document does not exist.
+                  if (snapshot.data.isEmpty) {
+                    return Container();
+                  }
+                  final iconButtonBudgetCategoriesRecord =
+                      iconButtonBudgetCategoriesRecordList.isNotEmpty
+                          ? iconButtonBudgetCategoriesRecordList.first
+                          : null;
+                  return FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30,
+                    borderWidth: 1,
+                    buttonSize: 60,
+                    icon: Icon(
+                      Icons.edit_rounded,
+                      color: Colors.white,
+                      size: 32,
                     ),
+                    onPressed: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditBudgetCategoriesWidget(
+                            createdBudget: widget.budget,
+                            uncategorized: iconButtonBudgetCategoriesRecord,
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
               ),
@@ -153,7 +189,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                         widget.budget.budgetSpent,
                                         formatType: FormatType.custom,
                                         currency: 'N',
-                                        format: '#,###,###',
+                                        format: '###,###,###.##',
                                         locale: '',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -175,7 +211,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                         widget.budget.budgetAmount,
                                         formatType: FormatType.custom,
                                         currency: 'N',
-                                        format: '#,###,###',
+                                        format: '###,###,###.##',
                                         locale: '',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -211,97 +247,139 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                               List<BudgetCategoriesRecord>
                                   columnBudgetCategoriesRecordList =
                                   snapshot.data;
-                              return SingleChildScrollView(
-                                primary: false,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: List.generate(
-                                      columnBudgetCategoriesRecordList.length,
-                                      (columnIndex) {
-                                    final columnBudgetCategoriesRecord =
-                                        columnBudgetCategoriesRecordList[
-                                            columnIndex];
-                                    return Container(
+                              return Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: List.generate(
+                                    columnBudgetCategoriesRecordList.length,
+                                    (columnIndex) {
+                                  final columnBudgetCategoriesRecord =
+                                      columnBudgetCategoriesRecordList[
+                                          columnIndex];
+                                  return Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 10),
+                                    child: Container(
                                       width: MediaQuery.of(context).size.width,
                                       height: 100,
-                                      decoration: BoxDecoration(),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CategorySingleWidget(
-                                                category:
-                                                    columnBudgetCategoriesRecord,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 0, 10),
-                                                  child: Text(
-                                                    columnBudgetCategoriesRecord
-                                                        .categoryName,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .title3,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16, 16, 16, 16),
+                                        child: Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 100,
+                                          decoration: BoxDecoration(),
+                                          child: InkWell(
+                                            onTap: () async {
+                                              await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CategorySingleWidget(
+                                                    category:
+                                                        columnBudgetCategoriesRecord,
                                                   ),
                                                 ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 0, 10),
-                                                  child: Text(
-                                                    '${functions.subInt(columnBudgetCategoriesRecord.allocatedAmount, columnBudgetCategoriesRecord.spentAmount).toString()} of ${columnBudgetCategoriesRecord.allocatedAmount.toString()} left',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1,
+                                              );
+                                            },
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Expanded(
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(0, 0,
+                                                                    0, 10),
+                                                        child: Text(
+                                                          columnBudgetCategoriesRecord
+                                                              .categoryName,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .title3,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(0, 0,
+                                                                    0, 10),
+                                                        child: Text(
+                                                          '${functions.subInt(columnBudgetCategoriesRecord.allocatedAmount, columnBudgetCategoriesRecord.spentAmount).toString()} of ${columnBudgetCategoriesRecord.allocatedAmount.toString()} left',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Expanded(
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Expanded(
+                                                              child:
+                                                                  LinearPercentIndicator(
+                                                                percent: functions
+                                                                    .calcCategoryPercent(
+                                                                        columnBudgetCategoriesRecord),
+                                                                width: 250,
+                                                                lineHeight: 8,
+                                                                animation: true,
+                                                                progressColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryColor,
+                                                                backgroundColor:
+                                                                    Color(
+                                                                        0xFF1B998B),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                            LinearPercentIndicator(
-                                              percent:
-                                                  functions.calcCategoryPercent(
-                                                      columnBudgetCategoriesRecord),
-                                              width: 325,
-                                              lineHeight: 10,
-                                              animation: true,
-                                              progressColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              backgroundColor:
-                                                  Color(0xFF1B998B),
-                                            ),
-                                          ],
+                                          ),
                                         ),
                                       ),
-                                    );
-                                  }),
-                                ),
+                                    ),
+                                  );
+                                }),
                               );
                             },
                           ),
                         ],
                       ),
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [],
                     ),
                   ],
                 ),

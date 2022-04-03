@@ -111,7 +111,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                               widget.category.spentAmount,
                               formatType: FormatType.custom,
                               currency: 'N',
-                              format: '#,###,###',
+                              format: '###,###,###.##',
                               locale: '',
                             ),
                             style: FlutterFlowTheme.of(context).subtitle1,
@@ -131,7 +131,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                               widget.category.allocatedAmount,
                               formatType: FormatType.custom,
                               currency: 'N',
-                              format: '#,###,###',
+                              format: '###,###,###.##',
                               locale: '',
                             ),
                             style: FlutterFlowTheme.of(context).subtitle1,
@@ -320,7 +320,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                     formatType:
                                                         FormatType.custom,
                                                     currency: 'N',
-                                                    format: '#,###,###',
+                                                    format: '###,###,###.##',
                                                     locale: '',
                                                   ).maybeHandleOverflow(
                                                     maxChars: 15,
