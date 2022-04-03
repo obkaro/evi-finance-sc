@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 //import 'package:mono_flutter/mono_flutter.dart';
 //import 'package:mono_flutter/mono_web_view.dart';
 import '../mono_custom/mono_flutter.dart';
-import 'package:evi_finance/auth/auth_util.dart';
-import 'package:evi_finance/backend/api_requests/api_calls.dart';
-import 'package:evi_finance/dashboard/dashboard_widget.dart';
+import 'package:evi/auth/auth_util.dart';
+import 'package:evi/backend/api_requests/api_calls.dart';
+import 'package:evi/dashboard/dashboard_widget.dart';
 
 extension CustomContext on BuildContext {
   double screenHeight([double percent = 1]) =>

@@ -11,10 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:mono_flutter/mono_flutter.dart';
 //import '../backend/backend.dart';
 //import 'package:evi_finance/backend/schema/users_record.dart';
-import 'package:evi_finance/auth/auth_util.dart';
-import 'package:evi_finance/backend/api_requests/api_calls.dart';
-import 'package:evi_finance/backend/api_requests/api_manager.dart';
-import 'package:evi_finance/dashboard/dashboard_widget.dart';
+import 'package:evi/auth/auth_util.dart';
+import 'package:evi/backend/api_requests/api_calls.dart';
+import 'package:evi/backend/api_requests/api_manager.dart';
+import 'package:evi/dashboard/dashboard_widget.dart';
 
 class MonoConnect extends StatefulWidget {
   const MonoConnect({

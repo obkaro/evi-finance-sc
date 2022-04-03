@@ -92,6 +92,13 @@ class _$TransactionsRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType(Object)])));
     }
+    value = object.isCategorized;
+    if (value != null) {
+      result
+        ..add('isCategorized')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -161,6 +168,10 @@ class _$TransactionsRecordSerializer
                       DocumentReference, const [const FullType(Object)]))
               as DocumentReference<Object>;
           break;
+        case 'isCategorized':
+          result.isCategorized = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -196,6 +207,8 @@ class _$TransactionsRecord extends TransactionsRecord {
   @override
   final DocumentReference<Object> linkedCategory;
   @override
+  final bool isCategorized;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$TransactionsRecord(
@@ -213,6 +226,7 @@ class _$TransactionsRecord extends TransactionsRecord {
       this.transactionType,
       this.transactionNarration,
       this.linkedCategory,
+      this.isCategorized,
       this.reference})
       : super._();
 
@@ -239,6 +253,7 @@ class _$TransactionsRecord extends TransactionsRecord {
         transactionType == other.transactionType &&
         transactionNarration == other.transactionNarration &&
         linkedCategory == other.linkedCategory &&
+        isCategorized == other.isCategorized &&
         reference == other.reference;
   }
 
@@ -253,16 +268,18 @@ class _$TransactionsRecord extends TransactionsRecord {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, trasactionDate.hashCode),
-                                            account.hashCode),
-                                        monoCategory.hashCode),
-                                    transactionOwner.hashCode),
-                                balanceAfter.hashCode),
-                            transactionMonoID.hashCode),
-                        transactionAmount.hashCode),
-                    transactionType.hashCode),
-                transactionNarration.hashCode),
-            linkedCategory.hashCode),
+                                        $jc(
+                                            $jc($jc(0, trasactionDate.hashCode),
+                                                account.hashCode),
+                                            monoCategory.hashCode),
+                                        transactionOwner.hashCode),
+                                    balanceAfter.hashCode),
+                                transactionMonoID.hashCode),
+                            transactionAmount.hashCode),
+                        transactionType.hashCode),
+                    transactionNarration.hashCode),
+                linkedCategory.hashCode),
+            isCategorized.hashCode),
         reference.hashCode));
   }
 
@@ -279,6 +296,7 @@ class _$TransactionsRecord extends TransactionsRecord {
           ..add('transactionType', transactionType)
           ..add('transactionNarration', transactionNarration)
           ..add('linkedCategory', linkedCategory)
+          ..add('isCategorized', isCategorized)
           ..add('reference', reference))
         .toString();
   }
@@ -335,6 +353,11 @@ class TransactionsRecordBuilder
   set linkedCategory(DocumentReference<Object> linkedCategory) =>
       _$this._linkedCategory = linkedCategory;
 
+  bool _isCategorized;
+  bool get isCategorized => _$this._isCategorized;
+  set isCategorized(bool isCategorized) =>
+      _$this._isCategorized = isCategorized;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -357,6 +380,7 @@ class TransactionsRecordBuilder
       _transactionType = $v.transactionType;
       _transactionNarration = $v.transactionNarration;
       _linkedCategory = $v.linkedCategory;
+      _isCategorized = $v.isCategorized;
       _reference = $v.reference;
       _$v = null;
     }
@@ -388,6 +412,7 @@ class TransactionsRecordBuilder
             transactionType: transactionType,
             transactionNarration: transactionNarration,
             linkedCategory: linkedCategory,
+            isCategorized: isCategorized,
             reference: reference);
     replace(_$result);
     return _$result;

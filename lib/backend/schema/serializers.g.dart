@@ -11,6 +11,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(BudgetCategoriesRecord.serializer)
       ..add(BudgetsRecord.serializer)
       ..add(ConstBudgetCategoriesRecord.serializer)
+      ..add(ConstInstitutionLogosRecord.serializer)
       ..add(TransactionsRecord.serializer)
       ..add(UsersRecord.serializer)
       ..addBuilderFactory(

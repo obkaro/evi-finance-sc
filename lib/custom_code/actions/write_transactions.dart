@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 // Begin custom action code
 // Begin custom action code
-import 'package:evi_finance/auth/auth_util.dart';
+import 'package:evi/auth/auth_util.dart';
 
 Future<List<DocumentReference>> writeTransactions(
   dynamic transactionJsonResponse,
