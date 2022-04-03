@@ -2,6 +2,7 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -28,7 +29,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
       width: MediaQuery.of(context).size.width,
       height: 300,
       decoration: BoxDecoration(
-        color: Color(0xFFEEEEEE),
+        color: FlutterFlowTheme.of(context).primaryBackground,
       ),
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
@@ -66,13 +67,14 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
                       final transactionsUpdateData =
                           createTransactionsRecordData(
                         linkedCategory: columnBudgetCategoriesRecord.reference,
+                        isCategorized: true,
                       );
                       await widget.transaction.reference
                           .update(transactionsUpdateData);
 
                       final budgetCategoriesUpdateData = {
-                        'spentAmount': FieldValue.increment(
-                            widget.transaction.transactionAmount),
+                        'spentAmount': FieldValue.increment(functions
+                            .koboToNaira(widget.transaction.transactionAmount)),
                         'linkedTransactions': FieldValue.arrayUnion(
                             [widget.transaction.reference]),
                       };
@@ -80,8 +82,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
                           .update(budgetCategoriesUpdateData);
 
                       final budgetsUpdateData = {
-                        'budgetSpent': FieldValue.increment(
-                            widget.transaction.transactionAmount),
+                        'budgetSpent': FieldValue.increment(functions
+                            .koboToNaira(widget.transaction.transactionAmount)),
                       };
                       await widget.recievedBudget.update(budgetsUpdateData);
                       Navigator.pop(context);

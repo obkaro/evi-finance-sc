@@ -281,7 +281,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                                                     currency:
                                                                         'N',
                                                                     format:
-                                                                        '#,###,###',
+                                                                        '###,###,###.##',
                                                                     locale: '',
                                                                   ),
                                                                   style: FlutterFlowTheme.of(
@@ -371,7 +371,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                           Expanded(
                             child: Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                               child: TextFormField(
                                 controller: textController2,
                                 obscureText: false,
@@ -403,67 +403,46 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            if (createdTransaction.account != null) {
-                              if (choiceChipsValue != null &&
-                                  choiceChipsValue != '') {
-                                if (textController1.text != null &&
-                                    textController1.text != '') {
-                                  final transactionsUpdateData =
-                                      createTransactionsRecordData(
-                                    trasactionDate: getCurrentTimestamp,
-                                    transactionOwner: currentUserReference,
-                                    transactionAmount:
-                                        int.parse(textController1.text),
-                                    transactionNarration: textController2.text,
-                                    transactionType: choiceChipsValue,
-                                  );
-                                  await createdTransaction.reference
-                                      .update(transactionsUpdateData);
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    context: context,
-                                    builder: (context) {
-                                      return Padding(
-                                        padding:
-                                            MediaQuery.of(context).viewInsets,
-                                        child: SetBudgetCompWidget(
-                                          transaction: createdTransaction,
-                                        ),
-                                      );
-                                    },
-                                  );
-                                } else {
-                                  await showDialog(
-                                    context: context,
-                                    builder: (alertDialogContext) {
-                                      return AlertDialog(
-                                        title: Text('No Account Selected'),
-                                        content: Text(
-                                            'Please enter an amount for this transaction'),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () => Navigator.pop(
-                                                alertDialogContext),
-                                            child: Text('Okay'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                }
+                      FFButtonWidget(
+                        onPressed: () async {
+                          if (createdTransaction.account != null) {
+                            if (choiceChipsValue != null &&
+                                choiceChipsValue != '') {
+                              if (textController1.text != null &&
+                                  textController1.text != '') {
+                                final transactionsUpdateData =
+                                    createTransactionsRecordData(
+                                  trasactionDate: getCurrentTimestamp,
+                                  transactionOwner: currentUserReference,
+                                  transactionAmount:
+                                      int.parse(textController1.text),
+                                  transactionNarration: textController2.text,
+                                  transactionType: choiceChipsValue,
+                                );
+                                await createdTransaction.reference
+                                    .update(transactionsUpdateData);
+                                await showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  builder: (context) {
+                                    return Padding(
+                                      padding:
+                                          MediaQuery.of(context).viewInsets,
+                                      child: SetBudgetCompWidget(
+                                        transaction: createdTransaction,
+                                      ),
+                                    );
+                                  },
+                                );
                               } else {
                                 await showDialog(
                                   context: context,
                                   builder: (alertDialogContext) {
                                     return AlertDialog(
-                                      title: Text('Credit or Debit'),
+                                      title: Text('No Account Selected'),
                                       content: Text(
-                                          'Please select credit or debit for this transaction'),
+                                          'Please enter an amount for this transaction'),
                                       actions: [
                                         TextButton(
                                           onPressed: () =>
@@ -480,9 +459,9 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                 context: context,
                                 builder: (alertDialogContext) {
                                   return AlertDialog(
-                                    title: Text('No Account Selected'),
+                                    title: Text('Credit or Debit'),
                                     content: Text(
-                                        'Please select an account from the list'),
+                                        'Please select credit or debit for this transaction'),
                                     actions: [
                                       TextButton(
                                         onPressed: () =>
@@ -494,23 +473,41 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                 },
                               );
                             }
-                          },
-                          text: 'Save',
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 50,
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
+                          } else {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('No Account Selected'),
+                                  content: Text(
+                                      'Please select an account from the list'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Okay'),
                                     ),
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: 12,
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        },
+                        text: 'Save',
+                        options: FFButtonOptions(
+                          width: double.infinity,
+                          height: 50,
+                          color: FlutterFlowTheme.of(context).primaryColor,
+                          textStyle:
+                              FlutterFlowTheme.of(context).subtitle2.override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                  ),
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
                           ),
+                          borderRadius: 12,
                         ),
                       ),
                     ],

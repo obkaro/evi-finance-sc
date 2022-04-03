@@ -94,179 +94,233 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: StreamBuilder<List<TransactionsRecord>>(
-            stream: queryTransactionsRecord(
-              queryBuilder: (transactionsRecord) => transactionsRecord
-                  .where('transactionOwner', isEqualTo: currentUserReference)
-                  .orderBy('trasactionDate', descending: true),
-            ),
-            builder: (context, snapshot) {
-              // Customize what your widget looks like when it's loading.
-              if (!snapshot.hasData) {
-                return Center(
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: SpinKitRing(
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 50,
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
+            child: StreamBuilder<List<TransactionsRecord>>(
+              stream: queryTransactionsRecord(
+                queryBuilder: (transactionsRecord) => transactionsRecord
+                    .where('transactionOwner', isEqualTo: currentUserReference)
+                    .orderBy('trasactionDate', descending: true),
+              ),
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: SpinKitRing(
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        size: 50,
+                      ),
                     ),
-                  ),
-                );
-              }
-              List<TransactionsRecord> columnTransactionsRecordList =
-                  snapshot.data;
-              return SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: List.generate(columnTransactionsRecordList.length,
-                      (columnIndex) {
-                    final columnTransactionsRecord =
-                        columnTransactionsRecordList[columnIndex];
-                    return Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 100,
-                            decoration: BoxDecoration(),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                              child: InkWell(
-                                onTap: () async {
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          TransactionSingleWidget(
-                                        transaction: columnTransactionsRecord,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        width: 100,
-                                        height: 100,
-                                        decoration: BoxDecoration(),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            if (columnTransactionsRecord
-                                                    .linkedCategory !=
-                                                null)
-                                              StreamBuilder<
-                                                  BudgetCategoriesRecord>(
-                                                stream: BudgetCategoriesRecord
-                                                    .getDocument(
-                                                        columnTransactionsRecord
-                                                            .linkedCategory),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return Center(
-                                                      child: SizedBox(
-                                                        width: 50,
-                                                        height: 50,
-                                                        child: SpinKitRing(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryColor,
-                                                          size: 50,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }
-                                                  final textBudgetCategoriesRecord =
-                                                      snapshot.data;
-                                                  return AutoSizeText(
-                                                    textBudgetCategoriesRecord
-                                                        .categoryName
-                                                        .maybeHandleOverflow(
-                                                      maxChars: 25,
-                                                      replacement: '…',
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1,
-                                                  );
-                                                },
-                                              ),
-                                            Text(
-                                              '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
-                                              textAlign: TextAlign.start,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText2,
-                                            ),
-                                          ],
+                  );
+                }
+                List<TransactionsRecord> columnTransactionsRecordList =
+                    snapshot.data;
+                return SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: List.generate(columnTransactionsRecordList.length,
+                        (columnIndex) {
+                      final columnTransactionsRecord =
+                          columnTransactionsRecordList[columnIndex];
+                      return Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 100,
+                              decoration: BoxDecoration(),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0, 10, 0, 10),
+                                child: InkWell(
+                                  onTap: () async {
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            TransactionSingleWidget(
+                                          transaction: columnTransactionsRecord,
                                         ),
                                       ),
-                                    ),
-                                    Container(
-                                      width: 100,
-                                      height: 100,
-                                      decoration: BoxDecoration(),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          AutoSizeText(
-                                            formatNumber(
-                                              columnTransactionsRecord
-                                                  .transactionAmount,
-                                              formatType: FormatType.custom,
-                                              currency: 'N',
-                                              format: '#,###,###',
-                                              locale: '',
-                                            ).maybeHandleOverflow(
-                                              maxChars: 15,
-                                              replacement: '…',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1,
+                                    );
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Container(
+                                          width: 100,
+                                          height: 100,
+                                          decoration: BoxDecoration(),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              if (columnTransactionsRecord
+                                                      .linkedCategory !=
+                                                  null)
+                                                StreamBuilder<
+                                                    BudgetCategoriesRecord>(
+                                                  stream: BudgetCategoriesRecord
+                                                      .getDocument(
+                                                          columnTransactionsRecord
+                                                              .linkedCategory),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50,
+                                                          height: 50,
+                                                          child: SpinKitRing(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryColor,
+                                                            size: 50,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                    final textBudgetCategoriesRecord =
+                                                        snapshot.data;
+                                                    return AutoSizeText(
+                                                      textBudgetCategoriesRecord
+                                                          .categoryName
+                                                          .maybeHandleOverflow(
+                                                        maxChars: 25,
+                                                        replacement: '…',
+                                                      ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1,
+                                                    );
+                                                  },
+                                                ),
+                                              if (!(columnTransactionsRecord
+                                                      .isCategorized) ??
+                                                  true)
+                                                StreamBuilder<
+                                                    BudgetCategoriesRecord>(
+                                                  stream: BudgetCategoriesRecord
+                                                      .getDocument(
+                                                          columnTransactionsRecord
+                                                              .linkedCategory),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50,
+                                                          height: 50,
+                                                          child: SpinKitRing(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryColor,
+                                                            size: 50,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                    final textBudgetCategoriesRecord =
+                                                        snapshot.data;
+                                                    return AutoSizeText(
+                                                      'Uncategorized',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyText1
+                                                          .override(
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            color: Color(
+                                                                0xFFFF0003),
+                                                            fontStyle: FontStyle
+                                                                .italic,
+                                                          ),
+                                                    );
+                                                  },
+                                                ),
+                                              Text(
+                                                '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
+                                                textAlign: TextAlign.start,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText2,
+                                              ),
+                                            ],
                                           ),
-                                          AutoSizeText(
-                                            columnTransactionsRecord
-                                                .transactionType
-                                                .maybeHandleOverflow(
-                                              maxChars: 15,
-                                              replacement: '…',
-                                            ),
-                                            textAlign: TextAlign.start,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText2,
-                                          ),
-                                        ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          width: 100,
+                                          height: 100,
+                                          decoration: BoxDecoration(),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              AutoSizeText(
+                                                formatNumber(
+                                                  columnTransactionsRecord
+                                                      .transactionAmount,
+                                                  formatType: FormatType.custom,
+                                                  currency: 'N',
+                                                  format: '###,###,###.##',
+                                                  locale: '',
+                                                ).maybeHandleOverflow(
+                                                  maxChars: 15,
+                                                  replacement: '…',
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
+                                              ),
+                                              AutoSizeText(
+                                                columnTransactionsRecord
+                                                    .transactionType
+                                                    .maybeHandleOverflow(
+                                                  maxChars: 15,
+                                                  replacement: '…',
+                                                ),
+                                                textAlign: TextAlign.start,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText2,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        Divider(),
-                      ],
-                    );
-                  }),
-                ),
-              );
-            },
+                          Divider(),
+                        ],
+                      );
+                    }),
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ),

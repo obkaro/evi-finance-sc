@@ -135,7 +135,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           widget.transaction.transactionAmount,
                                           formatType: FormatType.custom,
                                           currency: 'N',
-                                          format: '#,###,###',
+                                          format: '###,###,###.##',
                                           locale: '',
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -145,13 +145,18 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                   ),
                                 ),
                                 Divider(),
-                                Row(
+                                Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Narration',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText2,
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          'Narration',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText2,
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -161,31 +166,35 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Wrap(
-                                            spacing: 0,
-                                            runSpacing: 0,
-                                            alignment: WrapAlignment.start,
-                                            crossAxisAlignment:
-                                                WrapCrossAlignment.start,
-                                            direction: Axis.horizontal,
-                                            runAlignment: WrapAlignment.start,
-                                            verticalDirection:
-                                                VerticalDirection.down,
-                                            clipBehavior: Clip.none,
-                                            children: [
-                                              Text(
-                                                widget.transaction
-                                                    .transactionNarration,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle1,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Wrap(
+                                              spacing: 0,
+                                              runSpacing: 0,
+                                              alignment: WrapAlignment.start,
+                                              crossAxisAlignment:
+                                                  WrapCrossAlignment.start,
+                                              direction: Axis.horizontal,
+                                              runAlignment: WrapAlignment.start,
+                                              verticalDirection:
+                                                  VerticalDirection.down,
+                                              clipBehavior: Clip.none,
+                                              children: [
+                                                Text(
+                                                  widget.transaction
+                                                      .transactionNarration,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .subtitle1,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -237,7 +246,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           widget.transaction.balanceAfter,
                                           formatType: FormatType.custom,
                                           currency: 'N',
-                                          format: '#,###,###',
+                                          format: '###,###,###.##',
                                           locale: '',
                                         ),
                                         style: FlutterFlowTheme.of(context)

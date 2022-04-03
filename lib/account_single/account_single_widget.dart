@@ -8,7 +8,6 @@ import '../main.dart';
 import '../transaction_single/transaction_single_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -135,7 +134,13 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Text(
-                                    widget.account.accountBalance.toString(),
+                                    formatNumber(
+                                      widget.account.accountBalance,
+                                      formatType: FormatType.custom,
+                                      currency: 'N',
+                                      format: '###,###,###.##',
+                                      locale: '',
+                                    ),
                                     style: FlutterFlowTheme.of(context).title3,
                                   ),
                                 ],
@@ -652,32 +657,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(0, 0,
-                                                                    10, 0),
-                                                        child: Container(
-                                                          width: 50,
-                                                          height: 50,
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Container(
-                                                            width: 120,
-                                                            height: 120,
-                                                            clipBehavior:
-                                                                Clip.antiAlias,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                            ),
-                                                            child: Image.asset(
-                                                              'assets/images/evi-app-icon.png',
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
                                                       Expanded(
                                                         child: Container(
                                                           width: 100,
@@ -781,7 +760,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                         .custom,
                                                                 currency: 'N',
                                                                 format:
-                                                                    '#,###,###',
+                                                                    '###,###,###.##',
                                                                 locale: '',
                                                               ).maybeHandleOverflow(
                                                                 maxChars: 15,
