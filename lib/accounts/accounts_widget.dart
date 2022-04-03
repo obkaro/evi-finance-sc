@@ -199,57 +199,43 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                             context)
                                                         .title3,
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 10, 0, 0),
-                                                    child: Text(
-                                                      listViewAccountsRecord
-                                                          .institutionName,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(0, 10,
+                                                                    0, 0),
+                                                        child: Text(
+                                                          listViewAccountsRecord
+                                                              .institutionName,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
                                                               .subtitle2,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                              flex: 3,
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                children: [
-                                                  Text(
-                                                    formatNumber(
-                                                      listViewAccountsRecord
-                                                          .accountBalance,
-                                                      formatType:
-                                                          FormatType.custom,
-                                                      currency: 'N',
-                                                      format: '###,###,###.##',
-                                                      locale: '',
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .title3,
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 10, 0, 0),
-                                                    child: Text(
-                                                      listViewAccountsRecord
-                                                          .dataStatus,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle2,
-                                                    ),
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        formatNumber(
+                                                          listViewAccountsRecord
+                                                              .accountBalance,
+                                                          formatType:
+                                                              FormatType.custom,
+                                                          currency: 'N',
+                                                          format:
+                                                              '###,###,###.##',
+                                                          locale: '',
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .title3,
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
