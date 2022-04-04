@@ -168,8 +168,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               if (columnTransactionsRecord
-                                                      .linkedCategory !=
-                                                  null)
+                                                      .isCategorized ??
+                                                  true)
                                                 StreamBuilder<
                                                     BudgetCategoriesRecord>(
                                                   stream: BudgetCategoriesRecord

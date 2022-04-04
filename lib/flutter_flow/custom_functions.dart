@@ -50,9 +50,12 @@ double calcBudgetChart(BudgetsRecord budget) {
   return budgPercent;
 }
 
-int calcRemBudget(BudgetsRecord budget) {
+String calcRemBudget(BudgetsRecord budget) {
   // Add your function code here!
-  return budget.budgetAmount - budget.budgetSpent;
+  final formatCurrency = NumberFormat.simpleCurrency(
+      locale: 'en_US', name: 'NGN', decimalDigits: 0);
+  int remaining = budget.budgetAmount - budget.budgetSpent;
+  return formatCurrency.format(remaining);
 }
 
 double calcCategoryPercent(BudgetCategoriesRecord category) {
@@ -108,4 +111,33 @@ int checkEditCatTotal(
 int koboToNaira(int koboValue) {
   // Add your function code here!
   return (koboValue / 100).round();
+}
+
+String formatTransCurrency(int num) {
+  // Add your function code here!
+  //NumberFormat formatNumber = NumberFormat.decimalPattern('en_us');
+  final formatCurrency = NumberFormat.simpleCurrency(
+      locale: 'en_US', name: 'NGN', decimalDigits: 0);
+
+  return formatCurrency.format(num / 100);
+}
+
+String formatBudgetCurrency(int num) {
+  // Add your function code here!
+  //NumberFormat formatNumber = NumberFormat.decimalPattern('en_us');
+  final formatCurrency = NumberFormat.simpleCurrency(
+      locale: 'en_US', name: 'NGN', decimalDigits: 0);
+
+  return formatCurrency.format(num);
+}
+
+String subtractCurrency(
+  int value1,
+  int value2,
+) {
+  // Add your function code here!
+  final formatCurrency = NumberFormat.simpleCurrency(
+      locale: 'en_US', name: 'NGN', decimalDigits: 0);
+  int result = value1 - value2;
+  return formatCurrency.format(result);
 }
