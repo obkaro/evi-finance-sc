@@ -35,9 +35,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
         title: Text(
           'Dashboard',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
         actions: [

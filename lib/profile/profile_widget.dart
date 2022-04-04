@@ -28,9 +28,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         title: Text(
           'Profile',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
         actions: [],
@@ -74,8 +75,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 textStyle: FlutterFlowTheme.of(context)
                                     .subtitle2
                                     .override(
-                                      fontFamily: 'Poppins',
+                                      fontFamily: 'Spline Sans',
                                       color: Colors.white,
+                                      useGoogleFonts: false,
                                     ),
                                 borderSide: BorderSide(
                                   color: Colors.transparent,
@@ -107,8 +109,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .subtitle2
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        fontFamily: 'Spline Sans',
                                         color: Colors.white,
+                                        useGoogleFonts: false,
                                       ),
                                   borderSide: BorderSide(
                                     color: Colors.transparent,

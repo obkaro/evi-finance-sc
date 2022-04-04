@@ -1,12 +1,15 @@
 import '../add_transaction/add_transaction_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../transaction_single/transaction_single_widget.dart';
+import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,12 +40,61 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
         title: Text(
           widget.category.categoryName,
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
-        actions: [],
+        actions: [
+          StreamBuilder<List<TransactionsRecord>>(
+            stream: queryTransactionsRecord(
+              queryBuilder: (transactionsRecord) => transactionsRecord.where(
+                  'linkedCategory',
+                  isEqualTo: widget.category.reference),
+            ),
+            builder: (context, snapshot) {
+              // Customize what your widget looks like when it's loading.
+              if (!snapshot.hasData) {
+                return Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: SpinKitRing(
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      size: 50,
+                    ),
+                  ),
+                );
+              }
+              List<TransactionsRecord> iconButtonTransactionsRecordList =
+                  snapshot.data;
+              return FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30,
+                borderWidth: 1,
+                buttonSize: 60,
+                icon: Icon(
+                  Icons.link_off_rounded,
+                  color: Colors.white,
+                  size: 24,
+                ),
+                onPressed: () async {
+                  await actions.unlinkAllTransCategories(
+                    iconButtonTransactionsRecordList.toList(),
+                    widget.category,
+                  );
+
+                  final budgetCategoriesUpdateData = {
+                    'linkedTransactions': FieldValue.delete(),
+                  };
+                  await widget.category.reference
+                      .update(budgetCategoriesUpdateData);
+                },
+              );
+            },
+          ),
+        ],
         centerTitle: false,
         elevation: 2,
       ),
@@ -107,13 +159,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                             style: FlutterFlowTheme.of(context).bodyText2,
                           ),
                           Text(
-                            formatNumber(
-                              widget.category.spentAmount,
-                              formatType: FormatType.custom,
-                              currency: 'N',
-                              format: '###,###,###.##',
-                              locale: '',
-                            ),
+                            functions.formatBudgetCurrency(
+                                widget.category.spentAmount),
                             style: FlutterFlowTheme.of(context).subtitle1,
                           ),
                         ],
@@ -127,13 +174,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                             style: FlutterFlowTheme.of(context).bodyText2,
                           ),
                           Text(
-                            formatNumber(
-                              widget.category.allocatedAmount,
-                              formatType: FormatType.custom,
-                              currency: 'N',
-                              format: '###,###,###.##',
-                              locale: '',
-                            ),
+                            functions.formatBudgetCurrency(
+                                widget.category.allocatedAmount),
                             style: FlutterFlowTheme.of(context).subtitle1,
                           ),
                         ],

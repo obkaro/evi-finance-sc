@@ -42,9 +42,10 @@ class _UserDetailsWidgetState extends State<UserDetailsWidget> {
         title: Text(
           'Input your details',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
         actions: [
@@ -236,8 +237,9 @@ class _UserDetailsWidgetState extends State<UserDetailsWidget> {
                               textStyle: FlutterFlowTheme.of(context)
                                   .subtitle2
                                   .override(
-                                    fontFamily: 'Poppins',
+                                    fontFamily: 'Spline Sans',
                                     color: Colors.white,
+                                    useGoogleFonts: false,
                                   ),
                               borderSide: BorderSide(
                                 color: Colors.transparent,
