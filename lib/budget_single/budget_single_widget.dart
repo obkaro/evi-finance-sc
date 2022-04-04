@@ -56,9 +56,10 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
             title: Text(
               widget.budget.budgetName,
               style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: 'Poppins',
+                    fontFamily: 'Spline Sans',
                     color: Colors.white,
                     fontSize: 22,
+                    useGoogleFonts: false,
                   ),
             ),
             actions: [
@@ -103,7 +104,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                     icon: Icon(
                       Icons.edit_rounded,
                       color: Colors.white,
-                      size: 32,
+                      size: 24,
                     ),
                     onPressed: () async {
                       await Navigator.push(
@@ -159,9 +160,10 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'Spline Sans',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
+                                            useGoogleFonts: false,
                                           ),
                                     ),
                                     startAngle: 0),
@@ -185,13 +187,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                           .bodyText2,
                                     ),
                                     Text(
-                                      formatNumber(
-                                        widget.budget.budgetSpent,
-                                        formatType: FormatType.custom,
-                                        currency: 'N',
-                                        format: '###,###,###.##',
-                                        locale: '',
-                                      ),
+                                      functions.formatBudgetCurrency(
+                                          widget.budget.budgetSpent),
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1,
                                     ),
@@ -207,13 +204,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                           .bodyText2,
                                     ),
                                     Text(
-                                      formatNumber(
-                                        widget.budget.budgetAmount,
-                                        formatType: FormatType.custom,
-                                        currency: 'N',
-                                        format: '###,###,###.##',
-                                        locale: '',
-                                      ),
+                                      functions.formatBudgetCurrency(
+                                          widget.budget.budgetAmount),
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1,
                                     ),
@@ -321,7 +313,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                 .fromSTEB(0, 0,
                                                                     0, 10),
                                                         child: Text(
-                                                          '${functions.subInt(columnBudgetCategoriesRecord.allocatedAmount, columnBudgetCategoriesRecord.spentAmount).toString()} of ${columnBudgetCategoriesRecord.allocatedAmount.toString()} left',
+                                                          '${functions.subtractCurrency(columnBudgetCategoriesRecord.allocatedAmount, columnBudgetCategoriesRecord.spentAmount)} of ${functions.formatBudgetCurrency(columnBudgetCategoriesRecord.allocatedAmount)} left',
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyText1,

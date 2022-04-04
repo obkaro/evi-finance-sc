@@ -25,6 +25,25 @@ int calculateRemBudgetCat(
   return remaining;
 }
 
+String calcRemCatCurrency(
+  List<BudgetCategoriesRecord> categoriesToCalc,
+  BudgetsRecord budget,
+) {
+  // Add your function code here!
+  final formatCurrency = NumberFormat.simpleCurrency(
+      locale: 'en_US', name: 'NGN', decimalDigits: 0);
+
+  int total = 0;
+  for (var i = 0; i < categoriesToCalc.length; i++) {
+    //var currentCat = categoriesToCalc[i];
+
+    total += categoriesToCalc[i].allocatedAmount;
+  }
+  int remaining = budget.budgetAmount - total;
+
+  return formatCurrency.format(remaining);
+}
+
 List<String> getCategoryNames(List<BudgetCategoriesRecord> listForNames) {
   // Add your function code here!
   List<String> list;

@@ -99,9 +99,10 @@ class _EditBudgetCategoriesWidgetState
                   child: Text(
                     'Select Categories',
                     style: FlutterFlowTheme.of(context).title2.override(
-                          fontFamily: 'Poppins',
+                          fontFamily: 'Spline Sans',
                           color: Colors.white,
                           fontSize: 22,
+                          useGoogleFonts: false,
                         ),
                   ),
                 ),
@@ -191,18 +192,17 @@ class _EditBudgetCategoriesWidgetState
                                             .primaryBackground,
                                       ),
                                       child: Text(
-                                        functions
-                                            .calculateRemBudgetCat(
-                                                editBudgetCategoriesBudgetCategoriesRecordList
-                                                    .toList(),
-                                                columnBudgetsRecord)
-                                            .toString(),
+                                        functions.calcRemCatCurrency(
+                                            editBudgetCategoriesBudgetCategoriesRecordList
+                                                .toList(),
+                                            columnBudgetsRecord),
                                         textAlign: TextAlign.end,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Poppins',
+                                              fontFamily: 'Spline Sans',
                                               color: Color(0xFFFF0003),
+                                              useGoogleFonts: false,
                                             ),
                                       ),
                                     ),
@@ -259,13 +259,8 @@ class _EditBudgetCategoriesWidgetState
                                             .primaryBackground,
                                       ),
                                       child: Text(
-                                        formatNumber(
-                                          columnBudgetsRecord.budgetAmount,
-                                          formatType: FormatType.custom,
-                                          currency: 'N',
-                                          format: '#,###,###',
-                                          locale: '',
-                                        ),
+                                        functions.formatBudgetCurrency(
+                                            columnBudgetsRecord.budgetAmount),
                                         textAlign: TextAlign.end,
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1,
@@ -451,8 +446,10 @@ class _EditBudgetCategoriesWidgetState
                                                               .bodyText1
                                                               .override(
                                                                 fontFamily:
-                                                                    'Poppins',
+                                                                    'Spline Sans',
                                                                 fontSize: 12,
+                                                                useGoogleFonts:
+                                                                    false,
                                                               ),
                                                     ),
                                                   ],
@@ -509,8 +506,9 @@ class _EditBudgetCategoriesWidgetState
                                       textStyle: FlutterFlowTheme.of(context)
                                           .subtitle2
                                           .override(
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'Spline Sans',
                                             color: Colors.white,
+                                            useGoogleFonts: false,
                                           ),
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
@@ -620,15 +618,9 @@ class _EditBudgetCategoriesWidgetState
                                                 alignment:
                                                     AlignmentDirectional(0, 0),
                                                 child: Text(
-                                                  formatNumber(
-                                                    columnBudgetCategoriesRecord
-                                                        .allocatedAmount,
-                                                    formatType:
-                                                        FormatType.custom,
-                                                    currency: 'N',
-                                                    format: '#,###,###',
-                                                    locale: '',
-                                                  ),
+                                                  functions.formatBudgetCurrency(
+                                                      columnBudgetCategoriesRecord
+                                                          .allocatedAmount),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1,
@@ -839,8 +831,9 @@ class _EditBudgetCategoriesWidgetState
                                               FlutterFlowTheme.of(context)
                                                   .subtitle2
                                                   .override(
-                                                    fontFamily: 'Poppins',
+                                                    fontFamily: 'Spline Sans',
                                                     color: Color(0xFF5D5B5B),
+                                                    useGoogleFonts: false,
                                                   ),
                                           elevation: 0,
                                           borderSide: BorderSide(
@@ -941,8 +934,9 @@ class _EditBudgetCategoriesWidgetState
                                               FlutterFlowTheme.of(context)
                                                   .subtitle2
                                                   .override(
-                                                    fontFamily: 'Poppins',
+                                                    fontFamily: 'Spline Sans',
                                                     color: Colors.white,
+                                                    useGoogleFonts: false,
                                                   ),
                                           borderSide: BorderSide(
                                             color: Colors.transparent,

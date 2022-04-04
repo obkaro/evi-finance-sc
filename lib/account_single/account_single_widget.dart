@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import '../transaction_single/transaction_single_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -65,9 +66,10 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
             title: Text(
               'Account',
               style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: 'Poppins',
+                    fontFamily: 'Spline Sans',
                     color: Colors.white,
                     fontSize: 22,
+                    useGoogleFonts: false,
                   ),
             ),
             actions: [],
@@ -134,13 +136,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Text(
-                                    formatNumber(
-                                      widget.account.accountBalance,
-                                      formatType: FormatType.custom,
-                                      currency: 'N',
-                                      format: '###,###,###.##',
-                                      locale: '',
-                                    ),
+                                    functions.formatTransCurrency(
+                                        widget.account.accountBalance),
                                     style: FlutterFlowTheme.of(context).title3,
                                   ),
                                 ],
@@ -345,8 +342,10 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .subtitle2
                                                       .override(
-                                                        fontFamily: 'Poppins',
+                                                        fontFamily:
+                                                            'Spline Sans',
                                                         color: Colors.white,
+                                                        useGoogleFonts: false,
                                                       ),
                                               borderSide: BorderSide(
                                                 color: Colors.transparent,
@@ -554,8 +553,10 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .subtitle2
                                                       .override(
-                                                        fontFamily: 'Poppins',
+                                                        fontFamily:
+                                                            'Spline Sans',
                                                         color: Colors.white,
+                                                        useGoogleFonts: false,
                                                       ),
                                               borderSide: BorderSide(
                                                 color: Colors.transparent,

@@ -4,6 +4,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../transaction_single/transaction_single_widget.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -29,9 +30,10 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
         title: Text(
           'Transactions',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
         actions: [],
@@ -100,6 +102,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
               stream: queryTransactionsRecord(
                 queryBuilder: (transactionsRecord) => transactionsRecord
                     .where('transactionOwner', isEqualTo: currentUserReference)
+                    .where('transactionType', isEqualTo: 'debit')
                     .orderBy('trasactionDate', descending: true),
               ),
               builder: (context, snapshot) {
@@ -217,11 +220,13 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                           context)
                                                       .bodyText1
                                                       .override(
-                                                        fontFamily: 'Poppins',
+                                                        fontFamily:
+                                                            'Spline Sans',
                                                         color:
                                                             Color(0xFFFF0003),
                                                         fontStyle:
                                                             FontStyle.italic,
+                                                        useGoogleFonts: false,
                                                       ),
                                                 ),
                                               Text(
@@ -249,17 +254,14 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                 CrossAxisAlignment.end,
                                             children: [
                                               AutoSizeText(
-                                                formatNumber(
-                                                  columnTransactionsRecord
-                                                      .transactionAmount,
-                                                  formatType: FormatType.custom,
-                                                  currency: 'N',
-                                                  format: '###,###,###.##',
-                                                  locale: '',
-                                                ).maybeHandleOverflow(
-                                                  maxChars: 15,
-                                                  replacement: '…',
-                                                ),
+                                                functions
+                                                    .formatTransCurrency(
+                                                        columnTransactionsRecord
+                                                            .transactionAmount)
+                                                    .maybeHandleOverflow(
+                                                      maxChars: 15,
+                                                      replacement: '…',
+                                                    ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyText1,
