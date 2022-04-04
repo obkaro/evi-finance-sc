@@ -211,45 +211,18 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                               if (!(columnTransactionsRecord
                                                       .isCategorized) ??
                                                   true)
-                                                StreamBuilder<
-                                                    BudgetCategoriesRecord>(
-                                                  stream: BudgetCategoriesRecord
-                                                      .getDocument(
-                                                          columnTransactionsRecord
-                                                              .linkedCategory),
-                                                  builder: (context, snapshot) {
-                                                    // Customize what your widget looks like when it's loading.
-                                                    if (!snapshot.hasData) {
-                                                      return Center(
-                                                        child: SizedBox(
-                                                          width: 50,
-                                                          height: 50,
-                                                          child: SpinKitRing(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryColor,
-                                                            size: 50,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }
-                                                    final textBudgetCategoriesRecord =
-                                                        snapshot.data;
-                                                    return AutoSizeText(
-                                                      'Uncategorized',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyText1
-                                                          .override(
-                                                            fontFamily:
-                                                                'Poppins',
-                                                            color: Color(
-                                                                0xFFFF0003),
-                                                            fontStyle: FontStyle
-                                                                .italic,
-                                                          ),
-                                                    );
-                                                  },
+                                                AutoSizeText(
+                                                  'Uncategorized',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            Color(0xFFFF0003),
+                                                        fontStyle:
+                                                            FontStyle.italic,
+                                                      ),
                                                 ),
                                               Text(
                                                 '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
