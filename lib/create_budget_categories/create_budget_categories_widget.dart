@@ -179,12 +179,10 @@ class _CreateBudgetCategoriesWidgetState
                                             .primaryBackground,
                                       ),
                                       child: Text(
-                                        functions
-                                            .calculateRemBudgetCat(
-                                                createBudgetCategoriesBudgetCategoriesRecordList
-                                                    .toList(),
-                                                columnBudgetsRecord)
-                                            .toString(),
+                                        functions.calcRemCatCurrency(
+                                            createBudgetCategoriesBudgetCategoriesRecordList
+                                                .toList(),
+                                            columnBudgetsRecord),
                                         textAlign: TextAlign.end,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
@@ -248,13 +246,8 @@ class _CreateBudgetCategoriesWidgetState
                                             .primaryBackground,
                                       ),
                                       child: Text(
-                                        formatNumber(
-                                          columnBudgetsRecord.budgetAmount,
-                                          formatType: FormatType.custom,
-                                          currency: 'N',
-                                          format: '#,###,###',
-                                          locale: '',
-                                        ),
+                                        functions.formatBudgetCurrency(
+                                            columnBudgetsRecord.budgetAmount),
                                         textAlign: TextAlign.end,
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1,
@@ -612,15 +605,9 @@ class _CreateBudgetCategoriesWidgetState
                                                 alignment:
                                                     AlignmentDirectional(0, 0),
                                                 child: Text(
-                                                  formatNumber(
-                                                    columnBudgetCategoriesRecord
-                                                        .allocatedAmount,
-                                                    formatType:
-                                                        FormatType.custom,
-                                                    currency: 'N',
-                                                    format: '#,###,###',
-                                                    locale: '',
-                                                  ),
+                                                  functions.formatBudgetCurrency(
+                                                      columnBudgetCategoriesRecord
+                                                          .allocatedAmount),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1,
