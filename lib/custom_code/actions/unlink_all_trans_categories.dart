@@ -13,7 +13,11 @@ Future unlinkAllTransCategories(
 ) async {
   // Add your function code here!
   for (var i = 0; i < transactions.length; i++) {
-    transactions[i].isCategorized = false;
-    transactions[i].linkedCategory = null;
+    final categoryUpdateData = {
+      'isCategorized': false,
+      'linkedCategory': FieldValue.delete(),
+    };
+
+    await transactions[i].reference.update(categoryUpdateData);
   }
 }
