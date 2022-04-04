@@ -5,6 +5,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../custom_code/actions/index.dart' as actions;
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -32,9 +33,10 @@ class _AccountsWidgetState extends State<AccountsWidget> {
         title: Text(
           'My Accounts',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
         actions: [],
@@ -107,8 +109,9 @@ class _AccountsWidgetState extends State<AccountsWidget> {
         label: Text(
           'Link New Account',
           style: FlutterFlowTheme.of(context).bodyText1.override(
-                fontFamily: 'Poppins',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
+                useGoogleFonts: false,
               ),
         ),
       ),
@@ -220,16 +223,9 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                         ),
                                                       ),
                                                       Text(
-                                                        formatNumber(
-                                                          listViewAccountsRecord
-                                                              .accountBalance,
-                                                          formatType:
-                                                              FormatType.custom,
-                                                          currency: 'N',
-                                                          format:
-                                                              '###,###,###.##',
-                                                          locale: '',
-                                                        ),
+                                                        functions.formatTransCurrency(
+                                                            listViewAccountsRecord
+                                                                .accountBalance),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)

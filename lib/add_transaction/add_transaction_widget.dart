@@ -58,9 +58,10 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
         title: Text(
           'Add Transaction',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
         actions: [],
@@ -134,9 +135,10 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .subtitle1
                                   .override(
-                                    fontFamily: 'Poppins',
+                                    fontFamily: 'Spline Sans',
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
+                                    useGoogleFonts: false,
                                   ),
                             ),
                           ],
@@ -338,8 +340,9 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        fontFamily: 'Spline Sans',
                                         color: Colors.white,
+                                        useGoogleFonts: false,
                                       ),
                                   iconColor: Colors.white,
                                   iconSize: 18,
@@ -350,8 +353,9 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        fontFamily: 'Spline Sans',
                                         color: Color(0xFF323B45),
+                                        useGoogleFonts: false,
                                       ),
                                   iconColor: Color(0xFF323B45),
                                   iconSize: 18,
@@ -500,8 +504,9 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                           color: FlutterFlowTheme.of(context).primaryColor,
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Poppins',
+                                    fontFamily: 'Spline Sans',
                                     color: Colors.white,
+                                    useGoogleFonts: false,
                                   ),
                           borderSide: BorderSide(
                             color: Colors.transparent,

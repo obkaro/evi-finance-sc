@@ -4,6 +4,7 @@ import '../budget_single/budget_single_widget.dart';
 import '../create_budget/create_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -29,9 +30,10 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
         title: Text(
           'My Budgets',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
         actions: [],
@@ -124,13 +126,8 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                 style: FlutterFlowTheme.of(context).title3,
                               ),
                               subtitle: Text(
-                                formatNumber(
-                                  columnBudgetsRecord.budgetAmount,
-                                  formatType: FormatType.custom,
-                                  currency: 'N',
-                                  format: '###,###,###.##',
-                                  locale: '',
-                                ),
+                                functions.formatTransCurrency(
+                                    columnBudgetsRecord.budgetAmount),
                                 style: FlutterFlowTheme.of(context).subtitle2,
                               ),
                               trailing: Icon(

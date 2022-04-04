@@ -9,6 +9,10 @@
           "order": "ASCENDING"
         },
         {
+          "fieldPath": "transactionType",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "trasactionDate",
           "order": "DESCENDING"
         }

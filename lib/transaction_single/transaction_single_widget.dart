@@ -1,9 +1,12 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/set_budget_comp_widget.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -55,9 +58,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
             title: Text(
               'Transaction',
               style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: 'Poppins',
+                    fontFamily: 'Spline Sans',
                     color: Colors.white,
                     fontSize: 22,
+                    useGoogleFonts: false,
                   ),
             ),
             actions: [],
@@ -131,13 +135,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text(
-                                        formatNumber(
-                                          widget.transaction.transactionAmount,
-                                          formatType: FormatType.custom,
-                                          currency: 'N',
-                                          format: '###,###,###.##',
-                                          locale: '',
-                                        ),
+                                        functions.formatTransCurrency(widget
+                                            .transaction.transactionAmount),
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1,
                                       ),
@@ -256,13 +255,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text(
-                                        formatNumber(
-                                          widget.transaction.balanceAfter,
-                                          formatType: FormatType.custom,
-                                          currency: 'N',
-                                          format: '###,###,###.##',
-                                          locale: '',
-                                        ),
+                                        functions.formatTransCurrency(widget
+                                            .transaction.transactionAmount),
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1,
                                       ),
@@ -294,59 +288,59 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            if (widget.transaction
-                                                    .linkedCategory !=
-                                                null)
-                                              StreamBuilder<
-                                                  List<BudgetCategoriesRecord>>(
-                                                stream:
-                                                    queryBudgetCategoriesRecord(
-                                                  queryBuilder: (budgetCategoriesRecord) =>
-                                                      budgetCategoriesRecord.where(
-                                                          'linkedTransactions',
-                                                          arrayContains: widget
-                                                              .transaction
-                                                              .reference),
-                                                  singleRecord: true,
-                                                ),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return Center(
-                                                      child: SizedBox(
-                                                        width: 50,
-                                                        height: 50,
-                                                        child: SpinKitRing(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryColor,
-                                                          size: 50,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }
-                                                  List<BudgetCategoriesRecord>
-                                                      textBudgetCategoriesRecordList =
-                                                      snapshot.data;
-                                                  // Return an empty Container when the document does not exist.
-                                                  if (snapshot.data.isEmpty) {
-                                                    return Container();
-                                                  }
-                                                  final textBudgetCategoriesRecord =
-                                                      textBudgetCategoriesRecordList
-                                                              .isNotEmpty
-                                                          ? textBudgetCategoriesRecordList
-                                                              .first
-                                                          : null;
-                                                  return Text(
-                                                    textBudgetCategoriesRecord
-                                                        .categoryName,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .subtitle1,
-                                                  );
-                                                },
+                                            StreamBuilder<
+                                                List<BudgetCategoriesRecord>>(
+                                              stream:
+                                                  queryBudgetCategoriesRecord(
+                                                queryBuilder:
+                                                    (budgetCategoriesRecord) =>
+                                                        budgetCategoriesRecord.where(
+                                                            'linkedTransactions',
+                                                            arrayContains:
+                                                                widget
+                                                                    .transaction
+                                                                    .reference),
+                                                singleRecord: true,
                                               ),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50,
+                                                      height: 50,
+                                                      child: SpinKitRing(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        size: 50,
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                                List<BudgetCategoriesRecord>
+                                                    textBudgetCategoriesRecordList =
+                                                    snapshot.data;
+                                                // Return an empty Container when the document does not exist.
+                                                if (snapshot.data.isEmpty) {
+                                                  return Container();
+                                                }
+                                                final textBudgetCategoriesRecord =
+                                                    textBudgetCategoriesRecordList
+                                                            .isNotEmpty
+                                                        ? textBudgetCategoriesRecordList
+                                                            .first
+                                                        : null;
+                                                return Text(
+                                                  textBudgetCategoriesRecord
+                                                      .categoryName,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .subtitle1,
+                                                );
+                                              },
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -363,50 +357,125 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          FFButtonWidget(
-                                            onPressed: () async {
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                context: context,
-                                                builder: (context) {
-                                                  return Padding(
-                                                    padding:
-                                                        MediaQuery.of(context)
+                                          Expanded(
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 20, 0),
+                                              child: FFButtonWidget(
+                                                onPressed: () async {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Padding(
+                                                        padding: MediaQuery.of(
+                                                                context)
                                                             .viewInsets,
-                                                    child: SetBudgetCompWidget(
-                                                      transaction:
-                                                          widget.transaction,
-                                                    ),
+                                                        child:
+                                                            SetBudgetCompWidget(
+                                                          transaction: widget
+                                                              .transaction,
+                                                        ),
+                                                      );
+                                                    },
                                                   );
+                                                },
+                                                text: 'Edit',
+                                                icon: Icon(
+                                                  Icons.edit_rounded,
+                                                  size: 15,
+                                                ),
+                                                options: FFButtonOptions(
+                                                  width: 130,
+                                                  height: 50,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily:
+                                                            'Spline Sans',
+                                                        color: Colors.white,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius: 12,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          StreamBuilder<BudgetCategoriesRecord>(
+                                            stream: BudgetCategoriesRecord
+                                                .getDocument(widget.transaction
+                                                    .linkedCategory),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 50,
+                                                    height: 50,
+                                                    child: SpinKitRing(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryColor,
+                                                      size: 50,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              final iconButtonBudgetCategoriesRecord =
+                                                  snapshot.data;
+                                              return FlutterFlowIconButton(
+                                                borderColor: Colors.transparent,
+                                                borderRadius: 30,
+                                                borderWidth: 1,
+                                                buttonSize: 50,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                icon: Icon(
+                                                  Icons.link_off_rounded,
+                                                  color: Colors.white,
+                                                  size: 24,
+                                                ),
+                                                onPressed: () async {
+                                                  final transactionsUpdateData =
+                                                      {
+                                                    ...createTransactionsRecordData(
+                                                      isCategorized: false,
+                                                    ),
+                                                    'linkedCategory':
+                                                        FieldValue.delete(),
+                                                  };
+                                                  await widget
+                                                      .transaction.reference
+                                                      .update(
+                                                          transactionsUpdateData);
+
+                                                  final budgetCategoriesUpdateData =
+                                                      {
+                                                    'linkedTransactions':
+                                                        FieldValue.arrayRemove([
+                                                      widget
+                                                          .transaction.reference
+                                                    ]),
+                                                  };
+                                                  await iconButtonBudgetCategoriesRecord
+                                                      .reference
+                                                      .update(
+                                                          budgetCategoriesUpdateData);
                                                 },
                                               );
                                             },
-                                            text: 'Edit',
-                                            icon: Icon(
-                                              Icons.edit_rounded,
-                                              size: 15,
-                                            ),
-                                            options: FFButtonOptions(
-                                              width: 130,
-                                              height: 50,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color: Colors.white,
-                                                      ),
-                                              borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                                width: 1,
-                                              ),
-                                              borderRadius: 12,
-                                            ),
                                           ),
                                         ],
                                       ),
