@@ -468,6 +468,11 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                       widget
                                                           .transaction.reference
                                                     ]),
+                                                    'spentAmount': FieldValue
+                                                        .increment(functions
+                                                            .returnNegative(widget
+                                                                .transaction
+                                                                .transactionAmount)),
                                                   };
                                                   await iconButtonBudgetCategoriesRecord
                                                       .reference
