@@ -46,10 +46,9 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
         title: Text(
           'Create A Budget',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Spline Sans',
+                fontFamily: 'Roboto',
                 color: Colors.white,
                 fontSize: 22,
-                useGoogleFonts: false,
               ),
         ),
         actions: [],
@@ -186,10 +185,9 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                 textStyle: FlutterFlowTheme.of(context)
                                     .subtitle2
                                     .override(
-                                      fontFamily: 'Spline Sans',
+                                      fontFamily: 'Roboto',
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
-                                      useGoogleFonts: false,
                                     ),
                                 elevation: 0,
                                 borderSide: BorderSide(
@@ -219,10 +217,9 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                 textStyle: FlutterFlowTheme.of(context)
                                     .subtitle2
                                     .override(
-                                      fontFamily: 'Spline Sans',
+                                      fontFamily: 'Roboto',
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
-                                      useGoogleFonts: false,
                                     ),
                                 elevation: 0,
                                 borderSide: BorderSide(
@@ -322,9 +319,8 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                             color: FlutterFlowTheme.of(context).primaryColor,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Spline Sans',
+                                      fontFamily: 'Roboto',
                                       color: Colors.white,
-                                      useGoogleFonts: false,
                                     ),
                             borderSide: BorderSide(
                               color: Colors.transparent,

@@ -40,10 +40,9 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
         title: Text(
           widget.category.categoryName,
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Spline Sans',
+                fontFamily: 'Roboto',
                 color: Colors.white,
                 fontSize: 22,
-                useGoogleFonts: false,
               ),
         ),
         actions: [

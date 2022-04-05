@@ -30,10 +30,9 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
         title: Text(
           'Transactions',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Spline Sans',
+                fontFamily: 'Roboto',
                 color: Colors.white,
                 fontSize: 22,
-                useGoogleFonts: false,
               ),
         ),
         actions: [],
@@ -220,13 +219,11 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                           context)
                                                       .bodyText1
                                                       .override(
-                                                        fontFamily:
-                                                            'Spline Sans',
+                                                        fontFamily: 'Roboto',
                                                         color:
                                                             Color(0xFFFF0003),
                                                         fontStyle:
                                                             FontStyle.italic,
-                                                        useGoogleFonts: false,
                                                       ),
                                                 ),
                                               Text(

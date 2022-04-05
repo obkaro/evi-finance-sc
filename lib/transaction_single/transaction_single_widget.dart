@@ -58,10 +58,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
             title: Text(
               'Transaction',
               style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: 'Spline Sans',
+                    fontFamily: 'Roboto',
                     color: Colors.white,
                     fontSize: 22,
-                    useGoogleFonts: false,
                   ),
             ),
             actions: [],
@@ -397,10 +396,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                           .of(context)
                                                       .subtitle2
                                                       .override(
-                                                        fontFamily:
-                                                            'Spline Sans',
+                                                        fontFamily: 'Roboto',
                                                         color: Colors.white,
-                                                        useGoogleFonts: false,
                                                       ),
                                                   borderSide: BorderSide(
                                                     color: Colors.transparent,
