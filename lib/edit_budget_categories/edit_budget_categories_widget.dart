@@ -99,10 +99,9 @@ class _EditBudgetCategoriesWidgetState
                   child: Text(
                     'Select Categories',
                     style: FlutterFlowTheme.of(context).title2.override(
-                          fontFamily: 'Spline Sans',
+                          fontFamily: 'Roboto',
                           color: Colors.white,
                           fontSize: 22,
-                          useGoogleFonts: false,
                         ),
                   ),
                 ),
@@ -200,9 +199,8 @@ class _EditBudgetCategoriesWidgetState
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Spline Sans',
+                                              fontFamily: 'Roboto',
                                               color: Color(0xFFFF0003),
-                                              useGoogleFonts: false,
                                             ),
                                       ),
                                     ),
@@ -446,10 +444,8 @@ class _EditBudgetCategoriesWidgetState
                                                               .bodyText1
                                                               .override(
                                                                 fontFamily:
-                                                                    'Spline Sans',
+                                                                    'Roboto',
                                                                 fontSize: 12,
-                                                                useGoogleFonts:
-                                                                    false,
                                                               ),
                                                     ),
                                                   ],
@@ -506,9 +502,8 @@ class _EditBudgetCategoriesWidgetState
                                       textStyle: FlutterFlowTheme.of(context)
                                           .subtitle2
                                           .override(
-                                            fontFamily: 'Spline Sans',
+                                            fontFamily: 'Roboto',
                                             color: Colors.white,
-                                            useGoogleFonts: false,
                                           ),
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
@@ -831,9 +826,8 @@ class _EditBudgetCategoriesWidgetState
                                               FlutterFlowTheme.of(context)
                                                   .subtitle2
                                                   .override(
-                                                    fontFamily: 'Spline Sans',
+                                                    fontFamily: 'Roboto',
                                                     color: Color(0xFF5D5B5B),
-                                                    useGoogleFonts: false,
                                                   ),
                                           elevation: 0,
                                           borderSide: BorderSide(
@@ -934,9 +928,8 @@ class _EditBudgetCategoriesWidgetState
                                               FlutterFlowTheme.of(context)
                                                   .subtitle2
                                                   .override(
-                                                    fontFamily: 'Spline Sans',
+                                                    fontFamily: 'Roboto',
                                                     color: Colors.white,
-                                                    useGoogleFonts: false,
                                                   ),
                                           borderSide: BorderSide(
                                             color: Colors.transparent,

@@ -146,9 +146,8 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                     height: 50,
                     color: FlutterFlowTheme.of(context).primaryColor,
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily: 'Spline Sans',
+                          fontFamily: 'Roboto',
                           color: Colors.white,
-                          useGoogleFonts: false,
                         ),
                     borderSide: BorderSide(
                       color: Colors.transparent,

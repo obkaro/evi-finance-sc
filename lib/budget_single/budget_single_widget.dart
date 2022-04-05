@@ -56,10 +56,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
             title: Text(
               widget.budget.budgetName,
               style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: 'Spline Sans',
+                    fontFamily: 'Roboto',
                     color: Colors.white,
                     fontSize: 22,
-                    useGoogleFonts: false,
                   ),
             ),
             actions: [
@@ -160,10 +159,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily: 'Spline Sans',
+                                            fontFamily: 'Roboto',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
-                                            useGoogleFonts: false,
                                           ),
                                     ),
                                     startAngle: 0),

@@ -33,10 +33,9 @@ class _AccountsWidgetState extends State<AccountsWidget> {
         title: Text(
           'My Accounts',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Spline Sans',
+                fontFamily: 'Roboto',
                 color: Colors.white,
                 fontSize: 22,
-                useGoogleFonts: false,
               ),
         ),
         actions: [],
@@ -109,9 +108,8 @@ class _AccountsWidgetState extends State<AccountsWidget> {
         label: Text(
           'Link New Account',
           style: FlutterFlowTheme.of(context).bodyText1.override(
-                fontFamily: 'Spline Sans',
+                fontFamily: 'Roboto',
                 color: Colors.white,
-                useGoogleFonts: false,
               ),
         ),
       ),
