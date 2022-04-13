@@ -405,11 +405,11 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          if (createdTransaction.account != null) {
-                            if (choiceChipsValue != null &&
-                                choiceChipsValue != '') {
-                              if (textController1.text != null &&
-                                  textController1.text != '') {
+                          if ((createdTransaction.account != null)) {
+                            if ((choiceChipsValue != null) &&
+                                (choiceChipsValue != '')) {
+                              if ((textController1.text != null) &&
+                                  (textController1.text != '')) {
                                 final transactionsUpdateData =
                                     createTransactionsRecordData(
                                   trasactionDate: getCurrentTimestamp,
