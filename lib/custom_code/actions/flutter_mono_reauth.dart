@@ -22,8 +22,8 @@ extension CustomContext on BuildContext {
 }
 
 Future flutterMonoReauth(
-  String reauthCode,
   BuildContext context,
+  String reauthCode,
 ) async =>
     showDialog(
         context: context,
