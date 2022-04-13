@@ -125,7 +125,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                 style: FlutterFlowTheme.of(context).title3,
                               ),
                               subtitle: Text(
-                                functions.formatTransCurrency(
+                                functions.formatBudgetCurrency(
                                     columnBudgetsRecord.budgetAmount),
                                 style: FlutterFlowTheme.of(context).subtitle2,
                               ),

@@ -350,9 +350,10 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                       .calcCategoryPercent(
                                                                           columnBudgetCategoriesRecord),
                                                                   width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      0.8,
                                                                   lineHeight: 8,
                                                                   animation:
                                                                       true,
