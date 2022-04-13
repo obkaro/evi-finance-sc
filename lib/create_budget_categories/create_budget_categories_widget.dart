@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/create_const_category_widget.dart';
 import '../components/create_custom_category_widget.dart';
 import '../components/edit_category_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -151,6 +152,7 @@ class _CreateBudgetCategoriesWidgetState
                               children: [
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Expanded(
                                       child: Container(
@@ -162,7 +164,7 @@ class _CreateBudgetCategoriesWidgetState
                                           borderRadius:
                                               BorderRadius.circular(12),
                                         ),
-                                        alignment: AlignmentDirectional(1, 0),
+                                        alignment: AlignmentDirectional(1, 1),
                                         child: Text(
                                           'Remaining (Uncategorized):',
                                           style: FlutterFlowTheme.of(context)
@@ -177,6 +179,7 @@ class _CreateBudgetCategoriesWidgetState
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBackground,
                                       ),
+                                      alignment: AlignmentDirectional(0, 1),
                                       child: Text(
                                         functions.calcRemCatCurrency(
                                             createBudgetCategoriesBudgetCategoriesRecordList
@@ -386,10 +389,12 @@ class _CreateBudgetCategoriesWidgetState
                                                                 context)
                                                             .viewInsets,
                                                         child:
-                                                            CreateCustomCategoryWidget(
+                                                            CreateConstCategoryWidget(
+                                                          constCategory:
+                                                              gridViewConstBudgetCategoriesRecord,
                                                           budget: widget
                                                               .createdBudget,
-                                                          budgetRemaining:
+                                                          budgetAllocatedRemaining:
                                                               functions.calculateRemBudgetCat(
                                                                   createBudgetCategoriesBudgetCategoriesRecordList
                                                                       .toList(),
