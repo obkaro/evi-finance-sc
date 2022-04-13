@@ -39,7 +39,7 @@ abstract class FlutterFlowTheme {
   Color secondaryText;
 
   TextStyle get title1 => GoogleFonts.getFont(
-        'Roboto',
+        'Readex Pro',
         color: primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 24,

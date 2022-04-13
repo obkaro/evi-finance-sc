@@ -103,6 +103,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         icon: Icon(
           Icons.add,
+          color: Colors.white,
         ),
         elevation: 3,
         label: Text(

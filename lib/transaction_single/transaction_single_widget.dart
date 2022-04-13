@@ -77,8 +77,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                   children: [
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                      child: StreamBuilder<AccountsRecord>(
-                        stream: AccountsRecord.getDocument(
+                      child: FutureBuilder<AccountsRecord>(
+                        future: AccountsRecord.getDocumentOnce(
                             widget.transaction.account),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
@@ -408,77 +408,85 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                               ),
                                             ),
                                           ),
-                                          StreamBuilder<BudgetCategoriesRecord>(
-                                            stream: BudgetCategoriesRecord
-                                                .getDocument(widget.transaction
-                                                    .linkedCategory),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child: SpinKitRing(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      size: 50,
+                                          if (widget
+                                                  .transaction.isCategorized ??
+                                              true)
+                                            StreamBuilder<
+                                                BudgetCategoriesRecord>(
+                                              stream: BudgetCategoriesRecord
+                                                  .getDocument(widget
+                                                      .transaction
+                                                      .linkedCategory),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50,
+                                                      height: 50,
+                                                      child: SpinKitRing(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        size: 50,
+                                                      ),
                                                     ),
+                                                  );
+                                                }
+                                                final iconButtonBudgetCategoriesRecord =
+                                                    snapshot.data;
+                                                return FlutterFlowIconButton(
+                                                  borderColor:
+                                                      Colors.transparent,
+                                                  borderRadius: 30,
+                                                  borderWidth: 1,
+                                                  buttonSize: 50,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryColor,
+                                                  icon: Icon(
+                                                    Icons.link_off_rounded,
+                                                    color: Colors.white,
+                                                    size: 24,
                                                   ),
-                                                );
-                                              }
-                                              final iconButtonBudgetCategoriesRecord =
-                                                  snapshot.data;
-                                              return FlutterFlowIconButton(
-                                                borderColor: Colors.transparent,
-                                                borderRadius: 30,
-                                                borderWidth: 1,
-                                                buttonSize: 50,
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                icon: Icon(
-                                                  Icons.link_off_rounded,
-                                                  color: Colors.white,
-                                                  size: 24,
-                                                ),
-                                                onPressed: () async {
-                                                  final transactionsUpdateData =
-                                                      {
-                                                    ...createTransactionsRecordData(
-                                                      isCategorized: false,
-                                                    ),
-                                                    'linkedCategory':
-                                                        FieldValue.delete(),
-                                                  };
-                                                  await widget
-                                                      .transaction.reference
-                                                      .update(
-                                                          transactionsUpdateData);
+                                                  onPressed: () async {
+                                                    final transactionsUpdateData =
+                                                        {
+                                                      ...createTransactionsRecordData(
+                                                        isCategorized: false,
+                                                      ),
+                                                      'linkedCategory':
+                                                          FieldValue.delete(),
+                                                    };
+                                                    await widget
+                                                        .transaction.reference
+                                                        .update(
+                                                            transactionsUpdateData);
 
-                                                  final budgetCategoriesUpdateData =
-                                                      {
-                                                    'linkedTransactions':
-                                                        FieldValue.arrayRemove([
-                                                      widget
-                                                          .transaction.reference
-                                                    ]),
-                                                    'spentAmount': FieldValue
-                                                        .increment(functions
-                                                            .returnNegative(widget
-                                                                .transaction
-                                                                .transactionAmount)),
-                                                  };
-                                                  await iconButtonBudgetCategoriesRecord
-                                                      .reference
-                                                      .update(
-                                                          budgetCategoriesUpdateData);
-                                                },
-                                              );
-                                            },
-                                          ),
+                                                    final budgetCategoriesUpdateData =
+                                                        {
+                                                      'linkedTransactions':
+                                                          FieldValue
+                                                              .arrayRemove([
+                                                        widget.transaction
+                                                            .reference
+                                                      ]),
+                                                      'spentAmount': FieldValue
+                                                          .increment(functions
+                                                              .returnNegative(widget
+                                                                  .transaction
+                                                                  .transactionAmount)),
+                                                    };
+                                                    await iconButtonBudgetCategoriesRecord
+                                                        .reference
+                                                        .update(
+                                                            budgetCategoriesUpdateData);
+                                                  },
+                                                );
+                                              },
+                                            ),
                                         ],
                                       ),
                                     ),
