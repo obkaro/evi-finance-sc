@@ -33,7 +33,7 @@ Future<List<DocumentReference>> writeTransactions(
     if (!existingIDS.contains(transaction.data[i].id)) {
       final transactionsCreateData = createTransactionsRecordData(
         account: buttonAccountsRecord.reference,
-        trasactionDate: transaction.data[i].date,
+        trasactionDate: DateTime.parse(transaction.data[i].date),
         //monoCategory: transaction.data[i].,
         transactionOwner: currentUserReference,
         balanceAfter: transaction.data[i].balance,

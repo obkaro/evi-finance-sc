@@ -54,9 +54,19 @@ List<String> getCategoryNames(List<BudgetCategoriesRecord> listForNames) {
   return list;
 }
 
-double calcBudgetChart(BudgetsRecord budget) {
+double calcBudgetChart(
+  BudgetsRecord budget,
+  List<BudgetCategoriesRecord> categories,
+) {
   // Add your function code here!
-  double budgPercent = (budget.budgetSpent / budget.budgetAmount);
+
+  int totalCategoriesSpent = 0;
+
+  for (var i = 0; i < categories.length; i++) {
+    totalCategoriesSpent += categories[i].spentAmount;
+  }
+
+  double budgPercent = (totalCategoriesSpent / budget.budgetAmount);
 
   while (budgPercent > 1) {
     budgPercent--;
@@ -159,4 +169,17 @@ String subtractCurrency(
       locale: 'en_US', name: 'NGN', decimalDigits: 0);
   int result = value1 - value2;
   return formatCurrency.format(result);
+}
+
+int sumTotalCategoriesSpent(List<BudgetCategoriesRecord> categoriesToSum) {
+  // Add your function code here!
+  //This function takes a number of categories and outputs the sum of their spent amounts
+
+  int totalSpent = 0;
+
+  for (var i = 0; i < categoriesToSum.length; i++) {
+    totalSpent += categoriesToSum[i].spentAmount;
+  }
+
+  return totalSpent;
 }
