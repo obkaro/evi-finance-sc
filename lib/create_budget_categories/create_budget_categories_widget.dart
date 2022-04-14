@@ -224,7 +224,7 @@ class _CreateBudgetCategoriesWidgetState
                                       borderColor: Colors.transparent,
                                       borderRadius: 30,
                                       borderWidth: 1,
-                                      buttonSize: 60,
+                                      buttonSize: 50,
                                       icon: Icon(
                                         Icons.do_disturb_on_rounded,
                                         color: FlutterFlowTheme.of(context)
@@ -249,7 +249,7 @@ class _CreateBudgetCategoriesWidgetState
                                       child: Text(
                                         functions.formatBudgetCurrency(
                                             columnBudgetsRecord.budgetAmount),
-                                        textAlign: TextAlign.end,
+                                        textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1,
                                       ),
@@ -258,7 +258,7 @@ class _CreateBudgetCategoriesWidgetState
                                       borderColor: Colors.transparent,
                                       borderRadius: 30,
                                       borderWidth: 1,
-                                      buttonSize: 60,
+                                      buttonSize: 50,
                                       icon: Icon(
                                         Icons.add_circle_rounded,
                                         color: FlutterFlowTheme.of(context)

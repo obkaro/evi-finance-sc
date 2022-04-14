@@ -2,6 +2,7 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../transaction_single/transaction_single_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +87,14 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
                             .koboToNaira(widget.transaction.transactionAmount)),
                       };
                       await widget.recievedBudget.update(budgetsUpdateData);
-                      Navigator.pop(context);
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TransactionSingleWidget(
+                            transaction: widget.transaction,
+                          ),
+                        ),
+                      );
                     },
                     child: ListTile(
                       title: Text(

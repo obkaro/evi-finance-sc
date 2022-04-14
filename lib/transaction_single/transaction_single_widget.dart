@@ -475,15 +475,17 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                       ]),
                                                       'spentAmount': FieldValue
                                                           .increment(functions
-                                                              .returnNegative(widget
-                                                                  .transaction
-                                                                  .transactionAmount)),
+                                                              .returnNegative(functions
+                                                                  .koboToNaira(widget
+                                                                      .transaction
+                                                                      .transactionAmount))),
                                                     };
                                                     await iconButtonBudgetCategoriesRecord
                                                         .reference
                                                         .update(
                                                             budgetCategoriesUpdateData);
-                                                    await Navigator.push(
+                                                    await Navigator
+                                                        .pushAndRemoveUntil(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
@@ -492,6 +494,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                               .transaction,
                                                         ),
                                                       ),
+                                                      (r) => false,
                                                     );
                                                   },
                                                 );
