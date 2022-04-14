@@ -144,8 +144,10 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0, 20, 0, 20),
                                 child: CircularPercentIndicator(
-                                  percent:
-                                      functions.calcBudgetChart(widget.budget),
+                                  percent: functions.calcBudgetChart(
+                                      widget.budget,
+                                      budgetSingleBudgetCategoriesRecordList
+                                          .toList()),
                                   radius: 112.5,
                                   lineWidth: 24,
                                   animation: true,
@@ -186,7 +188,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                     ),
                                     Text(
                                       functions.formatBudgetCurrency(
-                                          widget.budget.budgetSpent),
+                                          functions.sumTotalCategoriesSpent(
+                                              budgetSingleBudgetCategoriesRecordList
+                                                  .toList())),
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1,
                                     ),
