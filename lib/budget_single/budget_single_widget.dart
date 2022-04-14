@@ -156,7 +156,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                   backgroundColor: FlutterFlowTheme.of(context)
                                       .tertiaryColor,
                                   center: Text(
-                                    '${functions.calcRemBudget(widget.budget)} Left',
+                                    '${functions.formatBudgetCurrency(functions.subInt(widget.budget.budgetAmount, functions.sumTotalCategoriesSpent(budgetSingleBudgetCategoriesRecordList.toList())))} Left',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
