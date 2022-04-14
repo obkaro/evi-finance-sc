@@ -246,6 +246,7 @@ class _CreateBudgetCategoriesWidgetState
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBackground,
                                       ),
+                                      alignment: AlignmentDirectional(0, 0),
                                       child: Text(
                                         functions.formatBudgetCurrency(
                                             columnBudgetsRecord.budgetAmount),
