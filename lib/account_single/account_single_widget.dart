@@ -641,6 +641,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                   .where('transactionOwner',
                                       isEqualTo: currentUserReference)
                                   .where('transactionType', isEqualTo: 'debit')
+                                  .where('account',
+                                      isEqualTo: widget.account.reference)
                                   .orderBy('trasactionDate', descending: true),
                         ),
                         builder: (context, snapshot) {

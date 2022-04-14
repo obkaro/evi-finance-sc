@@ -483,6 +483,16 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                         .reference
                                                         .update(
                                                             budgetCategoriesUpdateData);
+                                                    await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            TransactionSingleWidget(
+                                                          transaction: widget
+                                                              .transaction,
+                                                        ),
+                                                      ),
+                                                    );
                                                   },
                                                 );
                                               },
