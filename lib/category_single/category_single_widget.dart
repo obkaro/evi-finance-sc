@@ -202,6 +202,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                           .where('transactionOwner',
                               isEqualTo: currentUserReference)
                           .where('transactionType', isEqualTo: 'debit')
+                          .where('linkedCategory',
+                              isEqualTo: widget.category.reference)
                           .orderBy('trasactionDate', descending: true),
                     ),
                     builder: (context, snapshot) {
