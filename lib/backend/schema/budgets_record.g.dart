@@ -93,6 +93,13 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
               const FullType(DocumentReference, const [const FullType(Object)])
             ])));
     }
+    value = object.isRecurring;
+    if (value != null) {
+      result
+        ..add('isRecurring')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -164,6 +171,10 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
                     DocumentReference, const [const FullType(Object)])
               ])) as BuiltList<Object>);
           break;
+        case 'isRecurring':
+          result.isRecurring = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -199,6 +210,8 @@ class _$BudgetsRecord extends BudgetsRecord {
   @override
   final BuiltList<DocumentReference<Object>> budgetSubCategories;
   @override
+  final bool isRecurring;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$BudgetsRecord([void Function(BudgetsRecordBuilder) updates]) =>
@@ -215,6 +228,7 @@ class _$BudgetsRecord extends BudgetsRecord {
       this.budgetDateCreated,
       this.budgetLinkedAccounts,
       this.budgetSubCategories,
+      this.isRecurring,
       this.reference})
       : super._();
 
@@ -239,6 +253,7 @@ class _$BudgetsRecord extends BudgetsRecord {
         budgetDateCreated == other.budgetDateCreated &&
         budgetLinkedAccounts == other.budgetLinkedAccounts &&
         budgetSubCategories == other.budgetSubCategories &&
+        isRecurring == other.isRecurring &&
         reference == other.reference;
   }
 
@@ -253,16 +268,18 @@ class _$BudgetsRecord extends BudgetsRecord {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, budgetName.hashCode),
-                                            budgetOwner.hashCode),
-                                        budgetAmount.hashCode),
-                                    budgetSpent.hashCode),
-                                budgetDescription.hashCode),
-                            budgetStart.hashCode),
-                        budgetEnd.hashCode),
-                    budgetDateCreated.hashCode),
-                budgetLinkedAccounts.hashCode),
-            budgetSubCategories.hashCode),
+                                        $jc(
+                                            $jc($jc(0, budgetName.hashCode),
+                                                budgetOwner.hashCode),
+                                            budgetAmount.hashCode),
+                                        budgetSpent.hashCode),
+                                    budgetDescription.hashCode),
+                                budgetStart.hashCode),
+                            budgetEnd.hashCode),
+                        budgetDateCreated.hashCode),
+                    budgetLinkedAccounts.hashCode),
+                budgetSubCategories.hashCode),
+            isRecurring.hashCode),
         reference.hashCode));
   }
 
@@ -279,6 +296,7 @@ class _$BudgetsRecord extends BudgetsRecord {
           ..add('budgetDateCreated', budgetDateCreated)
           ..add('budgetLinkedAccounts', budgetLinkedAccounts)
           ..add('budgetSubCategories', budgetSubCategories)
+          ..add('isRecurring', isRecurring)
           ..add('reference', reference))
         .toString();
   }
@@ -339,6 +357,10 @@ class BudgetsRecordBuilder
           ListBuilder<DocumentReference<Object>> budgetSubCategories) =>
       _$this._budgetSubCategories = budgetSubCategories;
 
+  bool _isRecurring;
+  bool get isRecurring => _$this._isRecurring;
+  set isRecurring(bool isRecurring) => _$this._isRecurring = isRecurring;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -361,6 +383,7 @@ class BudgetsRecordBuilder
       _budgetDateCreated = $v.budgetDateCreated;
       _budgetLinkedAccounts = $v.budgetLinkedAccounts?.toBuilder();
       _budgetSubCategories = $v.budgetSubCategories?.toBuilder();
+      _isRecurring = $v.isRecurring;
       _reference = $v.reference;
       _$v = null;
     }
@@ -394,6 +417,7 @@ class BudgetsRecordBuilder
               budgetDateCreated: budgetDateCreated,
               budgetLinkedAccounts: _budgetLinkedAccounts?.build(),
               budgetSubCategories: _budgetSubCategories?.build(),
+              isRecurring: isRecurring,
               reference: reference);
     } catch (_) {
       String _$failedField;
