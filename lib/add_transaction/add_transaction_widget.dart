@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -25,8 +26,7 @@ class AddTransactionWidget extends StatefulWidget {
 
 class _AddTransactionWidgetState extends State<AddTransactionWidget> {
   String choiceChipsValue;
-  TextEditingController textController1;
-  TextEditingController textController2;
+  TextEditingController textController;
   TransactionsRecord createdTransaction;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -44,8 +44,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
           transactionsCreateData, transactionsRecordReference);
     });
 
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
+    textController = TextEditingController();
   }
 
   @override
@@ -88,32 +87,12 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                             child: Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                              child: TextFormField(
-                                controller: textController1,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Amount (N)',
-                                  hintText: 'Transaction amount',
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  filled: true,
-                                  fillColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                ),
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                                keyboardType: TextInputType.number,
+                              child: custom_widgets.CurrencyTextField(
+                                width: double.infinity,
+                                height: 60,
+                                amount: FFAppState().currencyTextField,
+                                labelText: 'Amount',
+                                hintText: 'Input transaction amount',
                               ),
                             ),
                           ),
@@ -373,7 +352,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                               child: TextFormField(
-                                controller: textController2,
+                                controller: textController,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'Narration',
@@ -408,15 +387,14 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                           if ((createdTransaction.account != null)) {
                             if ((choiceChipsValue != null) &&
                                 (choiceChipsValue != '')) {
-                              if ((textController1.text != null) &&
-                                  (textController1.text != '')) {
+                              if ((FFAppState().currencyTextField) > 0) {
                                 final transactionsUpdateData =
                                     createTransactionsRecordData(
                                   trasactionDate: getCurrentTimestamp,
                                   transactionOwner: currentUserReference,
                                   transactionAmount:
-                                      int.parse(textController1.text),
-                                  transactionNarration: textController2.text,
+                                      FFAppState().currencyTextField,
+                                  transactionNarration: textController.text,
                                   transactionType: choiceChipsValue,
                                 );
                                 await createdTransaction.reference
