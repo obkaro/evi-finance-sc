@@ -11,8 +11,8 @@ import 'flutter_flow/internationalization.dart';
 import 'package:evi/land_page/land_page_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'budgets/budgets_widget.dart';
 import 'transactions/transactions_widget.dart';
+import 'budgets/budgets_widget.dart';
 import 'profile/profile_widget.dart';
 
 void main() async {
@@ -120,8 +120,8 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'Budgets': BudgetsWidget(),
       'Transactions': TransactionsWidget(),
+      'Budgets': BudgetsWidget(),
       'Profile': ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
@@ -139,18 +139,18 @@ class _NavBarPageState extends State<NavBarPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.pie_chart,
-              size: 24,
-            ),
-            label: 'Transactions',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.compare_arrows_rounded,
               size: 24,
             ),
             label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.pie_chart,
+              size: 24,
+            ),
+            label: 'Transactions',
             tooltip: '',
           ),
           BottomNavigationBarItem(

@@ -123,7 +123,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                               title: Text(
                                 '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
                                 style: FlutterFlowTheme.of(context)
-                                    .title3
+                                    .subtitle1
                                     .override(
                                       fontFamily: 'Roboto',
                                       lineHeight: 2,
@@ -133,7 +133,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                 functions.formatTransCurrency(
                                     columnBudgetsRecord.budgetAmount),
                                 style: FlutterFlowTheme.of(context)
-                                    .subtitle2
+                                    .bodyText2
                                     .override(
                                       fontFamily: 'Roboto',
                                       lineHeight: 2,
