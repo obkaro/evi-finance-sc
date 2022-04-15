@@ -41,6 +41,9 @@ abstract class BudgetsRecord
   BuiltList<DocumentReference> get budgetSubCategories;
 
   @nullable
+  bool get isRecurring;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -50,7 +53,8 @@ abstract class BudgetsRecord
     ..budgetSpent = 0
     ..budgetDescription = ''
     ..budgetLinkedAccounts = ListBuilder()
-    ..budgetSubCategories = ListBuilder();
+    ..budgetSubCategories = ListBuilder()
+    ..isRecurring = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('budgets');
@@ -82,6 +86,7 @@ Map<String, dynamic> createBudgetsRecordData({
   DateTime budgetStart,
   DateTime budgetEnd,
   DateTime budgetDateCreated,
+  bool isRecurring,
 }) =>
     serializers.toFirestore(
         BudgetsRecord.serializer,
@@ -95,4 +100,5 @@ Map<String, dynamic> createBudgetsRecordData({
           ..budgetEnd = budgetEnd
           ..budgetDateCreated = budgetDateCreated
           ..budgetLinkedAccounts = null
-          ..budgetSubCategories = null));
+          ..budgetSubCategories = null
+          ..isRecurring = isRecurring));

@@ -164,7 +164,7 @@ class _CreateBudgetCategoriesWidgetState
                                           borderRadius:
                                               BorderRadius.circular(12),
                                         ),
-                                        alignment: AlignmentDirectional(1, 1),
+                                        alignment: AlignmentDirectional(1, 0),
                                         child: Text(
                                           'Remaining (Uncategorized):',
                                           style: FlutterFlowTheme.of(context)
@@ -179,7 +179,7 @@ class _CreateBudgetCategoriesWidgetState
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBackground,
                                       ),
-                                      alignment: AlignmentDirectional(0, 1),
+                                      alignment: AlignmentDirectional(0, 0),
                                       child: Text(
                                         functions.calcRemCatCurrency(
                                             createBudgetCategoriesBudgetCategoriesRecordList
@@ -212,6 +212,7 @@ class _CreateBudgetCategoriesWidgetState
                                             borderRadius:
                                                 BorderRadius.circular(12),
                                           ),
+                                          alignment: AlignmentDirectional(0, 0),
                                           child: Text(
                                             widget.createdBudget.budgetName,
                                             style: FlutterFlowTheme.of(context)
@@ -557,7 +558,7 @@ class _CreateBudgetCategoriesWidgetState
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                                MainAxisAlignment.center,
                                             children: [
                                               Expanded(
                                                 child: Container(

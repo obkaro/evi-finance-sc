@@ -183,3 +183,14 @@ int sumTotalCategoriesSpent(List<BudgetCategoriesRecord> categoriesToSum) {
 
   return totalSpent;
 }
+
+String repeatingOrOnce(bool repeatingSwitch) {
+  // Add your function code here!
+  String rTrue = 'Repeating';
+  String rFalse = 'One Time';
+  if (repeatingSwitch = true) {
+    return rTrue;
+  } else {
+    return rFalse;
+  }
+}

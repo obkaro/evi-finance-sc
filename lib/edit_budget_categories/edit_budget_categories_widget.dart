@@ -214,6 +214,7 @@ class _EditBudgetCategoriesWidgetState
                                             .primaryBackground,
                                         borderRadius: BorderRadius.circular(12),
                                       ),
+                                      alignment: AlignmentDirectional(0, 0),
                                       child: Text(
                                         widget.createdBudget.budgetName,
                                         style: FlutterFlowTheme.of(context)
@@ -566,7 +567,7 @@ class _EditBudgetCategoriesWidgetState
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Expanded(
                                                     child: Container(
