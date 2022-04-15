@@ -473,29 +473,12 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                         widget.transaction
                                                             .reference
                                                       ]),
-                                                      'spentAmount': FieldValue
-                                                          .increment(functions
-                                                              .returnNegative(functions
-                                                                  .koboToNaira(widget
-                                                                      .transaction
-                                                                      .transactionAmount))),
                                                     };
                                                     await iconButtonBudgetCategoriesRecord
                                                         .reference
                                                         .update(
                                                             budgetCategoriesUpdateData);
-                                                    await Navigator
-                                                        .pushAndRemoveUntil(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            TransactionSingleWidget(
-                                                          transaction: widget
-                                                              .transaction,
-                                                        ),
-                                                      ),
-                                                      (r) => false,
-                                                    );
+                                                    Navigator.pop(context);
                                                   },
                                                 );
                                               },

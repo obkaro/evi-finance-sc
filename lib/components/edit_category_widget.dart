@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -26,16 +27,13 @@ class EditCategoryWidget extends StatefulWidget {
 }
 
 class _EditCategoryWidgetState extends State<EditCategoryWidget> {
-  TextEditingController textController1;
-  TextEditingController textController2;
+  TextEditingController textController;
 
   @override
   void initState() {
     super.initState();
-    textController1 =
+    textController =
         TextEditingController(text: widget.categoryToEdit.categoryName);
-    textController2 = TextEditingController(
-        text: widget.categoryToEdit.allocatedAmount.toString());
   }
 
   @override
@@ -68,7 +66,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: TextFormField(
-                  controller: textController1,
+                  controller: textController,
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Amount',
@@ -96,31 +94,12 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                child: TextFormField(
-                  controller: textController2,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelText: 'Amount',
-                    hintText: 'Enter Amount',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    filled: true,
-                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyText1,
-                  keyboardType: TextInputType.number,
+                child: custom_widgets.CurrencyTextField(
+                  width: MediaQuery.of(context).size.width,
+                  height: 50,
+                  amount: widget.categoryToEdit.allocatedAmount,
+                  labelText: 'Amount',
+                  hintText: 'Enter amount',
                 ),
               ),
               Padding(
@@ -129,13 +108,13 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                   onPressed: () async {
                     if ((functions.checkEditCatTotal(
                             widget.budgetRemaining,
-                            int.parse(textController2.text),
+                            FFAppState().currencyTextField,
                             widget.categoryToEdit.allocatedAmount)) >=
                         0) {
                       final budgetCategoriesUpdateData =
                           createBudgetCategoriesRecordData(
-                        allocatedAmount: int.parse(textController2.text),
-                        categoryName: textController1.text,
+                        allocatedAmount: FFAppState().currencyTextField,
+                        categoryName: textController.text,
                       );
                       await widget.categoryToEdit.reference
                           .update(budgetCategoriesUpdateData);
