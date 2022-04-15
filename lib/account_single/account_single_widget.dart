@@ -9,6 +9,7 @@ import '../transaction_single/transaction_single_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -96,16 +97,61 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 10),
-                                  child: Container(
-                                    width: 120,
-                                    height: 120,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
+                                  child: FutureBuilder<
+                                      List<ConstInstitutionLogosRecord>>(
+                                    future:
+                                        queryConstInstitutionLogosRecordOnce(
+                                      queryBuilder:
+                                          (constInstitutionLogosRecord) =>
+                                              constInstitutionLogosRecord.where(
+                                                  'institutionCode',
+                                                  isEqualTo:
+                                                      widget.account.bankCode),
+                                      singleRecord: true,
                                     ),
-                                    child: Image.network(
-                                      'https://picsum.photos/seed/768/600',
-                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: SpinKitRing(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 50,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<ConstInstitutionLogosRecord>
+                                          circleImageConstInstitutionLogosRecordList =
+                                          snapshot.data;
+                                      // Return an empty Container when the document does not exist.
+                                      if (snapshot.data.isEmpty) {
+                                        return Container();
+                                      }
+                                      final circleImageConstInstitutionLogosRecord =
+                                          circleImageConstInstitutionLogosRecordList
+                                                  .isNotEmpty
+                                              ? circleImageConstInstitutionLogosRecordList
+                                                  .first
+                                              : null;
+                                      return Container(
+                                        width: 180,
+                                        height: 180,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: CachedNetworkImage(
+                                          imageUrl:
+                                              circleImageConstInstitutionLogosRecord
+                                                  .institutionLogo,
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                                 Padding(

@@ -19,13 +19,17 @@ abstract class ConstInstitutionLogosRecord
   String get institutionLogo;
 
   @nullable
+  String get institutionCode;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(ConstInstitutionLogosRecordBuilder builder) =>
       builder
         ..institutionName = ''
-        ..institutionLogo = '';
+        ..institutionLogo = ''
+        ..institutionCode = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('constInstitutionLogos');
@@ -54,9 +58,11 @@ abstract class ConstInstitutionLogosRecord
 Map<String, dynamic> createConstInstitutionLogosRecordData({
   String institutionName,
   String institutionLogo,
+  String institutionCode,
 }) =>
     serializers.toFirestore(
         ConstInstitutionLogosRecord.serializer,
         ConstInstitutionLogosRecord((c) => c
           ..institutionName = institutionName
-          ..institutionLogo = institutionLogo));
+          ..institutionLogo = institutionLogo
+          ..institutionCode = institutionCode));

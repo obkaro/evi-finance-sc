@@ -67,7 +67,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+        padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
         child: FutureBuilder<List<BudgetCategoriesRecord>>(
           future: queryBudgetCategoriesRecordOnce(
             queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
@@ -98,7 +98,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                   final columnBudgetCategoriesRecord =
                       columnBudgetCategoriesRecordList[columnIndex];
                   return Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                     child: InkWell(
                       onTap: () async {
                         await (animationsMap[
@@ -126,7 +126,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                       },
                       child: Container(
                         width: double.infinity,
-                        height: 120,
+                        height: 100,
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBackground,
                           borderRadius: BorderRadius.circular(12),
