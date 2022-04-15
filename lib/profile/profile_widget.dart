@@ -126,7 +126,118 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 10, 10, 10, 10),
                                       ),
                                     ),
+                                    InkWell(
+                                      onTap: () async {
+                                        if ((Theme.of(context).brightness ==
+                                                Brightness.dark) ==
+                                            false) {
+                                          setDarkModeSetting(
+                                              context, ThemeMode.light);
+                                        } else {
+                                          setDarkModeSetting(
+                                              context, ThemeMode.light);
+                                        }
+                                      },
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 60,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                      ),
+                                    ),
                                   ],
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    if ((Theme.of(context).brightness ==
+                                            Brightness.dark) ==
+                                        false) {
+                                      setDarkModeSetting(
+                                          context, ThemeMode.light);
+                                    } else {
+                                      setDarkModeSetting(
+                                          context, ThemeMode.light);
+                                    }
+                                  },
+                                  text: 'Toggle',
+                                  options: FFButtonOptions(
+                                    width: double.infinity,
+                                    height: 50,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Roboto',
+                                          color: Colors.white,
+                                        ),
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    ),
+                                    borderRadius: 12,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    setDarkModeSetting(
+                                        context, ThemeMode.light);
+                                  },
+                                  text: 'Light',
+                                  options: FFButtonOptions(
+                                    width: double.infinity,
+                                    height: 50,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Roboto',
+                                          color: Colors.white,
+                                        ),
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    ),
+                                    borderRadius: 12,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    setDarkModeSetting(context, ThemeMode.dark);
+                                  },
+                                  text: 'Dark',
+                                  options: FFButtonOptions(
+                                    width: double.infinity,
+                                    height: 50,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Roboto',
+                                          color: Colors.white,
+                                        ),
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    ),
+                                    borderRadius: 12,
+                                  ),
                                 ),
                               ),
                               Padding(
