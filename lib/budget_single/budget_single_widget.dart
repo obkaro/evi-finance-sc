@@ -4,6 +4,7 @@ import '../edit_budget/edit_budget_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../uncategorized/uncategorized_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -285,7 +286,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                           Divider(),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                             child: FutureBuilder<List<BudgetCategoriesRecord>>(
                               future: queryBudgetCategoriesRecordOnce(
                                 queryBuilder: (budgetCategoriesRecord) =>
@@ -324,36 +325,37 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                         ? containerBudgetCategoriesRecordList
                                             .first
                                         : null;
-                                return Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  alignment: AlignmentDirectional(0, 0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16, 16, 16, 16),
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      height: 100,
-                                      decoration: BoxDecoration(),
-                                      alignment: AlignmentDirectional(0, 0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CategorySingleWidget(
-                                                category:
-                                                    containerBudgetCategoriesRecord,
-                                              ),
-                                            ),
-                                          );
-                                        },
+                                return InkWell(
+                                  onTap: () async {
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            UncategorizedWidget(
+                                          category:
+                                              containerBudgetCategoriesRecord,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 16, 16, 16),
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 100,
+                                        decoration: BoxDecoration(),
+                                        alignment: AlignmentDirectional(0, 0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
