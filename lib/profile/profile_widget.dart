@@ -68,7 +68,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               text: 'Accounts',
                               options: FFButtonOptions(
                                 width: 130,
-                                height: 40,
+                                height: 50,
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
                                 textStyle: FlutterFlowTheme.of(context)
@@ -101,7 +101,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 text: 'Logout',
                                 options: FFButtonOptions(
                                   width: 130,
-                                  height: 40,
+                                  height: 50,
                                   color:
                                       FlutterFlowTheme.of(context).primaryColor,
                                   textStyle: FlutterFlowTheme.of(context)
