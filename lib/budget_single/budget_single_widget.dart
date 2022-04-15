@@ -54,7 +54,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
             backgroundColor: FlutterFlowTheme.of(context).primaryColor,
             automaticallyImplyLeading: true,
             title: Text(
-              widget.budget.budgetName,
+              '${dateTimeFormat('MMMEd', widget.budget.budgetStart)} - ${dateTimeFormat('MMMEd', widget.budget.budgetEnd)}',
               style: FlutterFlowTheme.of(context).title2.override(
                     fontFamily: 'Roboto',
                     color: Colors.white,
@@ -285,13 +285,127 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                           Divider(),
                           Padding(
                             padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                            child: FutureBuilder<List<BudgetCategoriesRecord>>(
+                              future: queryBudgetCategoriesRecordOnce(
+                                queryBuilder: (budgetCategoriesRecord) =>
+                                    budgetCategoriesRecord
+                                        .where('categoryName',
+                                            isEqualTo: 'Uncategorized')
+                                        .where('categoryBudget',
+                                            isEqualTo: widget.budget.reference),
+                                singleRecord: true,
+                              ),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: SpinKitRing(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        size: 50,
+                                      ),
+                                    ),
+                                  );
+                                }
+                                List<BudgetCategoriesRecord>
+                                    containerBudgetCategoriesRecordList =
+                                    snapshot.data;
+                                // Return an empty Container when the document does not exist.
+                                if (snapshot.data.isEmpty) {
+                                  return Container();
+                                }
+                                final containerBudgetCategoriesRecord =
+                                    containerBudgetCategoriesRecordList
+                                            .isNotEmpty
+                                        ? containerBudgetCategoriesRecordList
+                                            .first
+                                        : null;
+                                return Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  alignment: AlignmentDirectional(0, 0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16, 16, 16, 16),
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 100,
+                                      decoration: BoxDecoration(),
+                                      alignment: AlignmentDirectional(0, 0),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CategorySingleWidget(
+                                                category:
+                                                    containerBudgetCategoriesRecord,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    containerBudgetCategoriesRecord
+                                                        .categoryName,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .subtitle1,
+                                                  ),
+                                                  Text(
+                                                    functions.formatTransCurrency(
+                                                        containerBudgetCategoriesRecord
+                                                            .allocatedAmount),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                             child: StreamBuilder<List<BudgetCategoriesRecord>>(
                               stream: queryBudgetCategoriesRecord(
                                 queryBuilder: (budgetCategoriesRecord) =>
-                                    budgetCategoriesRecord.where(
-                                        'categoryBudget',
-                                        isEqualTo: widget.budget.reference),
+                                    budgetCategoriesRecord
+                                        .where('categoryBudget',
+                                            isEqualTo: widget.budget.reference)
+                                        .where('categoryName',
+                                            isNotEqualTo: 'Uncategorized'),
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.

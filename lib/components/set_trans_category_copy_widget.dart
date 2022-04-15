@@ -80,7 +80,7 @@ class _SetTransCategoryCopyWidgetState extends State<SetTransCategoryCopyWidget>
           ),
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+          padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
           child: FutureBuilder<List<BudgetCategoriesRecord>>(
             future: queryBudgetCategoriesRecordOnce(
               queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
@@ -111,7 +111,7 @@ class _SetTransCategoryCopyWidgetState extends State<SetTransCategoryCopyWidget>
                     final columnBudgetCategoriesRecord =
                         columnBudgetCategoriesRecordList[columnIndex];
                     return Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                       child: InkWell(
                         onTap: () async {
                           await (animationsMap[
