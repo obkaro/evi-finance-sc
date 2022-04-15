@@ -143,29 +143,64 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0, 20, 0, 20),
-                                child: CircularPercentIndicator(
-                                  percent: functions.calcBudgetChart(
-                                      widget.budget,
-                                      budgetSingleBudgetCategoriesRecordList
-                                          .toList()),
-                                  radius: 112.5,
-                                  lineWidth: 24,
-                                  animation: true,
-                                  progressColor:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  backgroundColor: FlutterFlowTheme.of(context)
-                                      .tertiaryColor,
-                                  center: Text(
-                                    '${functions.formatTransCurrency(functions.subInt(widget.budget.budgetAmount, functions.sumTotalCategoriesSpent(budgetSingleBudgetCategoriesRecordList.toList())))} Left',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Roboto',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                        ),
+                                child: FutureBuilder<List<TransactionsRecord>>(
+                                  future: queryTransactionsRecordOnce(
+                                    queryBuilder: (transactionsRecord) =>
+                                        transactionsRecord.where(
+                                            'linkedCategory',
+                                            whereIn:
+                                                budgetSingleBudgetCategoriesRecordList
+                                                    .map((e) => e.reference)
+                                                    .toList()),
                                   ),
-                                  startAngle: 0,
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: SpinKitRing(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            size: 50,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<TransactionsRecord>
+                                        progressBarTransactionsRecordList =
+                                        snapshot.data;
+                                    return CircularPercentIndicator(
+                                      percent: functions.calcBudgetChart(
+                                          widget.budget,
+                                          budgetSingleBudgetCategoriesRecordList
+                                              .toList(),
+                                          progressBarTransactionsRecordList
+                                              .toList()),
+                                      radius: 112.5,
+                                      lineWidth: 24,
+                                      animation: true,
+                                      progressColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .tertiaryColor,
+                                      center: Text(
+                                        '${functions.formatTransCurrency(functions.subInt(widget.budget.budgetAmount, functions.sumTotalCategoriesSpent(budgetSingleBudgetCategoriesRecordList.toList(), progressBarTransactionsRecordList.toList())))} Left',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Roboto',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                            ),
+                                      ),
+                                      startAngle: 0,
+                                    );
+                                  },
                                 ),
                               ),
                             ],
@@ -186,13 +221,44 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText2,
                                     ),
-                                    Text(
-                                      functions.formatTransCurrency(
-                                          functions.sumTotalCategoriesSpent(
-                                              budgetSingleBudgetCategoriesRecordList
-                                                  .toList())),
-                                      style: FlutterFlowTheme.of(context)
-                                          .subtitle1,
+                                    FutureBuilder<List<TransactionsRecord>>(
+                                      future: queryTransactionsRecordOnce(
+                                        queryBuilder: (transactionsRecord) =>
+                                            transactionsRecord.where(
+                                                'linkedCategory',
+                                                whereIn:
+                                                    budgetSingleBudgetCategoriesRecordList
+                                                        .map((e) => e.reference)
+                                                        .toList()),
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50,
+                                              height: 50,
+                                              child: SpinKitRing(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                size: 50,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<TransactionsRecord>
+                                            textTransactionsRecordList =
+                                            snapshot.data;
+                                        return Text(
+                                          functions.formatTransCurrency(
+                                              functions.sumTransactionAmounts(
+                                                  textTransactionsRecordList
+                                                      .toList())),
+                                          style: FlutterFlowTheme.of(context)
+                                              .subtitle1,
+                                        );
+                                      },
                                     ),
                                   ],
                                 ),
@@ -388,9 +454,10 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                   Expanded(
                                                                     child:
                                                                         LinearPercentIndicator(
-                                                                      percent: functions
-                                                                          .calcCategoryPercent(
-                                                                              columnBudgetCategoriesRecord),
+                                                                      percent: functions.calcCategoryPercent(
+                                                                          columnBudgetCategoriesRecord,
+                                                                          containerTransactionsRecordList
+                                                                              .toList()),
                                                                       width: MediaQuery.of(context)
                                                                               .size
                                                                               .width *
