@@ -1,6 +1,6 @@
 import '../backend/backend.dart';
 import '../category_single/category_single_widget.dart';
-import '../edit_budget_categories/edit_budget_categories_widget.dart';
+import '../edit_budget/edit_budget_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -109,9 +109,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EditBudgetCategoriesWidget(
-                            createdBudget: widget.budget,
+                          builder: (context) => EditBudgetWidget(
                             uncategorized: iconButtonBudgetCategoriesRecord,
+                            createdbudget: widget.budget,
                           ),
                         ),
                       );
@@ -188,7 +188,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                           FlutterFlowTheme.of(context)
                                               .tertiaryColor,
                                       center: Text(
-                                        '${functions.formatTransCurrency(functions.subInt(widget.budget.budgetAmount, functions.sumTotalCategoriesSpent(budgetSingleBudgetCategoriesRecordList.toList(), progressBarTransactionsRecordList.toList())))} Left',
+                                        '${functions.formatTransCurrency(functions.subInt(widget.budget.budgetAmount, functions.sumTotalCategoriesSpent(budgetSingleBudgetCategoriesRecordList.toList(), progressBarTransactionsRecordList.toList())))} ${functions.overOrUnder(widget.budget.budgetAmount, functions.sumTransactionAmounts(progressBarTransactionsRecordList.toList()))}',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -428,7 +428,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                           0,
                                                                           10),
                                                               child: Text(
-                                                                '${functions.subtractCurrency(columnBudgetCategoriesRecord.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))} of ${functions.formatTransCurrency(columnBudgetCategoriesRecord.allocatedAmount)} left',
+                                                                '${functions.subtractCurrency(columnBudgetCategoriesRecord.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText1,

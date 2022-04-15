@@ -69,18 +69,14 @@ double calcBudgetChart(
 
   double budgPercent = (totalCategoriesSpent / budget.budgetAmount);
 
-  while (budgPercent > 1) {
-    budgPercent--;
-  }
-
-  while (budgPercent < 0) {
-    budgPercent++;
+  if (totalCategoriesSpent >= budget.budgetAmount) {
+    budgPercent = 1.0;
   }
 
   return budgPercent;
 }
 
-String calcRemBudget(BudgetsRecord budget) {
+String calcRemBudgetCopy(BudgetsRecord budget) {
   // Add your function code here!
   final formatCurrency = NumberFormat.simpleCurrency(
       locale: 'en_US', name: 'NGN', decimalDigits: 0);
@@ -103,11 +99,8 @@ double calcCategoryPercent(
 
   double percent = (totalTransactions / category.allocatedAmount);
 
-  while (percent > 1) {
-    percent--;
-  }
-  while (percent < 0) {
-    percent++;
+  if (totalTransactions >= category.allocatedAmount) {
+    percent = 1.0;
   }
 
   return percent;
@@ -123,7 +116,13 @@ int subInt(
   int value2,
 ) {
   // Add your function code here!
-  return value1 - value2;
+  int result = value1 - value2;
+
+  if (value2 > value1) {
+    result = value2 - value1;
+  }
+
+  return result;
 }
 
 int budgetRemMinusAmt(
@@ -177,10 +176,22 @@ String subtractCurrency(
   int value2,
 ) {
   // Add your function code here!
+  String formatedResult;
+  int result;
   final formatCurrency = NumberFormat.simpleCurrency(
       locale: 'en_US', name: 'NGN', decimalDigits: 0);
-  int result = value1 - value2;
-  return formatCurrency.format(result / 100);
+
+  if (value1 > value2) {
+    result = value1 - value2;
+    formatedResult = formatCurrency.format(result / 100) + ' Left';
+  } else if (value2 == value1) {
+    formatedResult = 'Exhausted';
+  } else if (value2 > value1) {
+    result = value2 - value1;
+    formatedResult = formatCurrency.format(result / 100) + ' Over';
+  }
+
+  return formatedResult;
 }
 
 int sumTotalCategoriesSpent(
@@ -219,4 +230,18 @@ int sumTransactionAmounts(List<TransactionsRecord> transactions) {
   }
 
   return total;
+}
+
+String overOrUnder(
+  int value1,
+  int value2,
+) {
+  // Add your function code here!
+  String result = 'Remaining';
+
+  if (value2 > value1) {
+    result = 'Over';
+  }
+
+  return result;
 }

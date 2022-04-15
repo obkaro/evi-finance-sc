@@ -35,19 +35,34 @@ class CurrencyTextField extends StatefulWidget {
 
 class _CurrencyTextFieldState extends State<CurrencyTextField> {
   TextEditingController textController;
-  //var controller = new MaskedTextController(mask: '000.000.000-00');
+  var controller = new MaskedTextController(mask: '000.000.000-00');
+
   var moneyController = new MoneyMaskedTextController(
-      decimalSeparator: '.', thousandSeparator: ',', leftSymbol: '\₦');
+      decimalSeparator: '.',
+      thousandSeparator: ',',
+      leftSymbol: '\₦',
+      initialValue: 0.0);
+
+  @override
+  void initState() {
+    // if ((moneyController.numberValue < 1.0)) {
+    //   moneyController.updateValue(160000);
+    // }
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => moneyController.updateValue(widget.amount / 100));
+  }
 
   @override
   Widget build(BuildContext context) {
-    moneyController.updateValue((widget.amount) / 100);
     moneyController.afterChange = (String masked, double raw) {
       setState(() {
         FFAppState().currencyTextField = (raw * 100).round();
       });
       print(FFAppState().currencyTextField);
     };
+
+    setState(() {});
 
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
