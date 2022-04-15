@@ -57,13 +57,14 @@ List<String> getCategoryNames(List<BudgetCategoriesRecord> listForNames) {
 double calcBudgetChart(
   BudgetsRecord budget,
   List<BudgetCategoriesRecord> categories,
+  List<TransactionsRecord> transactions,
 ) {
   // Add your function code here!
 
   int totalCategoriesSpent = 0;
 
-  for (var i = 0; i < categories.length; i++) {
-    totalCategoriesSpent += categories[i].spentAmount;
+  for (var e = 0; e < transactions.length; e++) {
+    totalCategoriesSpent += transactions[e].transactionAmount;
   }
 
   double budgPercent = (totalCategoriesSpent / budget.budgetAmount);
@@ -87,9 +88,18 @@ String calcRemBudget(BudgetsRecord budget) {
   return formatCurrency.format(remaining);
 }
 
-double calcCategoryPercent(BudgetCategoriesRecord category) {
+double calcCategoryPercent(
+  BudgetCategoriesRecord category,
+  List<TransactionsRecord> transactions,
+) {
   // Add your function code here!
-  double percent = (category.spentAmount / category.allocatedAmount);
+  int totalTransactions = 0;
+
+  for (var i = 0; i < transactions.length; i++) {
+    totalTransactions += transactions[i].transactionAmount;
+  }
+
+  double percent = (totalTransactions / category.allocatedAmount);
 
   while (percent > 1) {
     percent--;
@@ -171,14 +181,17 @@ String subtractCurrency(
   return formatCurrency.format(result / 100);
 }
 
-int sumTotalCategoriesSpent(List<BudgetCategoriesRecord> categoriesToSum) {
+int sumTotalCategoriesSpent(
+  List<BudgetCategoriesRecord> categoriesToSum,
+  List<TransactionsRecord> transactions,
+) {
   // Add your function code here!
   //This function takes a number of categories and outputs the sum of their spent amounts
 
   int totalSpent = 0;
 
-  for (var i = 0; i < categoriesToSum.length; i++) {
-    totalSpent += categoriesToSum[i].spentAmount;
+  for (var i = 0; i < transactions.length; i++) {
+    totalSpent += transactions[i].transactionAmount;
   }
 
   return totalSpent;
