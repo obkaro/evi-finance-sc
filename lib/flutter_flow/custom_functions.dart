@@ -84,7 +84,9 @@ String calcRemBudget(BudgetsRecord budget) {
   // Add your function code here!
   final formatCurrency = NumberFormat.simpleCurrency(
       locale: 'en_US', name: 'NGN', decimalDigits: 0);
-  int remaining = budget.budgetAmount - budget.budgetSpent;
+  int remaining = budget.budgetAmount
+      //- budget.budgetSpent
+      ;
   return formatCurrency.format(remaining);
 }
 

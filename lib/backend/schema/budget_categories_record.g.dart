@@ -46,12 +46,6 @@ class _$BudgetCategoriesRecordSerializer
         ..add('allocatedAmount')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    value = object.spentAmount;
-    if (value != null) {
-      result
-        ..add('spentAmount')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
     value = object.budgetOwner;
     if (value != null) {
       result
@@ -106,10 +100,6 @@ class _$BudgetCategoriesRecordSerializer
           result.allocatedAmount = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
-        case 'spentAmount':
-          result.spentAmount = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
-          break;
         case 'budgetOwner':
           result.budgetOwner = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -144,8 +134,6 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
   @override
   final int allocatedAmount;
   @override
-  final int spentAmount;
-  @override
   final DocumentReference<Object> budgetOwner;
   @override
   final BuiltList<DocumentReference<Object>> linkedTransactions;
@@ -160,7 +148,6 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
       {this.categoryName,
       this.categoryBudget,
       this.allocatedAmount,
-      this.spentAmount,
       this.budgetOwner,
       this.linkedTransactions,
       this.reference})
@@ -182,7 +169,6 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
         categoryName == other.categoryName &&
         categoryBudget == other.categoryBudget &&
         allocatedAmount == other.allocatedAmount &&
-        spentAmount == other.spentAmount &&
         budgetOwner == other.budgetOwner &&
         linkedTransactions == other.linkedTransactions &&
         reference == other.reference;
@@ -193,12 +179,8 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
     return $jf($jc(
         $jc(
             $jc(
-                $jc(
-                    $jc(
-                        $jc($jc(0, categoryName.hashCode),
-                            categoryBudget.hashCode),
-                        allocatedAmount.hashCode),
-                    spentAmount.hashCode),
+                $jc($jc($jc(0, categoryName.hashCode), categoryBudget.hashCode),
+                    allocatedAmount.hashCode),
                 budgetOwner.hashCode),
             linkedTransactions.hashCode),
         reference.hashCode));
@@ -210,7 +192,6 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
           ..add('categoryName', categoryName)
           ..add('categoryBudget', categoryBudget)
           ..add('allocatedAmount', allocatedAmount)
-          ..add('spentAmount', spentAmount)
           ..add('budgetOwner', budgetOwner)
           ..add('linkedTransactions', linkedTransactions)
           ..add('reference', reference))
@@ -235,10 +216,6 @@ class BudgetCategoriesRecordBuilder
   int get allocatedAmount => _$this._allocatedAmount;
   set allocatedAmount(int allocatedAmount) =>
       _$this._allocatedAmount = allocatedAmount;
-
-  int _spentAmount;
-  int get spentAmount => _$this._spentAmount;
-  set spentAmount(int spentAmount) => _$this._spentAmount = spentAmount;
 
   DocumentReference<Object> _budgetOwner;
   DocumentReference<Object> get budgetOwner => _$this._budgetOwner;
@@ -268,7 +245,6 @@ class BudgetCategoriesRecordBuilder
       _categoryName = $v.categoryName;
       _categoryBudget = $v.categoryBudget;
       _allocatedAmount = $v.allocatedAmount;
-      _spentAmount = $v.spentAmount;
       _budgetOwner = $v.budgetOwner;
       _linkedTransactions = $v.linkedTransactions?.toBuilder();
       _reference = $v.reference;
@@ -297,7 +273,6 @@ class BudgetCategoriesRecordBuilder
               categoryName: categoryName,
               categoryBudget: categoryBudget,
               allocatedAmount: allocatedAmount,
-              spentAmount: spentAmount,
               budgetOwner: budgetOwner,
               linkedTransactions: _linkedTransactions?.build(),
               reference: reference);

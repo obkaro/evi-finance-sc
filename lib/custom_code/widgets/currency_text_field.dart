@@ -41,7 +41,7 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
 
   @override
   Widget build(BuildContext context) {
-    moneyController.updateText(widget.amount);
+    moneyController.updateValue((widget.amount) / 100);
     moneyController.afterChange = (String masked, double raw) {
       setState(() {
         FFAppState().currencyTextField = (raw * 100).round();

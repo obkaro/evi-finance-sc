@@ -41,12 +41,6 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         ..add('budgetAmount')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    value = object.budgetSpent;
-    if (value != null) {
-      result
-        ..add('budgetSpent')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
     value = object.budgetDescription;
     if (value != null) {
       result
@@ -137,10 +131,6 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
           result.budgetAmount = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
-        case 'budgetSpent':
-          result.budgetSpent = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
-          break;
         case 'budgetDescription':
           result.budgetDescription = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -196,8 +186,6 @@ class _$BudgetsRecord extends BudgetsRecord {
   @override
   final int budgetAmount;
   @override
-  final int budgetSpent;
-  @override
   final String budgetDescription;
   @override
   final DateTime budgetStart;
@@ -221,7 +209,6 @@ class _$BudgetsRecord extends BudgetsRecord {
       {this.budgetName,
       this.budgetOwner,
       this.budgetAmount,
-      this.budgetSpent,
       this.budgetDescription,
       this.budgetStart,
       this.budgetEnd,
@@ -246,7 +233,6 @@ class _$BudgetsRecord extends BudgetsRecord {
         budgetName == other.budgetName &&
         budgetOwner == other.budgetOwner &&
         budgetAmount == other.budgetAmount &&
-        budgetSpent == other.budgetSpent &&
         budgetDescription == other.budgetDescription &&
         budgetStart == other.budgetStart &&
         budgetEnd == other.budgetEnd &&
@@ -268,11 +254,9 @@ class _$BudgetsRecord extends BudgetsRecord {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc(
-                                            $jc($jc(0, budgetName.hashCode),
-                                                budgetOwner.hashCode),
-                                            budgetAmount.hashCode),
-                                        budgetSpent.hashCode),
+                                        $jc($jc(0, budgetName.hashCode),
+                                            budgetOwner.hashCode),
+                                        budgetAmount.hashCode),
                                     budgetDescription.hashCode),
                                 budgetStart.hashCode),
                             budgetEnd.hashCode),
@@ -289,7 +273,6 @@ class _$BudgetsRecord extends BudgetsRecord {
           ..add('budgetName', budgetName)
           ..add('budgetOwner', budgetOwner)
           ..add('budgetAmount', budgetAmount)
-          ..add('budgetSpent', budgetSpent)
           ..add('budgetDescription', budgetDescription)
           ..add('budgetStart', budgetStart)
           ..add('budgetEnd', budgetEnd)
@@ -318,10 +301,6 @@ class BudgetsRecordBuilder
   int _budgetAmount;
   int get budgetAmount => _$this._budgetAmount;
   set budgetAmount(int budgetAmount) => _$this._budgetAmount = budgetAmount;
-
-  int _budgetSpent;
-  int get budgetSpent => _$this._budgetSpent;
-  set budgetSpent(int budgetSpent) => _$this._budgetSpent = budgetSpent;
 
   String _budgetDescription;
   String get budgetDescription => _$this._budgetDescription;
@@ -376,7 +355,6 @@ class BudgetsRecordBuilder
       _budgetName = $v.budgetName;
       _budgetOwner = $v.budgetOwner;
       _budgetAmount = $v.budgetAmount;
-      _budgetSpent = $v.budgetSpent;
       _budgetDescription = $v.budgetDescription;
       _budgetStart = $v.budgetStart;
       _budgetEnd = $v.budgetEnd;
@@ -410,7 +388,6 @@ class BudgetsRecordBuilder
               budgetName: budgetName,
               budgetOwner: budgetOwner,
               budgetAmount: budgetAmount,
-              budgetSpent: budgetSpent,
               budgetDescription: budgetDescription,
               budgetStart: budgetStart,
               budgetEnd: budgetEnd,
