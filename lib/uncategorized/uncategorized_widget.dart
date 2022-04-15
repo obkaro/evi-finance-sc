@@ -165,9 +165,10 @@ class _UncategorizedWidgetState extends State<UncategorizedWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Container(
-                                      width: 80,
-                                      height: 80,
+                                      width: 70,
+                                      height: 70,
                                       child: Stack(
+                                        alignment: AlignmentDirectional(0, 0),
                                         children: [
                                           Container(
                                             width: double.infinity,
@@ -224,8 +225,8 @@ class _UncategorizedWidgetState extends State<UncategorizedWidget> {
                                                           .first
                                                       : null;
                                               return Container(
-                                                width: 80,
-                                                height: 80,
+                                                width: 55,
+                                                height: 55,
                                                 clipBehavior: Clip.antiAlias,
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,

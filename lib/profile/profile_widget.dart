@@ -90,55 +90,43 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                                child: InkWell(
-                                  onTap: () async {
-                                    setDarkModeSetting(
-                                      context,
-                                      (switchListTileValue)
-                                          ? ThemeMode.dark
-                                          : ThemeMode.light,
-                                    );
-                                  },
-                                  child: Stack(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    children: [
-                                      Container(
-                                        width: double.infinity,
-                                        height: 60,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                      ),
-                                      ClipRRect(
+                                child: Stack(
+                                  alignment: AlignmentDirectional(0, 0),
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      height: 60,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
                                         borderRadius: BorderRadius.circular(12),
-                                        child: SwitchListTile(
-                                          value: switchListTileValue ??=
-                                              Theme.of(context).brightness ==
-                                                  Brightness.dark,
-                                          onChanged: (newValue) => setState(
-                                              () => switchListTileValue =
-                                                  newValue),
-                                          title: Text(
-                                            'Dark Mode',
-                                            style: FlutterFlowTheme.of(context)
-                                                .title3,
-                                          ),
-                                          activeColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryColor,
-                                          dense: false,
-                                          controlAffinity:
-                                              ListTileControlAffinity.leading,
-                                          contentPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  10, 10, 10, 10),
-                                        ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: SwitchListTile(
+                                        value: switchListTileValue ??=
+                                            Theme.of(context).brightness ==
+                                                Brightness.dark,
+                                        onChanged: (newValue) => setState(() =>
+                                            switchListTileValue = newValue),
+                                        title: Text(
+                                          'Dark Mode',
+                                          style: FlutterFlowTheme.of(context)
+                                              .title3,
+                                        ),
+                                        activeColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                        dense: false,
+                                        controlAffinity:
+                                            ListTileControlAffinity.leading,
+                                        contentPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                10, 10, 10, 10),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               Padding(
