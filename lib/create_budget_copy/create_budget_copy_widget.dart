@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_calendar.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +22,9 @@ class CreateBudgetCopyWidget extends StatefulWidget {
 class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
   BudgetCategoriesRecord uncategorized;
   BudgetsRecord createdBudget;
-  DateTimeRange calendarSelectedDay1;
+  DateTimeRange calendarDateSelectedDay;
   TextEditingController textController;
-  DateTimeRange calendarSelectedDay2;
+  DateTimeRange calendarSelectedDay;
   bool switchListTileValue;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -31,12 +32,12 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
   @override
   void initState() {
     super.initState();
-    calendarSelectedDay1 = DateTimeRange(
+    calendarDateSelectedDay = DateTimeRange(
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
     textController = TextEditingController();
-    calendarSelectedDay2 = DateTimeRange(
+    calendarSelectedDay = DateTimeRange(
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
@@ -110,6 +111,13 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                               keyboardType: TextInputType.number,
                             ),
                           ),
+                          custom_widgets.CurrencyTextField(
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            amount: FFAppState().currencyTextField,
+                            labelText: 'Budget Amount',
+                            hintText: 'Enter budget amount',
+                          ),
                           Divider(),
                           Padding(
                             padding:
@@ -122,7 +130,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 10, 0, 0),
                                   child: Text(
-                                    'Select Start Date',
+                                    'Select Budget Duration',
                                     style:
                                         FlutterFlowTheme.of(context).subtitle1,
                                   ),
@@ -150,10 +158,9 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                       FlutterFlowTheme.of(context).primaryText,
                                   weekFormat: false,
                                   weekStartsMonday: false,
-                                  initialDate: getCurrentTimestamp,
                                   onChange: (DateTimeRange newSelectedDate) {
-                                    setState(() =>
-                                        calendarSelectedDay1 = newSelectedDate);
+                                    setState(() => calendarDateSelectedDay =
+                                        newSelectedDate);
                                   },
                                   titleStyle:
                                       FlutterFlowTheme.of(context).subtitle1,
@@ -214,7 +221,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                   weekStartsMonday: false,
                                   onChange: (DateTimeRange newSelectedDate) {
                                     setState(() =>
-                                        calendarSelectedDay2 = newSelectedDate);
+                                        calendarSelectedDay = newSelectedDate);
                                   },
                                   titleStyle:
                                       FlutterFlowTheme.of(context).subtitle1,
@@ -301,10 +308,10 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                 true,
                               ),
                               budgetOwner: currentUserReference,
-                              budgetAmount: int.parse(textController.text),
+                              budgetAmount: FFAppState().currencyTextField,
                               budgetDateCreated: getCurrentTimestamp,
-                              budgetStart: calendarSelectedDay1.start,
-                              budgetEnd: calendarSelectedDay2.start,
+                              budgetStart: calendarDateSelectedDay.start,
+                              budgetEnd: calendarDateSelectedDay.end,
                             );
                             var budgetsRecordReference =
                                 BudgetsRecord.collection.doc();

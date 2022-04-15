@@ -1,7 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../budget_single/budget_single_widget.dart';
-import '../create_budget/create_budget_widget.dart';
+import '../create_budget_copy/create_budget_copy_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -45,7 +45,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
           await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CreateBudgetWidget(),
+              builder: (context) => CreateBudgetCopyWidget(),
             ),
           );
         },
@@ -121,7 +121,11 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                             ],
                             child: ListTile(
                               title: Text(
-                                columnBudgetsRecord.budgetName,
+                                '${valueOrDefault<String>(
+                                  dateTimeFormat(
+                                      'MMMEd', columnBudgetsRecord.budgetStart),
+                                  ' - ',
+                                )}${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
                                 style: FlutterFlowTheme.of(context).title3,
                               ),
                               subtitle: Text(

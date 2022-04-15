@@ -181,10 +181,11 @@ class _CreateBudgetCategoriesWidgetState
                                       ),
                                       alignment: AlignmentDirectional(0, 0),
                                       child: Text(
-                                        functions.calcRemCatCurrency(
-                                            createBudgetCategoriesBudgetCategoriesRecordList
-                                                .toList(),
-                                            columnBudgetsRecord),
+                                        functions.formatTransCurrency(
+                                            functions.calculateRemBudgetCat(
+                                                createBudgetCategoriesBudgetCategoriesRecordList
+                                                    .toList(),
+                                                widget.createdBudget)),
                                         textAlign: TextAlign.end,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
@@ -235,7 +236,7 @@ class _CreateBudgetCategoriesWidgetState
                                       onPressed: () async {
                                         final budgetsUpdateData = {
                                           'budgetAmount':
-                                              FieldValue.increment(-1000),
+                                              FieldValue.increment(-100000),
                                         };
                                         await widget.createdBudget.reference
                                             .update(budgetsUpdateData);
@@ -249,8 +250,8 @@ class _CreateBudgetCategoriesWidgetState
                                       ),
                                       alignment: AlignmentDirectional(0, 0),
                                       child: Text(
-                                        functions.formatBudgetCurrency(
-                                            columnBudgetsRecord.budgetAmount),
+                                        functions.formatTransCurrency(
+                                            widget.createdBudget.budgetAmount),
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1,
@@ -270,7 +271,7 @@ class _CreateBudgetCategoriesWidgetState
                                       onPressed: () async {
                                         final budgetsUpdateData = {
                                           'budgetAmount':
-                                              FieldValue.increment(1000),
+                                              FieldValue.increment(100000),
                                         };
                                         await widget.createdBudget.reference
                                             .update(budgetsUpdateData);

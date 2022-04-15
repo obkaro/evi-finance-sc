@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -101,17 +102,26 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                 ),
               ),
               Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                child: custom_widgets.CurrencyTextField(
+                  width: MediaQuery.of(context).size.width,
+                  height: 50,
+                  labelText: 'Amount',
+                  hintText: 'Enter amount',
+                ),
+              ),
+              Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
                     if ((functions.budgetRemMinusAmt(
-                            int.parse(textController.text),
+                            FFAppState().currencyTextField,
                             widget.budgetAllocatedRemaining)) >=
                         0) {
                       final budgetCategoriesCreateData =
                           createBudgetCategoriesRecordData(
                         categoryName: widget.constCategory.categoryName,
-                        allocatedAmount: int.parse(textController.text),
+                        allocatedAmount: FFAppState().currencyTextField,
                         budgetOwner: currentUserReference,
                         categoryBudget: widget.budget.reference,
                         spentAmount: 0,
