@@ -1,27 +1,31 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../create_budget_categories/create_budget_categories_widget.dart';
+import '../edit_budget_categories/edit_budget_categories_widget.dart';
 import '../flutter_flow/flutter_flow_calendar.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
-import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CreateBudgetCopyWidget extends StatefulWidget {
-  const CreateBudgetCopyWidget({Key key}) : super(key: key);
+class EditBudgetWidget extends StatefulWidget {
+  const EditBudgetWidget({
+    Key key,
+    this.createdbudget,
+    this.uncategorized,
+  }) : super(key: key);
+
+  final BudgetsRecord createdbudget;
+  final BudgetCategoriesRecord uncategorized;
 
   @override
-  _CreateBudgetCopyWidgetState createState() => _CreateBudgetCopyWidgetState();
+  _EditBudgetWidgetState createState() => _EditBudgetWidgetState();
 }
 
-class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
-  BudgetCategoriesRecord uncategorized;
-  BudgetsRecord createdBudget;
+class _EditBudgetWidgetState extends State<EditBudgetWidget> {
   DateTimeRange calendarDateEndSelectedDay;
   DateTimeRange calendarDateStartSelectedDay;
   bool switchListTileValue;
@@ -49,7 +53,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: true,
         title: Text(
-          'Create A Budget',
+          'Edit Budget',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Roboto',
                 color: Colors.white,
@@ -81,7 +85,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                           custom_widgets.CurrencyTextField(
                             width: MediaQuery.of(context).size.width,
                             height: 50,
-                            amount: FFAppState().currencyTextField,
+                            amount: widget.createdbudget.budgetAmount,
                             labelText: 'Budget Amount',
                             hintText: 'Enter budget amount',
                           ),
@@ -125,6 +129,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                       FlutterFlowTheme.of(context).primaryText,
                                   weekFormat: false,
                                   weekStartsMonday: false,
+                                  initialDate: widget.createdbudget.budgetStart,
                                   onChange: (DateTimeRange newSelectedDate) {
                                     setState(() =>
                                         calendarDateStartSelectedDay =
@@ -168,6 +173,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                       FlutterFlowTheme.of(context).primaryText,
                                   weekFormat: false,
                                   weekStartsMonday: false,
+                                  initialDate: widget.createdbudget.budgetEnd,
                                   onChange: (DateTimeRange newSelectedDate) {
                                     setState(() => calendarDateEndSelectedDay =
                                         newSelectedDate);
@@ -193,7 +199,8 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: SwitchListTile(
-                              value: switchListTileValue ??= true,
+                              value: switchListTileValue ??=
+                                  widget.createdbudget.isRecurring,
                               onChanged: (newValue) => setState(
                                   () => switchListTileValue = newValue),
                               title: Text(
@@ -248,54 +255,25 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                 : null;
                         return FFButtonWidget(
                           onPressed: () async {
-                            final budgetsCreateData = createBudgetsRecordData(
-                              budgetName: random_data.randomString(
-                                10,
-                                10,
-                                true,
-                                true,
-                                true,
-                              ),
-                              budgetOwner: currentUserReference,
+                            final budgetsUpdateData = createBudgetsRecordData(
                               budgetAmount: FFAppState().currencyTextField,
-                              budgetDateCreated: getCurrentTimestamp,
                               budgetStart: calendarDateStartSelectedDay.start,
-                              budgetEnd: calendarDateEndSelectedDay.start,
+                              budgetEnd: calendarDateEndSelectedDay.end,
                               isRecurring: switchListTileValue,
                             );
-                            var budgetsRecordReference =
-                                BudgetsRecord.collection.doc();
-                            await budgetsRecordReference.set(budgetsCreateData);
-                            createdBudget = BudgetsRecord.getDocumentFromData(
-                                budgetsCreateData, budgetsRecordReference);
-
-                            final budgetCategoriesCreateData =
-                                createBudgetCategoriesRecordData(
-                              categoryName: 'Uncategorized',
-                              categoryBudget: createdBudget.reference,
-                              budgetOwner: currentUserReference,
-                            );
-                            var budgetCategoriesRecordReference =
-                                BudgetCategoriesRecord.collection.doc();
-                            await budgetCategoriesRecordReference
-                                .set(budgetCategoriesCreateData);
-                            uncategorized =
-                                BudgetCategoriesRecord.getDocumentFromData(
-                                    budgetCategoriesCreateData,
-                                    budgetCategoriesRecordReference);
+                            await widget.createdbudget.reference
+                                .update(budgetsUpdateData);
                             await Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    CreateBudgetCategoriesWidget(
-                                  createdBudget: createdBudget,
-                                  uncategorized: uncategorized,
+                                    EditBudgetCategoriesWidget(
+                                  createdBudget: widget.createdbudget,
+                                  uncategorized: widget.uncategorized,
                                 ),
                               ),
                               (r) => false,
                             );
-
-                            setState(() {});
                           },
                           text: 'Next',
                           options: FFButtonOptions(

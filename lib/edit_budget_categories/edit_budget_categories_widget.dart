@@ -184,10 +184,11 @@ class _EditBudgetCategoriesWidgetState
                                   ),
                                   alignment: AlignmentDirectional(0, 0),
                                   child: Text(
-                                    functions.calcRemCatCurrency(
-                                        editBudgetCategoriesBudgetCategoriesRecordList
-                                            .toList(),
-                                        columnBudgetsRecord),
+                                    functions.formatTransCurrency(
+                                        functions.calculateRemBudgetCat(
+                                            editBudgetCategoriesBudgetCategoriesRecordList
+                                                .toList(),
+                                            widget.createdBudget)),
                                     textAlign: TextAlign.end,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText2
@@ -251,8 +252,8 @@ class _EditBudgetCategoriesWidgetState
                                   ),
                                   alignment: AlignmentDirectional(0, 0),
                                   child: Text(
-                                    functions.formatBudgetCurrency(
-                                        columnBudgetsRecord.budgetAmount),
+                                    functions.formatTransCurrency(
+                                        widget.createdBudget.budgetAmount),
                                     textAlign: TextAlign.end,
                                     style:
                                         FlutterFlowTheme.of(context).subtitle1,
@@ -567,7 +568,8 @@ class _EditBudgetCategoriesWidgetState
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
                                                 children: [
                                                   Expanded(
                                                     child: Container(
@@ -618,7 +620,7 @@ class _EditBudgetCategoriesWidgetState
                                                         AlignmentDirectional(
                                                             0, 0),
                                                     child: Text(
-                                                      functions.formatBudgetCurrency(
+                                                      functions.formatTransCurrency(
                                                           columnBudgetCategoriesRecord
                                                               .allocatedAmount),
                                                       style:
@@ -915,9 +917,9 @@ class _EditBudgetCategoriesWidgetState
                                               SnackBar(
                                                 content: Text(
                                                   'Saved',
-                                                  style: TextStyle(
-                                                    color: Color(0xFFDBDBDB),
-                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .subtitle1,
                                                 ),
                                                 duration: Duration(
                                                     milliseconds: 4000),

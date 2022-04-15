@@ -81,19 +81,11 @@ class _SetTransCategoryCopyWidgetState
                           .update(transactionsUpdateData);
 
                       final budgetCategoriesUpdateData = {
-                        'spentAmount': FieldValue.increment(
-                            widget.transaction.transactionAmount),
                         'linkedTransactions': FieldValue.arrayUnion(
                             [widget.transaction.reference]),
                       };
                       await columnBudgetCategoriesRecord.reference
                           .update(budgetCategoriesUpdateData);
-
-                      final budgetsUpdateData = {
-                        'budgetSpent': FieldValue.increment(
-                            widget.transaction.transactionAmount),
-                      };
-                      await widget.recievedBudget.update(budgetsUpdateData);
                       await Navigator.push(
                         context,
                         MaterialPageRoute(

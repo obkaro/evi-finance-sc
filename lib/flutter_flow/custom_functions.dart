@@ -168,7 +168,7 @@ String subtractCurrency(
   final formatCurrency = NumberFormat.simpleCurrency(
       locale: 'en_US', name: 'NGN', decimalDigits: 0);
   int result = value1 - value2;
-  return formatCurrency.format(result);
+  return formatCurrency.format(result / 100);
 }
 
 int sumTotalCategoriesSpent(List<BudgetCategoriesRecord> categoriesToSum) {
@@ -193,4 +193,15 @@ String repeatingOrOnce(bool repeatingSwitch) {
   } else {
     return rFalse;
   }
+}
+
+int sumTransactionAmounts(List<TransactionsRecord> transactions) {
+  // Add your function code here!
+  int total = 0;
+
+  for (var i = 0; i < transactions.length; i++) {
+    total += transactions[i].transactionAmount;
+  }
+
+  return total;
 }

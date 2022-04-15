@@ -28,14 +28,6 @@ class CreateConstCategoryWidget extends StatefulWidget {
 }
 
 class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
-  TextEditingController textController;
-
-  @override
-  void initState() {
-    super.initState();
-    textController = TextEditingController();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,35 +66,6 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                child: TextFormField(
-                  controller: textController,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelText: 'Amount',
-                    hintText: 'Enter Amount',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    filled: true,
-                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyText1,
-                  keyboardType: TextInputType.number,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                 child: custom_widgets.CurrencyTextField(
                   width: MediaQuery.of(context).size.width,
                   height: 50,
@@ -124,7 +87,6 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                         allocatedAmount: FFAppState().currencyTextField,
                         budgetOwner: currentUserReference,
                         categoryBudget: widget.budget.reference,
-                        spentAmount: 0,
                       );
                       await BudgetCategoriesRecord.collection
                           .doc()

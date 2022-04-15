@@ -156,7 +156,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                   backgroundColor: FlutterFlowTheme.of(context)
                                       .tertiaryColor,
                                   center: Text(
-                                    '${functions.formatBudgetCurrency(functions.subInt(widget.budget.budgetAmount, functions.sumTotalCategoriesSpent(budgetSingleBudgetCategoriesRecordList.toList())))} Left',
+                                    '${functions.formatTransCurrency(functions.subInt(widget.budget.budgetAmount, functions.sumTotalCategoriesSpent(budgetSingleBudgetCategoriesRecordList.toList())))} Left',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
@@ -187,7 +187,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                           .bodyText2,
                                     ),
                                     Text(
-                                      functions.formatBudgetCurrency(
+                                      functions.formatTransCurrency(
                                           functions.sumTotalCategoriesSpent(
                                               budgetSingleBudgetCategoriesRecordList
                                                   .toList())),
@@ -206,7 +206,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                           .bodyText2,
                                     ),
                                     Text(
-                                      functions.formatBudgetCurrency(
+                                      functions.formatTransCurrency(
                                           widget.budget.budgetAmount),
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1,
@@ -256,134 +256,173 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                     return Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 0, 0, 10),
-                                      child: Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height: 100,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(12),
+                                      child: StreamBuilder<
+                                          List<TransactionsRecord>>(
+                                        stream: queryTransactionsRecord(
+                                          queryBuilder: (transactionsRecord) =>
+                                              transactionsRecord.where(
+                                                  'linkedCategory',
+                                                  isEqualTo:
+                                                      columnBudgetCategoriesRecord
+                                                          .reference),
                                         ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 16, 16, 16),
-                                          child: Container(
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50,
+                                                height: 50,
+                                                child: SpinKitRing(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  size: 50,
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          List<TransactionsRecord>
+                                              containerTransactionsRecordList =
+                                              snapshot.data;
+                                          return Container(
                                             width: MediaQuery.of(context)
                                                 .size
                                                 .width,
                                             height: 100,
-                                            decoration: BoxDecoration(),
-                                            child: InkWell(
-                                              onTap: () async {
-                                                await Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CategorySingleWidget(
-                                                      category:
-                                                          columnBudgetCategoriesRecord,
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Expanded(
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      0, 0, 10),
-                                                          child: Text(
-                                                            columnBudgetCategoriesRecord
-                                                                .categoryName,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .title3,
-                                                          ),
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 16, 16, 16),
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                height: 100,
+                                                decoration: BoxDecoration(),
+                                                child: InkWell(
+                                                  onTap: () async {
+                                                    await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            CategorySingleWidget(
+                                                          category:
+                                                              columnBudgetCategoriesRecord,
                                                         ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      0, 0, 10),
-                                                          child: Text(
-                                                            '${functions.subtractCurrency(columnBudgetCategoriesRecord.allocatedAmount, columnBudgetCategoriesRecord.spentAmount)} of ${functions.formatBudgetCurrency(columnBudgetCategoriesRecord.allocatedAmount)} left',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Expanded(
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Expanded(
-                                                                child:
-                                                                    LinearPercentIndicator(
-                                                                  percent: functions
-                                                                      .calcCategoryPercent(
-                                                                          columnBudgetCategoriesRecord),
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      0.8,
-                                                                  lineHeight: 8,
-                                                                  animation:
-                                                                      true,
-                                                                  progressColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryColor,
-                                                                  backgroundColor:
-                                                                      Color(
-                                                                          0xFF1B998B),
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .zero,
-                                                                ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Expanded(
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          10),
+                                                              child: Text(
+                                                                columnBudgetCategoriesRecord
+                                                                    .categoryName,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .title3,
                                                               ),
-                                                            ],
-                                                          ),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          10),
+                                                              child: Text(
+                                                                '${functions.subtractCurrency(columnBudgetCategoriesRecord.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))} of ${functions.formatTransCurrency(columnBudgetCategoriesRecord.allocatedAmount)} left',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1,
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Expanded(
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Expanded(
+                                                                    child:
+                                                                        LinearPercentIndicator(
+                                                                      percent: functions
+                                                                          .calcCategoryPercent(
+                                                                              columnBudgetCategoriesRecord),
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.8,
+                                                                      lineHeight:
+                                                                          8,
+                                                                      animation:
+                                                                          true,
+                                                                      progressColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .primaryColor,
+                                                                      backgroundColor:
+                                                                          Color(
+                                                                              0xFF1B998B),
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ),
+                                          );
+                                        },
                                       ),
                                     );
                                   }),
