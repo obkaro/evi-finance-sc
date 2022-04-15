@@ -98,8 +98,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 16),
                                   child: Container(
-                                    width: 180,
-                                    height: 180,
+                                    width: 160,
+                                    height: 160,
                                     child: Stack(
                                       alignment: AlignmentDirectional(0, 0),
                                       children: [
@@ -161,8 +161,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                         .first
                                                     : null;
                                             return Container(
-                                              width: 160,
-                                              height: 160,
+                                              width: 140,
+                                              height: 140,
                                               clipBehavior: Clip.antiAlias,
                                               decoration: BoxDecoration(
                                                 shape: BoxShape.circle,

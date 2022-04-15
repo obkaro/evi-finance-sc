@@ -158,8 +158,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Container(
-                                      width: 80,
-                                      height: 80,
+                                      width: 70,
+                                      height: 70,
                                       child: Stack(
                                         alignment: AlignmentDirectional(0, 0),
                                         children: [
@@ -218,8 +218,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                           .first
                                                       : null;
                                               return Container(
-                                                width: 65,
-                                                height: 65,
+                                                width: 55,
+                                                height: 55,
                                                 clipBehavior: Clip.antiAlias,
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,

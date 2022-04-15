@@ -298,8 +298,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Container(
-                                                width: 80,
-                                                height: 80,
+                                                width: 70,
+                                                height: 70,
                                                 child: Stack(
                                                   alignment:
                                                       AlignmentDirectional(
@@ -369,8 +369,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                     .first
                                                                 : null;
                                                         return Container(
-                                                          width: 65,
-                                                          height: 65,
+                                                          width: 55,
+                                                          height: 55,
                                                           clipBehavior:
                                                               Clip.antiAlias,
                                                           decoration:
