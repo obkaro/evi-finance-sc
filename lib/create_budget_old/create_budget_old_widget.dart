@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -134,6 +135,11 @@ class _CreateBudgetOldWidgetState extends State<CreateBudgetOldWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: TextFormField(
+                            onChanged: (_) => EasyDebounce.debounce(
+                              'textController3',
+                              Duration(milliseconds: 2000),
+                              () => setState(() {}),
+                            ),
                             controller: textController3,
                             obscureText: false,
                             decoration: InputDecoration(
@@ -155,6 +161,18 @@ class _CreateBudgetOldWidgetState extends State<CreateBudgetOldWidget> {
                               filled: true,
                               fillColor: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
+                              suffixIcon: textController3.text.isNotEmpty
+                                  ? InkWell(
+                                      onTap: () => setState(
+                                        () => textController3.clear(),
+                                      ),
+                                      child: Icon(
+                                        Icons.clear,
+                                        color: Color(0xFF757575),
+                                        size: 22,
+                                      ),
+                                    )
+                                  : null,
                             ),
                             style: FlutterFlowTheme.of(context).bodyText1,
                             keyboardType: TextInputType.number,
