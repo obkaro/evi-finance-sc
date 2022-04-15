@@ -78,7 +78,7 @@ class _SetBudgetCompCopyWidgetState extends State<SetBudgetCompCopyWidget>
           ),
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+          padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
           child: FutureBuilder<List<BudgetsRecord>>(
             future: queryBudgetsRecordOnce(
               queryBuilder: (budgetsRecord) => budgetsRecord
@@ -107,7 +107,7 @@ class _SetBudgetCompCopyWidgetState extends State<SetBudgetCompCopyWidget>
                     final columnBudgetsRecord =
                         columnBudgetsRecordList[columnIndex];
                     return Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                       child: InkWell(
                         onTap: () async {
                           await (animationsMap[

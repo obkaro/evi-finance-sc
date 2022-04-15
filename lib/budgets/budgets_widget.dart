@@ -122,12 +122,22 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                             child: ListTile(
                               title: Text(
                                 '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
-                                style: FlutterFlowTheme.of(context).title3,
+                                style: FlutterFlowTheme.of(context)
+                                    .title3
+                                    .override(
+                                      fontFamily: 'Roboto',
+                                      lineHeight: 2,
+                                    ),
                               ),
                               subtitle: Text(
                                 functions.formatTransCurrency(
                                     columnBudgetsRecord.budgetAmount),
-                                style: FlutterFlowTheme.of(context).subtitle2,
+                                style: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Roboto',
+                                      lineHeight: 2,
+                                    ),
                               ),
                               trailing: Icon(
                                 Icons.arrow_forward_ios,
@@ -138,7 +148,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                   .primaryBackground,
                               dense: false,
                               contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                  20, 10, 20, 10),
+                                  20, 16, 20, 16),
                             ),
                           ),
                         ),
