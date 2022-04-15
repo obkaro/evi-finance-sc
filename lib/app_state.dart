@@ -23,6 +23,8 @@ class FFAppState {
   DocumentReference selectedAccount;
 
   String selectedAcctName = '';
+
+  int currencyTextField = 0;
 }
 
 LatLng _latLngFromString(String val) {
