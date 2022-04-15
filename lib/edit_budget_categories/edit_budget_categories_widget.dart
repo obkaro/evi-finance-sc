@@ -217,7 +217,7 @@ class _EditBudgetCategoriesWidgetState
                                       ),
                                       alignment: AlignmentDirectional(0, 0),
                                       child: Text(
-                                        widget.createdBudget.budgetName,
+                                        'Starting ${dateTimeFormat('MMMEd', widget.createdBudget.budgetStart)}',
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1,
                                       ),

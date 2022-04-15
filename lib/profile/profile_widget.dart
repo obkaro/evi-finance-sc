@@ -88,7 +88,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                               Padding(
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                                    EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     await signOut();
