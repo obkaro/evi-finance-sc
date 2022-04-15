@@ -51,56 +51,25 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 30),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            FFButtonWidget(
-                              onPressed: () async {
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AccountsWidget(),
-                                  ),
-                                );
-                              },
-                              text: 'Accounts',
-                              options: FFButtonOptions(
-                                width: 130,
-                                height: 50,
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: 'Roboto',
-                                      color: Colors.white,
-                                    ),
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
-                                ),
-                                borderRadius: 12,
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                              child: FFButtonWidget(
+                      Expanded(
+                        child: Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              FFButtonWidget(
                                 onPressed: () async {
-                                  await signOut();
-                                  await Navigator.pushAndRemoveUntil(
+                                  await Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => LandPageWidget(),
+                                      builder: (context) => AccountsWidget(),
                                     ),
-                                    (r) => false,
                                   );
                                 },
-                                text: 'Logout',
+                                text: 'Accounts',
                                 options: FFButtonOptions(
-                                  width: 130,
+                                  width: double.infinity,
                                   height: 50,
                                   color:
                                       FlutterFlowTheme.of(context).primaryColor,
@@ -117,8 +86,42 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   borderRadius: 12,
                                 ),
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    await signOut();
+                                    await Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => LandPageWidget(),
+                                      ),
+                                      (r) => false,
+                                    );
+                                  },
+                                  text: 'Logout',
+                                  options: FFButtonOptions(
+                                    width: double.infinity,
+                                    height: 50,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Roboto',
+                                          color: Colors.white,
+                                        ),
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    ),
+                                    borderRadius: 12,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

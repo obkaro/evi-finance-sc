@@ -21,9 +21,6 @@ abstract class BudgetCategoriesRecord
   int get allocatedAmount;
 
   @nullable
-  int get spentAmount;
-
-  @nullable
   DocumentReference get budgetOwner;
 
   @nullable
@@ -37,7 +34,6 @@ abstract class BudgetCategoriesRecord
       builder
         ..categoryName = ''
         ..allocatedAmount = 0
-        ..spentAmount = 0
         ..linkedTransactions = ListBuilder();
 
   static CollectionReference get collection =>
@@ -67,7 +63,6 @@ Map<String, dynamic> createBudgetCategoriesRecordData({
   String categoryName,
   DocumentReference categoryBudget,
   int allocatedAmount,
-  int spentAmount,
   DocumentReference budgetOwner,
 }) =>
     serializers.toFirestore(
@@ -76,6 +71,5 @@ Map<String, dynamic> createBudgetCategoriesRecordData({
           ..categoryName = categoryName
           ..categoryBudget = categoryBudget
           ..allocatedAmount = allocatedAmount
-          ..spentAmount = spentAmount
           ..budgetOwner = budgetOwner
           ..linkedTransactions = null));

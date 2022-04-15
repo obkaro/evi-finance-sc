@@ -20,9 +20,6 @@ abstract class BudgetsRecord
   int get budgetAmount;
 
   @nullable
-  int get budgetSpent;
-
-  @nullable
   String get budgetDescription;
 
   @nullable
@@ -50,7 +47,6 @@ abstract class BudgetsRecord
   static void _initializeBuilder(BudgetsRecordBuilder builder) => builder
     ..budgetName = ''
     ..budgetAmount = 0
-    ..budgetSpent = 0
     ..budgetDescription = ''
     ..budgetLinkedAccounts = ListBuilder()
     ..budgetSubCategories = ListBuilder()
@@ -81,7 +77,6 @@ Map<String, dynamic> createBudgetsRecordData({
   String budgetName,
   DocumentReference budgetOwner,
   int budgetAmount,
-  int budgetSpent,
   String budgetDescription,
   DateTime budgetStart,
   DateTime budgetEnd,
@@ -94,7 +89,6 @@ Map<String, dynamic> createBudgetsRecordData({
           ..budgetName = budgetName
           ..budgetOwner = budgetOwner
           ..budgetAmount = budgetAmount
-          ..budgetSpent = budgetSpent
           ..budgetDescription = budgetDescription
           ..budgetStart = budgetStart
           ..budgetEnd = budgetEnd

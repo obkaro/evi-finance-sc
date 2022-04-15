@@ -2,8 +2,6 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../transaction_single/transaction_single_widget.dart';
-import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -74,27 +72,12 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget> {
                           .update(transactionsUpdateData);
 
                       final budgetCategoriesUpdateData = {
-                        'spentAmount': FieldValue.increment(functions
-                            .koboToNaira(widget.transaction.transactionAmount)),
                         'linkedTransactions': FieldValue.arrayUnion(
                             [widget.transaction.reference]),
                       };
                       await columnBudgetCategoriesRecord.reference
                           .update(budgetCategoriesUpdateData);
-
-                      final budgetsUpdateData = {
-                        'budgetSpent': FieldValue.increment(functions
-                            .koboToNaira(widget.transaction.transactionAmount)),
-                      };
-                      await widget.recievedBudget.update(budgetsUpdateData);
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TransactionSingleWidget(
-                            transaction: widget.transaction,
-                          ),
-                        ),
-                      );
+                      Navigator.pop(context);
                     },
                     child: ListTile(
                       title: Text(

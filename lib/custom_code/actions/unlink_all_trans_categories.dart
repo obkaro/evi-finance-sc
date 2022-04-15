@@ -19,12 +19,5 @@ Future unlinkAllTransCategories(
     };
 
     await transactions[i].reference.update(transactionUpdateData);
-
-    final categoryUpdateData = {
-      'spentAmount':
-          FieldValue.increment(-transactions[i].transactionAmount.round())
-    };
-
-    await category.reference.update(categoryUpdateData);
   }
 }

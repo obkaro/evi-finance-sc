@@ -559,7 +559,7 @@ class _CreateBudgetCategoriesWidgetState
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
                                               Expanded(
                                                 child: Container(
@@ -608,7 +608,7 @@ class _CreateBudgetCategoriesWidgetState
                                                 alignment:
                                                     AlignmentDirectional(0, 0),
                                                 child: Text(
-                                                  functions.formatBudgetCurrency(
+                                                  functions.formatTransCurrency(
                                                       columnBudgetCategoriesRecord
                                                           .allocatedAmount),
                                                   style: FlutterFlowTheme.of(
@@ -891,13 +891,6 @@ class _CreateBudgetCategoriesWidgetState
                                               .reference
                                               .update(
                                                   budgetCategoriesUpdateData);
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => NavBarPage(
-                                                  initialPage: 'Budgets'),
-                                            ),
-                                          );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             SnackBar(
@@ -909,6 +902,13 @@ class _CreateBudgetCategoriesWidgetState
                                                   Duration(milliseconds: 4000),
                                               backgroundColor:
                                                   Color(0x00000000),
+                                            ),
+                                          );
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => NavBarPage(
+                                                  initialPage: 'Budgets'),
                                             ),
                                           );
                                         },

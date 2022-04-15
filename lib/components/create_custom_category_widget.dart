@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -26,14 +27,12 @@ class CreateCustomCategoryWidget extends StatefulWidget {
 
 class _CreateCustomCategoryWidgetState
     extends State<CreateCustomCategoryWidget> {
-  TextEditingController textController1;
-  TextEditingController textController2;
+  TextEditingController textController;
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
+    textController = TextEditingController();
   }
 
   @override
@@ -66,7 +65,7 @@ class _CreateCustomCategoryWidgetState
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: TextFormField(
-                  controller: textController1,
+                  controller: textController,
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Category Name',
@@ -93,31 +92,11 @@ class _CreateCustomCategoryWidgetState
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                child: TextFormField(
-                  controller: textController2,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelText: 'Amount',
-                    hintText: 'Enter Amount',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    filled: true,
-                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyText1,
-                  keyboardType: TextInputType.number,
+                child: custom_widgets.CurrencyTextField(
+                  width: MediaQuery.of(context).size.width,
+                  height: 50,
+                  labelText: 'Amount',
+                  hintText: 'Enter amount',
                 ),
               ),
               Padding(
@@ -125,16 +104,15 @@ class _CreateCustomCategoryWidgetState
                 child: FFButtonWidget(
                   onPressed: () async {
                     if ((functions.budgetRemMinusAmt(
-                            int.parse(textController2.text),
+                            FFAppState().currencyTextField,
                             widget.budgetRemaining)) >=
                         0) {
                       final budgetCategoriesCreateData =
                           createBudgetCategoriesRecordData(
-                        categoryName: textController1.text,
-                        allocatedAmount: int.parse(textController2.text),
+                        categoryName: textController.text,
+                        allocatedAmount: FFAppState().currencyTextField,
                         budgetOwner: currentUserReference,
                         categoryBudget: widget.budget.reference,
-                        spentAmount: 0,
                       );
                       await BudgetCategoriesRecord.collection
                           .doc()
