@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/lat_lng.dart';
-import 'dart:convert';
 
 class FFAppState {
   static final FFAppState _instance = FFAppState._internal();
@@ -27,7 +26,9 @@ class FFAppState {
 
   int currencyTextField = 0;
 
-  dynamic currencyTextFieldJSON;
+  String dataSyncStatus = '';
+
+  bool hasNewData = false;
 }
 
 LatLng _latLngFromString(String val) {
