@@ -56,7 +56,6 @@ List<String> getCategoryNames(List<BudgetCategoriesRecord> listForNames) {
 
 double calcBudgetChart(
   BudgetsRecord budget,
-  List<BudgetCategoriesRecord> categories,
   List<TransactionsRecord> transactions,
 ) {
   // Add your function code here!
@@ -235,7 +234,7 @@ String overOrUnder(
   int value2,
 ) {
   // Add your function code here!
-  String result = 'Remaining';
+  String result = 'Left';
 
   if (value2 > value1) {
     result = 'Over';

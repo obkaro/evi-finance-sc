@@ -543,7 +543,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                     ),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyText1,
+                                                                    .subtitle1,
                                                               ),
                                                               AutoSizeText(
                                                                 columnTransactionsRecord
