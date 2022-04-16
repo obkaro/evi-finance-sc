@@ -68,12 +68,13 @@ class _CreateBudgetCategoriesWidgetState
               children: [
                 InkWell(
                   onTap: () async {
-                    await Navigator.push(
+                    await Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
                             NavBarPage(initialPage: 'Budgets'),
                       ),
+                      (r) => false,
                     );
                   },
                   child: Icon(
@@ -251,7 +252,7 @@ class _CreateBudgetCategoriesWidgetState
                                       alignment: AlignmentDirectional(0, 0),
                                       child: Text(
                                         functions.formatTransCurrency(
-                                            widget.createdBudget.budgetAmount),
+                                            columnBudgetsRecord.budgetAmount),
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1,
@@ -562,34 +563,38 @@ class _CreateBudgetCategoriesWidgetState
                                                 MainAxisAlignment.spaceEvenly,
                                             children: [
                                               Expanded(
-                                                child: Container(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  height: 36,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
-                                                  ),
-                                                  child: Align(
-                                                    alignment:
-                                                        AlignmentDirectional(
-                                                            -1, 0),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 0, 10, 0),
-                                                      child: AutoSizeText(
-                                                        columnBudgetCategoriesRecord
-                                                            .categoryName,
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(16, 0, 0, 0),
+                                                  child: Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    height: 36,
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryBackground,
+                                                    ),
+                                                    child: Align(
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              -1, 0),
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(0, 0,
+                                                                    10, 0),
+                                                        child: AutoSizeText(
+                                                          columnBudgetCategoriesRecord
+                                                              .categoryName,
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -895,21 +900,27 @@ class _CreateBudgetCategoriesWidgetState
                                               .showSnackBar(
                                             SnackBar(
                                               content: Text(
-                                                'Saved',
-                                                style: TextStyle(),
+                                                'Saved!',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
                                               ),
                                               duration:
                                                   Duration(milliseconds: 4000),
                                               backgroundColor:
-                                                  Color(0x00000000),
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
                                             ),
                                           );
-                                          await Navigator.push(
+                                          await Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) => NavBarPage(
                                                   initialPage: 'Budgets'),
                                             ),
+                                            (r) => false,
                                           );
                                         },
                                         text: 'Save',

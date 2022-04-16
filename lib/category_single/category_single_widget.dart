@@ -165,9 +165,15 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                               backgroundColor:
                                   FlutterFlowTheme.of(context).tertiaryColor,
                               center: Text(
-                                '${functions.subInt(widget.category.allocatedAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList())).toString()} ${functions.overOrUnder(widget.category.allocatedAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList()))}',
+                                '${functions.formatTransCurrency(functions.subInt(widget.category.allocatedAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList())))} ${functions.overOrUnder(widget.category.allocatedAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList()))}',
                                 textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context).bodyText1,
+                                style: FlutterFlowTheme.of(context)
+                                    .subtitle1
+                                    .override(
+                                      fontFamily: 'Roboto',
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryColor,
+                                    ),
                               ),
                               startAngle: 0,
                             ),
@@ -383,6 +389,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                             imageUrl:
                                                                 circleImageConstInstitutionLogosRecord
                                                                     .institutionLogo,
+                                                            fit: BoxFit.contain,
                                                           ),
                                                         );
                                                       },
@@ -473,7 +480,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                               '…',
                                                                         ),
                                                                         style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1,
+                                                                            .subtitle1,
                                                                       );
                                                                     },
                                                                   ),
