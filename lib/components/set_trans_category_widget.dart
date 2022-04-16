@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../transaction_single/transaction_single_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
+        padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
         child: FutureBuilder<List<BudgetCategoriesRecord>>(
           future: queryBudgetCategoriesRecordOnce(
             queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
@@ -98,7 +99,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                   final columnBudgetCategoriesRecord =
                       columnBudgetCategoriesRecordList[columnIndex];
                   return Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: InkWell(
                       onTap: () async {
                         await (animationsMap[
@@ -123,6 +124,15 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                         await columnBudgetCategoriesRecord.reference
                             .update(budgetCategoriesUpdateData);
                         Navigator.pop(context);
+                        await Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TransactionSingleWidget(
+                              transaction: widget.transaction,
+                            ),
+                          ),
+                          (r) => false,
+                        );
                       },
                       child: Container(
                         width: double.infinity,

@@ -171,7 +171,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                 imageUrl:
                                                     circleImageConstInstitutionLogosRecord
                                                         .institutionLogo,
-                                                fit: BoxFit.cover,
+                                                fit: BoxFit.contain,
                                               ),
                                             );
                                           },

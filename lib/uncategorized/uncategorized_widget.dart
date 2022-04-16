@@ -316,7 +316,7 @@ class _UncategorizedWidgetState extends State<UncategorizedWidget> {
                                                             ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText1,
+                                                                .subtitle1,
                                                           );
                                                         },
                                                       ),
@@ -328,7 +328,7 @@ class _UncategorizedWidgetState extends State<UncategorizedWidget> {
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyText1
+                                                                .subtitle1
                                                                 .override(
                                                                   fontFamily:
                                                                       'Roboto',
@@ -376,7 +376,7 @@ class _UncategorizedWidgetState extends State<UncategorizedWidget> {
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1,
+                                                              .subtitle1,
                                                     ),
                                                     AutoSizeText(
                                                       columnTransactionsRecord

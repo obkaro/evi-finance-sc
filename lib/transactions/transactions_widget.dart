@@ -98,8 +98,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
-            child: FutureBuilder<List<TransactionsRecord>>(
-              future: queryTransactionsRecordOnce(
+            child: StreamBuilder<List<TransactionsRecord>>(
+              stream: queryTransactionsRecord(
                 queryBuilder: (transactionsRecord) => transactionsRecord
                     .where('transactionOwner', isEqualTo: currentUserReference)
                     .where('transactionType', isEqualTo: 'debit')
@@ -228,6 +228,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                   imageUrl:
                                                       circleImageConstInstitutionLogosRecord
                                                           .institutionLogo,
+                                                  fit: BoxFit.contain,
                                                 ),
                                               );
                                             },
@@ -312,7 +313,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                               ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodyText1,
+                                                                  .subtitle1,
                                                             );
                                                           },
                                                         ),
@@ -323,7 +324,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                           'Uncategorized',
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .bodyText1
+                                                              .subtitle1
                                                               .override(
                                                                 fontFamily:
                                                                     'Roboto',
@@ -372,7 +373,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1,
+                                                              .subtitle1,
                                                     ),
                                                     AutoSizeText(
                                                       columnTransactionsRecord

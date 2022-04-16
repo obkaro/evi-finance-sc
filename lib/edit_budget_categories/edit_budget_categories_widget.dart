@@ -238,7 +238,7 @@ class _EditBudgetCategoriesWidgetState
                                   onPressed: () async {
                                     final budgetsUpdateData = {
                                       'budgetAmount':
-                                          FieldValue.increment(-1000),
+                                          FieldValue.increment(-100000),
                                     };
                                     await widget.createdBudget.reference
                                         .update(budgetsUpdateData);
@@ -273,7 +273,7 @@ class _EditBudgetCategoriesWidgetState
                                   onPressed: () async {
                                     final budgetsUpdateData = {
                                       'budgetAmount':
-                                          FieldValue.increment(1000),
+                                          FieldValue.increment(100000),
                                     };
                                     await widget.createdBudget.reference
                                         .update(budgetsUpdateData);
@@ -572,34 +572,45 @@ class _EditBudgetCategoriesWidgetState
                                                         .spaceEvenly,
                                                 children: [
                                                   Expanded(
-                                                    child: Container(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                      height: 36,
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .primaryBackground,
-                                                      ),
-                                                      child: Align(
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                -1, 0),
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      0, 10, 0),
-                                                          child: AutoSizeText(
-                                                            columnBudgetCategoriesRecord
-                                                                .categoryName,
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1,
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16, 0, 0, 0),
+                                                      child: Container(
+                                                        width: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .width,
+                                                        height: 36,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBackground,
+                                                        ),
+                                                        child: Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  -1, 0),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        10,
+                                                                        0),
+                                                            child: AutoSizeText(
+                                                              columnBudgetCategoriesRecord
+                                                                  .categoryName,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1,
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
@@ -926,13 +937,14 @@ class _EditBudgetCategoriesWidgetState
                                                 backgroundColor: Colors.black,
                                               ),
                                             );
-                                            await Navigator.push(
+                                            await Navigator.pushAndRemoveUntil(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     NavBarPage(
                                                         initialPage: 'Budgets'),
                                               ),
+                                              (r) => false,
                                             );
                                           },
                                           text: 'Save',

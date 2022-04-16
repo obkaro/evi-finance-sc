@@ -191,12 +191,12 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                       center: Text(
                                         '${functions.formatTransCurrency(functions.subInt(widget.budget.budgetAmount, functions.sumTotalCategoriesSpent(budgetSingleBudgetCategoriesRecordList.toList(), progressBarTransactionsRecordList.toList())))} ${functions.overOrUnder(widget.budget.budgetAmount, functions.sumTransactionAmounts(progressBarTransactionsRecordList.toList()))}',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyText1
+                                            .subtitle1
                                             .override(
                                               fontFamily: 'Roboto',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryColor,
+                                                      .secondaryColor,
                                             ),
                                       ),
                                       startAngle: 0,
@@ -257,7 +257,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                   textTransactionsRecordList
                                                       .toList())),
                                           style: FlutterFlowTheme.of(context)
-                                              .subtitle1,
+                                              .title3,
                                         );
                                       },
                                     ),
@@ -275,8 +275,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                     Text(
                                       functions.formatTransCurrency(
                                           widget.budget.budgetAmount),
-                                      style: FlutterFlowTheme.of(context)
-                                          .subtitle1,
+                                      style:
+                                          FlutterFlowTheme.of(context).title3,
                                     ),
                                   ],
                                 ),
@@ -383,7 +383,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                             .allocatedAmount),
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyText1,
+                                                        .subtitle1,
                                                   ),
                                                 ],
                                               ),
