@@ -27,6 +27,13 @@ class _UncategorizedWidgetState extends State<UncategorizedWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'Uncategorized'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -78,6 +85,8 @@ class _UncategorizedWidgetState extends State<UncategorizedWidget> {
                   : null;
           return FloatingActionButton(
             onPressed: () async {
+              logFirebaseEvent('FloatingActionButton-ON_TAP');
+              logFirebaseEvent('FloatingActionButton-Navigate-To');
               await Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -248,6 +257,8 @@ class _UncategorizedWidgetState extends State<UncategorizedWidget> {
                                             16, 10, 0, 10),
                                         child: InkWell(
                                           onTap: () async {
+                                            logFirebaseEvent('Row-ON_TAP');
+                                            logFirebaseEvent('Row-Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(

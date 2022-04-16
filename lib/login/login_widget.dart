@@ -26,6 +26,7 @@ class _LoginWidgetState extends State<LoginWidget> {
     inputEmailController = TextEditingController();
     inputPasswordController = TextEditingController();
     inputPasswordVisibility = false;
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Login'});
   }
 
   @override
@@ -167,6 +168,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     ),
                                     FFButtonWidget(
                                       onPressed: () async {
+                                        logFirebaseEvent('Button-ON_TAP');
+                                        logFirebaseEvent('Button-Auth');
+
                                         final user = await signInWithEmail(
                                           context,
                                           inputEmailController.text,
@@ -176,6 +180,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           return;
                                         }
 
+                                        logFirebaseEvent('Button-Navigate-To');
                                         await Navigator.push(
                                           context,
                                           MaterialPageRoute(

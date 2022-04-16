@@ -156,15 +156,13 @@ class ReauthMonoCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'reauthMono',
-      apiUrl: 'https://api.withmono.com/accounts/id/reauthorise',
+      apiUrl: 'https://api.withmono.com/accounts/${authID}/reauthorise',
       callType: ApiCallType.POST,
       headers: {
         'Accept': 'application/json',
         'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid',
       },
-      params: {
-        'authID': authID,
-      },
+      params: {},
       bodyType: BodyType.NONE,
       returnBody: true,
     );

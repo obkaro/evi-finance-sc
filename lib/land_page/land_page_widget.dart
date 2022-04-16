@@ -18,6 +18,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'LandPage'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -59,6 +65,8 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                             child: FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent('Button_SignUp-ON_TAP');
+                                logFirebaseEvent('Button_SignUp-Navigate-To');
                                 await Navigator.push(
                                   context,
                                   PageTransition(
@@ -95,6 +103,8 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                             child: FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent('Button_Login-ON_TAP');
+                                logFirebaseEvent('Button_Login-Navigate-To');
                                 await Navigator.push(
                                   context,
                                   PageTransition(

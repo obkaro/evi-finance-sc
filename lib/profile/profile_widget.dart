@@ -19,6 +19,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Profile'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -60,6 +66,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             children: [
                               FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent('Button-ON_TAP');
+                                  logFirebaseEvent('Button-Navigate-To');
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -91,6 +99,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    logFirebaseEvent('Button-ON_TAP');
+                                    logFirebaseEvent('Button-Auth');
                                     await signOut();
                                     await Navigator.pushAndRemoveUntil(
                                       context,

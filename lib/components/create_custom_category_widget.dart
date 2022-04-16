@@ -103,10 +103,13 @@ class _CreateCustomCategoryWidgetState
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
+                    logFirebaseEvent('Button-ON_TAP');
                     if ((functions.budgetRemMinusAmt(
                             FFAppState().currencyTextField,
                             widget.budgetRemaining)) >=
                         0) {
+                      logFirebaseEvent('Button-Backend-Call');
+
                       final budgetCategoriesCreateData =
                           createBudgetCategoriesRecordData(
                         categoryName: textController.text,
@@ -117,8 +120,10 @@ class _CreateCustomCategoryWidgetState
                       await BudgetCategoriesRecord.collection
                           .doc()
                           .set(budgetCategoriesCreateData);
+                      logFirebaseEvent('Button-Navigate-Back');
                       Navigator.pop(context);
                     } else {
+                      logFirebaseEvent('Button-Alert-Dialog');
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
@@ -157,6 +162,8 @@ class _CreateCustomCategoryWidgetState
               ),
               FFButtonWidget(
                 onPressed: () async {
+                  logFirebaseEvent('Button-ON_TAP');
+                  logFirebaseEvent('Button-Navigate-Back');
                   Navigator.pop(context);
                 },
                 text: 'Cancel',

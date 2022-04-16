@@ -28,6 +28,13 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'TransactionSingle'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<BudgetCategoriesRecord>>(
       future: queryBudgetCategoriesRecordOnce(
@@ -338,6 +345,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                   .fromSTEB(0, 0, 20, 0),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
+                                                  logFirebaseEvent(
+                                                      'Button-ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Button-Bottom-Sheet');
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
@@ -428,6 +439,11 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                     size: 24,
                                                   ),
                                                   onPressed: () async {
+                                                    logFirebaseEvent(
+                                                        'IconButton-ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'IconButton-Backend-Call');
+
                                                     final transactionsUpdateData =
                                                         {
                                                       ...createTransactionsRecordData(
@@ -440,6 +456,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                         .transaction.reference
                                                         .update(
                                                             transactionsUpdateData);
+                                                    logFirebaseEvent(
+                                                        'IconButton-Backend-Call');
 
                                                     final budgetCategoriesUpdateData =
                                                         {
@@ -454,6 +472,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                         .reference
                                                         .update(
                                                             budgetCategoriesUpdateData);
+                                                    logFirebaseEvent(
+                                                        'IconButton-Navigate-Back');
                                                     Navigator.pop(context);
                                                   },
                                                 );
