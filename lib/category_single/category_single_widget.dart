@@ -8,7 +8,6 @@ import '../transaction_single/transaction_single_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -320,8 +319,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                         height: double.infinity,
                                                         decoration:
                                                             BoxDecoration(
-                                                          color:
-                                                              Color(0xFFEEEEEE),
+                                                          color: Colors.white,
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
@@ -329,11 +327,11 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                         ),
                                                       ),
                                                     ),
-                                                    FutureBuilder<
+                                                    StreamBuilder<
                                                         List<
                                                             ConstInstitutionLogosRecord>>(
-                                                      future:
-                                                          queryConstInstitutionLogosRecordOnce(
+                                                      stream:
+                                                          queryConstInstitutionLogosRecord(
                                                         queryBuilder: (constInstitutionLogosRecord) =>
                                                             constInstitutionLogosRecord.where(
                                                                 'institutionCode',
@@ -361,36 +359,25 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                           );
                                                         }
                                                         List<ConstInstitutionLogosRecord>
-                                                            circleImageConstInstitutionLogosRecordList =
+                                                            imageConstInstitutionLogosRecordList =
                                                             snapshot.data;
                                                         // Return an empty Container when the document does not exist.
                                                         if (snapshot
                                                             .data.isEmpty) {
                                                           return Container();
                                                         }
-                                                        final circleImageConstInstitutionLogosRecord =
-                                                            circleImageConstInstitutionLogosRecordList
+                                                        final imageConstInstitutionLogosRecord =
+                                                            imageConstInstitutionLogosRecordList
                                                                     .isNotEmpty
-                                                                ? circleImageConstInstitutionLogosRecordList
+                                                                ? imageConstInstitutionLogosRecordList
                                                                     .first
                                                                 : null;
-                                                        return Container(
-                                                          width: 55,
-                                                          height: 55,
-                                                          clipBehavior:
-                                                              Clip.antiAlias,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            shape:
-                                                                BoxShape.circle,
-                                                          ),
-                                                          child:
-                                                              CachedNetworkImage(
-                                                            imageUrl:
-                                                                circleImageConstInstitutionLogosRecord
-                                                                    .institutionLogo,
-                                                            fit: BoxFit.contain,
-                                                          ),
+                                                        return Image.network(
+                                                          imageConstInstitutionLogosRecord
+                                                              .institutionLogo,
+                                                          width: 45,
+                                                          height: 45,
+                                                          fit: BoxFit.cover,
                                                         );
                                                       },
                                                     ),

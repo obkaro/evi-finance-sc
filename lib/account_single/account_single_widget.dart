@@ -148,31 +148,25 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                               );
                                             }
                                             List<ConstInstitutionLogosRecord>
-                                                circleImageConstInstitutionLogosRecordList =
+                                                imageConstInstitutionLogosRecordList =
                                                 snapshot.data;
                                             // Return an empty Container when the document does not exist.
                                             if (snapshot.data.isEmpty) {
                                               return Container();
                                             }
-                                            final circleImageConstInstitutionLogosRecord =
-                                                circleImageConstInstitutionLogosRecordList
+                                            final imageConstInstitutionLogosRecord =
+                                                imageConstInstitutionLogosRecordList
                                                         .isNotEmpty
-                                                    ? circleImageConstInstitutionLogosRecordList
+                                                    ? imageConstInstitutionLogosRecordList
                                                         .first
                                                     : null;
-                                            return Container(
-                                              width: 140,
-                                              height: 140,
-                                              clipBehavior: Clip.antiAlias,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: CachedNetworkImage(
-                                                imageUrl:
-                                                    circleImageConstInstitutionLogosRecord
-                                                        .institutionLogo,
-                                                fit: BoxFit.contain,
-                                              ),
+                                            return CachedNetworkImage(
+                                              imageUrl:
+                                                  imageConstInstitutionLogosRecord
+                                                      .institutionLogo,
+                                              width: 100,
+                                              height: 100,
+                                              fit: BoxFit.cover,
                                             );
                                           },
                                         ),

@@ -127,14 +127,8 @@ class _CreateBudgetCategoriesWidgetState
                         queryBuilder: (budgetsRecord) => budgetsRecord
                             .where('budgetOwner',
                                 isEqualTo: currentUserReference)
-                            .where('budgetName',
-                                isEqualTo: widget.createdBudget.budgetName)
-                            .where('budgetDescription',
-                                isEqualTo:
-                                    widget.createdBudget.budgetDescription)
-                            .where('budgetDateCreated',
-                                isEqualTo:
-                                    widget.createdBudget.budgetDateCreated),
+                            .where('budgetID',
+                                isEqualTo: widget.createdBudget.budgetID),
                         singleRecord: true,
                       ),
                       builder: (context, snapshot) {
@@ -199,7 +193,7 @@ class _CreateBudgetCategoriesWidgetState
                                             functions.calculateRemBudgetCat(
                                                 createBudgetCategoriesBudgetCategoriesRecordList
                                                     .toList(),
-                                                widget.createdBudget)),
+                                                columnBudgetsRecord)),
                                         textAlign: TextAlign.end,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
