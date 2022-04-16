@@ -1,6 +1,20 @@
 {
   "indexes": [
     {
+      "collectionGroup": "budgetCategories",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categoryBudget",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "categoryName",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "transactions",
       "queryScope": "COLLECTION",
       "fields": [
@@ -26,20 +40,6 @@
           "fieldPath": "budgetOwner",
           "order": "ASCENDING"
         },
-        {
-          "fieldPath": "categoryBudget",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "categoryName",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "budgetCategories",
-      "queryScope": "COLLECTION",
-      "fields": [
         {
           "fieldPath": "categoryBudget",
           "order": "ASCENDING"
