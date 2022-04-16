@@ -279,7 +279,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                     .accountName,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .title3,
+                                                        .subtitle1,
                                               ),
                                             ),
                                             Row(
@@ -293,7 +293,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                           .accountBalance),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .title3,
+                                                      .bodyText2,
                                                 ),
                                               ],
                                             ),

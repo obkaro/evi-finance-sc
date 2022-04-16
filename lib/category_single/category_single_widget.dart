@@ -171,7 +171,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                     .override(
                                       fontFamily: 'Roboto',
                                       color: FlutterFlowTheme.of(context)
-                                          .secondaryColor,
+                                          .primaryText,
                                     ),
                               ),
                               startAngle: 0,
@@ -420,7 +420,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                       .max,
                                                               mainAxisAlignment:
                                                                   MainAxisAlignment
-                                                                      .spaceEvenly,
+                                                                      .center,
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
                                                                       .start,
@@ -428,65 +428,78 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                 if (columnTransactionsRecord
                                                                         .isCategorized ??
                                                                     true)
-                                                                  StreamBuilder<
-                                                                      BudgetCategoriesRecord>(
-                                                                    stream: BudgetCategoriesRecord.getDocument(
-                                                                        columnTransactionsRecord
-                                                                            .linkedCategory),
-                                                                    builder:
-                                                                        (context,
-                                                                            snapshot) {
-                                                                      // Customize what your widget looks like when it's loading.
-                                                                      if (!snapshot
-                                                                          .hasData) {
-                                                                        return Center(
-                                                                          child:
-                                                                              SizedBox(
-                                                                            width:
-                                                                                50,
-                                                                            height:
-                                                                                50,
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0,
+                                                                            0,
+                                                                            0,
+                                                                            8),
+                                                                    child: StreamBuilder<
+                                                                        BudgetCategoriesRecord>(
+                                                                      stream: BudgetCategoriesRecord.getDocument(
+                                                                          columnTransactionsRecord
+                                                                              .linkedCategory),
+                                                                      builder:
+                                                                          (context,
+                                                                              snapshot) {
+                                                                        // Customize what your widget looks like when it's loading.
+                                                                        if (!snapshot
+                                                                            .hasData) {
+                                                                          return Center(
                                                                             child:
-                                                                                SpinKitRing(
-                                                                              color: FlutterFlowTheme.of(context).primaryColor,
-                                                                              size: 50,
+                                                                                SizedBox(
+                                                                              width: 50,
+                                                                              height: 50,
+                                                                              child: SpinKitRing(
+                                                                                color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                size: 50,
+                                                                              ),
                                                                             ),
+                                                                          );
+                                                                        }
+                                                                        final textBudgetCategoriesRecord =
+                                                                            snapshot.data;
+                                                                        return AutoSizeText(
+                                                                          textBudgetCategoriesRecord
+                                                                              .categoryName
+                                                                              .maybeHandleOverflow(
+                                                                            maxChars:
+                                                                                25,
+                                                                            replacement:
+                                                                                '…',
                                                                           ),
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).subtitle1,
                                                                         );
-                                                                      }
-                                                                      final textBudgetCategoriesRecord =
-                                                                          snapshot
-                                                                              .data;
-                                                                      return AutoSizeText(
-                                                                        textBudgetCategoriesRecord
-                                                                            .categoryName
-                                                                            .maybeHandleOverflow(
-                                                                          maxChars:
-                                                                              25,
-                                                                          replacement:
-                                                                              '…',
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .subtitle1,
-                                                                      );
-                                                                    },
+                                                                      },
+                                                                    ),
                                                                   ),
                                                                 if (!(columnTransactionsRecord
                                                                         .isCategorized) ??
                                                                     true)
-                                                                  AutoSizeText(
-                                                                    'Uncategorized',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Roboto',
-                                                                          color:
-                                                                              Color(0xFFFF0003),
-                                                                          fontStyle:
-                                                                              FontStyle.italic,
-                                                                        ),
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0,
+                                                                            0,
+                                                                            0,
+                                                                            8),
+                                                                    child:
+                                                                        AutoSizeText(
+                                                                      'Uncategorized',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Roboto',
+                                                                            color:
+                                                                                Color(0xFFFF0003),
+                                                                            fontStyle:
+                                                                                FontStyle.italic,
+                                                                          ),
+                                                                    ),
                                                                   ),
                                                                 Text(
                                                                   '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
@@ -512,25 +525,35 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                     .min,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
-                                                                    .spaceEvenly,
+                                                                    .center,
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
                                                                     .end,
                                                             children: [
-                                                              AutoSizeText(
-                                                                functions
-                                                                    .formatTransCurrency(
-                                                                        columnTransactionsRecord
-                                                                            .transactionAmount)
-                                                                    .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          15,
-                                                                      replacement:
-                                                                          '…',
-                                                                    ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle1,
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0,
+                                                                            0,
+                                                                            0,
+                                                                            8),
+                                                                child:
+                                                                    AutoSizeText(
+                                                                  functions
+                                                                      .formatTransCurrency(
+                                                                          columnTransactionsRecord
+                                                                              .transactionAmount)
+                                                                      .maybeHandleOverflow(
+                                                                        maxChars:
+                                                                            15,
+                                                                        replacement:
+                                                                            '…',
+                                                                      ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1,
+                                                                ),
                                                               ),
                                                               AutoSizeText(
                                                                 columnTransactionsRecord

@@ -64,100 +64,122 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
           topRight: Radius.circular(12),
         ),
       ),
-      child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-        child: FutureBuilder<List<BudgetsRecord>>(
-          future: queryBudgetsRecordOnce(
-            queryBuilder: (budgetsRecord) => budgetsRecord.where('budgetOwner',
-                isEqualTo: currentUserReference),
-          ),
-          builder: (context, snapshot) {
-            // Customize what your widget looks like when it's loading.
-            if (!snapshot.hasData) {
-              return Center(
-                child: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: SpinKitRing(
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    size: 50,
-                  ),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 16),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Text(
+                  'Select Budget',
+                  style: FlutterFlowTheme.of(context).title3,
                 ),
-              );
-            }
-            List<BudgetsRecord> columnBudgetsRecordList = snapshot.data;
-            return SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: List.generate(columnBudgetsRecordList.length,
-                    (columnIndex) {
-                  final columnBudgetsRecord =
-                      columnBudgetsRecordList[columnIndex];
-                  return Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                    child: InkWell(
-                      onTap: () async {
-                        await (animationsMap[
-                                    'containerOnActionTriggerAnimation']
-                                .curvedAnimation
-                                .parent as AnimationController)
-                            .forward(from: 0.0);
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
+            child: FutureBuilder<List<BudgetsRecord>>(
+              future: queryBudgetsRecordOnce(
+                queryBuilder: (budgetsRecord) => budgetsRecord
+                    .where('budgetOwner', isEqualTo: currentUserReference),
+              ),
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: SpinKitRing(
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        size: 50,
+                      ),
+                    ),
+                  );
+                }
+                List<BudgetsRecord> columnBudgetsRecordList = snapshot.data;
+                return SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: List.generate(columnBudgetsRecordList.length,
+                        (columnIndex) {
+                      final columnBudgetsRecord =
+                          columnBudgetsRecordList[columnIndex];
+                      return Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                        child: InkWell(
+                          onTap: () async {
+                            await (animationsMap[
+                                        'containerOnActionTriggerAnimation']
+                                    .curvedAnimation
+                                    .parent as AnimationController)
+                                .forward(from: 0.0);
 
-                        Navigator.pop(context);
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          context: context,
-                          builder: (context) {
-                            return Padding(
-                              padding: MediaQuery.of(context).viewInsets,
-                              child: SetTransCategoryWidget(
-                                transaction: widget.transaction,
-                                recievedBudget: columnBudgetsRecord.reference,
-                              ),
+                            Navigator.pop(context);
+                            await showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              builder: (context) {
+                                return Padding(
+                                  padding: MediaQuery.of(context).viewInsets,
+                                  child: SetTransCategoryWidget(
+                                    transaction: widget.transaction,
+                                    recievedBudget:
+                                        columnBudgetsRecord.reference,
+                                  ),
+                                );
+                              },
                             );
                           },
-                        );
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
-                                style: FlutterFlowTheme.of(context).title3,
+                          child: Container(
+                            width: double.infinity,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
+                                    style: FlutterFlowTheme.of(context).title3,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 16, 0, 0),
+                                    child: Text(
+                                      functions.formatTransCurrency(
+                                          columnBudgetsRecord.budgetAmount),
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle2,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                                child: Text(
-                                  functions.formatTransCurrency(
-                                      columnBudgetsRecord.budgetAmount),
-                                  style: FlutterFlowTheme.of(context).subtitle2,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                    ).animated(
-                        [animationsMap['containerOnActionTriggerAnimation']]),
-                  );
-                }),
-              ),
-            );
-          },
-        ),
+                        ).animated([
+                          animationsMap['containerOnActionTriggerAnimation']
+                        ]),
+                      );
+                    }),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

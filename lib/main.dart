@@ -14,6 +14,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'transactions/transactions_widget.dart';
 import 'budgets/budgets_widget.dart';
 import 'profile/profile_widget.dart';
+import 'admin/admin_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -123,6 +124,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'Transactions': TransactionsWidget(),
       'Budgets': BudgetsWidget(),
       'Profile': ProfileWidget(),
+      'Admin': AdminWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -156,6 +158,14 @@ class _NavBarPageState extends State<NavBarPage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.person,
+              size: 24,
+            ),
+            label: 'Profile',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.admin_panel_settings_rounded,
               size: 24,
             ),
             label: 'Profile',
