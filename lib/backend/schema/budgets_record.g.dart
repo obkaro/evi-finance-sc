@@ -94,6 +94,14 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.uncategorizedLink;
+    if (value != null) {
+      result
+        ..add('uncategorizedLink')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType(Object)])));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -165,6 +173,12 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
           result.isRecurring = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
+        case 'uncategorizedLink':
+          result.uncategorizedLink = serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      DocumentReference, const [const FullType(Object)]))
+              as DocumentReference<Object>;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -200,6 +214,8 @@ class _$BudgetsRecord extends BudgetsRecord {
   @override
   final bool isRecurring;
   @override
+  final DocumentReference<Object> uncategorizedLink;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$BudgetsRecord([void Function(BudgetsRecordBuilder) updates]) =>
@@ -216,6 +232,7 @@ class _$BudgetsRecord extends BudgetsRecord {
       this.budgetLinkedAccounts,
       this.budgetSubCategories,
       this.isRecurring,
+      this.uncategorizedLink,
       this.reference})
       : super._();
 
@@ -240,6 +257,7 @@ class _$BudgetsRecord extends BudgetsRecord {
         budgetLinkedAccounts == other.budgetLinkedAccounts &&
         budgetSubCategories == other.budgetSubCategories &&
         isRecurring == other.isRecurring &&
+        uncategorizedLink == other.uncategorizedLink &&
         reference == other.reference;
   }
 
@@ -254,16 +272,18 @@ class _$BudgetsRecord extends BudgetsRecord {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, budgetName.hashCode),
-                                            budgetOwner.hashCode),
-                                        budgetAmount.hashCode),
-                                    budgetDescription.hashCode),
-                                budgetStart.hashCode),
-                            budgetEnd.hashCode),
-                        budgetDateCreated.hashCode),
-                    budgetLinkedAccounts.hashCode),
-                budgetSubCategories.hashCode),
-            isRecurring.hashCode),
+                                        $jc(
+                                            $jc($jc(0, budgetName.hashCode),
+                                                budgetOwner.hashCode),
+                                            budgetAmount.hashCode),
+                                        budgetDescription.hashCode),
+                                    budgetStart.hashCode),
+                                budgetEnd.hashCode),
+                            budgetDateCreated.hashCode),
+                        budgetLinkedAccounts.hashCode),
+                    budgetSubCategories.hashCode),
+                isRecurring.hashCode),
+            uncategorizedLink.hashCode),
         reference.hashCode));
   }
 
@@ -280,6 +300,7 @@ class _$BudgetsRecord extends BudgetsRecord {
           ..add('budgetLinkedAccounts', budgetLinkedAccounts)
           ..add('budgetSubCategories', budgetSubCategories)
           ..add('isRecurring', isRecurring)
+          ..add('uncategorizedLink', uncategorizedLink)
           ..add('reference', reference))
         .toString();
   }
@@ -340,6 +361,11 @@ class BudgetsRecordBuilder
   bool get isRecurring => _$this._isRecurring;
   set isRecurring(bool isRecurring) => _$this._isRecurring = isRecurring;
 
+  DocumentReference<Object> _uncategorizedLink;
+  DocumentReference<Object> get uncategorizedLink => _$this._uncategorizedLink;
+  set uncategorizedLink(DocumentReference<Object> uncategorizedLink) =>
+      _$this._uncategorizedLink = uncategorizedLink;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -362,6 +388,7 @@ class BudgetsRecordBuilder
       _budgetLinkedAccounts = $v.budgetLinkedAccounts?.toBuilder();
       _budgetSubCategories = $v.budgetSubCategories?.toBuilder();
       _isRecurring = $v.isRecurring;
+      _uncategorizedLink = $v.uncategorizedLink;
       _reference = $v.reference;
       _$v = null;
     }
@@ -395,6 +422,7 @@ class BudgetsRecordBuilder
               budgetLinkedAccounts: _budgetLinkedAccounts?.build(),
               budgetSubCategories: _budgetSubCategories?.build(),
               isRecurring: isRecurring,
+              uncategorizedLink: uncategorizedLink,
               reference: reference);
     } catch (_) {
       String _$failedField;
