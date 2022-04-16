@@ -140,6 +140,20 @@ class _$AccountsRecordSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.dataSyncStatus;
+    if (value != null) {
+      result
+        ..add('dataSyncStatus')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.hasNewData;
+    if (value != null) {
+      result
+        ..add('hasNewData')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -233,6 +247,14 @@ class _$AccountsRecordSerializer
           result.reauthRequired = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
+        case 'dataSyncStatus':
+          result.dataSyncStatus = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'hasNewData':
+          result.hasNewData = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -282,6 +304,10 @@ class _$AccountsRecord extends AccountsRecord {
   @override
   final bool reauthRequired;
   @override
+  final String dataSyncStatus;
+  @override
+  final String hasNewData;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$AccountsRecord([void Function(AccountsRecordBuilder) updates]) =>
@@ -305,6 +331,8 @@ class _$AccountsRecord extends AccountsRecord {
       this.accountLogo,
       this.isSelectedT,
       this.reauthRequired,
+      this.dataSyncStatus,
+      this.hasNewData,
       this.reference})
       : super._();
 
@@ -337,6 +365,8 @@ class _$AccountsRecord extends AccountsRecord {
         accountLogo == other.accountLogo &&
         isSelectedT == other.isSelectedT &&
         reauthRequired == other.reauthRequired &&
+        dataSyncStatus == other.dataSyncStatus &&
+        hasNewData == other.hasNewData &&
         reference == other.reference;
   }
 
@@ -360,29 +390,25 @@ class _$AccountsRecord extends AccountsRecord {
                                                                 $jc(
                                                                     $jc(
                                                                         $jc(
-                                                                            0,
-                                                                            accountName
-                                                                                .hashCode),
-                                                                        accountOwner
-                                                                            .hashCode),
-                                                                    dataStatus
-                                                                        .hashCode),
-                                                                accountType
-                                                                    .hashCode),
-                                                            institutionType
-                                                                .hashCode),
-                                                        authMethod.hashCode),
-                                                    currency.hashCode),
-                                                authID.hashCode),
-                                            institutionName.hashCode),
-                                        accountBalance.hashCode),
-                                    bankCode.hashCode),
-                                accountNumber.hashCode),
-                            bvn.hashCode),
-                        dateLinked.hashCode),
-                    accountLogo.hashCode),
-                isSelectedT.hashCode),
-            reauthRequired.hashCode),
+                                                                            $jc($jc(0, accountName.hashCode),
+                                                                                accountOwner.hashCode),
+                                                                            dataStatus.hashCode),
+                                                                        accountType.hashCode),
+                                                                    institutionType.hashCode),
+                                                                authMethod.hashCode),
+                                                            currency.hashCode),
+                                                        authID.hashCode),
+                                                    institutionName.hashCode),
+                                                accountBalance.hashCode),
+                                            bankCode.hashCode),
+                                        accountNumber.hashCode),
+                                    bvn.hashCode),
+                                dateLinked.hashCode),
+                            accountLogo.hashCode),
+                        isSelectedT.hashCode),
+                    reauthRequired.hashCode),
+                dataSyncStatus.hashCode),
+            hasNewData.hashCode),
         reference.hashCode));
   }
 
@@ -406,6 +432,8 @@ class _$AccountsRecord extends AccountsRecord {
           ..add('accountLogo', accountLogo)
           ..add('isSelectedT', isSelectedT)
           ..add('reauthRequired', reauthRequired)
+          ..add('dataSyncStatus', dataSyncStatus)
+          ..add('hasNewData', hasNewData)
           ..add('reference', reference))
         .toString();
   }
@@ -489,6 +517,15 @@ class AccountsRecordBuilder
   set reauthRequired(bool reauthRequired) =>
       _$this._reauthRequired = reauthRequired;
 
+  String _dataSyncStatus;
+  String get dataSyncStatus => _$this._dataSyncStatus;
+  set dataSyncStatus(String dataSyncStatus) =>
+      _$this._dataSyncStatus = dataSyncStatus;
+
+  String _hasNewData;
+  String get hasNewData => _$this._hasNewData;
+  set hasNewData(String hasNewData) => _$this._hasNewData = hasNewData;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -518,6 +555,8 @@ class AccountsRecordBuilder
       _accountLogo = $v.accountLogo;
       _isSelectedT = $v.isSelectedT;
       _reauthRequired = $v.reauthRequired;
+      _dataSyncStatus = $v.dataSyncStatus;
+      _hasNewData = $v.hasNewData;
       _reference = $v.reference;
       _$v = null;
     }
@@ -556,6 +595,8 @@ class AccountsRecordBuilder
             accountLogo: accountLogo,
             isSelectedT: isSelectedT,
             reauthRequired: reauthRequired,
+            dataSyncStatus: dataSyncStatus,
+            hasNewData: hasNewData,
             reference: reference);
     replace(_$result);
     return _$result;
