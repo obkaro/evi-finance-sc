@@ -31,8 +31,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<TransactionsRecord>>(
-      future: queryTransactionsRecordOnce(
+    return StreamBuilder<List<TransactionsRecord>>(
+      stream: queryTransactionsRecord(
         queryBuilder: (transactionsRecord) => transactionsRecord
             .where('linkedCategory', isEqualTo: widget.category.reference),
       ),
@@ -66,8 +66,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                   ),
             ),
             actions: [
-              FutureBuilder<List<TransactionsRecord>>(
-                future: queryTransactionsRecordOnce(
+              StreamBuilder<List<TransactionsRecord>>(
+                stream: queryTransactionsRecord(
                   queryBuilder: (transactionsRecord) =>
                       transactionsRecord.where('linkedCategory',
                           isEqualTo: widget.category.reference),
@@ -236,8 +236,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
-                        child: FutureBuilder<List<TransactionsRecord>>(
-                          future: queryTransactionsRecordOnce(
+                        child: StreamBuilder<List<TransactionsRecord>>(
+                          stream: queryTransactionsRecord(
                             queryBuilder: (transactionsRecord) =>
                                 transactionsRecord
                                     .where('transactionOwner',

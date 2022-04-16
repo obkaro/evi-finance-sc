@@ -158,67 +158,72 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 20, 0, 20),
-                                child: StreamBuilder<List<TransactionsRecord>>(
-                                  stream: queryTransactionsRecord(
-                                    queryBuilder: (transactionsRecord) =>
-                                        transactionsRecord.where(
-                                            'linkedCategory',
-                                            whereIn:
-                                                budgetSingleBudgetCategoriesRecordList
-                                                    .map((e) => e.reference)
-                                                    .toList()),
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50,
-                                          height: 50,
-                                          child: SpinKitRing(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            size: 50,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    List<TransactionsRecord>
-                                        progressBarTransactionsRecordList =
-                                        snapshot.data;
-                                    return CircularPercentIndicator(
-                                      percent: functions.calcBudgetChart(
-                                          widget.budget,
-                                          progressBarTransactionsRecordList
-                                              .toList()),
-                                      radius: 112.5,
-                                      lineWidth: 24,
-                                      animation: true,
-                                      progressColor:
-                                          FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .tertiaryColor,
-                                      center: Text(
-                                        '${functions.formatTransCurrency(functions.subInt(widget.budget.budgetAmount, functions.sumTotalCategoriesSpent(budgetSingleBudgetCategoriesRecordList.toList(), progressBarTransactionsRecordList.toList())))} ${functions.overOrUnder(widget.budget.budgetAmount, functions.sumTransactionAmounts(progressBarTransactionsRecordList.toList()))}',
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle1
-                                            .override(
-                                              fontFamily: 'Roboto',
+                              if ((budgetSingleBudgetCategoriesRecordList
+                                      .length) >
+                                  0)
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 20, 0, 20),
+                                  child:
+                                      StreamBuilder<List<TransactionsRecord>>(
+                                    stream: queryTransactionsRecord(
+                                      queryBuilder: (transactionsRecord) =>
+                                          transactionsRecord.where(
+                                              'linkedCategory',
+                                              whereIn:
+                                                  budgetSingleBudgetCategoriesRecordList
+                                                      .map((e) => e.reference)
+                                                      .toList()),
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: SpinKitRing(
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryColor,
+                                                      .primaryColor,
+                                              size: 50,
                                             ),
-                                      ),
-                                      startAngle: 0,
-                                    );
-                                  },
+                                          ),
+                                        );
+                                      }
+                                      List<TransactionsRecord>
+                                          progressBarTransactionsRecordList =
+                                          snapshot.data;
+                                      return CircularPercentIndicator(
+                                        percent: functions.calcBudgetChart(
+                                            widget.budget,
+                                            progressBarTransactionsRecordList
+                                                .toList()),
+                                        radius: 112.5,
+                                        lineWidth: 24,
+                                        animation: true,
+                                        progressColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .tertiaryColor,
+                                        center: Text(
+                                          '${functions.formatTransCurrency(functions.subInt(widget.budget.budgetAmount, functions.sumTotalCategoriesSpent(budgetSingleBudgetCategoriesRecordList.toList(), progressBarTransactionsRecordList.toList())))} ${functions.overOrUnder(widget.budget.budgetAmount, functions.sumTransactionAmounts(progressBarTransactionsRecordList.toList()))}',
+                                          style: FlutterFlowTheme.of(context)
+                                              .subtitle1
+                                              .override(
+                                                fontFamily: 'Roboto',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryColor,
+                                              ),
+                                        ),
+                                        startAngle: 0,
+                                      );
+                                    },
+                                  ),
                                 ),
-                              ),
                             ],
                           ),
                           Padding(
