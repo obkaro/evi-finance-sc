@@ -26,6 +26,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -52,7 +58,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
               size: 30,
             ),
             onPressed: () async {
+              logFirebaseEvent('IconButton-ON_TAP');
+              logFirebaseEvent('IconButton-Auth');
               await signOut();
+              logFirebaseEvent('IconButton-Navigate-To');
               await Navigator.push(
                 context,
                 MaterialPageRoute(

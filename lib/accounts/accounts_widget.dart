@@ -24,6 +24,12 @@ class _AccountsWidgetState extends State<AccountsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Accounts'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -45,12 +51,16 @@ class _AccountsWidgetState extends State<AccountsWidget> {
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
+          logFirebaseEvent('FloatingActionButton-ON_TAP');
+          logFirebaseEvent('FloatingActionButton-Custom-Action');
           newacctB = await actions.flutterMono(
             context,
           );
+          logFirebaseEvent('FloatingActionButton-Backend-Call');
           acctInfoResponse = await GetAccountInfoCall.call(
             authID: newacctB.authID,
           );
+          logFirebaseEvent('FloatingActionButton-Backend-Call');
 
           // final accountsUpdateData = createAccountsRecordData(
           //   accountName: getJsonField(
@@ -167,6 +177,8 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                   10, 10, 10, 10),
                               child: InkWell(
                                 onTap: () async {
+                                  logFirebaseEvent('Row-ON_TAP');
+                                  logFirebaseEvent('Row-Navigate-To');
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(

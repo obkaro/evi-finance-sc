@@ -19,6 +19,12 @@ class _AdminWidgetState extends State<AdminWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Admin'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -99,12 +105,17 @@ class _AdminWidgetState extends State<AdminWidget> {
                                     ),
                                     InkWell(
                                       onTap: () async {
+                                        logFirebaseEvent('Container-ON_TAP');
                                         if ((Theme.of(context).brightness ==
                                                 Brightness.dark) ==
                                             false) {
+                                          logFirebaseEvent(
+                                              'Container-Set-Dark-Mode-Settings');
                                           setDarkModeSetting(
                                               context, ThemeMode.light);
                                         } else {
+                                          logFirebaseEvent(
+                                              'Container-Set-Dark-Mode-Settings');
                                           setDarkModeSetting(
                                               context, ThemeMode.light);
                                         }
@@ -126,12 +137,17 @@ class _AdminWidgetState extends State<AdminWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    logFirebaseEvent('Button-ON_TAP');
                                     if ((Theme.of(context).brightness ==
                                             Brightness.dark) ==
                                         false) {
+                                      logFirebaseEvent(
+                                          'Button-Set-Dark-Mode-Settings');
                                       setDarkModeSetting(
                                           context, ThemeMode.light);
                                     } else {
+                                      logFirebaseEvent(
+                                          'Button-Set-Dark-Mode-Settings');
                                       setDarkModeSetting(
                                           context, ThemeMode.light);
                                     }
@@ -161,6 +177,9 @@ class _AdminWidgetState extends State<AdminWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    logFirebaseEvent('Button-ON_TAP');
+                                    logFirebaseEvent(
+                                        'Button-Set-Dark-Mode-Settings');
                                     setDarkModeSetting(
                                         context, ThemeMode.light);
                                   },
@@ -189,6 +208,9 @@ class _AdminWidgetState extends State<AdminWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    logFirebaseEvent('Button-ON_TAP');
+                                    logFirebaseEvent(
+                                        'Button-Set-Dark-Mode-Settings');
                                     setDarkModeSetting(context, ThemeMode.dark);
                                   },
                                   text: 'Dark',
@@ -216,6 +238,8 @@ class _AdminWidgetState extends State<AdminWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    logFirebaseEvent('Button-ON_TAP');
+                                    logFirebaseEvent('Button-Auth');
                                     await signOut();
                                     await Navigator.pushAndRemoveUntil(
                                       context,

@@ -69,17 +69,22 @@ class _SelectAccountWidgetState extends State<SelectAccountWidget> {
                       columnAccountsRecordList[columnIndex];
                   return InkWell(
                     onTap: () async {
+                      logFirebaseEvent('ListTile-ON_TAP');
+                      logFirebaseEvent('ListTile-Backend-Call');
+
                       final transactionsUpdateData =
                           createTransactionsRecordData(
                         account: columnAccountsRecord.reference,
                       );
                       await widget.transaction.reference
                           .update(transactionsUpdateData);
+                      logFirebaseEvent('ListTile-Backend-Call');
 
                       final usersUpdateData = createUsersRecordData(
                         defaultAccount: columnAccountsRecord.reference,
                       );
                       await currentUserReference.update(usersUpdateData);
+                      logFirebaseEvent('ListTile-Navigate-Back');
                       Navigator.pop(context);
                     },
                     child: ListTile(

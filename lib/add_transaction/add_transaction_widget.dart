@@ -36,7 +36,10 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
     super.initState();
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('AddTransaction-ON_PAGE_LOAD');
+      logFirebaseEvent('AddTransaction-Update-Local-State');
       setState(() => FFAppState().currencyTextField = 0);
+      logFirebaseEvent('AddTransaction-Backend-Call');
 
       final transactionsCreateData = createTransactionsRecordData(
         account: widget.defaultAccount,
@@ -47,6 +50,8 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
           transactionsCreateData, transactionsRecordReference);
     });
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'AddTransaction'});
     textController = TextEditingController();
   }
 
@@ -164,10 +169,16 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                             0, 0, 0, 10),
                                         child: InkWell(
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'Container-ON_TAP');
+                                            logFirebaseEvent(
+                                                'Container-Update-Local-State');
                                             setState(() =>
                                                 FFAppState().selectedAcctName =
                                                     columnAccountsRecord
                                                         .accountNumber);
+                                            logFirebaseEvent(
+                                                'Container-Backend-Call');
 
                                             final transactionsUpdateData =
                                                 createTransactionsRecordData(
@@ -444,10 +455,13 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () async {
+                          logFirebaseEvent('Button-ON_TAP');
                           if ((createdTransaction.account != null)) {
                             if ((choiceChipsValue != null) &&
                                 (choiceChipsValue != '')) {
                               if ((FFAppState().currencyTextField) > 0) {
+                                logFirebaseEvent('Button-Backend-Call');
+
                                 final transactionsUpdateData =
                                     createTransactionsRecordData(
                                   trasactionDate: getCurrentTimestamp,
@@ -459,6 +473,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                 );
                                 await createdTransaction.reference
                                     .update(transactionsUpdateData);
+                                logFirebaseEvent('Button-Bottom-Sheet');
                                 await showModalBottomSheet(
                                   isScrollControlled: true,
                                   backgroundColor: Colors.transparent,
@@ -474,6 +489,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                   },
                                 );
                               } else {
+                                logFirebaseEvent('Button-Alert-Dialog');
                                 await showDialog(
                                   context: context,
                                   builder: (alertDialogContext) {
@@ -493,6 +509,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                 );
                               }
                             } else {
+                              logFirebaseEvent('Button-Alert-Dialog');
                               await showDialog(
                                 context: context,
                                 builder: (alertDialogContext) {
@@ -512,6 +529,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                               );
                             }
                           } else {
+                            logFirebaseEvent('Button-Alert-Dialog');
                             await showDialog(
                               context: context,
                               builder: (alertDialogContext) {

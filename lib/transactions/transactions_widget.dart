@@ -21,6 +21,13 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'Transactions'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -72,6 +79,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                   : null;
           return FloatingActionButton(
             onPressed: () async {
+              logFirebaseEvent('FloatingActionButton-ON_TAP');
+              logFirebaseEvent('FloatingActionButton-Navigate-To');
               await Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -234,6 +243,10 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                             16, 0, 0, 0),
                                         child: InkWell(
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'OpenTransaction-ON_TAP');
+                                            logFirebaseEvent(
+                                                'OpenTransaction-Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(

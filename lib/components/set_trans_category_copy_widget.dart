@@ -133,11 +133,15 @@ class _SetTransCategoryCopyWidgetState extends State<SetTransCategoryCopyWidget>
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: InkWell(
                             onTap: () async {
+                              logFirebaseEvent('Container-ON_TAP');
+                              logFirebaseEvent('Container-Widget-Animation');
                               await (animationsMap[
                                           'containerOnActionTriggerAnimation']
                                       .curvedAnimation
                                       .parent as AnimationController)
                                   .forward(from: 0.0);
+
+                              logFirebaseEvent('Container-Backend-Call');
 
                               final transactionsUpdateData =
                                   createTransactionsRecordData(
@@ -147,6 +151,7 @@ class _SetTransCategoryCopyWidgetState extends State<SetTransCategoryCopyWidget>
                               );
                               await widget.transaction.reference
                                   .update(transactionsUpdateData);
+                              logFirebaseEvent('Container-Backend-Call');
 
                               final budgetCategoriesUpdateData = {
                                 'linkedTransactions': FieldValue.arrayUnion(
@@ -154,6 +159,7 @@ class _SetTransCategoryCopyWidgetState extends State<SetTransCategoryCopyWidget>
                               };
                               await columnBudgetCategoriesRecord.reference
                                   .update(budgetCategoriesUpdateData);
+                              logFirebaseEvent('Container-Navigate-To');
                               await Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(

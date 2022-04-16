@@ -30,6 +30,13 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'CategorySingle'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<TransactionsRecord>>(
       stream: queryTransactionsRecord(
@@ -99,10 +106,13 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                       size: 24,
                     ),
                     onPressed: () async {
+                      logFirebaseEvent('IconButton-ON_TAP');
+                      logFirebaseEvent('IconButton-Custom-Action');
                       await actions.unlinkAllTransCategories(
                         iconButtonTransactionsRecordList.toList(),
                         widget.category,
                       );
+                      logFirebaseEvent('IconButton-Backend-Call');
 
                       final budgetCategoriesUpdateData = {
                         'linkedTransactions': FieldValue.delete(),
@@ -120,6 +130,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
+              logFirebaseEvent('FloatingActionButton-ON_TAP');
+              logFirebaseEvent('FloatingActionButton-Navigate-To');
               await Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -390,6 +402,10 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                       .fromSTEB(16, 10, 0, 10),
                                                   child: InkWell(
                                                     onTap: () async {
+                                                      logFirebaseEvent(
+                                                          'Row-ON_TAP');
+                                                      logFirebaseEvent(
+                                                          'Row-Navigate-To');
                                                       await Navigator.push(
                                                         context,
                                                         MaterialPageRoute(

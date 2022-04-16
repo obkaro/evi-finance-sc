@@ -41,11 +41,17 @@ class _CreateBudgetCategoriesWidgetState
     super.initState();
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('CreateBudgetCategories-ON_PAGE_LOAD');
+      logFirebaseEvent('CreateBudgetCategories-Backend-Call');
+
       final budgetsUpdateData = createBudgetsRecordData(
         uncategorizedLink: widget.uncategorized.reference,
       );
       await widget.createdBudget.reference.update(budgetsUpdateData);
     });
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'CreateBudgetCategories'});
   }
 
   @override
@@ -81,6 +87,8 @@ class _CreateBudgetCategoriesWidgetState
               children: [
                 InkWell(
                   onTap: () async {
+                    logFirebaseEvent('Icon-ON_TAP');
+                    logFirebaseEvent('Icon-Navigate-To');
                     await Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
@@ -242,6 +250,10 @@ class _CreateBudgetCategoriesWidgetState
                                         size: 24,
                                       ),
                                       onPressed: () async {
+                                        logFirebaseEvent('IconButton-ON_TAP');
+                                        logFirebaseEvent(
+                                            'IconButton-Backend-Call');
+
                                         final budgetsUpdateData = {
                                           'budgetAmount':
                                               FieldValue.increment(-100000),
@@ -277,6 +289,10 @@ class _CreateBudgetCategoriesWidgetState
                                         size: 24,
                                       ),
                                       onPressed: () async {
+                                        logFirebaseEvent('IconButton-ON_TAP');
+                                        logFirebaseEvent(
+                                            'IconButton-Backend-Call');
+
                                         final budgetsUpdateData = {
                                           'budgetAmount':
                                               FieldValue.increment(100000),
@@ -389,6 +405,10 @@ class _CreateBudgetCategoriesWidgetState
                                               ),
                                               child: InkWell(
                                                 onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'Column-ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Column-Bottom-Sheet');
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
@@ -472,6 +492,8 @@ class _CreateBudgetCategoriesWidgetState
                                       0, 16, 0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      logFirebaseEvent('Button-ON_TAP');
+                                      logFirebaseEvent('Button-Bottom-Sheet');
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
                                         backgroundColor: Colors.transparent,
@@ -645,6 +667,10 @@ class _CreateBudgetCategoriesWidgetState
                                                     size: 24,
                                                   ),
                                                   onPressed: () async {
+                                                    logFirebaseEvent(
+                                                        'IconButton-ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'IconButton-Bottom-Sheet');
                                                     await showModalBottomSheet(
                                                       isScrollControlled: true,
                                                       backgroundColor:
@@ -691,6 +717,10 @@ class _CreateBudgetCategoriesWidgetState
                                                     size: 24,
                                                   ),
                                                   onPressed: () async {
+                                                    logFirebaseEvent(
+                                                        'IconButton-ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'IconButton-Alert-Dialog');
                                                     var confirmDialogResponse =
                                                         await showDialog<bool>(
                                                               context: context,
@@ -722,6 +752,8 @@ class _CreateBudgetCategoriesWidgetState
                                                             ) ??
                                                             false;
                                                     if (confirmDialogResponse) {
+                                                      logFirebaseEvent(
+                                                          'IconButton-Backend-Call');
                                                       await columnBudgetCategoriesRecord
                                                           .reference
                                                           .delete();
@@ -782,6 +814,9 @@ class _CreateBudgetCategoriesWidgetState
                                           snapshot.data;
                                       return FFButtonWidget(
                                         onPressed: () async {
+                                          logFirebaseEvent('Button-ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button-Alert-Dialog');
                                           var confirmDialogResponse =
                                               await showDialog<bool>(
                                                     context: context,
@@ -815,6 +850,8 @@ class _CreateBudgetCategoriesWidgetState
                                                   ) ??
                                                   false;
                                           if (confirmDialogResponse) {
+                                            logFirebaseEvent(
+                                                'Button-Custom-Action');
                                             await actions.deleteCategories(
                                               buttonBudgetCategoriesRecordList
                                                   .toList(),
@@ -891,6 +928,10 @@ class _CreateBudgetCategoriesWidgetState
                                               : null;
                                       return FFButtonWidget(
                                         onPressed: () async {
+                                          logFirebaseEvent('Button-ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button-Backend-Call');
+
                                           final budgetCategoriesUpdateData =
                                               createBudgetCategoriesRecordData(
                                             allocatedAmount:
@@ -903,6 +944,8 @@ class _CreateBudgetCategoriesWidgetState
                                               .reference
                                               .update(
                                                   budgetCategoriesUpdateData);
+                                          logFirebaseEvent(
+                                              'Button-Show-Snack-Bar');
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             SnackBar(
@@ -921,6 +964,8 @@ class _CreateBudgetCategoriesWidgetState
                                                       .secondaryBackground,
                                             ),
                                           );
+                                          logFirebaseEvent(
+                                              'Button-Navigate-To');
                                           await Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(
