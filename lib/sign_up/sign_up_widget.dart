@@ -31,6 +31,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     inputEmailController = TextEditingController();
     inputPasswordController = TextEditingController();
     inputPasswordVisibility = false;
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'SignUp'});
   }
 
   @override
@@ -226,6 +227,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                     ),
                                     FFButtonWidget(
                                       onPressed: () async {
+                                        logFirebaseEvent('Button-ON_TAP');
+                                        logFirebaseEvent('Button-Auth');
                                         if (inputPasswordController.text !=
                                             inputConfirmPasswordController
                                                 .text) {
@@ -259,6 +262,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                             .doc(user.uid)
                                             .update(usersCreateData);
 
+                                        logFirebaseEvent('Button-Navigate-To');
                                         await Navigator.push(
                                           context,
                                           MaterialPageRoute(

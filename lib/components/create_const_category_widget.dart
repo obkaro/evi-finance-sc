@@ -77,10 +77,13 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
+                    logFirebaseEvent('Button-ON_TAP');
                     if ((functions.budgetRemMinusAmt(
                             FFAppState().currencyTextField,
                             widget.budgetAllocatedRemaining)) >=
                         0) {
+                      logFirebaseEvent('Button-Backend-Call');
+
                       final budgetCategoriesCreateData =
                           createBudgetCategoriesRecordData(
                         categoryName: widget.constCategory.categoryName,
@@ -91,8 +94,10 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                       await BudgetCategoriesRecord.collection
                           .doc()
                           .set(budgetCategoriesCreateData);
+                      logFirebaseEvent('Button-Navigate-Back');
                       Navigator.pop(context);
                     } else {
+                      logFirebaseEvent('Button-Alert-Dialog');
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
@@ -131,6 +136,8 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
+                  logFirebaseEvent('Button-ON_TAP');
+                  logFirebaseEvent('Button-Navigate-Back');
                   Navigator.pop(context);
                 },
                 text: 'Cancel',

@@ -43,6 +43,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'EditBudget'});
   }
 
   @override
@@ -259,6 +260,9 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                 : null;
                         return FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent('Button-ON_TAP');
+                            logFirebaseEvent('Button-Backend-Call');
+
                             final budgetsUpdateData = createBudgetsRecordData(
                               budgetAmount: FFAppState().currencyTextField,
                               budgetStart: calendarDateStartSelectedDay.start,
@@ -267,6 +271,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                             );
                             await widget.createdbudget.reference
                                 .update(budgetsUpdateData);
+                            logFirebaseEvent('Button-Navigate-To');
                             await Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(

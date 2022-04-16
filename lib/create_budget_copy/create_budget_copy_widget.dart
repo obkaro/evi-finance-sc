@@ -39,6 +39,8 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'CreateBudgetCopy'});
   }
 
   @override
@@ -252,6 +254,9 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                 : null;
                         return FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent('Button-ON_TAP');
+                            logFirebaseEvent('Button-Backend-Call');
+
                             final budgetsCreateData = createBudgetsRecordData(
                               budgetOwner: currentUserReference,
                               budgetAmount: FFAppState().currencyTextField,
@@ -272,6 +277,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                             await budgetsRecordReference.set(budgetsCreateData);
                             createdBudget = BudgetsRecord.getDocumentFromData(
                                 budgetsCreateData, budgetsRecordReference);
+                            logFirebaseEvent('Button-Backend-Call');
 
                             final budgetCategoriesCreateData =
                                 createBudgetCategoriesRecordData(
@@ -287,6 +293,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                 BudgetCategoriesRecord.getDocumentFromData(
                                     budgetCategoriesCreateData,
                                     budgetCategoriesRecordReference);
+                            logFirebaseEvent('Button-Navigate-To');
                             await Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(

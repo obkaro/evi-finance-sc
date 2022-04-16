@@ -27,6 +27,7 @@ class _UserDetailsWidgetState extends State<UserDetailsWidget> {
   @override
   void initState() {
     super.initState();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'UserDetails'});
     textController1 = TextEditingController();
     textController2 = TextEditingController();
     textController3 = TextEditingController();
@@ -59,7 +60,10 @@ class _UserDetailsWidgetState extends State<UserDetailsWidget> {
               size: 30,
             ),
             onPressed: () async {
+              logFirebaseEvent('IconButton-ON_TAP');
+              logFirebaseEvent('IconButton-Auth');
               await signOut();
+              logFirebaseEvent('IconButton-Navigate-To');
               await Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -214,6 +218,9 @@ class _UserDetailsWidgetState extends State<UserDetailsWidget> {
                           ),
                           FFButtonWidget(
                             onPressed: () async {
+                              logFirebaseEvent('Button-ON_TAP');
+                              logFirebaseEvent('Button-Backend-Call');
+
                               final usersUpdateData = createUsersRecordData(
                                 displayName: textController1.text,
                                 age: int.parse(textController2.text),
@@ -221,6 +228,7 @@ class _UserDetailsWidgetState extends State<UserDetailsWidget> {
                               );
                               await currentUserReference
                                   .update(usersUpdateData);
+                              logFirebaseEvent('Button-Navigate-To');
                               await Navigator.push(
                                 context,
                                 MaterialPageRoute(

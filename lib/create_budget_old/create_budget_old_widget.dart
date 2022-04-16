@@ -32,6 +32,8 @@ class _CreateBudgetOldWidgetState extends State<CreateBudgetOldWidget> {
   @override
   void initState() {
     super.initState();
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'CreateBudgetOld'});
     textController1 = TextEditingController();
     textController2 = TextEditingController();
     textController3 = TextEditingController();
@@ -184,6 +186,8 @@ class _CreateBudgetOldWidgetState extends State<CreateBudgetOldWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent('Button-ON_TAP');
+                                logFirebaseEvent('Button-Date-Time-Picker');
                                 await DatePicker.showDatePicker(
                                   context,
                                   showTitleActions: true,
@@ -216,6 +220,8 @@ class _CreateBudgetOldWidgetState extends State<CreateBudgetOldWidget> {
                             ),
                             FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent('Button-ON_TAP');
+                                logFirebaseEvent('Button-Date-Time-Picker');
                                 await DatePicker.showDatePicker(
                                   context,
                                   showTitleActions: true,
@@ -287,6 +293,9 @@ class _CreateBudgetOldWidgetState extends State<CreateBudgetOldWidget> {
                                 : null;
                         return FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent('Button-ON_TAP');
+                            logFirebaseEvent('Button-Backend-Call');
+
                             final budgetsCreateData = createBudgetsRecordData(
                               budgetName: textController1.text,
                               budgetOwner: currentUserReference,
@@ -301,6 +310,7 @@ class _CreateBudgetOldWidgetState extends State<CreateBudgetOldWidget> {
                             await budgetsRecordReference.set(budgetsCreateData);
                             createdBudget = BudgetsRecord.getDocumentFromData(
                                 budgetsCreateData, budgetsRecordReference);
+                            logFirebaseEvent('Button-Backend-Call');
 
                             final budgetCategoriesCreateData =
                                 createBudgetCategoriesRecordData(
@@ -316,6 +326,7 @@ class _CreateBudgetOldWidgetState extends State<CreateBudgetOldWidget> {
                                 BudgetCategoriesRecord.getDocumentFromData(
                                     budgetCategoriesCreateData,
                                     budgetCategoriesRecordReference);
+                            logFirebaseEvent('Button-Navigate-To');
                             await Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(

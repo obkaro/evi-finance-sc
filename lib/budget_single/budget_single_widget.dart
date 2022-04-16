@@ -35,11 +35,17 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
     super.initState();
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('BudgetSingle-ON_PAGE_LOAD');
+      logFirebaseEvent('BudgetSingle-Backend-Call');
+
       final budgetCategoriesUpdateData = createBudgetCategoriesRecordData(
         allocatedAmount: widget.uncategorizedAmount,
       );
       await widget.budget.uncategorizedLink.update(budgetCategoriesUpdateData);
     });
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'BudgetSingle'});
   }
 
   @override
@@ -124,6 +130,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                       size: 24,
                     ),
                     onPressed: () async {
+                      logFirebaseEvent('IconButton-ON_TAP');
+                      logFirebaseEvent('IconButton-Navigate-To');
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -538,6 +546,10 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                 decoration: BoxDecoration(),
                                                 child: InkWell(
                                                   onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'Column-ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Column-Navigate-To');
                                                     await Navigator.push(
                                                       context,
                                                       MaterialPageRoute(

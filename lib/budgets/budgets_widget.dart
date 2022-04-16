@@ -21,6 +21,12 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Budgets'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -42,6 +48,8 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          logFirebaseEvent('FloatingActionButton-ON_TAP');
+          logFirebaseEvent('FloatingActionButton-Navigate-To');
           await Navigator.push(
             context,
             MaterialPageRoute(
@@ -126,6 +134,8 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                 snapshot.data;
                             return InkWell(
                               onTap: () async {
+                                logFirebaseEvent('ListTile-ON_TAP');
+                                logFirebaseEvent('ListTile-Navigate-To');
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -148,6 +158,10 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                     color: Color(0xFFFF0003),
                                     icon: Icons.delete_rounded,
                                     onTap: () async {
+                                      logFirebaseEvent(
+                                          'SlidableActionWidget-ON_TAP');
+                                      logFirebaseEvent(
+                                          'SlidableActionWidget-Backend-Call');
                                       await columnBudgetsRecord.reference
                                           .delete();
                                     },
