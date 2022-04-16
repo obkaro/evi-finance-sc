@@ -471,22 +471,40 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                   snapshot.data;
                                               return FFButtonWidget(
                                                 onPressed: () async {
+                                                  var _shouldSetState = false;
                                                   dataSyncResponse =
                                                       await DataSyncMonoCall
                                                           .call(
                                                     authID:
                                                         widget.account.authID,
                                                   );
-                                                  if (((dataSyncResponse
-                                                              ?.statusCode ??
-                                                          200)) ==
-                                                      400) {
+                                                  _shouldSetState = true;
+                                                  setState(() => FFAppState()
+                                                              .dataSyncStatus =
+                                                          getJsonField(
+                                                        (dataSyncResponse
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                        r'''$.status''',
+                                                      ).toString());
+                                                  setState(() =>
+                                                      FFAppState().hasNewData =
+                                                          getJsonField(
+                                                        (dataSyncResponse
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                        r'''$.hasNewData''',
+                                                      ));
+                                                  if ((FFAppState()
+                                                          .dataSyncStatus) ==
+                                                      'failed') {
                                                     reauthCode =
                                                         await ReauthMonoCall
                                                             .call(
                                                       authID:
                                                           widget.account.authID,
                                                     );
+                                                    _shouldSetState = true;
                                                     await actions
                                                         .flutterMonoReauth(
                                                       context,
@@ -502,12 +520,14 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                       authID:
                                                           widget.account.authID,
                                                     );
+                                                    _shouldSetState = true;
                                                     transactionJsonResponse =
                                                         await GetTransactionsCall
                                                             .call(
                                                       authID:
                                                           widget.account.authID,
                                                     );
+                                                    _shouldSetState = true;
                                                     await actions
                                                         .writeTransactions(
                                                       (transactionJsonResponse
@@ -553,94 +573,76 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                       ),
                                                     );
                                                   } else {
-                                                    if (((dataSyncResponse
-                                                                ?.statusCode ??
-                                                            200)) ==
-                                                        500) {
-                                                      await showDialog(
-                                                        context: context,
-                                                        builder:
-                                                            (alertDialogContext) {
-                                                          return AlertDialog(
-                                                            title: Text(
-                                                                'Sync Error'),
-                                                            content: Text(
-                                                                'Please wait 10 minutes, then try again'),
-                                                            actions: [
-                                                              TextButton(
-                                                                onPressed: () =>
-                                                                    Navigator.pop(
-                                                                        alertDialogContext),
-                                                                child:
-                                                                    Text('Ok'),
-                                                              ),
-                                                            ],
-                                                          );
-                                                        },
-                                                      );
-                                                    } else {
-                                                      accountRespons =
-                                                          await GetAccountInfoCall
-                                                              .call(
-                                                        authID: widget
-                                                            .account.authID,
-                                                      );
+                                                    if ((FFAppState()
+                                                            .hasNewData) ==
+                                                        false) {
+                                                      if (_shouldSetState)
+                                                        setState(() {});
+                                                      return;
+                                                    }
 
-                                                      final accountsUpdateData =
-                                                          createAccountsRecordData(
-                                                        dataStatus:
-                                                            getJsonField(
-                                                          (accountRespons
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                          r'''$.meta.data_status''',
-                                                        ).toString(),
-                                                        accountBalance:
-                                                            getJsonField(
-                                                          (accountRespons
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                          r'''$.account.balance''',
-                                                        ),
-                                                      );
-                                                      await widget
-                                                          .account.reference
-                                                          .update(
-                                                              accountsUpdateData);
-                                                      transactionJsonRespons =
-                                                          await GetTransactionsCall
-                                                              .call(
-                                                        authID: widget
-                                                            .account.authID,
-                                                      );
-                                                      await actions
-                                                          .writeTransactions(
-                                                        (transactionJsonRespons
+                                                    accountRespons =
+                                                        await GetAccountInfoCall
+                                                            .call(
+                                                      authID:
+                                                          widget.account.authID,
+                                                    );
+                                                    _shouldSetState = true;
+
+                                                    final accountsUpdateData =
+                                                        createAccountsRecordData(
+                                                      dataStatus: getJsonField(
+                                                        (accountRespons
                                                                 ?.jsonBody ??
                                                             ''),
-                                                        widget.account,
-                                                        buttonTransactionsRecordList
-                                                            .toList(),
-                                                      );
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                        SnackBar(
-                                                          content: Text(
-                                                            'Synchronization Successful',
-                                                            style: TextStyle(),
-                                                          ),
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                                  4000),
-                                                          backgroundColor:
-                                                              Color(0x00000000),
+                                                        r'''$.meta.data_status''',
+                                                      ).toString(),
+                                                      accountBalance:
+                                                          getJsonField(
+                                                        (accountRespons
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                        r'''$.account.balance''',
+                                                      ),
+                                                    );
+                                                    await widget
+                                                        .account.reference
+                                                        .update(
+                                                            accountsUpdateData);
+                                                    transactionJsonRespons =
+                                                        await GetTransactionsCall
+                                                            .call(
+                                                      authID:
+                                                          widget.account.authID,
+                                                    );
+                                                    _shouldSetState = true;
+                                                    await actions
+                                                        .writeTransactions(
+                                                      (transactionJsonRespons
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                      widget.account,
+                                                      buttonTransactionsRecordList
+                                                          .toList(),
+                                                    );
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          'Synchronization Successful',
+                                                          style: TextStyle(),
                                                         ),
-                                                      );
-                                                    }
+                                                        duration: Duration(
+                                                            milliseconds: 4000),
+                                                        backgroundColor:
+                                                            Color(0x00000000),
+                                                      ),
+                                                    );
                                                   }
 
-                                                  setState(() {});
+                                                  if (_shouldSetState)
+                                                    setState(() {});
                                                 },
                                                 text: 'Refresh',
                                                 icon: Icon(
