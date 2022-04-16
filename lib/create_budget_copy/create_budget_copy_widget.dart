@@ -253,19 +253,19 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                         return FFButtonWidget(
                           onPressed: () async {
                             final budgetsCreateData = createBudgetsRecordData(
-                              budgetName: random_data.randomString(
-                                10,
-                                10,
-                                true,
-                                true,
-                                true,
-                              ),
                               budgetOwner: currentUserReference,
                               budgetAmount: FFAppState().currencyTextField,
                               budgetDateCreated: getCurrentTimestamp,
                               budgetStart: calendarDateStartSelectedDay.start,
                               budgetEnd: calendarDateEndSelectedDay.start,
                               isRecurring: switchListTileValue,
+                              budgetID: random_data.randomString(
+                                10,
+                                10,
+                                true,
+                                true,
+                                true,
+                              ),
                             );
                             var budgetsRecordReference =
                                 BudgetsRecord.collection.doc();
