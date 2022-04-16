@@ -73,7 +73,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                 children: [
                   Form(
                     key: formKey,
-                    autovalidateMode: AutovalidateMode.disabled,
+                    autovalidateMode: AutovalidateMode.always,
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,

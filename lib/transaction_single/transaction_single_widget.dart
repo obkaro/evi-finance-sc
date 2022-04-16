@@ -222,20 +222,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                     ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 10),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        columnAccountsRecord.institutionName,
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle1,
-                                      ),
-                                    ],
-                                  ),
-                                ),
                                 Divider(),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -263,87 +249,79 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                   ),
                                 ),
                                 Divider(),
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(),
-                                ),
                                 if (widget.transaction.isCategorized ?? true)
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Row(
+                                  StreamBuilder<List<BudgetCategoriesRecord>>(
+                                    stream: queryBudgetCategoriesRecord(
+                                      queryBuilder: (budgetCategoriesRecord) =>
+                                          budgetCategoriesRecord.where(
+                                              'linkedTransactions',
+                                              arrayContains:
+                                                  widget.transaction.reference),
+                                      singleRecord: true,
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: SpinKitRing(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 50,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<BudgetCategoriesRecord>
+                                          columnBudgetCategoriesRecordList =
+                                          snapshot.data;
+                                      // Return an empty Container when the document does not exist.
+                                      if (snapshot.data.isEmpty) {
+                                        return Container();
+                                      }
+                                      final columnBudgetCategoriesRecord =
+                                          columnBudgetCategoriesRecordList
+                                                  .isNotEmpty
+                                              ? columnBudgetCategoriesRecordList
+                                                  .first
+                                              : null;
+                                      return Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Text(
-                                            'Category',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText2,
-                                          ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 10),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            StreamBuilder<
-                                                List<BudgetCategoriesRecord>>(
-                                              stream:
-                                                  queryBudgetCategoriesRecord(
-                                                queryBuilder:
-                                                    (budgetCategoriesRecord) =>
-                                                        budgetCategoriesRecord.where(
-                                                            'linkedTransactions',
-                                                            arrayContains:
-                                                                widget
-                                                                    .transaction
-                                                                    .reference),
-                                                singleRecord: true,
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Text(
+                                                'Category',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText2,
                                               ),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50,
-                                                      height: 50,
-                                                      child: SpinKitRing(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                        size: 50,
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                                List<BudgetCategoriesRecord>
-                                                    textBudgetCategoriesRecordList =
-                                                    snapshot.data;
-                                                // Return an empty Container when the document does not exist.
-                                                if (snapshot.data.isEmpty) {
-                                                  return Container();
-                                                }
-                                                final textBudgetCategoriesRecord =
-                                                    textBudgetCategoriesRecordList
-                                                            .isNotEmpty
-                                                        ? textBudgetCategoriesRecordList
-                                                            .first
-                                                        : null;
-                                                return Text(
-                                                  textBudgetCategoriesRecord
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 0, 10),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Text(
+                                                  columnBudgetCategoriesRecord
                                                       .categoryName,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .subtitle1,
-                                                );
-                                              },
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                                          ),
+                                        ],
+                                      );
+                                    },
                                   ),
                                 Column(
                                   mainAxisSize: MainAxisSize.max,

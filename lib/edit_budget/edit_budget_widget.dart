@@ -82,12 +82,16 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          custom_widgets.CurrencyTextField(
-                            width: MediaQuery.of(context).size.width,
-                            height: 50,
-                            amount: widget.createdbudget.budgetAmount,
-                            labelText: 'Budget Amount',
-                            hintText: 'Enter budget amount',
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                            child: custom_widgets.CurrencyTextField(
+                              width: MediaQuery.of(context).size.width,
+                              height: 50,
+                              amount: widget.createdbudget.budgetAmount,
+                              labelText: 'Budget Amount',
+                              hintText: 'Enter budget amount',
+                            ),
                           ),
                           Divider(),
                           Padding(

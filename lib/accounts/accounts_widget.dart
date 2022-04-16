@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -124,132 +125,199 @@ class _AccountsWidgetState extends State<AccountsWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: StreamBuilder<List<AccountsRecord>>(
-                            stream: queryAccountsRecord(
-                              queryBuilder: (accountsRecord) =>
-                                  accountsRecord.where('accountOwner',
-                                      isEqualTo: currentUserReference),
+                Expanded(
+                  child: StreamBuilder<List<AccountsRecord>>(
+                    stream: queryAccountsRecord(
+                      queryBuilder: (accountsRecord) => accountsRecord.where(
+                          'accountOwner',
+                          isEqualTo: currentUserReference),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: SpinKitRing(
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              size: 50,
                             ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: SpinKitRing(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      size: 50,
+                          ),
+                        );
+                      }
+                      List<AccountsRecord> listViewAccountsRecordList =
+                          snapshot.data;
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: listViewAccountsRecordList.length,
+                        itemBuilder: (context, listViewIndex) {
+                          final listViewAccountsRecord =
+                              listViewAccountsRecordList[listViewIndex];
+                          return Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  10, 10, 10, 10),
+                              child: InkWell(
+                                onTap: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AccountSingleWidget(
+                                        account: listViewAccountsRecord,
+                                      ),
                                     ),
-                                  ),
-                                );
-                              }
-                              List<AccountsRecord> listViewAccountsRecordList =
-                                  snapshot.data;
-                              return ListView.builder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemCount: listViewAccountsRecordList.length,
-                                itemBuilder: (context, listViewIndex) {
-                                  final listViewAccountsRecord =
-                                      listViewAccountsRecordList[listViewIndex];
-                                  return Container(
-                                    width: 100,
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 10, 10, 10),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AccountSingleWidget(
-                                                account: listViewAccountsRecord,
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width: 70,
+                                      height: 70,
+                                      child: Stack(
+                                        alignment: AlignmentDirectional(0, 0),
+                                        children: [
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(0, 0),
+                                            child: Container(
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xFFEEEEEE),
+                                                borderRadius:
+                                                    BorderRadius.circular(300),
                                               ),
+                                              alignment:
+                                                  AlignmentDirectional(0, 0),
                                             ),
-                                          );
-                                        },
-                                        child: Row(
+                                          ),
+                                          StreamBuilder<
+                                              List<
+                                                  ConstInstitutionLogosRecord>>(
+                                            stream:
+                                                queryConstInstitutionLogosRecord(
+                                              queryBuilder:
+                                                  (constInstitutionLogosRecord) =>
+                                                      constInstitutionLogosRecord
+                                                          .where(
+                                                              'institutionCode',
+                                                              isEqualTo:
+                                                                  listViewAccountsRecord
+                                                                      .bankCode),
+                                              singleRecord: true,
+                                            ),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 50,
+                                                    height: 50,
+                                                    child: SpinKitRing(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryColor,
+                                                      size: 50,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              List<ConstInstitutionLogosRecord>
+                                                  circleImageConstInstitutionLogosRecordList =
+                                                  snapshot.data;
+                                              // Return an empty Container when the document does not exist.
+                                              if (snapshot.data.isEmpty) {
+                                                return Container();
+                                              }
+                                              final circleImageConstInstitutionLogosRecord =
+                                                  circleImageConstInstitutionLogosRecordList
+                                                          .isNotEmpty
+                                                      ? circleImageConstInstitutionLogosRecordList
+                                                          .first
+                                                      : null;
+                                              return Container(
+                                                width: 55,
+                                                height: 55,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      circleImageConstInstitutionLogosRecord
+                                                          .institutionLogo,
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 4,
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16, 0, 0, 0),
+                                        child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            Expanded(
-                                              flex: 4,
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    listViewAccountsRecord
-                                                        .accountName,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 0, 10),
+                                              child: Text(
+                                                listViewAccountsRecord
+                                                    .accountName,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
                                                         .title3,
-                                                  ),
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(0, 10,
-                                                                    0, 0),
-                                                        child: Text(
-                                                          listViewAccountsRecord
-                                                              .institutionName,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .subtitle2,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        functions.formatTransCurrency(
-                                                            listViewAccountsRecord
-                                                                .accountBalance),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .title3,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
                                               ),
+                                            ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  functions.formatTransCurrency(
+                                                      listViewAccountsRecord
+                                                          .accountBalance),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .title3,
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
                                       ),
                                     ),
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
