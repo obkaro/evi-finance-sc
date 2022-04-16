@@ -7,7 +7,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -274,8 +273,8 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                                                       .infinity,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: Color(
-                                                                        0xFFEEEEEE),
+                                                                    color: Colors
+                                                                        .white,
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             300),
@@ -285,24 +284,13 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                                                           0, 0),
                                                                 ),
                                                               ),
-                                                              Container(
-                                                                width: 55,
-                                                                height: 55,
-                                                                clipBehavior: Clip
-                                                                    .antiAlias,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                ),
-                                                                child:
-                                                                    CachedNetworkImage(
-                                                                  imageUrl:
-                                                                      stackConstInstitutionLogosRecord
-                                                                          .institutionLogo,
-                                                                  fit: BoxFit
-                                                                      .contain,
-                                                                ),
+                                                              Image.network(
+                                                                stackConstInstitutionLogosRecord
+                                                                    .institutionLogo,
+                                                                width: 45,
+                                                                height: 45,
+                                                                fit: BoxFit
+                                                                    .cover,
                                                               ),
                                                             ],
                                                           ),

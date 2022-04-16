@@ -121,12 +121,8 @@ class _EditBudgetCategoriesWidgetState
                 stream: queryBudgetsRecord(
                   queryBuilder: (budgetsRecord) => budgetsRecord
                       .where('budgetOwner', isEqualTo: currentUserReference)
-                      .where('budgetName',
-                          isEqualTo: widget.createdBudget.budgetName)
-                      .where('budgetDescription',
-                          isEqualTo: widget.createdBudget.budgetDescription)
-                      .where('budgetDateCreated',
-                          isEqualTo: widget.createdBudget.budgetDateCreated),
+                      .where('budgetID',
+                          isEqualTo: widget.createdBudget.budgetID),
                   singleRecord: true,
                 ),
                 builder: (context, snapshot) {
@@ -253,7 +249,7 @@ class _EditBudgetCategoriesWidgetState
                                   alignment: AlignmentDirectional(0, 0),
                                   child: Text(
                                     functions.formatTransCurrency(
-                                        widget.createdBudget.budgetAmount),
+                                        columnBudgetsRecord.budgetAmount),
                                     textAlign: TextAlign.end,
                                     style:
                                         FlutterFlowTheme.of(context).subtitle1,
