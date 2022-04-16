@@ -96,61 +96,98 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                           color: FlutterFlowTheme.of(context).primaryBackground,
                         ),
                         alignment: AlignmentDirectional(0, 0),
-                        child: InkWell(
-                          onTap: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BudgetSingleWidget(
-                                  budget: columnBudgetsRecord,
+                        child: StreamBuilder<List<BudgetCategoriesRecord>>(
+                          stream: queryBudgetCategoriesRecord(
+                            queryBuilder: (budgetCategoriesRecord) =>
+                                budgetCategoriesRecord
+                                    .where('categoryBudget',
+                                        isEqualTo:
+                                            columnBudgetsRecord.reference)
+                                    .where('categoryName',
+                                        isNotEqualTo: 'Uncategorized'),
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: SpinKitRing(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    size: 50,
+                                  ),
+                                ),
+                              );
+                            }
+                            List<BudgetCategoriesRecord>
+                                listTileBudgetCategoriesRecordList =
+                                snapshot.data;
+                            return InkWell(
+                              onTap: () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BudgetSingleWidget(
+                                      budget: columnBudgetsRecord,
+                                      uncategorizedAmount:
+                                          functions.calculateRemBudgetCat(
+                                              listTileBudgetCategoriesRecordList
+                                                  .toList(),
+                                              columnBudgetsRecord),
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Slidable(
+                                actionPane: const SlidableScrollActionPane(),
+                                secondaryActions: [
+                                  IconSlideAction(
+                                    caption: 'Delete',
+                                    color: Color(0xFFFF0003),
+                                    icon: Icons.delete_rounded,
+                                    onTap: () async {
+                                      await columnBudgetsRecord.reference
+                                          .delete();
+                                    },
+                                  ),
+                                ],
+                                child: ListTile(
+                                  title: Text(
+                                    '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
+                                    style: FlutterFlowTheme.of(context)
+                                        .subtitle1
+                                        .override(
+                                          fontFamily: 'Roboto',
+                                          lineHeight: 2,
+                                        ),
+                                  ),
+                                  subtitle: Text(
+                                    functions.formatTransCurrency(
+                                        columnBudgetsRecord.budgetAmount),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Roboto',
+                                          lineHeight: 2,
+                                        ),
+                                  ),
+                                  trailing: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: Color(0xFF303030),
+                                    size: 20,
+                                  ),
+                                  tileColor: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  dense: false,
+                                  contentPadding:
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          20, 16, 20, 16),
                                 ),
                               ),
                             );
                           },
-                          child: Slidable(
-                            actionPane: const SlidableScrollActionPane(),
-                            secondaryActions: [
-                              IconSlideAction(
-                                caption: 'Delete',
-                                color: Color(0xFFFF0003),
-                                icon: Icons.delete_rounded,
-                                onTap: () async {
-                                  await columnBudgetsRecord.reference.delete();
-                                },
-                              ),
-                            ],
-                            child: ListTile(
-                              title: Text(
-                                '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
-                                style: FlutterFlowTheme.of(context)
-                                    .subtitle1
-                                    .override(
-                                      fontFamily: 'Roboto',
-                                      lineHeight: 2,
-                                    ),
-                              ),
-                              subtitle: Text(
-                                functions.formatTransCurrency(
-                                    columnBudgetsRecord.budgetAmount),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText2
-                                    .override(
-                                      fontFamily: 'Roboto',
-                                      lineHeight: 2,
-                                    ),
-                              ),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios,
-                                color: Color(0xFF303030),
-                                size: 20,
-                              ),
-                              tileColor: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              dense: false,
-                              contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                  20, 16, 20, 16),
-                            ),
-                          ),
                         ),
                       ),
                     );
