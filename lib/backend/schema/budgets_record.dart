@@ -41,6 +41,9 @@ abstract class BudgetsRecord
   bool get isRecurring;
 
   @nullable
+  DocumentReference get uncategorizedLink;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -82,6 +85,7 @@ Map<String, dynamic> createBudgetsRecordData({
   DateTime budgetEnd,
   DateTime budgetDateCreated,
   bool isRecurring,
+  DocumentReference uncategorizedLink,
 }) =>
     serializers.toFirestore(
         BudgetsRecord.serializer,
@@ -95,4 +99,5 @@ Map<String, dynamic> createBudgetsRecordData({
           ..budgetDateCreated = budgetDateCreated
           ..budgetLinkedAccounts = null
           ..budgetSubCategories = null
-          ..isRecurring = isRecurring));
+          ..isRecurring = isRecurring
+          ..uncategorizedLink = uncategorizedLink));
