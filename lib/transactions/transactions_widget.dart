@@ -231,7 +231,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                     Expanded(
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            16, 10, 0, 10),
+                                            16, 0, 0, 0),
                                         child: InkWell(
                                           onTap: () async {
                                             await Navigator.push(
@@ -272,7 +272,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                           padding:
                                                               EdgeInsetsDirectional
                                                                   .fromSTEB(0,
-                                                                      0, 0, 4),
+                                                                      0, 0, 8),
                                                           child: FutureBuilder<
                                                               BudgetCategoriesRecord>(
                                                             future: BudgetCategoriesRecord
@@ -323,7 +323,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                           padding:
                                                               EdgeInsetsDirectional
                                                                   .fromSTEB(0,
-                                                                      0, 0, 4),
+                                                                      0, 0, 8),
                                                           child: AutoSizeText(
                                                             'Uncategorized',
                                                             style: FlutterFlowTheme
@@ -361,8 +361,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                   mainAxisSize:
                                                       MainAxisSize.min,
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
+                                                      MainAxisAlignment.center,
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.end,
                                                   children: [
@@ -370,7 +369,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
-                                                                  0, 0, 0, 4),
+                                                                  0, 0, 0, 8),
                                                       child: AutoSizeText(
                                                         functions
                                                             .formatTransCurrency(
