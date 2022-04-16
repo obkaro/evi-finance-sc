@@ -18,9 +18,11 @@ class BudgetSingleWidget extends StatefulWidget {
   const BudgetSingleWidget({
     Key key,
     this.budget,
+    this.uncategorizedAmount,
   }) : super(key: key);
 
   final BudgetsRecord budget;
+  final int uncategorizedAmount;
 
   @override
   _BudgetSingleWidgetState createState() => _BudgetSingleWidgetState();
@@ -35,8 +37,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       final budgetCategoriesUpdateData = createBudgetCategoriesRecordData(
-        allocatedAmount: functions.calculateRemBudgetCat(
-            budgetSingleBudgetCategoriesRecordList.toList(), widget.budget),
+        allocatedAmount: widget.uncategorizedAmount,
       );
       await widget.budget.uncategorizedLink.update(budgetCategoriesUpdateData);
     });
