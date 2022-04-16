@@ -102,6 +102,13 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
             specifiedType: const FullType(
                 DocumentReference, const [const FullType(Object)])));
     }
+    value = object.budgetID;
+    if (value != null) {
+      result
+        ..add('budgetID')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -179,6 +186,10 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
                       DocumentReference, const [const FullType(Object)]))
               as DocumentReference<Object>;
           break;
+        case 'budgetID':
+          result.budgetID = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -216,6 +227,8 @@ class _$BudgetsRecord extends BudgetsRecord {
   @override
   final DocumentReference<Object> uncategorizedLink;
   @override
+  final String budgetID;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$BudgetsRecord([void Function(BudgetsRecordBuilder) updates]) =>
@@ -233,6 +246,7 @@ class _$BudgetsRecord extends BudgetsRecord {
       this.budgetSubCategories,
       this.isRecurring,
       this.uncategorizedLink,
+      this.budgetID,
       this.reference})
       : super._();
 
@@ -258,6 +272,7 @@ class _$BudgetsRecord extends BudgetsRecord {
         budgetSubCategories == other.budgetSubCategories &&
         isRecurring == other.isRecurring &&
         uncategorizedLink == other.uncategorizedLink &&
+        budgetID == other.budgetID &&
         reference == other.reference;
   }
 
@@ -273,17 +288,19 @@ class _$BudgetsRecord extends BudgetsRecord {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc($jc(0, budgetName.hashCode),
-                                                budgetOwner.hashCode),
-                                            budgetAmount.hashCode),
-                                        budgetDescription.hashCode),
-                                    budgetStart.hashCode),
-                                budgetEnd.hashCode),
-                            budgetDateCreated.hashCode),
-                        budgetLinkedAccounts.hashCode),
-                    budgetSubCategories.hashCode),
-                isRecurring.hashCode),
-            uncategorizedLink.hashCode),
+                                            $jc(
+                                                $jc($jc(0, budgetName.hashCode),
+                                                    budgetOwner.hashCode),
+                                                budgetAmount.hashCode),
+                                            budgetDescription.hashCode),
+                                        budgetStart.hashCode),
+                                    budgetEnd.hashCode),
+                                budgetDateCreated.hashCode),
+                            budgetLinkedAccounts.hashCode),
+                        budgetSubCategories.hashCode),
+                    isRecurring.hashCode),
+                uncategorizedLink.hashCode),
+            budgetID.hashCode),
         reference.hashCode));
   }
 
@@ -301,6 +318,7 @@ class _$BudgetsRecord extends BudgetsRecord {
           ..add('budgetSubCategories', budgetSubCategories)
           ..add('isRecurring', isRecurring)
           ..add('uncategorizedLink', uncategorizedLink)
+          ..add('budgetID', budgetID)
           ..add('reference', reference))
         .toString();
   }
@@ -366,6 +384,10 @@ class BudgetsRecordBuilder
   set uncategorizedLink(DocumentReference<Object> uncategorizedLink) =>
       _$this._uncategorizedLink = uncategorizedLink;
 
+  String _budgetID;
+  String get budgetID => _$this._budgetID;
+  set budgetID(String budgetID) => _$this._budgetID = budgetID;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -389,6 +411,7 @@ class BudgetsRecordBuilder
       _budgetSubCategories = $v.budgetSubCategories?.toBuilder();
       _isRecurring = $v.isRecurring;
       _uncategorizedLink = $v.uncategorizedLink;
+      _budgetID = $v.budgetID;
       _reference = $v.reference;
       _$v = null;
     }
@@ -423,6 +446,7 @@ class BudgetsRecordBuilder
               budgetSubCategories: _budgetSubCategories?.build(),
               isRecurring: isRecurring,
               uncategorizedLink: uncategorizedLink,
+              budgetID: budgetID,
               reference: reference);
     } catch (_) {
       String _$failedField;

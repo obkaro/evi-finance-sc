@@ -63,6 +63,13 @@ class _$BudgetCategoriesRecordSerializer
               const FullType(DocumentReference, const [const FullType(Object)])
             ])));
     }
+    value = object.categoryID;
+    if (value != null) {
+      result
+        ..add('categoryID')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -113,6 +120,10 @@ class _$BudgetCategoriesRecordSerializer
                     DocumentReference, const [const FullType(Object)])
               ])) as BuiltList<Object>);
           break;
+        case 'categoryID':
+          result.categoryID = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -138,6 +149,8 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
   @override
   final BuiltList<DocumentReference<Object>> linkedTransactions;
   @override
+  final String categoryID;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$BudgetCategoriesRecord(
@@ -150,6 +163,7 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
       this.allocatedAmount,
       this.budgetOwner,
       this.linkedTransactions,
+      this.categoryID,
       this.reference})
       : super._();
 
@@ -171,6 +185,7 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
         allocatedAmount == other.allocatedAmount &&
         budgetOwner == other.budgetOwner &&
         linkedTransactions == other.linkedTransactions &&
+        categoryID == other.categoryID &&
         reference == other.reference;
   }
 
@@ -179,10 +194,14 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, categoryName.hashCode), categoryBudget.hashCode),
-                    allocatedAmount.hashCode),
-                budgetOwner.hashCode),
-            linkedTransactions.hashCode),
+                $jc(
+                    $jc(
+                        $jc($jc(0, categoryName.hashCode),
+                            categoryBudget.hashCode),
+                        allocatedAmount.hashCode),
+                    budgetOwner.hashCode),
+                linkedTransactions.hashCode),
+            categoryID.hashCode),
         reference.hashCode));
   }
 
@@ -194,6 +213,7 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
           ..add('allocatedAmount', allocatedAmount)
           ..add('budgetOwner', budgetOwner)
           ..add('linkedTransactions', linkedTransactions)
+          ..add('categoryID', categoryID)
           ..add('reference', reference))
         .toString();
   }
@@ -230,6 +250,10 @@ class BudgetCategoriesRecordBuilder
           ListBuilder<DocumentReference<Object>> linkedTransactions) =>
       _$this._linkedTransactions = linkedTransactions;
 
+  String _categoryID;
+  String get categoryID => _$this._categoryID;
+  set categoryID(String categoryID) => _$this._categoryID = categoryID;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -247,6 +271,7 @@ class BudgetCategoriesRecordBuilder
       _allocatedAmount = $v.allocatedAmount;
       _budgetOwner = $v.budgetOwner;
       _linkedTransactions = $v.linkedTransactions?.toBuilder();
+      _categoryID = $v.categoryID;
       _reference = $v.reference;
       _$v = null;
     }
@@ -275,6 +300,7 @@ class BudgetCategoriesRecordBuilder
               allocatedAmount: allocatedAmount,
               budgetOwner: budgetOwner,
               linkedTransactions: _linkedTransactions?.build(),
+              categoryID: categoryID,
               reference: reference);
     } catch (_) {
       String _$failedField;
