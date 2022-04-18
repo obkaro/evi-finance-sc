@@ -17,7 +17,9 @@ class MonoReauthHtml {
         window.onload = setupMonoConnect;
         function setupMonoConnect() {
           const options = {
+             
              reference: "$reference",
+             
             onSuccess:  (data) => {
               const response = {"type":"mono.modal.linked", response: {...data}}
               MonoClientInterface.postMessage(JSON.stringify(response))
@@ -37,8 +39,9 @@ class MonoReauthHtml {
           };
           const MonoConnect = new Connect("$key", options);
           const configJson = JSON.parse(`${jsonEncode(config ?? {})}`)
+          
 
-          MonoConnect.reauthorise($token);
+          MonoConnect.reauthorise("$token");
           MonoConnect.open()
         }
       </script>
