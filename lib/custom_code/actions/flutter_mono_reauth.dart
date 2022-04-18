@@ -6,6 +6,7 @@ import 'index.dart'; // Imports other custom actions
 import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom action code
+// Begin custom action code
 //import 'package:mono_flutter/mono_flutter.dart';
 //import 'package:mono_flutter/mono_web_view.dart';
 import '../mono_custom/mono_flutter.dart';
@@ -43,12 +44,40 @@ Future flutterMonoReauth(
                     },
                     onClosed: () {
                       print('Modal closed');
+                      print('REAUTH CODE WAS: $reauthCode');
                     },
                     onLoad: () {
                       print('Mono loaded successfully');
                     },
-                    onSuccess: (code) {
+                    onSuccess: (code) async {
                       print('Mono Success $code');
+
+                      //Write temporary key to database
+                      final usersUpdateData = createUsersRecordData(
+                        tempAuthCode: '$code',
+                      );
+                      await currentUserReference.update(usersUpdateData);
+
+                      //Print temporary key
+                      //print(currentUserDocument?.tempAuthCode);
+
+                      //Use temporary key to get permanent key, save to variable: permKey
+                      ApiCallResponse permKey = await GetPermanentAuthCall.call(
+                          tempKey: (currentUserDocument?.tempAuthCode));
+
+                      print(getJsonField(
+                        (permKey?.jsonBody ?? ''),
+                        r'''$.id''',
+                      ).toString());
+
+                      //Write permanent key to database
+                      var accountsCreateData = createAccountsRecordData(
+                        authID: getJsonField(
+                          (permKey?.jsonBody ?? ''),
+                          r'''$.id''',
+                        ).toString(),
+                        accountOwner: currentUserReference,
+                      );
                       // onClosed: () {
                       //   print('Modal closed');
                       // },

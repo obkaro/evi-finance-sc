@@ -21,6 +21,7 @@ class AccountsWidget extends StatefulWidget {
 class _AccountsWidgetState extends State<AccountsWidget> {
   AccountsRecord newacctB;
   ApiCallResponse acctInfoResponse;
+  ApiCallResponse transactionsResponse;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -62,53 +63,62 @@ class _AccountsWidgetState extends State<AccountsWidget> {
           );
           logFirebaseEvent('FloatingActionButton-Backend-Call');
 
-          // final accountsUpdateData = createAccountsRecordData(
-          //   accountName: getJsonField(
-          //     (acctInfoResponse?.jsonBody ?? ''),
-          //     r'''$.account.name''',
-          //   ).toString(),
-          //   accountBalance: getJsonField(
-          //     (acctInfoResponse?.jsonBody ?? ''),
-          //     r'''$.account.balance''',
-          //   ),
-          //   dataStatus: getJsonField(
-          //     (acctInfoResponse?.jsonBody ?? ''),
-          //     r'''$.meta.data_status''',
-          //   ).toString(),
-          //   institutionName: getJsonField(
-          //     (acctInfoResponse?.jsonBody ?? ''),
-          //     r'''$.account.institution.name''',
-          //   ).toString(),
-          //   accountType: getJsonField(
-          //     (acctInfoResponse?.jsonBody ?? ''),
-          //     r'''$.account.type''',
-          //   ).toString(),
-          //   bankCode: getJsonField(
-          //     (acctInfoResponse?.jsonBody ?? ''),
-          //     r'''$.account.institution.bankCode''',
-          //   ).toString(),
-          //   institutionType: getJsonField(
-          //     (acctInfoResponse?.jsonBody ?? ''),
-          //     r'''$.account.institution.type''',
-          //   ).toString(),
-          //   authMethod: getJsonField(
-          //     (acctInfoResponse?.jsonBody ?? ''),
-          //     r'''$.meta.auth_method''',
-          //   ).toString(),
-          //   bvn: getJsonField(
-          //     (acctInfoResponse?.jsonBody ?? ''),
-          //     r'''$.account.bvn''',
-          //   ).toString(),
-          //   currency: getJsonField(
-          //     (acctInfoResponse?.jsonBody ?? ''),
-          //     r'''$.account.currency''',
-          //   ).toString(),
-          //   accountNumber: getJsonField(
-          //     (acctInfoResponse?.jsonBody ?? ''),
-          //     r'''$.account.accountNumber''',
-          //   ).toString(),
-          // );
-          // await newacctB.reference.update(accountsUpdateData);
+          final accountsUpdateData = createAccountsRecordData(
+            accountName: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.name''',
+            ).toString(),
+            accountBalance: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.balance''',
+            ),
+            dataStatus: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.meta.data_status''',
+            ).toString(),
+            institutionName: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.institution.name''',
+            ).toString(),
+            accountType: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.type''',
+            ).toString(),
+            bankCode: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.institution.bankCode''',
+            ).toString(),
+            institutionType: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.institution.type''',
+            ).toString(),
+            authMethod: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.meta.auth_method''',
+            ).toString(),
+            bvn: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.bvn''',
+            ).toString(),
+            currency: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.currency''',
+            ).toString(),
+            accountNumber: getJsonField(
+              (acctInfoResponse?.jsonBody ?? ''),
+              r'''$.account.accountNumber''',
+            ).toString(),
+          );
+          await newacctB.reference.update(accountsUpdateData);
+          logFirebaseEvent('FloatingActionButton-Backend-Call');
+          transactionsResponse = await GetTransactionsCall.call(
+            authID: newacctB.authID,
+          );
+          logFirebaseEvent('FloatingActionButton-Custom-Action');
+          await actions.writeNewAcctTransactions(
+            (transactionsResponse?.jsonBody ?? ''),
+            newacctB,
+          );
 
           setState(() {});
         },
