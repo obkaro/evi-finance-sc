@@ -63,7 +63,7 @@ class _CreateCustomCategoryWidgetState
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
                 child: TextFormField(
                   controller: textController,
                   obscureText: false,

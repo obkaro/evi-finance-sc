@@ -423,14 +423,13 @@ class _CreateBudgetCategoriesWidgetState
                                                             CreateConstCategoryWidget(
                                                           constCategory:
                                                               gridViewConstBudgetCategoriesRecord,
-                                                          budget: widget
-                                                              .createdBudget,
+                                                          budget:
+                                                              columnBudgetsRecord,
                                                           budgetAllocatedRemaining:
                                                               functions.calculateRemBudgetCat(
                                                                   createBudgetCategoriesBudgetCategoriesRecordList
                                                                       .toList(),
-                                                                  widget
-                                                                      .createdBudget),
+                                                                  columnBudgetsRecord),
                                                         ),
                                                       );
                                                     },
