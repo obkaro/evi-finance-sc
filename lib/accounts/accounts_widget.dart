@@ -21,6 +21,7 @@ class AccountsWidget extends StatefulWidget {
 class _AccountsWidgetState extends State<AccountsWidget> {
   AccountsRecord newacctB;
   ApiCallResponse acctInfoResponse;
+  ApiCallResponse transactionsResponse;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -109,6 +110,15 @@ class _AccountsWidgetState extends State<AccountsWidget> {
             ).toString(),
           );
           await newacctB.reference.update(accountsUpdateData);
+          logFirebaseEvent('FloatingActionButton-Backend-Call');
+          transactionsResponse = await GetTransactionsCall.call(
+            authID: newacctB.authID,
+          );
+          logFirebaseEvent('FloatingActionButton-Custom-Action');
+          await actions.writeNewAcctTransactions(
+            (transactionsResponse?.jsonBody ?? ''),
+            newacctB,
+          );
 
           setState(() {});
         },
