@@ -80,49 +80,50 @@ class _SetTransCategoryCopyWidgetState extends State<SetTransCategoryCopyWidget>
             topRight: Radius.circular(12),
           ),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 16),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Text(
-                    'Select Category',
-                    style: FlutterFlowTheme.of(context).title3,
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
-              child: FutureBuilder<List<BudgetCategoriesRecord>>(
-                future: queryBudgetCategoriesRecordOnce(
-                  queryBuilder: (budgetCategoriesRecord) =>
-                      budgetCategoriesRecord
-                          .where('budgetOwner', isEqualTo: currentUserReference)
-                          .where('categoryBudget',
-                              isEqualTo: widget.recievedBudget),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 16),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      'Select Category',
+                      style: FlutterFlowTheme.of(context).title3,
+                    ),
+                  ],
                 ),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: SpinKitRing(
-                          color: FlutterFlowTheme.of(context).primaryColor,
-                          size: 50,
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
+                child: FutureBuilder<List<BudgetCategoriesRecord>>(
+                  future: queryBudgetCategoriesRecordOnce(
+                    queryBuilder: (budgetCategoriesRecord) =>
+                        budgetCategoriesRecord
+                            .where('budgetOwner',
+                                isEqualTo: currentUserReference)
+                            .where('categoryBudget',
+                                isEqualTo: widget.recievedBudget),
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: SpinKitRing(
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                            size: 50,
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                  List<BudgetCategoriesRecord>
-                      columnBudgetCategoriesRecordList = snapshot.data;
-                  return SingleChildScrollView(
-                    child: Column(
+                      );
+                    }
+                    List<BudgetCategoriesRecord>
+                        columnBudgetCategoriesRecordList = snapshot.data;
+                    return Column(
                       mainAxisSize: MainAxisSize.max,
                       children:
                           List.generate(columnBudgetCategoriesRecordList.length,
@@ -210,12 +211,12 @@ class _SetTransCategoryCopyWidgetState extends State<SetTransCategoryCopyWidget>
                           ]),
                         );
                       }),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

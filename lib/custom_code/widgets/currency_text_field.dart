@@ -49,8 +49,10 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
     //   moneyController.updateValue(160000);
     // }
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-        (_) => moneyController.updateValue(widget.amount / 100));
+    if (widget.amount != null) {
+      WidgetsBinding.instance.addPostFrameCallback(
+          (_) => moneyController.updateValue(widget.amount / 100));
+    }
   }
 
   @override

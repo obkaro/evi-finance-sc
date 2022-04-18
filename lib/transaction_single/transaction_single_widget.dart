@@ -124,27 +124,37 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                   ),
                                 ),
                                 Divider(),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Text(
-                                      'Amount',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText2,
-                                    ),
-                                  ],
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 10),
-                                  child: Row(
+                                      0, 10, 0, 10),
+                                  child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Text(
-                                        functions.formatTransCurrency(widget
-                                            .transaction.transactionAmount),
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle1,
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 4),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              'Amount',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            functions.formatTransCurrency(widget
+                                                .transaction.transactionAmount),
+                                            style: FlutterFlowTheme.of(context)
+                                                .subtitle1,
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -209,6 +219,32 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Text(
+                                      'Date',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText2,
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 10),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        dateTimeFormat('MMMMEEEEd',
+                                            widget.transaction.trasactionDate),
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle1,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Divider(),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
                                       'Account',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText2,
@@ -247,8 +283,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text(
-                                        functions.formatTransCurrency(widget
-                                            .transaction.transactionAmount),
+                                        functions.formatTransCurrency(
+                                            widget.transaction.balanceAfter),
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1,
                                       ),
