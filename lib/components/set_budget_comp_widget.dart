@@ -64,45 +64,45 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
           topRight: Radius.circular(12),
         ),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 16),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text(
-                  'Select Budget',
-                  style: FlutterFlowTheme.of(context).title3,
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
-            child: FutureBuilder<List<BudgetsRecord>>(
-              future: queryBudgetsRecordOnce(
-                queryBuilder: (budgetsRecord) => budgetsRecord
-                    .where('budgetOwner', isEqualTo: currentUserReference),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 16),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    'Select Budget',
+                    style: FlutterFlowTheme.of(context).title3,
+                  ),
+                ],
               ),
-              builder: (context, snapshot) {
-                // Customize what your widget looks like when it's loading.
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: SizedBox(
-                      width: 50,
-                      height: 50,
-                      child: SpinKitRing(
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                        size: 50,
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
+              child: FutureBuilder<List<BudgetsRecord>>(
+                future: queryBudgetsRecordOnce(
+                  queryBuilder: (budgetsRecord) => budgetsRecord
+                      .where('budgetOwner', isEqualTo: currentUserReference),
+                ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: SpinKitRing(
+                          color: FlutterFlowTheme.of(context).primaryColor,
+                          size: 50,
+                        ),
                       ),
-                    ),
-                  );
-                }
-                List<BudgetsRecord> columnBudgetsRecordList = snapshot.data;
-                return SingleChildScrollView(
-                  child: Column(
+                    );
+                  }
+                  List<BudgetsRecord> columnBudgetsRecordList = snapshot.data;
+                  return Column(
                     mainAxisSize: MainAxisSize.max,
                     children: List.generate(columnBudgetsRecordList.length,
                         (columnIndex) {
@@ -178,12 +178,12 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
                         ]),
                       );
                     }),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

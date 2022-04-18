@@ -29,8 +29,6 @@ class FFAppState {
   String dataSyncStatus = '';
 
   bool hasNewData = false;
-
-  List<DocumentReference> tempNewAcctTransactions = [];
 }
 
 LatLng _latLngFromString(String val) {
