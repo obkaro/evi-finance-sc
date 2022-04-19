@@ -265,8 +265,8 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                               budgetEnd: calendarDateEndSelectedDay.start,
                               isRecurring: switchListTileValue,
                               budgetID: random_data.randomString(
-                                10,
-                                10,
+                                24,
+                                24,
                                 true,
                                 true,
                                 true,
