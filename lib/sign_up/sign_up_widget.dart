@@ -1,9 +1,9 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../dashboard/dashboard_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -227,8 +227,11 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                     ),
                                     FFButtonWidget(
                                       onPressed: () async {
-                                        logFirebaseEvent('Button-ON_TAP');
-                                        logFirebaseEvent('Button-Auth');
+                                        logFirebaseEvent(
+                                            'Button_SignUp-ON_TAP');
+                                        // Action_SignUp
+                                        logFirebaseEvent(
+                                            'Button_SignUp-Action_SignUp');
                                         if (inputPasswordController.text !=
                                             inputConfirmPasswordController
                                                 .text) {
@@ -262,12 +265,13 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                             .doc(user.uid)
                                             .update(usersCreateData);
 
-                                        logFirebaseEvent('Button-Navigate-To');
+                                        logFirebaseEvent(
+                                            'Button_SignUp-Navigate-To');
                                         await Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                DashboardWidget(),
+                                            builder: (context) => NavBarPage(
+                                                initialPage: 'Budgets'),
                                           ),
                                         );
                                       },

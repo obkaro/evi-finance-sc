@@ -1,12 +1,10 @@
 import '../account_single/account_single_widget.dart';
 import '../auth/auth_util.dart';
-import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,9 +17,6 @@ class AccountsWidget extends StatefulWidget {
 }
 
 class _AccountsWidgetState extends State<AccountsWidget> {
-  AccountsRecord newacctB;
-  ApiCallResponse acctInfoResponse;
-  ApiCallResponse transactionsResponse;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -53,74 +48,11 @@ class _AccountsWidgetState extends State<AccountsWidget> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           logFirebaseEvent('FloatingActionButton-ON_TAP');
-          logFirebaseEvent('FloatingActionButton-Custom-Action');
-          newacctB = await actions.flutterMono(
+          // Action_LinkNewAcct
+          logFirebaseEvent('FloatingActionButton-Action_LinkNewAcct');
+          await actions.flutterMono(
             context,
           );
-          logFirebaseEvent('FloatingActionButton-Backend-Call');
-          acctInfoResponse = await GetAccountInfoCall.call(
-            authID: newacctB.authID,
-          );
-          logFirebaseEvent('FloatingActionButton-Backend-Call');
-
-          final accountsUpdateData = createAccountsRecordData(
-            accountName: getJsonField(
-              (acctInfoResponse?.jsonBody ?? ''),
-              r'''$.account.name''',
-            ).toString(),
-            accountBalance: getJsonField(
-              (acctInfoResponse?.jsonBody ?? ''),
-              r'''$.account.balance''',
-            ),
-            dataStatus: getJsonField(
-              (acctInfoResponse?.jsonBody ?? ''),
-              r'''$.meta.data_status''',
-            ).toString(),
-            institutionName: getJsonField(
-              (acctInfoResponse?.jsonBody ?? ''),
-              r'''$.account.institution.name''',
-            ).toString(),
-            accountType: getJsonField(
-              (acctInfoResponse?.jsonBody ?? ''),
-              r'''$.account.type''',
-            ).toString(),
-            bankCode: getJsonField(
-              (acctInfoResponse?.jsonBody ?? ''),
-              r'''$.account.institution.bankCode''',
-            ).toString(),
-            institutionType: getJsonField(
-              (acctInfoResponse?.jsonBody ?? ''),
-              r'''$.account.institution.type''',
-            ).toString(),
-            authMethod: getJsonField(
-              (acctInfoResponse?.jsonBody ?? ''),
-              r'''$.meta.auth_method''',
-            ).toString(),
-            bvn: getJsonField(
-              (acctInfoResponse?.jsonBody ?? ''),
-              r'''$.account.bvn''',
-            ).toString(),
-            currency: getJsonField(
-              (acctInfoResponse?.jsonBody ?? ''),
-              r'''$.account.currency''',
-            ).toString(),
-            accountNumber: getJsonField(
-              (acctInfoResponse?.jsonBody ?? ''),
-              r'''$.account.accountNumber''',
-            ).toString(),
-          );
-          await newacctB.reference.update(accountsUpdateData);
-          logFirebaseEvent('FloatingActionButton-Backend-Call');
-          transactionsResponse = await GetTransactionsCall.call(
-            authID: newacctB.authID,
-          );
-          logFirebaseEvent('FloatingActionButton-Custom-Action');
-          await actions.writeNewAcctTransactions(
-            (transactionsResponse?.jsonBody ?? ''),
-            newacctB,
-          );
-
-          setState(() {});
         },
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         icon: Icon(
@@ -178,31 +110,32 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                           return Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                            child: Container(
-                              width: 100,
-                              height: 120,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10, 10, 10, 10),
-                                child: InkWell(
-                                  onTap: () async {
-                                    logFirebaseEvent('Row-ON_TAP');
-                                    logFirebaseEvent('Row-Navigate-To');
-                                    await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            AccountSingleWidget(
-                                          account: listViewAccountsRecord,
-                                        ),
-                                      ),
-                                    );
-                                  },
+                            child: InkWell(
+                              onTap: () async {
+                                logFirebaseEvent('Container-ON_TAP');
+                                // Action_NavToAcctSingle
+                                logFirebaseEvent(
+                                    'Container-Action_NavToAcctSingle');
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AccountSingleWidget(
+                                      account: listViewAccountsRecord,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: 100,
+                                height: 120,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10, 10, 10, 10),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:

@@ -261,7 +261,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                         return FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent('Button-ON_TAP');
-                            logFirebaseEvent('Button-Backend-Call');
+                            // Action_EditBudgetStep1
+                            logFirebaseEvent('Button-Action_EditBudgetStep1');
 
                             final budgetsUpdateData = createBudgetsRecordData(
                               budgetAmount: FFAppState().currencyTextField,

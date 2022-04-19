@@ -455,12 +455,14 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          logFirebaseEvent('Button-ON_TAP');
+                          logFirebaseEvent('Button_SaveNewTransaction-ON_TAP');
                           if ((createdTransaction.account != null)) {
                             if ((choiceChipsValue != null) &&
                                 (choiceChipsValue != '')) {
                               if ((FFAppState().currencyTextField) > 0) {
-                                logFirebaseEvent('Button-Backend-Call');
+                                // Action_SaveNewTransaction
+                                logFirebaseEvent(
+                                    'Button_SaveNewTransaction-Action_SaveNewTransaction');
 
                                 final transactionsUpdateData =
                                     createTransactionsRecordData(
@@ -473,7 +475,8 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                 );
                                 await createdTransaction.reference
                                     .update(transactionsUpdateData);
-                                logFirebaseEvent('Button-Bottom-Sheet');
+                                logFirebaseEvent(
+                                    'Button_SaveNewTransaction-Bottom-Sheet');
                                 await showModalBottomSheet(
                                   isScrollControlled: true,
                                   backgroundColor: Colors.transparent,
@@ -489,7 +492,8 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                   },
                                 );
                               } else {
-                                logFirebaseEvent('Button-Alert-Dialog');
+                                logFirebaseEvent(
+                                    'Button_SaveNewTransaction-Alert-Dialog');
                                 await showDialog(
                                   context: context,
                                   builder: (alertDialogContext) {
@@ -509,7 +513,8 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                 );
                               }
                             } else {
-                              logFirebaseEvent('Button-Alert-Dialog');
+                              logFirebaseEvent(
+                                  'Button_SaveNewTransaction-Alert-Dialog');
                               await showDialog(
                                 context: context,
                                 builder: (alertDialogContext) {
@@ -529,7 +534,8 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                               );
                             }
                           } else {
-                            logFirebaseEvent('Button-Alert-Dialog');
+                            logFirebaseEvent(
+                                'Button_SaveNewTransaction-Alert-Dialog');
                             await showDialog(
                               context: context,
                               builder: (alertDialogContext) {

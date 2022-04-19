@@ -67,26 +67,30 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
               ),
             );
           }
-          List<AccountsRecord> floatingActionButtonAccountsRecordList =
+          List<AccountsRecord>
+              floatingActionButtonAddTransactionAccountsRecordList =
               snapshot.data;
           // Return an empty Container when the document does not exist.
           if (snapshot.data.isEmpty) {
             return Container();
           }
-          final floatingActionButtonAccountsRecord =
-              floatingActionButtonAccountsRecordList.isNotEmpty
-                  ? floatingActionButtonAccountsRecordList.first
+          final floatingActionButtonAddTransactionAccountsRecord =
+              floatingActionButtonAddTransactionAccountsRecordList.isNotEmpty
+                  ? floatingActionButtonAddTransactionAccountsRecordList.first
                   : null;
           return FloatingActionButton(
             onPressed: () async {
-              logFirebaseEvent('FloatingActionButton-ON_TAP');
-              logFirebaseEvent('FloatingActionButton-Navigate-To');
+              logFirebaseEvent('FloatingActionButton_AddTransaction-ON_TAP');
+              // Action_AddNewTransaction
+              logFirebaseEvent(
+                  'FloatingActionButton_AddTransaction-Action_AddNewTransaction');
               await Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => AddTransactionWidget(
                     defaultAccount:
-                        floatingActionButtonAccountsRecord.reference,
+                        floatingActionButtonAddTransactionAccountsRecord
+                            .reference,
                   ),
                 ),
               );
@@ -136,132 +140,129 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                         (columnIndex) {
                       final columnTransactionsRecord =
                           columnTransactionsRecordList[columnIndex];
-                      return Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                            child: FutureBuilder<AccountsRecord>(
-                              future: AccountsRecord.getDocumentOnce(
-                                  columnTransactionsRecord.account),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitRing(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 50,
+                      return InkWell(
+                        onTap: () async {
+                          logFirebaseEvent('Column-ON_TAP');
+                          // Action_NavToTransaction
+                          logFirebaseEvent('Column-Action_NavToTransaction');
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TransactionSingleWidget(
+                                transaction: columnTransactionsRecord,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                              child: FutureBuilder<AccountsRecord>(
+                                future: AccountsRecord.getDocumentOnce(
+                                    columnTransactionsRecord.account),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: SpinKitRing(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          size: 50,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }
-                                final rowAccountsRecord = snapshot.data;
-                                return Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Container(
-                                      width: 70,
-                                      height: 70,
-                                      child: Stack(
-                                        alignment: AlignmentDirectional(0, 0),
-                                        children: [
-                                          Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(300),
+                                    );
+                                  }
+                                  final rowAccountsRecord = snapshot.data;
+                                  return Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Container(
+                                        width: 70,
+                                        height: 70,
+                                        child: Stack(
+                                          alignment: AlignmentDirectional(0, 0),
+                                          children: [
+                                            Container(
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(300),
+                                              ),
                                             ),
-                                          ),
-                                          FutureBuilder<
-                                              List<
-                                                  ConstInstitutionLogosRecord>>(
-                                            future:
-                                                queryConstInstitutionLogosRecordOnce(
-                                              queryBuilder:
-                                                  (constInstitutionLogosRecord) =>
-                                                      constInstitutionLogosRecord
-                                                          .where(
-                                                              'institutionCode',
-                                                              isEqualTo:
-                                                                  rowAccountsRecord
-                                                                      .bankCode),
-                                              singleRecord: true,
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child: SpinKitRing(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      size: 50,
+                                            FutureBuilder<
+                                                List<
+                                                    ConstInstitutionLogosRecord>>(
+                                              future:
+                                                  queryConstInstitutionLogosRecordOnce(
+                                                queryBuilder:
+                                                    (constInstitutionLogosRecord) =>
+                                                        constInstitutionLogosRecord.where(
+                                                            'institutionCode',
+                                                            isEqualTo:
+                                                                rowAccountsRecord
+                                                                    .bankCode),
+                                                singleRecord: true,
+                                              ),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50,
+                                                      height: 50,
+                                                      child: SpinKitRing(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        size: 50,
+                                                      ),
                                                     ),
+                                                  );
+                                                }
+                                                List<ConstInstitutionLogosRecord>
+                                                    imageConstInstitutionLogosRecordList =
+                                                    snapshot.data;
+                                                // Return an empty Container when the document does not exist.
+                                                if (snapshot.data.isEmpty) {
+                                                  return Container();
+                                                }
+                                                final imageConstInstitutionLogosRecord =
+                                                    imageConstInstitutionLogosRecordList
+                                                            .isNotEmpty
+                                                        ? imageConstInstitutionLogosRecordList
+                                                            .first
+                                                        : null;
+                                                return ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  child: Image.network(
+                                                    imageConstInstitutionLogosRecord
+                                                        .institutionLogo,
+                                                    width: 45,
+                                                    height: 45,
+                                                    fit: BoxFit.cover,
                                                   ),
                                                 );
-                                              }
-                                              List<ConstInstitutionLogosRecord>
-                                                  imageConstInstitutionLogosRecordList =
-                                                  snapshot.data;
-                                              // Return an empty Container when the document does not exist.
-                                              if (snapshot.data.isEmpty) {
-                                                return Container();
-                                              }
-                                              final imageConstInstitutionLogosRecord =
-                                                  imageConstInstitutionLogosRecordList
-                                                          .isNotEmpty
-                                                      ? imageConstInstitutionLogosRecordList
-                                                          .first
-                                                      : null;
-                                              return ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                                child: Image.network(
-                                                  imageConstInstitutionLogosRecord
-                                                      .institutionLogo,
-                                                  width: 45,
-                                                  height: 45,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ],
+                                              },
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            16, 0, 0, 0),
-                                        child: InkWell(
-                                          onTap: () async {
-                                            logFirebaseEvent(
-                                                'OpenTransaction-ON_TAP');
-                                            logFirebaseEvent(
-                                                'OpenTransaction-Navigate-To');
-                                            await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TransactionSingleWidget(
-                                                  transaction:
-                                                      columnTransactionsRecord,
-                                                ),
-                                              ),
-                                            );
-                                          },
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 0, 0, 0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
                                             mainAxisAlignment:
@@ -423,14 +424,14 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                );
-                              },
+                                    ],
+                                  );
+                                },
+                              ),
                             ),
-                          ),
-                          Divider(),
-                        ],
+                            Divider(),
+                          ],
+                        ),
                       );
                     }),
                   ),
