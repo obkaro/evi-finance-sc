@@ -35,71 +35,76 @@ Future flutterMonoReauth(
                     child: Container(
                   width: context.screenWidth(.95),
                   height: context.screenHeight(.8),
-                  child: ReauthMonoWebView(
-                    apiKey: 'live_pk_dNWUp8sYwG5mGXq3mFOT',
-                    //config: "abc",
-                    token: reauthCode,
-                    onEvent: (event, data) {
-                      print('event: $event, data: $data');
-                    },
-                    onClosed: () {
-                      print('Modal closed');
-                      print('REAUTH CODE WAS: $reauthCode');
-                    },
-                    onLoad: () {
-                      print('Mono loaded successfully');
-                    },
-                    onSuccess: (code) async {
-                      print('Mono Success $code');
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.all(
+                        const Radius.circular(24.0),
+                      ),
+                      child: ReauthMonoWebView(
+                        apiKey: 'live_pk_dNWUp8sYwG5mGXq3mFOT',
+                        //config: "abc",
+                        token: reauthCode,
+                        onEvent: (event, data) {
+                          print('event: $event, data: $data');
+                        },
+                        onClosed: () {
+                          print('Modal closed');
+                          print('REAUTH CODE WAS: $reauthCode');
+                        },
+                        onLoad: () {
+                          print('Mono loaded successfully');
+                        },
+                        onSuccess: (code) async {
+                          print('Mono Success $code');
 
-                      //Write temporary key to database
-                      final usersUpdateData = createUsersRecordData(
-                        tempAuthCode: '$code',
-                      );
-                      await currentUserReference.update(usersUpdateData);
+                          //Write temporary key to database
+                          final usersUpdateData = createUsersRecordData(
+                            tempAuthCode: '$code',
+                          );
+                          await currentUserReference.update(usersUpdateData);
 
-                      //Print temporary key
-                      //print(currentUserDocument?.tempAuthCode);
+                          //Print temporary key
+                          //print(currentUserDocument?.tempAuthCode);
 
-                      //Use temporary key to get permanent key, save to variable: permKey
-                      ApiCallResponse permKey = await GetPermanentAuthCall.call(
-                          tempKey: (currentUserDocument?.tempAuthCode));
+                          //Use temporary key to get permanent key, save to variable: permKey
+                          ApiCallResponse permKey =
+                              await GetPermanentAuthCall.call(
+                                  tempKey: (currentUserDocument?.tempAuthCode));
 
-                      print(getJsonField(
-                        (permKey?.jsonBody ?? ''),
-                        r'''$.id''',
-                      ).toString());
+                          print(getJsonField(
+                            (permKey?.jsonBody ?? ''),
+                            r'''$.id''',
+                          ).toString());
 
-                      //Write permanent key to database
-                      var accountsCreateData = createAccountsRecordData(
-                        authID: getJsonField(
-                          (permKey?.jsonBody ?? ''),
-                          r'''$.id''',
-                        ).toString(),
-                        accountOwner: currentUserReference,
-                      );
-                      // onClosed: () {
-                      //   print('Modal closed');
-                      // },
-                      // onSuccess: (code) async {
-                      //   print('Mono Success $code');
+                          //Write permanent key to database
+                          var accountsCreateData = createAccountsRecordData(
+                            authID: getJsonField(
+                              (permKey?.jsonBody ?? ''),
+                              r'''$.id''',
+                            ).toString(),
+                            accountOwner: currentUserReference,
+                          );
+                          // onClosed: () {
+                          //   print('Modal closed');
+                          // },
+                          // onSuccess: (code) async {
+                          //   print('Mono Success $code');
 
-                      //Write temporary key to database
-                      // final usersUpdateData = createUsersRecordData(
-                      //   tempAuthCode: '$code',
-                      // );
-                      // await currentUserReference.update(usersUpdateData);
+                          //Write temporary key to database
+                          // final usersUpdateData = createUsersRecordData(
+                          //   tempAuthCode: '$code',
+                          // );
+                          // await currentUserReference.update(usersUpdateData);
 
-                      // //Use temporary key to get permanent key, save to variable: permKey
-                      // ApiCallResponse permKey = await GetPermanentAuthCall.call(
-                      //     tempKey: (currentUserDocument?.tempAuthCode));
+                          // //Use temporary key to get permanent key, save to variable: permKey
+                          // ApiCallResponse permKey = await GetPermanentAuthCall.call(
+                          //     tempKey: (currentUserDocument?.tempAuthCode));
 
-                      // print(getJsonField(
-                      //   (permKey?.jsonBody ?? ''),
-                      //   r'''$.id''',
-                      // ).toString());
-                    },
-                  ),
+                          // print(getJsonField(
+                          //   (permKey?.jsonBody ?? ''),
+                          //   r'''$.id''',
+                          // ).toString());
+                        },
+                      )),
                 ))
               ],
             ));

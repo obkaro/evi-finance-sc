@@ -126,13 +126,6 @@ class _$AccountsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.isSelectedT;
-    if (value != null) {
-      result
-        ..add('isSelectedT')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
     value = object.reauthRequired;
     if (value != null) {
       result
@@ -140,19 +133,12 @@ class _$AccountsRecordSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
-    value = object.dataSyncStatus;
+    value = object.lastSync;
     if (value != null) {
       result
-        ..add('dataSyncStatus')
+        ..add('lastSync')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.hasNewData;
-    if (value != null) {
-      result
-        ..add('hasNewData')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
+            specifiedType: const FullType(DateTime)));
     }
     value = object.reference;
     if (value != null) {
@@ -239,21 +225,13 @@ class _$AccountsRecordSerializer
           result.accountLogo = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'isSelectedT':
-          result.isSelectedT = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
-          break;
         case 'reauthRequired':
           result.reauthRequired = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
-        case 'dataSyncStatus':
-          result.dataSyncStatus = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
-          break;
-        case 'hasNewData':
-          result.hasNewData = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+        case 'lastSync':
+          result.lastSync = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
           break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
@@ -300,13 +278,9 @@ class _$AccountsRecord extends AccountsRecord {
   @override
   final String accountLogo;
   @override
-  final bool isSelectedT;
-  @override
   final bool reauthRequired;
   @override
-  final String dataSyncStatus;
-  @override
-  final String hasNewData;
+  final DateTime lastSync;
   @override
   final DocumentReference<Object> reference;
 
@@ -329,10 +303,8 @@ class _$AccountsRecord extends AccountsRecord {
       this.bvn,
       this.dateLinked,
       this.accountLogo,
-      this.isSelectedT,
       this.reauthRequired,
-      this.dataSyncStatus,
-      this.hasNewData,
+      this.lastSync,
       this.reference})
       : super._();
 
@@ -363,10 +335,8 @@ class _$AccountsRecord extends AccountsRecord {
         bvn == other.bvn &&
         dateLinked == other.dateLinked &&
         accountLogo == other.accountLogo &&
-        isSelectedT == other.isSelectedT &&
         reauthRequired == other.reauthRequired &&
-        dataSyncStatus == other.dataSyncStatus &&
-        hasNewData == other.hasNewData &&
+        lastSync == other.lastSync &&
         reference == other.reference;
   }
 
@@ -390,25 +360,29 @@ class _$AccountsRecord extends AccountsRecord {
                                                                 $jc(
                                                                     $jc(
                                                                         $jc(
-                                                                            $jc($jc(0, accountName.hashCode),
-                                                                                accountOwner.hashCode),
-                                                                            dataStatus.hashCode),
-                                                                        accountType.hashCode),
-                                                                    institutionType.hashCode),
-                                                                authMethod.hashCode),
-                                                            currency.hashCode),
-                                                        authID.hashCode),
-                                                    institutionName.hashCode),
-                                                accountBalance.hashCode),
-                                            bankCode.hashCode),
-                                        accountNumber.hashCode),
-                                    bvn.hashCode),
-                                dateLinked.hashCode),
-                            accountLogo.hashCode),
-                        isSelectedT.hashCode),
-                    reauthRequired.hashCode),
-                dataSyncStatus.hashCode),
-            hasNewData.hashCode),
+                                                                            0,
+                                                                            accountName
+                                                                                .hashCode),
+                                                                        accountOwner
+                                                                            .hashCode),
+                                                                    dataStatus
+                                                                        .hashCode),
+                                                                accountType
+                                                                    .hashCode),
+                                                            institutionType
+                                                                .hashCode),
+                                                        authMethod.hashCode),
+                                                    currency.hashCode),
+                                                authID.hashCode),
+                                            institutionName.hashCode),
+                                        accountBalance.hashCode),
+                                    bankCode.hashCode),
+                                accountNumber.hashCode),
+                            bvn.hashCode),
+                        dateLinked.hashCode),
+                    accountLogo.hashCode),
+                reauthRequired.hashCode),
+            lastSync.hashCode),
         reference.hashCode));
   }
 
@@ -430,10 +404,8 @@ class _$AccountsRecord extends AccountsRecord {
           ..add('bvn', bvn)
           ..add('dateLinked', dateLinked)
           ..add('accountLogo', accountLogo)
-          ..add('isSelectedT', isSelectedT)
           ..add('reauthRequired', reauthRequired)
-          ..add('dataSyncStatus', dataSyncStatus)
-          ..add('hasNewData', hasNewData)
+          ..add('lastSync', lastSync)
           ..add('reference', reference))
         .toString();
   }
@@ -508,23 +480,14 @@ class AccountsRecordBuilder
   String get accountLogo => _$this._accountLogo;
   set accountLogo(String accountLogo) => _$this._accountLogo = accountLogo;
 
-  bool _isSelectedT;
-  bool get isSelectedT => _$this._isSelectedT;
-  set isSelectedT(bool isSelectedT) => _$this._isSelectedT = isSelectedT;
-
   bool _reauthRequired;
   bool get reauthRequired => _$this._reauthRequired;
   set reauthRequired(bool reauthRequired) =>
       _$this._reauthRequired = reauthRequired;
 
-  String _dataSyncStatus;
-  String get dataSyncStatus => _$this._dataSyncStatus;
-  set dataSyncStatus(String dataSyncStatus) =>
-      _$this._dataSyncStatus = dataSyncStatus;
-
-  String _hasNewData;
-  String get hasNewData => _$this._hasNewData;
-  set hasNewData(String hasNewData) => _$this._hasNewData = hasNewData;
+  DateTime _lastSync;
+  DateTime get lastSync => _$this._lastSync;
+  set lastSync(DateTime lastSync) => _$this._lastSync = lastSync;
 
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
@@ -553,10 +516,8 @@ class AccountsRecordBuilder
       _bvn = $v.bvn;
       _dateLinked = $v.dateLinked;
       _accountLogo = $v.accountLogo;
-      _isSelectedT = $v.isSelectedT;
       _reauthRequired = $v.reauthRequired;
-      _dataSyncStatus = $v.dataSyncStatus;
-      _hasNewData = $v.hasNewData;
+      _lastSync = $v.lastSync;
       _reference = $v.reference;
       _$v = null;
     }
@@ -593,10 +554,8 @@ class AccountsRecordBuilder
             bvn: bvn,
             dateLinked: dateLinked,
             accountLogo: accountLogo,
-            isSelectedT: isSelectedT,
             reauthRequired: reauthRequired,
-            dataSyncStatus: dataSyncStatus,
-            hasNewData: hasNewData,
+            lastSync: lastSync,
             reference: reference);
     replace(_$result);
     return _$result;
