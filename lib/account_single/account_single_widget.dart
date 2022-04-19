@@ -237,44 +237,34 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                   ),
                                 ),
                                 Divider(),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Text(
-                                      'Institution',
-                                      style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
-                                    ),
-                                  ],
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 10),
-                                  child: Row(
+                                      0, 10, 0, 10),
+                                  child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Column(
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 4),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              'Institution',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Wrap(
-                                            spacing: 0,
-                                            runSpacing: 0,
-                                            alignment: WrapAlignment.start,
-                                            crossAxisAlignment:
-                                                WrapCrossAlignment.start,
-                                            direction: Axis.horizontal,
-                                            runAlignment: WrapAlignment.start,
-                                            verticalDirection:
-                                                VerticalDirection.down,
-                                            clipBehavior: Clip.none,
-                                            children: [
-                                              Text(
-                                                widget.account.institutionName,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title3,
-                                              ),
-                                            ],
+                                          Text(
+                                            widget.account.institutionName,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
                                           ),
                                         ],
                                       ),
@@ -282,51 +272,71 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                   ),
                                 ),
                                 Divider(),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Text(
-                                      'Account Number',
-                                      style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
-                                    ),
-                                  ],
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 10),
-                                  child: Row(
+                                      0, 10, 0, 10),
+                                  child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Text(
-                                        widget.account.accountNumber,
-                                        style:
-                                            FlutterFlowTheme.of(context).title3,
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 4),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              'Account Number',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            widget.account.accountNumber,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
                                 ),
                                 Divider(),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Text(
-                                      'Account Details',
-                                      style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
-                                    ),
-                                  ],
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 10),
-                                  child: Row(
+                                      0, 10, 0, 10),
+                                  child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Text(
-                                        widget.account.accountType,
-                                        style:
-                                            FlutterFlowTheme.of(context).title3,
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 4),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              'Account Details',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            widget.account.accountType,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -337,7 +347,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 20, 0, 10),
+                                          0, 20, 0, 16),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -652,15 +662,24 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             SnackBar(
                                                               content: Text(
                                                                 'Synchronization Successful',
-                                                                style:
-                                                                    TextStyle(),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Roboto',
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .normal,
+                                                                    ),
                                                               ),
                                                               duration: Duration(
                                                                   milliseconds:
                                                                       4000),
                                                               backgroundColor:
-                                                                  Color(
-                                                                      0x00000000),
+                                                                  Colors.black,
                                                             ),
                                                           );
                                                         } else {
@@ -736,15 +755,22 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                   'Synchronization Successful',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle1,
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Roboto',
+                                                                        fontSize:
+                                                                            12,
+                                                                        fontWeight:
+                                                                            FontWeight.normal,
+                                                                      ),
                                                                 ),
                                                                 duration: Duration(
                                                                     milliseconds:
                                                                         4000),
                                                                 backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryBackground,
+                                                                    Colors
+                                                                        .black,
                                                               ),
                                                             );
                                                           } else {
@@ -758,15 +784,22 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                   'Synchronization Error: Please try again later',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle1,
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Roboto',
+                                                                        fontSize:
+                                                                            12,
+                                                                        fontWeight:
+                                                                            FontWeight.normal,
+                                                                      ),
                                                                 ),
                                                                 duration: Duration(
                                                                     milliseconds:
                                                                         4000),
                                                                 backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryBackground,
+                                                                    Colors
+                                                                        .black,
                                                               ),
                                                             );
                                                           }
@@ -819,7 +852,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 20, 0, 10),
+                                          0, 0, 0, 10),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -945,7 +978,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                               transactionsRecord
                                   .where('transactionOwner',
                                       isEqualTo: currentUserReference)
-                                  .where('transactionType', isEqualTo: 'debit')
                                   .where('account',
                                       isEqualTo: widget.account.reference)
                                   .orderBy('trasactionDate', descending: true),
@@ -1137,18 +1169,59 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                     .of(context)
                                                                 .bodyText1,
                                                           ),
-                                                          AutoSizeText(
-                                                            columnTransactionsRecord
-                                                                .transactionType
-                                                                .maybeHandleOverflow(
-                                                              maxChars: 15,
-                                                              replacement: '…',
-                                                            ),
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText2,
+                                                          Stack(
+                                                            children: [
+                                                              if ((columnTransactionsRecord
+                                                                      .transactionType) ==
+                                                                  'debit')
+                                                                AutoSizeText(
+                                                                  columnTransactionsRecord
+                                                                      .transactionType
+                                                                      .maybeHandleOverflow(
+                                                                    maxChars:
+                                                                        15,
+                                                                    replacement:
+                                                                        '…',
+                                                                  ),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .start,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText2
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Roboto',
+                                                                        color: Color(
+                                                                            0xFFFF0003),
+                                                                      ),
+                                                                ),
+                                                              if ((columnTransactionsRecord
+                                                                      .transactionType) ==
+                                                                  'credit')
+                                                                AutoSizeText(
+                                                                  columnTransactionsRecord
+                                                                      .transactionType
+                                                                      .maybeHandleOverflow(
+                                                                    maxChars:
+                                                                        15,
+                                                                    replacement:
+                                                                        '…',
+                                                                  ),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .start,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText2
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Roboto',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryColor,
+                                                                      ),
+                                                                ),
+                                                            ],
                                                           ),
                                                         ],
                                                       ),
