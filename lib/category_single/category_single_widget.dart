@@ -240,7 +240,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                             child: Text(
-                              'Transactions',
+                              'Expenses',
                               style: FlutterFlowTheme.of(context).bodyText2,
                             ),
                           ),

@@ -81,10 +81,6 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "transactionType",
-          "order": "ASCENDING"
-        },
-        {
           "fieldPath": "account",
           "order": "ASCENDING"
         },
