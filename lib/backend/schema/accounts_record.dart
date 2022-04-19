@@ -57,16 +57,10 @@ abstract class AccountsRecord
   String get accountLogo;
 
   @nullable
-  bool get isSelectedT;
-
-  @nullable
   bool get reauthRequired;
 
   @nullable
-  String get dataSyncStatus;
-
-  @nullable
-  String get hasNewData;
+  DateTime get lastSync;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -86,10 +80,7 @@ abstract class AccountsRecord
     ..accountNumber = ''
     ..bvn = ''
     ..accountLogo = ''
-    ..isSelectedT = false
-    ..reauthRequired = false
-    ..dataSyncStatus = ''
-    ..hasNewData = '';
+    ..reauthRequired = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('accounts');
@@ -128,10 +119,8 @@ Map<String, dynamic> createAccountsRecordData({
   String bvn,
   DateTime dateLinked,
   String accountLogo,
-  bool isSelectedT,
   bool reauthRequired,
-  String dataSyncStatus,
-  String hasNewData,
+  DateTime lastSync,
 }) =>
     serializers.toFirestore(
         AccountsRecord.serializer,
@@ -151,7 +140,5 @@ Map<String, dynamic> createAccountsRecordData({
           ..bvn = bvn
           ..dateLinked = dateLinked
           ..accountLogo = accountLogo
-          ..isSelectedT = isSelectedT
           ..reauthRequired = reauthRequired
-          ..dataSyncStatus = dataSyncStatus
-          ..hasNewData = hasNewData));
+          ..lastSync = lastSync));

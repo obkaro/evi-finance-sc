@@ -269,12 +269,16 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                       ? imageConstInstitutionLogosRecordList
                                                           .first
                                                       : null;
-                                              return Image.network(
-                                                imageConstInstitutionLogosRecord
-                                                    .institutionLogo,
-                                                width: 45,
-                                                height: 45,
-                                                fit: BoxFit.cover,
+                                              return ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                                child: Image.network(
+                                                  imageConstInstitutionLogosRecord
+                                                      .institutionLogo,
+                                                  width: 45,
+                                                  height: 45,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               );
                                             },
                                           ),

@@ -15,7 +15,6 @@ class AdminWidget extends StatefulWidget {
 }
 
 class _AdminWidgetState extends State<AdminWidget> {
-  bool switchListTileValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -64,74 +63,6 @@ class _AdminWidgetState extends State<AdminWidget> {
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                                child: Stack(
-                                  alignment: AlignmentDirectional(0, 0),
-                                  children: [
-                                    Container(
-                                      width: double.infinity,
-                                      height: 60,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                    ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(12),
-                                      child: SwitchListTile(
-                                        value: switchListTileValue ??=
-                                            Theme.of(context).brightness ==
-                                                Brightness.dark,
-                                        onChanged: (newValue) => setState(() =>
-                                            switchListTileValue = newValue),
-                                        title: Text(
-                                          'Dark Mode',
-                                          style: FlutterFlowTheme.of(context)
-                                              .title3,
-                                        ),
-                                        activeColor:
-                                            FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                        dense: false,
-                                        controlAffinity:
-                                            ListTileControlAffinity.leading,
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                10, 10, 10, 10),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () async {
-                                        logFirebaseEvent('Container-ON_TAP');
-                                        if ((Theme.of(context).brightness ==
-                                                Brightness.dark) ==
-                                            false) {
-                                          logFirebaseEvent(
-                                              'Container-Set-Dark-Mode-Settings');
-                                          setDarkModeSetting(
-                                              context, ThemeMode.light);
-                                        } else {
-                                          logFirebaseEvent(
-                                              'Container-Set-Dark-Mode-Settings');
-                                          setDarkModeSetting(
-                                              context, ThemeMode.light);
-                                        }
-                                      },
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: 60,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                               Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),

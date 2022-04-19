@@ -167,13 +167,17 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                     ? imageConstInstitutionLogosRecordList
                                                         .first
                                                     : null;
-                                            return CachedNetworkImage(
-                                              imageUrl:
-                                                  imageConstInstitutionLogosRecord
-                                                      .institutionLogo,
-                                              width: 100,
-                                              height: 100,
-                                              fit: BoxFit.cover,
+                                            return ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    imageConstInstitutionLogosRecord
+                                                        .institutionLogo,
+                                                width: 100,
+                                                height: 100,
+                                                fit: BoxFit.cover,
+                                              ),
                                             );
                                           },
                                         ),
@@ -197,27 +201,37 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                   ),
                                 ),
                                 Divider(),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Text(
-                                      'Account Balance',
-                                      style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
-                                    ),
-                                  ],
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 10),
-                                  child: Row(
+                                      0, 10, 0, 10),
+                                  child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Text(
-                                        functions.formatTransCurrency(
-                                            widget.account.accountBalance),
-                                        style:
-                                            FlutterFlowTheme.of(context).title3,
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 4),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              'Account Balance',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            functions.formatTransCurrency(
+                                                widget.account.accountBalance),
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -329,398 +343,570 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          StreamBuilder<
-                                              List<TransactionsRecord>>(
-                                            stream: queryTransactionsRecord(
-                                              queryBuilder:
-                                                  (transactionsRecord) =>
-                                                      transactionsRecord.where(
-                                                          'account',
-                                                          isEqualTo: widget
-                                                              .account
-                                                              .reference),
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child: SpinKitRing(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      size: 50,
-                                                    ),
+                                          Expanded(
+                                            child: Container(
+                                              width: 100,
+                                              height: 50,
+                                              decoration: BoxDecoration(),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 0, 8, 0),
+                                                child: StreamBuilder<
+                                                    List<TransactionsRecord>>(
+                                                  stream:
+                                                      queryTransactionsRecord(
+                                                    queryBuilder:
+                                                        (transactionsRecord) =>
+                                                            transactionsRecord.where(
+                                                                'account',
+                                                                isEqualTo: widget
+                                                                    .account
+                                                                    .reference),
                                                   ),
-                                                );
-                                              }
-                                              List<TransactionsRecord>
-                                                  buttonTransactionsRecordList =
-                                                  snapshot.data;
-                                              return FFButtonWidget(
-                                                onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'Button-ON_TAP');
-                                                  logFirebaseEvent(
-                                                      'Button-Alert-Dialog');
-                                                  var confirmDialogResponse =
-                                                      await showDialog<bool>(
-                                                            context: context,
-                                                            builder:
-                                                                (alertDialogContext) {
-                                                              return AlertDialog(
-                                                                title: Text(
-                                                                    'Unlink and Delete Account'),
-                                                                content: Text(
-                                                                    'This will delete all account associated account data and cannot be undone'),
-                                                                actions: [
-                                                                  TextButton(
-                                                                    onPressed: () =>
-                                                                        Navigator.pop(
-                                                                            alertDialogContext,
-                                                                            false),
-                                                                    child: Text(
-                                                                        'Cancel'),
-                                                                  ),
-                                                                  TextButton(
-                                                                    onPressed: () =>
-                                                                        Navigator.pop(
-                                                                            alertDialogContext,
-                                                                            true),
-                                                                    child: Text(
-                                                                        'Confirm'),
-                                                                  ),
-                                                                ],
-                                                              );
-                                                            },
-                                                          ) ??
-                                                          false;
-                                                  if (confirmDialogResponse) {
-                                                    logFirebaseEvent(
-                                                        'Button-Custom-Action');
-                                                    await actions
-                                                        .deleteTransactions(
-                                                      buttonTransactionsRecordList
-                                                          .toList(),
-                                                    );
-                                                    logFirebaseEvent(
-                                                        'Button-Backend-Call');
-                                                    await UnlinkMonoCall.call(
-                                                      authID:
-                                                          widget.account.authID,
-                                                    );
-                                                    logFirebaseEvent(
-                                                        'Button-Backend-Call');
-                                                    await widget
-                                                        .account.reference
-                                                        .delete();
-                                                    logFirebaseEvent(
-                                                        'Button-Navigate-To');
-                                                    await Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            NavBarPage(
-                                                                initialPage:
-                                                                    'Profile'),
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    return;
-                                                  }
-                                                },
-                                                text: 'Unlink',
-                                                icon: Icon(
-                                                  Icons.delete,
-                                                  size: 15,
-                                                ),
-                                                options: FFButtonOptions(
-                                                  width: 130,
-                                                  height: 40,
-                                                  color: Color(0xFFFF0003),
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily: 'Roboto',
-                                                        color: Colors.white,
-                                                      ),
-                                                  borderSide: BorderSide(
-                                                    color: Colors.transparent,
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius: 12,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                          StreamBuilder<
-                                              List<TransactionsRecord>>(
-                                            stream: queryTransactionsRecord(
-                                              queryBuilder:
-                                                  (transactionsRecord) =>
-                                                      transactionsRecord.where(
-                                                          'account',
-                                                          isEqualTo: widget
-                                                              .account
-                                                              .reference),
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child: SpinKitRing(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      size: 50,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<TransactionsRecord>
-                                                  buttonTransactionsRecordList =
-                                                  snapshot.data;
-                                              return FFButtonWidget(
-                                                onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'Button-ON_TAP');
-                                                  var _shouldSetState = false;
-                                                  logFirebaseEvent(
-                                                      'Button-Backend-Call');
-                                                  dataSyncResponse =
-                                                      await DataSyncMonoCall
-                                                          .call(
-                                                    authID:
-                                                        widget.account.authID,
-                                                  );
-                                                  _shouldSetState = true;
-                                                  logFirebaseEvent(
-                                                      'Button-Update-Local-State');
-                                                  setState(() => FFAppState()
-                                                              .dataSyncStatus =
-                                                          getJsonField(
-                                                        (dataSyncResponse
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                        r'''$.status''',
-                                                      ).toString());
-                                                  logFirebaseEvent(
-                                                      'Button-Update-Local-State');
-                                                  setState(() =>
-                                                      FFAppState().hasNewData =
-                                                          getJsonField(
-                                                        (dataSyncResponse
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                        r'''$.hasNewData''',
-                                                      ));
-                                                  if ((FFAppState()
-                                                          .dataSyncStatus) ==
-                                                      'failed') {
-                                                    logFirebaseEvent(
-                                                        'Button-Backend-Call');
-                                                    reauthCode =
-                                                        await ReauthMonoCall
-                                                            .call(
-                                                      authID:
-                                                          widget.account.authID,
-                                                    );
-                                                    _shouldSetState = true;
-                                                    logFirebaseEvent(
-                                                        'Button-Custom-Action');
-                                                    await actions
-                                                        .flutterMonoReauth(
-                                                      context,
-                                                      getJsonField(
-                                                        (reauthCode?.jsonBody ??
-                                                            ''),
-                                                        r'''$.token''',
-                                                      ).toString(),
-                                                    );
-                                                    logFirebaseEvent(
-                                                        'Button-Backend-Call');
-                                                    accountResponse =
-                                                        await GetAccountInfoCall
-                                                            .call(
-                                                      authID:
-                                                          widget.account.authID,
-                                                    );
-                                                    _shouldSetState = true;
-                                                    logFirebaseEvent(
-                                                        'Button-Backend-Call');
-                                                    transactionJsonResponse =
-                                                        await GetTransactionsCall
-                                                            .call(
-                                                      authID:
-                                                          widget.account.authID,
-                                                    );
-                                                    _shouldSetState = true;
-                                                    logFirebaseEvent(
-                                                        'Button-Custom-Action');
-                                                    await actions
-                                                        .writeTransactions(
-                                                      (transactionJsonResponse
-                                                              ?.jsonBody ??
-                                                          ''),
-                                                      widget.account,
-                                                      buttonTransactionsRecordList
-                                                          .toList(),
-                                                    );
-                                                    logFirebaseEvent(
-                                                        'Button-Backend-Call');
-
-                                                    final accountsUpdateData =
-                                                        createAccountsRecordData(
-                                                      dataStatus: getJsonField(
-                                                        (accountResponse
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                        r'''$.meta.data_status''',
-                                                      ).toString(),
-                                                      accountBalance:
-                                                          getJsonField(
-                                                        (accountResponse
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                        r'''$.account.balance''',
-                                                      ),
-                                                    );
-                                                    await widget
-                                                        .account.reference
-                                                        .update(
-                                                            accountsUpdateData);
-                                                    logFirebaseEvent(
-                                                        'Button-Show-Snack-Bar');
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          'Synchronization Successful',
-                                                          style: TextStyle(),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50,
+                                                          height: 50,
+                                                          child: SpinKitRing(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryColor,
+                                                            size: 50,
+                                                          ),
                                                         ),
-                                                        duration: Duration(
-                                                            milliseconds: 4000),
-                                                        backgroundColor:
-                                                            Color(0x00000000),
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    if ((FFAppState()
-                                                            .hasNewData) ==
-                                                        false) {
-                                                      if (_shouldSetState)
-                                                        setState(() {});
-                                                      return;
+                                                      );
                                                     }
-
-                                                    logFirebaseEvent(
-                                                        'Button-Backend-Call');
-                                                    accountRespons =
-                                                        await GetAccountInfoCall
-                                                            .call(
-                                                      authID:
-                                                          widget.account.authID,
-                                                    );
-                                                    _shouldSetState = true;
-                                                    logFirebaseEvent(
-                                                        'Button-Backend-Call');
-
-                                                    final accountsUpdateData =
-                                                        createAccountsRecordData(
-                                                      dataStatus: getJsonField(
-                                                        (accountRespons
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                        r'''$.meta.data_status''',
-                                                      ).toString(),
-                                                      accountBalance:
-                                                          getJsonField(
-                                                        (accountRespons
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                        r'''$.account.balance''',
+                                                    List<TransactionsRecord>
+                                                        buttonTransactionsRecordList =
+                                                        snapshot.data;
+                                                    return FFButtonWidget(
+                                                      onPressed: () async {
+                                                        logFirebaseEvent(
+                                                            'Button-ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Button-Alert-Dialog');
+                                                        var confirmDialogResponse =
+                                                            await showDialog<
+                                                                    bool>(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (alertDialogContext) {
+                                                                    return AlertDialog(
+                                                                      title: Text(
+                                                                          'Unlink and Delete Account'),
+                                                                      content: Text(
+                                                                          'This will delete all account associated account data and cannot be undone'),
+                                                                      actions: [
+                                                                        TextButton(
+                                                                          onPressed: () => Navigator.pop(
+                                                                              alertDialogContext,
+                                                                              false),
+                                                                          child:
+                                                                              Text('Cancel'),
+                                                                        ),
+                                                                        TextButton(
+                                                                          onPressed: () => Navigator.pop(
+                                                                              alertDialogContext,
+                                                                              true),
+                                                                          child:
+                                                                              Text('Confirm'),
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  },
+                                                                ) ??
+                                                                false;
+                                                        if (confirmDialogResponse) {
+                                                          logFirebaseEvent(
+                                                              'Button-Custom-Action');
+                                                          await actions
+                                                              .deleteTransactions(
+                                                            buttonTransactionsRecordList
+                                                                .toList(),
+                                                          );
+                                                          logFirebaseEvent(
+                                                              'Button-Backend-Call');
+                                                          await UnlinkMonoCall
+                                                              .call(
+                                                            authID: widget
+                                                                .account.authID,
+                                                          );
+                                                          logFirebaseEvent(
+                                                              'Button-Backend-Call');
+                                                          await widget
+                                                              .account.reference
+                                                              .delete();
+                                                          logFirebaseEvent(
+                                                              'Button-Navigate-To');
+                                                          await Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  NavBarPage(
+                                                                      initialPage:
+                                                                          'Profile'),
+                                                            ),
+                                                          );
+                                                        } else {
+                                                          return;
+                                                        }
+                                                      },
+                                                      text: 'Unlink',
+                                                      icon: Icon(
+                                                        Icons.delete,
+                                                        size: 15,
+                                                      ),
+                                                      options: FFButtonOptions(
+                                                        width: 130,
+                                                        height: 50,
+                                                        color:
+                                                            Color(0xFFFF0003),
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .subtitle2
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Roboto',
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                        borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 1,
+                                                        ),
+                                                        borderRadius: 12,
                                                       ),
                                                     );
-                                                    await widget
-                                                        .account.reference
-                                                        .update(
-                                                            accountsUpdateData);
-                                                    logFirebaseEvent(
-                                                        'Button-Backend-Call');
-                                                    transactionJsonRespons =
-                                                        await GetTransactionsCall
-                                                            .call(
-                                                      authID:
-                                                          widget.account.authID,
-                                                    );
-                                                    _shouldSetState = true;
-                                                    logFirebaseEvent(
-                                                        'Button-Custom-Action');
-                                                    await actions
-                                                        .writeTransactions(
-                                                      (transactionJsonRespons
-                                                              ?.jsonBody ??
-                                                          ''),
-                                                      widget.account,
-                                                      buttonTransactionsRecordList
-                                                          .toList(),
-                                                    );
-                                                    logFirebaseEvent(
-                                                        'Button-Show-Snack-Bar');
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          'Synchronization Successful',
-                                                          style: TextStyle(),
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              width: 100,
+                                              height: 50,
+                                              decoration: BoxDecoration(),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(8, 0, 0, 0),
+                                                child: StreamBuilder<
+                                                    List<TransactionsRecord>>(
+                                                  stream:
+                                                      queryTransactionsRecord(
+                                                    queryBuilder:
+                                                        (transactionsRecord) =>
+                                                            transactionsRecord.where(
+                                                                'account',
+                                                                isEqualTo: widget
+                                                                    .account
+                                                                    .reference),
+                                                  ),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50,
+                                                          height: 50,
+                                                          child: SpinKitRing(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryColor,
+                                                            size: 50,
+                                                          ),
                                                         ),
-                                                        duration: Duration(
-                                                            milliseconds: 4000),
-                                                        backgroundColor:
-                                                            Color(0x00000000),
+                                                      );
+                                                    }
+                                                    List<TransactionsRecord>
+                                                        buttonTransactionsRecordList =
+                                                        snapshot.data;
+                                                    return FFButtonWidget(
+                                                      onPressed: () async {
+                                                        logFirebaseEvent(
+                                                            'Button-ON_TAP');
+                                                        var _shouldSetState =
+                                                            false;
+                                                        logFirebaseEvent(
+                                                            'Button-Backend-Call');
+                                                        dataSyncResponse =
+                                                            await DataSyncMonoCall
+                                                                .call(
+                                                          authID: widget
+                                                              .account.authID,
+                                                        );
+                                                        _shouldSetState = true;
+                                                        logFirebaseEvent(
+                                                            'Button-Update-Local-State');
+                                                        setState(() =>
+                                                            FFAppState()
+                                                                    .dataSyncCode =
+                                                                getJsonField(
+                                                              (dataSyncResponse
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.code''',
+                                                            ).toString());
+                                                        logFirebaseEvent(
+                                                            'Button-Update-Local-State');
+                                                        setState(() =>
+                                                            FFAppState()
+                                                                    .hasNewData =
+                                                                getJsonField(
+                                                              (dataSyncResponse
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.hasNewData''',
+                                                            ));
+                                                        if ((FFAppState()
+                                                                .dataSyncCode) ==
+                                                            'REAUTHORISATION_REQUIRED') {
+                                                          logFirebaseEvent(
+                                                              'Button-Backend-Call');
+                                                          reauthCode =
+                                                              await ReauthMonoCall
+                                                                  .call(
+                                                            authID: widget
+                                                                .account.authID,
+                                                          );
+                                                          _shouldSetState =
+                                                              true;
+                                                          logFirebaseEvent(
+                                                              'Button-Custom-Action');
+                                                          await actions
+                                                              .flutterMonoReauth(
+                                                            context,
+                                                            getJsonField(
+                                                              (reauthCode
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.token''',
+                                                            ).toString(),
+                                                          );
+                                                          logFirebaseEvent(
+                                                              'Button-Backend-Call');
+                                                          accountResponse =
+                                                              await GetAccountInfoCall
+                                                                  .call(
+                                                            authID: widget
+                                                                .account.authID,
+                                                          );
+                                                          _shouldSetState =
+                                                              true;
+                                                          logFirebaseEvent(
+                                                              'Button-Backend-Call');
+                                                          transactionJsonResponse =
+                                                              await GetTransactionsCall
+                                                                  .call(
+                                                            authID: widget
+                                                                .account.authID,
+                                                          );
+                                                          _shouldSetState =
+                                                              true;
+                                                          logFirebaseEvent(
+                                                              'Button-Custom-Action');
+                                                          await actions
+                                                              .writeTransactions(
+                                                            (transactionJsonResponse
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                            widget.account,
+                                                            buttonTransactionsRecordList
+                                                                .toList(),
+                                                          );
+                                                          logFirebaseEvent(
+                                                              'Button-Backend-Call');
+
+                                                          final accountsUpdateData =
+                                                              createAccountsRecordData(
+                                                            dataStatus:
+                                                                getJsonField(
+                                                              (accountResponse
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.meta.data_status''',
+                                                            ).toString(),
+                                                            accountBalance:
+                                                                getJsonField(
+                                                              (accountResponse
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.account.balance''',
+                                                            ),
+                                                          );
+                                                          await widget
+                                                              .account.reference
+                                                              .update(
+                                                                  accountsUpdateData);
+                                                          logFirebaseEvent(
+                                                              'Button-Show-Snack-Bar');
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(
+                                                            SnackBar(
+                                                              content: Text(
+                                                                'Synchronization Successful',
+                                                                style:
+                                                                    TextStyle(),
+                                                              ),
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      4000),
+                                                              backgroundColor:
+                                                                  Color(
+                                                                      0x00000000),
+                                                            ),
+                                                          );
+                                                        } else {
+                                                          if ((FFAppState()
+                                                                  .dataSyncCode) ==
+                                                              'SYNC_SUCCESSFUL') {
+                                                            logFirebaseEvent(
+                                                                'Button-Backend-Call');
+                                                            accountRespons =
+                                                                await GetAccountInfoCall
+                                                                    .call(
+                                                              authID: widget
+                                                                  .account
+                                                                  .authID,
+                                                            );
+                                                            _shouldSetState =
+                                                                true;
+                                                            logFirebaseEvent(
+                                                                'Button-Backend-Call');
+
+                                                            final accountsUpdateData =
+                                                                createAccountsRecordData(
+                                                              dataStatus:
+                                                                  getJsonField(
+                                                                (accountRespons
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                                r'''$.meta.data_status''',
+                                                              ).toString(),
+                                                              accountBalance:
+                                                                  getJsonField(
+                                                                (accountRespons
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                                r'''$.account.balance''',
+                                                              ),
+                                                              lastSync:
+                                                                  getCurrentTimestamp,
+                                                            );
+                                                            await widget.account
+                                                                .reference
+                                                                .update(
+                                                                    accountsUpdateData);
+                                                            logFirebaseEvent(
+                                                                'Button-Backend-Call');
+                                                            transactionJsonRespons =
+                                                                await GetTransactionsCall
+                                                                    .call(
+                                                              authID: widget
+                                                                  .account
+                                                                  .authID,
+                                                            );
+                                                            _shouldSetState =
+                                                                true;
+                                                            logFirebaseEvent(
+                                                                'Button-Custom-Action');
+                                                            await actions
+                                                                .writeTransactions(
+                                                              (transactionJsonRespons
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              widget.account,
+                                                              buttonTransactionsRecordList
+                                                                  .toList(),
+                                                            );
+                                                            logFirebaseEvent(
+                                                                'Button-Show-Snack-Bar');
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              SnackBar(
+                                                                content: Text(
+                                                                  'Synchronization Successful',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1,
+                                                                ),
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        4000),
+                                                                backgroundColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryBackground,
+                                                              ),
+                                                            );
+                                                          } else {
+                                                            logFirebaseEvent(
+                                                                'Button-Show-Snack-Bar');
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              SnackBar(
+                                                                content: Text(
+                                                                  'Synchronization Error: Please try again later',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1,
+                                                                ),
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        4000),
+                                                                backgroundColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryBackground,
+                                                              ),
+                                                            );
+                                                          }
+
+                                                          if (_shouldSetState)
+                                                            setState(() {});
+                                                          return;
+                                                        }
+
+                                                        if (_shouldSetState)
+                                                          setState(() {});
+                                                      },
+                                                      text: 'Refresh',
+                                                      icon: Icon(
+                                                        Icons.refresh_rounded,
+                                                        size: 15,
+                                                      ),
+                                                      options: FFButtonOptions(
+                                                        width: 130,
+                                                        height: 50,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .subtitle2
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Roboto',
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                        borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 1,
+                                                        ),
+                                                        borderRadius: 12,
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 20, 0, 10),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: 50,
+                                              decoration: BoxDecoration(),
+                                              child: StreamBuilder<
+                                                  List<TransactionsRecord>>(
+                                                stream: queryTransactionsRecord(
+                                                  queryBuilder:
+                                                      (transactionsRecord) =>
+                                                          transactionsRecord.where(
+                                                              'account',
+                                                              isEqualTo: widget
+                                                                  .account
+                                                                  .reference),
+                                                ),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50,
+                                                        height: 50,
+                                                        child: SpinKitRing(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
+                                                          size: 50,
+                                                        ),
                                                       ),
                                                     );
                                                   }
-
-                                                  if (_shouldSetState)
-                                                    setState(() {});
-                                                },
-                                                text: 'Refresh',
-                                                icon: Icon(
-                                                  Icons.refresh_rounded,
-                                                  size: 15,
-                                                ),
-                                                options: FFButtonOptions(
-                                                  width: 130,
-                                                  height: 40,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryColor,
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily: 'Roboto',
-                                                        color: Colors.white,
+                                                  List<TransactionsRecord>
+                                                      buttonTransactionsRecordList =
+                                                      snapshot.data;
+                                                  return FFButtonWidget(
+                                                    onPressed: () async {
+                                                      logFirebaseEvent(
+                                                          'Button-ON_TAP');
+                                                      logFirebaseEvent(
+                                                          'Button-Custom-Action');
+                                                      await actions
+                                                          .deleteTransactions(
+                                                        buttonTransactionsRecordList
+                                                            .toList(),
+                                                      );
+                                                    },
+                                                    text: 'Clear Transactions',
+                                                    icon: Icon(
+                                                      Icons.clear_rounded,
+                                                      size: 15,
+                                                    ),
+                                                    options: FFButtonOptions(
+                                                      width: 130,
+                                                      height: 50,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Roboto',
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent,
+                                                        width: 1,
                                                       ),
-                                                  borderSide: BorderSide(
-                                                    color: Colors.transparent,
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius: 12,
-                                                ),
-                                              );
-                                            },
+                                                      borderRadius: 12,
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
                                           ),
                                         ],
                                       ),

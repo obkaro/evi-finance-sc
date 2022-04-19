@@ -45,6 +45,9 @@ abstract class TransactionsRecord
   bool get isCategorized;
 
   @nullable
+  String get transactionID;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -55,7 +58,8 @@ abstract class TransactionsRecord
     ..transactionAmount = 0
     ..transactionType = ''
     ..transactionNarration = ''
-    ..isCategorized = false;
+    ..isCategorized = false
+    ..transactionID = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('transactions');
@@ -91,6 +95,7 @@ Map<String, dynamic> createTransactionsRecordData({
   String transactionNarration,
   DocumentReference linkedCategory,
   bool isCategorized,
+  String transactionID,
 }) =>
     serializers.toFirestore(
         TransactionsRecord.serializer,
@@ -105,4 +110,5 @@ Map<String, dynamic> createTransactionsRecordData({
           ..transactionType = transactionType
           ..transactionNarration = transactionNarration
           ..linkedCategory = linkedCategory
-          ..isCategorized = isCategorized));
+          ..isCategorized = isCategorized
+          ..transactionID = transactionID));

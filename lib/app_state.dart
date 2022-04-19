@@ -29,6 +29,8 @@ class FFAppState {
   String dataSyncStatus = '';
 
   bool hasNewData = false;
+
+  String dataSyncCode = '';
 }
 
 LatLng _latLngFromString(String val) {
