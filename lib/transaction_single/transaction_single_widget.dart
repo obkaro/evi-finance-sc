@@ -16,11 +16,9 @@ class TransactionSingleWidget extends StatefulWidget {
   const TransactionSingleWidget({
     Key key,
     this.transaction,
-    this.bankLogo,
   }) : super(key: key);
 
   final TransactionsRecord transaction;
-  final String bankLogo;
 
   @override
   _TransactionSingleWidgetState createState() =>
@@ -86,50 +84,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 16),
-                      child: Container(
-                        width: 160,
-                        height: 160,
-                        child: Stack(
-                          alignment: AlignmentDirectional(0, 0),
-                          children: [
-                            Align(
-                              alignment: AlignmentDirectional(0, 0),
-                              child: Container(
-                                width: double.infinity,
-                                height: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFEEEEEE),
-                                  borderRadius: BorderRadius.circular(300),
-                                ),
-                                alignment: AlignmentDirectional(0, 0),
-                              ),
-                            ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: CachedNetworkImage(
-                                imageUrl: widget.bankLogo,
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          functions.formatTransCurrency(
-                              widget.transaction.transactionAmount),
-                          style: FlutterFlowTheme.of(context).title3,
-                        ),
-                      ],
-                    ),
-                    Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                       child: FutureBuilder<AccountsRecord>(
                         future: AccountsRecord.getDocumentOnce(
@@ -155,6 +109,102 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 16),
+                                  child: Container(
+                                    width: 160,
+                                    height: 160,
+                                    child: Stack(
+                                      alignment: AlignmentDirectional(0, 0),
+                                      children: [
+                                        Align(
+                                          alignment: AlignmentDirectional(0, 0),
+                                          child: Container(
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFFEEEEEE),
+                                              borderRadius:
+                                                  BorderRadius.circular(300),
+                                            ),
+                                            alignment:
+                                                AlignmentDirectional(0, 0),
+                                          ),
+                                        ),
+                                        FutureBuilder<
+                                            List<ConstInstitutionLogosRecord>>(
+                                          future:
+                                              queryConstInstitutionLogosRecordOnce(
+                                            queryBuilder:
+                                                (constInstitutionLogosRecord) =>
+                                                    constInstitutionLogosRecord
+                                                        .where(
+                                                            'institutionCode',
+                                                            isEqualTo:
+                                                                columnAccountsRecord
+                                                                    .bankCode),
+                                            singleRecord: true,
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50,
+                                                  height: 50,
+                                                  child: SpinKitRing(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryColor,
+                                                    size: 50,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<ConstInstitutionLogosRecord>
+                                                imageConstInstitutionLogosRecordList =
+                                                snapshot.data;
+                                            // Return an empty Container when the document does not exist.
+                                            if (snapshot.data.isEmpty) {
+                                              return Container();
+                                            }
+                                            final imageConstInstitutionLogosRecord =
+                                                imageConstInstitutionLogosRecordList
+                                                        .isNotEmpty
+                                                    ? imageConstInstitutionLogosRecordList
+                                                        .first
+                                                    : null;
+                                            return ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    imageConstInstitutionLogosRecord
+                                                        .institutionLogo,
+                                                width: 100,
+                                                height: 100,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      functions.formatTransCurrency(
+                                          widget.transaction.transactionAmount),
+                                      style:
+                                          FlutterFlowTheme.of(context).title3,
+                                    ),
+                                  ],
+                                ),
                                 Divider(),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(

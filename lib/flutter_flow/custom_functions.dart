@@ -154,7 +154,7 @@ String formatTransCurrency(int num) {
   // Add your function code here!
   //NumberFormat formatNumber = NumberFormat.decimalPattern('en_us');
   final formatCurrency = NumberFormat.simpleCurrency(
-      locale: 'en_US', name: 'NGN', decimalDigits: 0);
+      locale: 'en_US', name: 'NGN', decimalDigits: 2);
 
   return formatCurrency.format(num / 100);
 }

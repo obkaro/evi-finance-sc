@@ -109,7 +109,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'TransactionSingle': (data) async => TransactionSingleWidget(
         transaction: await getDocumentParameter(
             data, 'transaction', TransactionsRecord.serializer),
-        bankLogo: getParameter(data, 'bankLogo'),
       ),
   'AddTransaction': (data) async => AddTransactionWidget(
         defaultAccount: getParameter(data, 'defaultAccount'),

@@ -35,7 +35,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
         title: Text(
-          'Transactions',
+          'Expenses',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Roboto',
                 color: Colors.white,
