@@ -168,8 +168,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     ),
                                     FFButtonWidget(
                                       onPressed: () async {
-                                        logFirebaseEvent('Button-ON_TAP');
-                                        logFirebaseEvent('Button-Auth');
+                                        logFirebaseEvent('Button_Login-ON_TAP');
+                                        // Action_Login
+                                        logFirebaseEvent(
+                                            'Button_Login-Action_Login');
 
                                         final user = await signInWithEmail(
                                           context,
@@ -180,7 +182,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           return;
                                         }
 
-                                        logFirebaseEvent('Button-Navigate-To');
+                                        logFirebaseEvent(
+                                            'Button_Login-Navigate-To');
                                         await Navigator.push(
                                           context,
                                           MaterialPageRoute(

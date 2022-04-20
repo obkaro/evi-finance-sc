@@ -2,6 +2,7 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/create_const_category_widget.dart';
 import '../components/create_custom_category_widget.dart';
+import '../components/edit_budget_amount_widget.dart';
 import '../components/edit_category_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -188,11 +189,11 @@ class _EditBudgetCategoriesWidgetState
                                   ),
                                   alignment: AlignmentDirectional(0, 0),
                                   child: Text(
-                                    functions.formatTransCurrency(
+                                    functions.formatBudgetCurrency(
                                         functions.calculateRemBudgetCat(
                                             editBudgetCategoriesBudgetCategoriesRecordList
                                                 .toList(),
-                                            widget.createdBudget)),
+                                            columnBudgetsRecord)),
                                     textAlign: TextAlign.end,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText2
@@ -241,7 +242,9 @@ class _EditBudgetCategoriesWidgetState
                                   ),
                                   onPressed: () async {
                                     logFirebaseEvent('IconButton-ON_TAP');
-                                    logFirebaseEvent('IconButton-Backend-Call');
+                                    // Action_BudgetAmountMinus
+                                    logFirebaseEvent(
+                                        'IconButton-Action_BudgetAmountMinus');
 
                                     final budgetsUpdateData = {
                                       'budgetAmount':
@@ -251,19 +254,41 @@ class _EditBudgetCategoriesWidgetState
                                         .update(budgetsUpdateData);
                                   },
                                 ),
-                                Container(
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                  ),
-                                  alignment: AlignmentDirectional(0, 0),
-                                  child: Text(
-                                    functions.formatTransCurrency(
-                                        columnBudgetsRecord.budgetAmount),
-                                    textAlign: TextAlign.end,
-                                    style:
-                                        FlutterFlowTheme.of(context).subtitle1,
+                                InkWell(
+                                  onTap: () async {
+                                    logFirebaseEvent('Container-ON_TAP');
+                                    // Action_EditBudgetAmount
+                                    logFirebaseEvent(
+                                        'Container-Action_EditBudgetAmount');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      context: context,
+                                      builder: (context) {
+                                        return Padding(
+                                          padding:
+                                              MediaQuery.of(context).viewInsets,
+                                          child: EditBudgetAmountWidget(
+                                            budget: columnBudgetsRecord,
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                    ),
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Text(
+                                      functions.formatBudgetCurrency(
+                                          columnBudgetsRecord.budgetAmount),
+                                      textAlign: TextAlign.end,
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle1,
+                                    ),
                                   ),
                                 ),
                                 FlutterFlowIconButton(
@@ -279,7 +304,9 @@ class _EditBudgetCategoriesWidgetState
                                   ),
                                   onPressed: () async {
                                     logFirebaseEvent('IconButton-ON_TAP');
-                                    logFirebaseEvent('IconButton-Backend-Call');
+                                    // Action_BudgetAmountPlus
+                                    logFirebaseEvent(
+                                        'IconButton-Action_BudgetAmountPlus');
 
                                     final budgetsUpdateData = {
                                       'budgetAmount':
@@ -400,8 +427,9 @@ class _EditBudgetCategoriesWidgetState
                                                   onTap: () async {
                                                     logFirebaseEvent(
                                                         'Column-ON_TAP');
+                                                    // Action_BSCreateConstCategory
                                                     logFirebaseEvent(
-                                                        'Column-Bottom-Sheet');
+                                                        'Column-Action_BSCreateConstCategory');
                                                     await showModalBottomSheet(
                                                       isScrollControlled: true,
                                                       backgroundColor:
@@ -487,7 +515,9 @@ class _EditBudgetCategoriesWidgetState
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         logFirebaseEvent('Button-ON_TAP');
-                                        logFirebaseEvent('Button-Bottom-Sheet');
+                                        // Action_BSCreateCustomCategory
+                                        logFirebaseEvent(
+                                            'Button-Action_BSCreateCustomCategory');
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
                                           backgroundColor: Colors.transparent,
@@ -647,7 +677,7 @@ class _EditBudgetCategoriesWidgetState
                                                         AlignmentDirectional(
                                                             0, 0),
                                                     child: Text(
-                                                      functions.formatTransCurrency(
+                                                      functions.formatBudgetCurrency(
                                                           columnBudgetCategoriesRecord
                                                               .allocatedAmount),
                                                       style:
@@ -676,8 +706,9 @@ class _EditBudgetCategoriesWidgetState
                                                       onPressed: () async {
                                                         logFirebaseEvent(
                                                             'IconButton-ON_TAP');
+                                                        // Action_BSEditCateogoryAmt
                                                         logFirebaseEvent(
-                                                            'IconButton-Bottom-Sheet');
+                                                            'IconButton-Action_BSEditCateogoryAmt');
                                                         await showModalBottomSheet(
                                                           isScrollControlled:
                                                               true,
@@ -763,8 +794,9 @@ class _EditBudgetCategoriesWidgetState
                                                                 ) ??
                                                                 false;
                                                         if (confirmDialogResponse) {
+                                                          // Action_DeleteCategory
                                                           logFirebaseEvent(
-                                                              'IconButton-Backend-Call');
+                                                              'IconButton-Action_DeleteCategory');
                                                           await columnBudgetCategoriesRecord
                                                               .reference
                                                               .delete();
@@ -863,8 +895,9 @@ class _EditBudgetCategoriesWidgetState
                                                     ) ??
                                                     false;
                                             if (confirmDialogResponse) {
+                                              // Action_ResetCategories
                                               logFirebaseEvent(
-                                                  'Button-Custom-Action');
+                                                  'Button-Action_ResetCategories');
                                               await actions.deleteCategories(
                                                 buttonBudgetCategoriesRecordList
                                                     .toList(),
@@ -943,8 +976,9 @@ class _EditBudgetCategoriesWidgetState
                                         return FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent('Button-ON_TAP');
+                                            // Action_SaveEditBudget
                                             logFirebaseEvent(
-                                                'Button-Backend-Call');
+                                                'Button-Action_SaveEditBudget');
 
                                             final budgetCategoriesUpdateData =
                                                 createBudgetCategoriesRecordData(

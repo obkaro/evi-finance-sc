@@ -197,11 +197,15 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      functions.formatTransCurrency(
-                                          widget.transaction.transactionAmount),
-                                      style:
-                                          FlutterFlowTheme.of(context).title3,
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 0, 10),
+                                      child: Text(
+                                        functions.formatTransCurrency(widget
+                                            .transaction.transactionAmount),
+                                        style:
+                                            FlutterFlowTheme.of(context).title3,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -593,9 +597,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                               child: FFButtonWidget(
                                                 onPressed: () async {
                                                   logFirebaseEvent(
-                                                      'Button-ON_TAP');
+                                                      'Button_CategorizeTransaction-ON_TAP');
+                                                  // Action_CategorizeBottomSheet
                                                   logFirebaseEvent(
-                                                      'Button-Bottom-Sheet');
+                                                      'Button_CategorizeTransaction-Action_CategorizeBottomSheet');
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
@@ -668,7 +673,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                     ),
                                                   );
                                                 }
-                                                final iconButtonBudgetCategoriesRecord =
+                                                final iconButtonUnlinkTransactionBudgetCategoriesRecord =
                                                     snapshot.data;
                                                 return FlutterFlowIconButton(
                                                   borderColor:
@@ -687,9 +692,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                   ),
                                                   onPressed: () async {
                                                     logFirebaseEvent(
-                                                        'IconButton-ON_TAP');
+                                                        'IconButton_UnlinkTransaction-ON_TAP');
+                                                    // Action_UnlinkTransactionSingle
                                                     logFirebaseEvent(
-                                                        'IconButton-Backend-Call');
+                                                        'IconButton_UnlinkTransaction-Action_UnlinkTransactionSingle');
 
                                                     final transactionsUpdateData =
                                                         {
@@ -704,7 +710,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                         .update(
                                                             transactionsUpdateData);
                                                     logFirebaseEvent(
-                                                        'IconButton-Backend-Call');
+                                                        'IconButton_UnlinkTransaction-Backend-Call');
 
                                                     final budgetCategoriesUpdateData =
                                                         {
@@ -715,12 +721,12 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                             .reference
                                                       ]),
                                                     };
-                                                    await iconButtonBudgetCategoriesRecord
+                                                    await iconButtonUnlinkTransactionBudgetCategoriesRecord
                                                         .reference
                                                         .update(
                                                             budgetCategoriesUpdateData);
                                                     logFirebaseEvent(
-                                                        'IconButton-Navigate-Back');
+                                                        'IconButton_UnlinkTransaction-Navigate-Back');
                                                     Navigator.pop(context);
                                                   },
                                                 );

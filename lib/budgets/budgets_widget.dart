@@ -49,7 +49,8 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           logFirebaseEvent('FloatingActionButton-ON_TAP');
-          logFirebaseEvent('FloatingActionButton-Navigate-To');
+          // Action_NewBudget
+          logFirebaseEvent('FloatingActionButton-Action_NewBudget');
           await Navigator.push(
             context,
             MaterialPageRoute(
@@ -130,12 +131,14 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                               );
                             }
                             List<BudgetCategoriesRecord>
-                                listTileBudgetCategoriesRecordList =
+                                listTileBudgetsBudgetCategoriesRecordList =
                                 snapshot.data;
                             return InkWell(
                               onTap: () async {
-                                logFirebaseEvent('ListTile-ON_TAP');
-                                logFirebaseEvent('ListTile-Navigate-To');
+                                logFirebaseEvent('ListTile_Budgets-ON_TAP');
+                                // Action_BudgetSingle
+                                logFirebaseEvent(
+                                    'ListTile_Budgets-Action_BudgetSingle');
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -143,7 +146,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                       budget: columnBudgetsRecord,
                                       uncategorizedAmount:
                                           functions.calculateRemBudgetCat(
-                                              listTileBudgetCategoriesRecordList
+                                              listTileBudgetsBudgetCategoriesRecordList
                                                   .toList(),
                                               columnBudgetsRecord),
                                     ),
@@ -160,8 +163,9 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                     onTap: () async {
                                       logFirebaseEvent(
                                           'SlidableActionWidget-ON_TAP');
+                                      // Action_DeleteBudget
                                       logFirebaseEvent(
-                                          'SlidableActionWidget-Backend-Call');
+                                          'SlidableActionWidget-Action_DeleteBudget');
                                       await columnBudgetsRecord.reference
                                           .delete();
                                     },
@@ -178,7 +182,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                         ),
                                   ),
                                   subtitle: Text(
-                                    functions.formatTransCurrency(
+                                    functions.formatBudgetCurrency(
                                         columnBudgetsRecord.budgetAmount),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText2
