@@ -111,15 +111,14 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                     );
                   }
                   List<BudgetCategoriesRecord>
-                      iconButtonEditBudgetBudgetCategoriesRecordList =
-                      snapshot.data;
+                      iconButtonBudgetCategoriesRecordList = snapshot.data;
                   // Return an empty Container when the document does not exist.
                   if (snapshot.data.isEmpty) {
                     return Container();
                   }
-                  final iconButtonEditBudgetBudgetCategoriesRecord =
-                      iconButtonEditBudgetBudgetCategoriesRecordList.isNotEmpty
-                          ? iconButtonEditBudgetBudgetCategoriesRecordList.first
+                  final iconButtonBudgetCategoriesRecord =
+                      iconButtonBudgetCategoriesRecordList.isNotEmpty
+                          ? iconButtonBudgetCategoriesRecordList.first
                           : null;
                   return FlutterFlowIconButton(
                     borderColor: Colors.transparent,
@@ -132,16 +131,14 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                       size: 24,
                     ),
                     onPressed: () async {
-                      logFirebaseEvent('IconButton_EditBudget-ON_TAP');
+                      logFirebaseEvent('IconButton-ON_TAP');
                       // Action_EditBudget
-                      logFirebaseEvent(
-                          'IconButton_EditBudget-Action_EditBudget');
+                      logFirebaseEvent('IconButton-Action_EditBudget');
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => EditBudgetWidget(
-                            uncategorized:
-                                iconButtonEditBudgetBudgetCategoriesRecord,
+                            uncategorized: iconButtonBudgetCategoriesRecord,
                             createdbudget: widget.budget,
                           ),
                         ),
