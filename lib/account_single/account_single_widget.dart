@@ -622,14 +622,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                           );
                                                           _shouldSetState =
                                                               true;
-                                                          // Action_clearTransactions
-                                                          logFirebaseEvent(
-                                                              'Button-Action_clearTransactions');
-                                                          await actions
-                                                              .deleteTransactions(
-                                                            buttonTransactionsRecordList
-                                                                .toList(),
-                                                          );
                                                           // Action_writeTransactions
                                                           logFirebaseEvent(
                                                               'Button-Action_writeTransactions');
@@ -746,14 +738,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             );
                                                             _shouldSetState =
                                                                 true;
-                                                            // Action_clearTransactions
-                                                            logFirebaseEvent(
-                                                                'Button-Action_clearTransactions');
-                                                            await actions
-                                                                .deleteTransactions(
-                                                              buttonTransactionsRecordList
-                                                                  .toList(),
-                                                            );
                                                             // Action_writeTransactions
                                                             logFirebaseEvent(
                                                                 'Button-Action_writeTransactions');
