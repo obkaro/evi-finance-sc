@@ -36,7 +36,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('BudgetSingle-ON_PAGE_LOAD');
-      logFirebaseEvent('BudgetSingle-Backend-Call');
+      // Action_UpdateUncategorized
+      logFirebaseEvent('BudgetSingle-Action_UpdateUncategorized');
 
       final budgetCategoriesUpdateData = createBudgetCategoriesRecordData(
         allocatedAmount: widget.uncategorizedAmount,
@@ -78,7 +79,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
             backgroundColor: FlutterFlowTheme.of(context).primaryColor,
             automaticallyImplyLeading: true,
             title: Text(
-              '${dateTimeFormat('MMMEd', widget.budget.budgetStart)} - ${dateTimeFormat('MMMEd', widget.budget.budgetEnd)}',
+              '${dateTimeFormat('MEd', widget.budget.budgetStart)} - ${dateTimeFormat('MEd', widget.budget.budgetEnd)}',
               style: FlutterFlowTheme.of(context).title2.override(
                     fontFamily: 'Roboto',
                     color: Colors.white,
@@ -131,7 +132,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                     ),
                     onPressed: () async {
                       logFirebaseEvent('IconButton-ON_TAP');
-                      logFirebaseEvent('IconButton-Navigate-To');
+                      // Action_EditBudget
+                      logFirebaseEvent('IconButton-Action_EditBudget');
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -253,7 +255,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .tertiaryColor,
                                                 center: Text(
-                                                  '${functions.formatTransCurrency(functions.subInt(widget.budget.budgetAmount, functions.sumTotalCategoriesSpent(budgetSingleBudgetCategoriesRecordList.toList(), progressBarTransactionsRecordList.toList())))} ${functions.overOrUnder(widget.budget.budgetAmount, functions.sumTransactionAmounts(progressBarTransactionsRecordList.toList()))}',
+                                                  '${functions.subtractCurrency(widget.budget.budgetAmount, functions.sumTransactionAmounts(progressBarTransactionsRecordList.toList()))}',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .subtitle1
@@ -323,7 +325,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                             textTransactionsRecordList =
                                             snapshot.data;
                                         return Text(
-                                          functions.formatTransCurrency(
+                                          functions.formatBudgetCurrency(
                                               functions.sumTransactionAmounts(
                                                   textTransactionsRecordList
                                                       .toList())),
@@ -344,7 +346,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                           .bodyText2,
                                     ),
                                     Text(
-                                      functions.formatTransCurrency(
+                                      functions.formatBudgetCurrency(
                                           widget.budget.budgetAmount),
                                       style:
                                           FlutterFlowTheme.of(context).title3,
@@ -435,7 +437,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                       .subtitle1,
                                                 ),
                                                 Text(
-                                                  functions.formatTransCurrency(
+                                                  functions.formatBudgetCurrency(
                                                       containerBudgetCategoriesRecord
                                                           .allocatedAmount),
                                                   style: FlutterFlowTheme.of(
@@ -523,44 +525,45 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                           List<TransactionsRecord>
                                               containerTransactionsRecordList =
                                               snapshot.data;
-                                          return Container(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(16, 16, 16, 16),
-                                              child: Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                height: 100,
-                                                decoration: BoxDecoration(),
-                                                child: InkWell(
-                                                  onTap: () async {
-                                                    logFirebaseEvent(
-                                                        'Column-ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Column-Navigate-To');
-                                                    await Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            CategorySingleWidget(
-                                                          category:
-                                                              columnBudgetCategoriesRecord,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
+                                          return InkWell(
+                                            onTap: () async {
+                                              logFirebaseEvent(
+                                                  'Container-ON_TAP');
+                                              // Action_ViewSingleCategory
+                                              logFirebaseEvent(
+                                                  'Container-Action_ViewSingleCategory');
+                                              await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CategorySingleWidget(
+                                                    category:
+                                                        columnBudgetCategoriesRecord,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: 100,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(16, 16, 16, 16),
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  height: 100,
+                                                  decoration: BoxDecoration(),
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,

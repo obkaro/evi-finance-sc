@@ -255,7 +255,8 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                         return FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent('Button-ON_TAP');
-                            logFirebaseEvent('Button-Backend-Call');
+                            // Action_CreateBudgetStep1
+                            logFirebaseEvent('Button-Action_CreateBudgetStep1');
 
                             final budgetsCreateData = createBudgetsRecordData(
                               budgetOwner: currentUserReference,

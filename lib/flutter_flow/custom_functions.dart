@@ -167,7 +167,7 @@ String formatBudgetCurrency(int num) {
   final formatCurrency = NumberFormat.simpleCurrency(
       locale: 'en_US', name: 'NGN', decimalDigits: 0);
 
-  return formatCurrency.format(num);
+  return formatCurrency.format(num / 100);
 }
 
 String subtractCurrency(

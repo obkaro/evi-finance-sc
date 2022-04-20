@@ -195,7 +195,7 @@ class _SetTransCategoryCopyWidgetState extends State<SetTransCategoryCopyWidget>
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 16, 0, 0),
                                       child: Text(
-                                        functions.formatTransCurrency(
+                                        functions.formatBudgetCurrency(
                                             columnBudgetCategoriesRecord
                                                 .allocatedAmount),
                                         style: FlutterFlowTheme.of(context)

@@ -2,6 +2,7 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/create_const_category_widget.dart';
 import '../components/create_custom_category_widget.dart';
+import '../components/edit_budget_amount_widget.dart';
 import '../components/edit_category_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -197,11 +198,8 @@ class _CreateBudgetCategoriesWidgetState
                                       ),
                                       alignment: AlignmentDirectional(0, 0),
                                       child: Text(
-                                        functions.formatTransCurrency(
-                                            functions.calculateRemBudgetCat(
-                                                createBudgetCategoriesBudgetCategoriesRecordList
-                                                    .toList(),
-                                                columnBudgetsRecord)),
+                                        functions.formatBudgetCurrency(
+                                            columnBudgetsRecord.budgetAmount),
                                         textAlign: TextAlign.end,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
@@ -251,8 +249,9 @@ class _CreateBudgetCategoriesWidgetState
                                       ),
                                       onPressed: () async {
                                         logFirebaseEvent('IconButton-ON_TAP');
+                                        // Action_CreateBudgAmtMinus
                                         logFirebaseEvent(
-                                            'IconButton-Backend-Call');
+                                            'IconButton-Action_CreateBudgAmtMinus');
 
                                         final budgetsUpdateData = {
                                           'budgetAmount':
@@ -262,19 +261,41 @@ class _CreateBudgetCategoriesWidgetState
                                             .update(budgetsUpdateData);
                                       },
                                     ),
-                                    Container(
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                      ),
-                                      alignment: AlignmentDirectional(0, 0),
-                                      child: Text(
-                                        functions.formatTransCurrency(
-                                            columnBudgetsRecord.budgetAmount),
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle1,
+                                    InkWell(
+                                      onTap: () async {
+                                        logFirebaseEvent('Container-ON_TAP');
+                                        // Action_BSCreateBudgAmt
+                                        logFirebaseEvent(
+                                            'Container-Action_BSCreateBudgAmt');
+                                        await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          context: context,
+                                          builder: (context) {
+                                            return Padding(
+                                              padding: MediaQuery.of(context)
+                                                  .viewInsets,
+                                              child: EditBudgetAmountWidget(
+                                                budget: columnBudgetsRecord,
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      },
+                                      child: Container(
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                        ),
+                                        alignment: AlignmentDirectional(0, 0),
+                                        child: Text(
+                                          functions.formatBudgetCurrency(
+                                              columnBudgetsRecord.budgetAmount),
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .subtitle1,
+                                        ),
                                       ),
                                     ),
                                     FlutterFlowIconButton(
@@ -290,8 +311,9 @@ class _CreateBudgetCategoriesWidgetState
                                       ),
                                       onPressed: () async {
                                         logFirebaseEvent('IconButton-ON_TAP');
+                                        // Action_CreateBudgeAmtPlus
                                         logFirebaseEvent(
-                                            'IconButton-Backend-Call');
+                                            'IconButton-Action_CreateBudgeAmtPlus');
 
                                         final budgetsUpdateData = {
                                           'budgetAmount':
@@ -407,8 +429,9 @@ class _CreateBudgetCategoriesWidgetState
                                                 onTap: () async {
                                                   logFirebaseEvent(
                                                       'Column-ON_TAP');
+                                                  // Action_BSCreateConstCatCreate
                                                   logFirebaseEvent(
-                                                      'Column-Bottom-Sheet');
+                                                      'Column-Action_BSCreateConstCatCreate');
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
@@ -492,7 +515,9 @@ class _CreateBudgetCategoriesWidgetState
                                   child: FFButtonWidget(
                                     onPressed: () async {
                                       logFirebaseEvent('Button-ON_TAP');
-                                      logFirebaseEvent('Button-Bottom-Sheet');
+                                      // Action_BSCreateCustomCatCreate
+                                      logFirebaseEvent(
+                                          'Button-Action_BSCreateCustomCatCreate');
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
                                         backgroundColor: Colors.transparent,
@@ -641,7 +666,7 @@ class _CreateBudgetCategoriesWidgetState
                                                 alignment:
                                                     AlignmentDirectional(0, 0),
                                                 child: Text(
-                                                  functions.formatTransCurrency(
+                                                  functions.formatBudgetCurrency(
                                                       columnBudgetCategoriesRecord
                                                           .allocatedAmount),
                                                   style: FlutterFlowTheme.of(
@@ -668,8 +693,9 @@ class _CreateBudgetCategoriesWidgetState
                                                   onPressed: () async {
                                                     logFirebaseEvent(
                                                         'IconButton-ON_TAP');
+                                                    // Action_BSEditCatAmtCreate
                                                     logFirebaseEvent(
-                                                        'IconButton-Bottom-Sheet');
+                                                        'IconButton-Action_BSEditCatAmtCreate');
                                                     await showModalBottomSheet(
                                                       isScrollControlled: true,
                                                       backgroundColor:
@@ -751,8 +777,9 @@ class _CreateBudgetCategoriesWidgetState
                                                             ) ??
                                                             false;
                                                     if (confirmDialogResponse) {
+                                                      // Action_DeleteCatCreate
                                                       logFirebaseEvent(
-                                                          'IconButton-Backend-Call');
+                                                          'IconButton-Action_DeleteCatCreate');
                                                       await columnBudgetCategoriesRecord
                                                           .reference
                                                           .delete();
@@ -849,8 +876,9 @@ class _CreateBudgetCategoriesWidgetState
                                                   ) ??
                                                   false;
                                           if (confirmDialogResponse) {
+                                            // Action_ResetCatCreate
                                             logFirebaseEvent(
-                                                'Button-Custom-Action');
+                                                'Button-Action_ResetCatCreate');
                                             await actions.deleteCategories(
                                               buttonBudgetCategoriesRecordList
                                                   .toList(),
@@ -928,8 +956,9 @@ class _CreateBudgetCategoriesWidgetState
                                       return FFButtonWidget(
                                         onPressed: () async {
                                           logFirebaseEvent('Button-ON_TAP');
+                                          // Action_SaveNewBudget
                                           logFirebaseEvent(
-                                              'Button-Backend-Call');
+                                              'Button-Action_SaveNewBudget');
 
                                           final budgetCategoriesUpdateData =
                                               createBudgetCategoriesRecordData(

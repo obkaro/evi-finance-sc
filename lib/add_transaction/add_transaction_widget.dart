@@ -460,7 +460,9 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                             if ((choiceChipsValue != null) &&
                                 (choiceChipsValue != '')) {
                               if ((FFAppState().currencyTextField) > 0) {
-                                logFirebaseEvent('Button-Backend-Call');
+                                // Action_SaveNewTransaction
+                                logFirebaseEvent(
+                                    'Button-Action_SaveNewTransaction');
 
                                 final transactionsUpdateData =
                                     createTransactionsRecordData(

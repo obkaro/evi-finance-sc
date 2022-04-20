@@ -11,6 +11,7 @@ import '../mono_custom/mono_flutter.dart';
 import 'package:evi/auth/auth_util.dart';
 import 'package:evi/backend/api_requests/api_calls.dart';
 import 'package:evi/dashboard/dashboard_widget.dart';
+import '../actions/index.dart' as actions;
 
 extension CustomContext on BuildContext {
   double screenHeight([double percent = 1]) =>
@@ -79,10 +80,10 @@ Future flutterMono(
                               await GetPermanentAuthCall.call(
                                   tempKey: (currentUserDocument?.tempAuthCode));
 
-                          print(getJsonField(
-                            (permKey?.jsonBody ?? ''),
-                            r'''$.id''',
-                          ).toString());
+                          // print(getJsonField(
+                          //   (permKey?.jsonBody ?? ''),
+                          //   r'''$.id''',
+                          // ).toString());
 
                           //Write permanent key to database
                           var accountsCreateData = createAccountsRecordData(
@@ -112,6 +113,7 @@ Future flutterMono(
                             authID: newacct.authID,
                           );
 
+                          //print((acctInfoResponse?.jsonBody ?? '').toString());
                           final accountsUpdateData = createAccountsRecordData(
                             accountName: getJsonField(
                               (acctInfoResponse?.jsonBody ?? ''),
@@ -157,9 +159,24 @@ Future flutterMono(
                               (acctInfoResponse?.jsonBody ?? ''),
                               r'''$.account.accountNumber''',
                             ).toString(),
+                            dateLinked: getCurrentTimestamp,
+                            lastSync: getCurrentTimestamp,
                           );
                           await newacct.reference.update(accountsUpdateData);
-                          //return newacct;
+
+                          logFirebaseEvent('Initial_Write_Transactions');
+                          ApiCallResponse transactionsResponse =
+                              await GetTransactionsCall.call(
+                            authID: newacct.authID,
+                          );
+                          //print(transactionsResponse?.jsonBody ?? '');
+                          // logFirebaseEvent(
+                          //     'FloatingActionButton-Custom-Action');
+                          //print('ABOUT TO RUN TRANSACTION WRITE');
+                          await actions.writeNewAcctTransactions(
+                            (transactionsResponse?.jsonBody ?? ''),
+                            newacct,
+                          );
                         },
                       )),
                 ))

@@ -29,8 +29,28 @@ Future<List<DocumentReference>> writeTransactions(
   final List<String> existingIDS =
       accountTransactions.map((e) => e.transactionMonoID).toList();
 
+  final List<DateTime> existingDates =
+      accountTransactions.map((e) => e.trasactionDate).toList();
+
+  final List<int> existingBalances =
+      accountTransactions.map((e) => e.balanceAfter).toList();
+
+  final List<int> existingAmounts =
+      accountTransactions.map((e) => e.transactionAmount).toList();
+
+  final List<String> existingNarrations =
+      accountTransactions.map((e) => e.transactionNarration).toList();
+
+  final List<String> existingTypes =
+      accountTransactions.map((e) => e.transactionType).toList();
+
   for (var i = 0; i < transaction.data.length; i++) {
-    if (!existingIDS.contains(transaction.data[i].id)) {
+    if (!existingIDS.contains(transaction.data[i].id) ||
+        (!existingAmounts.contains(transaction.data[i].amount) &&
+            !existingDates.contains(DateTime.parse(transaction.data[i].date)) &&
+            !existingBalances.contains(transaction.data[i].balance) &&
+            !existingNarrations.contains(transaction.data[i].narration) &&
+            !existingTypes.contains(transaction.data[i].type))) {
       final transactionsCreateData = createTransactionsRecordData(
         account: buttonAccountsRecord.reference,
         trasactionDate: DateTime.parse(transaction.data[i].date),
