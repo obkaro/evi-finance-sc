@@ -67,30 +67,27 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
               ),
             );
           }
-          List<AccountsRecord>
-              floatingActionButtonAddTransactionAccountsRecordList =
+          List<AccountsRecord> floatingActionButtonAccountsRecordList =
               snapshot.data;
           // Return an empty Container when the document does not exist.
           if (snapshot.data.isEmpty) {
             return Container();
           }
-          final floatingActionButtonAddTransactionAccountsRecord =
-              floatingActionButtonAddTransactionAccountsRecordList.isNotEmpty
-                  ? floatingActionButtonAddTransactionAccountsRecordList.first
+          final floatingActionButtonAccountsRecord =
+              floatingActionButtonAccountsRecordList.isNotEmpty
+                  ? floatingActionButtonAccountsRecordList.first
                   : null;
           return FloatingActionButton(
             onPressed: () async {
-              logFirebaseEvent('FloatingActionButton_AddTransaction-ON_TAP');
+              logFirebaseEvent('FloatingActionButton-ON_TAP');
               // Action_AddNewTransaction
-              logFirebaseEvent(
-                  'FloatingActionButton_AddTransaction-Action_AddNewTransaction');
+              logFirebaseEvent('FloatingActionButton-Action_AddNewTransaction');
               await Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => AddTransactionWidget(
                     defaultAccount:
-                        floatingActionButtonAddTransactionAccountsRecord
-                            .reference,
+                        floatingActionButtonAccountsRecord.reference,
                   ),
                 ),
               );

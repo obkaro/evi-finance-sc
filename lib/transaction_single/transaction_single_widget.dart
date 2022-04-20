@@ -591,146 +591,145 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Expanded(
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 20, 0),
-                                              child: FFButtonWidget(
-                                                onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'Button_CategorizeTransaction-ON_TAP');
-                                                  // Action_CategorizeBottomSheet
-                                                  logFirebaseEvent(
-                                                      'Button_CategorizeTransaction-Action_CategorizeBottomSheet');
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return Padding(
-                                                        padding: MediaQuery.of(
-                                                                context)
-                                                            .viewInsets,
-                                                        child:
-                                                            SetBudgetCompWidget(
-                                                          transaction: widget
-                                                              .transaction,
-                                                        ),
-                                                      );
-                                                    },
-                                                  );
-                                                },
-                                                text: 'Categorize',
-                                                icon: Icon(
-                                                  Icons.edit_rounded,
-                                                  size: 15,
-                                                ),
-                                                options: FFButtonOptions(
-                                                  width: 130,
-                                                  height: 50,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryColor,
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily: 'Roboto',
-                                                        color: Colors.white,
+                                            child: FFButtonWidget(
+                                              onPressed: () async {
+                                                logFirebaseEvent(
+                                                    'Button-ON_TAP');
+                                                // Action_CategorizeBottomSheet
+                                                logFirebaseEvent(
+                                                    'Button-Action_CategorizeBottomSheet');
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return Padding(
+                                                      padding:
+                                                          MediaQuery.of(context)
+                                                              .viewInsets,
+                                                      child:
+                                                          SetBudgetCompWidget(
+                                                        transaction:
+                                                            widget.transaction,
                                                       ),
-                                                  borderSide: BorderSide(
-                                                    color: Colors.transparent,
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius: 12,
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                              text: 'Categorize',
+                                              icon: Icon(
+                                                Icons.edit_rounded,
+                                                size: 15,
+                                              ),
+                                              options: FFButtonOptions(
+                                                width: 130,
+                                                height: 50,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                textStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily: 'Roboto',
+                                                          color: Colors.white,
+                                                        ),
+                                                borderSide: BorderSide(
+                                                  color: Colors.transparent,
+                                                  width: 1,
                                                 ),
+                                                borderRadius: 12,
                                               ),
                                             ),
                                           ),
                                           if (widget
                                                   .transaction.isCategorized ??
                                               true)
-                                            StreamBuilder<
-                                                BudgetCategoriesRecord>(
-                                              stream: BudgetCategoriesRecord
-                                                  .getDocument(widget
-                                                      .transaction
-                                                      .linkedCategory),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50,
-                                                      height: 50,
-                                                      child: SpinKitRing(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                        size: 50,
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(20, 0, 0, 0),
+                                              child: StreamBuilder<
+                                                  BudgetCategoriesRecord>(
+                                                stream: BudgetCategoriesRecord
+                                                    .getDocument(widget
+                                                        .transaction
+                                                        .linkedCategory),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50,
+                                                        height: 50,
+                                                        child: SpinKitRing(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
+                                                          size: 50,
+                                                        ),
                                                       ),
+                                                    );
+                                                  }
+                                                  final iconButtonBudgetCategoriesRecord =
+                                                      snapshot.data;
+                                                  return FlutterFlowIconButton(
+                                                    borderColor:
+                                                        Colors.transparent,
+                                                    borderRadius: 30,
+                                                    borderWidth: 1,
+                                                    buttonSize: 50,
+                                                    fillColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryColor,
+                                                    icon: Icon(
+                                                      Icons.link_off_rounded,
+                                                      color: Colors.white,
+                                                      size: 24,
                                                     ),
+                                                    onPressed: () async {
+                                                      logFirebaseEvent(
+                                                          'IconButton-ON_TAP');
+                                                      // Action_UnlinkTransactionSingle
+                                                      logFirebaseEvent(
+                                                          'IconButton-Action_UnlinkTransactionSingle');
+
+                                                      final transactionsUpdateData =
+                                                          {
+                                                        ...createTransactionsRecordData(
+                                                          isCategorized: false,
+                                                        ),
+                                                        'linkedCategory':
+                                                            FieldValue.delete(),
+                                                      };
+                                                      await widget
+                                                          .transaction.reference
+                                                          .update(
+                                                              transactionsUpdateData);
+                                                      logFirebaseEvent(
+                                                          'IconButton-Backend-Call');
+
+                                                      final budgetCategoriesUpdateData =
+                                                          {
+                                                        'linkedTransactions':
+                                                            FieldValue
+                                                                .arrayRemove([
+                                                          widget.transaction
+                                                              .reference
+                                                        ]),
+                                                      };
+                                                      await iconButtonBudgetCategoriesRecord
+                                                          .reference
+                                                          .update(
+                                                              budgetCategoriesUpdateData);
+                                                      logFirebaseEvent(
+                                                          'IconButton-Navigate-Back');
+                                                      Navigator.pop(context);
+                                                    },
                                                   );
-                                                }
-                                                final iconButtonUnlinkTransactionBudgetCategoriesRecord =
-                                                    snapshot.data;
-                                                return FlutterFlowIconButton(
-                                                  borderColor:
-                                                      Colors.transparent,
-                                                  borderRadius: 30,
-                                                  borderWidth: 1,
-                                                  buttonSize: 50,
-                                                  fillColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryColor,
-                                                  icon: Icon(
-                                                    Icons.link_off_rounded,
-                                                    color: Colors.white,
-                                                    size: 24,
-                                                  ),
-                                                  onPressed: () async {
-                                                    logFirebaseEvent(
-                                                        'IconButton_UnlinkTransaction-ON_TAP');
-                                                    // Action_UnlinkTransactionSingle
-                                                    logFirebaseEvent(
-                                                        'IconButton_UnlinkTransaction-Action_UnlinkTransactionSingle');
-
-                                                    final transactionsUpdateData =
-                                                        {
-                                                      ...createTransactionsRecordData(
-                                                        isCategorized: false,
-                                                      ),
-                                                      'linkedCategory':
-                                                          FieldValue.delete(),
-                                                    };
-                                                    await widget
-                                                        .transaction.reference
-                                                        .update(
-                                                            transactionsUpdateData);
-                                                    logFirebaseEvent(
-                                                        'IconButton_UnlinkTransaction-Backend-Call');
-
-                                                    final budgetCategoriesUpdateData =
-                                                        {
-                                                      'linkedTransactions':
-                                                          FieldValue
-                                                              .arrayRemove([
-                                                        widget.transaction
-                                                            .reference
-                                                      ]),
-                                                    };
-                                                    await iconButtonUnlinkTransactionBudgetCategoriesRecord
-                                                        .reference
-                                                        .update(
-                                                            budgetCategoriesUpdateData);
-                                                    logFirebaseEvent(
-                                                        'IconButton_UnlinkTransaction-Navigate-Back');
-                                                    Navigator.pop(context);
-                                                  },
-                                                );
-                                              },
+                                                },
+                                              ),
                                             ),
                                         ],
                                       ),

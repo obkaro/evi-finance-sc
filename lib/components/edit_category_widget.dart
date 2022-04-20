@@ -69,7 +69,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                   controller: textController,
                   obscureText: false,
                   decoration: InputDecoration(
-                    labelText: 'Amount',
+                    labelText: 'Category Name',
                     hintText: 'Enter Amount',
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -88,7 +88,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                     filled: true,
                     fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
-                  style: FlutterFlowTheme.of(context).bodyText1,
+                  style: FlutterFlowTheme.of(context).subtitle1,
                   keyboardType: TextInputType.number,
                 ),
               ),

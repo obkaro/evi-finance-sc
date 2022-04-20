@@ -131,14 +131,14 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                               );
                             }
                             List<BudgetCategoriesRecord>
-                                listTileBudgetsBudgetCategoriesRecordList =
+                                listTileBudgetCategoriesRecordList =
                                 snapshot.data;
                             return InkWell(
                               onTap: () async {
-                                logFirebaseEvent('ListTile_Budgets-ON_TAP');
+                                logFirebaseEvent('ListTile-ON_TAP');
                                 // Action_BudgetSingle
                                 logFirebaseEvent(
-                                    'ListTile_Budgets-Action_BudgetSingle');
+                                    'ListTile-Action_BudgetSingle');
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -146,7 +146,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                       budget: columnBudgetsRecord,
                                       uncategorizedAmount:
                                           functions.calculateRemBudgetCat(
-                                              listTileBudgetsBudgetCategoriesRecordList
+                                              listTileBudgetCategoriesRecordList
                                                   .toList(),
                                               columnBudgetsRecord),
                                     ),

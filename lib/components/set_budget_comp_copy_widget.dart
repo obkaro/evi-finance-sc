@@ -177,7 +177,7 @@ class _SetBudgetCompCopyWidgetState extends State<SetBudgetCompCopyWidget>
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 16, 0, 0),
                                       child: Text(
-                                        functions.formatTransCurrency(
+                                        functions.formatBudgetCurrency(
                                             columnBudgetsRecord.budgetAmount),
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle2,
