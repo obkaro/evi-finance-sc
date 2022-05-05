@@ -44,13 +44,14 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
         title: Text(
           'Create A Budget',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Roboto',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
         actions: [],
-        centerTitle: false,
+        centerTitle: true,
         elevation: 0,
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -231,7 +232,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                             color: FlutterFlowTheme.of(context).primaryColor,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Roboto',
+                                      fontFamily: 'Source Sans Pro',
                                       color: Colors.white,
                                     ),
                             borderSide: BorderSide(

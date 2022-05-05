@@ -38,44 +38,46 @@ abstract class FlutterFlowTheme {
   Color primaryText;
   Color secondaryText;
 
-  TextStyle get title1 => GoogleFonts.getFont(
-        'Readex Pro',
+  Color customColor1;
+
+  TextStyle get title1 => TextStyle(
+        fontFamily: 'Spline Sans',
         color: primaryText,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w900,
         fontSize: 24,
       );
-  TextStyle get title2 => GoogleFonts.getFont(
-        'Roboto',
+  TextStyle get title2 => TextStyle(
+        fontFamily: 'Spline Sans',
         color: secondaryText,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w800,
         fontSize: 22,
       );
-  TextStyle get title3 => GoogleFonts.getFont(
-        'Roboto',
+  TextStyle get title3 => TextStyle(
+        fontFamily: 'Spline Sans',
         color: primaryText,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.bold,
         fontSize: 20,
       );
   TextStyle get subtitle1 => GoogleFonts.getFont(
-        'Roboto',
+        'Source Sans Pro',
         color: primaryText,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.bold,
         fontSize: 18,
       );
   TextStyle get subtitle2 => GoogleFonts.getFont(
-        'Roboto',
+        'Source Sans Pro',
         color: secondaryText,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.bold,
         fontSize: 16,
       );
   TextStyle get bodyText1 => GoogleFonts.getFont(
-        'Roboto',
+        'Source Sans Pro',
         color: primaryText,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.bold,
         fontSize: 14,
       );
   TextStyle get bodyText2 => GoogleFonts.getFont(
-        'Roboto',
+        'Source Sans Pro',
         color: secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 14,
@@ -87,21 +89,25 @@ class LightModeTheme extends FlutterFlowTheme {
   Color secondaryColor = const Color(0xFF1B2124);
   Color tertiaryColor = const Color(0xFF1B998B);
   Color alternate = const Color(0xFFFAA916);
-  Color primaryBackground = const Color(0xFFFFFFFF);
-  Color secondaryBackground = const Color(0xFFF1F4F8);
-  Color primaryText = const Color(0xFF000000);
-  Color secondaryText = const Color(0xFF57636C);
+  Color primaryBackground = const Color(0xFFC8C8C8);
+  Color secondaryBackground = const Color(0xFFDCDCDC);
+  Color primaryText = const Color(0xFF292728);
+  Color secondaryText = const Color(0xFF504E4F);
+
+  Color customColor1 = Color(0x28FF0054);
 }
 
 class DarkModeTheme extends FlutterFlowTheme {
   Color primaryColor = const Color(0xFFFF0054);
-  Color secondaryColor = const Color(0xFF1B998B);
+  Color secondaryColor = const Color(0xFF494949);
   Color tertiaryColor = const Color(0xFF1B998B);
   Color alternate = const Color(0xFFFAA916);
-  Color primaryBackground = const Color(0xFF1B2124);
-  Color secondaryBackground = const Color(0xFF1D2429);
-  Color primaryText = const Color(0xFFDBDBDB);
-  Color secondaryText = const Color(0xFF95A1AC);
+  Color primaryBackground = const Color(0xFF171717);
+  Color secondaryBackground = const Color(0xFF1F1F1F);
+  Color primaryText = const Color(0xFFF4F4F4);
+  Color secondaryText = const Color(0xFFCBCBCB);
+
+  Color customColor1 = Color(0x2AFF0054);
 }
 
 extension TextStyleHelper on TextStyle {

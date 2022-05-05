@@ -43,9 +43,10 @@ class _UncategorizedWidgetState extends State<UncategorizedWidget> {
         title: Text(
           'Uncategorized',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Roboto',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
         actions: [],
@@ -342,7 +343,7 @@ class _UncategorizedWidgetState extends State<UncategorizedWidget> {
                                                                 .subtitle1
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Roboto',
+                                                                      'Source Sans Pro',
                                                                   color: Color(
                                                                       0xFFFF0003),
                                                                   fontStyle:

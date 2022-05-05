@@ -96,7 +96,8 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                                 dotWidth: 16,
                                 dotHeight: 16,
                                 dotColor: Color(0xFF9E9E9E),
-                                activeDotColor: Color(0xFF3F51B5),
+                                activeDotColor:
+                                    FlutterFlowTheme.of(context).primaryColor,
                                 paintStyle: PaintingStyle.fill,
                               ),
                             ),
@@ -128,7 +129,7 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                       color: FlutterFlowTheme.of(context).primaryColor,
                       textStyle:
                           FlutterFlowTheme.of(context).subtitle2.override(
-                                fontFamily: 'Roboto',
+                                fontFamily: 'Source Sans Pro',
                                 color: Colors.white,
                               ),
                       borderSide: BorderSide(

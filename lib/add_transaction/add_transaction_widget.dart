@@ -65,9 +65,10 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
         title: Text(
           'Add Transaction',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Roboto',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
         actions: [],
@@ -120,9 +121,10 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                               FFAppState().selectedAcctName,
                               style:
                                   FlutterFlowTheme.of(context).title3.override(
-                                        fontFamily: 'Roboto',
+                                        fontFamily: 'Spline Sans',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
+                                        useGoogleFonts: false,
                                       ),
                             ),
                           ],
@@ -395,7 +397,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Roboto',
+                                        fontFamily: 'Source Sans Pro',
                                         color: Colors.white,
                                       ),
                                   iconColor: Colors.white,
@@ -407,7 +409,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(
-                                        fontFamily: 'Roboto',
+                                        fontFamily: 'Source Sans Pro',
                                         color: Color(0xFF323B45),
                                       ),
                                   iconColor: Color(0xFF323B45),
@@ -565,7 +567,7 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                           color: FlutterFlowTheme.of(context).primaryColor,
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Roboto',
+                                    fontFamily: 'Source Sans Pro',
                                     color: Colors.white,
                                   ),
                           borderSide: BorderSide(

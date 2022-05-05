@@ -1,7 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../budget_single/budget_single_widget.dart';
-import '../create_budget_copy/create_budget_copy_widget.dart';
+import '../components/create_new_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -36,11 +36,16 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
           logFirebaseEvent('FloatingActionButton-ON_TAP');
           // Action_NewBudget
           logFirebaseEvent('FloatingActionButton-Action_NewBudget');
-          await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CreateBudgetCopyWidget(),
-            ),
+          await showModalBottomSheet(
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (context) {
+              return Padding(
+                padding: MediaQuery.of(context).viewInsets,
+                child: CreateNewBudgetWidget(),
+              );
+            },
           );
         },
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
@@ -58,15 +63,38 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      'My Budgets',
-                      style: FlutterFlowTheme.of(context).title1,
-                    ),
-                  ],
+                padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                child: Container(
+                  width: double.infinity,
+                  height: 72,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primaryColor,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                        child: Icon(
+                          Icons.pie_chart_rounded,
+                          color: Color(0xFFF4F4F4),
+                          size: 24,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(8, 0, 20, 0),
+                        child: Text(
+                          'Budgets',
+                          style: FlutterFlowTheme.of(context).title1.override(
+                                fontFamily: 'Spline Sans',
+                                color: Color(0xFFF4F4F4),
+                                useGoogleFonts: false,
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               StreamBuilder<List<BudgetsRecord>>(
@@ -180,7 +208,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1
                                             .override(
-                                              fontFamily: 'Roboto',
+                                              fontFamily: 'Source Sans Pro',
                                               lineHeight: 2,
                                             ),
                                       ),
@@ -190,7 +218,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Roboto',
+                                              fontFamily: 'Source Sans Pro',
                                               lineHeight: 2,
                                             ),
                                       ),
@@ -237,7 +265,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                           textAlign: TextAlign.center,
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Roboto',
+                                    fontFamily: 'Source Sans Pro',
                                     lineHeight: 1.4,
                                   ),
                         ),

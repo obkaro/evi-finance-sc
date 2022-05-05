@@ -60,19 +60,13 @@ class _SetTransCategoryCopyWidgetState extends State<SetTransCategoryCopyWidget>
       width: MediaQuery.of(context).size.width,
       height: 300,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(0),
-          bottomRight: Radius.circular(0),
-          topLeft: Radius.circular(12),
-          topRight: Radius.circular(12),
-        ),
+        color: FlutterFlowTheme.of(context).primaryBackground,
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 420,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(0),
             bottomRight: Radius.circular(0),
@@ -174,8 +168,8 @@ class _SetTransCategoryCopyWidgetState extends State<SetTransCategoryCopyWidget>
                               height: 120,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                borderRadius: BorderRadius.circular(12),
+                                    .secondaryBackground,
+                                borderRadius: BorderRadius.circular(16),
                               ),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(

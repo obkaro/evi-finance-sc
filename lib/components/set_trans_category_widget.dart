@@ -58,13 +58,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
       width: MediaQuery.of(context).size.width,
       height: 420,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(0),
-          bottomRight: Radius.circular(0),
-          topLeft: Radius.circular(12),
-          topRight: Radius.circular(12),
-        ),
+        color: FlutterFlowTheme.of(context).primaryBackground,
+        borderRadius: BorderRadius.circular(16),
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -152,8 +147,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                             height: 100,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              borderRadius: BorderRadius.circular(12),
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(16),
                             ),
                             child: Padding(
                               padding:

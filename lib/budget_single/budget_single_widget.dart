@@ -76,14 +76,17 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            iconTheme:
+                IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
             automaticallyImplyLeading: true,
             title: Text(
               '${dateTimeFormat('MEd', widget.budget.budgetStart)} - ${dateTimeFormat('MEd', widget.budget.budgetEnd)}',
               style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
+                    fontFamily: 'Spline Sans',
+                    color: FlutterFlowTheme.of(context).primaryText,
                     fontSize: 22,
+                    useGoogleFonts: false,
                   ),
             ),
             actions: [
@@ -127,7 +130,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                     buttonSize: 60,
                     icon: Icon(
                       Icons.edit_rounded,
-                      color: Colors.white,
+                      color: FlutterFlowTheme.of(context).primaryText,
                       size: 24,
                     ),
                     onPressed: () async {
@@ -148,8 +151,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                 },
               ),
             ],
-            centerTitle: false,
-            elevation: 2,
+            centerTitle: true,
+            elevation: 0,
           ),
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
@@ -199,7 +202,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                         snapshot.data;
                                     return Container(
                                       width: double.infinity,
-                                      height: 320,
+                                      height: 325,
                                       decoration: BoxDecoration(),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -230,7 +233,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                           context)
                                                       .subtitle1
                                                       .override(
-                                                        fontFamily: 'Roboto',
+                                                        fontFamily:
+                                                            'Source Sans Pro',
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)

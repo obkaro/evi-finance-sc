@@ -37,121 +37,146 @@ class _CreateCustomCategoryWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 300,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).primaryBackground,
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 5,
-            color: Color(0x3B1D2429),
-            offset: Offset(0, -3),
-          )
-        ],
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(0),
-          bottomRight: Radius.circular(0),
-          topLeft: Radius.circular(16),
-          topRight: Radius.circular(16),
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 24),
+      child: Container(
+        width: double.infinity,
+        height: 325,
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).primaryBackground,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 5,
+              color: Color(0x3B1D2429),
+              offset: Offset(0, -3),
+            )
+          ],
+          borderRadius: BorderRadius.circular(16),
         ),
-      ),
-      child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
-                child: TextFormField(
-                  controller: textController,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelText: 'Category Name',
-                    hintText: 'Enter Category Name',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1,
+        child: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                  child: TextFormField(
+                    controller: textController,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: 'Category Name',
+                      hintText: 'Enter Category Name',
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 1,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      borderRadius: BorderRadius.circular(12),
+                      filled: true,
+                      fillColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    filled: true,
-                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    style: FlutterFlowTheme.of(context).bodyText1,
                   ),
-                  style: FlutterFlowTheme.of(context).bodyText1,
                 ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                child: custom_widgets.CurrencyTextField(
-                  width: MediaQuery.of(context).size.width,
-                  height: 50,
-                  labelText: 'Amount',
-                  hintText: 'Enter amount',
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                  child: custom_widgets.CurrencyTextField(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    labelText: 'Amount',
+                    hintText: 'Enter amount',
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                child: FFButtonWidget(
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      logFirebaseEvent('Button-ON_TAP');
+                      if ((functions.budgetRemMinusAmt(
+                              FFAppState().currencyTextField,
+                              widget.budgetRemaining)) >=
+                          0) {
+                        logFirebaseEvent('Button-Backend-Call');
+
+                        final budgetCategoriesCreateData =
+                            createBudgetCategoriesRecordData(
+                          categoryName: textController.text,
+                          allocatedAmount: FFAppState().currencyTextField,
+                          budgetOwner: currentUserReference,
+                          categoryBudget: widget.budget.reference,
+                        );
+                        await BudgetCategoriesRecord.collection
+                            .doc()
+                            .set(budgetCategoriesCreateData);
+                        logFirebaseEvent('Button-Navigate-Back');
+                        Navigator.pop(context);
+                      } else {
+                        logFirebaseEvent('Button-Alert-Dialog');
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('Budget Amount Exceeded'),
+                              content: Text(
+                                  'Please enter a value lower than the target budget, or increase the target budget value'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('Okay'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
+                    },
+                    text: 'Save',
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 50,
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      textStyle:
+                          FlutterFlowTheme.of(context).subtitle2.override(
+                                fontFamily: 'Source Sans Pro',
+                                color: Colors.white,
+                              ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: 12,
+                    ),
+                  ),
+                ),
+                FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent('Button-ON_TAP');
-                    if ((functions.budgetRemMinusAmt(
-                            FFAppState().currencyTextField,
-                            widget.budgetRemaining)) >=
-                        0) {
-                      logFirebaseEvent('Button-Backend-Call');
-
-                      final budgetCategoriesCreateData =
-                          createBudgetCategoriesRecordData(
-                        categoryName: textController.text,
-                        allocatedAmount: FFAppState().currencyTextField,
-                        budgetOwner: currentUserReference,
-                        categoryBudget: widget.budget.reference,
-                      );
-                      await BudgetCategoriesRecord.collection
-                          .doc()
-                          .set(budgetCategoriesCreateData);
-                      logFirebaseEvent('Button-Navigate-Back');
-                      Navigator.pop(context);
-                    } else {
-                      logFirebaseEvent('Button-Alert-Dialog');
-                      await showDialog(
-                        context: context,
-                        builder: (alertDialogContext) {
-                          return AlertDialog(
-                            title: Text('Budget Amount Exceeded'),
-                            content: Text(
-                                'Please enter a value lower than the target budget, or increase the target budget value'),
-                            actions: [
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(alertDialogContext),
-                                child: Text('Okay'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    }
+                    logFirebaseEvent('Button-Navigate-Back');
+                    Navigator.pop(context);
                   },
-                  text: 'Save',
+                  text: 'Cancel',
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 50,
-                    color: FlutterFlowTheme.of(context).primaryColor,
+                    color: FlutterFlowTheme.of(context).primaryBackground,
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily: 'Roboto',
-                          color: Colors.white,
+                          fontFamily: 'Lexend Deca',
+                          color: Color(0xFF57636C),
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
                         ),
+                    elevation: 0,
                     borderSide: BorderSide(
                       color: Colors.transparent,
                       width: 1,
@@ -159,33 +184,8 @@ class _CreateCustomCategoryWidgetState
                     borderRadius: 12,
                   ),
                 ),
-              ),
-              FFButtonWidget(
-                onPressed: () async {
-                  logFirebaseEvent('Button-ON_TAP');
-                  logFirebaseEvent('Button-Navigate-Back');
-                  Navigator.pop(context);
-                },
-                text: 'Cancel',
-                options: FFButtonOptions(
-                  width: double.infinity,
-                  height: 50,
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: 'Lexend Deca',
-                        color: Color(0xFF57636C),
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                      ),
-                  elevation: 0,
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1,
-                  ),
-                  borderRadius: 12,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

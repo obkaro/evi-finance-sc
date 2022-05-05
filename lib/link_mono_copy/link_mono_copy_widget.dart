@@ -32,9 +32,10 @@ class _LinkMonoCopyWidgetState extends State<LinkMonoCopyWidget> {
         title: Text(
           'Link your bank account',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Roboto',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
         actions: [],

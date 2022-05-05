@@ -125,6 +125,8 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Maximize your income.',
@@ -132,34 +134,32 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .title1
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              fontFamily: 'Spline Sans',
                                               color: Colors.white,
                                               fontSize: 48,
+                                              useGoogleFonts: false,
                                             ),
                                       ).animated([
                                         animationsMap[
                                             'textOnPageLoadAnimation1']
                                       ]),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 20, 0, 0),
-                                        child: Text(
-                                          'Live Better, with Evi.',
-                                          textAlign: TextAlign.start,
-                                          style: FlutterFlowTheme.of(context)
-                                              .title1
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                fontSize: 48,
-                                              ),
-                                        ).animated([
-                                          animationsMap[
-                                              'textOnPageLoadAnimation2']
-                                        ]),
-                                      ),
+                                      Text(
+                                        'Live Better, with Evi.',
+                                        textAlign: TextAlign.start,
+                                        style: FlutterFlowTheme.of(context)
+                                            .title1
+                                            .override(
+                                              fontFamily: 'Spline Sans',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              fontSize: 32,
+                                              useGoogleFonts: false,
+                                            ),
+                                      ).animated([
+                                        animationsMap[
+                                            'textOnPageLoadAnimation2']
+                                      ]),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 40, 0, 0),
@@ -169,7 +169,7 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .subtitle1
                                               .override(
-                                                fontFamily: 'Roboto',
+                                                fontFamily: 'Source Sans Pro',
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.normal,
                                                 lineHeight: 1.4,
@@ -217,7 +217,7 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                     textStyle: FlutterFlowTheme.of(context)
                                         .subtitle2
                                         .override(
-                                          fontFamily: 'Roboto',
+                                          fontFamily: 'Source Sans Pro',
                                           color: Colors.white,
                                         ),
                                     borderSide: BorderSide(
@@ -256,7 +256,7 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                     textStyle: FlutterFlowTheme.of(context)
                                         .subtitle2
                                         .override(
-                                          fontFamily: 'Roboto',
+                                          fontFamily: 'Source Sans Pro',
                                           color: Color(0xFFE4E5E6),
                                         ),
                                     elevation: 0,
