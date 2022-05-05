@@ -23,6 +23,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
   bool switchListTileValue;
   BudgetCategoriesRecord uncategorized;
   BudgetsRecord createdBudget;
+  DateTimeRange startEndRange;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -82,15 +83,6 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                             ),
                           ),
                           Divider(),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [],
-                            ),
-                          ),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
@@ -212,7 +204,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                     budgetCategoriesCreateData,
                                     budgetCategoriesRecordReference);
                             logFirebaseEvent('Button-Custom-Action');
-                            await actions.selectDateRange(
+                            startEndRange = await actions.selectDateRange(
                               context,
                               createdBudget,
                             );
@@ -224,6 +216,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                     CreateBudgetCategoriesWidget(
                                   createdBudget: createdBudget,
                                   uncategorized: uncategorized,
+                                  dateRange: startEndRange,
                                 ),
                               ),
                               (r) => false,

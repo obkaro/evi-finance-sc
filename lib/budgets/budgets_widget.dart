@@ -30,26 +30,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(72),
-        child: AppBar(
-          backgroundColor: Colors.black,
-          automaticallyImplyLeading: false,
-          flexibleSpace: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-            child: Text(
-              'My Budgets',
-              style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
-                    fontSize: 22,
-                  ),
-            ),
-          ),
-          actions: [],
-          elevation: 0,
-        ),
-      ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -77,6 +57,18 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      'My Budgets',
+                      style: FlutterFlowTheme.of(context).title1,
+                    ),
+                  ],
+                ),
+              ),
               StreamBuilder<List<BudgetsRecord>>(
                 stream: queryBudgetsRecord(
                   queryBuilder: (budgetsRecord) => budgetsRecord
@@ -243,7 +235,11 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                         Text(
                           'This is where your budgets live. Tap on the  + icon to create a new budget.',
                           textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.of(context).bodyText1,
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Roboto',
+                                    lineHeight: 1.4,
+                                  ),
                         ),
                       ],
                     ),
