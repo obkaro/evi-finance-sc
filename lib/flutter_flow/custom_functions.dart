@@ -242,3 +242,8 @@ String overOrUnder(
 
   return result;
 }
+
+int listCounterBudgets(List<BudgetsRecord> budgets) {
+  // Add your function code here!
+  return budgets.length;
+}

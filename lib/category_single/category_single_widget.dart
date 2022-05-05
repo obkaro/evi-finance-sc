@@ -173,7 +173,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                   categorySingleTransactionsRecordList
                                       .toList()),
                               radius: 112.5,
-                              lineWidth: 24,
+                              lineWidth: 16,
                               animation: true,
                               progressColor:
                                   FlutterFlowTheme.of(context).primaryColor,

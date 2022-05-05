@@ -28,13 +28,13 @@ class AccountSingleWidget extends StatefulWidget {
 }
 
 class _AccountSingleWidgetState extends State<AccountSingleWidget> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   ApiCallResponse accountRespons;
   ApiCallResponse accountResponse;
   ApiCallResponse dataSyncResponse;
   ApiCallResponse reauthCode;
   ApiCallResponse transactionJsonResponse;
   ApiCallResponse transactionJsonRespons;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {

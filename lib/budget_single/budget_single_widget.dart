@@ -169,13 +169,15 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Expanded(
-                                child:
-                                    StreamBuilder<List<BudgetCategoriesRecord>>(
-                                  stream: queryBudgetCategoriesRecord(
-                                    queryBuilder: (budgetCategoriesRecord) =>
-                                        budgetCategoriesRecord.where(
-                                            'categoryBudget',
-                                            isEqualTo: widget.budget.reference),
+                                child: StreamBuilder<List<TransactionsRecord>>(
+                                  stream: queryTransactionsRecord(
+                                    queryBuilder: (transactionsRecord) =>
+                                        transactionsRecord.where(
+                                            'linkedCategory',
+                                            whereIn:
+                                                budgetSingleBudgetCategoriesRecordList
+                                                    .map((e) => e.reference)
+                                                    .toList()),
                                   ),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
@@ -192,61 +194,29 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                         ),
                                       );
                                     }
-                                    List<BudgetCategoriesRecord>
-                                        containerBudgetCategoriesRecordList =
+                                    List<TransactionsRecord>
+                                        containerTransactionsRecordList =
                                         snapshot.data;
                                     return Container(
-                                      width: 150,
-                                      height: 300,
+                                      width: double.infinity,
+                                      height: 320,
                                       decoration: BoxDecoration(),
-                                      child: Visibility(
-                                        visible:
-                                            (budgetSingleBudgetCategoriesRecordList
-                                                    .length) >
-                                                0,
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 20, 0, 20),
-                                          child: StreamBuilder<
-                                              List<TransactionsRecord>>(
-                                            stream: queryTransactionsRecord(
-                                              queryBuilder: (transactionsRecord) =>
-                                                  transactionsRecord.where(
-                                                      'linkedCategory',
-                                                      whereIn:
-                                                          containerBudgetCategoriesRecordList
-                                                              .map((e) =>
-                                                                  e.reference)
-                                                              .toList()),
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child: SpinKitRing(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      size: 50,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<TransactionsRecord>
-                                                  progressBarTransactionsRecordList =
-                                                  snapshot.data;
-                                              return CircularPercentIndicator(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          if ((containerTransactionsRecordList
+                                                  .length) >
+                                              0)
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 20, 0, 20),
+                                              child: CircularPercentIndicator(
                                                 percent: functions.calcBudgetChart(
                                                     widget.budget,
-                                                    progressBarTransactionsRecordList
+                                                    containerTransactionsRecordList
                                                         .toList()),
                                                 radius: 112.5,
-                                                lineWidth: 24,
+                                                lineWidth: 16,
                                                 animation: true,
                                                 progressColor:
                                                     FlutterFlowTheme.of(context)
@@ -255,7 +225,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .tertiaryColor,
                                                 center: Text(
-                                                  '${functions.subtractCurrency(widget.budget.budgetAmount, functions.sumTransactionAmounts(progressBarTransactionsRecordList.toList()))}',
+                                                  '${functions.subtractCurrency(widget.budget.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .subtitle1
@@ -268,93 +238,82 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                       ),
                                                 ),
                                                 startAngle: 0,
-                                              );
-                                            },
+                                              ),
+                                            ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 0, 20),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                if ((containerTransactionsRecordList
+                                                        .length) >
+                                                    0)
+                                                  Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        'Spent',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText2,
+                                                      ),
+                                                      Text(
+                                                        functions.formatBudgetCurrency(
+                                                            functions.sumTransactionAmounts(
+                                                                containerTransactionsRecordList
+                                                                    .toList())),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .title3,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Target',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText2,
+                                                    ),
+                                                    Text(
+                                                      functions
+                                                          .formatBudgetCurrency(
+                                                              widget.budget
+                                                                  .budgetAmount),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .title3,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     );
                                   },
                                 ),
                               ),
                             ],
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Spent',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText2,
-                                    ),
-                                    FutureBuilder<List<TransactionsRecord>>(
-                                      future: queryTransactionsRecordOnce(
-                                        queryBuilder: (transactionsRecord) =>
-                                            transactionsRecord.where(
-                                                'linkedCategory',
-                                                whereIn:
-                                                    budgetSingleBudgetCategoriesRecordList
-                                                        .map((e) => e.reference)
-                                                        .toList()),
-                                      ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50,
-                                              height: 50,
-                                              child: SpinKitRing(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                size: 50,
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                        List<TransactionsRecord>
-                                            textTransactionsRecordList =
-                                            snapshot.data;
-                                        return Text(
-                                          functions.formatBudgetCurrency(
-                                              functions.sumTransactionAmounts(
-                                                  textTransactionsRecordList
-                                                      .toList())),
-                                          style: FlutterFlowTheme.of(context)
-                                              .title3,
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Target',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText2,
-                                    ),
-                                    Text(
-                                      functions.formatBudgetCurrency(
-                                          widget.budget.budgetAmount),
-                                      style:
-                                          FlutterFlowTheme.of(context).title3,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
                           ),
                           Divider(),
                           Padding(
@@ -651,6 +610,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                       backgroundColor:
                                                                           Color(
                                                                               0xFF1B998B),
+                                                                      barRadius:
+                                                                          Radius.circular(
+                                                                              12),
                                                                       padding:
                                                                           EdgeInsets
                                                                               .zero,

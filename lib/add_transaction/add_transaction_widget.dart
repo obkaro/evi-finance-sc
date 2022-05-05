@@ -28,8 +28,8 @@ class AddTransactionWidget extends StatefulWidget {
 class _AddTransactionWidgetState extends State<AddTransactionWidget> {
   String choiceChipsValue;
   TextEditingController textController;
-  TransactionsRecord createdTransaction;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  TransactionsRecord createdTransaction;
 
   @override
   void initState() {
@@ -295,13 +295,20 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
                                                                           0, 0),
                                                                 ),
                                                               ),
-                                                              Image.network(
-                                                                stackConstInstitutionLogosRecord
-                                                                    .institutionLogo,
-                                                                width: 45,
-                                                                height: 45,
-                                                                fit: BoxFit
-                                                                    .cover,
+                                                              ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            12),
+                                                                child: Image
+                                                                    .network(
+                                                                  stackConstInstitutionLogosRecord
+                                                                      .institutionLogo,
+                                                                  width: 45,
+                                                                  height: 45,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
                                                               ),
                                                             ],
                                                           ),
