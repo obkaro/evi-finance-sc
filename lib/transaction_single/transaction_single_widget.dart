@@ -61,19 +61,13 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            iconTheme:
+                IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
             automaticallyImplyLeading: true,
-            title: Text(
-              'Expense',
-              style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
-                    fontSize: 22,
-                  ),
-            ),
             actions: [],
             centerTitle: false,
-            elevation: 2,
+            elevation: 0,
           ),
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
@@ -84,7 +78,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
                       child: FutureBuilder<AccountsRecord>(
                         future: AccountsRecord.getDocumentOnce(
                             widget.transaction.account),
@@ -120,16 +114,24 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                       children: [
                                         Align(
                                           alignment: AlignmentDirectional(0, 0),
-                                          child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFEEEEEE),
+                                          child: Material(
+                                            color: Colors.transparent,
+                                            elevation: 0,
+                                            shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(300),
                                             ),
-                                            alignment:
-                                                AlignmentDirectional(0, 0),
+                                            child: Container(
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xFFEEEEEE),
+                                                borderRadius:
+                                                    BorderRadius.circular(300),
+                                              ),
+                                              alignment:
+                                                  AlignmentDirectional(0, 0),
+                                            ),
                                           ),
                                         ),
                                         FutureBuilder<
@@ -595,9 +597,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                               onPressed: () async {
                                                 logFirebaseEvent(
                                                     'Button-ON_TAP');
-                                                // Action_CategorizeBottomSheet
+                                                // Action_CategorizeTrans
                                                 logFirebaseEvent(
-                                                    'Button-Action_CategorizeBottomSheet');
+                                                    'Button-Action_CategorizeTrans');
                                                 await showModalBottomSheet(
                                                   isScrollControlled: true,
                                                   backgroundColor:
@@ -632,7 +634,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .subtitle2
                                                         .override(
-                                                          fontFamily: 'Roboto',
+                                                          fontFamily:
+                                                              'Source Sans Pro',
                                                           color: Colors.white,
                                                         ),
                                                 borderSide: BorderSide(
@@ -691,9 +694,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                     onPressed: () async {
                                                       logFirebaseEvent(
                                                           'IconButton-ON_TAP');
-                                                      // Action_UnlinkTransactionSingle
+                                                      // Action_UnlinkTransaction
                                                       logFirebaseEvent(
-                                                          'IconButton-Action_UnlinkTransactionSingle');
+                                                          'IconButton-Action_UnlinkTransaction');
 
                                                       final transactionsUpdateData =
                                                           {

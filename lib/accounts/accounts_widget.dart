@@ -51,7 +51,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+            padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -61,18 +61,30 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                     width: double.infinity,
                     height: 72,
                     decoration: BoxDecoration(
-                      color: Color(0x7F000000),
-                      borderRadius: BorderRadius.circular(12),
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(16),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                          child: Icon(
+                            Icons.account_balance_rounded,
+                            color: Color(0xFFF4F4F4),
+                            size: 24,
+                          ),
+                        ),
+                        Padding(
                           padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                              EdgeInsetsDirectional.fromSTEB(8, 20, 20, 20),
                           child: Text(
-                            'My Accounts',
-                            style: FlutterFlowTheme.of(context).title1,
+                            'Accounts',
+                            style: FlutterFlowTheme.of(context).title1.override(
+                                  fontFamily: 'Spline Sans',
+                                  color: Color(0xFFF4F4F4),
+                                  useGoogleFonts: false,
+                                ),
                           ),
                         ),
                       ],
@@ -127,7 +139,6 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                             },
                             child: Container(
                               width: 100,
-                              height: 120,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -135,7 +146,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                               ),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    10, 10, 10, 10),
+                                    10, 16, 10, 16),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:

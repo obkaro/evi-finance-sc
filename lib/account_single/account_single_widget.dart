@@ -69,19 +69,11 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             automaticallyImplyLeading: true,
-            title: Text(
-              'Account',
-              style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
-                    fontSize: 22,
-                  ),
-            ),
             actions: [],
             centerTitle: false,
-            elevation: 2,
+            elevation: 0,
           ),
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
@@ -96,7 +88,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                       children: [
                         Padding(
                           padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                              EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -481,7 +473,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                 .subtitle2
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Roboto',
+                                                                      'Source Sans Pro',
                                                                   color: Colors
                                                                       .white,
                                                                 ),
@@ -671,7 +663,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                     .bodyText1
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Roboto',
+                                                                          'Source Sans Pro',
                                                                       fontSize:
                                                                           12,
                                                                       fontWeight:
@@ -763,7 +755,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                       .bodyText1
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Roboto',
+                                                                            'Source Sans Pro',
                                                                         fontSize:
                                                                             12,
                                                                         fontWeight:
@@ -792,7 +784,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                       .bodyText1
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Roboto',
+                                                                            'Source Sans Pro',
                                                                         fontSize:
                                                                             12,
                                                                         fontWeight:
@@ -835,7 +827,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                 .subtitle2
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Roboto',
+                                                                      'Source Sans Pro',
                                                                   color: Colors
                                                                       .white,
                                                                 ),
@@ -930,7 +922,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               .subtitle2
                                                               .override(
                                                                 fontFamily:
-                                                                    'Roboto',
+                                                                    'Source Sans Pro',
                                                                 color: Colors
                                                                     .white,
                                                               ),
@@ -1144,7 +1136,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                     .bodyText1
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Roboto',
+                                                                          'Source Sans Pro',
                                                                       color: Color(
                                                                           0xFFFF0003),
                                                                       fontStyle:
@@ -1219,7 +1211,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                         .bodyText2
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Roboto',
+                                                                              'Source Sans Pro',
                                                                           color:
                                                                               Color(0xFFFF0003),
                                                                         ),
@@ -1244,7 +1236,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                         .bodyText2
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Roboto',
+                                                                              'Source Sans Pro',
                                                                           color:
                                                                               FlutterFlowTheme.of(context).secondaryColor,
                                                                         ),

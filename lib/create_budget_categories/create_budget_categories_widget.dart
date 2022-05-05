@@ -114,9 +114,10 @@ class _CreateBudgetCategoriesWidgetState
                   child: Text(
                     'Select Categories',
                     style: FlutterFlowTheme.of(context).title2.override(
-                          fontFamily: 'Roboto',
+                          fontFamily: 'Spline Sans',
                           color: Colors.white,
                           fontSize: 22,
+                          useGoogleFonts: false,
                         ),
                   ),
                 ),
@@ -211,7 +212,7 @@ class _CreateBudgetCategoriesWidgetState
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Roboto',
+                                              fontFamily: 'Source Sans Pro',
                                               color: Color(0xFFFF0003),
                                             ),
                                       ),
@@ -496,7 +497,7 @@ class _CreateBudgetCategoriesWidgetState
                                                               .bodyText1
                                                               .override(
                                                                 fontFamily:
-                                                                    'Roboto',
+                                                                    'Source Sans Pro',
                                                                 fontSize: 12,
                                                               ),
                                                     ),
@@ -558,7 +559,7 @@ class _CreateBudgetCategoriesWidgetState
                                       textStyle: FlutterFlowTheme.of(context)
                                           .subtitle2
                                           .override(
-                                            fontFamily: 'Roboto',
+                                            fontFamily: 'Source Sans Pro',
                                             color: Colors.white,
                                           ),
                                       borderSide: BorderSide(
@@ -904,7 +905,8 @@ class _CreateBudgetCategoriesWidgetState
                                               FlutterFlowTheme.of(context)
                                                   .subtitle2
                                                   .override(
-                                                    fontFamily: 'Roboto',
+                                                    fontFamily:
+                                                        'Source Sans Pro',
                                                     color: Color(0xFF5D5B5B),
                                                   ),
                                           elevation: 0,
@@ -1020,7 +1022,8 @@ class _CreateBudgetCategoriesWidgetState
                                               FlutterFlowTheme.of(context)
                                                   .subtitle2
                                                   .override(
-                                                    fontFamily: 'Roboto',
+                                                    fontFamily:
+                                                        'Source Sans Pro',
                                                     color: Colors.white,
                                                   ),
                                           borderSide: BorderSide(

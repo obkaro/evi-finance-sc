@@ -40,7 +40,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 300,
+      height: 325,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
         boxShadow: [
@@ -50,12 +50,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
             offset: Offset(0, -3),
           )
         ],
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(0),
-          bottomRight: Radius.circular(0),
-          topLeft: Radius.circular(12),
-          topRight: Radius.circular(12),
-        ),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
@@ -150,7 +145,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                     height: 50,
                     color: FlutterFlowTheme.of(context).primaryColor,
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily: 'Roboto',
+                          fontFamily: 'Source Sans Pro',
                           color: Colors.white,
                         ),
                     borderSide: BorderSide(

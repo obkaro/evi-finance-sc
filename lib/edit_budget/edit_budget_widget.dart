@@ -56,9 +56,10 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
         title: Text(
           'Edit Budget',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Roboto',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
         actions: [],
@@ -150,7 +151,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                       FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily: 'Roboto',
+                                            fontFamily: 'Source Sans Pro',
                                             color: Colors.white,
                                           ),
                                   inactiveDateStyle: TextStyle(),
@@ -193,7 +194,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                       FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily: 'Roboto',
+                                            fontFamily: 'Source Sans Pro',
                                             color: Colors.white,
                                           ),
                                   inactiveDateStyle: TextStyle(),
@@ -292,7 +293,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                             color: FlutterFlowTheme.of(context).primaryColor,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Roboto',
+                                      fontFamily: 'Source Sans Pro',
                                       color: Colors.white,
                                     ),
                             borderSide: BorderSide(

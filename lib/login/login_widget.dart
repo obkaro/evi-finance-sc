@@ -39,9 +39,10 @@ class _LoginWidgetState extends State<LoginWidget> {
         title: Text(
           'Login',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Roboto',
+                fontFamily: 'Spline Sans',
                 color: Colors.white,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
         actions: [],
@@ -201,7 +202,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         textStyle: FlutterFlowTheme.of(context)
                                             .subtitle2
                                             .override(
-                                              fontFamily: 'Roboto',
+                                              fontFamily: 'Source Sans Pro',
                                               color: Colors.white,
                                             ),
                                         borderSide: BorderSide(

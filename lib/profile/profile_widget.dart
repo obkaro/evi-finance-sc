@@ -1,3 +1,4 @@
+import '../admin/admin_widget.dart';
 import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -28,26 +29,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(72),
-        child: AppBar(
-          backgroundColor: Color(0x7F000000),
-          automaticallyImplyLeading: false,
-          flexibleSpace: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20, 60, 20, 20),
-            child: Text(
-              'Profile',
-              style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
-                    fontSize: 22,
-                  ),
-            ),
-          ),
-          actions: [],
-          elevation: 2,
-        ),
-      ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
@@ -90,7 +71,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .subtitle2
                                       .override(
-                                        fontFamily: 'Roboto',
+                                        fontFamily: 'Source Sans Pro',
                                         color: Colors.white,
                                       ),
                                   borderSide: BorderSide(
@@ -103,36 +84,49 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    logFirebaseEvent('Button-ON_TAP');
-                                    logFirebaseEvent('Button-Auth');
-                                    await signOut();
-                                    await Navigator.pushAndRemoveUntil(
+                                child: InkWell(
+                                  onLongPress: () async {
+                                    logFirebaseEvent('Button-ON_LONG_PRESS');
+                                    logFirebaseEvent('Button-Navigate-To');
+                                    await Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => LandPageWidget(),
+                                        builder: (context) => AdminWidget(),
                                       ),
-                                      (r) => false,
                                     );
                                   },
-                                  text: 'Logout',
-                                  options: FFButtonOptions(
-                                    width: double.infinity,
-                                    height: 50,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                          fontFamily: 'Roboto',
-                                          color: Colors.white,
+                                  child: FFButtonWidget(
+                                    onPressed: () async {
+                                      logFirebaseEvent('Button-ON_TAP');
+                                      logFirebaseEvent('Button-Auth');
+                                      await signOut();
+                                      await Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              LandPageWidget(),
                                         ),
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1,
+                                        (r) => false,
+                                      );
+                                    },
+                                    text: 'Logout',
+                                    options: FFButtonOptions(
+                                      width: double.infinity,
+                                      height: 50,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .subtitle2
+                                          .override(
+                                            fontFamily: 'Source Sans Pro',
+                                            color: Colors.white,
+                                          ),
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1,
+                                      ),
+                                      borderRadius: 12,
                                     ),
-                                    borderRadius: 12,
                                   ),
                                 ),
                               ),
