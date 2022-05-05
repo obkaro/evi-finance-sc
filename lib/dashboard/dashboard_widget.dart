@@ -47,6 +47,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
@@ -144,6 +145,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                       16, 16, 16, 16),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Container(
                                         width: 70,
@@ -439,7 +442,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                               .subtitle1,
                                                         ),
                                                         Text(
-                                                          '${functions.formatTransCurrency(functions.subInt(cardBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList())))} Remaining',
+                                                          '${functions.formatBudgetCurrency(functions.subInt(cardBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList())))} Remaining',
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .subtitle2,
@@ -576,8 +579,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Container(
-                                            width: 70,
-                                            height: 70,
+                                            width: 60,
+                                            height: 60,
                                             child: Stack(
                                               alignment:
                                                   AlignmentDirectional(0, 0),
@@ -642,12 +645,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                     return ClipRRect(
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              12),
+                                                              8),
                                                       child: Image.network(
                                                         imageConstInstitutionLogosRecord
                                                             .institutionLogo,
-                                                        width: 45,
-                                                        height: 45,
+                                                        width: 40,
+                                                        height: 40,
                                                         fit: BoxFit.cover,
                                                       ),
                                                     );
@@ -834,7 +837,13 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                   ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .subtitle1,
+                                                                  .subtitle1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Roboto',
+                                                                    fontSize:
+                                                                        16,
+                                                                  ),
                                                             ),
                                                           ),
                                                           AutoSizeText(

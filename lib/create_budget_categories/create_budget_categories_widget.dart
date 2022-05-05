@@ -23,10 +23,12 @@ class CreateBudgetCategoriesWidget extends StatefulWidget {
     Key key,
     this.createdBudget,
     this.uncategorized,
+    this.dateRange,
   }) : super(key: key);
 
   final BudgetsRecord createdBudget;
   final BudgetCategoriesRecord uncategorized;
+  final DateTimeRange dateRange;
 
   @override
   _CreateBudgetCategoriesWidgetState createState() =>
@@ -47,6 +49,8 @@ class _CreateBudgetCategoriesWidgetState
 
       final budgetsUpdateData = createBudgetsRecordData(
         uncategorizedLink: widget.uncategorized.reference,
+        budgetStart: widget.dateRange.start,
+        budgetEnd: widget.dateRange.end,
       );
       await widget.createdBudget.reference.update(budgetsUpdateData);
     });
@@ -81,7 +85,7 @@ class _CreateBudgetCategoriesWidgetState
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+            backgroundColor: Color(0x7F000000),
             automaticallyImplyLeading: false,
             title: Row(
               mainAxisSize: MainAxisSize.max,

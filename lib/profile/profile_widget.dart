@@ -28,20 +28,25 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Profile',
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Roboto',
-                color: Colors.white,
-                fontSize: 22,
-              ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(72),
+        child: AppBar(
+          backgroundColor: Color(0x7F000000),
+          automaticallyImplyLeading: false,
+          flexibleSpace: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20, 60, 20, 20),
+            child: Text(
+              'Profile',
+              style: FlutterFlowTheme.of(context).title2.override(
+                    fontFamily: 'Roboto',
+                    color: Colors.white,
+                    fontSize: 22,
+                  ),
+            ),
+          ),
+          actions: [],
+          elevation: 2,
         ),
-        actions: [],
-        centerTitle: false,
-        elevation: 2,
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(

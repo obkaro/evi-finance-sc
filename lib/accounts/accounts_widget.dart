@@ -29,21 +29,6 @@ class _AccountsWidgetState extends State<AccountsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-        automaticallyImplyLeading: true,
-        title: Text(
-          'My Accounts',
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Roboto',
-                color: Colors.white,
-                fontSize: 22,
-              ),
-        ),
-        actions: [],
-        centerTitle: false,
-        elevation: 2,
-      ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -70,6 +55,30 @@ class _AccountsWidgetState extends State<AccountsWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                  child: Container(
+                    width: double.infinity,
+                    height: 72,
+                    decoration: BoxDecoration(
+                      color: Color(0x7F000000),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                          child: Text(
+                            'My Accounts',
+                            style: FlutterFlowTheme.of(context).title1,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 StreamBuilder<List<AccountsRecord>>(
                   stream: queryAccountsRecord(
                     queryBuilder: (accountsRecord) => accountsRecord
