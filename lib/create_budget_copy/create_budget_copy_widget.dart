@@ -1,10 +1,10 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../create_budget_categories/create_budget_categories_widget.dart';
-import '../flutter_flow/flutter_flow_calendar.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,25 +20,15 @@ class CreateBudgetCopyWidget extends StatefulWidget {
 }
 
 class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
+  bool switchListTileValue;
   BudgetCategoriesRecord uncategorized;
   BudgetsRecord createdBudget;
-  DateTimeRange calendarDateEndSelectedDay;
-  DateTimeRange calendarDateStartSelectedDay;
-  bool switchListTileValue;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    calendarDateEndSelectedDay = DateTimeRange(
-      start: DateTime.now().startOfDay,
-      end: DateTime.now().endOfDay,
-    );
-    calendarDateStartSelectedDay = DateTimeRange(
-      start: DateTime.now().startOfDay,
-      end: DateTime.now().endOfDay,
-    );
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'CreateBudgetCopy'});
   }
@@ -48,7 +38,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         automaticallyImplyLeading: true,
         title: Text(
           'Create A Budget',
@@ -60,7 +50,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
         ),
         actions: [],
         centerTitle: false,
-        elevation: 2,
+        elevation: 0,
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
@@ -98,17 +88,7 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 10, 0, 0),
-                                  child: Text(
-                                    'Select Start and End Dates',
-                                    style:
-                                        FlutterFlowTheme.of(context).subtitle1,
-                                  ),
-                                ),
-                              ],
+                              children: [],
                             ),
                           ),
                           Padding(
@@ -121,37 +101,6 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                     .secondaryBackground,
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10, 8, 10, 10),
-                                child: FlutterFlowCalendar(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  iconColor:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  weekFormat: false,
-                                  weekStartsMonday: false,
-                                  onChange: (DateTimeRange newSelectedDate) {
-                                    setState(() =>
-                                        calendarDateStartSelectedDay =
-                                            newSelectedDate);
-                                  },
-                                  titleStyle:
-                                      FlutterFlowTheme.of(context).subtitle1,
-                                  dayOfWeekStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
-                                  dateStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
-                                  selectedDateStyle:
-                                      FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Roboto',
-                                            color: Colors.white,
-                                          ),
-                                  inactiveDateStyle: TextStyle(),
-                                ),
-                              ),
                             ),
                           ),
                           Padding(
@@ -163,36 +112,6 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                                 borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10, 8, 10, 10),
-                                child: FlutterFlowCalendar(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  iconColor:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  weekFormat: false,
-                                  weekStartsMonday: false,
-                                  onChange: (DateTimeRange newSelectedDate) {
-                                    setState(() => calendarDateEndSelectedDay =
-                                        newSelectedDate);
-                                  },
-                                  titleStyle:
-                                      FlutterFlowTheme.of(context).subtitle1,
-                                  dayOfWeekStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
-                                  dateStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
-                                  selectedDateStyle:
-                                      FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Roboto',
-                                            color: Colors.white,
-                                          ),
-                                  inactiveDateStyle: TextStyle(),
-                                ),
                               ),
                             ),
                           ),
@@ -262,8 +181,6 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                               budgetOwner: currentUserReference,
                               budgetAmount: FFAppState().currencyTextField,
                               budgetDateCreated: getCurrentTimestamp,
-                              budgetStart: calendarDateStartSelectedDay.start,
-                              budgetEnd: calendarDateEndSelectedDay.start,
                               isRecurring: switchListTileValue,
                               budgetID: random_data.randomString(
                                 24,
@@ -294,6 +211,11 @@ class _CreateBudgetCopyWidgetState extends State<CreateBudgetCopyWidget> {
                                 BudgetCategoriesRecord.getDocumentFromData(
                                     budgetCategoriesCreateData,
                                     budgetCategoriesRecordReference);
+                            logFirebaseEvent('Button-Custom-Action');
+                            await actions.selectDateRange(
+                              context,
+                              createdBudget,
+                            );
                             logFirebaseEvent('Button-Navigate-To');
                             await Navigator.pushAndRemoveUntil(
                               context,

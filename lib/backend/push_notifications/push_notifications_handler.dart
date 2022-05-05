@@ -9,25 +9,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
+import '../../index.dart';
 import '../../main.dart';
-import '../../land_page/land_page_widget.dart';
-import '../../sign_up/sign_up_widget.dart';
-import '../../login/login_widget.dart';
-import '../../user_details/user_details_widget.dart';
-import '../../dashboard/dashboard_widget.dart';
-import '../../transaction_single/transaction_single_widget.dart';
-import '../../add_transaction/add_transaction_widget.dart';
-import '../../uncategorized/uncategorized_widget.dart';
-import '../../budget_single/budget_single_widget.dart';
-import '../../category_single/category_single_widget.dart';
-import '../../create_budget_old/create_budget_old_widget.dart';
-import '../../create_budget_copy/create_budget_copy_widget.dart';
-import '../../edit_budget/edit_budget_widget.dart';
-import '../../edit_budget_categories/edit_budget_categories_widget.dart';
-import '../../create_budget_categories/create_budget_categories_widget.dart';
-import '../../accounts/accounts_widget.dart';
-import '../../account_single/account_single_widget.dart';
-import '../../link_mono_copy/link_mono_copy_widget.dart';
 
 class PushNotificationsHandler extends StatefulWidget {
   const PushNotificationsHandler(
@@ -100,12 +83,16 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'LandPage': (data) async => LandPageWidget(),
   'SignUp': (data) async => SignUpWidget(),
   'Login': (data) async => LoginWidget(),
+  'OnboardingInfo': (data) async => OnboardingInfoWidget(),
   'UserDetails': (data) async => UserDetailsWidget(),
-  'Dashboard': (data) async => DashboardWidget(
-        command: getParameter(data, 'command'),
-        newAccount: getParameter(data, 'newAccount'),
-      ),
-  'Transactions': (data) async => NavBarPage(initialPage: 'TransactionsWidget'),
+  'Dashboard': (data) async =>
+      hasMatchingParameters(data, {'command', 'newAccount'})
+          ? DashboardWidget(
+              command: getParameter(data, 'command'),
+              newAccount: getParameter(data, 'newAccount'),
+            )
+          : NavBarPage(initialPage: 'Dashboard'),
+  'Transactions': (data) async => TransactionsWidget(),
   'TransactionSingle': (data) async => TransactionSingleWidget(
         transaction: await getDocumentParameter(
             data, 'transaction', TransactionsRecord.serializer),
@@ -146,14 +133,14 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         uncategorized: await getDocumentParameter(
             data, 'uncategorized', BudgetCategoriesRecord.serializer),
       ),
-  'Accounts': (data) async => AccountsWidget(),
+  'Accounts': (data) async => NavBarPage(initialPage: 'Accounts'),
   'AccountSingle': (data) async => AccountSingleWidget(
         account: await getDocumentParameter(
             data, 'account', AccountsRecord.serializer),
       ),
-  'Profile': (data) async => NavBarPage(initialPage: 'ProfileWidget'),
+  'Profile': (data) async => NavBarPage(initialPage: 'Profile'),
   'LinkMonoCopy': (data) async => LinkMonoCopyWidget(),
-  'Admin': (data) async => NavBarPage(initialPage: 'AdminWidget'),
+  'Admin': (data) async => AdminWidget(),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

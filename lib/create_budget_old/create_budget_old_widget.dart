@@ -19,13 +19,13 @@ class CreateBudgetOldWidget extends StatefulWidget {
 }
 
 class _CreateBudgetOldWidgetState extends State<CreateBudgetOldWidget> {
-  BudgetCategoriesRecord uncategorized;
-  BudgetsRecord createdBudget;
   DateTime datePicked1;
   DateTime datePicked2;
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
+  BudgetCategoriesRecord uncategorized;
+  BudgetsRecord createdBudget;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -137,12 +137,12 @@ class _CreateBudgetOldWidgetState extends State<CreateBudgetOldWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: TextFormField(
+                            controller: textController3,
                             onChanged: (_) => EasyDebounce.debounce(
                               'textController3',
                               Duration(milliseconds: 2000),
                               () => setState(() {}),
                             ),
-                            controller: textController3,
                             obscureText: false,
                             decoration: InputDecoration(
                               hintText: 'Input target amount',

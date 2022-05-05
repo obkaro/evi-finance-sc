@@ -5,22 +5,19 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 import 'backend/push_notifications/push_notifications_util.dart';
-import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
+import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
-import 'package:evi/land_page/land_page_widget.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'transactions/transactions_widget.dart';
-import 'budgets/budgets_widget.dart';
-import 'profile/profile_widget.dart';
-import 'admin/admin_widget.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   await FlutterFlowTheme.initialize();
+
+  FFAppState(); // Initialize FFAppState
 
   runApp(MyApp());
 }
@@ -28,7 +25,7 @@ void main() async {
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 
   static _MyAppState of(BuildContext context) =>
       context.findAncestorStateOfType<_MyAppState>();
@@ -37,17 +34,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Locale _locale;
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
+
   Stream<EviFirebaseUser> userStream;
   EviFirebaseUser initialUser;
   bool displaySplashImage = true;
+
   final authUserSub = authenticatedUserStream.listen((_) {});
   final fcmTokenSub = fcmTokenUserStream.listen((_) {});
-
-  void setLocale(Locale value) => setState(() => _locale = value);
-  void setThemeMode(ThemeMode mode) => setState(() {
-        _themeMode = mode;
-        FlutterFlowTheme.saveThemeMode(mode);
-      });
 
   @override
   void initState() {
@@ -55,7 +48,9 @@ class _MyAppState extends State<MyApp> {
     userStream = eviFirebaseUserStream()
       ..listen((user) => initialUser ?? setState(() => initialUser = user));
     Future.delayed(
-        Duration(seconds: 1), () => setState(() => displaySplashImage = false));
+      Duration(seconds: 1),
+      () => setState(() => displaySplashImage = false),
+    );
   }
 
   @override
@@ -64,6 +59,12 @@ class _MyAppState extends State<MyApp> {
     fcmTokenSub.cancel();
     super.dispose();
   }
+
+  void setLocale(Locale value) => setState(() => _locale = value);
+  void setThemeMode(ThemeMode mode) => setState(() {
+        _themeMode = mode;
+        FlutterFlowTheme.saveThemeMode(mode);
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -122,10 +123,10 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'Transactions': TransactionsWidget(),
+      'Dashboard': DashboardWidget(),
       'Budgets': BudgetsWidget(),
+      'Accounts': AccountsWidget(),
       'Profile': ProfileWidget(),
-      'Admin': AdminWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -142,10 +143,10 @@ class _NavBarPageState extends State<NavBarPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.compare_arrows_rounded,
+              Icons.home_rounded,
               size: 24,
             ),
-            label: 'Home',
+            label: 'Dashboard',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -158,15 +159,15 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.person,
+              Icons.account_balance_rounded,
               size: 24,
             ),
-            label: 'Profile',
+            label: 'Accounts',
             tooltip: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.admin_panel_settings_rounded,
+              Icons.person,
               size: 24,
             ),
             label: 'Profile',

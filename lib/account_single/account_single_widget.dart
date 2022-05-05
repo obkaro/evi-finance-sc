@@ -28,13 +28,13 @@ class AccountSingleWidget extends StatefulWidget {
 }
 
 class _AccountSingleWidgetState extends State<AccountSingleWidget> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   ApiCallResponse accountRespons;
   ApiCallResponse accountResponse;
   ApiCallResponse dataSyncResponse;
   ApiCallResponse reauthCode;
   ApiCallResponse transactionJsonResponse;
   ApiCallResponse transactionJsonRespons;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -622,14 +622,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                           );
                                                           _shouldSetState =
                                                               true;
-                                                          // Action_clearTransactions
-                                                          logFirebaseEvent(
-                                                              'Button-Action_clearTransactions');
-                                                          await actions
-                                                              .deleteTransactions(
-                                                            buttonTransactionsRecordList
-                                                                .toList(),
-                                                          );
                                                           // Action_writeTransactions
                                                           logFirebaseEvent(
                                                               'Button-Action_writeTransactions');
@@ -746,14 +738,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             );
                                                             _shouldSetState =
                                                                 true;
-                                                            // Action_clearTransactions
-                                                            logFirebaseEvent(
-                                                                'Button-Action_clearTransactions');
-                                                            await actions
-                                                                .deleteTransactions(
-                                                              buttonTransactionsRecordList
-                                                                  .toList(),
-                                                            );
                                                             // Action_writeTransactions
                                                             logFirebaseEvent(
                                                                 'Button-Action_writeTransactions');

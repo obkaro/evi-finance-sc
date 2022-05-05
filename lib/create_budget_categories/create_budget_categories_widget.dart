@@ -199,7 +199,10 @@ class _CreateBudgetCategoriesWidgetState
                                       alignment: AlignmentDirectional(0, 0),
                                       child: Text(
                                         functions.formatBudgetCurrency(
-                                            columnBudgetsRecord.budgetAmount),
+                                            functions.calculateRemBudgetCat(
+                                                createBudgetCategoriesBudgetCategoriesRecordList
+                                                    .toList(),
+                                                columnBudgetsRecord)),
                                         textAlign: TextAlign.end,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
