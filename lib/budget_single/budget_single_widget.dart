@@ -171,7 +171,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -236,7 +236,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                     backgroundColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .tertiaryColor,
+                                                            .customColor1,
                                                     center: Text(
                                                       '${functions.formatBudgetCurrency(widget.budget.budgetAmount)} Left',
                                                       style:
@@ -277,7 +277,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                     backgroundColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .tertiaryColor,
+                                                            .customColor1,
                                                     center: Text(
                                                       '${functions.subtractCurrency(widget.budget.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                       style:
@@ -434,7 +434,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
-                                    borderRadius: BorderRadius.circular(12),
+                                    borderRadius: BorderRadius.circular(16),
                                   ),
                                   alignment: AlignmentDirectional(0, 0),
                                   child: Padding(
@@ -525,7 +525,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                             columnIndex];
                                     return Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 10),
+                                          0, 0, 0, 16),
                                       child: StreamBuilder<
                                           List<TransactionsRecord>>(
                                         stream: queryTransactionsRecord(
@@ -583,7 +583,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryBackground,
                                                 borderRadius:
-                                                    BorderRadius.circular(12),
+                                                    BorderRadius.circular(16),
                                               ),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
@@ -602,7 +602,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                             .spaceAround,
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
-                                                            .start,
+                                                            .center,
                                                     children: [
                                                       Expanded(
                                                         child: Row(
@@ -679,8 +679,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                           FlutterFlowTheme.of(context)
                                                                               .primaryColor,
                                                                       backgroundColor:
-                                                                          Color(
-                                                                              0xFF1B998B),
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .customColor1,
                                                                       barRadius:
                                                                           Radius.circular(
                                                                               12),

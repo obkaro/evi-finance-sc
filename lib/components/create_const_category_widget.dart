@@ -31,10 +31,9 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 24),
+      padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 24),
       child: Container(
         width: double.infinity,
-        height: 300,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).primaryBackground,
           boxShadow: [
@@ -55,10 +54,24 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
               children: [
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                  child: Text(
-                    widget.constCategory.categoryName,
-                    textAlign: TextAlign.start,
-                    style: FlutterFlowTheme.of(context).title3,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        widget.constCategory.categoryName,
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context).title3,
+                      ),
+                      Text(
+                        'Unallocated: ${functions.formatBudgetCurrency(widget.budgetAllocatedRemaining)}',
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context).subtitle2.override(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color(0xFFFF0000),
+                            ),
+                      ),
+                    ],
                   ),
                 ),
                 Padding(

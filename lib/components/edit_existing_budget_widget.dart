@@ -30,22 +30,14 @@ class EditExistingBudgetWidget extends StatefulWidget {
 
 class _EditExistingBudgetWidgetState extends State<EditExistingBudgetWidget> {
   bool switchListTileValue;
-  TextEditingController textController;
   DateTimeRange startEndRange;
-
-  @override
-  void initState() {
-    super.initState();
-    textController = TextEditingController();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 24),
+      padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 48),
       child: Container(
         width: double.infinity,
-        height: 400,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).primaryBackground,
           boxShadow: [
@@ -63,35 +55,6 @@ class _EditExistingBudgetWidgetState extends State<EditExistingBudgetWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
-                  child: TextFormField(
-                    controller: textController,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      labelText: 'Budget Name',
-                      hintText: 'Enter Budget Name',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0x00000000),
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0x00000000),
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      filled: true,
-                      fillColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyText1,
-                  ),
-                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                   child: custom_widgets.CurrencyTextField(
@@ -151,8 +114,6 @@ class _EditExistingBudgetWidgetState extends State<EditExistingBudgetWidget> {
                           isRecurring: switchListTileValue,
                         );
                         await widget.budget.reference.update(budgetsUpdateData);
-                        logFirebaseEvent('Button-Navigate-Back');
-                        Navigator.pop(context);
                         logFirebaseEvent('Button-Custom-Action');
                         startEndRange = await actions.selectDateRange(
                           context,

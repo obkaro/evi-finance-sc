@@ -53,7 +53,7 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 24),
+      padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 24),
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 420,

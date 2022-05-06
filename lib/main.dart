@@ -167,7 +167,7 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.person,
+              Icons.settings_rounded,
               size: 24,
             ),
             label: 'Profile',

@@ -83,6 +83,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'LandPage': (data) async => LandPageWidget(),
   'SignUp': (data) async => SignUpWidget(),
   'Login': (data) async => LoginWidget(),
+  'LoginCopy': (data) async => LoginCopyWidget(),
   'OnboardingInfo': (data) async => OnboardingInfoWidget(),
   'UserDetails': (data) async => UserDetailsWidget(),
   'Dashboard': (data) async =>
@@ -135,7 +136,8 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
             data, 'uncategorized', BudgetCategoriesRecord.serializer),
         dateRange: getParameter(data, 'dateRange'),
       ),
-  'editBudgetCategoriesCopy': (data) async => EditBudgetCategoriesCopyWidget(
+  'createBudgetCategoriesCopy': (data) async =>
+      CreateBudgetCategoriesCopyWidget(
         createdBudget: await getDocumentParameter(
             data, 'createdBudget', BudgetsRecord.serializer),
         uncategorized: await getDocumentParameter(
@@ -150,6 +152,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'Profile': (data) async => NavBarPage(initialPage: 'Profile'),
   'LinkMonoCopy': (data) async => LinkMonoCopyWidget(),
   'Admin': (data) async => AdminWidget(),
+  'ProfileSettings': (data) async => ProfileSettingsWidget(),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

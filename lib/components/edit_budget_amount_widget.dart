@@ -13,9 +13,11 @@ class EditBudgetAmountWidget extends StatefulWidget {
   const EditBudgetAmountWidget({
     Key key,
     this.budget,
+    this.categoryTotal,
   }) : super(key: key);
 
   final BudgetsRecord budget;
+  final int categoryTotal;
 
   @override
   _EditBudgetAmountWidgetState createState() => _EditBudgetAmountWidgetState();
@@ -25,10 +27,9 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 48),
+      padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 48),
       child: Container(
         width: double.infinity,
-        height: 300,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).primaryBackground,
           boxShadow: [
@@ -75,14 +76,36 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent('Button-ON_TAP');
-                      logFirebaseEvent('Button-Backend-Call');
+                      if ((FFAppState().currencyTextField) >
+                          (widget.categoryTotal)) {
+                        logFirebaseEvent('Button-Backend-Call');
 
-                      final budgetsUpdateData = createBudgetsRecordData(
-                        budgetAmount: FFAppState().currencyTextField,
-                      );
-                      await widget.budget.reference.update(budgetsUpdateData);
-                      logFirebaseEvent('Button-Navigate-Back');
-                      Navigator.pop(context);
+                        final budgetsUpdateData = createBudgetsRecordData(
+                          budgetAmount: FFAppState().currencyTextField,
+                        );
+                        await widget.budget.reference.update(budgetsUpdateData);
+                        logFirebaseEvent('Button-Navigate-Back');
+                        Navigator.pop(context);
+                      } else {
+                        logFirebaseEvent('Button-Alert-Dialog');
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('Invalid Entry'),
+                              content: Text(
+                                  'Budget amount needs to be greater than the total amount of already created categories. '),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('Okay'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
                     },
                     text: 'Save',
                     options: FFButtonOptions(

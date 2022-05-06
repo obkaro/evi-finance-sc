@@ -55,7 +55,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 48),
+      padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 48),
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 420,

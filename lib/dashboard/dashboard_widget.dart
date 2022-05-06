@@ -99,167 +99,176 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     ],
                   ),
                 ),
-                StreamBuilder<List<AccountsRecord>>(
-                  stream: queryAccountsRecord(
-                    queryBuilder: (accountsRecord) => accountsRecord
-                        .where('accountOwner', isEqualTo: currentUserReference),
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: SpinKitRing(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            size: 50,
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(6, 0, 0, 0),
+                  child: StreamBuilder<List<AccountsRecord>>(
+                    stream: queryAccountsRecord(
+                      queryBuilder: (accountsRecord) => accountsRecord.where(
+                          'accountOwner',
+                          isEqualTo: currentUserReference),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: SpinKitRing(
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              size: 50,
+                            ),
                           ),
-                        ),
-                      );
-                    }
-                    List<AccountsRecord> rowAccountsRecordList = snapshot.data;
-                    return SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: List.generate(rowAccountsRecordList.length,
-                            (rowIndex) {
-                          final rowAccountsRecord =
-                              rowAccountsRecordList[rowIndex];
-                          return Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(10, 10, 0, 10),
-                            child: InkWell(
-                              onTap: () async {
-                                logFirebaseEvent('Container-ON_TAP');
-                                logFirebaseEvent('Container-Navigate-To');
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AccountSingleWidget(
-                                      account: rowAccountsRecord,
+                        );
+                      }
+                      List<AccountsRecord> rowAccountsRecordList =
+                          snapshot.data;
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: List.generate(rowAccountsRecordList.length,
+                              (rowIndex) {
+                            final rowAccountsRecord =
+                                rowAccountsRecordList[rowIndex];
+                            return Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(10, 10, 0, 10),
+                              child: InkWell(
+                                onTap: () async {
+                                  logFirebaseEvent('Container-ON_TAP');
+                                  logFirebaseEvent('Container-Navigate-To');
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AccountSingleWidget(
+                                        account: rowAccountsRecord,
+                                      ),
                                     ),
+                                  );
+                                },
+                                child: Container(
+                                  width: 145,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(16),
                                   ),
-                                );
-                              },
-                              child: Container(
-                                width: 145,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 16, 16, 16),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Container(
-                                        width: 70,
-                                        height: 70,
-                                        child: Stack(
-                                          alignment: AlignmentDirectional(0, 0),
-                                          children: [
-                                            Align(
-                                              alignment:
-                                                  AlignmentDirectional(0, 0),
-                                              child: Container(
-                                                width: double.infinity,
-                                                height: double.infinity,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          300),
-                                                ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16, 16, 16, 16),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Container(
+                                          width: 70,
+                                          height: 70,
+                                          child: Stack(
+                                            alignment:
+                                                AlignmentDirectional(0, 0),
+                                            children: [
+                                              Align(
                                                 alignment:
                                                     AlignmentDirectional(0, 0),
+                                                child: Container(
+                                                  width: double.infinity,
+                                                  height: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            300),
+                                                  ),
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0, 0),
+                                                ),
                                               ),
-                                            ),
-                                            FutureBuilder<
-                                                List<
-                                                    ConstInstitutionLogosRecord>>(
-                                              future:
-                                                  queryConstInstitutionLogosRecordOnce(
-                                                queryBuilder:
-                                                    (constInstitutionLogosRecord) =>
-                                                        constInstitutionLogosRecord.where(
-                                                            'institutionCode',
-                                                            isEqualTo:
-                                                                rowAccountsRecord
-                                                                    .bankCode),
-                                                singleRecord: true,
-                                              ),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50,
-                                                      height: 50,
-                                                      child: SpinKitRing(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                        size: 50,
+                                              FutureBuilder<
+                                                  List<
+                                                      ConstInstitutionLogosRecord>>(
+                                                future:
+                                                    queryConstInstitutionLogosRecordOnce(
+                                                  queryBuilder: (constInstitutionLogosRecord) =>
+                                                      constInstitutionLogosRecord
+                                                          .where(
+                                                              'institutionCode',
+                                                              isEqualTo:
+                                                                  rowAccountsRecord
+                                                                      .bankCode),
+                                                  singleRecord: true,
+                                                ),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50,
+                                                        height: 50,
+                                                        child: SpinKitRing(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
+                                                          size: 50,
+                                                        ),
                                                       ),
+                                                    );
+                                                  }
+                                                  List<ConstInstitutionLogosRecord>
+                                                      imageConstInstitutionLogosRecordList =
+                                                      snapshot.data;
+                                                  // Return an empty Container when the document does not exist.
+                                                  if (snapshot.data.isEmpty) {
+                                                    return Container();
+                                                  }
+                                                  final imageConstInstitutionLogosRecord =
+                                                      imageConstInstitutionLogosRecordList
+                                                              .isNotEmpty
+                                                          ? imageConstInstitutionLogosRecordList
+                                                              .first
+                                                          : null;
+                                                  return ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12),
+                                                    child: Image.network(
+                                                      imageConstInstitutionLogosRecord
+                                                          .institutionLogo,
+                                                      width: 45,
+                                                      height: 45,
+                                                      fit: BoxFit.cover,
                                                     ),
                                                   );
-                                                }
-                                                List<ConstInstitutionLogosRecord>
-                                                    imageConstInstitutionLogosRecordList =
-                                                    snapshot.data;
-                                                // Return an empty Container when the document does not exist.
-                                                if (snapshot.data.isEmpty) {
-                                                  return Container();
-                                                }
-                                                final imageConstInstitutionLogosRecord =
-                                                    imageConstInstitutionLogosRecordList
-                                                            .isNotEmpty
-                                                        ? imageConstInstitutionLogosRecordList
-                                                            .first
-                                                        : null;
-                                                return ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                  child: Image.network(
-                                                    imageConstInstitutionLogosRecord
-                                                        .institutionLogo,
-                                                    width: 45,
-                                                    height: 45,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ],
+                                                },
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 10, 0, 0),
-                                        child: Text(
-                                          functions.formatTransCurrency(
-                                              rowAccountsRecord.accountBalance),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 10, 0, 0),
+                                          child: Text(
+                                            functions.formatTransCurrency(
+                                                rowAccountsRecord
+                                                    .accountBalance),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          );
-                        }),
-                      ),
-                    );
-                  },
+                            );
+                          }),
+                        ),
+                      );
+                    },
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
@@ -299,7 +308,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(10, 8, 10, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
                   child: StreamBuilder<List<BudgetsRecord>>(
                     stream: queryBudgetsRecord(
                       queryBuilder: (budgetsRecord) => budgetsRecord
@@ -459,7 +468,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                               .subtitle1,
                                                         ),
                                                         Text(
-                                                          '${functions.formatBudgetCurrency(functions.subInt(containerBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList())))} Remaining',
+                                                          '${functions.subtractCurrency(containerBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .subtitle2,
@@ -520,7 +529,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 10),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
