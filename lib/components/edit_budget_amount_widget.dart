@@ -24,73 +24,102 @@ class EditBudgetAmountWidget extends StatefulWidget {
 class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 300,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).primaryBackground,
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 5,
-            color: Color(0x3B1D2429),
-            offset: Offset(0, -3),
-          )
-        ],
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(0),
-          bottomRight: Radius.circular(0),
-          topLeft: Radius.circular(16),
-          topRight: Radius.circular(16),
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 48),
+      child: Container(
+        width: double.infinity,
+        height: 300,
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).primaryBackground,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 5,
+              color: Color(0x3B1D2429),
+              offset: Offset(0, -3),
+            )
+          ],
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(0),
+            bottomRight: Radius.circular(0),
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+          ),
         ),
-      ),
-      child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                child: Text(
-                  'Edit Budget Amount',
-                  textAlign: TextAlign.start,
-                  style: FlutterFlowTheme.of(context).title3,
+        child: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                  child: Text(
+                    'Edit Budget Amount',
+                    textAlign: TextAlign.start,
+                    style: FlutterFlowTheme.of(context).title3,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                child: custom_widgets.CurrencyTextField(
-                  width: MediaQuery.of(context).size.width,
-                  height: 50,
-                  amount: widget.budget.budgetAmount,
-                  labelText: 'Amount',
-                  hintText: 'Enter amount',
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                  child: custom_widgets.CurrencyTextField(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    amount: widget.budget.budgetAmount,
+                    labelText: 'Amount',
+                    hintText: 'Enter amount',
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                child: FFButtonWidget(
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      logFirebaseEvent('Button-ON_TAP');
+                      logFirebaseEvent('Button-Backend-Call');
+
+                      final budgetsUpdateData = createBudgetsRecordData(
+                        budgetAmount: FFAppState().currencyTextField,
+                      );
+                      await widget.budget.reference.update(budgetsUpdateData);
+                      logFirebaseEvent('Button-Navigate-Back');
+                      Navigator.pop(context);
+                    },
+                    text: 'Save',
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 50,
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      textStyle:
+                          FlutterFlowTheme.of(context).subtitle2.override(
+                                fontFamily: 'Source Sans Pro',
+                                color: Colors.white,
+                              ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: 12,
+                    ),
+                  ),
+                ),
+                FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent('Button-ON_TAP');
-                    logFirebaseEvent('Button-Backend-Call');
-
-                    final budgetsUpdateData = createBudgetsRecordData(
-                      budgetAmount: FFAppState().currencyTextField,
-                    );
-                    await widget.budget.reference.update(budgetsUpdateData);
                     logFirebaseEvent('Button-Navigate-Back');
                     Navigator.pop(context);
                   },
-                  text: 'Save',
+                  text: 'Cancel',
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 50,
-                    color: FlutterFlowTheme.of(context).primaryColor,
+                    color: FlutterFlowTheme.of(context).primaryBackground,
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily: 'Source Sans Pro',
-                          color: Colors.white,
+                          fontFamily: 'Lexend Deca',
+                          color: Color(0xFF57636C),
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
                         ),
+                    elevation: 0,
                     borderSide: BorderSide(
                       color: Colors.transparent,
                       width: 1,
@@ -98,33 +127,8 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                     borderRadius: 12,
                   ),
                 ),
-              ),
-              FFButtonWidget(
-                onPressed: () async {
-                  logFirebaseEvent('Button-ON_TAP');
-                  logFirebaseEvent('Button-Navigate-Back');
-                  Navigator.pop(context);
-                },
-                text: 'Cancel',
-                options: FFButtonOptions(
-                  width: double.infinity,
-                  height: 50,
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: 'Lexend Deca',
-                        color: Color(0xFF57636C),
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                      ),
-                  elevation: 0,
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1,
-                  ),
-                  borderRadius: 12,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

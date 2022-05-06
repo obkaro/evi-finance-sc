@@ -924,7 +924,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                             fontFamily:
                                                                                 'Source Sans Pro',
                                                                             color:
-                                                                                FlutterFlowTheme.of(context).secondaryColor,
+                                                                                FlutterFlowTheme.of(context).tertiaryColor,
                                                                           ),
                                                                     ),
                                                                 ],

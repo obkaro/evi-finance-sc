@@ -138,7 +138,7 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
                             },
                             child: Container(
                               width: double.infinity,
-                              height: 100,
+                              height: 80,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -154,8 +154,8 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
                                   children: [
                                     Text(
                                       '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
-                                      style:
-                                          FlutterFlowTheme.of(context).title3,
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle1,
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(

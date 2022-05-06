@@ -22,6 +22,8 @@ export 'edit_budget_categories/edit_budget_categories_widget.dart'
     show EditBudgetCategoriesWidget;
 export 'create_budget_categories/create_budget_categories_widget.dart'
     show CreateBudgetCategoriesWidget;
+export 'edit_budget_categories_copy/edit_budget_categories_copy_widget.dart'
+    show EditBudgetCategoriesCopyWidget;
 export 'accounts/accounts_widget.dart' show AccountsWidget;
 export 'account_single/account_single_widget.dart' show AccountSingleWidget;
 export 'profile/profile_widget.dart' show ProfileWidget;

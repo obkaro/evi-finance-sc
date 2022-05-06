@@ -205,8 +205,12 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                       child: Text(
                                         functions.formatTransCurrency(widget
                                             .transaction.transactionAmount),
-                                        style:
-                                            FlutterFlowTheme.of(context).title3,
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle1
+                                            .override(
+                                              fontFamily: 'Source Sans Pro',
+                                              fontSize: 20,
+                                            ),
                                       ),
                                     ),
                                   ],

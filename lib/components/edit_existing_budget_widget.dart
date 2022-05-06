@@ -1,36 +1,36 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../create_budget_categories/create_budget_categories_widget.dart';
+import '../edit_budget_categories/edit_budget_categories_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
-import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CreateNewBudgetWidget extends StatefulWidget {
-  const CreateNewBudgetWidget({
+class EditExistingBudgetWidget extends StatefulWidget {
+  const EditExistingBudgetWidget({
     Key key,
     this.budget,
-    this.budgetRemaining,
+    this.categoriesSum,
+    this.uncategorized,
   }) : super(key: key);
 
   final BudgetsRecord budget;
-  final int budgetRemaining;
+  final int categoriesSum;
+  final BudgetCategoriesRecord uncategorized;
 
   @override
-  _CreateNewBudgetWidgetState createState() => _CreateNewBudgetWidgetState();
+  _EditExistingBudgetWidgetState createState() =>
+      _EditExistingBudgetWidgetState();
 }
 
-class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
+class _EditExistingBudgetWidgetState extends State<EditExistingBudgetWidget> {
   bool switchListTileValue;
   TextEditingController textController;
-  BudgetCategoriesRecord uncategorized;
-  BudgetsRecord createdBudget;
   DateTimeRange startEndRange;
 
   @override
@@ -97,6 +97,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                   child: custom_widgets.CurrencyTextField(
                     width: MediaQuery.of(context).size.width,
                     height: 50,
+                    amount: widget.budget.budgetAmount,
                     labelText: 'Amount',
                     hintText: 'Enter amount',
                   ),
@@ -116,7 +117,8 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: SwitchListTile(
-                          value: switchListTileValue ??= true,
+                          value: switchListTileValue ??=
+                              widget.budget.isRecurring,
                           onChanged: (newValue) =>
                               setState(() => switchListTileValue = newValue),
                           title: Text(
@@ -139,61 +141,54 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent('Button-ON_TAP');
-                      // Action_CreateBudgetStep1
-                      logFirebaseEvent('Button-Action_CreateBudgetStep1');
+                      if ((FFAppState().currencyTextField) >
+                          (widget.categoriesSum)) {
+                        // Action_CreateBudgetStep1
+                        logFirebaseEvent('Button-Action_CreateBudgetStep1');
 
-                      final budgetsCreateData = createBudgetsRecordData(
-                        budgetOwner: currentUserReference,
-                        budgetAmount: FFAppState().currencyTextField,
-                        budgetDateCreated: getCurrentTimestamp,
-                        budgetID: random_data.randomString(
-                          24,
-                          24,
-                          true,
-                          true,
-                          true,
-                        ),
-                        isRecurring: switchListTileValue,
-                      );
-                      var budgetsRecordReference =
-                          BudgetsRecord.collection.doc();
-                      await budgetsRecordReference.set(budgetsCreateData);
-                      createdBudget = BudgetsRecord.getDocumentFromData(
-                          budgetsCreateData, budgetsRecordReference);
-                      logFirebaseEvent('Button-Backend-Call');
-
-                      final budgetCategoriesCreateData =
-                          createBudgetCategoriesRecordData(
-                        categoryName: 'Uncategorized',
-                        categoryBudget: createdBudget.reference,
-                        budgetOwner: currentUserReference,
-                      );
-                      var budgetCategoriesRecordReference =
-                          BudgetCategoriesRecord.collection.doc();
-                      await budgetCategoriesRecordReference
-                          .set(budgetCategoriesCreateData);
-                      uncategorized =
-                          BudgetCategoriesRecord.getDocumentFromData(
-                              budgetCategoriesCreateData,
-                              budgetCategoriesRecordReference);
-                      logFirebaseEvent('Button-Navigate-Back');
-                      Navigator.pop(context);
-                      logFirebaseEvent('Button-Custom-Action');
-                      startEndRange = await actions.selectDateRange(
-                        context,
-                        createdBudget,
-                      );
-                      logFirebaseEvent('Button-Navigate-To');
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateBudgetCategoriesWidget(
-                            createdBudget: createdBudget,
-                            uncategorized: uncategorized,
-                            dateRange: startEndRange,
+                        final budgetsUpdateData = createBudgetsRecordData(
+                          budgetAmount: FFAppState().currencyTextField,
+                          isRecurring: switchListTileValue,
+                        );
+                        await widget.budget.reference.update(budgetsUpdateData);
+                        logFirebaseEvent('Button-Navigate-Back');
+                        Navigator.pop(context);
+                        logFirebaseEvent('Button-Custom-Action');
+                        startEndRange = await actions.selectDateRange(
+                          context,
+                          widget.budget,
+                        );
+                        logFirebaseEvent('Button-Navigate-To');
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditBudgetCategoriesWidget(
+                              createdBudget: widget.budget,
+                              uncategorized: widget.uncategorized,
+                              dateRange: startEndRange,
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                      } else {
+                        logFirebaseEvent('Button-Alert-Dialog');
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('Invalid entry'),
+                              content: Text(
+                                  'Budget amount should be greater than the sum of existing categories within it.'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('Okay'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
 
                       setState(() {});
                     },
