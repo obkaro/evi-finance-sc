@@ -136,7 +136,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 10),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -158,8 +158,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                               animation: true,
                               progressColor:
                                   FlutterFlowTheme.of(context).primaryColor,
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).tertiaryColor,
+                              backgroundColor: Color(0x341B998B),
                               center: Text(
                                 '${functions.subtractCurrency(widget.category.allocatedAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList()))}',
                                 textAlign: TextAlign.center,

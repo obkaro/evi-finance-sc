@@ -106,7 +106,7 @@ class _EditBudgetCategoriesWidgetState
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 20),
+              padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 20),
               child: StreamBuilder<List<BudgetsRecord>>(
                 stream: queryBudgetsRecord(
                   queryBuilder: (budgetsRecord) => budgetsRecord
@@ -256,6 +256,10 @@ class _EditBudgetCategoriesWidgetState
                                                   .viewInsets,
                                               child: EditBudgetAmountWidget(
                                                 budget: columnBudgetsRecord,
+                                                categoryTotal: functions
+                                                    .sumCategoryAmounts(
+                                                        editBudgetCategoriesBudgetCategoriesRecordList
+                                                            .toList()),
                                               ),
                                             );
                                           },

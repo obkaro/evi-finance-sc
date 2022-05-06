@@ -42,7 +42,6 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
       padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 48),
       child: Container(
         width: double.infinity,
-        height: 325,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).primaryBackground,
           boxShadow: [
@@ -60,6 +59,19 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Unallocated: ${functions.formatBudgetCurrency(widget.budgetRemaining)}',
+                      style: FlutterFlowTheme.of(context).subtitle2.override(
+                            fontFamily: 'Source Sans Pro',
+                            color: Color(0xFFFF0303),
+                          ),
+                    ),
+                  ],
+                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
                   child: TextFormField(

@@ -2,6 +2,7 @@
 export 'land_page/land_page_widget.dart' show LandPageWidget;
 export 'sign_up/sign_up_widget.dart' show SignUpWidget;
 export 'login/login_widget.dart' show LoginWidget;
+export 'login_copy/login_copy_widget.dart' show LoginCopyWidget;
 export 'onboarding_info/onboarding_info_widget.dart' show OnboardingInfoWidget;
 export 'user_details/user_details_widget.dart' show UserDetailsWidget;
 export 'dashboard/dashboard_widget.dart' show DashboardWidget;
@@ -22,10 +23,12 @@ export 'edit_budget_categories/edit_budget_categories_widget.dart'
     show EditBudgetCategoriesWidget;
 export 'create_budget_categories/create_budget_categories_widget.dart'
     show CreateBudgetCategoriesWidget;
-export 'edit_budget_categories_copy/edit_budget_categories_copy_widget.dart'
-    show EditBudgetCategoriesCopyWidget;
+export 'create_budget_categories_copy/create_budget_categories_copy_widget.dart'
+    show CreateBudgetCategoriesCopyWidget;
 export 'accounts/accounts_widget.dart' show AccountsWidget;
 export 'account_single/account_single_widget.dart' show AccountSingleWidget;
 export 'profile/profile_widget.dart' show ProfileWidget;
 export 'link_mono_copy/link_mono_copy_widget.dart' show LinkMonoCopyWidget;
 export 'admin/admin_widget.dart' show AdminWidget;
+export 'profile_settings/profile_settings_widget.dart'
+    show ProfileSettingsWidget;

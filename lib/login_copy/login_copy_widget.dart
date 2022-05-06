@@ -2,32 +2,28 @@ import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../main.dart';
+import '../login/login_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginWidget extends StatefulWidget {
-  const LoginWidget({Key key}) : super(key: key);
+class LoginCopyWidget extends StatefulWidget {
+  const LoginCopyWidget({Key key}) : super(key: key);
 
   @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+  _LoginCopyWidgetState createState() => _LoginCopyWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _LoginCopyWidgetState extends State<LoginCopyWidget> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController inputEmailController;
-  TextEditingController inputPasswordController;
-  bool inputPasswordVisibility;
 
   @override
   void initState() {
     super.initState();
     inputEmailController = TextEditingController();
-    inputPasswordController = TextEditingController();
-    inputPasswordVisibility = false;
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Login'});
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'LoginCopy'});
   }
 
   @override
@@ -83,7 +79,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     10, 0, 0, 16),
                                 child: Text(
-                                  'Login',
+                                  'Forgot Password',
                                   style: FlutterFlowTheme.of(context)
                                       .title1
                                       .override(
@@ -158,65 +154,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                             ),
                                           ),
                                         ),
-                                        Container(
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 0, 16),
-                                            child: TextFormField(
-                                              controller:
-                                                  inputPasswordController,
-                                              obscureText:
-                                                  !inputPasswordVisibility,
-                                              decoration: InputDecoration(
-                                                labelText: 'Password',
-                                                hintText: 'Enter your password',
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(16),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(16),
-                                                ),
-                                                filled: true,
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                suffixIcon: InkWell(
-                                                  onTap: () => setState(
-                                                    () => inputPasswordVisibility =
-                                                        !inputPasswordVisibility,
-                                                  ),
-                                                  child: Icon(
-                                                    inputPasswordVisibility
-                                                        ? Icons
-                                                            .visibility_outlined
-                                                        : Icons
-                                                            .visibility_off_outlined,
-                                                    color: Color(0xFF757575),
-                                                    size: 22,
-                                                  ),
-                                                ),
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1,
-                                            ),
-                                          ),
-                                        ),
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
@@ -232,29 +169,33 @@ class _LoginWidgetState extends State<LoginWidget> {
                                             // Action_SignUp
                                             logFirebaseEvent(
                                                 'Button_SignUp-Action_SignUp');
-
-                                            final user = await signInWithEmail(
-                                              context,
-                                              inputEmailController.text,
-                                              inputPasswordController.text,
-                                            );
-                                            if (user == null) {
+                                            if (inputEmailController
+                                                .text.isEmpty) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'Email required!',
+                                                  ),
+                                                ),
+                                              );
                                               return;
                                             }
-
+                                            await resetPassword(
+                                              email: inputEmailController.text,
+                                              context: context,
+                                            );
                                             logFirebaseEvent(
                                                 'Button_SignUp-Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    NavBarPage(
-                                                        initialPage:
-                                                            'Dashboard'),
+                                                    LoginWidget(),
                                               ),
                                             );
                                           },
-                                          text: 'Login',
+                                          text: 'Reset Password',
                                           options: FFButtonOptions(
                                             width: double.infinity,
                                             height: 55,
@@ -268,37 +209,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                           'Source Sans Pro',
                                                       color: Colors.white,
                                                     ),
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1,
-                                            ),
-                                            borderRadius: 16,
-                                          ),
-                                        ),
-                                        FFButtonWidget(
-                                          onPressed: () async {
-                                            logFirebaseEvent(
-                                                'Button_SignUp-ON_TAP');
-                                            logFirebaseEvent(
-                                                'Button_SignUp-Navigate-To');
-                                            await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    NavBarPage(
-                                                        initialPage: 'Budgets'),
-                                              ),
-                                            );
-                                          },
-                                          text: 'Forgot Password?',
-                                          options: FFButtonOptions(
-                                            width: double.infinity,
-                                            height: 55,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText2,
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1,

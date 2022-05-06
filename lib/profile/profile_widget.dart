@@ -1,10 +1,7 @@
 import '../admin/admin_widget.dart';
-import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
-import '../land_page/land_page_widget.dart';
-import '../main.dart';
+import '../profile_settings/profile_settings_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,112 +30,285 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              FFButtonWidget(
-                                onPressed: () async {
-                                  logFirebaseEvent('Button-ON_TAP');
-                                  logFirebaseEvent('Button-Navigate-To');
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          NavBarPage(initialPage: 'Accounts'),
-                                    ),
-                                  );
-                                },
-                                text: 'Accounts',
-                                options: FFButtonOptions(
-                                  width: double.infinity,
-                                  height: 50,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'Source Sans Pro',
-                                        color: Colors.white,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                  child: Container(
+                    width: double.infinity,
+                    height: 72,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(1, 1, 1, 1),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                            child: Icon(
+                              Icons.settings_rounded,
+                              color: Color(0xFFF4F4F4),
+                              size: 24,
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(8, 0, 20, 0),
+                            child: Text(
+                              'Settings',
+                              style:
+                                  FlutterFlowTheme.of(context).title1.override(
+                                        fontFamily: 'Spline Sans',
+                                        color: Color(0xFFF4F4F4),
+                                        useGoogleFonts: false,
                                       ),
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1,
-                                  ),
-                                  borderRadius: 12,
-                                ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            logFirebaseEvent('ListTile-ON_TAP');
+                            logFirebaseEvent('ListTile-Navigate-To');
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProfileSettingsWidget(),
                               ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                                child: InkWell(
-                                  onLongPress: () async {
-                                    logFirebaseEvent('Button-ON_LONG_PRESS');
-                                    logFirebaseEvent('Button-Navigate-To');
-                                    await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => AdminWidget(),
-                                      ),
-                                    );
-                                  },
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      logFirebaseEvent('Button-ON_TAP');
-                                      logFirebaseEvent('Button-Auth');
-                                      await signOut();
-                                      await Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              LandPageWidget(),
-                                        ),
-                                        (r) => false,
-                                      );
-                                    },
-                                    text: 'Logout',
-                                    options: FFButtonOptions(
-                                      width: double.infinity,
-                                      height: 50,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .subtitle2
-                                          .override(
-                                            fontFamily: 'Source Sans Pro',
-                                            color: Colors.white,
-                                          ),
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1,
-                                      ),
-                                      borderRadius: 12,
-                                    ),
+                            );
+                          },
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.person_rounded,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 32,
+                            ),
+                            title: Text(
+                              'Profile',
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                    fontFamily: 'Source Sans Pro',
+                                    lineHeight: 1.6,
                                   ),
-                                ),
-                              ),
-                            ],
+                            ),
+                            subtitle: Text(
+                              'Edit profile settings',
+                              style: FlutterFlowTheme.of(context).subtitle2,
+                            ),
+                            trailing: Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF303030),
+                              size: 20,
+                            ),
+                            dense: false,
+                            contentPadding:
+                                EdgeInsetsDirectional.fromSTEB(20, 10, 20, 16),
                           ),
                         ),
-                      ),
-                    ],
+                        InkWell(
+                          onTap: () async {
+                            logFirebaseEvent('ListTile-ON_TAP');
+                            logFirebaseEvent('ListTile-Google-Analytics-Event');
+                            logFirebaseEvent('premiumClick');
+                          },
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.star_rounded,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 32,
+                            ),
+                            title: Text(
+                              'Premium Plan',
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                    fontFamily: 'Source Sans Pro',
+                                    lineHeight: 1.6,
+                                  ),
+                            ),
+                            subtitle: Text(
+                              'Get in on Evi premium options',
+                              style: FlutterFlowTheme.of(context).subtitle2,
+                            ),
+                            dense: false,
+                            contentPadding:
+                                EdgeInsetsDirectional.fromSTEB(20, 10, 20, 16),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            logFirebaseEvent('ListTile-ON_TAP');
+                            if ((Theme.of(context).brightness ==
+                                    Brightness.dark) ==
+                                true) {
+                              logFirebaseEvent(
+                                  'ListTile-Set-Dark-Mode-Settings');
+                              setDarkModeSetting(context, ThemeMode.light);
+                            } else {
+                              logFirebaseEvent(
+                                  'ListTile-Set-Dark-Mode-Settings');
+                              setDarkModeSetting(context, ThemeMode.dark);
+                            }
+                          },
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.toggle_on_rounded,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 32,
+                            ),
+                            title: Text(
+                              'Dark Mode',
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                    fontFamily: 'Source Sans Pro',
+                                    lineHeight: 1.6,
+                                  ),
+                            ),
+                            subtitle: Text(
+                              'Toggle dark/light mode',
+                              style: FlutterFlowTheme.of(context).subtitle2,
+                            ),
+                            trailing: Icon(
+                              Icons.arrow_forward_ios,
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              size: 20,
+                            ),
+                            dense: false,
+                            contentPadding:
+                                EdgeInsetsDirectional.fromSTEB(20, 10, 20, 16),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            logFirebaseEvent('ListTile-ON_TAP');
+                            logFirebaseEvent('ListTile-Launch-U-R-L');
+                            await launchURL(
+                                'https://www.evifinance.com/privacy-policy');
+                          },
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.shield,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 32,
+                            ),
+                            title: Text(
+                              'Personal data & Privacy',
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                    fontFamily: 'Source Sans Pro',
+                                    lineHeight: 1.6,
+                                  ),
+                            ),
+                            subtitle: Text(
+                              'Review and manage your data',
+                              style: FlutterFlowTheme.of(context).subtitle2,
+                            ),
+                            dense: false,
+                            contentPadding:
+                                EdgeInsetsDirectional.fromSTEB(20, 10, 20, 16),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            logFirebaseEvent('ListTile-ON_TAP');
+                            logFirebaseEvent('ListTile-Launch-U-R-L');
+                            await launchURL(
+                                'https://www.evifinance.com/general-terms');
+                          },
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.launch_rounded,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 32,
+                            ),
+                            title: Text(
+                              'Terms and Conditions',
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                    fontFamily: 'Source Sans Pro',
+                                    lineHeight: 1.6,
+                                  ),
+                            ),
+                            subtitle: Text(
+                              'Link to our TCs',
+                              style: FlutterFlowTheme.of(context).subtitle2,
+                            ),
+                            dense: false,
+                            contentPadding:
+                                EdgeInsetsDirectional.fromSTEB(20, 10, 20, 16),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            logFirebaseEvent('ListTile-ON_TAP');
+                            logFirebaseEvent('ListTile-Launch-U-R-L');
+                            await launchURL('https://www.evifinance.com');
+                          },
+                          onLongPress: () async {
+                            logFirebaseEvent('ListTile-ON_LONG_PRESS');
+                            logFirebaseEvent('ListTile-Navigate-To');
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AdminWidget(),
+                              ),
+                            );
+                          },
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.info_rounded,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 32,
+                            ),
+                            title: Text(
+                              'About Us',
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                    fontFamily: 'Source Sans Pro',
+                                    lineHeight: 1.6,
+                                  ),
+                            ),
+                            subtitle: Text(
+                              'Learn more about Evi Finance',
+                              style: FlutterFlowTheme.of(context).subtitle2,
+                            ),
+                            dense: false,
+                            contentPadding:
+                                EdgeInsetsDirectional.fromSTEB(20, 10, 20, 16),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -18,8 +18,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EditBudgetCategoriesCopyWidget extends StatefulWidget {
-  const EditBudgetCategoriesCopyWidget({
+class CreateBudgetCategoriesCopyWidget extends StatefulWidget {
+  const CreateBudgetCategoriesCopyWidget({
     Key key,
     this.createdBudget,
     this.uncategorized,
@@ -31,12 +31,12 @@ class EditBudgetCategoriesCopyWidget extends StatefulWidget {
   final DateTimeRange dateRange;
 
   @override
-  _EditBudgetCategoriesCopyWidgetState createState() =>
-      _EditBudgetCategoriesCopyWidgetState();
+  _CreateBudgetCategoriesCopyWidgetState createState() =>
+      _CreateBudgetCategoriesCopyWidgetState();
 }
 
-class _EditBudgetCategoriesCopyWidgetState
-    extends State<EditBudgetCategoriesCopyWidget> {
+class _CreateBudgetCategoriesCopyWidgetState
+    extends State<CreateBudgetCategoriesCopyWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -44,8 +44,8 @@ class _EditBudgetCategoriesCopyWidgetState
     super.initState();
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('editBudgetCategoriesCopy-ON_PAGE_LOAD');
-      logFirebaseEvent('editBudgetCategoriesCopy-Backend-Call');
+      logFirebaseEvent('createBudgetCategoriesCopy-ON_PAGE_LOAD');
+      logFirebaseEvent('createBudgetCategoriesCopy-Backend-Call');
 
       final budgetsUpdateData = createBudgetsRecordData(
         uncategorizedLink: widget.uncategorized.reference,
@@ -56,7 +56,7 @@ class _EditBudgetCategoriesCopyWidgetState
     });
 
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'editBudgetCategoriesCopy'});
+        parameters: {'screen_name': 'createBudgetCategoriesCopy'});
   }
 
   @override
@@ -81,7 +81,8 @@ class _EditBudgetCategoriesCopyWidgetState
           );
         }
         List<BudgetCategoriesRecord>
-            editBudgetCategoriesCopyBudgetCategoriesRecordList = snapshot.data;
+            createBudgetCategoriesCopyBudgetCategoriesRecordList =
+            snapshot.data;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -101,7 +102,7 @@ class _EditBudgetCategoriesCopyWidgetState
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 20),
+              padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 20),
               child: StreamBuilder<List<BudgetsRecord>>(
                 stream: queryBudgetsRecord(
                   queryBuilder: (budgetsRecord) => budgetsRecord
@@ -173,7 +174,7 @@ class _EditBudgetCategoriesCopyWidgetState
                                       child: Text(
                                         functions.formatBudgetCurrency(
                                             functions.calculateRemBudgetCat(
-                                                editBudgetCategoriesCopyBudgetCategoriesRecordList
+                                                createBudgetCategoriesCopyBudgetCategoriesRecordList
                                                     .toList(),
                                                 columnBudgetsRecord)),
                                         textAlign: TextAlign.end,
@@ -251,6 +252,10 @@ class _EditBudgetCategoriesCopyWidgetState
                                                   .viewInsets,
                                               child: EditBudgetAmountWidget(
                                                 budget: columnBudgetsRecord,
+                                                categoryTotal: functions
+                                                    .sumCategoryAmounts(
+                                                        createBudgetCategoriesCopyBudgetCategoriesRecordList
+                                                            .toList()),
                                               ),
                                             );
                                           },
@@ -347,7 +352,7 @@ class _EditBudgetCategoriesCopyWidgetState
                                             constBudgetCategoriesRecord
                                                 .where('categoryName',
                                                     whereNotIn:
-                                                        editBudgetCategoriesCopyBudgetCategoriesRecordList
+                                                        createBudgetCategoriesCopyBudgetCategoriesRecordList
                                                             .map((e) =>
                                                                 e.categoryName)
                                                             .toList())
@@ -426,7 +431,7 @@ class _EditBudgetCategoriesCopyWidgetState
                                                               columnBudgetsRecord,
                                                           budgetAllocatedRemaining:
                                                               functions.calculateRemBudgetCat(
-                                                                  editBudgetCategoriesCopyBudgetCategoriesRecordList
+                                                                  createBudgetCategoriesCopyBudgetCategoriesRecordList
                                                                       .toList(),
                                                                   columnBudgetsRecord),
                                                         ),
@@ -515,7 +520,7 @@ class _EditBudgetCategoriesCopyWidgetState
                                                 budget: columnBudgetsRecord,
                                                 budgetRemaining: functions
                                                     .calculateRemBudgetCat(
-                                                        editBudgetCategoriesCopyBudgetCategoriesRecordList
+                                                        createBudgetCategoriesCopyBudgetCategoriesRecordList
                                                             .toList(),
                                                         columnBudgetsRecord),
                                               ),
@@ -722,7 +727,7 @@ class _EditBudgetCategoriesCopyWidgetState
                                                                     categoryToEdit:
                                                                         columnBudgetCategoriesRecord,
                                                                     budgetRemaining: functions.calculateRemBudgetCat(
-                                                                        editBudgetCategoriesCopyBudgetCategoriesRecordList
+                                                                        createBudgetCategoriesCopyBudgetCategoriesRecordList
                                                                             .toList(),
                                                                         columnBudgetsRecord),
                                                                   ),
@@ -973,7 +978,7 @@ class _EditBudgetCategoriesCopyWidgetState
                                                 createBudgetCategoriesRecordData(
                                               allocatedAmount: functions
                                                   .calculateRemBudgetCat(
-                                                      editBudgetCategoriesCopyBudgetCategoriesRecordList
+                                                      createBudgetCategoriesCopyBudgetCategoriesRecordList
                                                           .toList(),
                                                       columnBudgetsRecord),
                                             );

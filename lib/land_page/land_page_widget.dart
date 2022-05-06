@@ -136,7 +136,7 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                             .override(
                                               fontFamily: 'Spline Sans',
                                               color: Colors.white,
-                                              fontSize: 48,
+                                              fontSize: 64,
                                               useGoogleFonts: false,
                                             ),
                                       ).animated([
@@ -153,7 +153,7 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
-                                              fontSize: 32,
+                                              fontSize: 48,
                                               useGoogleFonts: false,
                                             ),
                                       ).animated([
@@ -171,7 +171,8 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                               .override(
                                                 fontFamily: 'Source Sans Pro',
                                                 color: Colors.white,
-                                                fontWeight: FontWeight.normal,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
                                                 lineHeight: 1.4,
                                               ),
                                         ).animated([
@@ -211,7 +212,7 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                   text: 'Sign Up',
                                   options: FFButtonOptions(
                                     width: double.infinity,
-                                    height: 55,
+                                    height: 50,
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -224,7 +225,7 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                       color: Colors.transparent,
                                       width: 1,
                                     ),
-                                    borderRadius: 32,
+                                    borderRadius: 12,
                                   ),
                                 ),
                               ),
@@ -251,7 +252,7 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                   text: 'Login',
                                   options: FFButtonOptions(
                                     width: double.infinity,
-                                    height: 55,
+                                    height: 50,
                                     color: Color(0x001B2124),
                                     textStyle: FlutterFlowTheme.of(context)
                                         .subtitle2
@@ -264,7 +265,7 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                       color: Colors.transparent,
                                       width: 1,
                                     ),
-                                    borderRadius: 32,
+                                    borderRadius: 12,
                                   ),
                                 ),
                               ),

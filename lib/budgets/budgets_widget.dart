@@ -99,171 +99,220 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                     ),
                   ),
                 ),
-                StreamBuilder<List<BudgetsRecord>>(
-                  stream: queryBudgetsRecord(
-                    queryBuilder: (budgetsRecord) => budgetsRecord
-                        .where('budgetOwner', isEqualTo: currentUserReference),
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: SpinKitRing(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            size: 50,
-                          ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                  child: Material(
+                    color: Colors.transparent,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: StreamBuilder<List<BudgetsRecord>>(
+                        stream: queryBudgetsRecord(
+                          queryBuilder: (budgetsRecord) => budgetsRecord.where(
+                              'budgetOwner',
+                              isEqualTo: currentUserReference),
                         ),
-                      );
-                    }
-                    List<BudgetsRecord> columnBudgetsRecordList = snapshot.data;
-                    return SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: List.generate(columnBudgetsRecordList.length,
-                            (columnIndex) {
-                          final columnBudgetsRecord =
-                              columnBudgetsRecordList[columnIndex];
-                          return Material(
-                            color: Colors.transparent,
-                            elevation: 1,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                              ),
-                              alignment: AlignmentDirectional(0, 0),
-                              child:
-                                  StreamBuilder<List<BudgetCategoriesRecord>>(
-                                stream: queryBudgetCategoriesRecord(
-                                  queryBuilder: (budgetCategoriesRecord) =>
-                                      budgetCategoriesRecord
-                                          .where('categoryBudget',
-                                              isEqualTo:
-                                                  columnBudgetsRecord.reference)
-                                          .where('categoryName',
-                                              isNotEqualTo: 'Uncategorized'),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: SpinKitRing(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  size: 50,
                                 ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50,
-                                        height: 50,
-                                        child: SpinKitRing(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                          size: 50,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  List<BudgetCategoriesRecord>
-                                      listTileBudgetCategoriesRecordList =
-                                      snapshot.data;
-                                  return InkWell(
-                                    onTap: () async {
-                                      logFirebaseEvent('ListTile-ON_TAP');
-                                      logFirebaseEvent('ListTile-Backend-Call');
+                              ),
+                            );
+                          }
+                          List<BudgetsRecord> columnBudgetsRecordList =
+                              snapshot.data;
+                          return SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children:
+                                  List.generate(columnBudgetsRecordList.length,
+                                      (columnIndex) {
+                                final columnBudgetsRecord =
+                                    columnBudgetsRecordList[columnIndex];
+                                return Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Material(
+                                      color: Colors.transparent,
+                                      elevation: 0,
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(),
+                                        alignment: AlignmentDirectional(0, 0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  10, 0, 10, 0),
+                                          child: StreamBuilder<
+                                              List<BudgetCategoriesRecord>>(
+                                            stream: queryBudgetCategoriesRecord(
+                                              queryBuilder: (budgetCategoriesRecord) =>
+                                                  budgetCategoriesRecord
+                                                      .where('categoryBudget',
+                                                          isEqualTo:
+                                                              columnBudgetsRecord
+                                                                  .reference)
+                                                      .where('categoryName',
+                                                          isNotEqualTo:
+                                                              'Uncategorized'),
+                                            ),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 50,
+                                                    height: 50,
+                                                    child: SpinKitRing(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryColor,
+                                                      size: 50,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              List<BudgetCategoriesRecord>
+                                                  listTileBudgetCategoriesRecordList =
+                                                  snapshot.data;
+                                              return InkWell(
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'ListTile-ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'ListTile-Backend-Call');
 
-                                      final budgetsUpdateData =
-                                          createBudgetsRecordData(
-                                        lastViewed: getCurrentTimestamp,
-                                      );
-                                      await columnBudgetsRecord.reference
-                                          .update(budgetsUpdateData);
-                                      // Action_BudgetSingle
-                                      logFirebaseEvent(
-                                          'ListTile-Action_BudgetSingle');
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              BudgetSingleWidget(
-                                            budget: columnBudgetsRecord,
-                                            uncategorizedAmount:
-                                                functions.calculateRemBudgetCat(
-                                                    listTileBudgetCategoriesRecordList
-                                                        .toList(),
-                                                    columnBudgetsRecord),
+                                                  final budgetsUpdateData =
+                                                      createBudgetsRecordData(
+                                                    lastViewed:
+                                                        getCurrentTimestamp,
+                                                  );
+                                                  await columnBudgetsRecord
+                                                      .reference
+                                                      .update(
+                                                          budgetsUpdateData);
+                                                  // Action_BudgetSingle
+                                                  logFirebaseEvent(
+                                                      'ListTile-Action_BudgetSingle');
+                                                  await Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          BudgetSingleWidget(
+                                                        budget:
+                                                            columnBudgetsRecord,
+                                                        uncategorizedAmount: functions
+                                                            .calculateRemBudgetCat(
+                                                                listTileBudgetCategoriesRecordList
+                                                                    .toList(),
+                                                                columnBudgetsRecord),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Slidable(
+                                                  actionPane:
+                                                      const SlidableScrollActionPane(),
+                                                  secondaryActions: [
+                                                    IconSlideAction(
+                                                      caption: 'Delete',
+                                                      color: Color(0xFFFF0003),
+                                                      icon:
+                                                          Icons.delete_rounded,
+                                                      onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'SlidableActionWidget-ON_TAP');
+                                                        // Action_DeleteBudget
+                                                        logFirebaseEvent(
+                                                            'SlidableActionWidget-Action_DeleteBudget');
+                                                        await columnBudgetsRecord
+                                                            .reference
+                                                            .delete();
+                                                      },
+                                                    ),
+                                                  ],
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Source Sans Pro',
+                                                                lineHeight: 2,
+                                                              ),
+                                                    ),
+                                                    subtitle: Text(
+                                                      functions
+                                                          .formatBudgetCurrency(
+                                                              columnBudgetsRecord
+                                                                  .budgetAmount),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText2
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Source Sans Pro',
+                                                                lineHeight: 2,
+                                                              ),
+                                                    ),
+                                                    trailing: Icon(
+                                                      Icons.arrow_forward_ios,
+                                                      color: Color(0xFF303030),
+                                                      size: 20,
+                                                    ),
+                                                    dense: false,
+                                                    contentPadding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                20, 10, 20, 10),
+                                                  ),
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ),
-                                      );
-                                    },
-                                    child: Slidable(
-                                      actionPane:
-                                          const SlidableScrollActionPane(),
-                                      secondaryActions: [
-                                        IconSlideAction(
-                                          caption: 'Delete',
-                                          color: Color(0xFFFF0003),
-                                          icon: Icons.delete_rounded,
-                                          onTap: () async {
-                                            logFirebaseEvent(
-                                                'SlidableActionWidget-ON_TAP');
-                                            // Action_DeleteBudget
-                                            logFirebaseEvent(
-                                                'SlidableActionWidget-Action_DeleteBudget');
-                                            await columnBudgetsRecord.reference
-                                                .delete();
-                                          },
-                                        ),
-                                      ],
-                                      child: ListTile(
-                                        title: Text(
-                                          '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
-                                          style: FlutterFlowTheme.of(context)
-                                              .subtitle1
-                                              .override(
-                                                fontFamily: 'Source Sans Pro',
-                                                lineHeight: 2,
-                                              ),
-                                        ),
-                                        subtitle: Text(
-                                          functions.formatBudgetCurrency(
-                                              columnBudgetsRecord.budgetAmount),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText2
-                                              .override(
-                                                fontFamily: 'Source Sans Pro',
-                                                lineHeight: 2,
-                                              ),
-                                        ),
-                                        trailing: Icon(
-                                          Icons.arrow_forward_ios,
-                                          color: Color(0xFF303030),
-                                          size: 20,
-                                        ),
-                                        tileColor: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        dense: false,
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                20, 16, 20, 16),
                                       ),
                                     ),
-                                  );
-                                },
-                              ),
+                                    Divider(),
+                                  ],
+                                );
+                              }),
                             ),
                           );
-                        }),
+                        },
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                   child: Container(
                     width: double.infinity,
                     height: 100,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(16),
                     ),
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
