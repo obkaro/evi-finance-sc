@@ -70,6 +70,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
           key: scaffoldKey,
           appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            iconTheme:
+                IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
             automaticallyImplyLeading: true,
             actions: [],
             centerTitle: false,
@@ -221,7 +223,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                             functions.formatTransCurrency(
                                                 widget.account.accountBalance),
                                             style: FlutterFlowTheme.of(context)
-                                                .title3,
+                                                .subtitle1,
                                           ),
                                         ],
                                       ),
@@ -256,7 +258,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                           Text(
                                             widget.account.institutionName,
                                             style: FlutterFlowTheme.of(context)
-                                                .title3,
+                                                .subtitle1,
                                           ),
                                         ],
                                       ),
@@ -291,7 +293,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                           Text(
                                             widget.account.accountNumber,
                                             style: FlutterFlowTheme.of(context)
-                                                .title3,
+                                                .subtitle1,
                                           ),
                                         ],
                                       ),
@@ -326,7 +328,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                           Text(
                                             widget.account.accountType,
                                             style: FlutterFlowTheme.of(context)
-                                                .title3,
+                                                .subtitle1,
                                           ),
                                         ],
                                       ),
@@ -1238,7 +1240,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                           fontFamily:
                                                                               'Source Sans Pro',
                                                                           color:
-                                                                              FlutterFlowTheme.of(context).secondaryColor,
+                                                                              FlutterFlowTheme.of(context).tertiaryColor,
                                                                         ),
                                                                   ),
                                                               ],

@@ -47,6 +47,9 @@ abstract class BudgetsRecord
   String get budgetID;
 
   @nullable
+  DateTime get lastViewed;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -91,6 +94,7 @@ Map<String, dynamic> createBudgetsRecordData({
   bool isRecurring,
   DocumentReference uncategorizedLink,
   String budgetID,
+  DateTime lastViewed,
 }) =>
     serializers.toFirestore(
         BudgetsRecord.serializer,
@@ -106,4 +110,5 @@ Map<String, dynamic> createBudgetsRecordData({
           ..budgetSubCategories = null
           ..isRecurring = isRecurring
           ..uncategorizedLink = uncategorizedLink
-          ..budgetID = budgetID));
+          ..budgetID = budgetID
+          ..lastViewed = lastViewed));

@@ -227,83 +227,48 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
-                    child: StreamBuilder<List<AccountsRecord>>(
-                      stream: queryAccountsRecord(
-                        queryBuilder: (accountsRecord) => accountsRecord.where(
-                            'accountOwner',
-                            isEqualTo: currentUserReference),
-                        singleRecord: true,
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: SpinKitRing(
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                size: 50,
-                              ),
-                            ),
-                          );
-                        }
-                        List<AccountsRecord> buttonAccountsRecordList =
-                            snapshot.data;
-                        // Return an empty Container when the document does not exist.
-                        if (snapshot.data.isEmpty) {
-                          return Container();
-                        }
-                        final buttonAccountsRecord =
-                            buttonAccountsRecordList.isNotEmpty
-                                ? buttonAccountsRecordList.first
-                                : null;
-                        return FFButtonWidget(
-                          onPressed: () async {
-                            logFirebaseEvent('Button-ON_TAP');
-                            // Action_EditBudgetStep1
-                            logFirebaseEvent('Button-Action_EditBudgetStep1');
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        logFirebaseEvent('Button-ON_TAP');
+                        // Action_EditBudgetStep1
+                        logFirebaseEvent('Button-Action_EditBudgetStep1');
 
-                            final budgetsUpdateData = createBudgetsRecordData(
-                              budgetAmount: FFAppState().currencyTextField,
-                              budgetStart: calendarDateStartSelectedDay.start,
-                              budgetEnd: calendarDateEndSelectedDay.end,
-                              isRecurring: switchListTileValue,
-                            );
-                            await widget.createdbudget.reference
-                                .update(budgetsUpdateData);
-                            logFirebaseEvent('Button-Navigate-To');
-                            await Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    EditBudgetCategoriesWidget(
-                                  createdBudget: widget.createdbudget,
-                                  uncategorized: widget.uncategorized,
-                                ),
-                              ),
-                              (r) => false,
-                            );
-                          },
-                          text: 'Next',
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 50,
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Source Sans Pro',
-                                      color: Colors.white,
-                                    ),
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
+                        final budgetsUpdateData = createBudgetsRecordData(
+                          budgetAmount: FFAppState().currencyTextField,
+                          budgetStart: calendarDateStartSelectedDay.start,
+                          budgetEnd: calendarDateEndSelectedDay.end,
+                          isRecurring: switchListTileValue,
+                        );
+                        await widget.createdbudget.reference
+                            .update(budgetsUpdateData);
+                        logFirebaseEvent('Button-Navigate-To');
+                        await Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditBudgetCategoriesWidget(
+                              createdBudget: widget.createdbudget,
+                              uncategorized: widget.uncategorized,
                             ),
-                            borderRadius: 12,
                           ),
+                          (r) => false,
                         );
                       },
+                      text: 'Next',
+                      options: FFButtonOptions(
+                        width: double.infinity,
+                        height: 50,
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        textStyle:
+                            FlutterFlowTheme.of(context).subtitle2.override(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Colors.white,
+                                ),
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: 12,
+                      ),
                     ),
                   ),
                 ],

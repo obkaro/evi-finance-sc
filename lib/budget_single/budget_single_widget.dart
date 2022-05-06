@@ -1,7 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../category_single/category_single_widget.dart';
-import '../edit_budget/edit_budget_widget.dart';
+import '../components/edit_existing_budget_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -137,14 +137,22 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                       logFirebaseEvent('IconButton-ON_TAP');
                       // Action_EditBudget
                       logFirebaseEvent('IconButton-Action_EditBudget');
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditBudgetWidget(
-                            uncategorized: iconButtonBudgetCategoriesRecord,
-                            createdbudget: widget.budget,
-                          ),
-                        ),
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        builder: (context) {
+                          return Padding(
+                            padding: MediaQuery.of(context).viewInsets,
+                            child: EditExistingBudgetWidget(
+                              budget: widget.budget,
+                              uncategorized: iconButtonBudgetCategoriesRecord,
+                              categoriesSum: functions.sumCategoryAmounts(
+                                  budgetSingleBudgetCategoriesRecordList
+                                      .toList()),
+                            ),
+                          );
+                        },
                       );
                     },
                   );
@@ -207,43 +215,88 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          if ((containerTransactionsRecordList
-                                                  .length) >
-                                              0)
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 20, 0, 20),
-                                              child: CircularPercentIndicator(
-                                                percent: functions.calcBudgetChart(
-                                                    widget.budget,
-                                                    containerTransactionsRecordList
-                                                        .toList()),
-                                                radius: 112.5,
-                                                lineWidth: 16,
-                                                animation: true,
-                                                progressColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                backgroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .tertiaryColor,
-                                                center: Text(
-                                                  '${functions.subtractCurrency(widget.budget.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .subtitle1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Source Sans Pro',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                      ),
+                                          Stack(
+                                            children: [
+                                              if ((containerTransactionsRecordList
+                                                      .length) <=
+                                                  0)
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 20, 0, 20),
+                                                  child:
+                                                      CircularPercentIndicator(
+                                                    percent: 0,
+                                                    radius: 112.5,
+                                                    lineWidth: 16,
+                                                    animation: true,
+                                                    progressColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryColor,
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .tertiaryColor,
+                                                    center: Text(
+                                                      '${functions.formatBudgetCurrency(widget.budget.budgetAmount)} Left',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Source Sans Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                              ),
+                                                    ),
+                                                    startAngle: 0,
+                                                  ),
                                                 ),
-                                                startAngle: 0,
-                                              ),
-                                            ),
+                                              if ((containerTransactionsRecordList
+                                                      .length) >
+                                                  0)
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 20, 0, 20),
+                                                  child:
+                                                      CircularPercentIndicator(
+                                                    percent: functions
+                                                        .calcBudgetChart(
+                                                            widget.budget,
+                                                            containerTransactionsRecordList
+                                                                .toList()),
+                                                    radius: 112.5,
+                                                    lineWidth: 16,
+                                                    animation: true,
+                                                    progressColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryColor,
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .tertiaryColor,
+                                                    center: Text(
+                                                      '${functions.subtractCurrency(widget.budget.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Source Sans Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                              ),
+                                                    ),
+                                                    startAngle: 0,
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -279,35 +332,49 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .title3,
+                                                                .subtitle1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Source Sans Pro',
+                                                                  fontSize: 20,
+                                                                ),
                                                       ),
                                                     ],
                                                   ),
-                                                Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Target',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText2,
-                                                    ),
-                                                    Text(
-                                                      functions
-                                                          .formatBudgetCurrency(
-                                                              widget.budget
-                                                                  .budgetAmount),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .title3,
-                                                    ),
-                                                  ],
-                                                ),
+                                                if ((containerTransactionsRecordList
+                                                        .length) >
+                                                    0)
+                                                  Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        'Target',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText2,
+                                                      ),
+                                                      Text(
+                                                        functions
+                                                            .formatBudgetCurrency(
+                                                                widget.budget
+                                                                    .budgetAmount),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .subtitle1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Source Sans Pro',
+                                                                  fontSize: 20,
+                                                                ),
+                                                      ),
+                                                    ],
+                                                  ),
                                               ],
                                             ),
                                           ),

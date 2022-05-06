@@ -18,8 +18,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EditBudgetCategoriesWidget extends StatefulWidget {
-  const EditBudgetCategoriesWidget({
+class EditBudgetCategoriesCopyWidget extends StatefulWidget {
+  const EditBudgetCategoriesCopyWidget({
     Key key,
     this.createdBudget,
     this.uncategorized,
@@ -31,12 +31,12 @@ class EditBudgetCategoriesWidget extends StatefulWidget {
   final DateTimeRange dateRange;
 
   @override
-  _EditBudgetCategoriesWidgetState createState() =>
-      _EditBudgetCategoriesWidgetState();
+  _EditBudgetCategoriesCopyWidgetState createState() =>
+      _EditBudgetCategoriesCopyWidgetState();
 }
 
-class _EditBudgetCategoriesWidgetState
-    extends State<EditBudgetCategoriesWidget> {
+class _EditBudgetCategoriesCopyWidgetState
+    extends State<EditBudgetCategoriesCopyWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -44,16 +44,11 @@ class _EditBudgetCategoriesWidgetState
     super.initState();
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('editBudgetCategories-ON_PAGE_LOAD');
-      logFirebaseEvent('editBudgetCategories-Backend-Call');
-
-      final budgetCategoriesUpdateData = createBudgetCategoriesRecordData(
-        allocatedAmount: 0,
-      );
-      await widget.uncategorized.reference.update(budgetCategoriesUpdateData);
-      logFirebaseEvent('editBudgetCategories-Backend-Call');
+      logFirebaseEvent('editBudgetCategoriesCopy-ON_PAGE_LOAD');
+      logFirebaseEvent('editBudgetCategoriesCopy-Backend-Call');
 
       final budgetsUpdateData = createBudgetsRecordData(
+        uncategorizedLink: widget.uncategorized.reference,
         budgetStart: widget.dateRange.start,
         budgetEnd: widget.dateRange.end,
       );
@@ -61,7 +56,7 @@ class _EditBudgetCategoriesWidgetState
     });
 
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'editBudgetCategories'});
+        parameters: {'screen_name': 'editBudgetCategoriesCopy'});
   }
 
   @override
@@ -86,7 +81,7 @@ class _EditBudgetCategoriesWidgetState
           );
         }
         List<BudgetCategoriesRecord>
-            editBudgetCategoriesBudgetCategoriesRecordList = snapshot.data;
+            editBudgetCategoriesCopyBudgetCategoriesRecordList = snapshot.data;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -95,7 +90,7 @@ class _EditBudgetCategoriesWidgetState
                 IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
             automaticallyImplyLeading: true,
             title: Text(
-              'Edit Budget Categories',
+              'Create Budget Categories',
               style: FlutterFlowTheme.of(context).title3,
             ),
             actions: [],
@@ -178,7 +173,7 @@ class _EditBudgetCategoriesWidgetState
                                       child: Text(
                                         functions.formatBudgetCurrency(
                                             functions.calculateRemBudgetCat(
-                                                editBudgetCategoriesBudgetCategoriesRecordList
+                                                editBudgetCategoriesCopyBudgetCategoriesRecordList
                                                     .toList(),
                                                 columnBudgetsRecord)),
                                         textAlign: TextAlign.end,
@@ -352,7 +347,7 @@ class _EditBudgetCategoriesWidgetState
                                             constBudgetCategoriesRecord
                                                 .where('categoryName',
                                                     whereNotIn:
-                                                        editBudgetCategoriesBudgetCategoriesRecordList
+                                                        editBudgetCategoriesCopyBudgetCategoriesRecordList
                                                             .map((e) =>
                                                                 e.categoryName)
                                                             .toList())
@@ -427,14 +422,13 @@ class _EditBudgetCategoriesWidgetState
                                                             CreateConstCategoryWidget(
                                                           constCategory:
                                                               gridViewConstBudgetCategoriesRecord,
-                                                          budget: widget
-                                                              .createdBudget,
+                                                          budget:
+                                                              columnBudgetsRecord,
                                                           budgetAllocatedRemaining:
                                                               functions.calculateRemBudgetCat(
-                                                                  editBudgetCategoriesBudgetCategoriesRecordList
+                                                                  editBudgetCategoriesCopyBudgetCategoriesRecordList
                                                                       .toList(),
-                                                                  widget
-                                                                      .createdBudget),
+                                                                  columnBudgetsRecord),
                                                         ),
                                                       );
                                                     },
@@ -518,12 +512,12 @@ class _EditBudgetCategoriesWidgetState
                                               padding: MediaQuery.of(context)
                                                   .viewInsets,
                                               child: CreateCustomCategoryWidget(
-                                                budget: widget.createdBudget,
+                                                budget: columnBudgetsRecord,
                                                 budgetRemaining: functions
                                                     .calculateRemBudgetCat(
-                                                        editBudgetCategoriesBudgetCategoriesRecordList
+                                                        editBudgetCategoriesCopyBudgetCategoriesRecordList
                                                             .toList(),
-                                                        widget.createdBudget),
+                                                        columnBudgetsRecord),
                                               ),
                                             );
                                           },
@@ -723,15 +717,14 @@ class _EditBudgetCategoriesWidgetState
                                                                       .viewInsets,
                                                                   child:
                                                                       EditCategoryWidget(
-                                                                    budget: widget
-                                                                        .createdBudget,
+                                                                    budget:
+                                                                        columnBudgetsRecord,
                                                                     categoryToEdit:
                                                                         columnBudgetCategoriesRecord,
                                                                     budgetRemaining: functions.calculateRemBudgetCat(
-                                                                        editBudgetCategoriesBudgetCategoriesRecordList
+                                                                        editBudgetCategoriesCopyBudgetCategoriesRecordList
                                                                             .toList(),
-                                                                        widget
-                                                                            .createdBudget),
+                                                                        columnBudgetsRecord),
                                                                   ),
                                                                 );
                                                               },
@@ -980,9 +973,9 @@ class _EditBudgetCategoriesWidgetState
                                                 createBudgetCategoriesRecordData(
                                               allocatedAmount: functions
                                                   .calculateRemBudgetCat(
-                                                      editBudgetCategoriesBudgetCategoriesRecordList
+                                                      editBudgetCategoriesCopyBudgetCategoriesRecordList
                                                           .toList(),
-                                                      widget.createdBudget),
+                                                      columnBudgetsRecord),
                                             );
                                             await buttonBudgetCategoriesRecord
                                                 .reference

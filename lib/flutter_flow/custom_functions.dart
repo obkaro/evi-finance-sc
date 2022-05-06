@@ -249,3 +249,13 @@ int listCounterBudgets(List<BudgetsRecord> budgets) {
   // Add your function code here!
   return budgets.length;
 }
+
+int sumCategoryAmounts(List<BudgetCategoriesRecord> categories) {
+  // Add your function code here!
+  int total = 0;
+  for (var i = 0; i < categories.length; i++) {
+    total += categories[i].allocatedAmount;
+  }
+
+  return total;
+}

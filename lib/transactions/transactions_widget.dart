@@ -458,7 +458,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                   isEqualTo:
                                                       currentUserReference)
                                               .where('transactionType',
-                                                  isEqualTo: 'debit')
+                                                  isEqualTo: 'credit')
                                               .orderBy('trasactionDate',
                                                   descending: true),
                                     ),

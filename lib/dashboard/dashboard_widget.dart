@@ -302,9 +302,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(10, 8, 10, 0),
                   child: StreamBuilder<List<BudgetsRecord>>(
                     stream: queryBudgetsRecord(
-                      queryBuilder: (budgetsRecord) => budgetsRecord.where(
-                          'budgetOwner',
-                          isEqualTo: currentUserReference),
+                      queryBuilder: (budgetsRecord) => budgetsRecord
+                          .where('budgetOwner', isEqualTo: currentUserReference)
+                          .orderBy('lastViewed', descending: true),
                       singleRecord: true,
                     ),
                     builder: (context, snapshot) {
@@ -924,7 +924,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                             fontFamily:
                                                                                 'Source Sans Pro',
                                                                             color:
-                                                                                FlutterFlowTheme.of(context).secondaryColor,
+                                                                                FlutterFlowTheme.of(context).tertiaryColor,
                                                                           ),
                                                                     ),
                                                                 ],
