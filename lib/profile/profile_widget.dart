@@ -1,6 +1,8 @@
 import '../admin/admin_widget.dart';
+import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../land_page/land_page_widget.dart';
 import '../profile_settings/profile_settings_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -296,6 +298,53 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             ),
                             subtitle: Text(
                               'Learn more about Evi Finance',
+                              style: FlutterFlowTheme.of(context).subtitle2,
+                            ),
+                            dense: false,
+                            contentPadding:
+                                EdgeInsetsDirectional.fromSTEB(20, 10, 20, 16),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            logFirebaseEvent('ListTile-ON_TAP');
+                            logFirebaseEvent('ListTile-Auth');
+                            await signOut();
+                            await Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LandPageWidget(),
+                              ),
+                              (r) => false,
+                            );
+                          },
+                          onLongPress: () async {
+                            logFirebaseEvent('ListTile-ON_LONG_PRESS');
+                            logFirebaseEvent('ListTile-Navigate-To');
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AdminWidget(),
+                              ),
+                            );
+                          },
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.logout,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 32,
+                            ),
+                            title: Text(
+                              'Logout',
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                    fontFamily: 'Source Sans Pro',
+                                    lineHeight: 1.6,
+                                  ),
+                            ),
+                            subtitle: Text(
+                              'Exit the app',
                               style: FlutterFlowTheme.of(context).subtitle2,
                             ),
                             dense: false,

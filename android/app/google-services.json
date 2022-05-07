@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "819008749583-qrg7mtqpecf2gqio5mh6is9kl7npiak0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutterflow.evifinance",
+            "certificate_hash": "a88eafca9416ced754618bd54f92450a72bf185e"
+          }
+        },
+        {
           "client_id": "819008749583-qna0perdgpou8fpd76nhcmti5mvhckln.apps.googleusercontent.com",
           "client_type": 3
         }

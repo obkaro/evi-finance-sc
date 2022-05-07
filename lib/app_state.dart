@@ -31,6 +31,8 @@ class FFAppState {
   bool hasNewData = false;
 
   String dataSyncCode = '';
+
+  int initPageViewNumber = 0;
 }
 
 LatLng _latLngFromString(String val) {

@@ -3,6 +3,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -21,6 +22,22 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
   @override
   void initState() {
     super.initState();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('OnboardingInfo-ON_PAGE_LOAD');
+      if ((FFAppState().initPageViewNumber) >= 3) {
+        logFirebaseEvent('OnboardingInfo-Navigate-To');
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NavBarPage(initialPage: 'Dashboard'),
+          ),
+        );
+      } else {
+        return;
+      }
+    });
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'OnboardingInfo'});
   }
@@ -51,23 +68,122 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                                 PageController(initialPage: 0),
                             scrollDirection: Axis.horizontal,
                             children: [
-                              Image.network(
-                                'https://picsum.photos/seed/107/600',
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.cover,
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          24, 24, 24, 24),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(32),
+                                        child: Image.network(
+                                          'https://picsum.photos/seed/107/600',
+                                          width: double.infinity,
+                                          height: 100,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 16, 0, 0),
+                                    child: Text(
+                                      'Link Your Bank Account',
+                                      style:
+                                          FlutterFlowTheme.of(context).title3,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 16, 0, 0),
+                                    child: Text(
+                                      'Link an accout to automatically import income and expenses into Evi.',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle2,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Image.network(
-                                'https://picsum.photos/seed/152/600',
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.cover,
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          24, 24, 24, 24),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(32),
+                                        child: Image.network(
+                                          'https://picsum.photos/seed/152/600',
+                                          width: double.infinity,
+                                          height: 100,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 16, 0, 0),
+                                    child: Text(
+                                      'Create a Budget',
+                                      style:
+                                          FlutterFlowTheme.of(context).title3,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 16, 0, 0),
+                                    child: Text(
+                                      'Build and manage budget categories to keep track of expenses.',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle2,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Image.network(
-                                'https://picsum.photos/seed/267/600',
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.cover,
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          24, 24, 24, 24),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(32),
+                                        child: Image.network(
+                                          'https://picsum.photos/seed/267/600',
+                                          width: double.infinity,
+                                          height: 100,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 16, 0, 0),
+                                    child: Text(
+                                      'Track Your Expenses',
+                                      style:
+                                          FlutterFlowTheme.of(context).title3,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 16, 0, 0),
+                                    child: Text(
+                                      'Come back into the app often to ensure you meet your financial goals.',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle2,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -95,7 +211,8 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                                 radius: 16,
                                 dotWidth: 16,
                                 dotHeight: 16,
-                                dotColor: Color(0xFF9E9E9E),
+                                dotColor:
+                                    FlutterFlowTheme.of(context).customColor1,
                                 activeDotColor:
                                     FlutterFlowTheme.of(context).primaryColor,
                                 paintStyle: PaintingStyle.fill,
@@ -112,20 +229,30 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent('Button-ON_TAP');
-                      logFirebaseEvent('Button-Navigate-To');
-                      await Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              NavBarPage(initialPage: 'Dashboard'),
-                        ),
-                        (r) => false,
-                      );
+                      if ((FFAppState().initPageViewNumber) >= 3) {
+                        logFirebaseEvent('Button-Navigate-To');
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                NavBarPage(initialPage: 'Budgets'),
+                          ),
+                        );
+                      } else {
+                        logFirebaseEvent('Button-Update-Local-State');
+                        setState(() => FFAppState().initPageViewNumber =
+                            FFAppState().initPageViewNumber + 1);
+                        logFirebaseEvent('Button-Page-View');
+                        await pageViewController.nextPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.ease,
+                        );
+                      }
                     },
-                    text: 'Next',
+                    text: 'Let\'s Go!',
                     options: FFButtonOptions(
-                      width: 130,
-                      height: 40,
+                      width: double.infinity,
+                      height: 50,
                       color: FlutterFlowTheme.of(context).primaryColor,
                       textStyle:
                           FlutterFlowTheme.of(context).subtitle2.override(

@@ -1,6 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../create_budget_categories/create_budget_categories_widget.dart';
+import '../create_budget_categories_copy/create_budget_categories_copy_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -148,7 +148,8 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CreateBudgetCategoriesWidget(
+                          builder: (context) =>
+                              CreateBudgetCategoriesCopyWidget(
                             createdBudget: createdBudget,
                             uncategorized: uncategorized,
                             dateRange: startEndRange,

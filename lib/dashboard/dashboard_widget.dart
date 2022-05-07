@@ -277,7 +277,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Recently Viewed Budget',
+                        'Last Budget',
                         style: FlutterFlowTheme.of(context).subtitle2,
                       ),
                       InkWell(
@@ -313,7 +313,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     stream: queryBudgetsRecord(
                       queryBuilder: (budgetsRecord) => budgetsRecord
                           .where('budgetOwner', isEqualTo: currentUserReference)
-                          .orderBy('lastViewed', descending: true),
+                          .orderBy('budgetStart', descending: true),
                       singleRecord: true,
                     ),
                     builder: (context, snapshot) {
