@@ -85,7 +85,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'Login': (data) async => LoginWidget(),
   'LoginCopy': (data) async => LoginCopyWidget(),
   'OnboardingInfo': (data) async => OnboardingInfoWidget(),
-  'UserDetails': (data) async => UserDetailsWidget(),
   'Dashboard': (data) async =>
       hasMatchingParameters(data, {'command', 'newAccount'})
           ? DashboardWidget(
@@ -98,13 +97,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         transaction: await getDocumentParameter(
             data, 'transaction', TransactionsRecord.serializer),
       ),
-  'AddTransaction': (data) async => AddTransactionWidget(
-        defaultAccount: getParameter(data, 'defaultAccount'),
-      ),
-  'Uncategorized': (data) async => UncategorizedWidget(
-        category: await getDocumentParameter(
-            data, 'category', BudgetCategoriesRecord.serializer),
-      ),
   'BudgetSingle': (data) async => BudgetSingleWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
@@ -114,22 +106,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         category: await getDocumentParameter(
             data, 'category', BudgetCategoriesRecord.serializer),
       ),
-  'CreateBudgetOld': (data) async => CreateBudgetOldWidget(),
-  'CreateBudgetCopy': (data) async => CreateBudgetCopyWidget(),
-  'EditBudget': (data) async => EditBudgetWidget(
-        createdbudget: await getDocumentParameter(
-            data, 'createdbudget', BudgetsRecord.serializer),
-        uncategorized: await getDocumentParameter(
-            data, 'uncategorized', BudgetCategoriesRecord.serializer),
-      ),
   'editBudgetCategories': (data) async => EditBudgetCategoriesWidget(
-        createdBudget: await getDocumentParameter(
-            data, 'createdBudget', BudgetsRecord.serializer),
-        uncategorized: await getDocumentParameter(
-            data, 'uncategorized', BudgetCategoriesRecord.serializer),
-        dateRange: getParameter(data, 'dateRange'),
-      ),
-  'CreateBudgetCategories': (data) async => CreateBudgetCategoriesWidget(
         createdBudget: await getDocumentParameter(
             data, 'createdBudget', BudgetsRecord.serializer),
         uncategorized: await getDocumentParameter(
@@ -150,7 +127,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
             data, 'account', AccountsRecord.serializer),
       ),
   'Profile': (data) async => NavBarPage(initialPage: 'Profile'),
-  'LinkMonoCopy': (data) async => LinkMonoCopyWidget(),
   'Admin': (data) async => AdminWidget(),
   'ProfileSettings': (data) async => ProfileSettingsWidget(),
 };

@@ -158,7 +158,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                               animation: true,
                               progressColor:
                                   FlutterFlowTheme.of(context).primaryColor,
-                              backgroundColor: Color(0x341B998B),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).customColor1,
                               center: Text(
                                 '${functions.subtractCurrency(widget.category.allocatedAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList()))}',
                                 textAlign: TextAlign.center,
@@ -176,7 +177,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 16),
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

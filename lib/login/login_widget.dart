@@ -2,6 +2,7 @@ import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../login_copy/login_copy_widget.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -285,8 +286,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    NavBarPage(
-                                                        initialPage: 'Budgets'),
+                                                    LoginCopyWidget(),
                                               ),
                                             );
                                           },
@@ -299,6 +299,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                             textStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodyText2,
+                                            elevation: 0,
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1,

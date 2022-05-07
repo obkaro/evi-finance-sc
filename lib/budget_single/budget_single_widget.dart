@@ -670,7 +670,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                       width: MediaQuery.of(context)
                                                                               .size
                                                                               .width *
-                                                                          0.8,
+                                                                          0.81,
                                                                       lineHeight:
                                                                           8,
                                                                       animation:

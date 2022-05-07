@@ -1,9 +1,9 @@
+import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../login/login_widget.dart';
-import '../sign_up/sign_up_widget.dart';
+import '../onboarding_info/onboarding_info_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -190,82 +190,84 @@ class _LandPageWidgetState extends State<LandPageWidget>
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    logFirebaseEvent('Button_SignUp-ON_TAP');
-                                    logFirebaseEvent(
-                                        'Button_SignUp-Navigate-To');
-                                    await Navigator.push(
-                                      context,
-                                      PageTransition(
-                                        type: PageTransitionType.topToBottom,
-                                        duration: Duration(milliseconds: 200),
-                                        reverseDuration:
-                                            Duration(milliseconds: 200),
-                                        child: SignUpWidget(),
-                                      ),
-                                    );
-                                  },
-                                  text: 'Sign Up',
-                                  options: FFButtonOptions(
+                              Align(
+                                alignment: AlignmentDirectional(0, 0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 48),
+                                  child: Container(
                                     width: double.infinity,
                                     height: 50,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                          fontFamily: 'Source Sans Pro',
-                                          color: Colors.white,
+                                    child: Stack(
+                                      children: [
+                                        Align(
+                                          alignment: AlignmentDirectional(0, 0),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 0, 1),
+                                            child: FFButtonWidget(
+                                              onPressed: () async {
+                                                logFirebaseEvent(
+                                                    'Button-ON_TAP');
+                                                logFirebaseEvent('Button-Auth');
+                                                final user =
+                                                    await signInWithGoogle(
+                                                        context);
+                                                if (user == null) {
+                                                  return;
+                                                }
+                                                logFirebaseEvent(
+                                                    'Button-Navigate-To');
+                                                await Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        OnboardingInfoWidget(),
+                                                  ),
+                                                );
+                                              },
+                                              text: 'Sign in with Google',
+                                              icon: Icon(
+                                                Icons.add,
+                                                color: Colors.transparent,
+                                                size: 20,
+                                              ),
+                                              options: FFButtonOptions(
+                                                width: double.infinity,
+                                                height: 50,
+                                                color: Colors.white,
+                                                textStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle2,
+                                                elevation: 4,
+                                                borderSide: BorderSide(
+                                                  color: Colors.transparent,
+                                                  width: 0,
+                                                ),
+                                                borderRadius: 12,
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1,
-                                    ),
-                                    borderRadius: 12,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    logFirebaseEvent('Button_Login-ON_TAP');
-                                    logFirebaseEvent(
-                                        'Button_Login-Navigate-To');
-                                    await Navigator.push(
-                                      context,
-                                      PageTransition(
-                                        type: PageTransitionType.scale,
-                                        alignment: Alignment.bottomCenter,
-                                        duration: Duration(milliseconds: 500),
-                                        reverseDuration:
-                                            Duration(milliseconds: 500),
-                                        child: LoginWidget(),
-                                      ),
-                                    );
-                                  },
-                                  text: 'Login',
-                                  options: FFButtonOptions(
-                                    width: double.infinity,
-                                    height: 50,
-                                    color: Color(0x001B2124),
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                          fontFamily: 'Source Sans Pro',
-                                          color: Color(0xFFE4E5E6),
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-0.83, 0),
+                                          child: Container(
+                                            width: 22,
+                                            height: 22,
+                                            clipBehavior: Clip.antiAlias,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Image.network(
+                                              'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
+                                              fit: BoxFit.contain,
+                                            ),
+                                          ),
                                         ),
-                                    elevation: 0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1,
+                                      ],
                                     ),
-                                    borderRadius: 12,
                                   ),
                                 ),
                               ),

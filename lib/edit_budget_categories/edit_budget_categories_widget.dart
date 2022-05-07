@@ -343,7 +343,7 @@ class _EditBudgetCategoriesWidgetState
                                     border: Border.all(
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
-                                      width: 1,
+                                      width: 2,
                                     ),
                                   ),
                                   child: Padding(

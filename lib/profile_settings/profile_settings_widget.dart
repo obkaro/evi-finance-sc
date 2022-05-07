@@ -46,7 +46,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
           'Profile Settings',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Spline Sans',
-                color: Colors.white,
+                color: FlutterFlowTheme.of(context).primaryText,
                 fontSize: 22,
                 useGoogleFonts: false,
               ),
@@ -62,181 +62,174 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primaryBackground,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                    child: Form(
-                      key: formKey,
-                      autovalidateMode: AutovalidateMode.disabled,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 16),
-                            child: AuthUserStreamWidget(
-                              child: TextFormField(
-                                controller: textController1,
-                                onChanged: (_) => EasyDebounce.debounce(
-                                  'textController1',
-                                  Duration(milliseconds: 2000),
-                                  () => setState(() {}),
-                                ),
-                                autofocus: true,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Username',
-                                  hintText: 'New username here',
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  filled: true,
-                                  fillColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                ),
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                                keyboardType: TextInputType.name,
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                  child: Form(
+                    key: formKey,
+                    autovalidateMode: AutovalidateMode.disabled,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 16),
+                          child: AuthUserStreamWidget(
+                            child: TextFormField(
+                              controller: textController1,
+                              onChanged: (_) => EasyDebounce.debounce(
+                                'textController1',
+                                Duration(milliseconds: 2000),
+                                () => setState(() {}),
                               ),
+                              autofocus: true,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'Username',
+                                hintText: 'New username here',
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                filled: true,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyText1,
+                              keyboardType: TextInputType.name,
                             ),
                           ),
-                          TextFormField(
-                            controller: textController2,
-                            onChanged: (_) => EasyDebounce.debounce(
-                              'textController2',
-                              Duration(milliseconds: 2000),
-                              () => setState(() {}),
-                            ),
-                            autofocus: true,
-                            readOnly: true,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              labelText: 'Email',
-                              hintText: 'Email address here',
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              filled: true,
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                            ),
-                            style: FlutterFlowTheme.of(context).bodyText1,
-                            keyboardType: TextInputType.emailAddress,
+                        ),
+                        TextFormField(
+                          controller: textController2,
+                          onChanged: (_) => EasyDebounce.debounce(
+                            'textController2',
+                            Duration(milliseconds: 2000),
+                            () => setState(() {}),
                           ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                            child: AuthUserStreamWidget(
-                              child: TextFormField(
-                                controller: textController3,
-                                onChanged: (_) => EasyDebounce.debounce(
-                                  'textController3',
-                                  Duration(milliseconds: 2000),
-                                  () => setState(() {}),
-                                ),
-                                autofocus: true,
-                                readOnly: true,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Phone',
-                                  hintText: 'Phone number here',
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  filled: true,
-                                  fillColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                ),
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                                keyboardType: TextInputType.phone,
+                          autofocus: true,
+                          readOnly: true,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            hintText: 'Email address here',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
                               ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            filled: true,
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          style: FlutterFlowTheme.of(context).bodyText1,
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                          child: AuthUserStreamWidget(
+                            child: TextFormField(
+                              controller: textController3,
+                              onChanged: (_) => EasyDebounce.debounce(
+                                'textController3',
+                                Duration(milliseconds: 2000),
+                                () => setState(() {}),
+                              ),
+                              autofocus: true,
+                              readOnly: true,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'Phone',
+                                hintText: 'Phone number here',
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                filled: true,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyText1,
+                              keyboardType: TextInputType.phone,
                             ),
                           ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                logFirebaseEvent('Button-ON_TAP');
-                                logFirebaseEvent('Button-Validate-Form');
-                                if (formKey.currentState == null ||
-                                    !formKey.currentState.validate()) {
-                                  return;
-                                }
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              logFirebaseEvent('Button-ON_TAP');
+                              logFirebaseEvent('Button-Validate-Form');
+                              if (formKey.currentState == null ||
+                                  !formKey.currentState.validate()) {
+                                return;
+                              }
 
-                                logFirebaseEvent('Button-Backend-Call');
+                              logFirebaseEvent('Button-Backend-Call');
 
-                                final usersUpdateData = createUsersRecordData(
-                                  displayName: textController1.text,
-                                  email: textController2.text,
-                                  phoneNumber: textController3.text,
-                                );
-                                await currentUserReference
-                                    .update(usersUpdateData);
-                                logFirebaseEvent('Button-Navigate-Back');
-                                Navigator.pop(context);
-                              },
-                              text: 'Save',
-                              options: FFButtonOptions(
-                                width: double.infinity,
-                                height: 50,
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: 'Source Sans Pro',
-                                      color: Colors.white,
-                                    ),
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
-                                ),
-                                borderRadius: 12,
+                              final usersUpdateData = createUsersRecordData(
+                                displayName: textController1.text,
+                                email: textController2.text,
+                                phoneNumber: textController3.text,
+                              );
+                              await currentUserReference
+                                  .update(usersUpdateData);
+                              logFirebaseEvent('Button-Navigate-Back');
+                              Navigator.pop(context);
+                            },
+                            text: 'Save',
+                            options: FFButtonOptions(
+                              width: double.infinity,
+                              height: 50,
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Source Sans Pro',
+                                    color: Colors.white,
+                                  ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
                               ),
+                              borderRadius: 12,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
