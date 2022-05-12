@@ -239,7 +239,13 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                                 color: Colors.white,
                                                 textStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .subtitle2,
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily:
+                                                              'Source Sans Pro',
+                                                          color:
+                                                              Color(0xFF454545),
+                                                        ),
                                                 elevation: 4,
                                                 borderSide: BorderSide(
                                                   color: Colors.transparent,

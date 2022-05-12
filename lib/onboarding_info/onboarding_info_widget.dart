@@ -3,7 +3,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -22,22 +21,6 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
   @override
   void initState() {
     super.initState();
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('OnboardingInfo-ON_PAGE_LOAD');
-      if ((FFAppState().initPageViewNumber) >= 3) {
-        logFirebaseEvent('OnboardingInfo-Navigate-To');
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => NavBarPage(initialPage: 'Dashboard'),
-          ),
-        );
-      } else {
-        return;
-      }
-    });
-
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'OnboardingInfo'});
   }
@@ -65,7 +48,7 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 50),
                           child: PageView(
                             controller: pageViewController ??=
-                                PageController(initialPage: 0),
+                                PageController(initialPage: 2),
                             scrollDirection: Axis.horizontal,
                             children: [
                               Column(
@@ -195,7 +178,7 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                             child: SmoothPageIndicator(
                               controller: pageViewController ??=
-                                  PageController(initialPage: 0),
+                                  PageController(initialPage: 2),
                               count: 3,
                               axisDirection: Axis.horizontal,
                               onDotClicked: (i) {
@@ -229,25 +212,14 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent('Button-ON_TAP');
-                      if ((FFAppState().initPageViewNumber) >= 3) {
-                        logFirebaseEvent('Button-Navigate-To');
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                NavBarPage(initialPage: 'Budgets'),
-                          ),
-                        );
-                      } else {
-                        logFirebaseEvent('Button-Update-Local-State');
-                        setState(() => FFAppState().initPageViewNumber =
-                            FFAppState().initPageViewNumber + 1);
-                        logFirebaseEvent('Button-Page-View');
-                        await pageViewController.nextPage(
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.ease,
-                        );
-                      }
+                      logFirebaseEvent('Button-Navigate-To');
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              NavBarPage(initialPage: 'Accounts'),
+                        ),
+                      );
                     },
                     text: 'Let\'s Go!',
                     options: FFButtonOptions(

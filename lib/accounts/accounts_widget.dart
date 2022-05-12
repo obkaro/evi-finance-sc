@@ -170,7 +170,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                 width: double.infinity,
                                                 height: double.infinity,
                                                 decoration: BoxDecoration(
-                                                  color: Color(0xFFEEEEEE),
+                                                  color: Colors.white,
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           300),

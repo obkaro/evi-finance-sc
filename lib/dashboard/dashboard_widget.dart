@@ -308,7 +308,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 0),
                   child: StreamBuilder<List<BudgetsRecord>>(
                     stream: queryBudgetsRecord(
                       queryBuilder: (budgetsRecord) => budgetsRecord

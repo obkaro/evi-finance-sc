@@ -102,7 +102,7 @@ class _CreateBudgetCategoriesCopyWidgetState
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 20),
+              padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 0),
               child: StreamBuilder<List<BudgetsRecord>>(
                 stream: queryBudgetsRecord(
                   queryBuilder: (budgetsRecord) => budgetsRecord
@@ -204,7 +204,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                           ),
                                           alignment: AlignmentDirectional(0, 0),
                                           child: Text(
-                                            'Start: ${dateTimeFormat('MMMEd', widget.createdBudget.budgetStart)}',
+                                            'Start: ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)}',
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle1,
                                           ),
@@ -313,8 +313,8 @@ class _CreateBudgetCategoriesCopyWidgetState
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16, 16, 16, 0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
