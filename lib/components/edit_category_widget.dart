@@ -99,7 +99,6 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                           FlutterFlowTheme.of(context).secondaryBackground,
                     ),
                     style: FlutterFlowTheme.of(context).subtitle1,
-                    keyboardType: TextInputType.number,
                   ),
                 ),
                 Padding(
@@ -182,7 +181,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 50,
-                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    color: Color(0x00D2D2D2),
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                           fontFamily: 'Lexend Deca',
                           color: Color(0xFF57636C),

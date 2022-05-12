@@ -17,11 +17,13 @@ class EditExistingBudgetWidget extends StatefulWidget {
     this.budget,
     this.categoriesSum,
     this.uncategorized,
+    this.dateRangeEx,
   }) : super(key: key);
 
   final BudgetsRecord budget;
   final int categoriesSum;
   final BudgetCategoriesRecord uncategorized;
+  final DateTimeRange dateRangeEx;
 
   @override
   _EditExistingBudgetWidgetState createState() =>
