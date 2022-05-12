@@ -63,7 +63,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(8, 0, 20, 0),
                             child: Text(
-                              'Settings',
+                              'Setting',
                               style:
                                   FlutterFlowTheme.of(context).title1.override(
                                         fontFamily: 'Spline Sans',
