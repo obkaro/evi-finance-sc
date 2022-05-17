@@ -97,7 +97,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 16),
+                                      0, 10, 0, 10),
                                   child: Container(
                                     width: 160,
                                     height: 160,
@@ -106,16 +106,21 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                       children: [
                                         Align(
                                           alignment: AlignmentDirectional(0, 0),
-                                          child: Container(
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFEEEEEE),
-                                              borderRadius:
-                                                  BorderRadius.circular(300),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 1, 0, 0),
+                                            child: Container(
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(300),
+                                              ),
+                                              alignment:
+                                                  AlignmentDirectional(0, 0),
                                             ),
-                                            alignment:
-                                                AlignmentDirectional(0, 0),
                                           ),
                                         ),
                                         FutureBuilder<
@@ -350,7 +355,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                           Expanded(
                                             child: Container(
                                               width: 100,
-                                              height: 50,
                                               decoration: BoxDecoration(),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
@@ -452,7 +456,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               builder: (context) =>
                                                                   NavBarPage(
                                                                       initialPage:
-                                                                          'Profile'),
+                                                                          'Settings'),
                                                             ),
                                                           );
                                                         } else {
@@ -466,7 +470,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                       ),
                                                       options: FFButtonOptions(
                                                         width: 130,
-                                                        height: 50,
+                                                        height: 60,
                                                         color:
                                                             Color(0xFFFF0003),
                                                         textStyle:
@@ -484,7 +488,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               .transparent,
                                                           width: 1,
                                                         ),
-                                                        borderRadius: 12,
+                                                        borderRadius: 16,
                                                       ),
                                                     );
                                                   },
@@ -495,7 +499,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                           Expanded(
                                             child: Container(
                                               width: 100,
-                                              height: 50,
                                               decoration: BoxDecoration(),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
@@ -818,7 +821,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                       ),
                                                       options: FFButtonOptions(
                                                         width: 130,
-                                                        height: 50,
+                                                        height: 60,
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -838,7 +841,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               .transparent,
                                                           width: 1,
                                                         ),
-                                                        borderRadius: 12,
+                                                        borderRadius: 16,
                                                       ),
                                                     );
                                                   },
@@ -862,7 +865,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                               width: MediaQuery.of(context)
                                                   .size
                                                   .width,
-                                              height: 50,
                                               decoration: BoxDecoration(),
                                               child: StreamBuilder<
                                                   List<TransactionsRecord>>(
@@ -913,11 +915,11 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                     ),
                                                     options: FFButtonOptions(
                                                       width: 130,
-                                                      height: 50,
+                                                      height: 60,
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .secondaryText,
+                                                              .neutralGray,
                                                       textStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -933,7 +935,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             Colors.transparent,
                                                         width: 1,
                                                       ),
-                                                      borderRadius: 12,
+                                                      borderRadius: 16,
                                                     ),
                                                   );
                                                 },

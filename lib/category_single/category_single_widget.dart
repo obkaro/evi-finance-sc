@@ -71,6 +71,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                     fontFamily: 'Spline Sans',
                     color: FlutterFlowTheme.of(context).primaryText,
                     fontSize: 22,
+                    fontWeight: FontWeight.bold,
                     useGoogleFonts: false,
                   ),
             ),
@@ -158,8 +159,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                               animation: true,
                               progressColor:
                                   FlutterFlowTheme.of(context).primaryColor,
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).customColor1,
+                              backgroundColor: FlutterFlowTheme.of(context)
+                                  .eviredTransparent,
                               center: Text(
                                 '${functions.subtractCurrency(widget.category.allocatedAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList()))}',
                                 textAlign: TextAlign.center,

@@ -17,7 +17,7 @@ export 'create_budget_categories_copy/create_budget_categories_copy_widget.dart'
     show CreateBudgetCategoriesCopyWidget;
 export 'accounts/accounts_widget.dart' show AccountsWidget;
 export 'account_single/account_single_widget.dart' show AccountSingleWidget;
-export 'profile/profile_widget.dart' show ProfileWidget;
+export 'settings/settings_widget.dart' show SettingsWidget;
 export 'admin/admin_widget.dart' show AdminWidget;
 export 'profile_settings/profile_settings_widget.dart'
     show ProfileSettingsWidget;

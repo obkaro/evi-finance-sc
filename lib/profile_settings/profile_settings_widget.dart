@@ -213,7 +213,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                             text: 'Save',
                             options: FFButtonOptions(
                               width: double.infinity,
-                              height: 50,
+                              height: 60,
                               color: FlutterFlowTheme.of(context).primaryColor,
                               textStyle: FlutterFlowTheme.of(context)
                                   .subtitle2
@@ -225,7 +225,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                 color: Colors.transparent,
                                 width: 1,
                               ),
-                              borderRadius: 12,
+                              borderRadius: 16,
                             ),
                           ),
                         ),

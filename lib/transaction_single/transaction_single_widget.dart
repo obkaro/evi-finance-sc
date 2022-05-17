@@ -1,13 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/set_budget_comp_widget.dart';
-import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -78,7 +76,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 20),
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                       child: FutureBuilder<AccountsRecord>(
                         future: AccountsRecord.getDocumentOnce(
                             widget.transaction.account),
@@ -125,7 +123,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                               width: double.infinity,
                                               height: double.infinity,
                                               decoration: BoxDecoration(
-                                                color: Color(0xFFEEEEEE),
+                                                color: Colors.white,
                                                 borderRadius:
                                                     BorderRadius.circular(300),
                                               ),
@@ -305,7 +303,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                               ],
                                             ),
                                           ),
-                                          Divider(),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -382,7 +379,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                               ],
                                             ),
                                           ),
-                                          Divider(),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -494,7 +490,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                               ],
                                             ),
                                           ),
-                                          Divider(),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -569,7 +564,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                               ],
                                             ),
                                           ),
-                                          Divider(),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -674,152 +668,137 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 10, 0, 10),
+                                          0, 0, 0, 16),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          Expanded(
-                                            child: FFButtonWidget(
-                                              onPressed: () async {
-                                                logFirebaseEvent(
-                                                    'Button-ON_TAP');
-                                                // Action_CategorizeTrans
-                                                logFirebaseEvent(
-                                                    'Button-Action_CategorizeTrans');
-                                                await showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return Padding(
-                                                      padding:
-                                                          MediaQuery.of(context)
-                                                              .viewInsets,
-                                                      child:
-                                                          SetBudgetCompWidget(
-                                                        transaction:
-                                                            widget.transaction,
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                              text: 'Categorize',
-                                              icon: Icon(
-                                                Icons.edit_rounded,
-                                                size: 15,
-                                              ),
-                                              options: FFButtonOptions(
-                                                width: 130,
-                                                height: 50,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle2
-                                                        .override(
-                                                          fontFamily:
-                                                              'Source Sans Pro',
-                                                          color: Colors.white,
-                                                        ),
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1,
-                                                ),
-                                                borderRadius: 12,
-                                              ),
-                                            ),
-                                          ),
-                                          if (widget
-                                                  .transaction.isCategorized ??
-                                              true)
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(20, 0, 0, 0),
-                                              child: StreamBuilder<
-                                                  BudgetCategoriesRecord>(
-                                                stream: BudgetCategoriesRecord
-                                                    .getDocument(widget
-                                                        .transaction
-                                                        .linkedCategory),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return Center(
-                                                      child: SizedBox(
-                                                        width: 50,
-                                                        height: 50,
-                                                        child: SpinKitRing(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryColor,
-                                                          size: 50,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }
-                                                  final iconButtonBudgetCategoriesRecord =
-                                                      snapshot.data;
-                                                  return FlutterFlowIconButton(
-                                                    borderColor:
+                                          if ((widget.transaction
+                                                  .transactionType) ==
+                                              'debit')
+                                            Expanded(
+                                              child: FFButtonWidget(
+                                                onPressed: () async {
+                                                  logFirebaseEvent(
+                                                      'Button-ON_TAP');
+                                                  // Action_CategorizeTrans
+                                                  logFirebaseEvent(
+                                                      'Button-Action_CategorizeTrans');
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
                                                         Colors.transparent,
-                                                    borderRadius: 30,
-                                                    borderWidth: 1,
-                                                    buttonSize: 50,
-                                                    fillColor:
-                                                        FlutterFlowTheme.of(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Padding(
+                                                        padding: MediaQuery.of(
                                                                 context)
-                                                            .primaryColor,
-                                                    icon: Icon(
-                                                      Icons.link_off_rounded,
-                                                      color: Colors.white,
-                                                      size: 24,
-                                                    ),
-                                                    onPressed: () async {
-                                                      logFirebaseEvent(
-                                                          'IconButton-ON_TAP');
-                                                      // Action_UnlinkTransaction
-                                                      logFirebaseEvent(
-                                                          'IconButton-Action_UnlinkTransaction');
-
-                                                      final transactionsUpdateData =
-                                                          {
-                                                        ...createTransactionsRecordData(
-                                                          isCategorized: false,
+                                                            .viewInsets,
+                                                        child:
+                                                            SetBudgetCompWidget(
+                                                          transaction: widget
+                                                              .transaction,
                                                         ),
-                                                        'linkedCategory':
-                                                            FieldValue.delete(),
-                                                      };
-                                                      await widget
-                                                          .transaction.reference
-                                                          .update(
-                                                              transactionsUpdateData);
-                                                      logFirebaseEvent(
-                                                          'IconButton-Backend-Call');
-
-                                                      final budgetCategoriesUpdateData =
-                                                          {
-                                                        'linkedTransactions':
-                                                            FieldValue
-                                                                .arrayRemove([
-                                                          widget.transaction
-                                                              .reference
-                                                        ]),
-                                                      };
-                                                      await iconButtonBudgetCategoriesRecord
-                                                          .reference
-                                                          .update(
-                                                              budgetCategoriesUpdateData);
-                                                      logFirebaseEvent(
-                                                          'IconButton-Navigate-Back');
-                                                      Navigator.pop(context);
+                                                      );
                                                     },
                                                   );
                                                 },
+                                                text: 'Categorize',
+                                                icon: Icon(
+                                                  Icons.edit_rounded,
+                                                  size: 15,
+                                                ),
+                                                options: FFButtonOptions(
+                                                  width: 130,
+                                                  height: 60,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  textStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .subtitle2
+                                                          .override(
+                                                            fontFamily:
+                                                                'Source Sans Pro',
+                                                            color: Colors.white,
+                                                          ),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius: 16,
+                                                ),
+                                              ),
+                                            ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 0, 16),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          if ((widget.transaction
+                                                  .transactionType) ==
+                                              'debit')
+                                            Expanded(
+                                              child: FFButtonWidget(
+                                                onPressed: () async {
+                                                  logFirebaseEvent(
+                                                      'Button-ON_TAP');
+                                                  // Action_CategorizeTrans
+                                                  logFirebaseEvent(
+                                                      'Button-Action_CategorizeTrans');
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Padding(
+                                                        padding: MediaQuery.of(
+                                                                context)
+                                                            .viewInsets,
+                                                        child:
+                                                            SetBudgetCompWidget(
+                                                          transaction: widget
+                                                              .transaction,
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                                text: 'Clear Category',
+                                                icon: Icon(
+                                                  Icons.clear_rounded,
+                                                  size: 15,
+                                                ),
+                                                options: FFButtonOptions(
+                                                  width: 130,
+                                                  height: 60,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .neutralGray,
+                                                  textStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .subtitle2
+                                                          .override(
+                                                            fontFamily:
+                                                                'Source Sans Pro',
+                                                            color: Colors.white,
+                                                          ),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius: 16,
+                                                ),
                                               ),
                                             ),
                                         ],

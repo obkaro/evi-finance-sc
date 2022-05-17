@@ -164,7 +164,7 @@ class _EditBudgetCategoriesWidgetState
                                         ),
                                         alignment: AlignmentDirectional(1, 0),
                                         child: Text(
-                                          'Remaining (Uncategorized):',
+                                          'Remaining (Unallocated):',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText2,
                                         ),
@@ -408,7 +408,7 @@ class _EditBudgetCategoriesWidgetState
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryBackground,
                                                 borderRadius:
-                                                    BorderRadius.circular(12),
+                                                    BorderRadius.circular(16),
                                               ),
                                               child: InkWell(
                                                 onTap: () async {
@@ -540,7 +540,7 @@ class _EditBudgetCategoriesWidgetState
                                       ),
                                       options: FFButtonOptions(
                                         width: 130,
-                                        height: 50,
+                                        height: 60,
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -553,7 +553,7 @@ class _EditBudgetCategoriesWidgetState
                                           color: Colors.transparent,
                                           width: 1,
                                         ),
-                                        borderRadius: 12,
+                                        borderRadius: 16,
                                       ),
                                     ),
                                   ],
@@ -773,9 +773,9 @@ class _EditBudgetCategoriesWidgetState
                                                                           (alertDialogContext) {
                                                                         return AlertDialog(
                                                                           title:
-                                                                              Text('Are you sure?'),
+                                                                              Text('Delete Category'),
                                                                           content:
-                                                                              Text('This cannot be undone'),
+                                                                              Text('All currently associated transactions will be set to uncategorized. This cannot be undone. '),
                                                                           actions: [
                                                                             TextButton(
                                                                               onPressed: () => Navigator.pop(alertDialogContext, false),
@@ -815,8 +815,8 @@ class _EditBudgetCategoriesWidgetState
                                 ),
                               ),
                               Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0, 16, 0, 16),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
@@ -908,7 +908,7 @@ class _EditBudgetCategoriesWidgetState
                                           text: 'Reset',
                                           options: FFButtonOptions(
                                             width: 130,
-                                            height: 50,
+                                            height: 60,
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryBackground,
                                             textStyle:
@@ -924,7 +924,7 @@ class _EditBudgetCategoriesWidgetState
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 12,
+                                            borderRadius: 16,
                                           ),
                                         );
                                       },
@@ -1023,7 +1023,7 @@ class _EditBudgetCategoriesWidgetState
                                           text: 'Save',
                                           options: FFButtonOptions(
                                             width: 130,
-                                            height: 50,
+                                            height: 60,
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
                                             textStyle:
@@ -1038,7 +1038,7 @@ class _EditBudgetCategoriesWidgetState
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 12,
+                                            borderRadius: 16,
                                           ),
                                         );
                                       },

@@ -29,6 +29,77 @@ class _AccountsWidgetState extends State<AccountsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100),
+        child: AppBar(
+          backgroundColor: Color(0x00FF0054),
+          automaticallyImplyLeading: false,
+          flexibleSpace: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primaryColor,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(32),
+                      bottomRight: Radius.circular(32),
+                      topLeft: Radius.circular(0),
+                      topRight: Radius.circular(0),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Icon(
+                                  Icons.account_balance_rounded,
+                                  color: Colors.white,
+                                  size: 32,
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16, 20, 24, 20),
+                                  child: Text(
+                                    'Accounts',
+                                    style: FlutterFlowTheme.of(context)
+                                        .title1
+                                        .override(
+                                          fontFamily: 'Spline Sans',
+                                          color: Colors.white,
+                                          fontSize: 32,
+                                          fontWeight: FontWeight.bold,
+                                          useGoogleFonts: false,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          actions: [],
+          elevation: 0,
+        ),
+      ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -51,246 +122,216 @@ class _AccountsWidgetState extends State<AccountsWidget> {
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                    child: Container(
-                      width: double.infinity,
-                      height: 72,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(16),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                    child: StreamBuilder<List<AccountsRecord>>(
+                      stream: queryAccountsRecord(
+                        queryBuilder: (accountsRecord) => accountsRecord.where(
+                            'accountOwner',
+                            isEqualTo: currentUserReference),
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                            child: Icon(
-                              Icons.account_balance_rounded,
-                              color: Color(0xFFF4F4F4),
-                              size: 24,
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: SpinKitRing(
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                size: 50,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(8, 20, 20, 20),
-                            child: Text(
-                              'Accounts',
-                              style:
-                                  FlutterFlowTheme.of(context).title1.override(
-                                        fontFamily: 'Spline Sans',
-                                        color: Color(0xFFF4F4F4),
-                                        useGoogleFonts: false,
+                          );
+                        }
+                        List<AccountsRecord> listViewAccountsRecordList =
+                            snapshot.data;
+                        return ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: listViewAccountsRecordList.length,
+                          itemBuilder: (context, listViewIndex) {
+                            final listViewAccountsRecord =
+                                listViewAccountsRecordList[listViewIndex];
+                            return Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                              child: InkWell(
+                                onTap: () async {
+                                  logFirebaseEvent('Container-ON_TAP');
+                                  // Action_NavToAcctSingle
+                                  logFirebaseEvent(
+                                      'Container-Action_NavToAcctSingle');
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AccountSingleWidget(
+                                        account: listViewAccountsRecord,
                                       ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  StreamBuilder<List<AccountsRecord>>(
-                    stream: queryAccountsRecord(
-                      queryBuilder: (accountsRecord) => accountsRecord.where(
-                          'accountOwner',
-                          isEqualTo: currentUserReference),
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: SpinKitRing(
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              size: 50,
-                            ),
-                          ),
-                        );
-                      }
-                      List<AccountsRecord> listViewAccountsRecordList =
-                          snapshot.data;
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: listViewAccountsRecordList.length,
-                        itemBuilder: (context, listViewIndex) {
-                          final listViewAccountsRecord =
-                              listViewAccountsRecordList[listViewIndex];
-                          return Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                            child: InkWell(
-                              onTap: () async {
-                                logFirebaseEvent('Container-ON_TAP');
-                                // Action_NavToAcctSingle
-                                logFirebaseEvent(
-                                    'Container-Action_NavToAcctSingle');
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AccountSingleWidget(
-                                      account: listViewAccountsRecord,
                                     ),
+                                  );
+                                },
+                                child: Container(
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(16),
                                   ),
-                                );
-                              },
-                              child: Container(
-                                width: 100,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10, 16, 10, 16),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        width: 70,
-                                        height: 70,
-                                        child: Stack(
-                                          alignment: AlignmentDirectional(0, 0),
-                                          children: [
-                                            Align(
-                                              alignment:
-                                                  AlignmentDirectional(0, 0),
-                                              child: Container(
-                                                width: double.infinity,
-                                                height: double.infinity,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          300),
-                                                ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10, 16, 10, 16),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          width: 70,
+                                          height: 70,
+                                          child: Stack(
+                                            alignment:
+                                                AlignmentDirectional(0, 0),
+                                            children: [
+                                              Align(
                                                 alignment:
                                                     AlignmentDirectional(0, 0),
-                                              ),
-                                            ),
-                                            FutureBuilder<
-                                                List<
-                                                    ConstInstitutionLogosRecord>>(
-                                              future:
-                                                  queryConstInstitutionLogosRecordOnce(
-                                                queryBuilder:
-                                                    (constInstitutionLogosRecord) =>
-                                                        constInstitutionLogosRecord.where(
-                                                            'institutionCode',
-                                                            isEqualTo:
-                                                                listViewAccountsRecord
-                                                                    .bankCode),
-                                                singleRecord: true,
-                                              ),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50,
-                                                      height: 50,
-                                                      child: SpinKitRing(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                        size: 50,
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                                List<ConstInstitutionLogosRecord>
-                                                    imageConstInstitutionLogosRecordList =
-                                                    snapshot.data;
-                                                // Return an empty Container when the document does not exist.
-                                                if (snapshot.data.isEmpty) {
-                                                  return Container();
-                                                }
-                                                final imageConstInstitutionLogosRecord =
-                                                    imageConstInstitutionLogosRecordList
-                                                            .isNotEmpty
-                                                        ? imageConstInstitutionLogosRecordList
-                                                            .first
-                                                        : null;
-                                                return ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                  child: Image.network(
-                                                    imageConstInstitutionLogosRecord
-                                                        .institutionLogo,
-                                                    width: 45,
-                                                    height: 45,
-                                                    fit: BoxFit.cover,
+                                                child: Container(
+                                                  width: double.infinity,
+                                                  height: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            300),
                                                   ),
-                                                );
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 4,
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 0, 0, 0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 10),
-                                                child: Text(
-                                                  listViewAccountsRecord
-                                                      .accountName,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .subtitle1,
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0, 0),
                                                 ),
                                               ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    functions.formatTransCurrency(
-                                                        listViewAccountsRecord
-                                                            .accountBalance),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText2,
-                                                  ),
-                                                ],
+                                              FutureBuilder<
+                                                  List<
+                                                      ConstInstitutionLogosRecord>>(
+                                                future:
+                                                    queryConstInstitutionLogosRecordOnce(
+                                                  queryBuilder: (constInstitutionLogosRecord) =>
+                                                      constInstitutionLogosRecord
+                                                          .where(
+                                                              'institutionCode',
+                                                              isEqualTo:
+                                                                  listViewAccountsRecord
+                                                                      .bankCode),
+                                                  singleRecord: true,
+                                                ),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50,
+                                                        height: 50,
+                                                        child: SpinKitRing(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
+                                                          size: 50,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                  List<ConstInstitutionLogosRecord>
+                                                      imageConstInstitutionLogosRecordList =
+                                                      snapshot.data;
+                                                  // Return an empty Container when the document does not exist.
+                                                  if (snapshot.data.isEmpty) {
+                                                    return Container();
+                                                  }
+                                                  final imageConstInstitutionLogosRecord =
+                                                      imageConstInstitutionLogosRecordList
+                                                              .isNotEmpty
+                                                          ? imageConstInstitutionLogosRecordList
+                                                              .first
+                                                          : null;
+                                                  return ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12),
+                                                    child: Image.network(
+                                                      imageConstInstitutionLogosRecord
+                                                          .institutionLogo,
+                                                      width: 45,
+                                                      height: 45,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  );
+                                                },
                                               ),
                                             ],
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                        Expanded(
+                                          flex: 4,
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16, 0, 0, 0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 0, 10),
+                                                  child: Text(
+                                                    listViewAccountsRecord
+                                                        .accountName,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .subtitle1,
+                                                  ),
+                                                ),
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      functions.formatTransCurrency(
+                                                          listViewAccountsRecord
+                                                              .accountBalance),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText2,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    },
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
@@ -299,7 +340,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                       height: 100,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(16),
                       ),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),

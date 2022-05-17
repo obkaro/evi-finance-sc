@@ -37,168 +37,162 @@ class _CreateCustomCategoryWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 24),
-      child: Container(
-        width: double.infinity,
-        height: 325,
-        decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).primaryBackground,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 5,
-              color: Color(0x3B1D2429),
-              offset: Offset(0, -3),
-            )
-          ],
-          borderRadius: BorderRadius.circular(16),
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).primaryBackground,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 5,
+            color: Color(0x3B1D2429),
+            offset: Offset(0, -3),
+          )
+        ],
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(0),
+          bottomRight: Radius.circular(0),
+          topLeft: Radius.circular(32),
+          topRight: Radius.circular(32),
         ),
-        child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Unallocated: ${functions.formatBudgetCurrency(widget.budgetRemaining)}',
-                      style: FlutterFlowTheme.of(context).subtitle2.override(
-                            fontFamily: 'Source Sans Pro',
-                            color: Color(0xFFFF0303),
-                          ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
-                  child: TextFormField(
-                    controller: textController,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      labelText: 'Category Name',
-                      hintText: 'Enter Category Name',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0x00000000),
-                          width: 1,
+      ),
+      child: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    'Unallocated: ${functions.formatBudgetCurrency(widget.budgetRemaining)}',
+                    style: FlutterFlowTheme.of(context).subtitle2.override(
+                          fontFamily: 'Source Sans Pro',
+                          color: Color(0xFFFF0303),
                         ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0x00000000),
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      filled: true,
-                      fillColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyText1,
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                  child: custom_widgets.CurrencyTextField(
-                    width: MediaQuery.of(context).size.width,
-                    height: 50,
-                    labelText: 'Amount',
-                    hintText: 'Enter amount',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      logFirebaseEvent('Button-ON_TAP');
-                      if ((functions.budgetRemMinusAmt(
-                              FFAppState().currencyTextField,
-                              widget.budgetRemaining)) >=
-                          0) {
-                        logFirebaseEvent('Button-Backend-Call');
-
-                        final budgetCategoriesCreateData =
-                            createBudgetCategoriesRecordData(
-                          categoryName: textController.text,
-                          allocatedAmount: FFAppState().currencyTextField,
-                          budgetOwner: currentUserReference,
-                          categoryBudget: widget.budget.reference,
-                        );
-                        await BudgetCategoriesRecord.collection
-                            .doc()
-                            .set(budgetCategoriesCreateData);
-                        logFirebaseEvent('Button-Navigate-Back');
-                        Navigator.pop(context);
-                      } else {
-                        logFirebaseEvent('Button-Alert-Dialog');
-                        await showDialog(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: Text('Budget Amount Exceeded'),
-                              content: Text(
-                                  'Please enter a value lower than the target budget, or increase the target budget value'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext),
-                                  child: Text('Okay'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
-                    },
-                    text: 'Save',
-                    options: FFButtonOptions(
-                      width: double.infinity,
-                      height: 50,
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      textStyle:
-                          FlutterFlowTheme.of(context).subtitle2.override(
-                                fontFamily: 'Source Sans Pro',
-                                color: Colors.white,
-                              ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                child: TextFormField(
+                  controller: textController,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    labelText: 'Category Name',
+                    hintText: 'Enter Category Name',
+                    enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Colors.transparent,
+                        color: Color(0x00000000),
                         width: 1,
                       ),
-                      borderRadius: 12,
+                      borderRadius: BorderRadius.circular(12),
                     ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0x00000000),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    filled: true,
+                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
+                  style: FlutterFlowTheme.of(context).bodyText1,
                 ),
-                FFButtonWidget(
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                child: custom_widgets.CurrencyTextField(
+                  width: MediaQuery.of(context).size.width,
+                  height: 50,
+                  labelText: 'Amount',
+                  hintText: 'Enter amount',
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent('Button-ON_TAP');
-                    logFirebaseEvent('Button-Navigate-Back');
-                    Navigator.pop(context);
+                    if ((functions.budgetRemMinusAmt(
+                            FFAppState().currencyTextField,
+                            widget.budgetRemaining)) >=
+                        0) {
+                      logFirebaseEvent('Button-Backend-Call');
+
+                      final budgetCategoriesCreateData =
+                          createBudgetCategoriesRecordData(
+                        categoryName: textController.text,
+                        allocatedAmount: FFAppState().currencyTextField,
+                        budgetOwner: currentUserReference,
+                        categoryBudget: widget.budget.reference,
+                      );
+                      await BudgetCategoriesRecord.collection
+                          .doc()
+                          .set(budgetCategoriesCreateData);
+                      logFirebaseEvent('Button-Navigate-Back');
+                      Navigator.pop(context);
+                    } else {
+                      logFirebaseEvent('Button-Alert-Dialog');
+                      await showDialog(
+                        context: context,
+                        builder: (alertDialogContext) {
+                          return AlertDialog(
+                            title: Text('Budget Amount Exceeded'),
+                            content: Text(
+                                'Please enter a value lower than the target budget, or increase the target budget value'),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext),
+                                child: Text('Okay'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
                   },
-                  text: 'Cancel',
+                  text: 'Save',
                   options: FFButtonOptions(
                     width: double.infinity,
-                    height: 50,
-                    color: Color(0x00D2D2D2),
+                    height: 60,
+                    color: FlutterFlowTheme.of(context).primaryColor,
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily: 'Lexend Deca',
-                          color: Color(0xFF57636C),
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
+                          fontFamily: 'Source Sans Pro',
+                          color: Colors.white,
                         ),
-                    elevation: 0,
                     borderSide: BorderSide(
                       color: Colors.transparent,
                       width: 1,
                     ),
-                    borderRadius: 12,
+                    borderRadius: 16,
                   ),
                 ),
-              ],
-            ),
+              ),
+              FFButtonWidget(
+                onPressed: () async {
+                  logFirebaseEvent('Button-ON_TAP');
+                  logFirebaseEvent('Button-Navigate-Back');
+                  Navigator.pop(context);
+                },
+                text: 'Cancel',
+                options: FFButtonOptions(
+                  width: double.infinity,
+                  height: 60,
+                  color: Color(0x00D2D2D2),
+                  textStyle: FlutterFlowTheme.of(context).subtitle2,
+                  elevation: 0,
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
+                  ),
+                  borderRadius: 16,
+                ),
+              ),
+            ],
           ),
         ),
       ),

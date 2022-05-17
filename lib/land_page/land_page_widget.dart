@@ -1,5 +1,4 @@
 import '../auth/auth_util.dart';
-import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -15,66 +14,12 @@ class LandPageWidget extends StatefulWidget {
   _LandPageWidgetState createState() => _LandPageWidgetState();
 }
 
-class _LandPageWidgetState extends State<LandPageWidget>
-    with TickerProviderStateMixin {
-  final animationsMap = {
-    'textOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
-    ),
-    'textOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
-    ),
-    'textOnPageLoadAnimation3': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
-    ),
-  };
+class _LandPageWidgetState extends State<LandPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    startPageLoadAnimations(
-      animationsMap.values
-          .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
-      this,
-    );
-
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'LandPage'});
   }
 
@@ -98,7 +43,7 @@ class _LandPageWidgetState extends State<LandPageWidget>
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: Image.asset(
-                      'assets/images/100naira.jpg',
+                      'assets/images/evi_hero_bg_PLAIN-01.jpg',
                     ).image,
                   ),
                 ),
@@ -107,12 +52,10 @@ class _LandPageWidgetState extends State<LandPageWidget>
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 1,
-                      decoration: BoxDecoration(
-                        color: Color(0x98000000),
-                      ),
+                      decoration: BoxDecoration(),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                      padding: EdgeInsetsDirectional.fromSTEB(24, 24, 24, 24),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -129,22 +72,20 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Maximize your income.',
+                                        'Maximize \nyour income.',
                                         textAlign: TextAlign.start,
                                         style: FlutterFlowTheme.of(context)
                                             .title1
                                             .override(
                                               fontFamily: 'Spline Sans',
-                                              color: Colors.white,
-                                              fontSize: 64,
+                                              color: Color(0xFF010101),
+                                              fontSize: 48,
+                                              fontWeight: FontWeight.bold,
                                               useGoogleFonts: false,
                                             ),
-                                      ).animated([
-                                        animationsMap[
-                                            'textOnPageLoadAnimation1']
-                                      ]),
+                                      ),
                                       Text(
-                                        'Live Better, with Evi.',
+                                        'Live Better,',
                                         textAlign: TextAlign.start,
                                         style: FlutterFlowTheme.of(context)
                                             .title1
@@ -154,12 +95,23 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
                                               fontSize: 48,
+                                              fontWeight: FontWeight.bold,
                                               useGoogleFonts: false,
                                             ),
-                                      ).animated([
-                                        animationsMap[
-                                            'textOnPageLoadAnimation2']
-                                      ]),
+                                      ),
+                                      Text(
+                                        'with Evi.',
+                                        textAlign: TextAlign.start,
+                                        style: FlutterFlowTheme.of(context)
+                                            .title1
+                                            .override(
+                                              fontFamily: 'Spline Sans',
+                                              color: Color(0xFF010101),
+                                              fontSize: 48,
+                                              fontWeight: FontWeight.bold,
+                                              useGoogleFonts: false,
+                                            ),
+                                      ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 40, 0, 0),
@@ -170,15 +122,12 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                               .subtitle1
                                               .override(
                                                 fontFamily: 'Source Sans Pro',
-                                                color: Colors.white,
+                                                color: Color(0xFF010101),
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w600,
                                                 lineHeight: 1.4,
                                               ),
-                                        ).animated([
-                                          animationsMap[
-                                              'textOnPageLoadAnimation3']
-                                        ]),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -197,7 +146,7 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                       0, 0, 0, 48),
                                   child: Container(
                                     width: double.infinity,
-                                    height: 50,
+                                    height: 60,
                                     child: Stack(
                                       children: [
                                         Align(
@@ -235,7 +184,7 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                               ),
                                               options: FFButtonOptions(
                                                 width: double.infinity,
-                                                height: 50,
+                                                height: 60,
                                                 color: Colors.white,
                                                 textStyle:
                                                     FlutterFlowTheme.of(context)
@@ -246,12 +195,12 @@ class _LandPageWidgetState extends State<LandPageWidget>
                                                           color:
                                                               Color(0xFF454545),
                                                         ),
-                                                elevation: 4,
+                                                elevation: 0,
                                                 borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 0,
+                                                  color: Color(0xFF010101),
+                                                  width: 1,
                                                 ),
-                                                borderRadius: 12,
+                                                borderRadius: 16,
                                               ),
                                             ),
                                           ),
