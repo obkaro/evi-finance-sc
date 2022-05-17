@@ -126,7 +126,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'Dashboard': DashboardWidget(),
       'Budgets': BudgetsWidget(),
       'Accounts': AccountsWidget(),
-      'Profile': ProfileWidget(),
+      'Settings': SettingsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -146,13 +146,21 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.home_rounded,
               size: 24,
             ),
+            activeIcon: Icon(
+              Icons.home_rounded,
+              size: 32,
+            ),
             label: 'Dashboard',
             tooltip: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.pie_chart,
+              Icons.pie_chart_rounded,
               size: 24,
+            ),
+            activeIcon: Icon(
+              Icons.pie_chart_rounded,
+              size: 32,
             ),
             label: 'Transactions',
             tooltip: '',
@@ -162,6 +170,10 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.account_balance_rounded,
               size: 24,
             ),
+            activeIcon: Icon(
+              Icons.account_balance_rounded,
+              size: 32,
+            ),
             label: 'Accounts',
             tooltip: '',
           ),
@@ -169,6 +181,10 @@ class _NavBarPageState extends State<NavBarPage> {
             icon: Icon(
               Icons.settings_rounded,
               size: 24,
+            ),
+            activeIcon: Icon(
+              Icons.settings_rounded,
+              size: 32,
             ),
             label: 'Profile',
             tooltip: '',

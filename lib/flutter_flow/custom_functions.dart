@@ -257,3 +257,13 @@ int sumCategoryAmounts(List<BudgetCategoriesRecord> categories) {
 
   return total;
 }
+
+int sumAccountBalances(List<AccountsRecord> accounts) {
+  // Add your function code here!
+  int total = 0;
+  for (int i = 0; i < accounts.length; i++) {
+    total += accounts[i].accountBalance;
+  }
+
+  return total;
+}

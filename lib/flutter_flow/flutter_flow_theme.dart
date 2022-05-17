@@ -38,18 +38,19 @@ abstract class FlutterFlowTheme {
   Color primaryText;
   Color secondaryText;
 
-  Color customColor1;
+  Color eviredTransparent;
+  Color neutralGray;
 
   TextStyle get title1 => TextStyle(
         fontFamily: 'Spline Sans',
         color: primaryText,
-        fontWeight: FontWeight.w900,
+        fontWeight: FontWeight.bold,
         fontSize: 24,
       );
   TextStyle get title2 => TextStyle(
         fontFamily: 'Spline Sans',
         color: secondaryText,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.bold,
         fontSize: 22,
       );
   TextStyle get title3 => TextStyle(
@@ -89,12 +90,13 @@ class LightModeTheme extends FlutterFlowTheme {
   Color secondaryColor = const Color(0xFF1B2124);
   Color tertiaryColor = const Color(0xFF1B998B);
   Color alternate = const Color(0xFFFAA916);
-  Color primaryBackground = const Color(0xFFD2D2D2);
-  Color secondaryBackground = const Color(0xC0FFFFFF);
-  Color primaryText = const Color(0xFF292728);
-  Color secondaryText = const Color(0xFF504E4F);
+  Color primaryBackground = const Color(0xFFF5F5F5);
+  Color secondaryBackground = const Color(0xFFFFFFFF);
+  Color primaryText = const Color(0xFF262626);
+  Color secondaryText = const Color(0xFF595959);
 
-  Color customColor1 = Color(0x28FF0054);
+  Color eviredTransparent = Color(0x28FF0054);
+  Color neutralGray = Color(0xFF747474);
 }
 
 class DarkModeTheme extends FlutterFlowTheme {
@@ -102,12 +104,13 @@ class DarkModeTheme extends FlutterFlowTheme {
   Color secondaryColor = const Color(0xFF494949);
   Color tertiaryColor = const Color(0xFF1B998B);
   Color alternate = const Color(0xFFFAA916);
-  Color primaryBackground = const Color(0xFF1A1A1A);
-  Color secondaryBackground = const Color(0x3F000000);
-  Color primaryText = const Color(0xFFF0F0F0);
-  Color secondaryText = const Color(0xFFC2C2C2);
+  Color primaryBackground = const Color(0xFF151515);
+  Color secondaryBackground = const Color(0xFF1D1D1D);
+  Color primaryText = const Color(0xFFE0E0E0);
+  Color secondaryText = const Color(0xFFD2D2D2);
 
-  Color customColor1 = Color(0x2AFF0054);
+  Color eviredTransparent = Color(0x2AFF0054);
+  Color neutralGray = Color(0xFFA396F0);
 }
 
 extension TextStyleHelper on TextStyle {

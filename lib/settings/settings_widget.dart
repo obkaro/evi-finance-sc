@@ -8,26 +8,97 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProfileWidget extends StatefulWidget {
-  const ProfileWidget({Key key}) : super(key: key);
+class SettingsWidget extends StatefulWidget {
+  const SettingsWidget({Key key}) : super(key: key);
 
   @override
-  _ProfileWidgetState createState() => _ProfileWidgetState();
+  _SettingsWidgetState createState() => _SettingsWidgetState();
 }
 
-class _ProfileWidgetState extends State<ProfileWidget> {
+class _SettingsWidgetState extends State<SettingsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Profile'});
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Settings'});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100),
+        child: AppBar(
+          backgroundColor: Color(0x00FF0054),
+          automaticallyImplyLeading: false,
+          flexibleSpace: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primaryColor,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(32),
+                      bottomRight: Radius.circular(32),
+                      topLeft: Radius.circular(0),
+                      topRight: Radius.circular(0),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Icon(
+                                  Icons.settings_rounded,
+                                  color: Colors.white,
+                                  size: 32,
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16, 20, 24, 20),
+                                  child: Text(
+                                    'Settings',
+                                    style: FlutterFlowTheme.of(context)
+                                        .title1
+                                        .override(
+                                          fontFamily: 'Spline Sans',
+                                          color: Colors.white,
+                                          fontSize: 32,
+                                          fontWeight: FontWeight.bold,
+                                          useGoogleFonts: false,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          actions: [],
+          elevation: 0,
+        ),
+      ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
@@ -38,47 +109,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               children: [
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                  child: Container(
-                    width: double.infinity,
-                    height: 72,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(1, 1, 1, 1),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                            child: Icon(
-                              Icons.settings_rounded,
-                              color: Color(0xFFF4F4F4),
-                              size: 24,
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(8, 0, 20, 0),
-                            child: Text(
-                              'Settings',
-                              style:
-                                  FlutterFlowTheme.of(context).title1.override(
-                                        fontFamily: 'Spline Sans',
-                                        color: Color(0xFFF4F4F4),
-                                        useGoogleFonts: false,
-                                      ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -116,7 +146,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             ),
                             subtitle: Text(
                               'Edit profile settings',
-                              style: FlutterFlowTheme.of(context).subtitle2,
+                              style: FlutterFlowTheme.of(context).bodyText2,
                             ),
                             trailing: Icon(
                               Icons.arrow_forward_ios,
@@ -151,7 +181,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             ),
                             subtitle: Text(
                               'Get in on Evi premium options',
-                              style: FlutterFlowTheme.of(context).subtitle2,
+                              style: FlutterFlowTheme.of(context).bodyText2,
                             ),
                             dense: false,
                             contentPadding:
@@ -190,7 +220,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             ),
                             subtitle: Text(
                               'Toggle dark/light mode',
-                              style: FlutterFlowTheme.of(context).subtitle2,
+                              style: FlutterFlowTheme.of(context).bodyText2,
                             ),
                             trailing: Icon(
                               Icons.arrow_forward_ios,
@@ -227,7 +257,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             ),
                             subtitle: Text(
                               'Review and manage your data',
-                              style: FlutterFlowTheme.of(context).subtitle2,
+                              style: FlutterFlowTheme.of(context).bodyText2,
                             ),
                             dense: false,
                             contentPadding:
@@ -258,7 +288,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             ),
                             subtitle: Text(
                               'Link to our TCs',
-                              style: FlutterFlowTheme.of(context).subtitle2,
+                              style: FlutterFlowTheme.of(context).bodyText2,
                             ),
                             dense: false,
                             contentPadding:
@@ -298,7 +328,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             ),
                             subtitle: Text(
                               'Learn more about Evi Finance',
-                              style: FlutterFlowTheme.of(context).subtitle2,
+                              style: FlutterFlowTheme.of(context).bodyText2,
                             ),
                             dense: false,
                             contentPadding:
@@ -345,7 +375,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             ),
                             subtitle: Text(
                               'Exit the app',
-                              style: FlutterFlowTheme.of(context).subtitle2,
+                              style: FlutterFlowTheme.of(context).bodyText2,
                             ),
                             dense: false,
                             contentPadding:

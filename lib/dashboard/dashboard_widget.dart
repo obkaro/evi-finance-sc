@@ -52,14 +52,68 @@ class _DashboardWidgetState extends State<DashboardWidget> {
               children: [
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        'Hello Somebody,',
-                        style: FlutterFlowTheme.of(context).title3,
+                  child: Container(
+                    width: double.infinity,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                child: StreamBuilder<List<AccountsRecord>>(
+                                  stream: queryAccountsRecord(
+                                    queryBuilder: (accountsRecord) =>
+                                        accountsRecord.where('accountOwner',
+                                            isEqualTo: currentUserReference),
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: SpinKitRing(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            size: 50,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<AccountsRecord>
+                                        textAccountsRecordList = snapshot.data;
+                                    return Text(
+                                      functions.formatTransCurrency(
+                                          functions.sumAccountBalances(
+                                              textAccountsRecordList.toList())),
+                                      style:
+                                          FlutterFlowTheme.of(context).title3,
+                                    );
+                                  },
+                                ),
+                              ),
+                              Text(
+                                'Total Balance',
+                                style: FlutterFlowTheme.of(context).subtitle2,
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
                 Padding(
@@ -277,7 +331,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Last Budget',
+                        'Active Budget',
                         style: FlutterFlowTheme.of(context).subtitle2,
                       ),
                       InkWell(
@@ -379,9 +433,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                             return Container(
                               width: double.infinity,
                               height: 96,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(1),
-                              ),
+                              decoration: BoxDecoration(),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     16, 16, 16, 16),
@@ -442,7 +494,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                   backgroundColor:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .customColor1,
+                                                          .eviredTransparent,
                                                   startAngle: 0,
                                                 ),
                                                 Expanded(

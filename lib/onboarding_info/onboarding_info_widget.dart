@@ -194,8 +194,8 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                                 radius: 16,
                                 dotWidth: 16,
                                 dotHeight: 16,
-                                dotColor:
-                                    FlutterFlowTheme.of(context).customColor1,
+                                dotColor: FlutterFlowTheme.of(context)
+                                    .eviredTransparent,
                                 activeDotColor:
                                     FlutterFlowTheme.of(context).primaryColor,
                                 paintStyle: PaintingStyle.fill,

@@ -86,6 +86,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                     fontFamily: 'Spline Sans',
                     color: FlutterFlowTheme.of(context).primaryText,
                     fontSize: 22,
+                    fontWeight: FontWeight.bold,
                     useGoogleFonts: false,
                   ),
             ),
@@ -236,7 +237,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                     backgroundColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .customColor1,
+                                                            .eviredTransparent,
                                                     center: Text(
                                                       '${functions.formatBudgetCurrency(widget.budget.budgetAmount)} Left',
                                                       style:
@@ -277,7 +278,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                     backgroundColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .customColor1,
+                                                            .eviredTransparent,
                                                     center: Text(
                                                       '${functions.subtractCurrency(widget.budget.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                       style:
@@ -386,7 +387,6 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                               ),
                             ],
                           ),
-                          Divider(),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
@@ -460,8 +460,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  containerBudgetCategoriesRecord
-                                                      .categoryName,
+                                                  'Unallocated',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .subtitle1,
@@ -485,9 +484,10 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                               },
                             ),
                           ),
+                          Divider(),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                             child: StreamBuilder<List<BudgetCategoriesRecord>>(
                               stream: queryBudgetCategoriesRecord(
                                 queryBuilder: (budgetCategoriesRecord) =>
@@ -680,7 +680,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                               .primaryColor,
                                                                       backgroundColor:
                                                                           FlutterFlowTheme.of(context)
-                                                                              .customColor1,
+                                                                              .eviredTransparent,
                                                                       barRadius:
                                                                           Radius.circular(
                                                                               12),

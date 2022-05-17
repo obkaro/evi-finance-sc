@@ -126,7 +126,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         account: await getDocumentParameter(
             data, 'account', AccountsRecord.serializer),
       ),
-  'Profile': (data) async => NavBarPage(initialPage: 'Profile'),
+  'Settings': (data) async => NavBarPage(initialPage: 'Settings'),
   'Admin': (data) async => AdminWidget(),
   'ProfileSettings': (data) async => ProfileSettingsWidget(),
 };
