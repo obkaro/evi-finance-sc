@@ -68,8 +68,25 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 16),
+                  child: Container(
+                    width: 60,
+                    height: 6,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 16),
+              padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
