@@ -14,12 +14,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CreateNewBudgetCopyWidget extends StatefulWidget {
-  const CreateNewBudgetCopyWidget({
-    Key key,
-    this.budget,
-  }) : super(key: key);
-
-  final BudgetsRecord budget;
+  const CreateNewBudgetCopyWidget({Key key}) : super(key: key);
 
   @override
   _CreateNewBudgetCopyWidgetState createState() =>

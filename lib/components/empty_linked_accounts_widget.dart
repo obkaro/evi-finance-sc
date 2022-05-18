@@ -16,35 +16,38 @@ class EmptyLinkedAccountsWidget extends StatefulWidget {
 class _EmptyLinkedAccountsWidgetState extends State<EmptyLinkedAccountsWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 100,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: InkWell(
-        onTap: () async {
-          logFirebaseEvent('Column-ON_TAP');
-          // Action_linkAcct
-          logFirebaseEvent('Column-Action_linkAcct');
-          await actions.flutterMono(
-            context,
-          );
-        },
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-              child: Text(
-                'Oops...looks like you\'re yet to link an account.\nClick here to  link a new account.',
-                textAlign: TextAlign.center,
-                style: FlutterFlowTheme.of(context).bodyText1,
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
+      child: Container(
+        width: double.infinity,
+        height: 100,
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: InkWell(
+          onTap: () async {
+            logFirebaseEvent('Column-ON_TAP');
+            // Action_linkAcct
+            logFirebaseEvent('Column-Action_linkAcct');
+            await actions.flutterMono(
+              context,
+            );
+          },
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                child: Text(
+                  'Oops...looks like you\'re yet to link an account.\nClick here to  link a new account.',
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.of(context).bodyText1,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
