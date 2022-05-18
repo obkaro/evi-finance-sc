@@ -292,3 +292,14 @@ bool listChecker(List<BudgetCategoriesRecord> listToCheck) {
   return emptyOrNot;
   //true = empty, false = not empty.
 }
+
+int isBudgetExising(DocumentReference userBudget) {
+  // Add your function code here!
+  int existing = 0;
+
+  if (userBudget != null) {
+    existing = 1;
+  }
+
+  return existing;
+}

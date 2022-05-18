@@ -669,6 +669,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                     .override(
                                                                       fontFamily:
                                                                           'Source Sans Pro',
+                                                                      color: Color(
+                                                                          0xFFD1D1D1),
                                                                       fontSize:
                                                                           12,
                                                                       fontWeight:
@@ -761,6 +763,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                       .override(
                                                                         fontFamily:
                                                                             'Source Sans Pro',
+                                                                        color: Color(
+                                                                            0xFFC1C1C1),
                                                                         fontSize:
                                                                             12,
                                                                         fontWeight:
@@ -790,6 +794,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                       .override(
                                                                         fontFamily:
                                                                             'Source Sans Pro',
+                                                                        color: Color(
+                                                                            0xFFE7E7E7),
                                                                         fontSize:
                                                                             12,
                                                                         fontWeight:

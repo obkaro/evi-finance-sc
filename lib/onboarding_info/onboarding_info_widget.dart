@@ -48,7 +48,7 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 50),
                           child: PageView(
                             controller: pageViewController ??=
-                                PageController(initialPage: 2),
+                                PageController(initialPage: 0),
                             scrollDirection: Axis.horizontal,
                             children: [
                               Column(
@@ -178,7 +178,7 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                             child: SmoothPageIndicator(
                               controller: pageViewController ??=
-                                  PageController(initialPage: 2),
+                                  PageController(initialPage: 0),
                               count: 3,
                               axisDirection: Axis.horizontal,
                               onDotClicked: (i) {

@@ -74,9 +74,10 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
               padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 16),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Select Budget',
+                    'Select Category',
                     style: FlutterFlowTheme.of(context).subtitle1,
                   ),
                 ],
