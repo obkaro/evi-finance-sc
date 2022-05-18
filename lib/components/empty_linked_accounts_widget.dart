@@ -16,15 +16,15 @@ class EmptyLinkedAccountsWidget extends StatefulWidget {
 class _EmptyLinkedAccountsWidgetState extends State<EmptyLinkedAccountsWidget> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
-      child: Container(
-        width: double.infinity,
-        height: 100,
-        decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
-          borderRadius: BorderRadius.circular(16),
-        ),
+    return Container(
+      width: double.infinity,
+      height: 100,
+      decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).secondaryBackground,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(14, 8, 20, 0),
         child: InkWell(
           onTap: () async {
             logFirebaseEvent('Column-ON_TAP');

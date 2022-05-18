@@ -113,7 +113,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                               ),
                               Text(
                                 'Total Balance',
-                                style: FlutterFlowTheme.of(context).subtitle2,
+                                style: FlutterFlowTheme.of(context).bodyText2,
                               ),
                             ],
                           ),
@@ -138,12 +138,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           logFirebaseEvent('Text-Navigate-To');
                           await Navigator.push(
                             context,
-                            PageTransition(
-                              type: PageTransitionType.scale,
-                              alignment: Alignment.bottomCenter,
-                              duration: Duration(milliseconds: 400),
-                              reverseDuration: Duration(milliseconds: 400),
-                              child: NavBarPage(initialPage: 'Accounts'),
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  NavBarPage(initialPage: 'Accounts'),
                             ),
                           );
                         },
@@ -187,7 +184,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       List<AccountsRecord> rowAccountsRecordList =
                           snapshot.data;
                       if (rowAccountsRecordList.isEmpty) {
-                        return EmptyLinkedAccountsWidget();
+                        return Center(
+                          child: EmptyLinkedAccountsWidget(),
+                        );
                       }
                       return SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
@@ -206,13 +205,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                   logFirebaseEvent('Container-Navigate-To');
                                   await Navigator.push(
                                     context,
-                                    PageTransition(
-                                      type: PageTransitionType.scale,
-                                      alignment: Alignment.bottomCenter,
-                                      duration: Duration(milliseconds: 400),
-                                      reverseDuration:
-                                          Duration(milliseconds: 400),
-                                      child: AccountSingleWidget(
+                                    MaterialPageRoute(
+                                      builder: (context) => AccountSingleWidget(
                                         account: rowAccountsRecord,
                                       ),
                                     ),
@@ -357,12 +351,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           logFirebaseEvent('Text-Navigate-To');
                           await Navigator.push(
                             context,
-                            PageTransition(
-                              type: PageTransitionType.scale,
-                              alignment: Alignment.bottomCenter,
-                              duration: Duration(milliseconds: 400),
-                              reverseDuration: Duration(milliseconds: 400),
-                              child: BudgetsWidget(),
+                            MaterialPageRoute(
+                              builder: (context) => BudgetsWidget(),
                             ),
                           );
                         },
@@ -575,12 +565,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           logFirebaseEvent('Text-Navigate-To');
                           await Navigator.push(
                             context,
-                            PageTransition(
-                              type: PageTransitionType.scale,
-                              alignment: Alignment.bottomCenter,
-                              duration: Duration(milliseconds: 400),
-                              reverseDuration: Duration(milliseconds: 400),
-                              child: TransactionsWidget(),
+                            MaterialPageRoute(
+                              builder: (context) => TransactionsWidget(),
                             ),
                           );
                         },
@@ -674,15 +660,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                 'Row-Action_TransactionSingle');
                                             await Navigator.push(
                                               context,
-                                              PageTransition(
-                                                type: PageTransitionType.scale,
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                                duration:
-                                                    Duration(milliseconds: 400),
-                                                reverseDuration:
-                                                    Duration(milliseconds: 400),
-                                                child: TransactionSingleWidget(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TransactionSingleWidget(
                                                   transaction:
                                                       columnTransactionsRecord,
                                                 ),
@@ -791,20 +771,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                           'Row-Navigate-To');
                                                       await Navigator.push(
                                                         context,
-                                                        PageTransition(
-                                                          type:
-                                                              PageTransitionType
-                                                                  .scale,
-                                                          alignment: Alignment
-                                                              .bottomCenter,
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                                  400),
-                                                          reverseDuration:
-                                                              Duration(
-                                                                  milliseconds:
-                                                                      400),
-                                                          child:
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
                                                               TransactionSingleWidget(
                                                             transaction:
                                                                 columnTransactionsRecord,

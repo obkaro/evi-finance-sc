@@ -200,16 +200,9 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                       'ListTile-Action_BudgetSingle');
                                                   await Navigator.push(
                                                     context,
-                                                    PageTransition(
-                                                      type: PageTransitionType
-                                                          .scale,
-                                                      alignment: Alignment
-                                                          .bottomCenter,
-                                                      duration: Duration(
-                                                          milliseconds: 400),
-                                                      reverseDuration: Duration(
-                                                          milliseconds: 400),
-                                                      child: BudgetSingleWidget(
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          BudgetSingleWidget(
                                                         budget:
                                                             columnBudgetsRecord,
                                                         uncategorizedAmount: functions

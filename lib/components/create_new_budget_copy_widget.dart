@@ -108,9 +108,19 @@ class _CreateNewBudgetCopyWidgetState extends State<CreateNewBudgetCopyWidget> {
                           iconColor: FlutterFlowTheme.of(context).secondaryText,
                           weekFormat: false,
                           weekStartsMonday: false,
-                          onChange: (DateTimeRange newSelectedDate) {
-                            setState(
-                                () => calendarSelectedDay = newSelectedDate);
+                          onChange: (DateTimeRange newSelectedDate) async {
+                            calendarSelectedDay = newSelectedDate;
+                            logFirebaseEvent('Calendar-ON_DATE_SELECTED');
+                            logFirebaseEvent('Calendar-Backend-Call');
+
+                            final budgetsUpdateData = createBudgetsRecordData(
+                              budgetStart: calendarSelectedDay.start,
+                              budgetEnd: functions.addDaysToDate(
+                                  calendarSelectedDay.start, 30),
+                            );
+                            await currentUserDocument?.activeBudget
+                                .update(budgetsUpdateData);
+                            setState(() {});
                           },
                           titleStyle: FlutterFlowTheme.of(context).bodyText1,
                           dayOfWeekStyle:
@@ -179,12 +189,8 @@ class _CreateNewBudgetCopyWidgetState extends State<CreateNewBudgetCopyWidget> {
                     logFirebaseEvent('Button-Navigate-To');
                     await Navigator.push(
                       context,
-                      PageTransition(
-                        type: PageTransitionType.scale,
-                        alignment: Alignment.bottomCenter,
-                        duration: Duration(milliseconds: 400),
-                        reverseDuration: Duration(milliseconds: 400),
-                        child: CreateBudgetCategoriesCopyWidget(
+                      MaterialPageRoute(
+                        builder: (context) => CreateBudgetCategoriesCopyWidget(
                           createdBudget: createdBudget,
                           uncategorized: uncategorized,
                         ),

@@ -1012,15 +1012,9 @@ class _EditBudgetCategoriesWidgetState
                                                 'Button-Navigate-To');
                                             await Navigator.pushAndRemoveUntil(
                                               context,
-                                              PageTransition(
-                                                type: PageTransitionType.scale,
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                                duration:
-                                                    Duration(milliseconds: 400),
-                                                reverseDuration:
-                                                    Duration(milliseconds: 400),
-                                                child: BudgetsWidget(),
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    BudgetsWidget(),
                                               ),
                                               (r) => false,
                                             );

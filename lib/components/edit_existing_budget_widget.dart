@@ -248,12 +248,8 @@ class _EditExistingBudgetWidgetState extends State<EditExistingBudgetWidget> {
                       logFirebaseEvent('Button-Navigate-To');
                       await Navigator.push(
                         context,
-                        PageTransition(
-                          type: PageTransitionType.scale,
-                          alignment: Alignment.bottomCenter,
-                          duration: Duration(milliseconds: 400),
-                          reverseDuration: Duration(milliseconds: 400),
-                          child: EditBudgetCategoriesWidget(
+                        MaterialPageRoute(
+                          builder: (context) => EditBudgetCategoriesWidget(
                             createdBudget: widget.budget,
                             uncategorized: widget.uncategorized,
                           ),
