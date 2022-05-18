@@ -123,6 +123,13 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.budgetDuration;
+    if (value != null) {
+      result
+        ..add('budgetDuration')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -212,6 +219,10 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
           result.isActive = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
+        case 'budgetDuration':
+          result.budgetDuration = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -255,6 +266,8 @@ class _$BudgetsRecord extends BudgetsRecord {
   @override
   final bool isActive;
   @override
+  final String budgetDuration;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$BudgetsRecord([void Function(BudgetsRecordBuilder) updates]) =>
@@ -275,6 +288,7 @@ class _$BudgetsRecord extends BudgetsRecord {
       this.budgetID,
       this.lastViewed,
       this.isActive,
+      this.budgetDuration,
       this.reference})
       : super._();
 
@@ -303,6 +317,7 @@ class _$BudgetsRecord extends BudgetsRecord {
         budgetID == other.budgetID &&
         lastViewed == other.lastViewed &&
         isActive == other.isActive &&
+        budgetDuration == other.budgetDuration &&
         reference == other.reference;
   }
 
@@ -323,23 +338,27 @@ class _$BudgetsRecord extends BudgetsRecord {
                                                     $jc(
                                                         $jc(
                                                             $jc(
-                                                                0,
-                                                                budgetName
+                                                                $jc(
+                                                                    0,
+                                                                    budgetName
+                                                                        .hashCode),
+                                                                budgetOwner
                                                                     .hashCode),
-                                                            budgetOwner
+                                                            budgetAmount
                                                                 .hashCode),
-                                                        budgetAmount.hashCode),
-                                                    budgetDescription.hashCode),
-                                                budgetStart.hashCode),
-                                            budgetEnd.hashCode),
-                                        budgetDateCreated.hashCode),
-                                    budgetLinkedAccounts.hashCode),
-                                budgetSubCategories.hashCode),
-                            isRecurring.hashCode),
-                        uncategorizedLink.hashCode),
-                    budgetID.hashCode),
-                lastViewed.hashCode),
-            isActive.hashCode),
+                                                        budgetDescription
+                                                            .hashCode),
+                                                    budgetStart.hashCode),
+                                                budgetEnd.hashCode),
+                                            budgetDateCreated.hashCode),
+                                        budgetLinkedAccounts.hashCode),
+                                    budgetSubCategories.hashCode),
+                                isRecurring.hashCode),
+                            uncategorizedLink.hashCode),
+                        budgetID.hashCode),
+                    lastViewed.hashCode),
+                isActive.hashCode),
+            budgetDuration.hashCode),
         reference.hashCode));
   }
 
@@ -360,6 +379,7 @@ class _$BudgetsRecord extends BudgetsRecord {
           ..add('budgetID', budgetID)
           ..add('lastViewed', lastViewed)
           ..add('isActive', isActive)
+          ..add('budgetDuration', budgetDuration)
           ..add('reference', reference))
         .toString();
   }
@@ -437,6 +457,11 @@ class BudgetsRecordBuilder
   bool get isActive => _$this._isActive;
   set isActive(bool isActive) => _$this._isActive = isActive;
 
+  String _budgetDuration;
+  String get budgetDuration => _$this._budgetDuration;
+  set budgetDuration(String budgetDuration) =>
+      _$this._budgetDuration = budgetDuration;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -463,6 +488,7 @@ class BudgetsRecordBuilder
       _budgetID = $v.budgetID;
       _lastViewed = $v.lastViewed;
       _isActive = $v.isActive;
+      _budgetDuration = $v.budgetDuration;
       _reference = $v.reference;
       _$v = null;
     }
@@ -500,6 +526,7 @@ class BudgetsRecordBuilder
               budgetID: budgetID,
               lastViewed: lastViewed,
               isActive: isActive,
+              budgetDuration: budgetDuration,
               reference: reference);
     } catch (_) {
       String _$failedField;
