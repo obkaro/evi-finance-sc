@@ -1,4 +1,5 @@
 import '../backend/backend.dart';
+import '../budgets/budgets_widget.dart';
 import '../components/create_new_budget_copy_copy_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -60,6 +61,8 @@ class _BudgetOptionsWidgetState extends State<BudgetOptionsWidget> {
                 return InkWell(
                   onTap: () async {
                     logFirebaseEvent('ListTile-ON_TAP');
+                    logFirebaseEvent('ListTile-Navigate-Back');
+                    Navigator.pop(context);
                     logFirebaseEvent('ListTile-Bottom-Sheet');
                     await showModalBottomSheet(
                       isScrollControlled: true,
@@ -97,19 +100,31 @@ class _BudgetOptionsWidgetState extends State<BudgetOptionsWidget> {
           ),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
-            child: ListTile(
-              title: Text(
-                'View All Budgets',
-                style: FlutterFlowTheme.of(context).subtitle1,
+            child: InkWell(
+              onLongPress: () async {
+                logFirebaseEvent('ListTile-ON_LONG_PRESS');
+                logFirebaseEvent('ListTile-Navigate-To');
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BudgetsWidget(),
+                  ),
+                );
+              },
+              child: ListTile(
+                title: Text(
+                  'View All Budgets',
+                  style: FlutterFlowTheme.of(context).subtitle1,
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Color(0xFF303030),
+                  size: 20,
+                ),
+                tileColor: Color(0xFFF5F5F5),
+                dense: false,
+                contentPadding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
               ),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xFF303030),
-                size: 20,
-              ),
-              tileColor: Color(0xFFF5F5F5),
-              dense: false,
-              contentPadding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
             ),
           ),
         ],

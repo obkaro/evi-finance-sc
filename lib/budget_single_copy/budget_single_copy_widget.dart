@@ -901,7 +901,7 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                           ),
                         ),
                       if ((functions.isBudgetExising(
-                              currentUserDocument?.activeBudget)) ==
+                              currentUserDocument?.activeBudget)) >
                           0)
                         Padding(
                           padding:

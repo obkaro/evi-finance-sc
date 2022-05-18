@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/set_budget_comp_widget.dart';
+import '../components/set_trans_category_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -569,19 +570,11 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0, 10, 0, 10),
                                             child: StreamBuilder<
-                                                List<BudgetCategoriesRecord>>(
-                                              stream:
-                                                  queryBudgetCategoriesRecord(
-                                                queryBuilder:
-                                                    (budgetCategoriesRecord) =>
-                                                        budgetCategoriesRecord.where(
-                                                            'linkedTransactions',
-                                                            arrayContains:
-                                                                widget
-                                                                    .transaction
-                                                                    .reference),
-                                                singleRecord: true,
-                                              ),
+                                                BudgetCategoriesRecord>(
+                                              stream: BudgetCategoriesRecord
+                                                  .getDocument(widget
+                                                      .transaction
+                                                      .linkedCategory),
                                               builder: (context, snapshot) {
                                                 // Customize what your widget looks like when it's loading.
                                                 if (!snapshot.hasData) {
@@ -599,19 +592,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                     ),
                                                   );
                                                 }
-                                                List<BudgetCategoriesRecord>
-                                                    columnBudgetCategoriesRecordList =
-                                                    snapshot.data;
-                                                // Return an empty Container when the document does not exist.
-                                                if (snapshot.data.isEmpty) {
-                                                  return Container();
-                                                }
                                                 final columnBudgetCategoriesRecord =
-                                                    columnBudgetCategoriesRecordList
-                                                            .isNotEmpty
-                                                        ? columnBudgetCategoriesRecordList
-                                                            .first
-                                                        : null;
+                                                    snapshot.data;
                                                 return Column(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -696,9 +678,12 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                 context)
                                                             .viewInsets,
                                                         child:
-                                                            SetBudgetCompWidget(
+                                                            SetTransCategoryWidget(
                                                           transaction: widget
                                                               .transaction,
+                                                          recievedBudget:
+                                                              currentUserDocument
+                                                                  ?.activeBudget,
                                                         ),
                                                       );
                                                     },
