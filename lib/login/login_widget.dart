@@ -247,11 +247,16 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                 'Button_SignUp-Navigate-To');
                                             await Navigator.push(
                                               context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    NavBarPage(
-                                                        initialPage:
-                                                            'Dashboard'),
+                                              PageTransition(
+                                                type: PageTransitionType.scale,
+                                                alignment:
+                                                    Alignment.bottomCenter,
+                                                duration:
+                                                    Duration(milliseconds: 400),
+                                                reverseDuration:
+                                                    Duration(milliseconds: 400),
+                                                child: NavBarPage(
+                                                    initialPage: 'Dashboard'),
                                               ),
                                             );
                                           },
@@ -284,9 +289,15 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                 'Button_SignUp-Navigate-To');
                                             await Navigator.push(
                                               context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    LoginCopyWidget(),
+                                              PageTransition(
+                                                type: PageTransitionType.scale,
+                                                alignment:
+                                                    Alignment.bottomCenter,
+                                                duration:
+                                                    Duration(milliseconds: 400),
+                                                reverseDuration:
+                                                    Duration(milliseconds: 400),
+                                                child: LoginCopyWidget(),
                                               ),
                                             );
                                           },

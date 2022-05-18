@@ -268,8 +268,13 @@ class _AdminWidgetState extends State<AdminWidget> {
                                     await signOut();
                                     await Navigator.pushAndRemoveUntil(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (context) => LandPageWidget(),
+                                      PageTransition(
+                                        type: PageTransitionType.scale,
+                                        alignment: Alignment.bottomCenter,
+                                        duration: Duration(milliseconds: 400),
+                                        reverseDuration:
+                                            Duration(milliseconds: 400),
+                                        child: LandPageWidget(),
                                       ),
                                       (r) => false,
                                     );

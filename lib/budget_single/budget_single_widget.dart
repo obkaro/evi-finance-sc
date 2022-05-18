@@ -564,9 +564,16 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                   'Container-Action_ViewSingleCategory');
                                               await Navigator.push(
                                                 context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      CategorySingleWidget(
+                                                PageTransition(
+                                                  type:
+                                                      PageTransitionType.scale,
+                                                  alignment:
+                                                      Alignment.bottomCenter,
+                                                  duration: Duration(
+                                                      milliseconds: 400),
+                                                  reverseDuration: Duration(
+                                                      milliseconds: 400),
+                                                  child: CategorySingleWidget(
                                                     category:
                                                         columnBudgetCategoriesRecord,
                                                   ),

@@ -170,8 +170,16 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                     'Button-Navigate-To');
                                                 await Navigator.push(
                                                   context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
+                                                  PageTransition(
+                                                    type: PageTransitionType
+                                                        .scale,
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                    duration: Duration(
+                                                        milliseconds: 400),
+                                                    reverseDuration: Duration(
+                                                        milliseconds: 400),
+                                                    child:
                                                         OnboardingInfoWidget(),
                                                   ),
                                                 );

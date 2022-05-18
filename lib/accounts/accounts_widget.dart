@@ -171,8 +171,13 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                       'Container-Action_NavToAcctSingle');
                                   await Navigator.push(
                                     context,
-                                    MaterialPageRoute(
-                                      builder: (context) => AccountSingleWidget(
+                                    PageTransition(
+                                      type: PageTransitionType.scale,
+                                      alignment: Alignment.bottomCenter,
+                                      duration: Duration(milliseconds: 400),
+                                      reverseDuration:
+                                          Duration(milliseconds: 400),
+                                      child: AccountSingleWidget(
                                         account: listViewAccountsRecord,
                                       ),
                                     ),

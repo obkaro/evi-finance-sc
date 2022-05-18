@@ -138,9 +138,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           logFirebaseEvent('Text-Navigate-To');
                           await Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  NavBarPage(initialPage: 'Accounts'),
+                            PageTransition(
+                              type: PageTransitionType.scale,
+                              alignment: Alignment.bottomCenter,
+                              duration: Duration(milliseconds: 400),
+                              reverseDuration: Duration(milliseconds: 400),
+                              child: NavBarPage(initialPage: 'Accounts'),
                             ),
                           );
                         },
@@ -203,8 +206,13 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                   logFirebaseEvent('Container-Navigate-To');
                                   await Navigator.push(
                                     context,
-                                    MaterialPageRoute(
-                                      builder: (context) => AccountSingleWidget(
+                                    PageTransition(
+                                      type: PageTransitionType.scale,
+                                      alignment: Alignment.bottomCenter,
+                                      duration: Duration(milliseconds: 400),
+                                      reverseDuration:
+                                          Duration(milliseconds: 400),
+                                      child: AccountSingleWidget(
                                         account: rowAccountsRecord,
                                       ),
                                     ),
@@ -349,8 +357,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           logFirebaseEvent('Text-Navigate-To');
                           await Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => BudgetsWidget(),
+                            PageTransition(
+                              type: PageTransitionType.scale,
+                              alignment: Alignment.bottomCenter,
+                              duration: Duration(milliseconds: 400),
+                              reverseDuration: Duration(milliseconds: 400),
+                              child: BudgetsWidget(),
                             ),
                           );
                         },
@@ -559,8 +571,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           logFirebaseEvent('Text-Navigate-To');
                           await Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => TransactionsWidget(),
+                            PageTransition(
+                              type: PageTransitionType.scale,
+                              alignment: Alignment.bottomCenter,
+                              duration: Duration(milliseconds: 400),
+                              reverseDuration: Duration(milliseconds: 400),
+                              child: TransactionsWidget(),
                             ),
                           );
                         },
@@ -654,9 +670,15 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                 'Row-Action_TransactionSingle');
                                             await Navigator.push(
                                               context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TransactionSingleWidget(
+                                              PageTransition(
+                                                type: PageTransitionType.scale,
+                                                alignment:
+                                                    Alignment.bottomCenter,
+                                                duration:
+                                                    Duration(milliseconds: 400),
+                                                reverseDuration:
+                                                    Duration(milliseconds: 400),
+                                                child: TransactionSingleWidget(
                                                   transaction:
                                                       columnTransactionsRecord,
                                                 ),
@@ -765,8 +787,20 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                           'Row-Navigate-To');
                                                       await Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
+                                                        PageTransition(
+                                                          type:
+                                                              PageTransitionType
+                                                                  .scale,
+                                                          alignment: Alignment
+                                                              .bottomCenter,
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  400),
+                                                          reverseDuration:
+                                                              Duration(
+                                                                  milliseconds:
+                                                                      400),
+                                                          child:
                                                               TransactionSingleWidget(
                                                             transaction:
                                                                 columnTransactionsRecord,
