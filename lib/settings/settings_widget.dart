@@ -124,8 +124,12 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                             logFirebaseEvent('ListTile-Navigate-To');
                             await Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => ProfileSettingsWidget(),
+                              PageTransition(
+                                type: PageTransitionType.scale,
+                                alignment: Alignment.bottomCenter,
+                                duration: Duration(milliseconds: 400),
+                                reverseDuration: Duration(milliseconds: 400),
+                                child: ProfileSettingsWidget(),
                               ),
                             );
                           },
@@ -306,8 +310,12 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                             logFirebaseEvent('ListTile-Navigate-To');
                             await Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => AdminWidget(),
+                              PageTransition(
+                                type: PageTransitionType.scale,
+                                alignment: Alignment.bottomCenter,
+                                duration: Duration(milliseconds: 400),
+                                reverseDuration: Duration(milliseconds: 400),
+                                child: AdminWidget(),
                               ),
                             );
                           },
@@ -342,8 +350,12 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                             await signOut();
                             await Navigator.pushAndRemoveUntil(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => LandPageWidget(),
+                              PageTransition(
+                                type: PageTransitionType.scale,
+                                alignment: Alignment.bottomCenter,
+                                duration: Duration(milliseconds: 400),
+                                reverseDuration: Duration(milliseconds: 400),
+                                child: LandPageWidget(),
                               ),
                               (r) => false,
                             );
@@ -353,8 +365,12 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                             logFirebaseEvent('ListTile-Navigate-To');
                             await Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => AdminWidget(),
+                              PageTransition(
+                                type: PageTransitionType.scale,
+                                alignment: Alignment.bottomCenter,
+                                duration: Duration(milliseconds: 400),
+                                reverseDuration: Duration(milliseconds: 400),
+                                child: AdminWidget(),
                               ),
                             );
                           },

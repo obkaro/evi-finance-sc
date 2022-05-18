@@ -452,11 +452,22 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               'Button-Navigate-To');
                                                           await Navigator.push(
                                                             context,
-                                                            MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  NavBarPage(
-                                                                      initialPage:
-                                                                          'Settings'),
+                                                            PageTransition(
+                                                              type:
+                                                                  PageTransitionType
+                                                                      .scale,
+                                                              alignment: Alignment
+                                                                  .bottomCenter,
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      400),
+                                                              reverseDuration:
+                                                                  Duration(
+                                                                      milliseconds:
+                                                                          400),
+                                                              child: NavBarPage(
+                                                                  initialPage:
+                                                                      'Settings'),
                                                             ),
                                                           );
                                                         } else {
@@ -1025,9 +1036,15 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                 'Container-Action_navToTransactionSingle');
                                             await Navigator.push(
                                               context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TransactionSingleWidget(
+                                              PageTransition(
+                                                type: PageTransitionType.scale,
+                                                alignment:
+                                                    Alignment.bottomCenter,
+                                                duration:
+                                                    Duration(milliseconds: 400),
+                                                reverseDuration:
+                                                    Duration(milliseconds: 400),
+                                                child: TransactionSingleWidget(
                                                   transaction:
                                                       columnTransactionsRecord,
                                                 ),
@@ -1051,8 +1068,16 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                       'Row-Navigate-To');
                                                   await Navigator.push(
                                                     context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
+                                                    PageTransition(
+                                                      type: PageTransitionType
+                                                          .scale,
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      duration: Duration(
+                                                          milliseconds: 400),
+                                                      reverseDuration: Duration(
+                                                          milliseconds: 400),
+                                                      child:
                                                           TransactionSingleWidget(
                                                         transaction:
                                                             columnTransactionsRecord,

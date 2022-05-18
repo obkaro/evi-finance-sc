@@ -215,9 +215,12 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                       logFirebaseEvent('Button-Navigate-To');
                       await Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              NavBarPage(initialPage: 'Accounts'),
+                        PageTransition(
+                          type: PageTransitionType.scale,
+                          alignment: Alignment.bottomCenter,
+                          duration: Duration(milliseconds: 400),
+                          reverseDuration: Duration(milliseconds: 400),
+                          child: NavBarPage(initialPage: 'Accounts'),
                         ),
                       );
                     },

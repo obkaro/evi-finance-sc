@@ -85,18 +85,12 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'Login': (data) async => LoginWidget(),
   'LoginCopy': (data) async => LoginCopyWidget(),
   'OnboardingInfo': (data) async => OnboardingInfoWidget(),
-  'Dashboard': (data) async =>
-      hasMatchingParameters(data, {'command', 'newAccount'})
-          ? DashboardWidget(
-              command: getParameter(data, 'command'),
-              newAccount: getParameter(data, 'newAccount'),
-            )
-          : NavBarPage(initialPage: 'Dashboard'),
   'Transactions': (data) async => TransactionsWidget(),
   'TransactionSingle': (data) async => TransactionSingleWidget(
         transaction: await getDocumentParameter(
             data, 'transaction', TransactionsRecord.serializer),
       ),
+  'Budgets': (data) async => BudgetsWidget(),
   'BudgetSingle': (data) async => BudgetSingleWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
