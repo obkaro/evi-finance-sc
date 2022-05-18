@@ -1,9 +1,9 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../budgets/budgets_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -382,8 +382,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    NavBarPage(
-                                                        initialPage: 'Budgets'),
+                                                    BudgetsWidget(),
                                               ),
                                             );
                                           },

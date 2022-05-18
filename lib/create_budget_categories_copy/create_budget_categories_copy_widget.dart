@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../budgets/budgets_widget.dart';
 import '../components/create_const_category_widget.dart';
 import '../components/create_custom_category_widget.dart';
 import '../components/edit_budget_amount_widget.dart';
@@ -8,7 +9,6 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../main.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
@@ -49,8 +49,6 @@ class _CreateBudgetCategoriesCopyWidgetState
 
       final budgetsUpdateData = createBudgetsRecordData(
         uncategorizedLink: widget.uncategorized.reference,
-        budgetStart: widget.dateRange.start,
-        budgetEnd: widget.dateRange.end,
       );
       await widget.createdBudget.reference.update(budgetsUpdateData);
     });
@@ -976,8 +974,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    NavBarPage(
-                                                        initialPage: 'Budgets'),
+                                                    BudgetsWidget(),
                                               ),
                                               (r) => false,
                                             );

@@ -35,8 +35,12 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
         iconTheme:
             IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
         automaticallyImplyLeading: true,
+        title: Text(
+          'All Transactions',
+          style: FlutterFlowTheme.of(context).title3,
+        ),
         actions: [],
-        centerTitle: false,
+        centerTitle: true,
         elevation: 0,
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

@@ -1,20 +1,6 @@
 {
   "indexes": [
     {
-      "collectionGroup": "budgets",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "budgetOwner",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "budgetStart",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
       "collectionGroup": "budgetCategories",
       "queryScope": "COLLECTION",
       "fields": [

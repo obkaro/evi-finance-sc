@@ -31,101 +31,52 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100),
-        child: AppBar(
-          backgroundColor: Color(0x00FF0054),
-          automaticallyImplyLeading: false,
-          flexibleSpace: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(32),
-                      bottomRight: Radius.circular(32),
-                      topLeft: Radius.circular(0),
-                      topRight: Radius.circular(0),
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Icon(
-                                  Icons.pie_chart_rounded,
-                                  color: Colors.white,
-                                  size: 32,
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 20, 24, 20),
-                                  child: Text(
-                                    'Budgets',
-                                    style: FlutterFlowTheme.of(context)
-                                        .title1
-                                        .override(
-                                          fontFamily: 'Spline Sans',
-                                          color: Colors.white,
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.bold,
-                                          useGoogleFonts: false,
-                                        ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        iconTheme:
+            IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
+        automaticallyImplyLeading: true,
+        title: Text(
+          'Budget History',
+          style: FlutterFlowTheme.of(context).title2.override(
+                fontFamily: 'Spline Sans',
+                color: FlutterFlowTheme.of(context).primaryText,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                useGoogleFonts: false,
               ),
-            ],
-          ),
-          actions: [],
-          elevation: 0,
         ),
+        actions: [],
+        centerTitle: true,
+        elevation: 0,
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          logFirebaseEvent('FloatingActionButton-ON_TAP');
-          // Action_NewBudget
-          logFirebaseEvent('FloatingActionButton-Action_NewBudget');
-          await showModalBottomSheet(
-            isScrollControlled: true,
-            backgroundColor: Colors.transparent,
-            context: context,
-            builder: (context) {
-              return Padding(
-                padding: MediaQuery.of(context).viewInsets,
-                child: CreateNewBudgetWidget(),
-              );
-            },
-          );
-        },
-        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-        elevation: 8,
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-          size: 32,
+      floatingActionButton: Visibility(
+        visible: (currentUserEmail) == '0',
+        child: FloatingActionButton(
+          onPressed: () async {
+            logFirebaseEvent('FloatingActionButton-ON_TAP');
+            // Action_NewBudget
+            logFirebaseEvent('FloatingActionButton-Action_NewBudget');
+            await showModalBottomSheet(
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              context: context,
+              builder: (context) {
+                return Padding(
+                  padding: MediaQuery.of(context).viewInsets,
+                  child: CreateNewBudgetWidget(),
+                );
+              },
+            );
+          },
+          backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+          elevation: 8,
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 32,
+          ),
         ),
       ),
       body: SafeArea(
@@ -356,10 +307,10 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'This is where your budgets live. \nTap on the  + icon to create a new budget, swipe left on a single budget for more options.',
+                            'This is where your budgets live. \nSwipe left on a single budget for more options.',
                             textAlign: TextAlign.center,
                             style:
-                                FlutterFlowTheme.of(context).bodyText2.override(
+                                FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Source Sans Pro',
                                       lineHeight: 1.4,
                                     ),

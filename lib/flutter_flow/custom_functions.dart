@@ -269,3 +269,28 @@ int sumAccountBalances(List<AccountsRecord> accounts) {
 
   return total;
 }
+
+DateTime addDaysToDate(
+  DateTime startDate,
+  int daysToAdd,
+) {
+  // Add your function code here!
+  var newDate =
+      DateTime(startDate.year, startDate.month, startDate.day + daysToAdd);
+
+  return newDate;
+}
+
+bool listChecker(List<BudgetCategoriesRecord> listToCheck) {
+  // Add your function code here!
+  int count = 0;
+  bool emptyOrNot = false;
+  for (int i = 0; i < listToCheck.length; i++) {
+    count++;
+  }
+  if (count < 1) {
+    emptyOrNot = true;
+  }
+  return emptyOrNot;
+  //true = empty, false = not empty.
+}

@@ -124,7 +124,7 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'Dashboard': DashboardWidget(),
-      'Budgets': BudgetsWidget(),
+      'BudgetSingleCopy': BudgetSingleCopyWidget(),
       'Accounts': AccountsWidget(),
       'Settings': SettingsWidget(),
     };
@@ -162,7 +162,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.pie_chart_rounded,
               size: 32,
             ),
-            label: 'Transactions',
+            label: 'Home',
             tooltip: '',
           ),
           BottomNavigationBarItem(
