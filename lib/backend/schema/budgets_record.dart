@@ -53,6 +53,9 @@ abstract class BudgetsRecord
   bool get isActive;
 
   @nullable
+  String get budgetDuration;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -64,7 +67,8 @@ abstract class BudgetsRecord
     ..budgetSubCategories = ListBuilder()
     ..isRecurring = false
     ..budgetID = ''
-    ..isActive = false;
+    ..isActive = false
+    ..budgetDuration = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('budgets');
@@ -100,6 +104,7 @@ Map<String, dynamic> createBudgetsRecordData({
   String budgetID,
   DateTime lastViewed,
   bool isActive,
+  String budgetDuration,
 }) =>
     serializers.toFirestore(
         BudgetsRecord.serializer,
@@ -117,4 +122,5 @@ Map<String, dynamic> createBudgetsRecordData({
           ..uncategorizedLink = uncategorizedLink
           ..budgetID = budgetID
           ..lastViewed = lastViewed
-          ..isActive = isActive));
+          ..isActive = isActive
+          ..budgetDuration = budgetDuration));

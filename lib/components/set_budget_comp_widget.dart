@@ -72,6 +72,7 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
               padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 16),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Select Budget',

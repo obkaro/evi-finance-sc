@@ -59,20 +59,31 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      widget.constCategory.categoryName,
-                      textAlign: TextAlign.start,
-                      style: FlutterFlowTheme.of(context).subtitle1,
-                    ),
-                    Text(
-                      'Unallocated: ${functions.formatBudgetCurrency(widget.budgetAllocatedRemaining)}',
-                      textAlign: TextAlign.start,
-                      style: FlutterFlowTheme.of(context).subtitle2.override(
-                            fontFamily: 'Source Sans Pro',
-                            color: Color(0xFFFF0000),
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                          child: Text(
+                            widget.constCategory.categoryName,
+                            textAlign: TextAlign.start,
+                            style: FlutterFlowTheme.of(context).subtitle1,
                           ),
+                        ),
+                        Text(
+                          '(Unallocated: ${functions.formatBudgetCurrency(widget.budgetAllocatedRemaining)})',
+                          textAlign: TextAlign.start,
+                          style: FlutterFlowTheme.of(context)
+                              .subtitle2
+                              .override(
+                                fontFamily: 'Source Sans Pro',
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                              ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

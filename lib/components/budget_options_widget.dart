@@ -79,10 +79,7 @@ class _BudgetOptionsWidgetState extends State<BudgetOptionsWidget> {
                   child: ListTile(
                     title: Text(
                       'Edit Budget',
-                      style: FlutterFlowTheme.of(context).subtitle1.override(
-                            fontFamily: 'Source Sans Pro',
-                            fontWeight: FontWeight.w600,
-                          ),
+                      style: FlutterFlowTheme.of(context).subtitle1,
                     ),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
@@ -103,10 +100,7 @@ class _BudgetOptionsWidgetState extends State<BudgetOptionsWidget> {
             child: ListTile(
               title: Text(
                 'View All Budgets',
-                style: FlutterFlowTheme.of(context).subtitle1.override(
-                      fontFamily: 'Source Sans Pro',
-                      fontWeight: FontWeight.w600,
-                    ),
+                style: FlutterFlowTheme.of(context).subtitle1,
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,

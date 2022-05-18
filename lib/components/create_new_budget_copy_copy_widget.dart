@@ -2,10 +2,12 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../edit_budget_categories/edit_budget_categories_widget.dart';
 import '../flutter_flow/flutter_flow_calendar.dart';
+import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -31,6 +33,7 @@ class CreateNewBudgetCopyCopyWidget extends StatefulWidget {
 class _CreateNewBudgetCopyCopyWidgetState
     extends State<CreateNewBudgetCopyCopyWidget> {
   DateTimeRange calendarSelectedDay;
+  String dropDownValue;
 
   @override
   void initState() {
@@ -45,6 +48,7 @@ class _CreateNewBudgetCopyCopyWidgetState
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      height: 520,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
         boxShadow: [
@@ -69,12 +73,38 @@ class _CreateNewBudgetCopyCopyWidgetState
             children: [
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                child: custom_widgets.CurrencyTextField(
-                  width: MediaQuery.of(context).size.width,
+                child: Text(
+                  'Edit budget',
+                  style: FlutterFlowTheme.of(context).subtitle1,
+                ),
+              ),
+              custom_widgets.CurrencyTextField(
+                width: MediaQuery.of(context).size.width,
+                height: 50,
+                amount: widget.budget.budgetAmount,
+                labelText: 'Amount',
+                hintText: 'Enter amount',
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                child: FlutterFlowDropDown(
+                  initialOption: dropDownValue ??= 'Monthly',
+                  options: ['Weekly', 'Monthly'].toList(),
+                  onChanged: (val) => setState(() => dropDownValue = val),
+                  width: double.infinity,
                   height: 50,
-                  amount: widget.budget.budgetAmount,
-                  labelText: 'Amount',
-                  hintText: 'Enter amount',
+                  textStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                        fontFamily: 'Source Sans Pro',
+                        color: Colors.black,
+                      ),
+                  hintText: 'Please select...',
+                  fillColor: Colors.white,
+                  elevation: 2,
+                  borderColor: Colors.transparent,
+                  borderWidth: 0,
+                  borderRadius: 0,
+                  margin: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
+                  hidesUnderline: true,
                 ),
               ),
               Padding(
@@ -95,7 +125,7 @@ class _CreateNewBudgetCopyCopyWidgetState
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              'Select date to restart this budget',
+                              'Select start date',
                               textAlign: TextAlign.start,
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
@@ -115,16 +145,56 @@ class _CreateNewBudgetCopyCopyWidgetState
                           iconColor: FlutterFlowTheme.of(context).secondaryText,
                           weekFormat: false,
                           weekStartsMonday: false,
+                          initialDate: widget.budget.budgetStart,
                           onChange: (DateTimeRange newSelectedDate) async {
                             calendarSelectedDay = newSelectedDate;
                             logFirebaseEvent('Calendar-ON_DATE_SELECTED');
-                            logFirebaseEvent('Calendar-Backend-Call');
+                            if ((dropDownValue) == 'Monthly') {
+                              logFirebaseEvent('Calendar-Backend-Call');
 
-                            final budgetsUpdateData = createBudgetsRecordData(
-                              budgetEnd: calendarSelectedDay.end,
-                            );
-                            await widget.budget.reference
-                                .update(budgetsUpdateData);
+                              final budgetsUpdateData = createBudgetsRecordData(
+                                budgetStart: calendarSelectedDay.start,
+                                budgetEnd: functions.addDaysToDate(
+                                    calendarSelectedDay.end, 30),
+                                budgetDuration: dropDownValue,
+                              );
+                              await widget.budget.reference
+                                  .update(budgetsUpdateData);
+                            } else {
+                              if ((dropDownValue) == 'Weekly') {
+                                logFirebaseEvent('Calendar-Backend-Call');
+
+                                final budgetsUpdateData =
+                                    createBudgetsRecordData(
+                                  budgetStart: calendarSelectedDay.start,
+                                  budgetEnd: functions.addDaysToDate(
+                                      calendarSelectedDay.end, 7),
+                                  budgetDuration: dropDownValue,
+                                );
+                                await widget.budget.reference
+                                    .update(budgetsUpdateData);
+                              } else {
+                                logFirebaseEvent('Calendar-Alert-Dialog');
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('No time period'),
+                                      content: Text(
+                                          'Please select a budget time period in the dropdown above'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Okay'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+                            }
+
                             setState(() {});
                           },
                           titleStyle: FlutterFlowTheme.of(context).bodyText1,
@@ -188,19 +258,49 @@ class _CreateNewBudgetCopyCopyWidgetState
 
                           final budgetsUpdateData = createBudgetsRecordData(
                             budgetAmount: FFAppState().currencyTextField,
+                            budgetDuration: dropDownValue,
                           );
                           await widget.budget.reference
                               .update(budgetsUpdateData);
-                          logFirebaseEvent('Button-Navigate-To');
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EditBudgetCategoriesWidget(
-                                createdBudget: widget.budget,
-                                uncategorized: buttonBudgetCategoriesRecord,
+                          logFirebaseEvent('Button-Alert-Dialog');
+                          var confirmDialogResponse = await showDialog<bool>(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text(
+                                        'Proceed to edit budget categories?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, false),
+                                        child: Text('No'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, true),
+                                        child: Text('Yes'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ) ??
+                              false;
+                          if (confirmDialogResponse) {
+                            logFirebaseEvent('Button-Navigate-To');
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    EditBudgetCategoriesWidget(
+                                  createdBudget: widget.budget,
+                                  uncategorized: buttonBudgetCategoriesRecord,
+                                ),
                               ),
-                            ),
-                          );
+                            );
+                          } else {
+                            logFirebaseEvent('Button-Navigate-Back');
+                            Navigator.pop(context);
+                          }
                         } else {
                           logFirebaseEvent('Button-Alert-Dialog');
                           await showDialog(
@@ -222,7 +322,7 @@ class _CreateNewBudgetCopyCopyWidgetState
                           );
                         }
                       },
-                      text: 'Set Categories',
+                      text: 'Save',
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 60,

@@ -63,13 +63,13 @@ class _CreateCustomCategoryWidgetState
             children: [
               Row(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Unallocated: ${functions.formatBudgetCurrency(widget.budgetRemaining)}',
+                    '(Unallocated: ${functions.formatBudgetCurrency(widget.budgetRemaining)})',
                     style: FlutterFlowTheme.of(context).subtitle2.override(
                           fontFamily: 'Source Sans Pro',
-                          color: Color(0xFFFF0303),
+                          color: FlutterFlowTheme.of(context).secondaryText,
                         ),
                   ),
                 ],

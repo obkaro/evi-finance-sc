@@ -51,13 +51,19 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                child: Text(
-                  'Edit Budget Amount',
-                  textAlign: TextAlign.start,
-                  style: FlutterFlowTheme.of(context).subtitle1,
-                ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                    child: Text(
+                      'Edit Budget Amount',
+                      textAlign: TextAlign.start,
+                      style: FlutterFlowTheme.of(context).subtitle1,
+                    ),
+                  ),
+                ],
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
