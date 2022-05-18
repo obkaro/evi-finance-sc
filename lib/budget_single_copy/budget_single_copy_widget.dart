@@ -2,6 +2,8 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../category_single/category_single_widget.dart';
 import '../components/budget_options_widget.dart';
+import '../components/create_new_budget_copy_widget.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -189,6 +191,7 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       if ((currentUserDocument?.activeBudget != null))
                         StreamBuilder<BudgetsRecord>(
@@ -838,32 +841,64 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                         Padding(
                           padding:
                               EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                          child: Container(
-                            width: double.infinity,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16, 16, 16, 16),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'This is where your budgets live. \nTap on the  + icon to create a new budget, swipe left on a single budget for more options.',
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Source Sans Pro',
-                                          lineHeight: 1.4,
-                                        ),
-                                  ),
-                                ],
+                          child: InkWell(
+                            onTap: () async {
+                              logFirebaseEvent('Container-ON_TAP');
+                              logFirebaseEvent('Container-Bottom-Sheet');
+                              await showModalBottomSheet(
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
+                                context: context,
+                                builder: (context) {
+                                  return Padding(
+                                    padding: MediaQuery.of(context).viewInsets,
+                                    child: CreateNewBudgetCopyWidget(),
+                                  );
+                                },
+                              );
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              height: 145,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16, 16, 16, 16),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Tap to create a budget',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Source Sans Pro',
+                                            lineHeight: 1.4,
+                                          ),
+                                    ),
+                                    FlutterFlowIconButton(
+                                      borderColor: Colors.transparent,
+                                      borderRadius: 30,
+                                      borderWidth: 1,
+                                      buttonSize: 60,
+                                      icon: Icon(
+                                        Icons.add_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        size: 48,
+                                      ),
+                                      onPressed: () {
+                                        print('IconButton pressed ...');
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
