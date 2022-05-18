@@ -332,18 +332,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                         'Row-Action_TransactionSingle');
                                                     await Navigator.push(
                                                       context,
-                                                      PageTransition(
-                                                        type: PageTransitionType
-                                                            .scale,
-                                                        alignment: Alignment
-                                                            .bottomCenter,
-                                                        duration: Duration(
-                                                            milliseconds: 400),
-                                                        reverseDuration:
-                                                            Duration(
-                                                                milliseconds:
-                                                                    400),
-                                                        child:
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
                                                             TransactionSingleWidget(
                                                           transaction:
                                                               columnTransactionsRecord,
@@ -468,22 +458,10 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                               await Navigator
                                                                   .push(
                                                                 context,
-                                                                PageTransition(
-                                                                  type:
-                                                                      PageTransitionType
-                                                                          .scale,
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .bottomCenter,
-                                                                  duration: Duration(
-                                                                      milliseconds:
-                                                                          400),
-                                                                  reverseDuration:
-                                                                      Duration(
-                                                                          milliseconds:
-                                                                              400),
-                                                                  child:
-                                                                      TransactionSingleWidget(
+                                                                MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          TransactionSingleWidget(
                                                                     transaction:
                                                                         columnTransactionsRecord,
                                                                   ),

@@ -247,16 +247,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                 'Button_SignUp-Navigate-To');
                                             await Navigator.push(
                                               context,
-                                              PageTransition(
-                                                type: PageTransitionType.scale,
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                                duration:
-                                                    Duration(milliseconds: 400),
-                                                reverseDuration:
-                                                    Duration(milliseconds: 400),
-                                                child: NavBarPage(
-                                                    initialPage: 'Dashboard'),
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    NavBarPage(
+                                                        initialPage:
+                                                            'Dashboard'),
                                               ),
                                             );
                                           },
@@ -289,15 +284,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                 'Button_SignUp-Navigate-To');
                                             await Navigator.push(
                                               context,
-                                              PageTransition(
-                                                type: PageTransitionType.scale,
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                                duration:
-                                                    Duration(milliseconds: 400),
-                                                reverseDuration:
-                                                    Duration(milliseconds: 400),
-                                                child: LoginCopyWidget(),
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LoginCopyWidget(),
                                               ),
                                             );
                                           },

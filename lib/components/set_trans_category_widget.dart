@@ -77,7 +77,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                 children: [
                   Text(
                     'Select Budget',
-                    style: FlutterFlowTheme.of(context).title3,
+                    style: FlutterFlowTheme.of(context).subtitle1,
                   ),
                 ],
               ),

@@ -180,12 +180,8 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                     logFirebaseEvent('Button-Navigate-To');
                     await Navigator.push(
                       context,
-                      PageTransition(
-                        type: PageTransitionType.scale,
-                        alignment: Alignment.bottomCenter,
-                        duration: Duration(milliseconds: 400),
-                        reverseDuration: Duration(milliseconds: 400),
-                        child: CreateBudgetCategoriesCopyWidget(
+                      MaterialPageRoute(
+                        builder: (context) => CreateBudgetCategoriesCopyWidget(
                           createdBudget: createdBudget,
                           uncategorized: uncategorized,
                           dateRange: startEndRange,

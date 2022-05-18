@@ -677,20 +677,8 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                                               'Container-Action_ViewSingleCategory');
                                                           await Navigator.push(
                                                             context,
-                                                            PageTransition(
-                                                              type:
-                                                                  PageTransitionType
-                                                                      .scale,
-                                                              alignment: Alignment
-                                                                  .bottomCenter,
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      400),
-                                                              reverseDuration:
-                                                                  Duration(
-                                                                      milliseconds:
-                                                                          400),
-                                                              child:
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
                                                                   CategorySingleWidget(
                                                                 category:
                                                                     columnBudgetCategoriesRecord,

@@ -162,16 +162,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                     'Column-Action_NavToTransaction');
                                                 await Navigator.push(
                                                   context,
-                                                  PageTransition(
-                                                    type: PageTransitionType
-                                                        .scale,
-                                                    alignment:
-                                                        Alignment.bottomCenter,
-                                                    duration: Duration(
-                                                        milliseconds: 400),
-                                                    reverseDuration: Duration(
-                                                        milliseconds: 400),
-                                                    child:
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
                                                         TransactionSingleWidget(
                                                       transaction:
                                                           columnTransactionsRecord,
@@ -511,16 +503,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                     'Column-Action_NavToTransaction');
                                                 await Navigator.push(
                                                   context,
-                                                  PageTransition(
-                                                    type: PageTransitionType
-                                                        .scale,
-                                                    alignment:
-                                                        Alignment.bottomCenter,
-                                                    duration: Duration(
-                                                        milliseconds: 400),
-                                                    reverseDuration: Duration(
-                                                        milliseconds: 400),
-                                                    child:
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
                                                         TransactionSingleWidget(
                                                       transaction:
                                                           columnTransactionsRecord,

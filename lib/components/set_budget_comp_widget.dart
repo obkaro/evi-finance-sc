@@ -75,7 +75,7 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
                 children: [
                   Text(
                     'Select Budget',
-                    style: FlutterFlowTheme.of(context).title3,
+                    style: FlutterFlowTheme.of(context).subtitle1,
                   ),
                 ],
               ),

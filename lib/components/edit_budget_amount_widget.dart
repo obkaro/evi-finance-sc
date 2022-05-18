@@ -56,7 +56,7 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                 child: Text(
                   'Edit Budget Amount',
                   textAlign: TextAlign.start,
-                  style: FlutterFlowTheme.of(context).title3,
+                  style: FlutterFlowTheme.of(context).subtitle1,
                 ),
               ),
               Padding(

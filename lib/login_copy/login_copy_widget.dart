@@ -189,15 +189,9 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                                 'Button_SignUp-Navigate-To');
                                             await Navigator.push(
                                               context,
-                                              PageTransition(
-                                                type: PageTransitionType.scale,
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                                duration:
-                                                    Duration(milliseconds: 400),
-                                                reverseDuration:
-                                                    Duration(milliseconds: 400),
-                                                child: LoginWidget(),
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LoginWidget(),
                                               ),
                                             );
                                           },

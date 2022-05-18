@@ -564,16 +564,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                   'Container-Action_ViewSingleCategory');
                                               await Navigator.push(
                                                 context,
-                                                PageTransition(
-                                                  type:
-                                                      PageTransitionType.scale,
-                                                  alignment:
-                                                      Alignment.bottomCenter,
-                                                  duration: Duration(
-                                                      milliseconds: 400),
-                                                  reverseDuration: Duration(
-                                                      milliseconds: 400),
-                                                  child: CategorySingleWidget(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CategorySingleWidget(
                                                     category:
                                                         columnBudgetCategoriesRecord,
                                                   ),
@@ -632,7 +625,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                     .categoryName,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .title3,
+                                                                    .subtitle1,
                                                               ),
                                                             ),
                                                             Padding(

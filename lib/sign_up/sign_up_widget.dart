@@ -380,15 +380,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                 'Button_SignUp-Navigate-To');
                                             await Navigator.push(
                                               context,
-                                              PageTransition(
-                                                type: PageTransitionType.scale,
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                                duration:
-                                                    Duration(milliseconds: 400),
-                                                reverseDuration:
-                                                    Duration(milliseconds: 400),
-                                                child: BudgetsWidget(),
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    BudgetsWidget(),
                                               ),
                                             );
                                           },

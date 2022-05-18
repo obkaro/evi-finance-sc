@@ -64,7 +64,7 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                     Text(
                       widget.constCategory.categoryName,
                       textAlign: TextAlign.start,
-                      style: FlutterFlowTheme.of(context).title3,
+                      style: FlutterFlowTheme.of(context).subtitle1,
                     ),
                     Text(
                       'Unallocated: ${functions.formatBudgetCurrency(widget.budgetAllocatedRemaining)}',
