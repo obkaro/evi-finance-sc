@@ -110,7 +110,7 @@ class DarkModeTheme extends FlutterFlowTheme {
   Color secondaryText = const Color(0xFFD2D2D2);
 
   Color eviredTransparent = Color(0x2AFF0054);
-  Color neutralGray = Color(0xFFA396F0);
+  Color neutralGray = Color(0xFF747474);
 }
 
 extension TextStyleHelper on TextStyle {

@@ -21,3 +21,6 @@ export 'settings/settings_widget.dart' show SettingsWidget;
 export 'admin/admin_widget.dart' show AdminWidget;
 export 'profile_settings/profile_settings_widget.dart'
     show ProfileSettingsWidget;
+export 'budgets_copy/budgets_copy_widget.dart' show BudgetsCopyWidget;
+export 'budget_single_copy/budget_single_copy_widget.dart'
+    show BudgetSingleCopyWidget;
