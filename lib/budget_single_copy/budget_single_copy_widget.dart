@@ -986,8 +986,34 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                                 .primaryColor,
                                             size: 48,
                                           ),
-                                          onPressed: () {
-                                            print('IconButton pressed ...');
+                                          onPressed: () async {
+                                            logFirebaseEvent(
+                                                'IconButton-ON_TAP');
+                                            logFirebaseEvent(
+                                                'IconButton-Bottom-Sheet');
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              context: context,
+                                              builder: (context) {
+                                                return Padding(
+                                                  padding:
+                                                      MediaQuery.of(context)
+                                                          .viewInsets,
+                                                  child:
+                                                      CreateCustomCategoryWidget(
+                                                    budget:
+                                                        containerBudgetsRecord,
+                                                    budgetRemaining: functions
+                                                        .calculateRemBudgetCat(
+                                                            budgetSingleCopyBudgetCategoriesRecordList
+                                                                .toList(),
+                                                            containerBudgetsRecord),
+                                                  ),
+                                                );
+                                              },
+                                            );
                                           },
                                         ),
                                       ],

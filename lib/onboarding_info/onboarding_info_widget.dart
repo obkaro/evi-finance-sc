@@ -55,17 +55,13 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          24, 24, 24, 24),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(32),
-                                        child: Image.network(
-                                          'https://picsum.photos/seed/107/600',
-                                          width: double.infinity,
-                                          height: 100,
-                                          fit: BoxFit.cover,
-                                        ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(32),
+                                      child: Image.asset(
+                                        'assets/images/secure_account_(1).png',
+                                        width: double.infinity,
+                                        height: 100,
+                                        fit: BoxFit.contain,
                                       ),
                                     ),
                                   ),
@@ -82,10 +78,20 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 16, 0, 0),
                                     child: Text(
-                                      'Link an accout to automatically import income and expenses into Evi.',
+                                      'Securely link your bank account to automatically import income and expenses into Evi.',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle2,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 16, 0, 0),
+                                    child: Text(
+                                      'This only gives Evi limited access to your transaction data via a secure link. ',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText2,
                                     ),
                                   ),
                                 ],
@@ -94,17 +100,13 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          24, 24, 24, 24),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(32),
-                                        child: Image.network(
-                                          'https://picsum.photos/seed/152/600',
-                                          width: double.infinity,
-                                          height: 100,
-                                          fit: BoxFit.cover,
-                                        ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(32),
+                                      child: Image.asset(
+                                        'assets/images/create_a_budget_(1).png',
+                                        width: double.infinity,
+                                        height: 100,
+                                        fit: BoxFit.contain,
                                       ),
                                     ),
                                   ),
@@ -138,11 +140,11 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                                           24, 24, 24, 24),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(32),
-                                        child: Image.network(
-                                          'https://picsum.photos/seed/267/600',
+                                        child: Image.asset(
+                                          'assets/images/track_expenses.png',
                                           width: double.infinity,
                                           height: 100,
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.contain,
                                         ),
                                       ),
                                     ),
