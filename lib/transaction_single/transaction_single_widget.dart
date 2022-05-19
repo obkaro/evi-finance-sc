@@ -751,75 +751,77 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                         ],
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 16),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          if ((widget.transaction
-                                                  .transactionType) ==
-                                              'debit')
-                                            Expanded(
-                                              child: FFButtonWidget(
-                                                onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'Button-ON_TAP');
-                                                  // Action_CategorizeTrans
-                                                  logFirebaseEvent(
-                                                      'Button-Action_CategorizeTrans');
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return Padding(
-                                                        padding: MediaQuery.of(
-                                                                context)
-                                                            .viewInsets,
-                                                        child:
-                                                            SetBudgetCompWidget(
-                                                          transaction: widget
-                                                              .transaction,
-                                                        ),
-                                                      );
-                                                    },
-                                                  );
-                                                },
-                                                text: 'Clear Category',
-                                                icon: Icon(
-                                                  Icons.clear_rounded,
-                                                  size: 15,
-                                                ),
-                                                options: FFButtonOptions(
-                                                  width: 130,
-                                                  height: 60,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .neutralGray,
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .subtitle2
-                                                          .override(
-                                                            fontFamily:
-                                                                'Source Sans Pro',
-                                                            color: Colors.white,
+                                    if ((widget.transaction.transactionType) ==
+                                        'debit')
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 16),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            if ((widget.transaction
+                                                    .linkedCategory !=
+                                                null))
+                                              Expanded(
+                                                child: FFButtonWidget(
+                                                  onPressed: () async {
+                                                    logFirebaseEvent(
+                                                        'Button-ON_TAP');
+                                                    // Action_CategorizeTrans
+                                                    logFirebaseEvent(
+                                                        'Button-Action_CategorizeTrans');
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return Padding(
+                                                          padding:
+                                                              MediaQuery.of(
+                                                                      context)
+                                                                  .viewInsets,
+                                                          child:
+                                                              SetBudgetCompWidget(
+                                                            transaction: widget
+                                                                .transaction,
                                                           ),
-                                                  borderSide: BorderSide(
-                                                    color: Colors.transparent,
-                                                    width: 1,
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  text: 'Clear Category',
+                                                  icon: Icon(
+                                                    Icons.clear_rounded,
+                                                    size: 15,
                                                   ),
-                                                  borderRadius: 16,
+                                                  options: FFButtonOptions(
+                                                    width: 130,
+                                                    height: 60,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .neutralGray,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily:
+                                                              'Source Sans Pro',
+                                                          color: Colors.white,
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius: 16,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
                                   ],
                                 ),
                               ],
