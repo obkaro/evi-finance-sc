@@ -8,8 +8,8 @@ export 'dashboard/dashboard_widget.dart' show DashboardWidget;
 export 'transactions/transactions_widget.dart' show TransactionsWidget;
 export 'transaction_single/transaction_single_widget.dart'
     show TransactionSingleWidget;
-export 'budgets/budgets_widget.dart' show BudgetsWidget;
 export 'budget_single/budget_single_widget.dart' show BudgetSingleWidget;
+export 'budgets/budgets_widget.dart' show BudgetsWidget;
 export 'category_single/category_single_widget.dart' show CategorySingleWidget;
 export 'edit_budget_categories/edit_budget_categories_widget.dart'
     show EditBudgetCategoriesWidget;
