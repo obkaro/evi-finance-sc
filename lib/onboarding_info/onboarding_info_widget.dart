@@ -162,7 +162,7 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 16, 0, 0),
                                     child: Text(
-                                      'Come back into the app often to ensure you meet your financial goals.',
+                                      'Come back into the app often to categorize your transactions and ensure your financial goals are met.',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle2,
