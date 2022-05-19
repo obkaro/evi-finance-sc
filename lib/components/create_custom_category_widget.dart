@@ -130,63 +130,105 @@ class _CreateCustomCategoryWidgetState
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    logFirebaseEvent('Button-ON_TAP');
-                    if ((functions.budgetRemMinusAmt(
-                            FFAppState().currencyTextField,
-                            widget.budgetRemaining)) >=
-                        0) {
-                      logFirebaseEvent('Button-Backend-Call');
-
-                      final budgetCategoriesCreateData =
-                          createBudgetCategoriesRecordData(
-                        categoryName: textController.text,
-                        allocatedAmount: FFAppState().currencyTextField,
-                        budgetOwner: currentUserReference,
-                        categoryBudget: widget.budget.reference,
-                      );
-                      await BudgetCategoriesRecord.collection
-                          .doc()
-                          .set(budgetCategoriesCreateData);
-                      logFirebaseEvent('Button-Navigate-Back');
-                      Navigator.pop(context);
-                    } else {
-                      logFirebaseEvent('Button-Alert-Dialog');
-                      await showDialog(
-                        context: context,
-                        builder: (alertDialogContext) {
-                          return AlertDialog(
-                            title: Text('Budget Amount Exceeded'),
-                            content: Text(
-                                'Please enter a value lower than the target budget, or increase the target budget value'),
-                            actions: [
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(alertDialogContext),
-                                child: Text('Okay'),
-                              ),
-                            ],
-                          );
-                        },
+                child: StreamBuilder<List<BudgetCategoriesRecord>>(
+                  stream: queryBudgetCategoriesRecord(
+                    queryBuilder: (budgetCategoriesRecord) =>
+                        budgetCategoriesRecord
+                            .where('categoryBudget',
+                                isEqualTo: widget.budget.reference)
+                            .where('categoryName', isEqualTo: 'Uncategorized'),
+                    singleRecord: true,
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: SpinKitRing(
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                            size: 50,
+                          ),
+                        ),
                       );
                     }
-                  },
-                  text: 'Save',
-                  options: FFButtonOptions(
-                    width: double.infinity,
-                    height: 60,
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily: 'Source Sans Pro',
-                          color: Colors.white,
+                    List<BudgetCategoriesRecord>
+                        buttonBudgetCategoriesRecordList = snapshot.data;
+                    final buttonBudgetCategoriesRecord =
+                        buttonBudgetCategoriesRecordList.isNotEmpty
+                            ? buttonBudgetCategoriesRecordList.first
+                            : null;
+                    return FFButtonWidget(
+                      onPressed: () async {
+                        logFirebaseEvent('Button-ON_TAP');
+                        if ((functions.budgetRemMinusAmt(
+                                FFAppState().currencyTextField,
+                                widget.budgetRemaining)) >=
+                            0) {
+                          logFirebaseEvent('Button-Backend-Call');
+
+                          final budgetCategoriesCreateData =
+                              createBudgetCategoriesRecordData(
+                            categoryName: textController.text,
+                            allocatedAmount: FFAppState().currencyTextField,
+                            budgetOwner: currentUserReference,
+                            categoryBudget: widget.budget.reference,
+                          );
+                          await BudgetCategoriesRecord.collection
+                              .doc()
+                              .set(budgetCategoriesCreateData);
+                          logFirebaseEvent('Button-Backend-Call');
+
+                          final budgetCategoriesUpdateData =
+                              createBudgetCategoriesRecordData(
+                            allocatedAmount: functions.budgetRemMinusAmt(
+                                FFAppState().currencyTextField,
+                                widget.budgetRemaining),
+                          );
+                          await buttonBudgetCategoriesRecord.reference
+                              .update(budgetCategoriesUpdateData);
+                          logFirebaseEvent('Button-Navigate-Back');
+                          Navigator.pop(context);
+                        } else {
+                          logFirebaseEvent('Button-Alert-Dialog');
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('Budget Amount Exceeded'),
+                                content: Text(
+                                    'Please enter a value lower than the target budget, or increase the target budget value'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Okay'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      },
+                      text: 'Save',
+                      options: FFButtonOptions(
+                        width: double.infinity,
+                        height: 60,
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        textStyle:
+                            FlutterFlowTheme.of(context).subtitle2.override(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Colors.white,
+                                ),
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
                         ),
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
-                    ),
-                    borderRadius: 16,
-                  ),
+                        borderRadius: 16,
+                      ),
+                    );
+                  },
                 ),
               ),
               FFButtonWidget(
