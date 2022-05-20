@@ -18,8 +18,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CreateBudgetCategoriesCopyWidget extends StatefulWidget {
-  const CreateBudgetCategoriesCopyWidget({
+class CreateBudgetCategoriesWidget extends StatefulWidget {
+  const CreateBudgetCategoriesWidget({
     Key key,
     this.createdBudget,
     this.uncategorized,
@@ -31,12 +31,12 @@ class CreateBudgetCategoriesCopyWidget extends StatefulWidget {
   final DateTimeRange dateRange;
 
   @override
-  _CreateBudgetCategoriesCopyWidgetState createState() =>
-      _CreateBudgetCategoriesCopyWidgetState();
+  _CreateBudgetCategoriesWidgetState createState() =>
+      _CreateBudgetCategoriesWidgetState();
 }
 
-class _CreateBudgetCategoriesCopyWidgetState
-    extends State<CreateBudgetCategoriesCopyWidget> {
+class _CreateBudgetCategoriesWidgetState
+    extends State<CreateBudgetCategoriesWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -44,8 +44,8 @@ class _CreateBudgetCategoriesCopyWidgetState
     super.initState();
     // On page load action.
     SchedulerBinding.instance?.addPostFrameCallback((_) async {
-      logFirebaseEvent('createBudgetCategoriesCopy_ON_PAGE_LOAD');
-      logFirebaseEvent('createBudgetCategoriesCopy_Backend-Call');
+      logFirebaseEvent('createBudgetCategories_ON_PAGE_LOAD');
+      logFirebaseEvent('createBudgetCategories_Backend-Call');
 
       final budgetsUpdateData = createBudgetsRecordData(
         uncategorizedLink: widget.uncategorized.reference,
@@ -54,7 +54,7 @@ class _CreateBudgetCategoriesCopyWidgetState
     });
 
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'createBudgetCategoriesCopy'});
+        parameters: {'screen_name': 'createBudgetCategories'});
   }
 
   @override
@@ -79,8 +79,7 @@ class _CreateBudgetCategoriesCopyWidgetState
           );
         }
         List<BudgetCategoriesRecord>
-            createBudgetCategoriesCopyBudgetCategoriesRecordList =
-            snapshot.data;
+            createBudgetCategoriesBudgetCategoriesRecordList = snapshot.data;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -143,7 +142,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                   child: Text(
                                     functions.formatBudgetCurrency(
                                         functions.calculateRemBudgetCat(
-                                            createBudgetCategoriesCopyBudgetCategoriesRecordList
+                                            createBudgetCategoriesBudgetCategoriesRecordList
                                                 .toList(),
                                             widget.createdBudget)),
                                     textAlign: TextAlign.end,
@@ -222,7 +221,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                             budget: widget.createdBudget,
                                             categoryTotal:
                                                 functions.sumCategoryAmounts(
-                                                    createBudgetCategoriesCopyBudgetCategoriesRecordList
+                                                    createBudgetCategoriesBudgetCategoriesRecordList
                                                         .toList()),
                                           ),
                                         );
@@ -318,7 +317,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                         constBudgetCategoriesRecord
                                             .where('categoryName',
                                                 whereNotIn:
-                                                    createBudgetCategoriesCopyBudgetCategoriesRecordList
+                                                    createBudgetCategoriesBudgetCategoriesRecordList
                                                         .map((e) =>
                                                             e.categoryName)
                                                         .toList())
@@ -393,7 +392,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                                           widget.createdBudget,
                                                       budgetAllocatedRemaining:
                                                           functions.calculateRemBudgetCat(
-                                                              createBudgetCategoriesCopyBudgetCategoriesRecordList
+                                                              createBudgetCategoriesBudgetCategoriesRecordList
                                                                   .toList(),
                                                               widget
                                                                   .createdBudget),
@@ -476,7 +475,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                             budget: widget.createdBudget,
                                             budgetRemaining:
                                                 functions.calculateRemBudgetCat(
-                                                    createBudgetCategoriesCopyBudgetCategoriesRecordList
+                                                    createBudgetCategoriesBudgetCategoriesRecordList
                                                         .toList(),
                                                     widget.createdBudget),
                                           ),
@@ -679,7 +678,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                                                     columnBudgetCategoriesRecord,
                                                                 budgetRemaining:
                                                                     functions.calculateRemBudgetCat(
-                                                                        createBudgetCategoriesCopyBudgetCategoriesRecordList
+                                                                        createBudgetCategoriesBudgetCategoriesRecordList
                                                                             .toList(),
                                                                         widget
                                                                             .createdBudget),
@@ -889,7 +888,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                             createBudgetCategoriesRecordData(
                                           allocatedAmount:
                                               functions.calculateRemBudgetCat(
-                                                  createBudgetCategoriesCopyBudgetCategoriesRecordList
+                                                  createBudgetCategoriesBudgetCategoriesRecordList
                                                       .toList(),
                                                   widget.createdBudget),
                                         );

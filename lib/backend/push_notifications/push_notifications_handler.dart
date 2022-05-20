@@ -108,15 +108,14 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
             data, 'uncategorized', BudgetCategoriesRecord.serializer),
         dateRange: getParameter(data, 'dateRange'),
       ),
-  'createBudgetCategoriesCopy': (data) async =>
-      CreateBudgetCategoriesCopyWidget(
+  'Accounts': (data) async => NavBarPage(initialPage: 'Accounts'),
+  'createBudgetCategories': (data) async => CreateBudgetCategoriesWidget(
         createdBudget: await getDocumentParameter(
             data, 'createdBudget', BudgetsRecord.serializer),
         uncategorized: await getDocumentParameter(
             data, 'uncategorized', BudgetCategoriesRecord.serializer),
         dateRange: getParameter(data, 'dateRange'),
       ),
-  'Accounts': (data) async => NavBarPage(initialPage: 'Accounts'),
   'AccountSingle': (data) async => AccountSingleWidget(
         account: await getDocumentParameter(
             data, 'account', AccountsRecord.serializer),

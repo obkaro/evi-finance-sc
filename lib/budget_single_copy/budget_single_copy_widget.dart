@@ -3,7 +3,7 @@ import '../backend/backend.dart';
 import '../category_single/category_single_widget.dart';
 import '../components/budget_options_widget.dart';
 import '../components/create_custom_category_widget.dart';
-import '../components/create_new_budget_copy_widget.dart';
+import '../components/create_new_budget_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -851,7 +851,7 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                 builder: (context) {
                                   return Padding(
                                     padding: MediaQuery.of(context).viewInsets,
-                                    child: CreateNewBudgetCopyWidget(
+                                    child: CreateNewBudgetWidget(
                                       budget: createdBudget,
                                     ),
                                   );
@@ -931,7 +931,7 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                             return Padding(
                                               padding: MediaQuery.of(context)
                                                   .viewInsets,
-                                              child: CreateNewBudgetCopyWidget(
+                                              child: CreateNewBudgetWidget(
                                                 budget: createdBudget2,
                                               ),
                                             );

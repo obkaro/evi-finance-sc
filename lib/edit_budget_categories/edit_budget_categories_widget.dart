@@ -244,7 +244,7 @@ class _EditBudgetCategoriesWidgetState
                                               padding: MediaQuery.of(context)
                                                   .viewInsets,
                                               child: EditBudgetAmountWidget(
-                                                budget: widget.createdBudget,
+                                                budget: columnBudgetsRecord,
                                                 categoryTotal: functions
                                                     .sumCategoryAmounts(
                                                         editBudgetCategoriesBudgetCategoriesRecordList
@@ -262,8 +262,8 @@ class _EditBudgetCategoriesWidgetState
                                         ),
                                         alignment: AlignmentDirectional(0, 0),
                                         child: Text(
-                                          functions.formatBudgetCurrency(widget
-                                              .createdBudget.budgetAmount),
+                                          functions.formatBudgetCurrency(
+                                              columnBudgetsRecord.budgetAmount),
                                           textAlign: TextAlign.end,
                                           style: FlutterFlowTheme.of(context)
                                               .subtitle1,
