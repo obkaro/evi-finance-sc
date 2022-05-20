@@ -541,7 +541,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                             .override(
                                               fontFamily: 'Source Sans Pro',
                                               color: Colors.white,
-                                              fontSize: 18,
+                                              fontSize: 16,
                                             ),
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
