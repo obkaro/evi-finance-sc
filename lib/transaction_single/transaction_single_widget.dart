@@ -36,10 +36,12 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<BudgetCategoriesRecord>>(
-      future: queryBudgetCategoriesRecordOnce(
-        queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
-            .where('budgetOwner', isEqualTo: currentUserReference),
+    return StreamBuilder<List<BudgetCategoriesRecord>>(
+      stream: queryBudgetCategoriesRecord(
+        queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord.where(
+            'linkedTransactions',
+            arrayContains: widget.transaction.reference),
+        singleRecord: true,
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -57,6 +59,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
         }
         List<BudgetCategoriesRecord>
             transactionSingleBudgetCategoriesRecordList = snapshot.data;
+        final transactionSingleBudgetCategoriesRecord =
+            transactionSingleBudgetCategoriesRecordList.isNotEmpty
+                ? transactionSingleBudgetCategoriesRecordList.first
+                : null;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -565,35 +571,37 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                               ],
                                             ),
                                           ),
-                                          StreamBuilder<BudgetCategoriesRecord>(
-                                            stream: BudgetCategoriesRecord
-                                                .getDocument(widget.transaction
-                                                    .linkedCategory),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child: SpinKitRing(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      size: 50,
+                                          if (transactionSingleBudgetCategoriesRecord !=
+                                              null)
+                                            StreamBuilder<
+                                                BudgetCategoriesRecord>(
+                                              stream: BudgetCategoriesRecord
+                                                  .getDocument(widget
+                                                      .transaction
+                                                      .linkedCategory),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50,
+                                                      height: 50,
+                                                      child: SpinKitRing(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        size: 50,
+                                                      ),
                                                     ),
-                                                  ),
-                                                );
-                                              }
-                                              final columnBudgetCategoriesRecord =
-                                                  snapshot.data;
-                                              return Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  if ((columnBudgetCategoriesRecord
-                                                          .reference !=
-                                                      null))
+                                                  );
+                                                }
+                                                final columnBudgetCategoriesRecord =
+                                                    snapshot.data;
+                                                return Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
                                                     Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
@@ -651,10 +659,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                         ],
                                                       ),
                                                     ),
-                                                ],
-                                              );
-                                            },
-                                          ),
+                                                  ],
+                                                );
+                                              },
+                                            ),
                                         ],
                                       ),
                                     ),
