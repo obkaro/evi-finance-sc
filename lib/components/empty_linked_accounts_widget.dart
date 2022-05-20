@@ -20,7 +20,6 @@ class _EmptyLinkedAccountsWidgetState extends State<EmptyLinkedAccountsWidget> {
       width: double.infinity,
       height: 100,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Padding(
