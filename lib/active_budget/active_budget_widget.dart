@@ -175,37 +175,38 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                AuthUserStreamWidget(
-                  child: StreamBuilder<List<BudgetCategoriesRecord>>(
-                    stream: queryBudgetCategoriesRecord(
-                      queryBuilder: (budgetCategoriesRecord) =>
-                          budgetCategoriesRecord
-                              .where('categoryBudget',
-                                  isEqualTo: currentUserDocument?.activeBudget)
-                              .where('categoryName',
-                                  isNotEqualTo: 'Uncategorized'),
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: SpinKitRing(
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              size: 50,
+                if ((currentUserDocument?.activeBudget != null))
+                  AuthUserStreamWidget(
+                    child: StreamBuilder<List<BudgetCategoriesRecord>>(
+                      stream: queryBudgetCategoriesRecord(
+                        queryBuilder: (budgetCategoriesRecord) =>
+                            budgetCategoriesRecord
+                                .where('categoryBudget',
+                                    isEqualTo:
+                                        currentUserDocument?.activeBudget)
+                                .where('categoryName',
+                                    isNotEqualTo: 'Uncategorized'),
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: SpinKitRing(
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                size: 50,
+                              ),
                             ),
-                          ),
-                        );
-                      }
-                      List<BudgetCategoriesRecord>
-                          containerBudgetCategoriesRecordList = snapshot.data;
-                      return Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(),
-                        child: Visibility(
-                          visible: (currentUserDocument?.activeBudget != null),
+                          );
+                        }
+                        List<BudgetCategoriesRecord>
+                            containerBudgetCategoriesRecordList = snapshot.data;
+                        return Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(),
                           child: StreamBuilder<BudgetsRecord>(
                             stream: BudgetsRecord.getDocument(
                                 currentUserDocument?.activeBudget),
@@ -813,11 +814,10 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                               );
                             },
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
-                ),
                 if ((functions
                         .isBudgetExising(currentUserDocument?.activeBudget)) ==
                     0)
