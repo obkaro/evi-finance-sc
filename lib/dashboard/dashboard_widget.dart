@@ -438,7 +438,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => NavBarPage(
-                                            initialPage: 'BudgetSingleCopy'),
+                                            initialPage: 'ActiveBudget'),
                                       ),
                                     );
                                   },

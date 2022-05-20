@@ -1002,7 +1002,7 @@ class _EditBudgetCategoriesWidgetState
                                                 builder: (context) =>
                                                     NavBarPage(
                                                         initialPage:
-                                                            'BudgetSingleCopy'),
+                                                            'ActiveBudget'),
                                               ),
                                             );
                                           },

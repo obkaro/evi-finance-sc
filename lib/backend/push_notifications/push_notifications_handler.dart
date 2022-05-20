@@ -123,8 +123,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'Settings': (data) async => NavBarPage(initialPage: 'Settings'),
   'Admin': (data) async => AdminWidget(),
   'ProfileSettings': (data) async => ProfileSettingsWidget(),
-  'BudgetSingleCopy': (data) async =>
-      NavBarPage(initialPage: 'BudgetSingleCopy'),
+  'ActiveBudget': (data) async => NavBarPage(initialPage: 'ActiveBudget'),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>
