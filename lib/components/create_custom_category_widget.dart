@@ -161,12 +161,12 @@ class _CreateCustomCategoryWidgetState
                             : null;
                     return FFButtonWidget(
                       onPressed: () async {
-                        logFirebaseEvent('Button-ON_TAP');
+                        logFirebaseEvent('Button_ON_TAP');
                         if ((functions.budgetRemMinusAmt(
                                 FFAppState().currencyTextField,
                                 widget.budgetRemaining)) >=
                             0) {
-                          logFirebaseEvent('Button-Backend-Call');
+                          logFirebaseEvent('Button_Backend-Call');
 
                           final budgetCategoriesCreateData =
                               createBudgetCategoriesRecordData(
@@ -178,7 +178,7 @@ class _CreateCustomCategoryWidgetState
                           await BudgetCategoriesRecord.collection
                               .doc()
                               .set(budgetCategoriesCreateData);
-                          logFirebaseEvent('Button-Backend-Call');
+                          logFirebaseEvent('Button_Backend-Call');
 
                           final budgetCategoriesUpdateData =
                               createBudgetCategoriesRecordData(
@@ -188,10 +188,10 @@ class _CreateCustomCategoryWidgetState
                           );
                           await buttonBudgetCategoriesRecord.reference
                               .update(budgetCategoriesUpdateData);
-                          logFirebaseEvent('Button-Navigate-Back');
+                          logFirebaseEvent('Button_Navigate-Back');
                           Navigator.pop(context);
                         } else {
-                          logFirebaseEvent('Button-Alert-Dialog');
+                          logFirebaseEvent('Button_Alert-Dialog');
                           await showDialog(
                             context: context,
                             builder: (alertDialogContext) {
@@ -233,8 +233,8 @@ class _CreateCustomCategoryWidgetState
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('Button-ON_TAP');
-                  logFirebaseEvent('Button-Navigate-Back');
+                  logFirebaseEvent('Button_ON_TAP');
+                  logFirebaseEvent('Button_Navigate-Back');
                   Navigator.pop(context);
                 },
                 text: 'Cancel',

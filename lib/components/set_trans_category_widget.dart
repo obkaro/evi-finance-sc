@@ -161,16 +161,16 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                   snapshot.data;
                               return InkWell(
                                 onTap: () async {
-                                  logFirebaseEvent('Container-ON_TAP');
+                                  logFirebaseEvent('Container_ON_TAP');
                                   logFirebaseEvent(
-                                      'Container-Widget-Animation');
+                                      'Container_Widget-Animation');
                                   await (animationsMap[
                                               'containerOnActionTriggerAnimation']
                                           .curvedAnimation
                                           .parent as AnimationController)
                                       .forward(from: 0.0);
 
-                                  logFirebaseEvent('Container-Backend-Call');
+                                  logFirebaseEvent('Container_Backend-Call');
 
                                   final transactionsUpdateData =
                                       createTransactionsRecordData(
@@ -180,7 +180,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                   );
                                   await widget.transaction.reference
                                       .update(transactionsUpdateData);
-                                  logFirebaseEvent('Container-Backend-Call');
+                                  logFirebaseEvent('Container_Backend-Call');
 
                                   final budgetCategoriesUpdateData = {
                                     'linkedTransactions': FieldValue.arrayUnion(
@@ -188,7 +188,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                   };
                                   await columnBudgetCategoriesRecord.reference
                                       .update(budgetCategoriesUpdateData);
-                                  logFirebaseEvent('Container-Navigate-Back');
+                                  logFirebaseEvent('Container_Navigate-Back');
                                   Navigator.pop(context);
                                 },
                                 child: Container(

@@ -213,8 +213,8 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      logFirebaseEvent('Button-ON_TAP');
-                      logFirebaseEvent('Button-Navigate-To');
+                      logFirebaseEvent('Button_ON_TAP');
+                      logFirebaseEvent('Button_Navigate-To');
                       await Navigator.push(
                         context,
                         MaterialPageRoute(

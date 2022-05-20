@@ -109,15 +109,15 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                       size: 24,
                     ),
                     onPressed: () async {
-                      logFirebaseEvent('IconButton-ON_TAP');
+                      logFirebaseEvent('IconButton_ON_TAP');
                       // Action_UnlinkAllTransCategories
                       logFirebaseEvent(
-                          'IconButton-Action_UnlinkAllTransCategories');
+                          'IconButton_Action_UnlinkAllTransCategories');
                       await actions.unlinkAllTransCategories(
                         iconButtonTransactionsRecordList.toList(),
                         widget.category,
                       );
-                      logFirebaseEvent('IconButton-Backend-Call');
+                      logFirebaseEvent('IconButton_Backend-Call');
 
                       final budgetCategoriesUpdateData = {
                         'linkedTransactions': FieldValue.delete(),
@@ -326,10 +326,10 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                 return InkWell(
                                                   onTap: () async {
                                                     logFirebaseEvent(
-                                                        'Row-ON_TAP');
+                                                        'Row_ON_TAP');
                                                     // Action_TransactionSingle
                                                     logFirebaseEvent(
-                                                        'Row-Action_TransactionSingle');
+                                                        'Row_Action_TransactionSingle');
                                                     await Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
@@ -452,9 +452,9 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                           child: InkWell(
                                                             onTap: () async {
                                                               logFirebaseEvent(
-                                                                  'Row-ON_TAP');
+                                                                  'Row_ON_TAP');
                                                               logFirebaseEvent(
-                                                                  'Row-Navigate-To');
+                                                                  'Row_Navigate-To');
                                                               await Navigator
                                                                   .push(
                                                                 context,

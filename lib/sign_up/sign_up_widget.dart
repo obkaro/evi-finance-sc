@@ -16,14 +16,14 @@ class SignUpWidget extends StatefulWidget {
 }
 
 class _SignUpWidgetState extends State<SignUpWidget> {
-  final formKey = GlobalKey<FormState>();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController inputConfirmPasswordController;
   bool inputConfirmPasswordVisibility;
   TextEditingController inputEmailController;
   TextEditingController inputUsernameController;
   TextEditingController inputPasswordController;
   bool inputPasswordVisibility;
+  final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -330,9 +330,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'Button_SignUp-ON_TAP');
+                                                'Button_SignUp_ON_TAP');
                                             logFirebaseEvent(
-                                                'Button_SignUp-Validate-Form');
+                                                'Button_SignUp_Validate-Form');
                                             if (formKey.currentState == null ||
                                                 !formKey.currentState
                                                     .validate()) {
@@ -341,10 +341,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
 
                                             // Action_SignUp
                                             logFirebaseEvent(
-                                                'Button_SignUp-Action_SignUp');
-                                            if (inputPasswordController.text !=
+                                                'Button_SignUp_Action_SignUp');
+                                            if (inputPasswordController?.text !=
                                                 inputConfirmPasswordController
-                                                    .text) {
+                                                    ?.text) {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
                                                 SnackBar(
@@ -377,7 +377,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                 .update(usersCreateData);
 
                                             logFirebaseEvent(
-                                                'Button_SignUp-Navigate-To');
+                                                'Button_SignUp_Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(

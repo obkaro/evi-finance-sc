@@ -15,9 +15,9 @@ class LoginCopyWidget extends StatefulWidget {
 }
 
 class _LoginCopyWidgetState extends State<LoginCopyWidget> {
+  TextEditingController inputEmailController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  TextEditingController inputEmailController;
 
   @override
   void initState() {
@@ -157,9 +157,9 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'Button_SignUp-ON_TAP');
+                                                'Button_SignUp_ON_TAP');
                                             logFirebaseEvent(
-                                                'Button_SignUp-Validate-Form');
+                                                'Button_SignUp_Validate-Form');
                                             if (formKey.currentState == null ||
                                                 !formKey.currentState
                                                     .validate()) {
@@ -168,7 +168,7 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
 
                                             // Action_SignUp
                                             logFirebaseEvent(
-                                                'Button_SignUp-Action_SignUp');
+                                                'Button_SignUp_Action_SignUp');
                                             if (inputEmailController
                                                 .text.isEmpty) {
                                               ScaffoldMessenger.of(context)
@@ -186,7 +186,7 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                               context: context,
                                             );
                                             logFirebaseEvent(
-                                                'Button_SignUp-Navigate-To');
+                                                'Button_SignUp_Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(

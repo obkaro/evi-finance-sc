@@ -34,10 +34,10 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
   void initState() {
     super.initState();
     // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('BudgetSingle-ON_PAGE_LOAD');
+    SchedulerBinding.instance?.addPostFrameCallback((_) async {
+      logFirebaseEvent('BudgetSingle_ON_PAGE_LOAD');
       // Action_UpdateUncategorized
-      logFirebaseEvent('BudgetSingle-Action_UpdateUncategorized');
+      logFirebaseEvent('BudgetSingle_Action_UpdateUncategorized');
 
       final budgetCategoriesUpdateData = createBudgetCategoriesRecordData(
         allocatedAmount: widget.uncategorizedAmount,
@@ -135,9 +135,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                       size: 24,
                     ),
                     onPressed: () async {
-                      logFirebaseEvent('IconButton-ON_TAP');
+                      logFirebaseEvent('IconButton_ON_TAP');
                       // Action_EditBudget
-                      logFirebaseEvent('IconButton-Action_EditBudget');
+                      logFirebaseEvent('IconButton_Action_EditBudget');
                       await showModalBottomSheet(
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
@@ -558,10 +558,10 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                           return InkWell(
                                             onTap: () async {
                                               logFirebaseEvent(
-                                                  'Container-ON_TAP');
+                                                  'Container_ON_TAP');
                                               // Action_ViewSingleCategory
                                               logFirebaseEvent(
-                                                  'Container-Action_ViewSingleCategory');
+                                                  'Container_Action_ViewSingleCategory');
                                               await Navigator.push(
                                                 context,
                                                 MaterialPageRoute(

@@ -27,11 +27,11 @@ class CreateNewBudgetWidget extends StatefulWidget {
 }
 
 class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
-  bool switchListTileValue1;
-  bool switchListTileValue2;
   BudgetCategoriesRecord uncategorized;
   BudgetsRecord createdBudget;
   DateTimeRange startEndRange;
+  bool switchListTileValue1;
+  bool switchListTileValue2;
 
   @override
   Widget build(BuildContext context) {
@@ -136,9 +136,9 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    logFirebaseEvent('Button-ON_TAP');
+                    logFirebaseEvent('Button_ON_TAP');
                     // Action_CreateBudgetStep1
-                    logFirebaseEvent('Button-Action_CreateBudgetStep1');
+                    logFirebaseEvent('Button_Action_CreateBudgetStep1');
 
                     final budgetsCreateData = createBudgetsRecordData(
                       budgetOwner: currentUserReference,
@@ -157,7 +157,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                     await budgetsRecordReference.set(budgetsCreateData);
                     createdBudget = BudgetsRecord.getDocumentFromData(
                         budgetsCreateData, budgetsRecordReference);
-                    logFirebaseEvent('Button-Backend-Call');
+                    logFirebaseEvent('Button_Backend-Call');
 
                     final budgetCategoriesCreateData =
                         createBudgetCategoriesRecordData(
@@ -172,12 +172,12 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                     uncategorized = BudgetCategoriesRecord.getDocumentFromData(
                         budgetCategoriesCreateData,
                         budgetCategoriesRecordReference);
-                    logFirebaseEvent('Button-Custom-Action');
+                    logFirebaseEvent('Button_Custom-Action');
                     startEndRange = await actions.selectDateRange(
                       context,
                       createdBudget,
                     );
-                    logFirebaseEvent('Button-Navigate-To');
+                    logFirebaseEvent('Button_Navigate-To');
                     await Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -216,8 +216,8 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    logFirebaseEvent('Button-ON_TAP');
-                    logFirebaseEvent('Button-Navigate-Back');
+                    logFirebaseEvent('Button_ON_TAP');
+                    logFirebaseEvent('Button_Navigate-Back');
                     Navigator.pop(context);
                   },
                   text: 'Cancel',

@@ -163,32 +163,32 @@ class _CreateNewBudgetCopyCopyWidgetState
                         initialDate: widget.budget.budgetStart,
                         onChange: (DateTimeRange newSelectedDate) async {
                           calendarSelectedDay = newSelectedDate;
-                          logFirebaseEvent('Calendar-ON_DATE_SELECTED');
+                          logFirebaseEvent('Calendar_ON_DATE_SELECTED');
                           if ((dropDownValue) == 'Monthly') {
-                            logFirebaseEvent('Calendar-Backend-Call');
+                            logFirebaseEvent('Calendar_Backend-Call');
 
                             final budgetsUpdateData = createBudgetsRecordData(
-                              budgetStart: calendarSelectedDay.start,
+                              budgetStart: calendarSelectedDay?.start,
                               budgetEnd: functions.addDaysToDate(
-                                  calendarSelectedDay.end, 30),
+                                  calendarSelectedDay?.end, 30),
                               budgetDuration: dropDownValue,
                             );
                             await widget.budget.reference
                                 .update(budgetsUpdateData);
                           } else {
                             if ((dropDownValue) == 'Weekly') {
-                              logFirebaseEvent('Calendar-Backend-Call');
+                              logFirebaseEvent('Calendar_Backend-Call');
 
                               final budgetsUpdateData = createBudgetsRecordData(
-                                budgetStart: calendarSelectedDay.start,
+                                budgetStart: calendarSelectedDay?.start,
                                 budgetEnd: functions.addDaysToDate(
-                                    calendarSelectedDay.end, 7),
+                                    calendarSelectedDay?.end, 7),
                                 budgetDuration: dropDownValue,
                               );
                               await widget.budget.reference
                                   .update(budgetsUpdateData);
                             } else {
-                              logFirebaseEvent('Calendar-Alert-Dialog');
+                              logFirebaseEvent('Calendar_Alert-Dialog');
                               await showDialog(
                                 context: context,
                                 builder: (alertDialogContext) {
@@ -263,18 +263,18 @@ class _CreateNewBudgetCopyCopyWidgetState
                           : null;
                   return FFButtonWidget(
                     onPressed: () async {
-                      logFirebaseEvent('Button-ON_TAP');
+                      logFirebaseEvent('Button_ON_TAP');
                       if ((FFAppState().currencyTextField) >
                           (widget.ccategoriesSum)) {
                         // Action_CreateBudgetStep1
-                        logFirebaseEvent('Button-Action_CreateBudgetStep1');
+                        logFirebaseEvent('Button_Action_CreateBudgetStep1');
 
                         final budgetsUpdateData = createBudgetsRecordData(
                           budgetAmount: FFAppState().currencyTextField,
                           budgetDuration: dropDownValue,
                         );
                         await widget.budget.reference.update(budgetsUpdateData);
-                        logFirebaseEvent('Button-Alert-Dialog');
+                        logFirebaseEvent('Button_Alert-Dialog');
                         var confirmDialogResponse = await showDialog<bool>(
                               context: context,
                               builder: (alertDialogContext) {
@@ -298,7 +298,7 @@ class _CreateNewBudgetCopyCopyWidgetState
                             ) ??
                             false;
                         if (confirmDialogResponse) {
-                          logFirebaseEvent('Button-Navigate-To');
+                          logFirebaseEvent('Button_Navigate-To');
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -309,11 +309,11 @@ class _CreateNewBudgetCopyCopyWidgetState
                             ),
                           );
                         } else {
-                          logFirebaseEvent('Button-Navigate-Back');
+                          logFirebaseEvent('Button_Navigate-Back');
                           Navigator.pop(context);
                         }
                       } else {
-                        logFirebaseEvent('Button-Alert-Dialog');
+                        logFirebaseEvent('Button_Alert-Dialog');
                         await showDialog(
                           context: context,
                           builder: (alertDialogContext) {

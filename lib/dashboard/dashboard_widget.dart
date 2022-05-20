@@ -134,8 +134,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       ),
                       InkWell(
                         onTap: () async {
-                          logFirebaseEvent('Text-ON_TAP');
-                          logFirebaseEvent('Text-Navigate-To');
+                          logFirebaseEvent('Text_ON_TAP');
+                          logFirebaseEvent('Text_Navigate-To');
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -201,8 +201,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                   EdgeInsetsDirectional.fromSTEB(10, 10, 0, 10),
                               child: InkWell(
                                 onTap: () async {
-                                  logFirebaseEvent('Container-ON_TAP');
-                                  logFirebaseEvent('Container-Navigate-To');
+                                  logFirebaseEvent('Container_ON_TAP');
+                                  logFirebaseEvent('Container_Navigate-To');
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -347,8 +347,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       ),
                       InkWell(
                         onTap: () async {
-                          logFirebaseEvent('Text-ON_TAP');
-                          logFirebaseEvent('Text-Navigate-To');
+                          logFirebaseEvent('Text_ON_TAP');
+                          logFirebaseEvent('Text_Navigate-To');
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -561,8 +561,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       ),
                       InkWell(
                         onTap: () async {
-                          logFirebaseEvent('Text-ON_TAP');
-                          logFirebaseEvent('Text-Navigate-To');
+                          logFirebaseEvent('Text_ON_TAP');
+                          logFirebaseEvent('Text_Navigate-To');
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -654,10 +654,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                         final rowAccountsRecord = snapshot.data;
                                         return InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Row-ON_TAP');
+                                            logFirebaseEvent('Row_ON_TAP');
                                             // Action_TransactionSingle
                                             logFirebaseEvent(
-                                                'Row-Action_TransactionSingle');
+                                                'Row_Action_TransactionSingle');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -766,9 +766,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                   child: InkWell(
                                                     onTap: () async {
                                                       logFirebaseEvent(
-                                                          'Row-ON_TAP');
+                                                          'Row_ON_TAP');
                                                       logFirebaseEvent(
-                                                          'Row-Navigate-To');
+                                                          'Row_Navigate-To');
                                                       await Navigator.push(
                                                         context,
                                                         MaterialPageRoute(

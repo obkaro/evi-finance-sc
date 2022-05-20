@@ -126,9 +126,9 @@ class _AdminWidgetState extends State<AdminWidget> {
                                               snapshot.data;
                                           return FFButtonWidget(
                                             onPressed: () async {
-                                              logFirebaseEvent('Button-ON_TAP');
+                                              logFirebaseEvent('Button_ON_TAP');
                                               logFirebaseEvent(
-                                                  'Button-Custom-Action');
+                                                  'Button_Custom-Action');
                                               await actions.deleteTransactions(
                                                 buttonTransactionsRecordList
                                                     .toList(),
@@ -222,9 +222,9 @@ class _AdminWidgetState extends State<AdminWidget> {
                                               snapshot.data;
                                           return FFButtonWidget(
                                             onPressed: () async {
-                                              logFirebaseEvent('Button-ON_TAP');
+                                              logFirebaseEvent('Button_ON_TAP');
                                               logFirebaseEvent(
-                                                  'Button-Custom-Action');
+                                                  'Button_Custom-Action');
                                               await actions.deleteCategories(
                                                 buttonBudgetCategoriesRecordList
                                                     .toList(),
@@ -263,8 +263,8 @@ class _AdminWidgetState extends State<AdminWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    logFirebaseEvent('Button-ON_TAP');
-                                    logFirebaseEvent('Button-Auth');
+                                    logFirebaseEvent('Button_ON_TAP');
+                                    logFirebaseEvent('Button_Auth');
                                     await signOut();
                                     await Navigator.pushAndRemoveUntil(
                                       context,

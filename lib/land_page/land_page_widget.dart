@@ -158,8 +158,8 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                             child: FFButtonWidget(
                                               onPressed: () async {
                                                 logFirebaseEvent(
-                                                    'Button-ON_TAP');
-                                                logFirebaseEvent('Button-Auth');
+                                                    'Button_ON_TAP');
+                                                logFirebaseEvent('Button_Auth');
                                                 final user =
                                                     await signInWithGoogle(
                                                         context);
@@ -167,7 +167,7 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                   return;
                                                 }
                                                 logFirebaseEvent(
-                                                    'Button-Navigate-To');
+                                                    'Button_Navigate-To');
                                                 await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(

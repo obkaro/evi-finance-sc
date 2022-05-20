@@ -27,9 +27,9 @@ class CreateNewBudgetCopyWidget extends StatefulWidget {
 }
 
 class _CreateNewBudgetCopyWidgetState extends State<CreateNewBudgetCopyWidget> {
+  BudgetCategoriesRecord uncategorized;
   DateTimeRange calendarSelectedDay;
   String dropDownValue;
-  BudgetCategoriesRecord uncategorized;
 
   @override
   void initState() {
@@ -163,32 +163,32 @@ class _CreateNewBudgetCopyWidgetState extends State<CreateNewBudgetCopyWidget> {
                         weekStartsMonday: false,
                         onChange: (DateTimeRange newSelectedDate) async {
                           calendarSelectedDay = newSelectedDate;
-                          logFirebaseEvent('Calendar-ON_DATE_SELECTED');
+                          logFirebaseEvent('Calendar_ON_DATE_SELECTED');
                           if ((dropDownValue) == 'Monthly') {
-                            logFirebaseEvent('Calendar-Backend-Call');
+                            logFirebaseEvent('Calendar_Backend-Call');
 
                             final budgetsUpdateData = createBudgetsRecordData(
-                              budgetStart: calendarSelectedDay.start,
+                              budgetStart: calendarSelectedDay?.start,
                               budgetEnd: functions.addDaysToDate(
-                                  calendarSelectedDay.end, 30),
+                                  calendarSelectedDay?.end, 30),
                               budgetDuration: dropDownValue,
                             );
                             await widget.budget.reference
                                 .update(budgetsUpdateData);
                           } else {
                             if ((dropDownValue) == 'Weekly') {
-                              logFirebaseEvent('Calendar-Backend-Call');
+                              logFirebaseEvent('Calendar_Backend-Call');
 
                               final budgetsUpdateData = createBudgetsRecordData(
-                                budgetStart: calendarSelectedDay.start,
+                                budgetStart: calendarSelectedDay?.start,
                                 budgetEnd: functions.addDaysToDate(
-                                    calendarSelectedDay.end, 7),
+                                    calendarSelectedDay?.end, 7),
                                 budgetDuration: dropDownValue,
                               );
                               await widget.budget.reference
                                   .update(budgetsUpdateData);
                             } else {
-                              logFirebaseEvent('Calendar-Alert-Dialog');
+                              logFirebaseEvent('Calendar_Alert-Dialog');
                               await showDialog(
                                 context: context,
                                 builder: (alertDialogContext) {
@@ -230,9 +230,9 @@ class _CreateNewBudgetCopyWidgetState extends State<CreateNewBudgetCopyWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
               child: FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('Button-ON_TAP');
+                  logFirebaseEvent('Button_ON_TAP');
                   if ((widget.budget.budgetStart != null)) {
-                    logFirebaseEvent('Button-Backend-Call');
+                    logFirebaseEvent('Button_Backend-Call');
 
                     final budgetCategoriesCreateData =
                         createBudgetCategoriesRecordData(
@@ -248,7 +248,7 @@ class _CreateNewBudgetCopyWidgetState extends State<CreateNewBudgetCopyWidget> {
                         budgetCategoriesCreateData,
                         budgetCategoriesRecordReference);
                     // Action_CreateBudgetStep1
-                    logFirebaseEvent('Button-Action_CreateBudgetStep1');
+                    logFirebaseEvent('Button_Action_CreateBudgetStep1');
 
                     final budgetsUpdateData = createBudgetsRecordData(
                       budgetOwner: currentUserReference,
@@ -258,13 +258,13 @@ class _CreateNewBudgetCopyWidgetState extends State<CreateNewBudgetCopyWidget> {
                       budgetDuration: dropDownValue,
                     );
                     await widget.budget.reference.update(budgetsUpdateData);
-                    logFirebaseEvent('Button-Backend-Call');
+                    logFirebaseEvent('Button_Backend-Call');
 
                     final usersUpdateData = createUsersRecordData(
                       activeBudget: widget.budget.reference,
                     );
                     await currentUserReference.update(usersUpdateData);
-                    logFirebaseEvent('Button-Navigate-To');
+                    logFirebaseEvent('Button_Navigate-To');
                     await Navigator.push(
                       context,
                       MaterialPageRoute(

@@ -16,11 +16,11 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  final formKey = GlobalKey<FormState>();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController inputEmailController;
   TextEditingController inputPasswordController;
   bool inputPasswordVisibility;
+  final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -221,9 +221,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'Button_SignUp-ON_TAP');
+                                                'Button_SignUp_ON_TAP');
                                             logFirebaseEvent(
-                                                'Button_SignUp-Validate-Form');
+                                                'Button_SignUp_Validate-Form');
                                             if (formKey.currentState == null ||
                                                 !formKey.currentState
                                                     .validate()) {
@@ -232,7 +232,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
                                             // Action_SignUp
                                             logFirebaseEvent(
-                                                'Button_SignUp-Action_SignUp');
+                                                'Button_SignUp_Action_SignUp');
 
                                             final user = await signInWithEmail(
                                               context,
@@ -244,7 +244,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                             }
 
                                             logFirebaseEvent(
-                                                'Button_SignUp-Navigate-To');
+                                                'Button_SignUp_Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -279,9 +279,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'Button_SignUp-ON_TAP');
+                                                'Button_SignUp_ON_TAP');
                                             logFirebaseEvent(
-                                                'Button_SignUp-Navigate-To');
+                                                'Button_SignUp_Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(

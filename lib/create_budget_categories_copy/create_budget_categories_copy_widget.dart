@@ -43,9 +43,9 @@ class _CreateBudgetCategoriesCopyWidgetState
   void initState() {
     super.initState();
     // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('createBudgetCategoriesCopy-ON_PAGE_LOAD');
-      logFirebaseEvent('createBudgetCategoriesCopy-Backend-Call');
+    SchedulerBinding.instance?.addPostFrameCallback((_) async {
+      logFirebaseEvent('createBudgetCategoriesCopy_ON_PAGE_LOAD');
+      logFirebaseEvent('createBudgetCategoriesCopy_Backend-Call');
 
       final budgetsUpdateData = createBudgetsRecordData(
         uncategorizedLink: widget.uncategorized.reference,
@@ -221,10 +221,10 @@ class _CreateBudgetCategoriesCopyWidgetState
                                         size: 24,
                                       ),
                                       onPressed: () async {
-                                        logFirebaseEvent('IconButton-ON_TAP');
+                                        logFirebaseEvent('IconButton_ON_TAP');
                                         // Action_BudgetAmountMinus
                                         logFirebaseEvent(
-                                            'IconButton-Action_BudgetAmountMinus');
+                                            'IconButton_Action_BudgetAmountMinus');
 
                                         final budgetsUpdateData = {
                                           'budgetAmount':
@@ -236,10 +236,10 @@ class _CreateBudgetCategoriesCopyWidgetState
                                     ),
                                     InkWell(
                                       onTap: () async {
-                                        logFirebaseEvent('Container-ON_TAP');
+                                        logFirebaseEvent('Container_ON_TAP');
                                         // Action_EditBudgetAmount
                                         logFirebaseEvent(
-                                            'Container-Action_EditBudgetAmount');
+                                            'Container_Action_EditBudgetAmount');
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
                                           backgroundColor: Colors.transparent,
@@ -287,10 +287,10 @@ class _CreateBudgetCategoriesCopyWidgetState
                                         size: 24,
                                       ),
                                       onPressed: () async {
-                                        logFirebaseEvent('IconButton-ON_TAP');
+                                        logFirebaseEvent('IconButton_ON_TAP');
                                         // Action_BudgetAmountPlus
                                         logFirebaseEvent(
-                                            'IconButton-Action_BudgetAmountPlus');
+                                            'IconButton_Action_BudgetAmountPlus');
 
                                         final budgetsUpdateData = {
                                           'budgetAmount':
@@ -407,10 +407,10 @@ class _CreateBudgetCategoriesCopyWidgetState
                                               child: InkWell(
                                                 onTap: () async {
                                                   logFirebaseEvent(
-                                                      'Column-ON_TAP');
+                                                      'Column_ON_TAP');
                                                   // Action_BSCreateConstCategory
                                                   logFirebaseEvent(
-                                                      'Column-Action_BSCreateConstCategory');
+                                                      'Column_Action_BSCreateConstCategory');
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
@@ -502,10 +502,10 @@ class _CreateBudgetCategoriesCopyWidgetState
                                     ),
                                     FFButtonWidget(
                                       onPressed: () async {
-                                        logFirebaseEvent('Button-ON_TAP');
+                                        logFirebaseEvent('Button_ON_TAP');
                                         // Action_BSCreateCustomCategory
                                         logFirebaseEvent(
-                                            'Button-Action_BSCreateCustomCategory');
+                                            'Button_Action_BSCreateCustomCategory');
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
                                           backgroundColor: Colors.transparent,
@@ -541,6 +541,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                             .override(
                                               fontFamily: 'Source Sans Pro',
                                               color: Colors.white,
+                                              fontSize: 18,
                                             ),
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
@@ -701,10 +702,10 @@ class _CreateBudgetCategoriesCopyWidgetState
                                                           ),
                                                           onPressed: () async {
                                                             logFirebaseEvent(
-                                                                'IconButton-ON_TAP');
+                                                                'IconButton_ON_TAP');
                                                             // Action_BSEditCateogoryAmt
                                                             logFirebaseEvent(
-                                                                'IconButton-Action_BSEditCateogoryAmt');
+                                                                'IconButton_Action_BSEditCateogoryAmt');
                                                             await showModalBottomSheet(
                                                               isScrollControlled:
                                                                   true,
@@ -753,10 +754,10 @@ class _CreateBudgetCategoriesCopyWidgetState
                                                           ),
                                                           onPressed: () async {
                                                             logFirebaseEvent(
-                                                                'IconButton-ON_TAP');
+                                                                'IconButton_ON_TAP');
                                                             // Action_DeleteCategory
                                                             logFirebaseEvent(
-                                                                'IconButton-Action_DeleteCategory');
+                                                                'IconButton_Action_DeleteCategory');
                                                             await columnBudgetCategoriesRecord
                                                                 .reference
                                                                 .delete();
@@ -818,9 +819,9 @@ class _CreateBudgetCategoriesCopyWidgetState
                                             snapshot.data;
                                         return FFButtonWidget(
                                           onPressed: () async {
-                                            logFirebaseEvent('Button-ON_TAP');
+                                            logFirebaseEvent('Button_ON_TAP');
                                             logFirebaseEvent(
-                                                'Button-Alert-Dialog');
+                                                'Button_Alert-Dialog');
                                             var confirmDialogResponse =
                                                 await showDialog<bool>(
                                                       context: context,
@@ -856,7 +857,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                             if (confirmDialogResponse) {
                                               // Action_ResetCategories
                                               logFirebaseEvent(
-                                                  'Button-Action_ResetCategories');
+                                                  'Button_Action_ResetCategories');
                                               await actions.deleteCategories(
                                                 buttonBudgetCategoriesRecordList
                                                     .toList(),
@@ -871,14 +872,15 @@ class _CreateBudgetCategoriesCopyWidgetState
                                             height: 60,
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryBackground,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily:
-                                                          'Source Sans Pro',
-                                                      color: Color(0xFF5D5B5B),
-                                                    ),
+                                            textStyle: FlutterFlowTheme.of(
+                                                    context)
+                                                .subtitle1
+                                                .override(
+                                                  fontFamily: 'Source Sans Pro',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                ),
                                             elevation: 0,
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
@@ -935,10 +937,10 @@ class _CreateBudgetCategoriesCopyWidgetState
                                                 : null;
                                         return FFButtonWidget(
                                           onPressed: () async {
-                                            logFirebaseEvent('Button-ON_TAP');
+                                            logFirebaseEvent('Button_ON_TAP');
                                             // Action_SaveEditBudget
                                             logFirebaseEvent(
-                                                'Button-Action_SaveEditBudget');
+                                                'Button_Action_SaveEditBudget');
 
                                             final budgetCategoriesUpdateData =
                                                 createBudgetCategoriesRecordData(
@@ -953,7 +955,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                                 .update(
                                                     budgetCategoriesUpdateData);
                                             logFirebaseEvent(
-                                                'Button-Show-Snack-Bar');
+                                                'Button_Show-Snack-Bar');
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               SnackBar(
@@ -969,7 +971,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                               ),
                                             );
                                             logFirebaseEvent(
-                                                'Button-Navigate-To');
+                                                'Button_Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -988,7 +990,7 @@ class _CreateBudgetCategoriesCopyWidgetState
                                                 .primaryColor,
                                             textStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .subtitle2
+                                                    .subtitle1
                                                     .override(
                                                       fontFamily:
                                                           'Source Sans Pro',
