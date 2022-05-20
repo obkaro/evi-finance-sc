@@ -41,7 +41,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
         queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord.where(
             'linkedTransactions',
             arrayContains: widget.transaction.reference),
-        singleRecord: true,
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -59,10 +58,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
         }
         List<BudgetCategoriesRecord>
             transactionSingleBudgetCategoriesRecordList = snapshot.data;
-        final transactionSingleBudgetCategoriesRecord =
-            transactionSingleBudgetCategoriesRecordList.isNotEmpty
-                ? transactionSingleBudgetCategoriesRecordList.first
-                : null;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -571,10 +566,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                               ],
                                             ),
                                           ),
-                                          if ((transactionSingleBudgetCategoriesRecord
-                                                  .reference) ==
-                                              (widget
-                                                  .transaction.linkedCategory))
+                                          if ((transactionSingleBudgetCategoriesRecordList
+                                                  .length) >
+                                              0)
                                             StreamBuilder<
                                                 BudgetCategoriesRecord>(
                                               stream: BudgetCategoriesRecord
