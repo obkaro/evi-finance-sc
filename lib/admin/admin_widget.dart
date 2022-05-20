@@ -162,8 +162,8 @@ class _AdminWidgetState extends State<AdminWidget> {
                                   );
                                 },
                               ),
-                              FutureBuilder<List<BudgetsRecord>>(
-                                future: queryBudgetsRecordOnce(),
+                              StreamBuilder<List<BudgetsRecord>>(
+                                stream: queryBudgetsRecord(),
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
                                   if (!snapshot.hasData) {
@@ -189,9 +189,9 @@ class _AdminWidgetState extends State<AdminWidget> {
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 20, 0, 0),
-                                      child: FutureBuilder<
+                                      child: StreamBuilder<
                                           List<BudgetCategoriesRecord>>(
-                                        future: queryBudgetCategoriesRecordOnce(
+                                        stream: queryBudgetCategoriesRecord(
                                           queryBuilder: (budgetCategoriesRecord) =>
                                               budgetCategoriesRecord.where(
                                                   'categoryBudget',

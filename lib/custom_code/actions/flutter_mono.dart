@@ -56,7 +56,7 @@ Future flutterMono(
                   height: context.screenHeight(.8),
                   child: ClipRRect(
                       borderRadius: BorderRadius.all(
-                        const Radius.circular(24.0),
+                        const Radius.circular(32.0),
                       ),
                       child: MonoWebView(
                         apiKey: 'live_pk_dNWUp8sYwG5mGXq3mFOT',
