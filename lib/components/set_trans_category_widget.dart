@@ -166,13 +166,14 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                               };
                               await columnBudgetCategoriesRecord.reference
                                   .update(budgetCategoriesUpdateData);
+                              logFirebaseEvent('Container_Navigate-Back');
+                              Navigator.pop(context);
                               logFirebaseEvent('Container_Navigate-To');
-                              await Navigator.pushAndRemoveUntil(
+                              await Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => TransactionsWidget(),
                                 ),
-                                (r) => false,
                               );
                             },
                             child: Container(
