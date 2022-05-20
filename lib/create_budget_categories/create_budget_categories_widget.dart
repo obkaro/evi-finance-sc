@@ -969,7 +969,7 @@ class _CreateBudgetCategoriesWidgetState
                                                 builder: (context) =>
                                                     NavBarPage(
                                                         initialPage:
-                                                            'BudgetSingleCopy'),
+                                                            'ActiveBudget'),
                                               ),
                                             );
                                           },
