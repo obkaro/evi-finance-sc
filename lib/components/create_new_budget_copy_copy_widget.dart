@@ -266,6 +266,8 @@ class _CreateNewBudgetCopyCopyWidgetState
                       logFirebaseEvent('Button_ON_TAP');
                       if ((FFAppState().currencyTextField) >
                           (widget.ccategoriesSum)) {
+                        logFirebaseEvent('Button_Navigate-Back');
+                        Navigator.pop(context);
                         // Action_CreateBudgetStep1
                         logFirebaseEvent('Button_Action_CreateBudgetStep1');
 

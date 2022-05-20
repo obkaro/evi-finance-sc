@@ -232,6 +232,8 @@ class _CreateNewBudgetCopyWidgetState extends State<CreateNewBudgetCopyWidget> {
                 onPressed: () async {
                   logFirebaseEvent('Button_ON_TAP');
                   if ((widget.budget.budgetStart != null)) {
+                    logFirebaseEvent('Button_Navigate-Back');
+                    Navigator.pop(context);
                     logFirebaseEvent('Button_Backend-Call');
 
                     final budgetCategoriesCreateData =
