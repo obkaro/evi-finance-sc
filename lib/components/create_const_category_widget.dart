@@ -118,12 +118,12 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    logFirebaseEvent('Button-ON_TAP');
+                    logFirebaseEvent('Button_ON_TAP');
                     if ((functions.budgetRemMinusAmt(
                             FFAppState().currencyTextField,
                             widget.budgetAllocatedRemaining)) >=
                         0) {
-                      logFirebaseEvent('Button-Backend-Call');
+                      logFirebaseEvent('Button_Backend-Call');
 
                       final budgetCategoriesCreateData =
                           createBudgetCategoriesRecordData(
@@ -135,10 +135,10 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                       await BudgetCategoriesRecord.collection
                           .doc()
                           .set(budgetCategoriesCreateData);
-                      logFirebaseEvent('Button-Navigate-Back');
+                      logFirebaseEvent('Button_Navigate-Back');
                       Navigator.pop(context);
                     } else {
-                      logFirebaseEvent('Button-Alert-Dialog');
+                      logFirebaseEvent('Button_Alert-Dialog');
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
@@ -177,8 +177,8 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('Button-ON_TAP');
-                  logFirebaseEvent('Button-Navigate-Back');
+                  logFirebaseEvent('Button_ON_TAP');
+                  logFirebaseEvent('Button_Navigate-Back');
                   Navigator.pop(context);
                 },
                 text: 'Cancel',

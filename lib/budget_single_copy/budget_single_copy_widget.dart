@@ -23,6 +23,8 @@ class BudgetSingleCopyWidget extends StatefulWidget {
 }
 
 class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
+  BudgetsRecord createdBudget2;
+  BudgetsRecord createdBudget;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -158,8 +160,8 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                       snapshot.data;
                   return FloatingActionButton(
                     onPressed: () async {
-                      logFirebaseEvent('FloatingActionButton-ON_TAP');
-                      logFirebaseEvent('FloatingActionButton-Bottom-Sheet');
+                      logFirebaseEvent('FloatingActionButton_ON_TAP');
+                      logFirebaseEvent('FloatingActionButton_Bottom-Sheet');
                       await showModalBottomSheet(
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
@@ -674,10 +676,10 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                                       return InkWell(
                                                         onTap: () async {
                                                           logFirebaseEvent(
-                                                              'Container-ON_TAP');
+                                                              'Container_ON_TAP');
                                                           // Action_ViewSingleCategory
                                                           logFirebaseEvent(
-                                                              'Container-Action_ViewSingleCategory');
+                                                              'Container_Action_ViewSingleCategory');
                                                           await Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
@@ -824,8 +826,8 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                               EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                           child: InkWell(
                             onTap: () async {
-                              logFirebaseEvent('Container-ON_TAP');
-                              logFirebaseEvent('Container-Backend-Call');
+                              logFirebaseEvent('Container_ON_TAP');
+                              logFirebaseEvent('Container_Backend-Call');
 
                               final budgetsCreateData = createBudgetsRecordData(
                                 budgetDateCreated: getCurrentTimestamp,
@@ -836,12 +838,14 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                   true,
                                   true,
                                 ),
-                                budgetName: '',
                               );
-                              await BudgetsRecord.collection
-                                  .doc()
+                              var budgetsRecordReference =
+                                  BudgetsRecord.collection.doc();
+                              await budgetsRecordReference
                                   .set(budgetsCreateData);
-                              logFirebaseEvent('Container-Bottom-Sheet');
+                              createdBudget = BudgetsRecord.getDocumentFromData(
+                                  budgetsCreateData, budgetsRecordReference);
+                              logFirebaseEvent('Container_Bottom-Sheet');
                               await showModalBottomSheet(
                                 isScrollControlled: true,
                                 backgroundColor: Colors.transparent,
@@ -849,10 +853,14 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                 builder: (context) {
                                   return Padding(
                                     padding: MediaQuery.of(context).viewInsets,
-                                    child: CreateNewBudgetCopyWidget(),
+                                    child: CreateNewBudgetCopyWidget(
+                                      budget: createdBudget,
+                                    ),
                                   );
                                 },
                               );
+
+                              setState(() {});
                             },
                             child: Container(
                               width: double.infinity,
@@ -890,8 +898,49 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                             .primaryColor,
                                         size: 48,
                                       ),
-                                      onPressed: () {
-                                        print('IconButton pressed ...');
+                                      onPressed: () async {
+                                        logFirebaseEvent('IconButton_ON_TAP');
+                                        logFirebaseEvent(
+                                            'IconButton_Backend-Call');
+
+                                        final budgetsCreateData =
+                                            createBudgetsRecordData(
+                                          budgetDateCreated:
+                                              getCurrentTimestamp,
+                                          budgetID: random_data.randomString(
+                                            24,
+                                            24,
+                                            true,
+                                            true,
+                                            true,
+                                          ),
+                                        );
+                                        var budgetsRecordReference =
+                                            BudgetsRecord.collection.doc();
+                                        await budgetsRecordReference
+                                            .set(budgetsCreateData);
+                                        createdBudget2 =
+                                            BudgetsRecord.getDocumentFromData(
+                                                budgetsCreateData,
+                                                budgetsRecordReference);
+                                        logFirebaseEvent(
+                                            'IconButton_Bottom-Sheet');
+                                        await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          context: context,
+                                          builder: (context) {
+                                            return Padding(
+                                              padding: MediaQuery.of(context)
+                                                  .viewInsets,
+                                              child: CreateNewBudgetCopyWidget(
+                                                budget: createdBudget2,
+                                              ),
+                                            );
+                                          },
+                                        );
+
+                                        setState(() {});
                                       },
                                     ),
                                   ],
@@ -927,8 +976,8 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                               final containerBudgetsRecord = snapshot.data;
                               return InkWell(
                                 onTap: () async {
-                                  logFirebaseEvent('Container-ON_TAP');
-                                  logFirebaseEvent('Container-Bottom-Sheet');
+                                  logFirebaseEvent('Container_ON_TAP');
+                                  logFirebaseEvent('Container_Bottom-Sheet');
                                   await showModalBottomSheet(
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
@@ -988,9 +1037,9 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                           ),
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'IconButton-ON_TAP');
+                                                'IconButton_ON_TAP');
                                             logFirebaseEvent(
-                                                'IconButton-Bottom-Sheet');
+                                                'IconButton_Bottom-Sheet');
                                             await showModalBottomSheet(
                                               isScrollControlled: true,
                                               backgroundColor:

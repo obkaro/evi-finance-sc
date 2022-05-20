@@ -43,19 +43,19 @@ class _EditBudgetCategoriesWidgetState
   void initState() {
     super.initState();
     // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('editBudgetCategories-ON_PAGE_LOAD');
-      logFirebaseEvent('editBudgetCategories-Backend-Call');
+    SchedulerBinding.instance?.addPostFrameCallback((_) async {
+      logFirebaseEvent('editBudgetCategories_ON_PAGE_LOAD');
+      logFirebaseEvent('editBudgetCategories_Backend-Call');
 
       final budgetCategoriesUpdateData = createBudgetCategoriesRecordData(
         allocatedAmount: 0,
       );
       await widget.uncategorized.reference.update(budgetCategoriesUpdateData);
-      logFirebaseEvent('editBudgetCategories-Backend-Call');
+      logFirebaseEvent('editBudgetCategories_Backend-Call');
 
       final budgetsUpdateData = createBudgetsRecordData(
-        budgetStart: widget.dateRange.start,
-        budgetEnd: widget.dateRange.end,
+        budgetStart: widget.dateRange?.start,
+        budgetEnd: widget.dateRange?.end,
       );
       await widget.createdBudget.reference.update(budgetsUpdateData);
     });
@@ -227,10 +227,10 @@ class _EditBudgetCategoriesWidgetState
                                         size: 24,
                                       ),
                                       onPressed: () async {
-                                        logFirebaseEvent('IconButton-ON_TAP');
+                                        logFirebaseEvent('IconButton_ON_TAP');
                                         // Action_BudgetAmountMinus
                                         logFirebaseEvent(
-                                            'IconButton-Action_BudgetAmountMinus');
+                                            'IconButton_Action_BudgetAmountMinus');
 
                                         final budgetsUpdateData = {
                                           'budgetAmount':
@@ -242,10 +242,10 @@ class _EditBudgetCategoriesWidgetState
                                     ),
                                     InkWell(
                                       onTap: () async {
-                                        logFirebaseEvent('Container-ON_TAP');
+                                        logFirebaseEvent('Container_ON_TAP');
                                         // Action_EditBudgetAmount
                                         logFirebaseEvent(
-                                            'Container-Action_EditBudgetAmount');
+                                            'Container_Action_EditBudgetAmount');
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
                                           backgroundColor: Colors.transparent,
@@ -293,10 +293,10 @@ class _EditBudgetCategoriesWidgetState
                                         size: 24,
                                       ),
                                       onPressed: () async {
-                                        logFirebaseEvent('IconButton-ON_TAP');
+                                        logFirebaseEvent('IconButton_ON_TAP');
                                         // Action_BudgetAmountPlus
                                         logFirebaseEvent(
-                                            'IconButton-Action_BudgetAmountPlus');
+                                            'IconButton_Action_BudgetAmountPlus');
 
                                         final budgetsUpdateData = {
                                           'budgetAmount':
@@ -413,10 +413,10 @@ class _EditBudgetCategoriesWidgetState
                                               child: InkWell(
                                                 onTap: () async {
                                                   logFirebaseEvent(
-                                                      'Column-ON_TAP');
+                                                      'Column_ON_TAP');
                                                   // Action_BSCreateConstCategory
                                                   logFirebaseEvent(
-                                                      'Column-Action_BSCreateConstCategory');
+                                                      'Column_Action_BSCreateConstCategory');
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
@@ -509,10 +509,10 @@ class _EditBudgetCategoriesWidgetState
                                     ),
                                     FFButtonWidget(
                                       onPressed: () async {
-                                        logFirebaseEvent('Button-ON_TAP');
+                                        logFirebaseEvent('Button_ON_TAP');
                                         // Action_BSCreateCustomCategory
                                         logFirebaseEvent(
-                                            'Button-Action_BSCreateCustomCategory');
+                                            'Button_Action_BSCreateCustomCategory');
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
                                           backgroundColor: Colors.transparent,
@@ -708,10 +708,10 @@ class _EditBudgetCategoriesWidgetState
                                                           ),
                                                           onPressed: () async {
                                                             logFirebaseEvent(
-                                                                'IconButton-ON_TAP');
+                                                                'IconButton_ON_TAP');
                                                             // Action_BSEditCateogoryAmt
                                                             logFirebaseEvent(
-                                                                'IconButton-Action_BSEditCateogoryAmt');
+                                                                'IconButton_Action_BSEditCateogoryAmt');
                                                             await showModalBottomSheet(
                                                               isScrollControlled:
                                                                   true,
@@ -761,9 +761,9 @@ class _EditBudgetCategoriesWidgetState
                                                           ),
                                                           onPressed: () async {
                                                             logFirebaseEvent(
-                                                                'IconButton-ON_TAP');
+                                                                'IconButton_ON_TAP');
                                                             logFirebaseEvent(
-                                                                'IconButton-Alert-Dialog');
+                                                                'IconButton_Alert-Dialog');
                                                             var confirmDialogResponse =
                                                                 await showDialog<
                                                                         bool>(
@@ -793,7 +793,7 @@ class _EditBudgetCategoriesWidgetState
                                                             if (confirmDialogResponse) {
                                                               // Action_DeleteCategory
                                                               logFirebaseEvent(
-                                                                  'IconButton-Action_DeleteCategory');
+                                                                  'IconButton_Action_DeleteCategory');
                                                               await columnBudgetCategoriesRecord
                                                                   .reference
                                                                   .delete();
@@ -858,9 +858,9 @@ class _EditBudgetCategoriesWidgetState
                                             snapshot.data;
                                         return FFButtonWidget(
                                           onPressed: () async {
-                                            logFirebaseEvent('Button-ON_TAP');
+                                            logFirebaseEvent('Button_ON_TAP');
                                             logFirebaseEvent(
-                                                'Button-Alert-Dialog');
+                                                'Button_Alert-Dialog');
                                             var confirmDialogResponse =
                                                 await showDialog<bool>(
                                                       context: context,
@@ -896,7 +896,7 @@ class _EditBudgetCategoriesWidgetState
                                             if (confirmDialogResponse) {
                                               // Action_ResetCategories
                                               logFirebaseEvent(
-                                                  'Button-Action_ResetCategories');
+                                                  'Button_Action_ResetCategories');
                                               await actions.deleteCategories(
                                                 buttonBudgetCategoriesRecordList
                                                     .toList(),
@@ -975,10 +975,10 @@ class _EditBudgetCategoriesWidgetState
                                                 : null;
                                         return FFButtonWidget(
                                           onPressed: () async {
-                                            logFirebaseEvent('Button-ON_TAP');
+                                            logFirebaseEvent('Button_ON_TAP');
                                             // Action_SaveEditBudget
                                             logFirebaseEvent(
-                                                'Button-Action_SaveEditBudget');
+                                                'Button_Action_SaveEditBudget');
 
                                             final budgetCategoriesUpdateData =
                                                 createBudgetCategoriesRecordData(
@@ -993,7 +993,7 @@ class _EditBudgetCategoriesWidgetState
                                                 .update(
                                                     budgetCategoriesUpdateData);
                                             logFirebaseEvent(
-                                                'Button-Show-Snack-Bar');
+                                                'Button_Show-Snack-Bar');
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               SnackBar(
@@ -1009,7 +1009,7 @@ class _EditBudgetCategoriesWidgetState
                                               ),
                                             );
                                             logFirebaseEvent(
-                                                'Button-Navigate-To');
+                                                'Button_Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(

@@ -17,11 +17,11 @@ class ProfileSettingsWidget extends StatefulWidget {
 }
 
 class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
-  final formKey = GlobalKey<FormState>();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
+  final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -191,14 +191,14 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              logFirebaseEvent('Button-ON_TAP');
-                              logFirebaseEvent('Button-Validate-Form');
+                              logFirebaseEvent('Button_ON_TAP');
+                              logFirebaseEvent('Button_Validate-Form');
                               if (formKey.currentState == null ||
                                   !formKey.currentState.validate()) {
                                 return;
                               }
 
-                              logFirebaseEvent('Button-Backend-Call');
+                              logFirebaseEvent('Button_Backend-Call');
 
                               final usersUpdateData = createUsersRecordData(
                                 displayName: textController1.text,
@@ -207,7 +207,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               );
                               await currentUserReference
                                   .update(usersUpdateData);
-                              logFirebaseEvent('Button-Navigate-Back');
+                              logFirebaseEvent('Button_Navigate-Back');
                               Navigator.pop(context);
                             },
                             text: 'Save',

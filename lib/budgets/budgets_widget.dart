@@ -55,9 +55,9 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
         visible: (currentUserEmail) == '0',
         child: FloatingActionButton(
           onPressed: () async {
-            logFirebaseEvent('FloatingActionButton-ON_TAP');
+            logFirebaseEvent('FloatingActionButton_ON_TAP');
             // Action_NewBudget
-            logFirebaseEvent('FloatingActionButton-Action_NewBudget');
+            logFirebaseEvent('FloatingActionButton_Action_NewBudget');
             await showModalBottomSheet(
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
@@ -182,9 +182,9 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                               return InkWell(
                                                 onTap: () async {
                                                   logFirebaseEvent(
-                                                      'ListTile-ON_TAP');
+                                                      'ListTile_ON_TAP');
                                                   logFirebaseEvent(
-                                                      'ListTile-Backend-Call');
+                                                      'ListTile_Backend-Call');
 
                                                   final budgetsUpdateData =
                                                       createBudgetsRecordData(
@@ -197,7 +197,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                           budgetsUpdateData);
                                                   // Action_BudgetSingle
                                                   logFirebaseEvent(
-                                                      'ListTile-Action_BudgetSingle');
+                                                      'ListTile_Action_BudgetSingle');
                                                   await Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
@@ -225,10 +225,10 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                           Icons.delete_rounded,
                                                       onTap: () async {
                                                         logFirebaseEvent(
-                                                            'SlidableActionWidget-ON_TAP');
+                                                            'SlidableActionWidget_ON_TAP');
                                                         // Action_DeleteBudget
                                                         logFirebaseEvent(
-                                                            'SlidableActionWidget-Action_DeleteBudget');
+                                                            'SlidableActionWidget_Action_DeleteBudget');
                                                         await columnBudgetsRecord
                                                             .reference
                                                             .delete();

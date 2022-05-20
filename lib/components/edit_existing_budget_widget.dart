@@ -31,9 +31,9 @@ class EditExistingBudgetWidget extends StatefulWidget {
 }
 
 class _EditExistingBudgetWidgetState extends State<EditExistingBudgetWidget> {
+  DateTimeRange startEndRange;
   bool switchListTileValue1;
   bool switchListTileValue2;
-  DateTimeRange startEndRange;
 
   @override
   Widget build(BuildContext context) {
@@ -153,16 +153,16 @@ class _EditExistingBudgetWidgetState extends State<EditExistingBudgetWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    logFirebaseEvent('Button-ON_TAP');
+                    logFirebaseEvent('Button_ON_TAP');
                     if ((FFAppState().currencyTextField) >
                         (widget.categoriesSum)) {
-                      logFirebaseEvent('Button-Custom-Action');
+                      logFirebaseEvent('Button_Custom-Action');
                       startEndRange = await actions.selectDateRange(
                         context,
                         widget.budget,
                       );
                       // Action_CreateBudgetStep1
-                      logFirebaseEvent('Button-Action_CreateBudgetStep1');
+                      logFirebaseEvent('Button_Action_CreateBudgetStep1');
 
                       final budgetsUpdateData = createBudgetsRecordData(
                         budgetAmount: FFAppState().currencyTextField,
@@ -170,7 +170,7 @@ class _EditExistingBudgetWidgetState extends State<EditExistingBudgetWidget> {
                         isActive: switchListTileValue2,
                       );
                       await widget.budget.reference.update(budgetsUpdateData);
-                      logFirebaseEvent('Button-Show-Snack-Bar');
+                      logFirebaseEvent('Button_Show-Snack-Bar');
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
@@ -186,7 +186,7 @@ class _EditExistingBudgetWidgetState extends State<EditExistingBudgetWidget> {
                         ),
                       );
                     } else {
-                      logFirebaseEvent('Button-Alert-Dialog');
+                      logFirebaseEvent('Button_Alert-Dialog');
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
@@ -233,11 +233,11 @@ class _EditExistingBudgetWidgetState extends State<EditExistingBudgetWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    logFirebaseEvent('Button-ON_TAP');
+                    logFirebaseEvent('Button_ON_TAP');
                     if ((FFAppState().currencyTextField) >
                         (widget.categoriesSum)) {
                       // Action_CreateBudgetStep1
-                      logFirebaseEvent('Button-Action_CreateBudgetStep1');
+                      logFirebaseEvent('Button_Action_CreateBudgetStep1');
 
                       final budgetsUpdateData = createBudgetsRecordData(
                         budgetAmount: FFAppState().currencyTextField,
@@ -245,7 +245,7 @@ class _EditExistingBudgetWidgetState extends State<EditExistingBudgetWidget> {
                         isActive: switchListTileValue2,
                       );
                       await widget.budget.reference.update(budgetsUpdateData);
-                      logFirebaseEvent('Button-Navigate-To');
+                      logFirebaseEvent('Button_Navigate-To');
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -256,7 +256,7 @@ class _EditExistingBudgetWidgetState extends State<EditExistingBudgetWidget> {
                         ),
                       );
                     } else {
-                      logFirebaseEvent('Button-Alert-Dialog');
+                      logFirebaseEvent('Button_Alert-Dialog');
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
@@ -301,8 +301,8 @@ class _EditExistingBudgetWidgetState extends State<EditExistingBudgetWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    logFirebaseEvent('Button-ON_TAP');
-                    logFirebaseEvent('Button-Navigate-Back');
+                    logFirebaseEvent('Button_ON_TAP');
+                    logFirebaseEvent('Button_Navigate-Back');
                     Navigator.pop(context);
                   },
                   text: 'Done',

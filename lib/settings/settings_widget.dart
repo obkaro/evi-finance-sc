@@ -120,8 +120,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       children: [
                         InkWell(
                           onTap: () async {
-                            logFirebaseEvent('ListTile-ON_TAP');
-                            logFirebaseEvent('ListTile-Navigate-To');
+                            logFirebaseEvent('ListTile_ON_TAP');
+                            logFirebaseEvent('ListTile_Navigate-To');
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -160,8 +160,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         ),
                         InkWell(
                           onTap: () async {
-                            logFirebaseEvent('ListTile-ON_TAP');
-                            logFirebaseEvent('ListTile-Google-Analytics-Event');
+                            logFirebaseEvent('ListTile_ON_TAP');
+                            logFirebaseEvent('ListTile_Google-Analytics-Event');
                             logFirebaseEvent('premiumClick');
                           },
                           child: ListTile(
@@ -190,16 +190,16 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         ),
                         InkWell(
                           onTap: () async {
-                            logFirebaseEvent('ListTile-ON_TAP');
+                            logFirebaseEvent('ListTile_ON_TAP');
                             if ((Theme.of(context).brightness ==
                                     Brightness.dark) ==
                                 true) {
                               logFirebaseEvent(
-                                  'ListTile-Set-Dark-Mode-Settings');
+                                  'ListTile_Set-Dark-Mode-Settings');
                               setDarkModeSetting(context, ThemeMode.light);
                             } else {
                               logFirebaseEvent(
-                                  'ListTile-Set-Dark-Mode-Settings');
+                                  'ListTile_Set-Dark-Mode-Settings');
                               setDarkModeSetting(context, ThemeMode.dark);
                             }
                           },
@@ -235,8 +235,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         ),
                         InkWell(
                           onTap: () async {
-                            logFirebaseEvent('ListTile-ON_TAP');
-                            logFirebaseEvent('ListTile-Launch-U-R-L');
+                            logFirebaseEvent('ListTile_ON_TAP');
+                            logFirebaseEvent('ListTile_Launch-U-R-L');
                             await launchURL(
                                 'https://www.evifinance.com/privacy-policy');
                           },
@@ -266,8 +266,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         ),
                         InkWell(
                           onTap: () async {
-                            logFirebaseEvent('ListTile-ON_TAP');
-                            logFirebaseEvent('ListTile-Launch-U-R-L');
+                            logFirebaseEvent('ListTile_ON_TAP');
+                            logFirebaseEvent('ListTile_Launch-U-R-L');
                             await launchURL(
                                 'https://www.evifinance.com/general-terms');
                           },
@@ -297,13 +297,13 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         ),
                         InkWell(
                           onTap: () async {
-                            logFirebaseEvent('ListTile-ON_TAP');
-                            logFirebaseEvent('ListTile-Launch-U-R-L');
+                            logFirebaseEvent('ListTile_ON_TAP');
+                            logFirebaseEvent('ListTile_Launch-U-R-L');
                             await launchURL('https://www.evifinance.com');
                           },
                           onLongPress: () async {
-                            logFirebaseEvent('ListTile-ON_LONG_PRESS');
-                            logFirebaseEvent('ListTile-Navigate-To');
+                            logFirebaseEvent('ListTile_ON_LONG_PRESS');
+                            logFirebaseEvent('ListTile_Navigate-To');
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -337,8 +337,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         ),
                         InkWell(
                           onTap: () async {
-                            logFirebaseEvent('ListTile-ON_TAP');
-                            logFirebaseEvent('ListTile-Auth');
+                            logFirebaseEvent('ListTile_ON_TAP');
+                            logFirebaseEvent('ListTile_Auth');
                             await signOut();
                             await Navigator.pushAndRemoveUntil(
                               context,
@@ -349,8 +349,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                             );
                           },
                           onLongPress: () async {
-                            logFirebaseEvent('ListTile-ON_LONG_PRESS');
-                            logFirebaseEvent('ListTile-Navigate-To');
+                            logFirebaseEvent('ListTile_ON_LONG_PRESS');
+                            logFirebaseEvent('ListTile_Navigate-To');
                             await Navigator.push(
                               context,
                               MaterialPageRoute(

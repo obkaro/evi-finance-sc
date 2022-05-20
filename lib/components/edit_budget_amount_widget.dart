@@ -96,19 +96,19 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    logFirebaseEvent('Button-ON_TAP');
+                    logFirebaseEvent('Button_ON_TAP');
                     if ((FFAppState().currencyTextField) >
                         (widget.categoryTotal)) {
-                      logFirebaseEvent('Button-Backend-Call');
+                      logFirebaseEvent('Button_Backend-Call');
 
                       final budgetsUpdateData = createBudgetsRecordData(
                         budgetAmount: FFAppState().currencyTextField,
                       );
                       await widget.budget.reference.update(budgetsUpdateData);
-                      logFirebaseEvent('Button-Navigate-Back');
+                      logFirebaseEvent('Button_Navigate-Back');
                       Navigator.pop(context);
                     } else {
-                      logFirebaseEvent('Button-Alert-Dialog');
+                      logFirebaseEvent('Button_Alert-Dialog');
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
@@ -147,8 +147,8 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('Button-ON_TAP');
-                  logFirebaseEvent('Button-Navigate-Back');
+                  logFirebaseEvent('Button_ON_TAP');
+                  logFirebaseEvent('Button_Navigate-Back');
                   Navigator.pop(context);
                 },
                 text: 'Cancel',
