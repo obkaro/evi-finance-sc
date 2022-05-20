@@ -340,8 +340,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                 true)
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                                                                child: FutureBuilder<BudgetCategoriesRecord>(
-                                                                                  future: BudgetCategoriesRecord.getDocumentOnce(columnTransactionsRecord.linkedCategory),
+                                                                                child: StreamBuilder<BudgetCategoriesRecord>(
+                                                                                  stream: BudgetCategoriesRecord.getDocument(columnTransactionsRecord.linkedCategory),
                                                                                   builder: (context, snapshot) {
                                                                                     // Customize what your widget looks like when it's loading.
                                                                                     if (!snapshot.hasData) {

@@ -571,8 +571,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                               ],
                                             ),
                                           ),
-                                          if (transactionSingleBudgetCategoriesRecord !=
-                                              null)
+                                          if ((transactionSingleBudgetCategoriesRecord
+                                                  .reference) ==
+                                              (widget
+                                                  .transaction.linkedCategory))
                                             StreamBuilder<
                                                 BudgetCategoriesRecord>(
                                               stream: BudgetCategoriesRecord
