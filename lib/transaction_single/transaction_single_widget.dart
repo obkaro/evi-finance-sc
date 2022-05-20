@@ -622,48 +622,18 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(0, 0,
                                                                     0, 10),
-                                                        child: StreamBuilder<
-                                                            BudgetCategoriesRecord>(
-                                                          stream: BudgetCategoriesRecord
-                                                              .getDocument(widget
-                                                                  .transaction
-                                                                  .linkedCategory),
-                                                          builder: (context,
-                                                              snapshot) {
-                                                            // Customize what your widget looks like when it's loading.
-                                                            if (!snapshot
-                                                                .hasData) {
-                                                              return Center(
-                                                                child: SizedBox(
-                                                                  width: 50,
-                                                                  height: 50,
-                                                                  child:
-                                                                      SpinKitRing(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryColor,
-                                                                    size: 50,
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            }
-                                                            final rowBudgetCategoriesRecord =
-                                                                snapshot.data;
-                                                            return Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Text(
-                                                                  columnBudgetCategoriesRecord
-                                                                      .categoryName,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .subtitle1,
-                                                                ),
-                                                              ],
-                                                            );
-                                                          },
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Text(
+                                                              columnBudgetCategoriesRecord
+                                                                  .categoryName,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .subtitle1,
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
                                                     ],
