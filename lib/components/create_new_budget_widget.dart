@@ -230,52 +230,50 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
               child: FFButtonWidget(
                 onPressed: () async {
                   logFirebaseEvent('Button_ON_TAP');
-                  if ((widget.budget.budgetStart != null)) {
-                    logFirebaseEvent('Button_Navigate-Back');
-                    Navigator.pop(context);
-                    logFirebaseEvent('Button_Backend-Call');
+                  logFirebaseEvent('Button_Navigate-Back');
+                  Navigator.pop(context);
+                  logFirebaseEvent('Button_Backend-Call');
 
-                    final budgetCategoriesCreateData =
-                        createBudgetCategoriesRecordData(
-                      categoryName: 'Uncategorized',
-                      categoryBudget: widget.budget.reference,
-                      budgetOwner: currentUserReference,
-                    );
-                    var budgetCategoriesRecordReference =
-                        BudgetCategoriesRecord.collection.doc();
-                    await budgetCategoriesRecordReference
-                        .set(budgetCategoriesCreateData);
-                    uncategorized = BudgetCategoriesRecord.getDocumentFromData(
-                        budgetCategoriesCreateData,
-                        budgetCategoriesRecordReference);
-                    // Action_CreateBudgetStep1
-                    logFirebaseEvent('Button_Action_CreateBudgetStep1');
+                  final budgetCategoriesCreateData =
+                      createBudgetCategoriesRecordData(
+                    categoryName: 'Uncategorized',
+                    categoryBudget: widget.budget.reference,
+                    budgetOwner: currentUserReference,
+                  );
+                  var budgetCategoriesRecordReference =
+                      BudgetCategoriesRecord.collection.doc();
+                  await budgetCategoriesRecordReference
+                      .set(budgetCategoriesCreateData);
+                  uncategorized = BudgetCategoriesRecord.getDocumentFromData(
+                      budgetCategoriesCreateData,
+                      budgetCategoriesRecordReference);
+                  // Action_CreateBudgetStep1
+                  logFirebaseEvent('Button_Action_CreateBudgetStep1');
 
-                    final budgetsUpdateData = createBudgetsRecordData(
-                      budgetOwner: currentUserReference,
-                      budgetAmount: FFAppState().currencyTextField,
-                      isActive: true,
-                      uncategorizedLink: uncategorized.reference,
-                      budgetDuration: dropDownValue,
-                    );
-                    await widget.budget.reference.update(budgetsUpdateData);
-                    logFirebaseEvent('Button_Backend-Call');
+                  final budgetsUpdateData = createBudgetsRecordData(
+                    budgetOwner: currentUserReference,
+                    budgetAmount: FFAppState().currencyTextField,
+                    isActive: true,
+                    uncategorizedLink: uncategorized.reference,
+                    budgetDuration: dropDownValue,
+                  );
+                  await widget.budget.reference.update(budgetsUpdateData);
+                  logFirebaseEvent('Button_Backend-Call');
 
-                    final usersUpdateData = createUsersRecordData(
-                      activeBudget: widget.budget.reference,
-                    );
-                    await currentUserReference.update(usersUpdateData);
-                    logFirebaseEvent('Button_Navigate-To');
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CreateBudgetCategoriesWidget(
-                          createdBudget: widget.budget,
-                          uncategorized: uncategorized,
-                        ),
+                  final usersUpdateData = createUsersRecordData(
+                    activeBudget: widget.budget.reference,
+                  );
+                  await currentUserReference.update(usersUpdateData);
+                  logFirebaseEvent('Button_Navigate-To');
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateBudgetCategoriesWidget(
+                        createdBudget: widget.budget,
+                        uncategorized: uncategorized,
                       ),
-                    );
-                  }
+                    ),
+                  );
 
                   setState(() {});
                 },
