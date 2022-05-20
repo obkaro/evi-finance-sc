@@ -230,8 +230,6 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
               child: FFButtonWidget(
                 onPressed: () async {
                   logFirebaseEvent('Button_ON_TAP');
-                  logFirebaseEvent('Button_Navigate-Back');
-                  Navigator.pop(context);
                   logFirebaseEvent('Button_Backend-Call');
 
                   final budgetCategoriesCreateData =
@@ -264,6 +262,8 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                     activeBudget: widget.budget.reference,
                   );
                   await currentUserReference.update(usersUpdateData);
+                  logFirebaseEvent('Button_Navigate-Back');
+                  Navigator.pop(context);
                   logFirebaseEvent('Button_Navigate-To');
                   await Navigator.push(
                     context,

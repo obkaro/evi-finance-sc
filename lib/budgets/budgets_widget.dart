@@ -269,12 +269,63 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                   secondaryActions: [
                                                     IconSlideAction(
                                                       caption: 'Delete',
-                                                      color: Color(0xFFFF0003),
+                                                      color: Color(0xFFC72323),
                                                       icon:
                                                           Icons.delete_rounded,
                                                       onTap: () async {
                                                         logFirebaseEvent(
                                                             'SlidableActionWidget_ON_TAP');
+                                                        if ((columnBudgetsRecord
+                                                                .reference) ==
+                                                            (currentUserDocument
+                                                                ?.activeBudget)) {
+                                                          logFirebaseEvent(
+                                                              'SlidableActionWidget_Alert-Dialog');
+                                                          var confirmDialogResponse =
+                                                              await showDialog<
+                                                                      bool>(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (alertDialogContext) {
+                                                                      return AlertDialog(
+                                                                        title: Text(
+                                                                            'Are you sure?'),
+                                                                        content:
+                                                                            Text('This is your current active budget'),
+                                                                        actions: [
+                                                                          TextButton(
+                                                                            onPressed: () =>
+                                                                                Navigator.pop(alertDialogContext, false),
+                                                                            child:
+                                                                                Text('Cancel'),
+                                                                          ),
+                                                                          TextButton(
+                                                                            onPressed: () =>
+                                                                                Navigator.pop(alertDialogContext, true),
+                                                                            child:
+                                                                                Text('Delete'),
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                  ) ??
+                                                                  false;
+                                                          if (confirmDialogResponse) {
+                                                            logFirebaseEvent(
+                                                                'SlidableActionWidget_Backend-Call');
+
+                                                            final usersUpdateData =
+                                                                {
+                                                              'activeBudget':
+                                                                  FieldValue
+                                                                      .delete(),
+                                                            };
+                                                            await currentUserReference
+                                                                .update(
+                                                                    usersUpdateData);
+                                                          }
+                                                        }
                                                         // Action_DeleteBudget
                                                         logFirebaseEvent(
                                                             'SlidableActionWidget_Action_DeleteBudget');

@@ -103,6 +103,8 @@ class _BudgetOptionsWidgetState extends State<BudgetOptionsWidget> {
             child: InkWell(
               onTap: () async {
                 logFirebaseEvent('ListTile_ON_TAP');
+                logFirebaseEvent('ListTile_Navigate-Back');
+                Navigator.pop(context);
                 logFirebaseEvent('ListTile_Navigate-To');
                 await Navigator.push(
                   context,
