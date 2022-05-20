@@ -335,42 +335,45 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     },
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Active Budget',
-                        style: FlutterFlowTheme.of(context).subtitle2,
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          logFirebaseEvent('Text_ON_TAP');
-                          logFirebaseEvent('Text_Navigate-To');
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BudgetsWidget(),
+                if ((currentUserDocument?.activeBudget != null))
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                    child: AuthUserStreamWidget(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Active Budget',
+                            style: FlutterFlowTheme.of(context).subtitle2,
+                          ),
+                          InkWell(
+                            onTap: () async {
+                              logFirebaseEvent('Text_ON_TAP');
+                              logFirebaseEvent('Text_Navigate-To');
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BudgetsWidget(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'See All',
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Source Sans Pro',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                             ),
-                          );
-                        },
-                        child: Text(
-                          'See All',
-                          style: FlutterFlowTheme.of(context)
-                              .subtitle2
-                              .override(
-                                fontFamily: 'Source Sans Pro',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
                 if ((currentUserDocument?.activeBudget != null))
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 0),
