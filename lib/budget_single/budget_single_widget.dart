@@ -1,8 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../category_single/category_single_widget.dart';
-import '../components/edit_existing_budget_widget.dart';
-import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -90,76 +88,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                     useGoogleFonts: false,
                   ),
             ),
-            actions: [
-              StreamBuilder<List<BudgetCategoriesRecord>>(
-                stream: queryBudgetCategoriesRecord(
-                  queryBuilder: (budgetCategoriesRecord) =>
-                      budgetCategoriesRecord
-                          .where('categoryBudget',
-                              isEqualTo: widget.budget.reference)
-                          .where('categoryName', isEqualTo: 'Uncategorized'),
-                  singleRecord: true,
-                ),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: SpinKitRing(
-                          color: FlutterFlowTheme.of(context).primaryColor,
-                          size: 50,
-                        ),
-                      ),
-                    );
-                  }
-                  List<BudgetCategoriesRecord>
-                      iconButtonBudgetCategoriesRecordList = snapshot.data;
-                  // Return an empty Container when the document does not exist.
-                  if (snapshot.data.isEmpty) {
-                    return Container();
-                  }
-                  final iconButtonBudgetCategoriesRecord =
-                      iconButtonBudgetCategoriesRecordList.isNotEmpty
-                          ? iconButtonBudgetCategoriesRecordList.first
-                          : null;
-                  return FlutterFlowIconButton(
-                    borderColor: Colors.transparent,
-                    borderRadius: 30,
-                    borderWidth: 1,
-                    buttonSize: 60,
-                    icon: Icon(
-                      Icons.edit_rounded,
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      size: 24,
-                    ),
-                    onPressed: () async {
-                      logFirebaseEvent('IconButton_ON_TAP');
-                      // Action_EditBudget
-                      logFirebaseEvent('IconButton_Action_EditBudget');
-                      await showModalBottomSheet(
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (context) {
-                          return Padding(
-                            padding: MediaQuery.of(context).viewInsets,
-                            child: EditExistingBudgetWidget(
-                              budget: widget.budget,
-                              uncategorized: iconButtonBudgetCategoriesRecord,
-                              categoriesSum: functions.sumCategoryAmounts(
-                                  budgetSingleBudgetCategoriesRecordList
-                                      .toList()),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
-              ),
-            ],
+            actions: [],
             centerTitle: true,
             elevation: 0,
           ),

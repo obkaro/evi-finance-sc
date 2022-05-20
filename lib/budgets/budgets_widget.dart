@@ -5,6 +5,7 @@ import '../components/create_new_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -19,6 +20,7 @@ class BudgetsWidget extends StatefulWidget {
 }
 
 class _BudgetsWidgetState extends State<BudgetsWidget> {
+  BudgetsRecord createdBudget2;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -52,30 +54,77 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: Visibility(
-        visible: (currentUserEmail) == '0',
-        child: FloatingActionButton(
-          onPressed: () async {
-            logFirebaseEvent('FloatingActionButton_ON_TAP');
-            // Action_NewBudget
-            logFirebaseEvent('FloatingActionButton_Action_NewBudget');
-            await showModalBottomSheet(
-              isScrollControlled: true,
-              backgroundColor: Colors.transparent,
-              context: context,
-              builder: (context) {
-                return Padding(
-                  padding: MediaQuery.of(context).viewInsets,
-                  child: CreateNewBudgetWidget(),
+        visible: (currentUserDocument?.activeBudget != null),
+        child: AuthUserStreamWidget(
+          child: StreamBuilder<List<BudgetCategoriesRecord>>(
+            stream: queryBudgetCategoriesRecord(
+              queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
+                  .where('categoryBudget',
+                      isEqualTo: currentUserDocument?.activeBudget)
+                  .where('categoryName', isNotEqualTo: 'Uncategorized'),
+            ),
+            builder: (context, snapshot) {
+              // Customize what your widget looks like when it's loading.
+              if (!snapshot.hasData) {
+                return Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: SpinKitRing(
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      size: 50,
+                    ),
+                  ),
                 );
-              },
-            );
-          },
-          backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-          elevation: 8,
-          child: Icon(
-            Icons.add,
-            color: Colors.white,
-            size: 32,
+              }
+              List<BudgetCategoriesRecord>
+                  floatingActionButtonBudgetCategoriesRecordList =
+                  snapshot.data;
+              return FloatingActionButton(
+                onPressed: () async {
+                  logFirebaseEvent('FloatingActionButton_ON_TAP');
+                  logFirebaseEvent('FloatingActionButton_Backend-Call');
+
+                  final budgetsCreateData = createBudgetsRecordData(
+                    budgetDateCreated: getCurrentTimestamp,
+                    budgetID: random_data.randomString(
+                      24,
+                      24,
+                      true,
+                      true,
+                      true,
+                    ),
+                  );
+                  var budgetsRecordReference = BudgetsRecord.collection.doc();
+                  await budgetsRecordReference.set(budgetsCreateData);
+                  createdBudget2 = BudgetsRecord.getDocumentFromData(
+                      budgetsCreateData, budgetsRecordReference);
+                  logFirebaseEvent('FloatingActionButton_Bottom-Sheet');
+                  await showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (context) {
+                      return Padding(
+                        padding: MediaQuery.of(context).viewInsets,
+                        child: CreateNewBudgetWidget(
+                          budget: createdBudget2,
+                        ),
+                      );
+                    },
+                  );
+
+                  setState(() {});
+                },
+                backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+                elevation: 8,
+                child: Icon(
+                  Icons.add_rounded,
+                  color: Colors.white,
+                  size: 32,
+                ),
+              );
+            },
           ),
         ),
       ),
@@ -232,6 +281,30 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                         await columnBudgetsRecord
                                                             .reference
                                                             .delete();
+                                                      },
+                                                    ),
+                                                    IconSlideAction(
+                                                      caption: 'Activate',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .tertiaryColor,
+                                                      icon: Icons.check_rounded,
+                                                      onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'SlidableActionWidget_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'SlidableActionWidget_Backend-Call');
+
+                                                        final usersUpdateData =
+                                                            createUsersRecordData(
+                                                          activeBudget:
+                                                              columnBudgetsRecord
+                                                                  .reference,
+                                                        );
+                                                        await currentUserReference
+                                                            .update(
+                                                                usersUpdateData);
                                                       },
                                                     ),
                                                   ],

@@ -1,12 +1,13 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../create_budget_categories_copy/create_budget_categories_copy_widget.dart';
+import '../create_budget_categories/create_budget_categories_widget.dart';
+import '../flutter_flow/flutter_flow_calendar.dart';
+import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
-import '../flutter_flow/random_data_util.dart' as random_data;
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -16,11 +17,9 @@ class CreateNewBudgetWidget extends StatefulWidget {
   const CreateNewBudgetWidget({
     Key key,
     this.budget,
-    this.budgetRemaining,
   }) : super(key: key);
 
   final BudgetsRecord budget;
-  final int budgetRemaining;
 
   @override
   _CreateNewBudgetWidgetState createState() => _CreateNewBudgetWidgetState();
@@ -28,10 +27,17 @@ class CreateNewBudgetWidget extends StatefulWidget {
 
 class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
   BudgetCategoriesRecord uncategorized;
-  BudgetsRecord createdBudget;
-  DateTimeRange startEndRange;
-  bool switchListTileValue1;
-  bool switchListTileValue2;
+  DateTimeRange calendarSelectedDay;
+  String dropDownValue;
+
+  @override
+  void initState() {
+    super.initState();
+    calendarSelectedDay = DateTimeRange(
+      start: DateTime.now().startOfDay,
+      end: DateTime.now().endOfDay,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,115 +60,185 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                child: custom_widgets.CurrencyTextField(
-                  width: MediaQuery.of(context).size.width,
-                  height: 50,
-                  labelText: 'Amount',
-                  hintText: 'Enter amount',
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                child: Container(
-                  width: double.infinity,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  alignment: AlignmentDirectional(0, 0),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: SwitchListTile(
-                        value: switchListTileValue1 ??= true,
-                        onChanged: (newValue) =>
-                            setState(() => switchListTileValue1 = newValue),
-                        title: Text(
-                          'Recurring',
-                          style: FlutterFlowTheme.of(context).subtitle2,
-                        ),
-                        tileColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        activeColor: FlutterFlowTheme.of(context).primaryColor,
-                        dense: false,
-                        controlAffinity: ListTileControlAffinity.leading,
-                      ),
+        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 16),
+                  child: Container(
+                    width: 60,
+                    height: 6,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      borderRadius: BorderRadius.circular(32),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                child: Container(
-                  width: double.infinity,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  alignment: AlignmentDirectional(0, 0),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: SwitchListTile(
-                        value: switchListTileValue2 ??= true,
-                        onChanged: (newValue) =>
-                            setState(() => switchListTileValue2 = newValue),
-                        title: Text(
-                          'Active',
-                          style: FlutterFlowTheme.of(context).subtitle2,
-                        ),
-                        tileColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        activeColor: FlutterFlowTheme.of(context).primaryColor,
-                        dense: false,
-                        controlAffinity: ListTileControlAffinity.leading,
-                      ),
-                    ),
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                  child: Text(
+                    'Create a new budget',
+                    style: FlutterFlowTheme.of(context).subtitle1,
                   ),
                 ),
+              ],
+            ),
+            custom_widgets.CurrencyTextField(
+              width: MediaQuery.of(context).size.width,
+              height: 50,
+              labelText: 'Amount',
+              hintText: 'Enter amount',
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+              child: FlutterFlowDropDown(
+                initialOption: dropDownValue ??= 'Monthly',
+                options: ['Weekly', 'Monthly'].toList(),
+                onChanged: (val) => setState(() => dropDownValue = val),
+                width: double.infinity,
+                height: 55,
+                textStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily: 'Source Sans Pro',
+                      color: Colors.black,
+                    ),
+                hintText: 'Please select...',
+                fillColor: Colors.white,
+                elevation: 2,
+                borderColor: Colors.transparent,
+                borderWidth: 0,
+                borderRadius: 12,
+                margin: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
+                hidesUnderline: true,
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    logFirebaseEvent('Button_ON_TAP');
-                    // Action_CreateBudgetStep1
-                    logFirebaseEvent('Button_Action_CreateBudgetStep1');
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(18, 16, 18, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Budget start date',
+                            textAlign: TextAlign.start,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyText1
+                                .override(
+                                  fontFamily: 'Source Sans Pro',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                      child: FlutterFlowCalendar(
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        iconColor: FlutterFlowTheme.of(context).secondaryText,
+                        weekFormat: false,
+                        weekStartsMonday: false,
+                        onChange: (DateTimeRange newSelectedDate) async {
+                          calendarSelectedDay = newSelectedDate;
+                          logFirebaseEvent('Calendar_ON_DATE_SELECTED');
+                          if ((dropDownValue) == 'Monthly') {
+                            logFirebaseEvent('Calendar_Backend-Call');
 
-                    final budgetsCreateData = createBudgetsRecordData(
-                      budgetOwner: currentUserReference,
-                      budgetAmount: FFAppState().currencyTextField,
-                      budgetDateCreated: getCurrentTimestamp,
-                      budgetID: random_data.randomString(
-                        24,
-                        24,
-                        true,
-                        true,
-                        true,
+                            final budgetsUpdateData = createBudgetsRecordData(
+                              budgetStart: calendarSelectedDay?.start,
+                              budgetEnd: functions.addDaysToDate(
+                                  calendarSelectedDay?.end, 30),
+                              budgetDuration: dropDownValue,
+                            );
+                            await widget.budget.reference
+                                .update(budgetsUpdateData);
+                          } else {
+                            if ((dropDownValue) == 'Weekly') {
+                              logFirebaseEvent('Calendar_Backend-Call');
+
+                              final budgetsUpdateData = createBudgetsRecordData(
+                                budgetStart: calendarSelectedDay?.start,
+                                budgetEnd: functions.addDaysToDate(
+                                    calendarSelectedDay?.end, 7),
+                                budgetDuration: dropDownValue,
+                              );
+                              await widget.budget.reference
+                                  .update(budgetsUpdateData);
+                            } else {
+                              logFirebaseEvent('Calendar_Alert-Dialog');
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text('No time period'),
+                                    content: Text(
+                                        'Please select a budget time period in the dropdown above'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: Text('Okay'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
+                          }
+
+                          setState(() {});
+                        },
+                        titleStyle: FlutterFlowTheme.of(context).bodyText1,
+                        dayOfWeekStyle: FlutterFlowTheme.of(context).bodyText2,
+                        dateStyle: FlutterFlowTheme.of(context).bodyText2,
+                        selectedDateStyle:
+                            FlutterFlowTheme.of(context).bodyText1.override(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Colors.white,
+                                ),
+                        inactiveDateStyle: TextStyle(),
                       ),
-                      isRecurring: switchListTileValue1,
-                    );
-                    var budgetsRecordReference = BudgetsRecord.collection.doc();
-                    await budgetsRecordReference.set(budgetsCreateData);
-                    createdBudget = BudgetsRecord.getDocumentFromData(
-                        budgetsCreateData, budgetsRecordReference);
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+              child: FFButtonWidget(
+                onPressed: () async {
+                  logFirebaseEvent('Button_ON_TAP');
+                  if ((widget.budget.budgetStart != null)) {
+                    logFirebaseEvent('Button_Navigate-Back');
+                    Navigator.pop(context);
                     logFirebaseEvent('Button_Backend-Call');
 
                     final budgetCategoriesCreateData =
                         createBudgetCategoriesRecordData(
                       categoryName: 'Uncategorized',
-                      categoryBudget: createdBudget.reference,
+                      categoryBudget: widget.budget.reference,
                       budgetOwner: currentUserReference,
                     );
                     var budgetCategoriesRecordReference =
@@ -172,71 +248,56 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                     uncategorized = BudgetCategoriesRecord.getDocumentFromData(
                         budgetCategoriesCreateData,
                         budgetCategoriesRecordReference);
-                    logFirebaseEvent('Button_Custom-Action');
-                    startEndRange = await actions.selectDateRange(
-                      context,
-                      createdBudget,
+                    // Action_CreateBudgetStep1
+                    logFirebaseEvent('Button_Action_CreateBudgetStep1');
+
+                    final budgetsUpdateData = createBudgetsRecordData(
+                      budgetOwner: currentUserReference,
+                      budgetAmount: FFAppState().currencyTextField,
+                      isActive: true,
+                      uncategorizedLink: uncategorized.reference,
+                      budgetDuration: dropDownValue,
                     );
+                    await widget.budget.reference.update(budgetsUpdateData);
+                    logFirebaseEvent('Button_Backend-Call');
+
+                    final usersUpdateData = createUsersRecordData(
+                      activeBudget: widget.budget.reference,
+                    );
+                    await currentUserReference.update(usersUpdateData);
                     logFirebaseEvent('Button_Navigate-To');
                     await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CreateBudgetCategoriesCopyWidget(
-                          createdBudget: createdBudget,
+                        builder: (context) => CreateBudgetCategoriesWidget(
+                          createdBudget: widget.budget,
                           uncategorized: uncategorized,
-                          dateRange: startEndRange,
                         ),
                       ),
                     );
+                  }
 
-                    setState(() {});
-                  },
-                  text: 'Set Date Range',
-                  icon: Icon(
-                    Icons.calendar_today_rounded,
-                    size: 15,
+                  setState(() {});
+                },
+                text: 'Save',
+                options: FFButtonOptions(
+                  width: double.infinity,
+                  height: 60,
+                  color: FlutterFlowTheme.of(context).primaryColor,
+                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: 'Source Sans Pro',
+                        color: Colors.white,
+                      ),
+                  elevation: 0,
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
                   ),
-                  options: FFButtonOptions(
-                    width: double.infinity,
-                    height: 60,
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily: 'Source Sans Pro',
-                          color: Colors.white,
-                        ),
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
-                    ),
-                    borderRadius: 16,
-                  ),
+                  borderRadius: 16,
                 ),
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    logFirebaseEvent('Button_ON_TAP');
-                    logFirebaseEvent('Button_Navigate-Back');
-                    Navigator.pop(context);
-                  },
-                  text: 'Cancel',
-                  options: FFButtonOptions(
-                    width: double.infinity,
-                    height: 60,
-                    color: FlutterFlowTheme.of(context).primaryBackground,
-                    textStyle: FlutterFlowTheme.of(context).subtitle2,
-                    elevation: 0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
-                    ),
-                    borderRadius: 16,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -430,115 +430,129 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                 List<BudgetCategoriesRecord>
                                     containerBudgetCategoriesRecordList =
                                     snapshot.data;
-                                return Container(
-                                  width: double.infinity,
-                                  height: 96,
-                                  decoration: BoxDecoration(),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16, 16, 16, 16),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: StreamBuilder<
-                                              List<TransactionsRecord>>(
-                                            stream: queryTransactionsRecord(
-                                              queryBuilder: (transactionsRecord) =>
-                                                  transactionsRecord.where(
-                                                      'linkedCategory',
-                                                      whereIn:
-                                                          containerBudgetCategoriesRecordList
-                                                              .map((e) =>
-                                                                  e.reference)
-                                                              .toList()),
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child: SpinKitRing(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      size: 50,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<TransactionsRecord>
-                                                  containerTransactionsRecordList =
-                                                  snapshot.data;
-                                              return Container(
-                                                width: 100,
-                                                height: double.infinity,
-                                                decoration: BoxDecoration(),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    CircularPercentIndicator(
-                                                      percent: functions
-                                                          .calcBudgetChart(
-                                                              containerBudgetsRecord,
-                                                              containerTransactionsRecordList
-                                                                  .toList()),
-                                                      radius: 32,
-                                                      lineWidth: 8,
-                                                      animation: true,
-                                                      progressColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .eviredTransparent,
-                                                      startAngle: 0,
-                                                    ),
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(20, 0,
-                                                                    0, 0),
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceAround,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              '${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetEnd)}',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .subtitle1,
-                                                            ),
-                                                            Text(
-                                                              '${functions.subtractCurrency(containerBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .subtitle2,
-                                                            ),
-                                                          ],
-                                                        ),
+                                return InkWell(
+                                  onTap: () async {
+                                    logFirebaseEvent('Container_ON_TAP');
+                                    logFirebaseEvent('Container_Navigate-To');
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => NavBarPage(
+                                            initialPage: 'BudgetSingleCopy'),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 96,
+                                    decoration: BoxDecoration(),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 16, 16, 16),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            child: StreamBuilder<
+                                                List<TransactionsRecord>>(
+                                              stream: queryTransactionsRecord(
+                                                queryBuilder: (transactionsRecord) =>
+                                                    transactionsRecord.where(
+                                                        'linkedCategory',
+                                                        whereIn:
+                                                            containerBudgetCategoriesRecordList
+                                                                .map((e) =>
+                                                                    e.reference)
+                                                                .toList()),
+                                              ),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50,
+                                                      height: 50,
+                                                      child: SpinKitRing(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        size: 50,
                                                       ),
                                                     ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
+                                                  );
+                                                }
+                                                List<TransactionsRecord>
+                                                    containerTransactionsRecordList =
+                                                    snapshot.data;
+                                                return Container(
+                                                  width: 100,
+                                                  height: double.infinity,
+                                                  decoration: BoxDecoration(),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      CircularPercentIndicator(
+                                                        percent: functions
+                                                            .calcBudgetChart(
+                                                                containerBudgetsRecord,
+                                                                containerTransactionsRecordList
+                                                                    .toList()),
+                                                        radius: 32,
+                                                        lineWidth: 8,
+                                                        animation: true,
+                                                        progressColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        backgroundColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .eviredTransparent,
+                                                        startAngle: 0,
+                                                      ),
+                                                      Expanded(
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(20,
+                                                                      0, 0, 0),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceAround,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                '${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetEnd)}',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle1,
+                                                              ),
+                                                              Text(
+                                                                '${functions.subtractCurrency(containerBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle2,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );

@@ -1,6 +1,6 @@
 import '../backend/backend.dart';
 import '../budgets/budgets_widget.dart';
-import '../components/create_new_budget_copy_copy_widget.dart';
+import '../components/edit_new_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -71,7 +71,7 @@ class _BudgetOptionsWidgetState extends State<BudgetOptionsWidget> {
                       builder: (context) {
                         return Padding(
                           padding: MediaQuery.of(context).viewInsets,
-                          child: CreateNewBudgetCopyCopyWidget(
+                          child: EditNewBudgetWidget(
                             budget: listTileBudgetsRecord,
                             ccategoriesSum: widget.categoriesSum,
                           ),
@@ -101,6 +101,16 @@ class _BudgetOptionsWidgetState extends State<BudgetOptionsWidget> {
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
             child: InkWell(
+              onTap: () async {
+                logFirebaseEvent('ListTile_ON_TAP');
+                logFirebaseEvent('ListTile_Navigate-To');
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BudgetsWidget(),
+                  ),
+                );
+              },
               onLongPress: () async {
                 logFirebaseEvent('ListTile_ON_LONG_PRESS');
                 logFirebaseEvent('ListTile_Navigate-To');

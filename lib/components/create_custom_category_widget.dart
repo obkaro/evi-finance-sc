@@ -178,16 +178,6 @@ class _CreateCustomCategoryWidgetState
                           await BudgetCategoriesRecord.collection
                               .doc()
                               .set(budgetCategoriesCreateData);
-                          logFirebaseEvent('Button_Backend-Call');
-
-                          final budgetCategoriesUpdateData =
-                              createBudgetCategoriesRecordData(
-                            allocatedAmount: functions.budgetRemMinusAmt(
-                                FFAppState().currencyTextField,
-                                widget.budgetRemaining),
-                          );
-                          await buttonBudgetCategoriesRecord.reference
-                              .update(budgetCategoriesUpdateData);
                           logFirebaseEvent('Button_Navigate-Back');
                           Navigator.pop(context);
                         } else {

@@ -107,8 +107,6 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                   future: queryBudgetCategoriesRecordOnce(
                     queryBuilder: (budgetCategoriesRecord) =>
                         budgetCategoriesRecord
-                            .where('budgetOwner',
-                                isEqualTo: currentUserReference)
                             .where('categoryBudget',
                                 isEqualTo: currentUserDocument?.activeBudget)
                             .where('categoryName',
