@@ -16,11 +16,13 @@ class CreateConstCategoryWidget extends StatefulWidget {
     this.constCategory,
     this.budget,
     this.budgetAllocatedRemaining,
+    this.uncategorized,
   }) : super(key: key);
 
   final ConstBudgetCategoriesRecord constCategory;
   final BudgetsRecord budget;
   final int budgetAllocatedRemaining;
+  final BudgetCategoriesRecord uncategorized;
 
   @override
   _CreateConstCategoryWidgetState createState() =>
@@ -135,6 +137,16 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                       await BudgetCategoriesRecord.collection
                           .doc()
                           .set(budgetCategoriesCreateData);
+                      logFirebaseEvent('Button_Backend-Call');
+
+                      final budgetCategoriesUpdateData =
+                          createBudgetCategoriesRecordData(
+                        allocatedAmount: functions.subInt(
+                            widget.budgetAllocatedRemaining,
+                            FFAppState().currencyTextField),
+                      );
+                      await widget.uncategorized.reference
+                          .update(budgetCategoriesUpdateData);
                       logFirebaseEvent('Button_Navigate-Back');
                       Navigator.pop(context);
                     } else {
