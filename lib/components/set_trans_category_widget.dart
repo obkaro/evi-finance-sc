@@ -3,7 +3,6 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../transactions/transactions_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -168,13 +167,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                   .update(budgetCategoriesUpdateData);
                               logFirebaseEvent('Container_Navigate-Back');
                               Navigator.pop(context);
-                              logFirebaseEvent('Container_Navigate-To');
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => TransactionsWidget(),
-                                ),
-                              );
+                              logFirebaseEvent('Container_Navigate-Back');
+                              Navigator.pop(context);
                             },
                             child: Container(
                               width: double.infinity,
