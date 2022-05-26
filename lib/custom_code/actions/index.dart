@@ -7,3 +7,4 @@ export 'delete_transactions.dart' show deleteTransactions;
 export 'unlink_all_trans_categories.dart' show unlinkAllTransCategories;
 export 'select_date_range.dart' show selectDateRange;
 export 'select_date_range_existing.dart' show selectDateRangeExisting;
+export 'update_category.dart' show updateCategory;

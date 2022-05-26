@@ -4,6 +4,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -14,10 +15,12 @@ class EditBudgetAmountWidget extends StatefulWidget {
     Key key,
     this.budget,
     this.categoryTotal,
+    this.uncategorized,
   }) : super(key: key);
 
   final BudgetsRecord budget;
   final int categoryTotal;
+  final BudgetCategoriesRecord uncategorized;
 
   @override
   _EditBudgetAmountWidgetState createState() => _EditBudgetAmountWidgetState();
@@ -105,6 +108,16 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                         budgetAmount: FFAppState().currencyTextField,
                       );
                       await widget.budget.reference.update(budgetsUpdateData);
+                      logFirebaseEvent('Button_Backend-Call');
+
+                      final budgetCategoriesUpdateData =
+                          createBudgetCategoriesRecordData(
+                        allocatedAmount: functions.subInt(
+                            widget.budget.budgetAmount,
+                            widget.uncategorized.allocatedAmount),
+                      );
+                      await widget.uncategorized.reference
+                          .update(budgetCategoriesUpdateData);
                       logFirebaseEvent('Button_Navigate-Back');
                       Navigator.pop(context);
                     } else {

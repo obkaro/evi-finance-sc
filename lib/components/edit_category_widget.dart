@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -151,6 +152,12 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                       );
                       await widget.categoryToEdit.reference
                           .update(budgetCategoriesUpdateData);
+                      logFirebaseEvent('Button_Custom-Action');
+                      await actions.updateCategory(
+                        widget.uncategorized,
+                        functions.subInt(
+                            widget.budget.budgetAmount, widget.budgetRemaining),
+                      );
                       logFirebaseEvent('Button_Navigate-Back');
                       Navigator.pop(context);
                     } else {

@@ -227,6 +227,15 @@ class _EditBudgetCategoriesWidgetState
                                         };
                                         await columnBudgetsRecord.reference
                                             .update(budgetsUpdateData);
+                                        logFirebaseEvent(
+                                            'IconButton_Backend-Call');
+
+                                        final budgetCategoriesUpdateData = {
+                                          'allocatedAmount':
+                                              FieldValue.increment(-(100000)),
+                                        };
+                                        await widget.uncategorized.reference
+                                            .update(budgetCategoriesUpdateData);
                                       },
                                     ),
                                     InkWell(
@@ -249,6 +258,8 @@ class _EditBudgetCategoriesWidgetState
                                                     .sumCategoryAmounts(
                                                         editBudgetCategoriesBudgetCategoriesRecordList
                                                             .toList()),
+                                                uncategorized:
+                                                    widget.uncategorized,
                                               ),
                                             );
                                           },
@@ -293,6 +304,15 @@ class _EditBudgetCategoriesWidgetState
                                         };
                                         await columnBudgetsRecord.reference
                                             .update(budgetsUpdateData);
+                                        logFirebaseEvent(
+                                            'IconButton_Backend-Call');
+
+                                        final budgetCategoriesUpdateData = {
+                                          'allocatedAmount':
+                                              FieldValue.increment(100000),
+                                        };
+                                        await widget.uncategorized.reference
+                                            .update(budgetCategoriesUpdateData);
                                       },
                                     ),
                                   ],
@@ -427,6 +447,8 @@ class _EditBudgetCategoriesWidgetState
                                                                   editBudgetCategoriesBudgetCategoriesRecordList
                                                                       .toList(),
                                                                   columnBudgetsRecord),
+                                                          uncategorized: widget
+                                                              .uncategorized,
                                                         ),
                                                       );
                                                     },
@@ -516,6 +538,8 @@ class _EditBudgetCategoriesWidgetState
                                                         editBudgetCategoriesBudgetCategoriesRecordList
                                                             .toList(),
                                                         columnBudgetsRecord),
+                                                uncategorized:
+                                                    widget.uncategorized,
                                               ),
                                             );
                                           },
@@ -723,6 +747,9 @@ class _EditBudgetCategoriesWidgetState
                                                                         editBudgetCategoriesBudgetCategoriesRecordList
                                                                             .toList(),
                                                                         columnBudgetsRecord),
+                                                                    uncategorized:
+                                                                        widget
+                                                                            .uncategorized,
                                                                   ),
                                                                 );
                                                               },
@@ -784,6 +811,21 @@ class _EditBudgetCategoriesWidgetState
                                                               await columnBudgetCategoriesRecord
                                                                   .reference
                                                                   .delete();
+                                                              logFirebaseEvent(
+                                                                  'IconButton_Backend-Call');
+
+                                                              final budgetCategoriesUpdateData =
+                                                                  {
+                                                                'allocatedAmount':
+                                                                    FieldValue.increment(
+                                                                        columnBudgetCategoriesRecord
+                                                                            .allocatedAmount),
+                                                              };
+                                                              await widget
+                                                                  .uncategorized
+                                                                  .reference
+                                                                  .update(
+                                                                      budgetCategoriesUpdateData);
                                                             } else {
                                                               return;
                                                             }
