@@ -91,6 +91,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         transaction: await getDocumentParameter(
             data, 'transaction', TransactionsRecord.serializer),
       ),
+  'ActiveBudget': (data) async => NavBarPage(initialPage: 'ActiveBudget'),
   'BudgetSingle': (data) async => BudgetSingleWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
@@ -106,15 +107,11 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
             data, 'createdBudget', BudgetsRecord.serializer),
         uncategorized: await getDocumentParameter(
             data, 'uncategorized', BudgetCategoriesRecord.serializer),
-        dateRange: getParameter(data, 'dateRange'),
       ),
   'Accounts': (data) async => NavBarPage(initialPage: 'Accounts'),
   'createBudgetCategories': (data) async => CreateBudgetCategoriesWidget(
         createdBudget: await getDocumentParameter(
             data, 'createdBudget', BudgetsRecord.serializer),
-        uncategorized: await getDocumentParameter(
-            data, 'uncategorized', BudgetCategoriesRecord.serializer),
-        dateRange: getParameter(data, 'dateRange'),
       ),
   'AccountSingle': (data) async => AccountSingleWidget(
         account: await getDocumentParameter(
@@ -123,7 +120,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'Settings': (data) async => NavBarPage(initialPage: 'Settings'),
   'Admin': (data) async => AdminWidget(),
   'ProfileSettings': (data) async => ProfileSettingsWidget(),
-  'ActiveBudget': (data) async => NavBarPage(initialPage: 'ActiveBudget'),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

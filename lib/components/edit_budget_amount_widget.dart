@@ -100,8 +100,9 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent('Button_ON_TAP');
-                    if ((FFAppState().currencyTextField) >
-                        (widget.categoryTotal)) {
+                    if ((FFAppState().currencyTextField) <=
+                        (functions.subInt(widget.categoryTotal,
+                            widget.uncategorized.allocatedAmount))) {
                       logFirebaseEvent('Button_Backend-Call');
 
                       final budgetsUpdateData = createBudgetsRecordData(
@@ -113,8 +114,7 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                       final budgetCategoriesUpdateData =
                           createBudgetCategoriesRecordData(
                         allocatedAmount: functions.subInt(
-                            widget.budget.budgetAmount,
-                            widget.uncategorized.allocatedAmount),
+                            widget.budget.budgetAmount, widget.categoryTotal),
                       );
                       await widget.uncategorized.reference
                           .update(budgetCategoriesUpdateData);

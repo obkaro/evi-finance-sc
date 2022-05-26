@@ -122,6 +122,16 @@ int subInt(
   return result;
 }
 
+int addInt(
+  int value1,
+  int value2,
+) {
+  // Add your function code here!
+  int result = value1 + value2;
+
+  return result;
+}
+
 int budgetRemMinusAmt(
   int amountFromWidget,
   int budgetRemaining,

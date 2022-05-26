@@ -14,12 +14,10 @@ class CreateCustomCategoryWidget extends StatefulWidget {
   const CreateCustomCategoryWidget({
     Key key,
     this.budget,
-    this.budgetRemaining,
     this.uncategorized,
   }) : super(key: key);
 
   final BudgetsRecord budget;
-  final int budgetRemaining;
   final BudgetCategoriesRecord uncategorized;
 
   @override
@@ -85,7 +83,7 @@ class _CreateCustomCategoryWidgetState
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '(Unallocated: ${functions.formatBudgetCurrency(widget.budgetRemaining)})',
+                    '(Unallocated: ${functions.formatBudgetCurrency(widget.uncategorized.allocatedAmount)})',
                     style: FlutterFlowTheme.of(context).subtitle2.override(
                           fontFamily: 'Source Sans Pro',
                           color: FlutterFlowTheme.of(context).secondaryText,
@@ -135,10 +133,16 @@ class _CreateCustomCategoryWidgetState
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent('Button_ON_TAP');
-                    if ((functions.budgetRemMinusAmt(
-                            FFAppState().currencyTextField,
-                            widget.budgetRemaining)) >=
-                        0) {
+                    if ((FFAppState().currencyTextField) <=
+                        (widget.uncategorized.allocatedAmount)) {
+                      logFirebaseEvent('Button_Backend-Call');
+
+                      final budgetCategoriesUpdateData = {
+                        'allocatedAmount': FieldValue.increment(
+                            -(FFAppState().currencyTextField)),
+                      };
+                      await widget.uncategorized.reference
+                          .update(budgetCategoriesUpdateData);
                       logFirebaseEvent('Button_Backend-Call');
 
                       final budgetCategoriesCreateData =
@@ -151,16 +155,6 @@ class _CreateCustomCategoryWidgetState
                       await BudgetCategoriesRecord.collection
                           .doc()
                           .set(budgetCategoriesCreateData);
-                      logFirebaseEvent('Button_Backend-Call');
-
-                      final budgetCategoriesUpdateData =
-                          createBudgetCategoriesRecordData(
-                        allocatedAmount: functions.subInt(
-                            widget.budgetRemaining,
-                            FFAppState().currencyTextField),
-                      );
-                      await widget.uncategorized.reference
-                          .update(budgetCategoriesUpdateData);
                       logFirebaseEvent('Button_Navigate-Back');
                       Navigator.pop(context);
                     } else {
