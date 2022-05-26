@@ -20,13 +20,6 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
     Object value;
-    value = object.budgetName;
-    if (value != null) {
-      result
-        ..add('budgetName')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.budgetOwner;
     if (value != null) {
       result
@@ -40,13 +33,6 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
       result
         ..add('budgetAmount')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
-    value = object.budgetDescription;
-    if (value != null) {
-      result
-        ..add('budgetDescription')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
     }
     value = object.budgetStart;
     if (value != null) {
@@ -68,15 +54,6 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         ..add('budgetDateCreated')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
-    }
-    value = object.budgetLinkedAccounts;
-    if (value != null) {
-      result
-        ..add('budgetLinkedAccounts')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(BuiltList, const [
-              const FullType(DocumentReference, const [const FullType(Object)])
-            ])));
     }
     value = object.budgetSubCategories;
     if (value != null) {
@@ -153,10 +130,6 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
       iterator.moveNext();
       final Object value = iterator.current;
       switch (key) {
-        case 'budgetName':
-          result.budgetName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
-          break;
         case 'budgetOwner':
           result.budgetOwner = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -166,10 +139,6 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         case 'budgetAmount':
           result.budgetAmount = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
-          break;
-        case 'budgetDescription':
-          result.budgetDescription = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
           break;
         case 'budgetStart':
           result.budgetStart = serializers.deserialize(value,
@@ -182,13 +151,6 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         case 'budgetDateCreated':
           result.budgetDateCreated = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
-          break;
-        case 'budgetLinkedAccounts':
-          result.budgetLinkedAccounts.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltList, const [
-                const FullType(
-                    DocumentReference, const [const FullType(Object)])
-              ])) as BuiltList<Object>);
           break;
         case 'budgetSubCategories':
           result.budgetSubCategories.replace(serializers.deserialize(value,
@@ -238,21 +200,15 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
 
 class _$BudgetsRecord extends BudgetsRecord {
   @override
-  final String budgetName;
-  @override
   final DocumentReference<Object> budgetOwner;
   @override
   final int budgetAmount;
-  @override
-  final String budgetDescription;
   @override
   final DateTime budgetStart;
   @override
   final DateTime budgetEnd;
   @override
   final DateTime budgetDateCreated;
-  @override
-  final BuiltList<DocumentReference<Object>> budgetLinkedAccounts;
   @override
   final BuiltList<DocumentReference<Object>> budgetSubCategories;
   @override
@@ -274,14 +230,11 @@ class _$BudgetsRecord extends BudgetsRecord {
       (new BudgetsRecordBuilder()..update(updates)).build();
 
   _$BudgetsRecord._(
-      {this.budgetName,
-      this.budgetOwner,
+      {this.budgetOwner,
       this.budgetAmount,
-      this.budgetDescription,
       this.budgetStart,
       this.budgetEnd,
       this.budgetDateCreated,
-      this.budgetLinkedAccounts,
       this.budgetSubCategories,
       this.isRecurring,
       this.uncategorizedLink,
@@ -303,14 +256,11 @@ class _$BudgetsRecord extends BudgetsRecord {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is BudgetsRecord &&
-        budgetName == other.budgetName &&
         budgetOwner == other.budgetOwner &&
         budgetAmount == other.budgetAmount &&
-        budgetDescription == other.budgetDescription &&
         budgetStart == other.budgetStart &&
         budgetEnd == other.budgetEnd &&
         budgetDateCreated == other.budgetDateCreated &&
-        budgetLinkedAccounts == other.budgetLinkedAccounts &&
         budgetSubCategories == other.budgetSubCategories &&
         isRecurring == other.isRecurring &&
         uncategorizedLink == other.uncategorizedLink &&
@@ -335,23 +285,12 @@ class _$BudgetsRecord extends BudgetsRecord {
                                         $jc(
                                             $jc(
                                                 $jc(
-                                                    $jc(
-                                                        $jc(
-                                                            $jc(
-                                                                $jc(
-                                                                    0,
-                                                                    budgetName
-                                                                        .hashCode),
-                                                                budgetOwner
-                                                                    .hashCode),
-                                                            budgetAmount
-                                                                .hashCode),
-                                                        budgetDescription
-                                                            .hashCode),
-                                                    budgetStart.hashCode),
-                                                budgetEnd.hashCode),
-                                            budgetDateCreated.hashCode),
-                                        budgetLinkedAccounts.hashCode),
+                                                    $jc(0,
+                                                        budgetOwner.hashCode),
+                                                    budgetAmount.hashCode),
+                                                budgetStart.hashCode),
+                                            budgetEnd.hashCode),
+                                        budgetDateCreated.hashCode),
                                     budgetSubCategories.hashCode),
                                 isRecurring.hashCode),
                             uncategorizedLink.hashCode),
@@ -365,14 +304,11 @@ class _$BudgetsRecord extends BudgetsRecord {
   @override
   String toString() {
     return (newBuiltValueToStringHelper('BudgetsRecord')
-          ..add('budgetName', budgetName)
           ..add('budgetOwner', budgetOwner)
           ..add('budgetAmount', budgetAmount)
-          ..add('budgetDescription', budgetDescription)
           ..add('budgetStart', budgetStart)
           ..add('budgetEnd', budgetEnd)
           ..add('budgetDateCreated', budgetDateCreated)
-          ..add('budgetLinkedAccounts', budgetLinkedAccounts)
           ..add('budgetSubCategories', budgetSubCategories)
           ..add('isRecurring', isRecurring)
           ..add('uncategorizedLink', uncategorizedLink)
@@ -389,10 +325,6 @@ class BudgetsRecordBuilder
     implements Builder<BudgetsRecord, BudgetsRecordBuilder> {
   _$BudgetsRecord _$v;
 
-  String _budgetName;
-  String get budgetName => _$this._budgetName;
-  set budgetName(String budgetName) => _$this._budgetName = budgetName;
-
   DocumentReference<Object> _budgetOwner;
   DocumentReference<Object> get budgetOwner => _$this._budgetOwner;
   set budgetOwner(DocumentReference<Object> budgetOwner) =>
@@ -401,11 +333,6 @@ class BudgetsRecordBuilder
   int _budgetAmount;
   int get budgetAmount => _$this._budgetAmount;
   set budgetAmount(int budgetAmount) => _$this._budgetAmount = budgetAmount;
-
-  String _budgetDescription;
-  String get budgetDescription => _$this._budgetDescription;
-  set budgetDescription(String budgetDescription) =>
-      _$this._budgetDescription = budgetDescription;
 
   DateTime _budgetStart;
   DateTime get budgetStart => _$this._budgetStart;
@@ -419,14 +346,6 @@ class BudgetsRecordBuilder
   DateTime get budgetDateCreated => _$this._budgetDateCreated;
   set budgetDateCreated(DateTime budgetDateCreated) =>
       _$this._budgetDateCreated = budgetDateCreated;
-
-  ListBuilder<DocumentReference<Object>> _budgetLinkedAccounts;
-  ListBuilder<DocumentReference<Object>> get budgetLinkedAccounts =>
-      _$this._budgetLinkedAccounts ??=
-          new ListBuilder<DocumentReference<Object>>();
-  set budgetLinkedAccounts(
-          ListBuilder<DocumentReference<Object>> budgetLinkedAccounts) =>
-      _$this._budgetLinkedAccounts = budgetLinkedAccounts;
 
   ListBuilder<DocumentReference<Object>> _budgetSubCategories;
   ListBuilder<DocumentReference<Object>> get budgetSubCategories =>
@@ -474,14 +393,11 @@ class BudgetsRecordBuilder
   BudgetsRecordBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _budgetName = $v.budgetName;
       _budgetOwner = $v.budgetOwner;
       _budgetAmount = $v.budgetAmount;
-      _budgetDescription = $v.budgetDescription;
       _budgetStart = $v.budgetStart;
       _budgetEnd = $v.budgetEnd;
       _budgetDateCreated = $v.budgetDateCreated;
-      _budgetLinkedAccounts = $v.budgetLinkedAccounts?.toBuilder();
       _budgetSubCategories = $v.budgetSubCategories?.toBuilder();
       _isRecurring = $v.isRecurring;
       _uncategorizedLink = $v.uncategorizedLink;
@@ -512,14 +428,11 @@ class BudgetsRecordBuilder
     try {
       _$result = _$v ??
           new _$BudgetsRecord._(
-              budgetName: budgetName,
               budgetOwner: budgetOwner,
               budgetAmount: budgetAmount,
-              budgetDescription: budgetDescription,
               budgetStart: budgetStart,
               budgetEnd: budgetEnd,
               budgetDateCreated: budgetDateCreated,
-              budgetLinkedAccounts: _budgetLinkedAccounts?.build(),
               budgetSubCategories: _budgetSubCategories?.build(),
               isRecurring: isRecurring,
               uncategorizedLink: uncategorizedLink,
@@ -531,8 +444,6 @@ class BudgetsRecordBuilder
     } catch (_) {
       String _$failedField;
       try {
-        _$failedField = 'budgetLinkedAccounts';
-        _budgetLinkedAccounts?.build();
         _$failedField = 'budgetSubCategories';
         _budgetSubCategories?.build();
       } catch (e) {
