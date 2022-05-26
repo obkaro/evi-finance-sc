@@ -48,3 +48,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+.firebaserc
+firebase.json
+functions/.eslintrc.js
+functions/.eslintignore
+functions/index.js
+functions/package-lock.json
+functions/package.json
