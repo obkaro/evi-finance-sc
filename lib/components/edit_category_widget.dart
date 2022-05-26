@@ -16,14 +16,14 @@ class EditCategoryWidget extends StatefulWidget {
     Key key,
     this.budget,
     this.categoryToEdit,
-    this.budgetRemaining,
     this.uncategorized,
+    this.categoriesTotal,
   }) : super(key: key);
 
   final BudgetsRecord budget;
   final BudgetCategoriesRecord categoryToEdit;
-  final int budgetRemaining;
   final BudgetCategoriesRecord uncategorized;
+  final int categoriesTotal;
 
   @override
   _EditCategoryWidgetState createState() => _EditCategoryWidgetState();
@@ -87,7 +87,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '(Unallocated: ${functions.formatBudgetCurrency(widget.budgetRemaining)})',
+                    '(Unallocated: ${functions.formatBudgetCurrency(widget.uncategorized.allocatedAmount)})',
                     style: FlutterFlowTheme.of(context).subtitle2.override(
                           fontFamily: 'Source Sans Pro',
                           color: FlutterFlowTheme.of(context).secondaryText,
@@ -139,10 +139,19 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                   onPressed: () async {
                     logFirebaseEvent('Button_ON_TAP');
                     if ((functions.checkEditCatTotal(
-                            widget.budgetRemaining,
+                            widget.uncategorized.allocatedAmount,
                             FFAppState().currencyTextField,
                             widget.categoryToEdit.allocatedAmount)) >=
                         0) {
+                      logFirebaseEvent('Button_Custom-Action');
+                      await actions.updateCategory(
+                        widget.uncategorized,
+                        functions.addInt(
+                            functions.subInt(
+                                widget.uncategorized.allocatedAmount,
+                                widget.categoryToEdit.allocatedAmount),
+                            FFAppState().currencyTextField),
+                      );
                       logFirebaseEvent('Button_Backend-Call');
 
                       final budgetCategoriesUpdateData =
@@ -152,12 +161,6 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                       );
                       await widget.categoryToEdit.reference
                           .update(budgetCategoriesUpdateData);
-                      logFirebaseEvent('Button_Custom-Action');
-                      await actions.updateCategory(
-                        widget.uncategorized,
-                        functions.subInt(
-                            widget.budget.budgetAmount, widget.budgetRemaining),
-                      );
                       logFirebaseEvent('Button_Navigate-Back');
                       Navigator.pop(context);
                     } else {

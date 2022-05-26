@@ -15,13 +15,11 @@ class CreateConstCategoryWidget extends StatefulWidget {
     Key key,
     this.constCategory,
     this.budget,
-    this.budgetAllocatedRemaining,
     this.uncategorized,
   }) : super(key: key);
 
   final ConstBudgetCategoriesRecord constCategory;
   final BudgetsRecord budget;
-  final int budgetAllocatedRemaining;
   final BudgetCategoriesRecord uncategorized;
 
   @override
@@ -92,7 +90,7 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                           ),
                         ),
                         Text(
-                          '(Unallocated: ${functions.formatBudgetCurrency(widget.budgetAllocatedRemaining)})',
+                          '(Unallocated: ${functions.formatBudgetCurrency(widget.uncategorized.allocatedAmount)})',
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.of(context)
                               .subtitle2
@@ -121,10 +119,16 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent('Button_ON_TAP');
-                    if ((functions.budgetRemMinusAmt(
-                            FFAppState().currencyTextField,
-                            widget.budgetAllocatedRemaining)) >=
-                        0) {
+                    if ((FFAppState().currencyTextField) <=
+                        (widget.uncategorized.allocatedAmount)) {
+                      logFirebaseEvent('Button_Backend-Call');
+
+                      final budgetCategoriesUpdateData = {
+                        'allocatedAmount': FieldValue.increment(
+                            -(FFAppState().currencyTextField)),
+                      };
+                      await widget.uncategorized.reference
+                          .update(budgetCategoriesUpdateData);
                       logFirebaseEvent('Button_Backend-Call');
 
                       final budgetCategoriesCreateData =
@@ -137,16 +141,6 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                       await BudgetCategoriesRecord.collection
                           .doc()
                           .set(budgetCategoriesCreateData);
-                      logFirebaseEvent('Button_Backend-Call');
-
-                      final budgetCategoriesUpdateData =
-                          createBudgetCategoriesRecordData(
-                        allocatedAmount: functions.subInt(
-                            widget.budgetAllocatedRemaining,
-                            FFAppState().currencyTextField),
-                      );
-                      await widget.uncategorized.reference
-                          .update(budgetCategoriesUpdateData);
                       logFirebaseEvent('Button_Navigate-Back');
                       Navigator.pop(context);
                     } else {

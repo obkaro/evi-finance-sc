@@ -11,16 +11,10 @@ abstract class BudgetsRecord
   static Serializer<BudgetsRecord> get serializer => _$budgetsRecordSerializer;
 
   @nullable
-  String get budgetName;
-
-  @nullable
   DocumentReference get budgetOwner;
 
   @nullable
   int get budgetAmount;
-
-  @nullable
-  String get budgetDescription;
 
   @nullable
   DateTime get budgetStart;
@@ -30,9 +24,6 @@ abstract class BudgetsRecord
 
   @nullable
   DateTime get budgetDateCreated;
-
-  @nullable
-  BuiltList<DocumentReference> get budgetLinkedAccounts;
 
   @nullable
   BuiltList<DocumentReference> get budgetSubCategories;
@@ -60,10 +51,7 @@ abstract class BudgetsRecord
   DocumentReference get reference;
 
   static void _initializeBuilder(BudgetsRecordBuilder builder) => builder
-    ..budgetName = ''
     ..budgetAmount = 0
-    ..budgetDescription = ''
-    ..budgetLinkedAccounts = ListBuilder()
     ..budgetSubCategories = ListBuilder()
     ..isRecurring = false
     ..budgetID = ''
@@ -92,10 +80,8 @@ abstract class BudgetsRecord
 }
 
 Map<String, dynamic> createBudgetsRecordData({
-  String budgetName,
   DocumentReference budgetOwner,
   int budgetAmount,
-  String budgetDescription,
   DateTime budgetStart,
   DateTime budgetEnd,
   DateTime budgetDateCreated,
@@ -109,14 +95,11 @@ Map<String, dynamic> createBudgetsRecordData({
     serializers.toFirestore(
         BudgetsRecord.serializer,
         BudgetsRecord((b) => b
-          ..budgetName = budgetName
           ..budgetOwner = budgetOwner
           ..budgetAmount = budgetAmount
-          ..budgetDescription = budgetDescription
           ..budgetStart = budgetStart
           ..budgetEnd = budgetEnd
           ..budgetDateCreated = budgetDateCreated
-          ..budgetLinkedAccounts = null
           ..budgetSubCategories = null
           ..isRecurring = isRecurring
           ..uncategorizedLink = uncategorizedLink
