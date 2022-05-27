@@ -163,11 +163,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                         weekStartsMonday: false,
                         onChange: (DateTimeRange newSelectedDate) async {
                           calendarSelectedDay = newSelectedDate;
-                          logFirebaseEvent(
-                              'CREATE_NEW_BUDGET_COMP_Calendar_3ojnshh7_ON_DATE_SELECTED');
                           if ((dropDownValue) == 'Monthly') {
-                            logFirebaseEvent('Calendar_Backend-Call');
-
                             final budgetsUpdateData = createBudgetsRecordData(
                               budgetStart: calendarSelectedDay?.start,
                               budgetEnd: functions.addDaysToDate(
@@ -178,8 +174,6 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                                 .update(budgetsUpdateData);
                           } else {
                             if ((dropDownValue) == 'Weekly') {
-                              logFirebaseEvent('Calendar_Backend-Call');
-
                               final budgetsUpdateData = createBudgetsRecordData(
                                 budgetStart: calendarSelectedDay?.start,
                                 budgetEnd: functions.addDaysToDate(
@@ -189,7 +183,6 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                               await widget.budget.reference
                                   .update(budgetsUpdateData);
                             } else {
-                              logFirebaseEvent('Calendar_Alert-Dialog');
                               await showDialog(
                                 context: context,
                                 builder: (alertDialogContext) {
@@ -231,9 +224,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
               child: FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('CREATE_NEW_BUDGET_COMP_SAVE_BUTTON_ON_TAP');
-                  // Action_CreateBudgetStep1
-                  logFirebaseEvent('Button_Action_CreateBudgetStep1');
+                  // Action_CreateBud
 
                   final budgetsUpdateData = createBudgetsRecordData(
                     budgetOwner: currentUserReference,
@@ -242,7 +233,6 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                     budgetDuration: dropDownValue,
                   );
                   await widget.budget.reference.update(budgetsUpdateData);
-                  logFirebaseEvent('Button_Backend-Call');
 
                   final budgetCategoriesCreateData =
                       createBudgetCategoriesRecordData(
@@ -265,15 +255,12 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                   uncategorized = BudgetCategoriesRecord.getDocumentFromData(
                       budgetCategoriesCreateData,
                       budgetCategoriesRecordReference);
-                  logFirebaseEvent('Button_Backend-Call');
 
                   final usersUpdateData = createUsersRecordData(
                     activeBudget: widget.budget.reference,
                   );
                   await currentUserReference.update(usersUpdateData);
-                  logFirebaseEvent('Button_Navigate-Back');
                   Navigator.pop(context);
-                  logFirebaseEvent('Button_Navigate-To');
                   await Navigator.push(
                     context,
                     MaterialPageRoute(

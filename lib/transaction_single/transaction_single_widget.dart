@@ -28,13 +28,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'TransactionSingle'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<BudgetCategoriesRecord>>(
       stream: queryBudgetCategoriesRecord(
@@ -682,11 +675,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                 child: AuthUserStreamWidget(
                                                   child: FFButtonWidget(
                                                     onPressed: () async {
-                                                      logFirebaseEvent(
-                                                          'TRANSACTION_SINGLE_PAGE_Button_ON_TAP');
                                                       // Action_CategorizeTrans
-                                                      logFirebaseEvent(
-                                                          'Button_Action_CategorizeTrans');
                                                       await showModalBottomSheet(
                                                         isScrollControlled:
                                                             true,
@@ -762,11 +751,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                               Expanded(
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
-                                                    logFirebaseEvent(
-                                                        'TRANSACTION_SINGLE_PAGE_Button_ON_TAP');
                                                     // Action_CategorizeTrans
-                                                    logFirebaseEvent(
-                                                        'Button_Action_CategorizeTrans');
 
                                                     final transactionsUpdateData =
                                                         {
@@ -780,8 +765,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                         .transaction.reference
                                                         .update(
                                                             transactionsUpdateData);
-                                                    logFirebaseEvent(
-                                                        'Button_Backend-Call');
 
                                                     final budgetCategoriesUpdateData =
                                                         {
@@ -796,8 +779,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                         .linkedCategory
                                                         .update(
                                                             budgetCategoriesUpdateData);
-                                                    logFirebaseEvent(
-                                                        'Button_Navigate-Back');
                                                     Navigator.pop(context);
                                                   },
                                                   text: 'Clear Category',

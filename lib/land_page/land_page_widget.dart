@@ -18,12 +18,6 @@ class _LandPageWidgetState extends State<LandPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'LandPage'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -157,17 +151,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                     0, 0, 0, 1),
                                             child: FFButtonWidget(
                                               onPressed: () async {
-                                                logFirebaseEvent(
-                                                    'LAND_PAGE_PAGE_SIGN_IN_WITH_GOOGLE_BUTTON_ON_TAP');
-                                                logFirebaseEvent('Button_Auth');
                                                 final user =
                                                     await signInWithGoogle(
                                                         context);
                                                 if (user == null) {
                                                   return;
                                                 }
-                                                logFirebaseEvent(
-                                                    'Button_Navigate-To');
                                                 await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(

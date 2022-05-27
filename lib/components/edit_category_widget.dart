@@ -137,13 +137,11 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    logFirebaseEvent('EDIT_CATEGORY_COMP_SAVE_BUTTON_ON_TAP');
                     if ((functions.checkEditCatTotal(
                             widget.uncategorized.allocatedAmount,
                             FFAppState().currencyTextField,
                             widget.categoryToEdit.allocatedAmount)) >=
                         0) {
-                      logFirebaseEvent('Button_Custom-Action');
                       await actions.updateCategory(
                         widget.uncategorized,
                         functions.addInt(
@@ -152,7 +150,6 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                                 widget.categoryToEdit.allocatedAmount),
                             FFAppState().currencyTextField),
                       );
-                      logFirebaseEvent('Button_Backend-Call');
 
                       final budgetCategoriesUpdateData =
                           createBudgetCategoriesRecordData(
@@ -161,10 +158,8 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                       );
                       await widget.categoryToEdit.reference
                           .update(budgetCategoriesUpdateData);
-                      logFirebaseEvent('Button_Navigate-Back');
                       Navigator.pop(context);
                     } else {
-                      logFirebaseEvent('Button_Alert-Dialog');
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
@@ -203,8 +198,6 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('EDIT_CATEGORY_COMP_CANCEL_BUTTON_ON_TAP');
-                  logFirebaseEvent('Button_Navigate-Back');
                   Navigator.pop(context);
                 },
                 text: 'Cancel',

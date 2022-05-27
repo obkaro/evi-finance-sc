@@ -28,13 +28,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'ActiveBudget'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -136,9 +129,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                   snapshot.data;
               return FloatingActionButton(
                 onPressed: () async {
-                  logFirebaseEvent(
-                      'ACTIVE_BUDGET_PAGE_FloatingActionButton_7jmbm0bf_ON_TAP');
-                  logFirebaseEvent('FloatingActionButton_Bottom-Sheet');
                   await showModalBottomSheet(
                     isScrollControlled: true,
                     backgroundColor: Colors.transparent,
@@ -644,11 +634,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                 return InkWell(
                                                                   onTap:
                                                                       () async {
-                                                                    logFirebaseEvent(
-                                                                        'ACTIVE_BUDGET_PAGE_Container_w0j70v72_ON_TAP');
                                                                     // Action_ViewSingleCategory
-                                                                    logFirebaseEvent(
-                                                                        'Container_Action_ViewSingleCategory');
                                                                     await Navigator
                                                                         .push(
                                                                       context,
@@ -804,10 +790,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                             snapshot.data;
                                         return InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent(
-                                                'ACTIVE_BUDGET_PAGE_Column_dytmyc70_ON_TAP');
-                                            logFirebaseEvent(
-                                                'Column_Bottom-Sheet');
                                             await showModalBottomSheet(
                                               isScrollControlled: true,
                                               backgroundColor:
@@ -858,10 +840,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                   size: 48,
                                                 ),
                                                 onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'ACTIVE_BUDGET_PAGE_add_rounded_ICON_ON_TAP');
-                                                  logFirebaseEvent(
-                                                      'IconButton_Bottom-Sheet');
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
@@ -905,10 +883,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                     child: AuthUserStreamWidget(
                       child: InkWell(
                         onTap: () async {
-                          logFirebaseEvent(
-                              'ACTIVE_BUDGET_PAGE_Container_q4ihd9jn_ON_TAP');
-                          logFirebaseEvent('Container_Backend-Call');
-
                           final budgetsCreateData = createBudgetsRecordData(
                             budgetDateCreated: getCurrentTimestamp,
                             budgetID: random_data.randomString(
@@ -924,7 +898,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                           await budgetsRecordReference.set(budgetsCreateData);
                           createdBudget = BudgetsRecord.getDocumentFromData(
                               budgetsCreateData, budgetsRecordReference);
-                          logFirebaseEvent('Container_Bottom-Sheet');
                           await showModalBottomSheet(
                             isScrollControlled: true,
                             backgroundColor: Colors.transparent,
@@ -978,10 +951,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                     size: 48,
                                   ),
                                   onPressed: () async {
-                                    logFirebaseEvent(
-                                        'ACTIVE_BUDGET_PAGE_add_rounded_ICON_ON_TAP');
-                                    logFirebaseEvent('IconButton_Backend-Call');
-
                                     final budgetsCreateData =
                                         createBudgetsRecordData(
                                       budgetDateCreated: getCurrentTimestamp,
@@ -1001,7 +970,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                         BudgetsRecord.getDocumentFromData(
                                             budgetsCreateData,
                                             budgetsRecordReference);
-                                    logFirebaseEvent('IconButton_Bottom-Sheet');
                                     await showModalBottomSheet(
                                       isScrollControlled: true,
                                       backgroundColor: Colors.transparent,

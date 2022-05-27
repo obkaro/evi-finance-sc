@@ -37,13 +37,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'AccountSingle'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<BudgetCategoriesRecord>>(
       future: queryBudgetCategoriesRecordOnce(
@@ -392,10 +385,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                         snapshot.data;
                                                     return FFButtonWidget(
                                                       onPressed: () async {
-                                                        logFirebaseEvent(
-                                                            'ACCOUNT_SINGLE_PAGE_UNLINK_BUTTON_ON_TAP');
-                                                        logFirebaseEvent(
-                                                            'Button_Alert-Dialog');
                                                         var confirmDialogResponse =
                                                             await showDialog<
                                                                     bool>(
@@ -429,27 +418,19 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                 ) ??
                                                                 false;
                                                         if (confirmDialogResponse) {
-                                                          logFirebaseEvent(
-                                                              'Button_Custom-Action');
                                                           await actions
                                                               .deleteTransactions(
                                                             buttonTransactionsRecordList
                                                                 .toList(),
                                                           );
-                                                          logFirebaseEvent(
-                                                              'Button_Backend-Call');
                                                           await UnlinkMonoCall
                                                               .call(
                                                             authID: widget
                                                                 .account.authID,
                                                           );
-                                                          logFirebaseEvent(
-                                                              'Button_Backend-Call');
                                                           await widget
                                                               .account.reference
                                                               .delete();
-                                                          logFirebaseEvent(
-                                                              'Button_Navigate-To');
                                                           await Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
@@ -536,13 +517,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                         snapshot.data;
                                                     return FFButtonWidget(
                                                       onPressed: () async {
-                                                        logFirebaseEvent(
-                                                            'ACCOUNT_SINGLE_PAGE_REFRESH_BUTTON_ON_TAP');
                                                         var _shouldSetState =
                                                             false;
                                                         // Action_dataSyncCall
-                                                        logFirebaseEvent(
-                                                            'Button_Action_dataSyncCall');
                                                         dataSyncResponse =
                                                             await DataSyncMonoCall
                                                                 .call(
@@ -550,8 +527,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               .account.authID,
                                                         );
                                                         _shouldSetState = true;
-                                                        logFirebaseEvent(
-                                                            'Button_Update-Local-State');
                                                         setState(() =>
                                                             FFAppState()
                                                                     .dataSyncCode =
@@ -561,8 +536,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                   ''),
                                                               r'''$.code''',
                                                             ).toString());
-                                                        logFirebaseEvent(
-                                                            'Button_Update-Local-State');
                                                         setState(() =>
                                                             FFAppState()
                                                                     .hasNewData =
@@ -576,8 +549,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                 .dataSyncCode) ==
                                                             'REAUTHORISATION_REQUIRED') {
                                                           // Action_ReauthCall
-                                                          logFirebaseEvent(
-                                                              'Button_Action_ReauthCall');
                                                           reauthCode =
                                                               await ReauthMonoCall
                                                                   .call(
@@ -587,8 +558,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                           _shouldSetState =
                                                               true;
                                                           // Action_ReauthAcct
-                                                          logFirebaseEvent(
-                                                              'Button_Action_ReauthAcct');
                                                           await actions
                                                               .flutterMonoReauth(
                                                             context,
@@ -599,8 +568,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               r'''$.token''',
                                                             ).toString(),
                                                           );
-                                                          logFirebaseEvent(
-                                                              'Button_Backend-Call');
                                                           accountResponse =
                                                               await GetAccountInfoCall
                                                                   .call(
@@ -609,8 +576,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                           );
                                                           _shouldSetState =
                                                               true;
-                                                          logFirebaseEvent(
-                                                              'Button_Backend-Call');
                                                           transactionJsonResponse =
                                                               await GetTransactionsCall
                                                                   .call(
@@ -620,8 +585,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                           _shouldSetState =
                                                               true;
                                                           // Action_writeTransactions
-                                                          logFirebaseEvent(
-                                                              'Button_Action_writeTransactions');
                                                           await actions
                                                               .writeTransactions(
                                                             (transactionJsonResponse
@@ -631,8 +594,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             buttonTransactionsRecordList
                                                                 .toList(),
                                                           );
-                                                          logFirebaseEvent(
-                                                              'Button_Backend-Call');
 
                                                           final accountsUpdateData =
                                                               createAccountsRecordData(
@@ -655,8 +616,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               .account.reference
                                                               .update(
                                                                   accountsUpdateData);
-                                                          logFirebaseEvent(
-                                                              'Button_Show-Snack-Bar');
                                                           ScaffoldMessenger.of(
                                                                   context)
                                                               .showSnackBar(
@@ -689,8 +648,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                           if ((FFAppState()
                                                                   .dataSyncCode) ==
                                                               'SYNC_SUCCESSFUL') {
-                                                            logFirebaseEvent(
-                                                                'Button_Backend-Call');
                                                             accountRespons =
                                                                 await GetAccountInfoCall
                                                                     .call(
@@ -700,8 +657,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             );
                                                             _shouldSetState =
                                                                 true;
-                                                            logFirebaseEvent(
-                                                                'Button_Backend-Call');
 
                                                             final accountsUpdateData =
                                                                 createAccountsRecordData(
@@ -726,8 +681,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                 .reference
                                                                 .update(
                                                                     accountsUpdateData);
-                                                            logFirebaseEvent(
-                                                                'Button_Backend-Call');
                                                             transactionJsonRespons =
                                                                 await GetTransactionsCall
                                                                     .call(
@@ -738,8 +691,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             _shouldSetState =
                                                                 true;
                                                             // Action_writeTransactions
-                                                            logFirebaseEvent(
-                                                                'Button_Action_writeTransactions');
                                                             await actions
                                                                 .writeTransactions(
                                                               (transactionJsonRespons
@@ -749,8 +700,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               buttonTransactionsRecordList
                                                                   .toList(),
                                                             );
-                                                            logFirebaseEvent(
-                                                                'Button_Show-Snack-Bar');
                                                             ScaffoldMessenger
                                                                     .of(context)
                                                                 .showSnackBar(
@@ -780,8 +729,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               ),
                                                             );
                                                           } else {
-                                                            logFirebaseEvent(
-                                                                'Button_Show-Snack-Bar');
                                                             ScaffoldMessenger
                                                                     .of(context)
                                                                 .showSnackBar(
@@ -904,10 +851,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                       snapshot.data;
                                                   return FFButtonWidget(
                                                     onPressed: () async {
-                                                      logFirebaseEvent(
-                                                          'ACCOUNT_SINGLE_PAGE_CLEAR_TRANSACTIONS_BUTTON_ON_TAP');
-                                                      logFirebaseEvent(
-                                                          'Button_Custom-Action');
                                                       await actions
                                                           .deleteTransactions(
                                                         buttonTransactionsRecordList
@@ -1024,11 +967,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                             20, 0, 20, 0),
                                         child: InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent(
-                                                'ACCOUNT_SINGLE_PAGE_Container_dn8ucg26_ON_TAP');
                                             // Action_navToTransactionSingle
-                                            logFirebaseEvent(
-                                                'Container_Action_navToTransactionSingle');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -1051,10 +990,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                   .fromSTEB(0, 10, 0, 10),
                                               child: InkWell(
                                                 onTap: () async {
-                                                  logFirebaseEvent(
-                                                      'ACCOUNT_SINGLE_PAGE_Row_6gcmtfuc_ON_TAP');
-                                                  logFirebaseEvent(
-                                                      'Row_Navigate-To');
                                                   await Navigator.push(
                                                     context,
                                                     MaterialPageRoute(

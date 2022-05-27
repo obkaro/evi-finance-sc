@@ -24,12 +24,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Budgets'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -82,10 +76,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                   snapshot.data;
               return FloatingActionButton(
                 onPressed: () async {
-                  logFirebaseEvent(
-                      'BUDGETS_PAGE_FloatingActionButton_4zfjaef1_ON_TAP');
-                  logFirebaseEvent('FloatingActionButton_Backend-Call');
-
                   final budgetsCreateData = createBudgetsRecordData(
                     budgetDateCreated: getCurrentTimestamp,
                     budgetID: random_data.randomString(
@@ -100,7 +90,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                   await budgetsRecordReference.set(budgetsCreateData);
                   createdBudget2 = BudgetsRecord.getDocumentFromData(
                       budgetsCreateData, budgetsRecordReference);
-                  logFirebaseEvent('FloatingActionButton_Bottom-Sheet');
                   await showModalBottomSheet(
                     isScrollControlled: true,
                     backgroundColor: Colors.transparent,
@@ -231,11 +220,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                   snapshot.data;
                                               return InkWell(
                                                 onTap: () async {
-                                                  logFirebaseEvent(
-                                                      'BUDGETS_PAGE_ListTile_ON_TAP');
-                                                  logFirebaseEvent(
-                                                      'ListTile_Backend-Call');
-
                                                   final budgetsUpdateData =
                                                       createBudgetsRecordData(
                                                     lastViewed:
@@ -246,8 +230,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                       .update(
                                                           budgetsUpdateData);
                                                   // Action_BudgetSingle
-                                                  logFirebaseEvent(
-                                                      'ListTile_Action_BudgetSingle');
                                                   await Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
@@ -274,14 +256,10 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                       icon:
                                                           Icons.delete_rounded,
                                                       onTap: () async {
-                                                        logFirebaseEvent(
-                                                            'BUDGETS_PAGE_SlidableActionWidget_38dvfl97_ON_TAP');
                                                         if ((columnBudgetsRecord
                                                                 .reference) ==
                                                             (currentUserDocument
                                                                 ?.activeBudget)) {
-                                                          logFirebaseEvent(
-                                                              'SlidableActionWidget_Alert-Dialog');
                                                           var confirmDialogResponse =
                                                               await showDialog<
                                                                       bool>(
@@ -313,9 +291,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                                   ) ??
                                                                   false;
                                                           if (confirmDialogResponse) {
-                                                            logFirebaseEvent(
-                                                                'SlidableActionWidget_Backend-Call');
-
                                                             final usersUpdateData =
                                                                 {
                                                               'activeBudget':
@@ -328,8 +303,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                           }
                                                         }
                                                         // Action_DeleteBudget
-                                                        logFirebaseEvent(
-                                                            'SlidableActionWidget_Action_DeleteBudget');
                                                         await columnBudgetsRecord
                                                             .reference
                                                             .delete();
@@ -343,11 +316,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                               .tertiaryColor,
                                                       icon: Icons.check_rounded,
                                                       onTap: () async {
-                                                        logFirebaseEvent(
-                                                            'BUDGETS_PAGE_SlidableActionWidget_xms3pwoz_ON_TAP');
-                                                        logFirebaseEvent(
-                                                            'SlidableActionWidget_Backend-Call');
-
                                                         final usersUpdateData =
                                                             createUsersRecordData(
                                                           activeBudget:

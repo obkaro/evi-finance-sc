@@ -60,11 +60,7 @@ class _BudgetOptionsWidgetState extends State<BudgetOptionsWidget> {
                 final listTileBudgetsRecord = snapshot.data;
                 return InkWell(
                   onTap: () async {
-                    logFirebaseEvent(
-                        'BUDGET_OPTIONS_COMP_ListTile_2yu589jn_ON_TAP');
-                    logFirebaseEvent('ListTile_Navigate-Back');
                     Navigator.pop(context);
-                    logFirebaseEvent('ListTile_Bottom-Sheet');
                     await showModalBottomSheet(
                       isScrollControlled: true,
                       backgroundColor: Colors.transparent,
@@ -103,11 +99,7 @@ class _BudgetOptionsWidgetState extends State<BudgetOptionsWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
             child: InkWell(
               onTap: () async {
-                logFirebaseEvent(
-                    'BUDGET_OPTIONS_COMP_ListTile_g0kdaxcf_ON_TAP');
-                logFirebaseEvent('ListTile_Navigate-Back');
                 Navigator.pop(context);
-                logFirebaseEvent('ListTile_Navigate-To');
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -116,9 +108,6 @@ class _BudgetOptionsWidgetState extends State<BudgetOptionsWidget> {
                 );
               },
               onLongPress: () async {
-                logFirebaseEvent(
-                    'BUDGET_OPTIONS_COMP_ListTile_g0kdaxcf_ON_LONG_PRESS');
-                logFirebaseEvent('ListTile_Navigate-To');
                 await Navigator.push(
                   context,
                   MaterialPageRoute(

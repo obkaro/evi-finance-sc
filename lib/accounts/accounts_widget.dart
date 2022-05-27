@@ -20,12 +20,6 @@ class _AccountsWidgetState extends State<AccountsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Accounts'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<AccountsRecord>>(
       stream: queryAccountsRecord(
@@ -124,10 +118,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
-              logFirebaseEvent(
-                  'ACCOUNTS_PAGE_FloatingActionButton_j3kq3zrt_ON_TAP');
               // Action_LinkNewAcct
-              logFirebaseEvent('FloatingActionButton_Action_LinkNewAcct');
               await actions.flutterMono(
                 context,
               );
@@ -187,11 +178,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                       0, 0, 0, 10),
                                   child: InkWell(
                                     onTap: () async {
-                                      logFirebaseEvent(
-                                          'ACCOUNTS_PAGE_Container_tcuae8g2_ON_TAP');
                                       // Action_NavToAcctSingle
-                                      logFirebaseEvent(
-                                          'Container_Action_NavToAcctSingle');
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(

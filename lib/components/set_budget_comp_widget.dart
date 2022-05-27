@@ -130,18 +130,13 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: InkWell(
                           onTap: () async {
-                            logFirebaseEvent(
-                                'SET_BUDGET_COMP_COMP_Container_im933s5w_ON_TAP');
-                            logFirebaseEvent('Container_Widget-Animation');
                             await (animationsMap[
                                         'containerOnActionTriggerAnimation']
                                     .curvedAnimation
                                     .parent as AnimationController)
                                 .forward(from: 0.0);
 
-                            logFirebaseEvent('Container_Navigate-Back');
                             Navigator.pop(context);
-                            logFirebaseEvent('Container_Bottom-Sheet');
                             await showModalBottomSheet(
                               isScrollControlled: true,
                               backgroundColor: Colors.transparent,

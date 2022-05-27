@@ -26,10 +26,7 @@ class _EmptyLinkedAccountsWidgetState extends State<EmptyLinkedAccountsWidget> {
         padding: EdgeInsetsDirectional.fromSTEB(14, 8, 20, 0),
         child: InkWell(
           onTap: () async {
-            logFirebaseEvent(
-                'EMPTY_LINKED_ACCOUNTS_COMP_Column_lmidqi00_ON_TAP');
             // Action_linkAcct
-            logFirebaseEvent('Column_Action_linkAcct');
             await actions.flutterMono(
               context,
             );

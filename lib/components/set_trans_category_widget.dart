@@ -139,16 +139,11 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: InkWell(
                             onTap: () async {
-                              logFirebaseEvent(
-                                  'SET_TRANS_CATEGORY_COMP_Container_7qxcamd9_ON_TAP');
-                              logFirebaseEvent('Container_Widget-Animation');
                               await (animationsMap[
                                           'containerOnActionTriggerAnimation']
                                       .curvedAnimation
                                       .parent as AnimationController)
                                   .forward(from: 0.0);
-
-                              logFirebaseEvent('Container_Backend-Call');
 
                               final transactionsUpdateData =
                                   createTransactionsRecordData(
@@ -158,7 +153,6 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                               );
                               await widget.transaction.reference
                                   .update(transactionsUpdateData);
-                              logFirebaseEvent('Container_Backend-Call');
 
                               final budgetCategoriesUpdateData = {
                                 'linkedTransactions': FieldValue.arrayUnion(
@@ -166,9 +160,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                               };
                               await columnBudgetCategoriesRecord.reference
                                   .update(budgetCategoriesUpdateData);
-                              logFirebaseEvent('Container_Navigate-Back');
                               Navigator.pop(context);
-                              logFirebaseEvent('Container_Navigate-Back');
                               Navigator.pop(context);
                             },
                             child: Container(
