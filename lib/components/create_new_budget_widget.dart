@@ -279,6 +279,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                     MaterialPageRoute(
                       builder: (context) => CreateBudgetCategoriesWidget(
                         createdBudget: widget.budget,
+                        uncategorized: uncategorized,
                       ),
                     ),
                   );
