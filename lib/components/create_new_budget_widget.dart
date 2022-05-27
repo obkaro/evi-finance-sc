@@ -8,6 +8,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
+import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -237,6 +238,13 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                     categoryName: 'Uncategorized',
                     categoryBudget: widget.budget.reference,
                     budgetOwner: currentUserReference,
+                    categoryID: random_data.randomString(
+                      32,
+                      32,
+                      true,
+                      true,
+                      true,
+                    ),
                   );
                   var budgetCategoriesRecordReference =
                       BudgetCategoriesRecord.collection.doc();

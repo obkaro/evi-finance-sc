@@ -109,13 +109,13 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
             data, 'uncategorized', BudgetCategoriesRecord.serializer),
       ),
   'Accounts': (data) async => NavBarPage(initialPage: 'Accounts'),
-  'createBudgetCategories': (data) async => CreateBudgetCategoriesWidget(
-        createdBudget: await getDocumentParameter(
-            data, 'createdBudget', BudgetsRecord.serializer),
-      ),
   'AccountSingle': (data) async => AccountSingleWidget(
         account: await getDocumentParameter(
             data, 'account', AccountsRecord.serializer),
+      ),
+  'createBudgetCategories': (data) async => CreateBudgetCategoriesWidget(
+        createdBudget: await getDocumentParameter(
+            data, 'createdBudget', BudgetsRecord.serializer),
       ),
   'Settings': (data) async => NavBarPage(initialPage: 'Settings'),
   'Admin': (data) async => AdminWidget(),
