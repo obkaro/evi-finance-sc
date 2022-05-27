@@ -231,6 +231,16 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
               child: FFButtonWidget(
                 onPressed: () async {
                   logFirebaseEvent('Button_ON_TAP');
+                  // Action_CreateBudgetStep1
+                  logFirebaseEvent('Button_Action_CreateBudgetStep1');
+
+                  final budgetsUpdateData = createBudgetsRecordData(
+                    budgetOwner: currentUserReference,
+                    budgetAmount: FFAppState().currencyTextField,
+                    isActive: true,
+                    budgetDuration: dropDownValue,
+                  );
+                  await widget.budget.reference.update(budgetsUpdateData);
                   logFirebaseEvent('Button_Backend-Call');
 
                   final budgetCategoriesCreateData =
@@ -245,6 +255,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                       true,
                       true,
                     ),
+                    allocatedAmount: widget.budget.budgetAmount,
                   );
                   var budgetCategoriesRecordReference =
                       BudgetCategoriesRecord.collection.doc();
@@ -253,17 +264,6 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                   uncategorized = BudgetCategoriesRecord.getDocumentFromData(
                       budgetCategoriesCreateData,
                       budgetCategoriesRecordReference);
-                  // Action_CreateBudgetStep1
-                  logFirebaseEvent('Button_Action_CreateBudgetStep1');
-
-                  final budgetsUpdateData = createBudgetsRecordData(
-                    budgetOwner: currentUserReference,
-                    budgetAmount: FFAppState().currencyTextField,
-                    isActive: true,
-                    uncategorizedLink: uncategorized.reference,
-                    budgetDuration: dropDownValue,
-                  );
-                  await widget.budget.reference.update(budgetsUpdateData);
                   logFirebaseEvent('Button_Backend-Call');
 
                   final usersUpdateData = createUsersRecordData(
