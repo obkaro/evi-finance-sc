@@ -23,7 +23,6 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
   void initState() {
     super.initState();
     inputEmailController = TextEditingController();
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'LoginCopy'});
   }
 
   @override
@@ -156,10 +155,6 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                         ),
                                         FFButtonWidget(
                                           onPressed: () async {
-                                            logFirebaseEvent(
-                                                'LOGIN_COPY_PAGE_Button_SignUp_ON_TAP');
-                                            logFirebaseEvent(
-                                                'Button_SignUp_Validate-Form');
                                             if (formKey.currentState == null ||
                                                 !formKey.currentState
                                                     .validate()) {
@@ -167,8 +162,6 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                             }
 
                                             // Action_SignUp
-                                            logFirebaseEvent(
-                                                'Button_SignUp_Action_SignUp');
                                             if (inputEmailController
                                                 .text.isEmpty) {
                                               ScaffoldMessenger.of(context)
@@ -185,8 +178,6 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                               email: inputEmailController.text,
                                               context: context,
                                             );
-                                            logFirebaseEvent(
-                                                'Button_SignUp_Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(

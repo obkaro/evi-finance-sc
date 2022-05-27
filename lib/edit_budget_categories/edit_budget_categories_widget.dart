@@ -37,13 +37,6 @@ class _EditBudgetCategoriesWidgetState
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'editBudgetCategories'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<BudgetCategoriesRecord>>(
       stream: queryBudgetCategoriesRecord(
@@ -228,11 +221,7 @@ class _EditBudgetCategoriesWidgetState
                                                 size: 24,
                                               ),
                                               onPressed: () async {
-                                                logFirebaseEvent(
-                                                    'EDIT_BUDGET_CATEGORIES_PAGE_do_disturb_on_rounded_ICON_ON_TAP');
                                                 // Action_BudgetAmountMinus
-                                                logFirebaseEvent(
-                                                    'IconButton_Action_BudgetAmountMinus');
 
                                                 final budgetsUpdateData = {
                                                   'budgetAmount':
@@ -242,8 +231,6 @@ class _EditBudgetCategoriesWidgetState
                                                 await columnBudgetsRecord
                                                     .reference
                                                     .update(budgetsUpdateData);
-                                                logFirebaseEvent(
-                                                    'IconButton_Backend-Call');
 
                                                 final budgetCategoriesUpdateData =
                                                     {
@@ -259,11 +246,7 @@ class _EditBudgetCategoriesWidgetState
                                             ),
                                             InkWell(
                                               onTap: () async {
-                                                logFirebaseEvent(
-                                                    'EDIT_BUDGET_CATEGORIES_PAGE_Container_xvdtxlwr_ON_TAP');
                                                 // Action_EditBudgetAmount
-                                                logFirebaseEvent(
-                                                    'Container_Action_EditBudgetAmount');
                                                 await showModalBottomSheet(
                                                   isScrollControlled: true,
                                                   backgroundColor:
@@ -322,11 +305,7 @@ class _EditBudgetCategoriesWidgetState
                                                 size: 24,
                                               ),
                                               onPressed: () async {
-                                                logFirebaseEvent(
-                                                    'EDIT_BUDGET_CATEGORIES_PAGE_add_circle_rounded_ICON_ON_TAP');
                                                 // Action_BudgetAmountPlus
-                                                logFirebaseEvent(
-                                                    'IconButton_Action_BudgetAmountPlus');
 
                                                 final budgetsUpdateData = {
                                                   'budgetAmount':
@@ -336,8 +315,6 @@ class _EditBudgetCategoriesWidgetState
                                                 await columnBudgetsRecord
                                                     .reference
                                                     .update(budgetsUpdateData);
-                                                logFirebaseEvent(
-                                                    'IconButton_Backend-Call');
 
                                                 final budgetCategoriesUpdateData =
                                                     {
@@ -468,11 +445,7 @@ class _EditBudgetCategoriesWidgetState
                                                       ),
                                                       child: InkWell(
                                                         onTap: () async {
-                                                          logFirebaseEvent(
-                                                              'EDIT_BUDGET_CATEGORIES_PAGE_Column_qv4ro433_ON_TAP');
                                                           // Action_BSCreateConstCategory
-                                                          logFirebaseEvent(
-                                                              'Column_Action_BSCreateConstCategory');
                                                           await showModalBottomSheet(
                                                             isScrollControlled:
                                                                 true,
@@ -569,11 +542,7 @@ class _EditBudgetCategoriesWidgetState
                                             ),
                                             FFButtonWidget(
                                               onPressed: () async {
-                                                logFirebaseEvent(
-                                                    'EDIT_BUDGET_CATEGORIES_PAGE_CUSTOM_BUTTON_ON_TAP');
                                                 // Action_BSCreateCustomCategory
-                                                logFirebaseEvent(
-                                                    'Button_Action_BSCreateCustomCategory');
                                                 await showModalBottomSheet(
                                                   isScrollControlled: true,
                                                   backgroundColor:
@@ -756,11 +725,7 @@ class _EditBudgetCategoriesWidgetState
                                                                 ),
                                                                 onPressed:
                                                                     () async {
-                                                                  logFirebaseEvent(
-                                                                      'EDIT_BUDGET_CATEGORIES_PAGE_edit_rounded_ICON_ON_TAP');
                                                                   // Action_BSEditCateogoryAmt
-                                                                  logFirebaseEvent(
-                                                                      'IconButton_Action_BSEditCateogoryAmt');
                                                                   await showModalBottomSheet(
                                                                     isScrollControlled:
                                                                         true,
@@ -807,10 +772,6 @@ class _EditBudgetCategoriesWidgetState
                                                                 ),
                                                                 onPressed:
                                                                     () async {
-                                                                  logFirebaseEvent(
-                                                                      'EDIT_BUDGET_CATEGORIES_PAGE_delete_rounded_ICON_ON_TAP');
-                                                                  logFirebaseEvent(
-                                                                      'IconButton_Alert-Dialog');
                                                                   var confirmDialogResponse =
                                                                       await showDialog<
                                                                               bool>(
@@ -836,9 +797,6 @@ class _EditBudgetCategoriesWidgetState
                                                                           ) ??
                                                                           false;
                                                                   if (confirmDialogResponse) {
-                                                                    logFirebaseEvent(
-                                                                        'IconButton_Backend-Call');
-
                                                                     final budgetCategoriesUpdateData =
                                                                         {
                                                                       'allocatedAmount':
@@ -850,8 +808,6 @@ class _EditBudgetCategoriesWidgetState
                                                                         .update(
                                                                             budgetCategoriesUpdateData);
                                                                     // Action_DeleteCategory
-                                                                    logFirebaseEvent(
-                                                                        'IconButton_Action_DeleteCategory');
                                                                     await editExistingCatsItem
                                                                         .reference
                                                                         .delete();
@@ -917,10 +873,6 @@ class _EditBudgetCategoriesWidgetState
                                                     snapshot.data;
                                                 return FFButtonWidget(
                                                   onPressed: () async {
-                                                    logFirebaseEvent(
-                                                        'EDIT_BUDGET_CATEGORIES_PAGE_RESET_BUTTON_ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Button_Alert-Dialog');
                                                     var confirmDialogResponse =
                                                         await showDialog<bool>(
                                                               context: context,
@@ -953,8 +905,6 @@ class _EditBudgetCategoriesWidgetState
                                                             false;
                                                     if (confirmDialogResponse) {
                                                       // Action_ResetCategories
-                                                      logFirebaseEvent(
-                                                          'Button_Action_ResetCategories');
                                                       await actions
                                                           .deleteCategories(
                                                         buttonBudgetCategoriesRecordList
@@ -992,10 +942,6 @@ class _EditBudgetCategoriesWidgetState
                                             ),
                                             FFButtonWidget(
                                               onPressed: () async {
-                                                logFirebaseEvent(
-                                                    'EDIT_BUDGET_CATEGORIES_PAGE_SAVE_BUTTON_ON_TAP');
-                                                logFirebaseEvent(
-                                                    'Button_Show-Snack-Bar');
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
                                                   SnackBar(
@@ -1012,8 +958,6 @@ class _EditBudgetCategoriesWidgetState
                                                         Colors.black,
                                                   ),
                                                 );
-                                                logFirebaseEvent(
-                                                    'Button_Navigate-To');
                                                 await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(

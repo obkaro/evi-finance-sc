@@ -26,8 +26,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
   @override
   void initState() {
     super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'ProfileSettings'});
     textController1 = TextEditingController(text: currentUserDisplayName);
     textController2 = TextEditingController(text: currentUserEmail);
     textController3 = TextEditingController(text: currentPhoneNumber);
@@ -191,15 +189,10 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              logFirebaseEvent(
-                                  'PROFILE_SETTINGS_PAGE_SAVE_BUTTON_ON_TAP');
-                              logFirebaseEvent('Button_Validate-Form');
                               if (formKey.currentState == null ||
                                   !formKey.currentState.validate()) {
                                 return;
                               }
-
-                              logFirebaseEvent('Button_Backend-Call');
 
                               final usersUpdateData = createUsersRecordData(
                                 displayName: textController1.text,
@@ -208,7 +201,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               );
                               await currentUserReference
                                   .update(usersUpdateData);
-                              logFirebaseEvent('Button_Navigate-Back');
                               Navigator.pop(context);
                             },
                             text: 'Save',

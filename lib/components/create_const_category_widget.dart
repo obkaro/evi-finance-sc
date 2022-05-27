@@ -118,19 +118,14 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    logFirebaseEvent(
-                        'CREATE_CONST_CATEGORY_COMP_SAVE_BUTTON_ON_TAP');
                     if ((FFAppState().currencyTextField) <=
                         (widget.uncategorized.allocatedAmount)) {
-                      logFirebaseEvent('Button_Backend-Call');
-
                       final budgetCategoriesUpdateData = {
                         'allocatedAmount': FieldValue.increment(
                             -(FFAppState().currencyTextField)),
                       };
                       await widget.uncategorized.reference
                           .update(budgetCategoriesUpdateData);
-                      logFirebaseEvent('Button_Backend-Call');
 
                       final budgetCategoriesCreateData =
                           createBudgetCategoriesRecordData(
@@ -142,10 +137,8 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                       await BudgetCategoriesRecord.collection
                           .doc()
                           .set(budgetCategoriesCreateData);
-                      logFirebaseEvent('Button_Navigate-Back');
                       Navigator.pop(context);
                     } else {
-                      logFirebaseEvent('Button_Alert-Dialog');
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
@@ -184,9 +177,6 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent(
-                      'CREATE_CONST_CATEGORY_COMP_CANCEL_BUTTON_ON_TAP');
-                  logFirebaseEvent('Button_Navigate-Back');
                   Navigator.pop(context);
                 },
                 text: 'Cancel',

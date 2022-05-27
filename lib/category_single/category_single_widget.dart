@@ -29,13 +29,6 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'CategorySingle'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<TransactionsRecord>>(
       stream: queryTransactionsRecord(
@@ -109,16 +102,11 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                       size: 24,
                     ),
                     onPressed: () async {
-                      logFirebaseEvent(
-                          'CATEGORY_SINGLE_PAGE_link_off_rounded_ICON_ON_TAP');
                       // Action_UnlinkAllTransCategories
-                      logFirebaseEvent(
-                          'IconButton_Action_UnlinkAllTransCategories');
                       await actions.unlinkAllTransCategories(
                         iconButtonTransactionsRecordList.toList(),
                         widget.category,
                       );
-                      logFirebaseEvent('IconButton_Backend-Call');
 
                       final budgetCategoriesUpdateData = {
                         'linkedTransactions': FieldValue.delete(),
@@ -326,11 +314,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                     snapshot.data;
                                                 return InkWell(
                                                   onTap: () async {
-                                                    logFirebaseEvent(
-                                                        'CATEGORY_SINGLE_PAGE_Row_wnn6kijb_ON_TAP');
                                                     // Action_TransactionSingle
-                                                    logFirebaseEvent(
-                                                        'Row_Action_TransactionSingle');
                                                     await Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
@@ -452,10 +436,6 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                       4, 0, 4),
                                                           child: InkWell(
                                                             onTap: () async {
-                                                              logFirebaseEvent(
-                                                                  'CATEGORY_SINGLE_PAGE_Row_hmoxobhz_ON_TAP');
-                                                              logFirebaseEvent(
-                                                                  'Row_Navigate-To');
                                                               await Navigator
                                                                   .push(
                                                                 context,

@@ -19,13 +19,6 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'OnboardingInfo'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -213,9 +206,6 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      logFirebaseEvent(
-                          'ONBOARDING_INFO_PAGE_LET\'S_GO!_BUTTON_ON_TAP');
-                      logFirebaseEvent('Button_Navigate-To');
                       await Navigator.push(
                         context,
                         MaterialPageRoute(

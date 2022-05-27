@@ -161,11 +161,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                         initialDate: widget.budget.budgetStart,
                         onChange: (DateTimeRange newSelectedDate) async {
                           calendarSelectedDay = newSelectedDate;
-                          logFirebaseEvent(
-                              'EDIT_NEW_BUDGET_COMP_Calendar_uwrlahmd_ON_DATE_SELECTED');
                           if ((dropDownValue) == 'Monthly') {
-                            logFirebaseEvent('Calendar_Backend-Call');
-
                             final budgetsUpdateData = createBudgetsRecordData(
                               budgetStart: calendarSelectedDay?.start,
                               budgetEnd: functions.addDaysToDate(
@@ -176,8 +172,6 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                                 .update(budgetsUpdateData);
                           } else {
                             if ((dropDownValue) == 'Weekly') {
-                              logFirebaseEvent('Calendar_Backend-Call');
-
                               final budgetsUpdateData = createBudgetsRecordData(
                                 budgetStart: calendarSelectedDay?.start,
                                 budgetEnd: functions.addDaysToDate(
@@ -187,7 +181,6 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                               await widget.budget.reference
                                   .update(budgetsUpdateData);
                             } else {
-                              logFirebaseEvent('Calendar_Alert-Dialog');
                               await showDialog(
                                 context: context,
                                 builder: (alertDialogContext) {
@@ -262,19 +255,15 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                           : null;
                   return FFButtonWidget(
                     onPressed: () async {
-                      logFirebaseEvent(
-                          'EDIT_NEW_BUDGET_COMP_SAVE_BUTTON_ON_TAP');
                       if ((FFAppState().currencyTextField) >
                           (widget.ccategoriesSum)) {
                         // Action_CreateBudgetStep1
-                        logFirebaseEvent('Button_Action_CreateBudgetStep1');
 
                         final budgetsUpdateData = createBudgetsRecordData(
                           budgetAmount: FFAppState().currencyTextField,
                           budgetDuration: dropDownValue,
                         );
                         await widget.budget.reference.update(budgetsUpdateData);
-                        logFirebaseEvent('Button_Backend-Call');
 
                         final budgetCategoriesUpdateData =
                             createBudgetCategoriesRecordData(
@@ -284,7 +273,6 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                         );
                         await widget.budget.uncategorizedLink
                             .update(budgetCategoriesUpdateData);
-                        logFirebaseEvent('Button_Alert-Dialog');
                         var confirmDialogResponse = await showDialog<bool>(
                               context: context,
                               builder: (alertDialogContext) {
@@ -308,9 +296,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                             ) ??
                             false;
                         if (confirmDialogResponse) {
-                          logFirebaseEvent('Button_Navigate-Back');
                           Navigator.pop(context);
-                          logFirebaseEvent('Button_Navigate-To');
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -321,11 +307,9 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                             ),
                           );
                         } else {
-                          logFirebaseEvent('Button_Navigate-Back');
                           Navigator.pop(context);
                         }
                       } else {
-                        logFirebaseEvent('Button_Alert-Dialog');
                         await showDialog(
                           context: context,
                           builder: (alertDialogContext) {

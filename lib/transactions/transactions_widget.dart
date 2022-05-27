@@ -20,13 +20,6 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'Transactions'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -155,11 +148,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                     columnIndex];
                                             return InkWell(
                                               onTap: () async {
-                                                logFirebaseEvent(
-                                                    'TRANSACTIONS_PAGE_Column_9ojcfsmx_ON_TAP');
                                                 // Action_NavToTransaction
-                                                logFirebaseEvent(
-                                                    'Column_Action_NavToTransaction');
                                                 await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -496,11 +485,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                     columnIndex];
                                             return InkWell(
                                               onTap: () async {
-                                                logFirebaseEvent(
-                                                    'TRANSACTIONS_PAGE_Column_vgsprr4v_ON_TAP');
                                                 // Action_NavToTransaction
-                                                logFirebaseEvent(
-                                                    'Column_Action_NavToTransaction');
                                                 await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(

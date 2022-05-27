@@ -34,7 +34,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     inputUsernameController = TextEditingController();
     inputPasswordController = TextEditingController();
     inputPasswordVisibility = false;
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'SignUp'});
   }
 
   @override
@@ -333,10 +332,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                         ),
                                         FFButtonWidget(
                                           onPressed: () async {
-                                            logFirebaseEvent(
-                                                'SIGN_UP_PAGE_Button_SignUp_ON_TAP');
-                                            logFirebaseEvent(
-                                                'Button_SignUp_Validate-Form');
                                             if (formKey.currentState == null ||
                                                 !formKey.currentState
                                                     .validate()) {
@@ -344,8 +339,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                             }
 
                                             // Action_SignUp
-                                            logFirebaseEvent(
-                                                'Button_SignUp_Action_SignUp');
                                             if (inputPasswordController?.text !=
                                                 inputConfirmPasswordController
                                                     ?.text) {
@@ -380,8 +373,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                 .doc(user.uid)
                                                 .update(usersCreateData);
 
-                                            logFirebaseEvent(
-                                                'Button_SignUp_Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(

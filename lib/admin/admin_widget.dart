@@ -20,12 +20,6 @@ class _AdminWidgetState extends State<AdminWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Admin'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -126,10 +120,6 @@ class _AdminWidgetState extends State<AdminWidget> {
                                               snapshot.data;
                                           return FFButtonWidget(
                                             onPressed: () async {
-                                              logFirebaseEvent(
-                                                  'ADMIN_PAGE_PURGE_TRANSACTIONS_BUTTON_ON_TAP');
-                                              logFirebaseEvent(
-                                                  'Button_Custom-Action');
                                               await actions.deleteTransactions(
                                                 buttonTransactionsRecordList
                                                     .toList(),
@@ -223,10 +213,6 @@ class _AdminWidgetState extends State<AdminWidget> {
                                               snapshot.data;
                                           return FFButtonWidget(
                                             onPressed: () async {
-                                              logFirebaseEvent(
-                                                  'ADMIN_PAGE_PURGE_CATEGORIES_BUTTON_ON_TAP');
-                                              logFirebaseEvent(
-                                                  'Button_Custom-Action');
                                               await actions.deleteCategories(
                                                 buttonBudgetCategoriesRecordList
                                                     .toList(),
@@ -265,9 +251,6 @@ class _AdminWidgetState extends State<AdminWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    logFirebaseEvent(
-                                        'ADMIN_PAGE_LOGOUT_BUTTON_ON_TAP');
-                                    logFirebaseEvent('Button_Auth');
                                     await signOut();
                                     await Navigator.pushAndRemoveUntil(
                                       context,
