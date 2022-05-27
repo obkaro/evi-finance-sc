@@ -15,9 +15,9 @@ export 'category_single/category_single_widget.dart' show CategorySingleWidget;
 export 'edit_budget_categories/edit_budget_categories_widget.dart'
     show EditBudgetCategoriesWidget;
 export 'accounts/accounts_widget.dart' show AccountsWidget;
+export 'account_single/account_single_widget.dart' show AccountSingleWidget;
 export 'create_budget_categories/create_budget_categories_widget.dart'
     show CreateBudgetCategoriesWidget;
-export 'account_single/account_single_widget.dart' show AccountSingleWidget;
 export 'settings/settings_widget.dart' show SettingsWidget;
 export 'admin/admin_widget.dart' show AdminWidget;
 export 'profile_settings/profile_settings_widget.dart'

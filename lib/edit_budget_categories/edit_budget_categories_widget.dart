@@ -14,7 +14,6 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -40,21 +39,6 @@ class _EditBudgetCategoriesWidgetState
   @override
   void initState() {
     super.initState();
-    // On page load action.
-    SchedulerBinding.instance?.addPostFrameCallback((_) async {
-      logFirebaseEvent('editBudgetCategories_ON_PAGE_LOAD');
-      logFirebaseEvent('editBudgetCategories_Backend-Call');
-
-      final budgetCategoriesUpdateData = createBudgetCategoriesRecordData(
-        allocatedAmount: 0,
-      );
-      await widget.uncategorized.reference.update(budgetCategoriesUpdateData);
-      logFirebaseEvent('editBudgetCategories_Backend-Call');
-
-      final budgetsUpdateData = createBudgetsRecordData();
-      await widget.createdBudget.reference.update(budgetsUpdateData);
-    });
-
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'editBudgetCategories'});
   }
