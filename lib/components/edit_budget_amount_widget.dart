@@ -99,7 +99,8 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    logFirebaseEvent('Button_ON_TAP');
+                    logFirebaseEvent(
+                        'EDIT_BUDGET_AMOUNT_COMP_SAVE_BUTTON_ON_TAP');
                     if ((FFAppState().currencyTextField) <=
                         (functions.subInt(widget.categoryTotal,
                             widget.uncategorized.allocatedAmount))) {
@@ -160,7 +161,8 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('Button_ON_TAP');
+                  logFirebaseEvent(
+                      'EDIT_BUDGET_AMOUNT_COMP_CANCEL_BUTTON_ON_TAP');
                   logFirebaseEvent('Button_Navigate-Back');
                   Navigator.pop(context);
                 },

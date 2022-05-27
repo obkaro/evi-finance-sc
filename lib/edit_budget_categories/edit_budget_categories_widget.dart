@@ -229,7 +229,7 @@ class _EditBudgetCategoriesWidgetState
                                               ),
                                               onPressed: () async {
                                                 logFirebaseEvent(
-                                                    'IconButton_ON_TAP');
+                                                    'EDIT_BUDGET_CATEGORIES_PAGE_do_disturb_on_rounded_ICON_ON_TAP');
                                                 // Action_BudgetAmountMinus
                                                 logFirebaseEvent(
                                                     'IconButton_Action_BudgetAmountMinus');
@@ -260,7 +260,7 @@ class _EditBudgetCategoriesWidgetState
                                             InkWell(
                                               onTap: () async {
                                                 logFirebaseEvent(
-                                                    'Container_ON_TAP');
+                                                    'EDIT_BUDGET_CATEGORIES_PAGE_Container_xvdtxlwr_ON_TAP');
                                                 // Action_EditBudgetAmount
                                                 logFirebaseEvent(
                                                     'Container_Action_EditBudgetAmount');
@@ -323,7 +323,7 @@ class _EditBudgetCategoriesWidgetState
                                               ),
                                               onPressed: () async {
                                                 logFirebaseEvent(
-                                                    'IconButton_ON_TAP');
+                                                    'EDIT_BUDGET_CATEGORIES_PAGE_add_circle_rounded_ICON_ON_TAP');
                                                 // Action_BudgetAmountPlus
                                                 logFirebaseEvent(
                                                     'IconButton_Action_BudgetAmountPlus');
@@ -469,7 +469,7 @@ class _EditBudgetCategoriesWidgetState
                                                       child: InkWell(
                                                         onTap: () async {
                                                           logFirebaseEvent(
-                                                              'Column_ON_TAP');
+                                                              'EDIT_BUDGET_CATEGORIES_PAGE_Column_qv4ro433_ON_TAP');
                                                           // Action_BSCreateConstCategory
                                                           logFirebaseEvent(
                                                               'Column_Action_BSCreateConstCategory');
@@ -570,7 +570,7 @@ class _EditBudgetCategoriesWidgetState
                                             FFButtonWidget(
                                               onPressed: () async {
                                                 logFirebaseEvent(
-                                                    'Button_ON_TAP');
+                                                    'EDIT_BUDGET_CATEGORIES_PAGE_CUSTOM_BUTTON_ON_TAP');
                                                 // Action_BSCreateCustomCategory
                                                 logFirebaseEvent(
                                                     'Button_Action_BSCreateCustomCategory');
@@ -757,7 +757,7 @@ class _EditBudgetCategoriesWidgetState
                                                                 onPressed:
                                                                     () async {
                                                                   logFirebaseEvent(
-                                                                      'IconButton_ON_TAP');
+                                                                      'EDIT_BUDGET_CATEGORIES_PAGE_edit_rounded_ICON_ON_TAP');
                                                                   // Action_BSEditCateogoryAmt
                                                                   logFirebaseEvent(
                                                                       'IconButton_Action_BSEditCateogoryAmt');
@@ -808,7 +808,7 @@ class _EditBudgetCategoriesWidgetState
                                                                 onPressed:
                                                                     () async {
                                                                   logFirebaseEvent(
-                                                                      'IconButton_ON_TAP');
+                                                                      'EDIT_BUDGET_CATEGORIES_PAGE_delete_rounded_ICON_ON_TAP');
                                                                   logFirebaseEvent(
                                                                       'IconButton_Alert-Dialog');
                                                                   var confirmDialogResponse =
@@ -918,7 +918,7 @@ class _EditBudgetCategoriesWidgetState
                                                 return FFButtonWidget(
                                                   onPressed: () async {
                                                     logFirebaseEvent(
-                                                        'Button_ON_TAP');
+                                                        'EDIT_BUDGET_CATEGORIES_PAGE_RESET_BUTTON_ON_TAP');
                                                     logFirebaseEvent(
                                                         'Button_Alert-Dialog');
                                                     var confirmDialogResponse =
@@ -993,7 +993,7 @@ class _EditBudgetCategoriesWidgetState
                                             FFButtonWidget(
                                               onPressed: () async {
                                                 logFirebaseEvent(
-                                                    'Button_ON_TAP');
+                                                    'EDIT_BUDGET_CATEGORIES_PAGE_SAVE_BUTTON_ON_TAP');
                                                 logFirebaseEvent(
                                                     'Button_Show-Snack-Bar');
                                                 ScaffoldMessenger.of(context)

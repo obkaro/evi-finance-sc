@@ -120,7 +120,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       children: [
                         InkWell(
                           onTap: () async {
-                            logFirebaseEvent('ListTile_ON_TAP');
+                            logFirebaseEvent(
+                                'SETTINGS_PAGE_ListTile_qqxxabj2_ON_TAP');
                             logFirebaseEvent('ListTile_Navigate-To');
                             await Navigator.push(
                               context,
@@ -160,7 +161,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         ),
                         InkWell(
                           onTap: () async {
-                            logFirebaseEvent('ListTile_ON_TAP');
+                            logFirebaseEvent(
+                                'SETTINGS_PAGE_ListTile_3wei8tcz_ON_TAP');
                             logFirebaseEvent('ListTile_Google-Analytics-Event');
                             logFirebaseEvent('premiumClick');
                           },
@@ -190,7 +192,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         ),
                         InkWell(
                           onTap: () async {
-                            logFirebaseEvent('ListTile_ON_TAP');
+                            logFirebaseEvent(
+                                'SETTINGS_PAGE_ListTile_70fqxdup_ON_TAP');
                             if ((Theme.of(context).brightness ==
                                     Brightness.dark) ==
                                 true) {
@@ -235,7 +238,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         ),
                         InkWell(
                           onTap: () async {
-                            logFirebaseEvent('ListTile_ON_TAP');
+                            logFirebaseEvent(
+                                'SETTINGS_PAGE_ListTile_m9i30zwn_ON_TAP');
                             logFirebaseEvent('ListTile_Launch-U-R-L');
                             await launchURL(
                                 'https://www.evifinance.com/privacy-policy');
@@ -266,7 +270,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         ),
                         InkWell(
                           onTap: () async {
-                            logFirebaseEvent('ListTile_ON_TAP');
+                            logFirebaseEvent(
+                                'SETTINGS_PAGE_ListTile_sqoev60t_ON_TAP');
                             logFirebaseEvent('ListTile_Launch-U-R-L');
                             await launchURL(
                                 'https://www.evifinance.com/general-terms');
@@ -297,12 +302,14 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         ),
                         InkWell(
                           onTap: () async {
-                            logFirebaseEvent('ListTile_ON_TAP');
+                            logFirebaseEvent(
+                                'SETTINGS_PAGE_ListTile_zlwx8mil_ON_TAP');
                             logFirebaseEvent('ListTile_Launch-U-R-L');
                             await launchURL('https://www.evifinance.com');
                           },
                           onLongPress: () async {
-                            logFirebaseEvent('ListTile_ON_LONG_PRESS');
+                            logFirebaseEvent(
+                                'SETTINGS_PAGE_ListTile_zlwx8mil_ON_LONG_PRESS');
                             logFirebaseEvent('ListTile_Navigate-To');
                             await Navigator.push(
                               context,
@@ -337,7 +344,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         ),
                         InkWell(
                           onTap: () async {
-                            logFirebaseEvent('ListTile_ON_TAP');
+                            logFirebaseEvent(
+                                'SETTINGS_PAGE_ListTile_e96bswaa_ON_TAP');
                             logFirebaseEvent('ListTile_Auth');
                             await signOut();
                             await Navigator.pushAndRemoveUntil(
@@ -349,7 +357,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                             );
                           },
                           onLongPress: () async {
-                            logFirebaseEvent('ListTile_ON_LONG_PRESS');
+                            logFirebaseEvent(
+                                'SETTINGS_PAGE_ListTile_e96bswaa_ON_LONG_PRESS');
                             logFirebaseEvent('ListTile_Navigate-To');
                             await Navigator.push(
                               context,

@@ -201,6 +201,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                     () => inputPasswordVisibility =
                                                         !inputPasswordVisibility,
                                                   ),
+                                                  focusNode: FocusNode(
+                                                      skipTraversal: true),
                                                   child: Icon(
                                                     inputPasswordVisibility
                                                         ? Icons
@@ -221,7 +223,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'Button_SignUp_ON_TAP');
+                                                'LOGIN_PAGE_Button_SignUp_ON_TAP');
                                             logFirebaseEvent(
                                                 'Button_SignUp_Validate-Form');
                                             if (formKey.currentState == null ||
@@ -279,7 +281,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'Button_SignUp_ON_TAP');
+                                                'LOGIN_PAGE_Button_SignUp_ON_TAP');
                                             logFirebaseEvent(
                                                 'Button_SignUp_Navigate-To');
                                             await Navigator.push(

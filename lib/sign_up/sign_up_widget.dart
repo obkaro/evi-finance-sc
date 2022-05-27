@@ -251,6 +251,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                     () => inputPasswordVisibility =
                                                         !inputPasswordVisibility,
                                                   ),
+                                                  focusNode: FocusNode(
+                                                      skipTraversal: true),
                                                   child: Icon(
                                                     inputPasswordVisibility
                                                         ? Icons
@@ -310,6 +312,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                     () => inputConfirmPasswordVisibility =
                                                         !inputConfirmPasswordVisibility,
                                                   ),
+                                                  focusNode: FocusNode(
+                                                      skipTraversal: true),
                                                   child: Icon(
                                                     inputConfirmPasswordVisibility
                                                         ? Icons
@@ -330,7 +334,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'Button_SignUp_ON_TAP');
+                                                'SIGN_UP_PAGE_Button_SignUp_ON_TAP');
                                             logFirebaseEvent(
                                                 'Button_SignUp_Validate-Form');
                                             if (formKey.currentState == null ||

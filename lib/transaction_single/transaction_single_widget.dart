@@ -683,7 +683,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                   child: FFButtonWidget(
                                                     onPressed: () async {
                                                       logFirebaseEvent(
-                                                          'Button_ON_TAP');
+                                                          'TRANSACTION_SINGLE_PAGE_Button_ON_TAP');
                                                       // Action_CategorizeTrans
                                                       logFirebaseEvent(
                                                           'Button_Action_CategorizeTrans');
@@ -763,7 +763,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
                                                     logFirebaseEvent(
-                                                        'Button_ON_TAP');
+                                                        'TRANSACTION_SINGLE_PAGE_Button_ON_TAP');
                                                     // Action_CategorizeTrans
                                                     logFirebaseEvent(
                                                         'Button_Action_CategorizeTrans');

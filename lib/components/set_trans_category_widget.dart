@@ -139,7 +139,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: InkWell(
                             onTap: () async {
-                              logFirebaseEvent('Container_ON_TAP');
+                              logFirebaseEvent(
+                                  'SET_TRANS_CATEGORY_COMP_Container_7qxcamd9_ON_TAP');
                               logFirebaseEvent('Container_Widget-Animation');
                               await (animationsMap[
                                           'containerOnActionTriggerAnimation']

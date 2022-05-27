@@ -63,7 +63,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -161,14 +161,15 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                         initialDate: widget.budget.budgetStart,
                         onChange: (DateTimeRange newSelectedDate) async {
                           calendarSelectedDay = newSelectedDate;
-                          logFirebaseEvent('Calendar_ON_DATE_SELECTED');
+                          logFirebaseEvent(
+                              'EDIT_NEW_BUDGET_COMP_Calendar_uwrlahmd_ON_DATE_SELECTED');
                           if ((dropDownValue) == 'Monthly') {
                             logFirebaseEvent('Calendar_Backend-Call');
 
                             final budgetsUpdateData = createBudgetsRecordData(
                               budgetStart: calendarSelectedDay?.start,
                               budgetEnd: functions.addDaysToDate(
-                                  calendarSelectedDay?.end, 30),
+                                  calendarSelectedDay.end, 30),
                               budgetDuration: dropDownValue,
                             );
                             await widget.budget.reference
@@ -180,7 +181,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                               final budgetsUpdateData = createBudgetsRecordData(
                                 budgetStart: calendarSelectedDay?.start,
                                 budgetEnd: functions.addDaysToDate(
-                                    calendarSelectedDay?.end, 7),
+                                    calendarSelectedDay.end, 7),
                                 budgetDuration: dropDownValue,
                               );
                               await widget.budget.reference
@@ -261,7 +262,8 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                           : null;
                   return FFButtonWidget(
                     onPressed: () async {
-                      logFirebaseEvent('Button_ON_TAP');
+                      logFirebaseEvent(
+                          'EDIT_NEW_BUDGET_COMP_SAVE_BUTTON_ON_TAP');
                       if ((FFAppState().currencyTextField) >
                           (widget.ccategoriesSum)) {
                         // Action_CreateBudgetStep1

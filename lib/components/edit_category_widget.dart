@@ -137,7 +137,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    logFirebaseEvent('Button_ON_TAP');
+                    logFirebaseEvent('EDIT_CATEGORY_COMP_SAVE_BUTTON_ON_TAP');
                     if ((functions.checkEditCatTotal(
                             widget.uncategorized.allocatedAmount,
                             FFAppState().currencyTextField,
@@ -203,7 +203,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('Button_ON_TAP');
+                  logFirebaseEvent('EDIT_CATEGORY_COMP_CANCEL_BUTTON_ON_TAP');
                   logFirebaseEvent('Button_Navigate-Back');
                   Navigator.pop(context);
                 },

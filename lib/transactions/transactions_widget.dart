@@ -156,7 +156,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                             return InkWell(
                                               onTap: () async {
                                                 logFirebaseEvent(
-                                                    'Column_ON_TAP');
+                                                    'TRANSACTIONS_PAGE_Column_9ojcfsmx_ON_TAP');
                                                 // Action_NavToTransaction
                                                 logFirebaseEvent(
                                                     'Column_Action_NavToTransaction');
@@ -497,7 +497,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                             return InkWell(
                                               onTap: () async {
                                                 logFirebaseEvent(
-                                                    'Column_ON_TAP');
+                                                    'TRANSACTIONS_PAGE_Column_vgsprr4v_ON_TAP');
                                                 // Action_NavToTransaction
                                                 logFirebaseEvent(
                                                     'Column_Action_NavToTransaction');

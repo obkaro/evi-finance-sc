@@ -111,10 +111,10 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                 height: 55,
                 textStyle: FlutterFlowTheme.of(context).bodyText1.override(
                       fontFamily: 'Source Sans Pro',
-                      color: Colors.black,
+                      color: FlutterFlowTheme.of(context).primaryText,
                     ),
                 hintText: 'Please select...',
-                fillColor: Colors.white,
+                fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                 elevation: 2,
                 borderColor: Colors.transparent,
                 borderWidth: 0,
@@ -163,14 +163,15 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                         weekStartsMonday: false,
                         onChange: (DateTimeRange newSelectedDate) async {
                           calendarSelectedDay = newSelectedDate;
-                          logFirebaseEvent('Calendar_ON_DATE_SELECTED');
+                          logFirebaseEvent(
+                              'CREATE_NEW_BUDGET_COMP_Calendar_3ojnshh7_ON_DATE_SELECTED');
                           if ((dropDownValue) == 'Monthly') {
                             logFirebaseEvent('Calendar_Backend-Call');
 
                             final budgetsUpdateData = createBudgetsRecordData(
                               budgetStart: calendarSelectedDay?.start,
                               budgetEnd: functions.addDaysToDate(
-                                  calendarSelectedDay?.end, 30),
+                                  calendarSelectedDay.end, 30),
                               budgetDuration: dropDownValue,
                             );
                             await widget.budget.reference
@@ -182,7 +183,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                               final budgetsUpdateData = createBudgetsRecordData(
                                 budgetStart: calendarSelectedDay?.start,
                                 budgetEnd: functions.addDaysToDate(
-                                    calendarSelectedDay?.end, 7),
+                                    calendarSelectedDay.end, 7),
                                 budgetDuration: dropDownValue,
                               );
                               await widget.budget.reference
@@ -230,7 +231,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
               child: FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('Button_ON_TAP');
+                  logFirebaseEvent('CREATE_NEW_BUDGET_COMP_SAVE_BUTTON_ON_TAP');
                   // Action_CreateBudgetStep1
                   logFirebaseEvent('Button_Action_CreateBudgetStep1');
 
@@ -278,6 +279,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                     MaterialPageRoute(
                       builder: (context) => CreateBudgetCategoriesWidget(
                         createdBudget: widget.budget,
+                        uncategorized: uncategorized,
                       ),
                     ),
                   );

@@ -134,7 +134,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       ),
                       InkWell(
                         onTap: () async {
-                          logFirebaseEvent('Text_ON_TAP');
+                          logFirebaseEvent(
+                              'DASHBOARD_PAGE_Text_cgnbwaex_ON_TAP');
                           logFirebaseEvent('Text_Navigate-To');
                           await Navigator.push(
                             context,
@@ -201,7 +202,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                   EdgeInsetsDirectional.fromSTEB(10, 10, 0, 10),
                               child: InkWell(
                                 onTap: () async {
-                                  logFirebaseEvent('Container_ON_TAP');
+                                  logFirebaseEvent(
+                                      'DASHBOARD_PAGE_Container_gw8cyv8f_ON_TAP');
                                   logFirebaseEvent('Container_Navigate-To');
                                   await Navigator.push(
                                     context,
@@ -349,7 +351,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           ),
                           InkWell(
                             onTap: () async {
-                              logFirebaseEvent('Text_ON_TAP');
+                              logFirebaseEvent(
+                                  'DASHBOARD_PAGE_Text_ww21f4gs_ON_TAP');
                               logFirebaseEvent('Text_Navigate-To');
                               await Navigator.push(
                                 context,
@@ -435,7 +438,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                     snapshot.data;
                                 return InkWell(
                                   onTap: () async {
-                                    logFirebaseEvent('Container_ON_TAP');
+                                    logFirebaseEvent(
+                                        'DASHBOARD_PAGE_Container_f5qboylq_ON_TAP');
                                     logFirebaseEvent('Container_Navigate-To');
                                     await Navigator.push(
                                       context,
@@ -578,7 +582,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       ),
                       InkWell(
                         onTap: () async {
-                          logFirebaseEvent('Text_ON_TAP');
+                          logFirebaseEvent(
+                              'DASHBOARD_PAGE_Text_q1jajvil_ON_TAP');
                           logFirebaseEvent('Text_Navigate-To');
                           await Navigator.push(
                             context,
@@ -671,7 +676,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                         final rowAccountsRecord = snapshot.data;
                                         return InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Row_ON_TAP');
+                                            logFirebaseEvent(
+                                                'DASHBOARD_PAGE_Row_97wgvmnf_ON_TAP');
                                             // Action_TransactionSingle
                                             logFirebaseEvent(
                                                 'Row_Action_TransactionSingle');
@@ -783,7 +789,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                   child: InkWell(
                                                     onTap: () async {
                                                       logFirebaseEvent(
-                                                          'Row_ON_TAP');
+                                                          'DASHBOARD_PAGE_Row_643o2eiz_ON_TAP');
                                                       logFirebaseEvent(
                                                           'Row_Navigate-To');
                                                       await Navigator.push(
