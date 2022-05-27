@@ -157,7 +157,7 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
-                                                'Button_SignUp_ON_TAP');
+                                                'LOGIN_COPY_PAGE_Button_SignUp_ON_TAP');
                                             logFirebaseEvent(
                                                 'Button_SignUp_Validate-Form');
                                             if (formKey.currentState == null ||

@@ -33,7 +33,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
     super.initState();
     // On page load action.
     SchedulerBinding.instance?.addPostFrameCallback((_) async {
-      logFirebaseEvent('BudgetSingle_ON_PAGE_LOAD');
+      logFirebaseEvent('BUDGET_SINGLE_PAGE_BudgetSingle_ON_PAGE_LOAD');
       // Action_UpdateUncategorized
       logFirebaseEvent('BudgetSingle_Action_UpdateUncategorized');
 
@@ -487,7 +487,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                           return InkWell(
                                             onTap: () async {
                                               logFirebaseEvent(
-                                                  'Container_ON_TAP');
+                                                  'BUDGET_SINGLE_PAGE_Container_d69rfexw_ON_TAP');
                                               // Action_ViewSingleCategory
                                               logFirebaseEvent(
                                                   'Container_Action_ViewSingleCategory');

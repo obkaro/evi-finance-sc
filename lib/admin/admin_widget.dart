@@ -126,7 +126,8 @@ class _AdminWidgetState extends State<AdminWidget> {
                                               snapshot.data;
                                           return FFButtonWidget(
                                             onPressed: () async {
-                                              logFirebaseEvent('Button_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'ADMIN_PAGE_PURGE_TRANSACTIONS_BUTTON_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_Custom-Action');
                                               await actions.deleteTransactions(
@@ -222,7 +223,8 @@ class _AdminWidgetState extends State<AdminWidget> {
                                               snapshot.data;
                                           return FFButtonWidget(
                                             onPressed: () async {
-                                              logFirebaseEvent('Button_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'ADMIN_PAGE_PURGE_CATEGORIES_BUTTON_ON_TAP');
                                               logFirebaseEvent(
                                                   'Button_Custom-Action');
                                               await actions.deleteCategories(
@@ -263,7 +265,8 @@ class _AdminWidgetState extends State<AdminWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    logFirebaseEvent('Button_ON_TAP');
+                                    logFirebaseEvent(
+                                        'ADMIN_PAGE_LOGOUT_BUTTON_ON_TAP');
                                     logFirebaseEvent('Button_Auth');
                                     await signOut();
                                     await Navigator.pushAndRemoveUntil(

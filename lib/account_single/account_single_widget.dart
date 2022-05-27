@@ -393,7 +393,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                     return FFButtonWidget(
                                                       onPressed: () async {
                                                         logFirebaseEvent(
-                                                            'Button_ON_TAP');
+                                                            'ACCOUNT_SINGLE_PAGE_UNLINK_BUTTON_ON_TAP');
                                                         logFirebaseEvent(
                                                             'Button_Alert-Dialog');
                                                         var confirmDialogResponse =
@@ -537,7 +537,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                     return FFButtonWidget(
                                                       onPressed: () async {
                                                         logFirebaseEvent(
-                                                            'Button_ON_TAP');
+                                                            'ACCOUNT_SINGLE_PAGE_REFRESH_BUTTON_ON_TAP');
                                                         var _shouldSetState =
                                                             false;
                                                         // Action_dataSyncCall
@@ -905,7 +905,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                   return FFButtonWidget(
                                                     onPressed: () async {
                                                       logFirebaseEvent(
-                                                          'Button_ON_TAP');
+                                                          'ACCOUNT_SINGLE_PAGE_CLEAR_TRANSACTIONS_BUTTON_ON_TAP');
                                                       logFirebaseEvent(
                                                           'Button_Custom-Action');
                                                       await actions
@@ -1025,7 +1025,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                         child: InkWell(
                                           onTap: () async {
                                             logFirebaseEvent(
-                                                'Container_ON_TAP');
+                                                'ACCOUNT_SINGLE_PAGE_Container_dn8ucg26_ON_TAP');
                                             // Action_navToTransactionSingle
                                             logFirebaseEvent(
                                                 'Container_Action_navToTransactionSingle');
@@ -1052,7 +1052,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                               child: InkWell(
                                                 onTap: () async {
                                                   logFirebaseEvent(
-                                                      'Row_ON_TAP');
+                                                      'ACCOUNT_SINGLE_PAGE_Row_6gcmtfuc_ON_TAP');
                                                   logFirebaseEvent(
                                                       'Row_Navigate-To');
                                                   await Navigator.push(

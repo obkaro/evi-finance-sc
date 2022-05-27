@@ -130,7 +130,8 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: InkWell(
                           onTap: () async {
-                            logFirebaseEvent('Container_ON_TAP');
+                            logFirebaseEvent(
+                                'SET_BUDGET_COMP_COMP_Container_im933s5w_ON_TAP');
                             logFirebaseEvent('Container_Widget-Animation');
                             await (animationsMap[
                                         'containerOnActionTriggerAnimation']

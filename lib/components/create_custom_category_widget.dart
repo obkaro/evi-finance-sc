@@ -132,7 +132,8 @@ class _CreateCustomCategoryWidgetState
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    logFirebaseEvent('Button_ON_TAP');
+                    logFirebaseEvent(
+                        'CREATE_CUSTOM_CATEGORY_COMP_SAVE_BUTTON_ON_TAP');
                     if ((FFAppState().currencyTextField) <=
                         (widget.uncategorized.allocatedAmount)) {
                       logFirebaseEvent('Button_Backend-Call');
@@ -197,7 +198,8 @@ class _CreateCustomCategoryWidgetState
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('Button_ON_TAP');
+                  logFirebaseEvent(
+                      'CREATE_CUSTOM_CATEGORY_COMP_CANCEL_BUTTON_ON_TAP');
                   logFirebaseEvent('Button_Navigate-Back');
                   Navigator.pop(context);
                 },

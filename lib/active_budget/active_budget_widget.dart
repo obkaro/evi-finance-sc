@@ -136,7 +136,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                   snapshot.data;
               return FloatingActionButton(
                 onPressed: () async {
-                  logFirebaseEvent('FloatingActionButton_ON_TAP');
+                  logFirebaseEvent(
+                      'ACTIVE_BUDGET_PAGE_FloatingActionButton_7jmbm0bf_ON_TAP');
                   logFirebaseEvent('FloatingActionButton_Bottom-Sheet');
                   await showModalBottomSheet(
                     isScrollControlled: true,
@@ -644,7 +645,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                   onTap:
                                                                       () async {
                                                                     logFirebaseEvent(
-                                                                        'Container_ON_TAP');
+                                                                        'ACTIVE_BUDGET_PAGE_Container_w0j70v72_ON_TAP');
                                                                     // Action_ViewSingleCategory
                                                                     logFirebaseEvent(
                                                                         'Container_Action_ViewSingleCategory');
@@ -803,7 +804,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                             snapshot.data;
                                         return InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Column_ON_TAP');
+                                            logFirebaseEvent(
+                                                'ACTIVE_BUDGET_PAGE_Column_dytmyc70_ON_TAP');
                                             logFirebaseEvent(
                                                 'Column_Bottom-Sheet');
                                             await showModalBottomSheet(
@@ -857,7 +859,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                 ),
                                                 onPressed: () async {
                                                   logFirebaseEvent(
-                                                      'IconButton_ON_TAP');
+                                                      'ACTIVE_BUDGET_PAGE_add_rounded_ICON_ON_TAP');
                                                   logFirebaseEvent(
                                                       'IconButton_Bottom-Sheet');
                                                   await showModalBottomSheet(
@@ -903,7 +905,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                     child: AuthUserStreamWidget(
                       child: InkWell(
                         onTap: () async {
-                          logFirebaseEvent('Container_ON_TAP');
+                          logFirebaseEvent(
+                              'ACTIVE_BUDGET_PAGE_Container_q4ihd9jn_ON_TAP');
                           logFirebaseEvent('Container_Backend-Call');
 
                           final budgetsCreateData = createBudgetsRecordData(
@@ -975,7 +978,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                     size: 48,
                                   ),
                                   onPressed: () async {
-                                    logFirebaseEvent('IconButton_ON_TAP');
+                                    logFirebaseEvent(
+                                        'ACTIVE_BUDGET_PAGE_add_rounded_ICON_ON_TAP');
                                     logFirebaseEvent('IconButton_Backend-Call');
 
                                     final budgetsCreateData =

@@ -191,7 +191,8 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              logFirebaseEvent('Button_ON_TAP');
+                              logFirebaseEvent(
+                                  'PROFILE_SETTINGS_PAGE_SAVE_BUTTON_ON_TAP');
                               logFirebaseEvent('Button_Validate-Form');
                               if (formKey.currentState == null ||
                                   !formKey.currentState.validate()) {

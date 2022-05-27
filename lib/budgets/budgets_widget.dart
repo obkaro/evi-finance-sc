@@ -82,7 +82,8 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                   snapshot.data;
               return FloatingActionButton(
                 onPressed: () async {
-                  logFirebaseEvent('FloatingActionButton_ON_TAP');
+                  logFirebaseEvent(
+                      'BUDGETS_PAGE_FloatingActionButton_4zfjaef1_ON_TAP');
                   logFirebaseEvent('FloatingActionButton_Backend-Call');
 
                   final budgetsCreateData = createBudgetsRecordData(
@@ -231,7 +232,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                               return InkWell(
                                                 onTap: () async {
                                                   logFirebaseEvent(
-                                                      'ListTile_ON_TAP');
+                                                      'BUDGETS_PAGE_ListTile_ON_TAP');
                                                   logFirebaseEvent(
                                                       'ListTile_Backend-Call');
 
@@ -274,7 +275,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                           Icons.delete_rounded,
                                                       onTap: () async {
                                                         logFirebaseEvent(
-                                                            'SlidableActionWidget_ON_TAP');
+                                                            'BUDGETS_PAGE_SlidableActionWidget_38dvfl97_ON_TAP');
                                                         if ((columnBudgetsRecord
                                                                 .reference) ==
                                                             (currentUserDocument
@@ -343,7 +344,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                       icon: Icons.check_rounded,
                                                       onTap: () async {
                                                         logFirebaseEvent(
-                                                            'SlidableActionWidget_ON_TAP');
+                                                            'BUDGETS_PAGE_SlidableActionWidget_xms3pwoz_ON_TAP');
                                                         logFirebaseEvent(
                                                             'SlidableActionWidget_Backend-Call');
 

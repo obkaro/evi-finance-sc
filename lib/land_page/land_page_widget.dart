@@ -158,7 +158,7 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                             child: FFButtonWidget(
                                               onPressed: () async {
                                                 logFirebaseEvent(
-                                                    'Button_ON_TAP');
+                                                    'LAND_PAGE_PAGE_SIGN_IN_WITH_GOOGLE_BUTTON_ON_TAP');
                                                 logFirebaseEvent('Button_Auth');
                                                 final user =
                                                     await signInWithGoogle(
