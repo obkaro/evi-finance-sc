@@ -116,6 +116,8 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'createBudgetCategories': (data) async => CreateBudgetCategoriesWidget(
         createdBudget: await getDocumentParameter(
             data, 'createdBudget', BudgetsRecord.serializer),
+        uncategorized: await getDocumentParameter(
+            data, 'uncategorized', BudgetCategoriesRecord.serializer),
       ),
   'Settings': (data) async => NavBarPage(initialPage: 'Settings'),
   'Admin': (data) async => AdminWidget(),

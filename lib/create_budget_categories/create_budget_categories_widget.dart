@@ -22,9 +22,11 @@ class CreateBudgetCategoriesWidget extends StatefulWidget {
   const CreateBudgetCategoriesWidget({
     Key key,
     this.createdBudget,
+    this.uncategorized,
   }) : super(key: key);
 
   final BudgetsRecord createdBudget;
+  final BudgetCategoriesRecord uncategorized;
 
   @override
   _CreateBudgetCategoriesWidgetState createState() =>
@@ -43,11 +45,10 @@ class _CreateBudgetCategoriesWidgetState
       logFirebaseEvent('createBudgetCategories_ON_PAGE_LOAD');
       logFirebaseEvent('createBudgetCategories_Backend-Call');
 
-      final budgetCategoriesUpdateData = createBudgetCategoriesRecordData(
-        allocatedAmount: widget.createdBudget.budgetAmount,
+      final budgetsUpdateData = createBudgetsRecordData(
+        uncategorizedLink: widget.uncategorized.reference,
       );
-      await widget.createdBudget.uncategorizedLink
-          .update(budgetCategoriesUpdateData);
+      await widget.createdBudget.reference.update(budgetsUpdateData);
     });
 
     logFirebaseEvent('screen_view',
