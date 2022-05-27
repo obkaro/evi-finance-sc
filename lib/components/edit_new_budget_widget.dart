@@ -272,6 +272,16 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                           budgetDuration: dropDownValue,
                         );
                         await widget.budget.reference.update(budgetsUpdateData);
+                        logFirebaseEvent('Button_Backend-Call');
+
+                        final budgetCategoriesUpdateData =
+                            createBudgetCategoriesRecordData(
+                          allocatedAmount: functions.subInt(
+                              widget.budget.budgetAmount,
+                              widget.ccategoriesSum),
+                        );
+                        await widget.budget.uncategorizedLink
+                            .update(budgetCategoriesUpdateData);
                         logFirebaseEvent('Button_Alert-Dialog');
                         var confirmDialogResponse = await showDialog<bool>(
                               context: context,
