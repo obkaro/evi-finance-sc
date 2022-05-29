@@ -15,12 +15,10 @@ class EditBudgetAmountWidget extends StatefulWidget {
     Key key,
     this.budget,
     this.categoryTotal,
-    this.uncategorized,
   }) : super(key: key);
 
   final BudgetsRecord budget;
   final int categoryTotal;
-  final BudgetCategoriesRecord uncategorized;
 
   @override
   _EditBudgetAmountWidgetState createState() => _EditBudgetAmountWidgetState();
@@ -101,19 +99,14 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                   onPressed: () async {
                     if ((FFAppState().currencyTextField) <=
                         (functions.subInt(widget.categoryTotal,
-                            widget.uncategorized.allocatedAmount))) {
+                            widget.budget.unallocatedAmount))) {
                       final budgetsUpdateData = createBudgetsRecordData(
                         budgetAmount: FFAppState().currencyTextField,
+                        unallocatedAmount: functions.subInt(
+                            FFAppState().currencyTextField,
+                            widget.categoryTotal),
                       );
                       await widget.budget.reference.update(budgetsUpdateData);
-
-                      final budgetCategoriesUpdateData =
-                          createBudgetCategoriesRecordData(
-                        allocatedAmount: functions.subInt(
-                            widget.budget.budgetAmount, widget.categoryTotal),
-                      );
-                      await widget.uncategorized.reference
-                          .update(budgetCategoriesUpdateData);
                       Navigator.pop(context);
                     } else {
                       await showDialog(

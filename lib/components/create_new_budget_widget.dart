@@ -8,7 +8,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
-import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -27,7 +26,6 @@ class CreateNewBudgetWidget extends StatefulWidget {
 }
 
 class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
-  BudgetCategoriesRecord uncategorized;
   DateTimeRange calendarSelectedDay;
   String dropDownValue;
 
@@ -231,47 +229,33 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                     budgetAmount: FFAppState().currencyTextField,
                     isActive: true,
                     budgetDuration: dropDownValue,
+                    unallocatedAmount: FFAppState().currencyTextField,
                   );
                   await widget.budget.reference.update(budgetsUpdateData);
-
-                  final budgetCategoriesCreateData =
-                      createBudgetCategoriesRecordData(
-                    categoryName: 'Uncategorized',
-                    categoryBudget: widget.budget.reference,
-                    budgetOwner: currentUserReference,
-                    categoryID: random_data.randomString(
-                      32,
-                      32,
-                      true,
-                      true,
-                      true,
-                    ),
-                    allocatedAmount: widget.budget.budgetAmount,
-                  );
-                  var budgetCategoriesRecordReference =
-                      BudgetCategoriesRecord.collection.doc();
-                  await budgetCategoriesRecordReference
-                      .set(budgetCategoriesCreateData);
-                  uncategorized = BudgetCategoriesRecord.getDocumentFromData(
-                      budgetCategoriesCreateData,
-                      budgetCategoriesRecordReference);
 
                   final usersUpdateData = createUsersRecordData(
                     activeBudget: widget.budget.reference,
                   );
                   await currentUserReference.update(usersUpdateData);
+
+                  final budgetCategoriesCreateData =
+                      createBudgetCategoriesRecordData(
+                    categoryName: 'dummy',
+                    categoryBudget: widget.budget.reference,
+                    allocatedAmount: 0,
+                  );
+                  await BudgetCategoriesRecord.collection
+                      .doc()
+                      .set(budgetCategoriesCreateData);
                   Navigator.pop(context);
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => CreateBudgetCategoriesWidget(
                         createdBudget: widget.budget,
-                        uncategorized: uncategorized,
                       ),
                     ),
                   );
-
-                  setState(() {});
                 },
                 text: 'Save',
                 options: FFButtonOptions(

@@ -26,13 +26,7 @@ abstract class BudgetsRecord
   DateTime get budgetDateCreated;
 
   @nullable
-  BuiltList<DocumentReference> get budgetSubCategories;
-
-  @nullable
   bool get isRecurring;
-
-  @nullable
-  DocumentReference get uncategorizedLink;
 
   @nullable
   String get budgetID;
@@ -47,16 +41,19 @@ abstract class BudgetsRecord
   String get budgetDuration;
 
   @nullable
+  int get unallocatedAmount;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(BudgetsRecordBuilder builder) => builder
     ..budgetAmount = 0
-    ..budgetSubCategories = ListBuilder()
     ..isRecurring = false
     ..budgetID = ''
     ..isActive = false
-    ..budgetDuration = '';
+    ..budgetDuration = ''
+    ..unallocatedAmount = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('budgets');
@@ -86,11 +83,11 @@ Map<String, dynamic> createBudgetsRecordData({
   DateTime budgetEnd,
   DateTime budgetDateCreated,
   bool isRecurring,
-  DocumentReference uncategorizedLink,
   String budgetID,
   DateTime lastViewed,
   bool isActive,
   String budgetDuration,
+  int unallocatedAmount,
 }) =>
     serializers.toFirestore(
         BudgetsRecord.serializer,
@@ -100,10 +97,9 @@ Map<String, dynamic> createBudgetsRecordData({
           ..budgetStart = budgetStart
           ..budgetEnd = budgetEnd
           ..budgetDateCreated = budgetDateCreated
-          ..budgetSubCategories = null
           ..isRecurring = isRecurring
-          ..uncategorizedLink = uncategorizedLink
           ..budgetID = budgetID
           ..lastViewed = lastViewed
           ..isActive = isActive
-          ..budgetDuration = budgetDuration));
+          ..budgetDuration = budgetDuration
+          ..unallocatedAmount = unallocatedAmount));

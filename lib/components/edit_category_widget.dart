@@ -3,7 +3,6 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,13 +15,11 @@ class EditCategoryWidget extends StatefulWidget {
     Key key,
     this.budget,
     this.categoryToEdit,
-    this.uncategorized,
     this.categoriesTotal,
   }) : super(key: key);
 
   final BudgetsRecord budget;
   final BudgetCategoriesRecord categoryToEdit;
-  final BudgetCategoriesRecord uncategorized;
   final int categoriesTotal;
 
   @override
@@ -87,7 +84,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '(Unallocated: ${functions.formatBudgetCurrency(widget.uncategorized.allocatedAmount)})',
+                    '(Unallocated: ${functions.formatBudgetCurrency(widget.budget.unallocatedAmount)})',
                     style: FlutterFlowTheme.of(context).subtitle2.override(
                           fontFamily: 'Source Sans Pro',
                           color: FlutterFlowTheme.of(context).secondaryText,
@@ -138,18 +135,17 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                 child: FFButtonWidget(
                   onPressed: () async {
                     if ((functions.checkEditCatTotal(
-                            widget.uncategorized.allocatedAmount,
+                            widget.budget.unallocatedAmount,
                             FFAppState().currencyTextField,
                             widget.categoryToEdit.allocatedAmount)) >=
                         0) {
-                      await actions.updateCategory(
-                        widget.uncategorized,
-                        functions.addInt(
-                            functions.subInt(
-                                widget.uncategorized.allocatedAmount,
+                      final budgetsUpdateData = createBudgetsRecordData(
+                        unallocatedAmount: functions.addInt(
+                            functions.subInt(widget.budget.unallocatedAmount,
                                 widget.categoryToEdit.allocatedAmount),
                             FFAppState().currencyTextField),
                       );
+                      await widget.budget.reference.update(budgetsUpdateData);
 
                       final budgetCategoriesUpdateData =
                           createBudgetCategoriesRecordData(

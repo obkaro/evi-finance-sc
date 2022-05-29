@@ -15,12 +15,10 @@ class CreateConstCategoryWidget extends StatefulWidget {
     Key key,
     this.constCategory,
     this.budget,
-    this.uncategorized,
   }) : super(key: key);
 
   final ConstBudgetCategoriesRecord constCategory;
   final BudgetsRecord budget;
-  final BudgetCategoriesRecord uncategorized;
 
   @override
   _CreateConstCategoryWidgetState createState() =>
@@ -90,7 +88,7 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                           ),
                         ),
                         Text(
-                          '(Unallocated: ${functions.formatBudgetCurrency(widget.uncategorized.allocatedAmount)})',
+                          '(Unallocated: ${functions.formatBudgetCurrency(widget.budget.unallocatedAmount)})',
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.of(context)
                               .subtitle2
@@ -119,13 +117,12 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                 child: FFButtonWidget(
                   onPressed: () async {
                     if ((FFAppState().currencyTextField) <=
-                        (widget.uncategorized.allocatedAmount)) {
-                      final budgetCategoriesUpdateData = {
-                        'allocatedAmount': FieldValue.increment(
+                        (widget.budget.unallocatedAmount)) {
+                      final budgetsUpdateData = {
+                        'unallocatedAmount': FieldValue.increment(
                             -(FFAppState().currencyTextField)),
                       };
-                      await widget.uncategorized.reference
-                          .update(budgetCategoriesUpdateData);
+                      await widget.budget.reference.update(budgetsUpdateData);
 
                       final budgetCategoriesCreateData =
                           createBudgetCategoriesRecordData(
