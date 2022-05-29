@@ -12,11 +12,9 @@ class BudgetSingleWidget extends StatefulWidget {
   const BudgetSingleWidget({
     Key key,
     this.budget,
-    this.uncategorizedAmount,
   }) : super(key: key);
 
   final BudgetsRecord budget;
-  final int uncategorizedAmount;
 
   @override
   _BudgetSingleWidgetState createState() => _BudgetSingleWidgetState();
@@ -31,7 +29,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
       stream: queryBudgetCategoriesRecord(
         queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
             .where('categoryBudget', isEqualTo: widget.budget.reference)
-            .where('categoryName', isNotEqualTo: 'Uncategorized'),
+            .where('categoryName', isNotEqualTo: 'dummy'),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -374,8 +372,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                 ),
                                                 Text(
                                                   functions.formatBudgetCurrency(
-                                                      containerBudgetCategoriesRecord
-                                                          .allocatedAmount),
+                                                      widget.budget
+                                                          .unallocatedAmount),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .subtitle1,
@@ -395,39 +393,19 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                            child: StreamBuilder<List<BudgetCategoriesRecord>>(
-                              stream: queryBudgetCategoriesRecord(
-                                queryBuilder: (budgetCategoriesRecord) =>
-                                    budgetCategoriesRecord.where(
-                                        'categoryBudget',
-                                        isEqualTo: widget.budget.reference),
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitRing(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 50,
-                                      ),
-                                    ),
-                                  );
-                                }
-                                List<BudgetCategoriesRecord>
-                                    columnBudgetCategoriesRecordList =
-                                    snapshot.data;
+                            child: Builder(
+                              builder: (context) {
+                                final budgetCategories =
+                                    budgetSingleBudgetCategoriesRecordList
+                                            ?.toList() ??
+                                        [];
                                 return Column(
                                   mainAxisSize: MainAxisSize.max,
-                                  children: List.generate(
-                                      columnBudgetCategoriesRecordList.length,
-                                      (columnIndex) {
-                                    final columnBudgetCategoriesRecord =
-                                        columnBudgetCategoriesRecordList[
-                                            columnIndex];
+                                  children:
+                                      List.generate(budgetCategories.length,
+                                          (budgetCategoriesIndex) {
+                                    final budgetCategoriesItem =
+                                        budgetCategories[budgetCategoriesIndex];
                                     return Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 0, 0, 16),
@@ -438,7 +416,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                               transactionsRecord.where(
                                                   'linkedCategory',
                                                   isEqualTo:
-                                                      columnBudgetCategoriesRecord
+                                                      budgetCategoriesItem
                                                           .reference),
                                         ),
                                         builder: (context, snapshot) {
@@ -469,7 +447,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                   builder: (context) =>
                                                       CategorySingleWidget(
                                                     category:
-                                                        columnBudgetCategoriesRecord,
+                                                        budgetCategoriesItem,
                                                   ),
                                                 ),
                                               );
@@ -522,7 +500,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                           0,
                                                                           10),
                                                               child: Text(
-                                                                columnBudgetCategoriesRecord
+                                                                budgetCategoriesItem
                                                                     .categoryName,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
@@ -538,7 +516,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                           0,
                                                                           10),
                                                               child: Text(
-                                                                '${functions.subtractCurrency(columnBudgetCategoriesRecord.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                                '${functions.subtractCurrencyLine(budgetCategoriesItem.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText1,
@@ -565,7 +543,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                     child:
                                                                         LinearPercentIndicator(
                                                                       percent: functions.calcCategoryPercent(
-                                                                          columnBudgetCategoriesRecord,
+                                                                          budgetCategoriesItem,
                                                                           containerTransactionsRecordList
                                                                               .toList()),
                                                                       width: MediaQuery.of(context)

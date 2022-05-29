@@ -675,66 +675,106 @@ class _EditBudgetCategoriesWidgetState
                                                             );
                                                           },
                                                         ),
-                                                        FlutterFlowIconButton(
-                                                          borderColor: Colors
-                                                              .transparent,
-                                                          borderRadius: 30,
-                                                          borderWidth: 1,
-                                                          buttonSize: 60,
-                                                          icon: Icon(
-                                                            Icons
-                                                                .delete_rounded,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryText,
-                                                            size: 24,
-                                                          ),
-                                                          onPressed: () async {
-                                                            var confirmDialogResponse =
-                                                                await showDialog<
-                                                                        bool>(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (alertDialogContext) {
-                                                                        return AlertDialog(
-                                                                          title:
-                                                                              Text('Delete Category'),
-                                                                          content:
-                                                                              Text('All currently associated transactions will be set to uncategorized. This cannot be undone. '),
-                                                                          actions: [
-                                                                            TextButton(
-                                                                              onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                              child: Text('Cancel'),
-                                                                            ),
-                                                                            TextButton(
-                                                                              onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                              child: Text('Confirm'),
-                                                                            ),
-                                                                          ],
-                                                                        );
-                                                                      },
-                                                                    ) ??
-                                                                    false;
-                                                            if (confirmDialogResponse) {
-                                                              final budgetsUpdateData =
-                                                                  {
-                                                                'unallocatedAmount':
-                                                                    FieldValue.increment(
+                                                        StreamBuilder<
+                                                            List<
+                                                                TransactionsRecord>>(
+                                                          stream:
+                                                              queryTransactionsRecord(
+                                                            queryBuilder: (transactionsRecord) =>
+                                                                transactionsRecord.where(
+                                                                    'linkedCategory',
+                                                                    isEqualTo:
                                                                         editExistingCatsItem
-                                                                            .allocatedAmount),
-                                                              };
-                                                              await columnBudgetsRecord
-                                                                  .reference
-                                                                  .update(
-                                                                      budgetsUpdateData);
-                                                              // Action_DeleteCategory
-                                                              await editExistingCatsItem
-                                                                  .reference
-                                                                  .delete();
-                                                            } else {
-                                                              return;
+                                                                            .reference),
+                                                          ),
+                                                          builder: (context,
+                                                              snapshot) {
+                                                            // Customize what your widget looks like when it's loading.
+                                                            if (!snapshot
+                                                                .hasData) {
+                                                              return Center(
+                                                                child: SizedBox(
+                                                                  width: 50,
+                                                                  height: 50,
+                                                                  child:
+                                                                      SpinKitRing(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryColor,
+                                                                    size: 50,
+                                                                  ),
+                                                                ),
+                                                              );
                                                             }
+                                                            List<TransactionsRecord>
+                                                                iconButtonTransactionsRecordList =
+                                                                snapshot.data;
+                                                            return FlutterFlowIconButton(
+                                                              borderColor: Colors
+                                                                  .transparent,
+                                                              borderRadius: 30,
+                                                              borderWidth: 1,
+                                                              buttonSize: 60,
+                                                              icon: Icon(
+                                                                Icons
+                                                                    .delete_rounded,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                                size: 24,
+                                                              ),
+                                                              onPressed:
+                                                                  () async {
+                                                                var confirmDialogResponse =
+                                                                    await showDialog<
+                                                                            bool>(
+                                                                          context:
+                                                                              context,
+                                                                          builder:
+                                                                              (alertDialogContext) {
+                                                                            return AlertDialog(
+                                                                              title: Text('Delete Category'),
+                                                                              content: Text('All currently associated transactions will be set to uncategorized. This cannot be undone. '),
+                                                                              actions: [
+                                                                                TextButton(
+                                                                                  onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                  child: Text('Cancel'),
+                                                                                ),
+                                                                                TextButton(
+                                                                                  onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                  child: Text('Confirm'),
+                                                                                ),
+                                                                              ],
+                                                                            );
+                                                                          },
+                                                                        ) ??
+                                                                        false;
+                                                                if (confirmDialogResponse) {
+                                                                  final budgetsUpdateData =
+                                                                      {
+                                                                    'unallocatedAmount':
+                                                                        FieldValue.increment(
+                                                                            editExistingCatsItem.allocatedAmount),
+                                                                  };
+                                                                  await columnBudgetsRecord
+                                                                      .reference
+                                                                      .update(
+                                                                          budgetsUpdateData);
+                                                                  await actions
+                                                                      .unlinkAllTransCategories(
+                                                                    iconButtonTransactionsRecordList
+                                                                        .toList(),
+                                                                    editExistingCatsItem,
+                                                                  );
+                                                                  // Action_DeleteCategory
+                                                                  await editExistingCatsItem
+                                                                      .reference
+                                                                      .delete();
+                                                                } else {
+                                                                  return;
+                                                                }
+                                                              },
+                                                            );
                                                           },
                                                         ),
                                                       ],
