@@ -14,11 +14,9 @@ class CreateCustomCategoryWidget extends StatefulWidget {
   const CreateCustomCategoryWidget({
     Key key,
     this.budget,
-    this.uncategorized,
   }) : super(key: key);
 
   final BudgetsRecord budget;
-  final BudgetCategoriesRecord uncategorized;
 
   @override
   _CreateCustomCategoryWidgetState createState() =>
@@ -83,7 +81,7 @@ class _CreateCustomCategoryWidgetState
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '(Unallocated: ${functions.formatBudgetCurrency(widget.uncategorized.allocatedAmount)})',
+                    '(Unallocated: ${functions.formatBudgetCurrency(widget.budget.unallocatedAmount)})',
                     style: FlutterFlowTheme.of(context).subtitle2.override(
                           fontFamily: 'Source Sans Pro',
                           color: FlutterFlowTheme.of(context).secondaryText,
@@ -133,13 +131,12 @@ class _CreateCustomCategoryWidgetState
                 child: FFButtonWidget(
                   onPressed: () async {
                     if ((FFAppState().currencyTextField) <=
-                        (widget.uncategorized.allocatedAmount)) {
-                      final budgetCategoriesUpdateData = {
-                        'allocatedAmount': FieldValue.increment(
+                        (widget.budget.unallocatedAmount)) {
+                      final budgetsUpdateData = {
+                        'unallocatedAmount': FieldValue.increment(
                             -(FFAppState().currencyTextField)),
                       };
-                      await widget.uncategorized.reference
-                          .update(budgetCategoriesUpdateData);
+                      await widget.budget.reference.update(budgetsUpdateData);
 
                       final budgetCategoriesCreateData =
                           createBudgetCategoriesRecordData(

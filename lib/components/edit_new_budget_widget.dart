@@ -18,12 +18,10 @@ class EditNewBudgetWidget extends StatefulWidget {
     Key key,
     this.budget,
     this.ccategoriesSum,
-    this.uncategorized,
   }) : super(key: key);
 
   final BudgetsRecord budget;
   final int ccategoriesSum;
-  final BudgetCategoriesRecord uncategorized;
 
   @override
   _EditNewBudgetWidgetState createState() => _EditNewBudgetWidgetState();
@@ -262,17 +260,11 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                         final budgetsUpdateData = createBudgetsRecordData(
                           budgetAmount: FFAppState().currencyTextField,
                           budgetDuration: dropDownValue,
-                        );
-                        await widget.budget.reference.update(budgetsUpdateData);
-
-                        final budgetCategoriesUpdateData =
-                            createBudgetCategoriesRecordData(
-                          allocatedAmount: functions.subInt(
-                              widget.budget.budgetAmount,
+                          unallocatedAmount: functions.subInt(
+                              FFAppState().currencyTextField,
                               widget.ccategoriesSum),
                         );
-                        await widget.budget.uncategorizedLink
-                            .update(budgetCategoriesUpdateData);
+                        await widget.budget.reference.update(budgetsUpdateData);
                         var confirmDialogResponse = await showDialog<bool>(
                               context: context,
                               builder: (alertDialogContext) {
@@ -302,7 +294,6 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                             MaterialPageRoute(
                               builder: (context) => EditBudgetCategoriesWidget(
                                 createdBudget: widget.budget,
-                                uncategorized: buttonBudgetCategoriesRecord,
                               ),
                             ),
                           );

@@ -35,7 +35,7 @@ class CurrencyTextField extends StatefulWidget {
 
 class _CurrencyTextFieldState extends State<CurrencyTextField> {
   TextEditingController textController;
-  var controller = new MaskedTextController(mask: '000.000.000-00');
+  var controller = new MaskedTextController(mask: '000.000.000');
 
   var moneyController = new MoneyMaskedTextController(
       decimalSeparator: '.',

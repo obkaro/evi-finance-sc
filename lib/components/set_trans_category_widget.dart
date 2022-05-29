@@ -106,11 +106,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                 child: FutureBuilder<List<BudgetCategoriesRecord>>(
                   future: queryBudgetCategoriesRecordOnce(
                     queryBuilder: (budgetCategoriesRecord) =>
-                        budgetCategoriesRecord
-                            .where('categoryBudget',
-                                isEqualTo: currentUserDocument?.activeBudget)
-                            .where('categoryName',
-                                isNotEqualTo: 'Uncategorized'),
+                        budgetCategoriesRecord.where('categoryBudget',
+                            isEqualTo: currentUserDocument?.activeBudget),
                   ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.

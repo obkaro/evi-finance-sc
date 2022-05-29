@@ -85,20 +85,6 @@
           "order": "DESCENDING"
         }
       ]
-    },
-    {
-      "collectionGroup": "budgetCategories",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "categoryBudget",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "categoryID",
-          "order": "ASCENDING"
-        }
-      ]
     }
   ],
   "fieldOverrides": [

@@ -1,12 +1,9 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../category_single/category_single_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -27,20 +24,6 @@ class BudgetSingleWidget extends StatefulWidget {
 
 class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-    // On page load action.
-    SchedulerBinding.instance?.addPostFrameCallback((_) async {
-      // Action_UpdateUncategorized
-
-      final budgetCategoriesUpdateData = createBudgetCategoriesRecordData(
-        allocatedAmount: widget.uncategorizedAmount,
-      );
-      await widget.budget.uncategorizedLink.update(budgetCategoriesUpdateData);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -415,11 +398,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                             child: StreamBuilder<List<BudgetCategoriesRecord>>(
                               stream: queryBudgetCategoriesRecord(
                                 queryBuilder: (budgetCategoriesRecord) =>
-                                    budgetCategoriesRecord
-                                        .where('categoryBudget',
-                                            isEqualTo: widget.budget.reference)
-                                        .where('categoryName',
-                                            isNotEqualTo: 'Uncategorized'),
+                                    budgetCategoriesRecord.where(
+                                        'categoryBudget',
+                                        isEqualTo: widget.budget.reference),
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
