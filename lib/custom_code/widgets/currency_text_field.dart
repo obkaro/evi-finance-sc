@@ -38,7 +38,7 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
   var controller = new MaskedTextController(mask: '000.000.000-000');
 
   var moneyController = new MoneyMaskedTextController(
-      decimalSeparator: '.',
+      decimalSeparator: '',
       thousandSeparator: ',',
       leftSymbol: '\₦',
       initialValue: 0,

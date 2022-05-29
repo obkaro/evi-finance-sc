@@ -55,29 +55,12 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
-    value = object.budgetSubCategories;
-    if (value != null) {
-      result
-        ..add('budgetSubCategories')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(BuiltList, const [
-              const FullType(DocumentReference, const [const FullType(Object)])
-            ])));
-    }
     value = object.isRecurring;
     if (value != null) {
       result
         ..add('isRecurring')
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
-    value = object.uncategorizedLink;
-    if (value != null) {
-      result
-        ..add('uncategorizedLink')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
     }
     value = object.budgetID;
     if (value != null) {
@@ -106,6 +89,12 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         ..add('budgetDuration')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
+    }
+    value = object.unallocatedAmount;
+    if (value != null) {
+      result
+        ..add('unallocatedAmount')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
     value = object.reference;
     if (value != null) {
@@ -152,22 +141,9 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
           result.budgetDateCreated = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
           break;
-        case 'budgetSubCategories':
-          result.budgetSubCategories.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltList, const [
-                const FullType(
-                    DocumentReference, const [const FullType(Object)])
-              ])) as BuiltList<Object>);
-          break;
         case 'isRecurring':
           result.isRecurring = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
-          break;
-        case 'uncategorizedLink':
-          result.uncategorizedLink = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
           break;
         case 'budgetID':
           result.budgetID = serializers.deserialize(value,
@@ -184,6 +160,10 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         case 'budgetDuration':
           result.budgetDuration = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
+          break;
+        case 'unallocatedAmount':
+          result.unallocatedAmount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
           break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
@@ -210,11 +190,7 @@ class _$BudgetsRecord extends BudgetsRecord {
   @override
   final DateTime budgetDateCreated;
   @override
-  final BuiltList<DocumentReference<Object>> budgetSubCategories;
-  @override
   final bool isRecurring;
-  @override
-  final DocumentReference<Object> uncategorizedLink;
   @override
   final String budgetID;
   @override
@@ -223,6 +199,8 @@ class _$BudgetsRecord extends BudgetsRecord {
   final bool isActive;
   @override
   final String budgetDuration;
+  @override
+  final int unallocatedAmount;
   @override
   final DocumentReference<Object> reference;
 
@@ -235,13 +213,12 @@ class _$BudgetsRecord extends BudgetsRecord {
       this.budgetStart,
       this.budgetEnd,
       this.budgetDateCreated,
-      this.budgetSubCategories,
       this.isRecurring,
-      this.uncategorizedLink,
       this.budgetID,
       this.lastViewed,
       this.isActive,
       this.budgetDuration,
+      this.unallocatedAmount,
       this.reference})
       : super._();
 
@@ -261,13 +238,12 @@ class _$BudgetsRecord extends BudgetsRecord {
         budgetStart == other.budgetStart &&
         budgetEnd == other.budgetEnd &&
         budgetDateCreated == other.budgetDateCreated &&
-        budgetSubCategories == other.budgetSubCategories &&
         isRecurring == other.isRecurring &&
-        uncategorizedLink == other.uncategorizedLink &&
         budgetID == other.budgetID &&
         lastViewed == other.lastViewed &&
         isActive == other.isActive &&
         budgetDuration == other.budgetDuration &&
+        unallocatedAmount == other.unallocatedAmount &&
         reference == other.reference;
   }
 
@@ -283,21 +259,17 @@ class _$BudgetsRecord extends BudgetsRecord {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc(
-                                                $jc(
-                                                    $jc(0,
-                                                        budgetOwner.hashCode),
-                                                    budgetAmount.hashCode),
-                                                budgetStart.hashCode),
-                                            budgetEnd.hashCode),
-                                        budgetDateCreated.hashCode),
-                                    budgetSubCategories.hashCode),
+                                            $jc($jc(0, budgetOwner.hashCode),
+                                                budgetAmount.hashCode),
+                                            budgetStart.hashCode),
+                                        budgetEnd.hashCode),
+                                    budgetDateCreated.hashCode),
                                 isRecurring.hashCode),
-                            uncategorizedLink.hashCode),
-                        budgetID.hashCode),
-                    lastViewed.hashCode),
-                isActive.hashCode),
-            budgetDuration.hashCode),
+                            budgetID.hashCode),
+                        lastViewed.hashCode),
+                    isActive.hashCode),
+                budgetDuration.hashCode),
+            unallocatedAmount.hashCode),
         reference.hashCode));
   }
 
@@ -309,13 +281,12 @@ class _$BudgetsRecord extends BudgetsRecord {
           ..add('budgetStart', budgetStart)
           ..add('budgetEnd', budgetEnd)
           ..add('budgetDateCreated', budgetDateCreated)
-          ..add('budgetSubCategories', budgetSubCategories)
           ..add('isRecurring', isRecurring)
-          ..add('uncategorizedLink', uncategorizedLink)
           ..add('budgetID', budgetID)
           ..add('lastViewed', lastViewed)
           ..add('isActive', isActive)
           ..add('budgetDuration', budgetDuration)
+          ..add('unallocatedAmount', unallocatedAmount)
           ..add('reference', reference))
         .toString();
   }
@@ -347,22 +318,9 @@ class BudgetsRecordBuilder
   set budgetDateCreated(DateTime budgetDateCreated) =>
       _$this._budgetDateCreated = budgetDateCreated;
 
-  ListBuilder<DocumentReference<Object>> _budgetSubCategories;
-  ListBuilder<DocumentReference<Object>> get budgetSubCategories =>
-      _$this._budgetSubCategories ??=
-          new ListBuilder<DocumentReference<Object>>();
-  set budgetSubCategories(
-          ListBuilder<DocumentReference<Object>> budgetSubCategories) =>
-      _$this._budgetSubCategories = budgetSubCategories;
-
   bool _isRecurring;
   bool get isRecurring => _$this._isRecurring;
   set isRecurring(bool isRecurring) => _$this._isRecurring = isRecurring;
-
-  DocumentReference<Object> _uncategorizedLink;
-  DocumentReference<Object> get uncategorizedLink => _$this._uncategorizedLink;
-  set uncategorizedLink(DocumentReference<Object> uncategorizedLink) =>
-      _$this._uncategorizedLink = uncategorizedLink;
 
   String _budgetID;
   String get budgetID => _$this._budgetID;
@@ -381,6 +339,11 @@ class BudgetsRecordBuilder
   set budgetDuration(String budgetDuration) =>
       _$this._budgetDuration = budgetDuration;
 
+  int _unallocatedAmount;
+  int get unallocatedAmount => _$this._unallocatedAmount;
+  set unallocatedAmount(int unallocatedAmount) =>
+      _$this._unallocatedAmount = unallocatedAmount;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -398,13 +361,12 @@ class BudgetsRecordBuilder
       _budgetStart = $v.budgetStart;
       _budgetEnd = $v.budgetEnd;
       _budgetDateCreated = $v.budgetDateCreated;
-      _budgetSubCategories = $v.budgetSubCategories?.toBuilder();
       _isRecurring = $v.isRecurring;
-      _uncategorizedLink = $v.uncategorizedLink;
       _budgetID = $v.budgetID;
       _lastViewed = $v.lastViewed;
       _isActive = $v.isActive;
       _budgetDuration = $v.budgetDuration;
+      _unallocatedAmount = $v.unallocatedAmount;
       _reference = $v.reference;
       _$v = null;
     }
@@ -424,34 +386,20 @@ class BudgetsRecordBuilder
 
   @override
   _$BudgetsRecord build() {
-    _$BudgetsRecord _$result;
-    try {
-      _$result = _$v ??
-          new _$BudgetsRecord._(
-              budgetOwner: budgetOwner,
-              budgetAmount: budgetAmount,
-              budgetStart: budgetStart,
-              budgetEnd: budgetEnd,
-              budgetDateCreated: budgetDateCreated,
-              budgetSubCategories: _budgetSubCategories?.build(),
-              isRecurring: isRecurring,
-              uncategorizedLink: uncategorizedLink,
-              budgetID: budgetID,
-              lastViewed: lastViewed,
-              isActive: isActive,
-              budgetDuration: budgetDuration,
-              reference: reference);
-    } catch (_) {
-      String _$failedField;
-      try {
-        _$failedField = 'budgetSubCategories';
-        _budgetSubCategories?.build();
-      } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            'BudgetsRecord', _$failedField, e.toString());
-      }
-      rethrow;
-    }
+    final _$result = _$v ??
+        new _$BudgetsRecord._(
+            budgetOwner: budgetOwner,
+            budgetAmount: budgetAmount,
+            budgetStart: budgetStart,
+            budgetEnd: budgetEnd,
+            budgetDateCreated: budgetDateCreated,
+            isRecurring: isRecurring,
+            budgetID: budgetID,
+            lastViewed: lastViewed,
+            isActive: isActive,
+            budgetDuration: budgetDuration,
+            unallocatedAmount: unallocatedAmount,
+            reference: reference);
     replace(_$result);
     return _$result;
   }
