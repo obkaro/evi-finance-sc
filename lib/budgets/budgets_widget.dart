@@ -237,11 +237,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                           BudgetSingleWidget(
                                                         budget:
                                                             columnBudgetsRecord,
-                                                        uncategorizedAmount: functions
-                                                            .calculateRemBudgetCat(
-                                                                listTileBudgetCategoriesRecordList
-                                                                    .toList(),
-                                                                columnBudgetsRecord),
                                                       ),
                                                     ),
                                                   );

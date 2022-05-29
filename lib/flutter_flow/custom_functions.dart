@@ -193,12 +193,35 @@ String subtractCurrency(
 
   if (value1 > value2) {
     result = value1 - value2;
-    formatedResult = formatCurrency.format(result / 100) + '\nLeft';
+    formatedResult = formatCurrency.format(result / 100) + '\nleft';
   } else if (value2 == value1) {
     formatedResult = 'Exhausted';
   } else if (value2 > value1) {
     result = value2 - value1;
-    formatedResult = formatCurrency.format(result / 100) + '\nOver';
+    formatedResult = formatCurrency.format(result / 100) + '\nover';
+  }
+
+  return formatedResult;
+}
+
+String subtractCurrencyLine(
+  int value1,
+  int value2,
+) {
+  // Add your function code here!
+  String formatedResult;
+  int result;
+  final formatCurrency = NumberFormat.simpleCurrency(
+      locale: 'en_US', name: 'NGN', decimalDigits: 0);
+
+  if (value1 > value2) {
+    result = value1 - value2;
+    formatedResult = formatCurrency.format(result / 100) + 'left';
+  } else if (value2 == value1) {
+    formatedResult = 'Exhausted';
+  } else if (value2 > value1) {
+    result = value2 - value1;
+    formatedResult = formatCurrency.format(result / 100) + 'over';
   }
 
   return formatedResult;

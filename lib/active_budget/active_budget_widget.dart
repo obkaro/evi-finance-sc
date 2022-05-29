@@ -193,10 +193,12 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                               StreamBuilder<List<BudgetCategoriesRecord>>(
                                 stream: queryBudgetCategoriesRecord(
                                   queryBuilder: (budgetCategoriesRecord) =>
-                                      budgetCategoriesRecord.where(
-                                          'categoryBudget',
-                                          isEqualTo:
-                                              columnBudgetsRecord.reference),
+                                      budgetCategoriesRecord
+                                          .where('categoryBudget',
+                                              isEqualTo:
+                                                  columnBudgetsRecord.reference)
+                                          .where('categoryName',
+                                              isNotEqualTo: 'dummy'),
                                 ),
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
@@ -643,7 +645,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                   style: FlutterFlowTheme.of(context).subtitle1,
                                                                                 ),
                                                                                 Text(
-                                                                                  '${functions.subtractCurrency(displayedCategoriesItem.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                                                  '${functions.subtractCurrencyLine(displayedCategoriesItem.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                                                   style: FlutterFlowTheme.of(context).bodyText1,
                                                                                 ),
                                                                               ],

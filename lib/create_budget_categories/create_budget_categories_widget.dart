@@ -686,8 +686,8 @@ class _CreateBudgetCategoriesWidgetState
                                                                 {
                                                               'unallocatedAmount':
                                                                   FieldValue.increment(
-                                                                      -(existingCategoriesItem
-                                                                          .allocatedAmount)),
+                                                                      existingCategoriesItem
+                                                                          .allocatedAmount),
                                                             };
                                                             await widget
                                                                 .createdBudget
