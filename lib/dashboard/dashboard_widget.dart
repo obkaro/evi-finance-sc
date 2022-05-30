@@ -525,7 +525,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                     .subtitle1,
                                                               ),
                                                               Text(
-                                                                '${functions.subtractCurrency(containerBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                                '${functions.subtractCurrencyLine(containerBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .subtitle2,

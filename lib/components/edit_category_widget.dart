@@ -139,12 +139,11 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                             FFAppState().currencyTextField,
                             widget.categoryToEdit.allocatedAmount)) >=
                         0) {
-                      final budgetsUpdateData = createBudgetsRecordData(
-                        unallocatedAmount: functions.addInt(
-                            functions.subInt(FFAppState().currencyTextField,
-                                widget.categoryToEdit.allocatedAmount),
-                            widget.budget.unallocatedAmount),
-                      );
+                      final budgetsUpdateData = {
+                        'unallocatedAmount': FieldValue.increment(
+                            -(functions.subInt(FFAppState().currencyTextField,
+                                widget.categoryToEdit.allocatedAmount))),
+                      };
                       await widget.budget.reference.update(budgetsUpdateData);
 
                       final budgetCategoriesUpdateData =
