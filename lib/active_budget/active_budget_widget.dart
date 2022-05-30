@@ -310,7 +310,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               progressColor: FlutterFlowTheme.of(context).primaryColor,
                                                                               backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
                                                                               center: Text(
-                                                                                '${functions.formatBudgetCurrency(columnBudgetsRecord.budgetAmount)} Left',
+                                                                                '${functions.formatBudgetCurrency(columnBudgetsRecord.budgetAmount)} ',
+                                                                                textAlign: TextAlign.center,
                                                                                 style: FlutterFlowTheme.of(context).subtitle1.override(
                                                                                       fontFamily: 'Source Sans Pro',
                                                                                       color: FlutterFlowTheme.of(context).primaryText,
@@ -337,6 +338,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
                                                                               center: Text(
                                                                                 '${functions.subtractCurrency(columnBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                                                textAlign: TextAlign.center,
                                                                                 style: FlutterFlowTheme.of(context).subtitle1.override(
                                                                                       fontFamily: 'Source Sans Pro',
                                                                                       color: FlutterFlowTheme.of(context).primaryText,
@@ -375,7 +377,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               0,
                                                                               0,
                                                                               0,
-                                                                              20),
+                                                                              16),
                                                                       child:
                                                                           Row(
                                                                         mainAxisSize:
@@ -436,7 +438,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                               ),
                                               Padding(
                                                 padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 10, 0, 10),
+                                                    .fromSTEB(0, 0, 0, 10),
                                                 child: Container(
                                                   width: MediaQuery.of(context)
                                                       .size
@@ -492,7 +494,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                   'Unallocated',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle1,
+                                                                      .subtitle2,
                                                                 ),
                                                                 Text(
                                                                   functions.formatBudgetCurrency(
@@ -500,7 +502,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                           .unallocatedAmount),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle1,
+                                                                      .bodyText1,
                                                                 ),
                                                               ],
                                                             ),
@@ -642,7 +644,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               children: [
                                                                                 Text(
                                                                                   displayedCategoriesItem.categoryName,
-                                                                                  style: FlutterFlowTheme.of(context).subtitle1,
+                                                                                  style: FlutterFlowTheme.of(context).subtitle2,
                                                                                 ),
                                                                                 Text(
                                                                                   '${functions.subtractCurrencyLine(displayedCategoriesItem.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',

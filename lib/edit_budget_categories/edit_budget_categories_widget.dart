@@ -906,7 +906,13 @@ class _EditBudgetCategoriesWidgetState
                                                   'Saved',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .subtitle1,
+                                                      .bodyText2
+                                                      .override(
+                                                        fontFamily:
+                                                            'Source Sans Pro',
+                                                        color:
+                                                            Color(0xFFF9F9F9),
+                                                      ),
                                                 ),
                                                 duration: Duration(
                                                     milliseconds: 4000),
