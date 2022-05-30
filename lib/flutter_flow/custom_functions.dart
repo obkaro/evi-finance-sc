@@ -214,12 +214,12 @@ String subtractCurrencyLine(
 
   if (value1 > value2) {
     result = value1 - value2;
-    formatedResult = formatCurrency.format(result / 100) + 'left';
+    formatedResult = formatCurrency.format(result / 100) + ' left';
   } else if (value2 == value1) {
     formatedResult = 'Exhausted';
   } else if (value2 > value1) {
     result = value2 - value1;
-    formatedResult = formatCurrency.format(result / 100) + 'over';
+    formatedResult = formatCurrency.format(result / 100) + ' over';
   }
 
   return formatedResult;

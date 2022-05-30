@@ -116,7 +116,6 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                         snapshot.data;
                                     return Container(
                                       width: double.infinity,
-                                      height: 325,
                                       decoration: BoxDecoration(),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -145,6 +144,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                             .eviredTransparent,
                                                     center: Text(
                                                       '${functions.formatBudgetCurrency(widget.budget.budgetAmount)} Left',
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -186,6 +187,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                             .eviredTransparent,
                                                     center: Text(
                                                       '${functions.subtractCurrency(widget.budget.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -456,7 +459,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                               width: MediaQuery.of(context)
                                                   .size
                                                   .width,
-                                              height: 100,
+                                              height: 80,
                                               decoration: BoxDecoration(
                                                 color:
                                                     FlutterFlowTheme.of(context)
@@ -466,113 +469,104 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                               ),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 16, 16, 16),
+                                                    .fromSTEB(16, 0, 16, 0),
                                                 child: Container(
                                                   width: MediaQuery.of(context)
                                                       .size
                                                       .width,
-                                                  height: 100,
                                                   decoration: BoxDecoration(),
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
-                                                            .spaceAround,
+                                                            .center,
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .center,
                                                     children: [
-                                                      Expanded(
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          0,
-                                                                          0,
-                                                                          10),
-                                                              child: Text(
-                                                                budgetCategoriesItem
-                                                                    .categoryName,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle1,
-                                                              ),
+                                                      Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        0,
+                                                                        10),
+                                                            child: Text(
+                                                              budgetCategoriesItem
+                                                                  .categoryName,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .subtitle1,
                                                             ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          0,
-                                                                          0,
-                                                                          10),
-                                                              child: Text(
-                                                                '${functions.subtractCurrencyLine(budgetCategoriesItem.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1,
-                                                              ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        0,
+                                                                        10),
+                                                            child: Text(
+                                                              '${functions.subtractCurrencyLine(budgetCategoriesItem.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1,
                                                             ),
-                                                          ],
-                                                        ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                      Expanded(
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Expanded(
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Expanded(
-                                                                    child:
-                                                                        LinearPercentIndicator(
-                                                                      percent: functions.calcCategoryPercent(
-                                                                          budgetCategoriesItem,
-                                                                          containerTransactionsRecordList
-                                                                              .toList()),
-                                                                      width: MediaQuery.of(context)
-                                                                              .size
-                                                                              .width *
-                                                                          0.81,
-                                                                      lineHeight:
-                                                                          8,
-                                                                      animation:
-                                                                          true,
-                                                                      progressColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .primaryColor,
-                                                                      backgroundColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .eviredTransparent,
-                                                                      barRadius:
-                                                                          Radius.circular(
-                                                                              12),
-                                                                      padding:
-                                                                          EdgeInsets
-                                                                              .zero,
-                                                                    ),
-                                                                  ),
-                                                                ],
+                                                      Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              LinearPercentIndicator(
+                                                                percent: functions.calcCategoryPercent(
+                                                                    budgetCategoriesItem,
+                                                                    containerTransactionsRecordList
+                                                                        .toList()),
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width *
+                                                                    0.81,
+                                                                lineHeight: 8,
+                                                                animation: true,
+                                                                progressColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryColor,
+                                                                backgroundColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .eviredTransparent,
+                                                                barRadius: Radius
+                                                                    .circular(
+                                                                        12),
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .zero,
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
+                                                            ],
+                                                          ),
+                                                        ],
                                                       ),
                                                     ],
                                                   ),

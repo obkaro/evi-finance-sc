@@ -218,127 +218,90 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-              child: StreamBuilder<List<BudgetCategoriesRecord>>(
-                stream: queryBudgetCategoriesRecord(
-                  queryBuilder: (budgetCategoriesRecord) =>
-                      budgetCategoriesRecord
-                          .where('categoryBudget',
-                              isEqualTo: widget.budget.reference)
-                          .where('categoryName', isEqualTo: 'Uncategorized'),
-                  singleRecord: true,
-                ),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: SpinKitRing(
-                          color: FlutterFlowTheme.of(context).primaryColor,
-                          size: 50,
-                        ),
-                      ),
-                    );
-                  }
-                  List<BudgetCategoriesRecord>
-                      buttonBudgetCategoriesRecordList = snapshot.data;
-                  // Return an empty Container when the document does not exist.
-                  if (snapshot.data.isEmpty) {
-                    return Container();
-                  }
-                  final buttonBudgetCategoriesRecord =
-                      buttonBudgetCategoriesRecordList.isNotEmpty
-                          ? buttonBudgetCategoriesRecordList.first
-                          : null;
-                  return FFButtonWidget(
-                    onPressed: () async {
-                      if ((FFAppState().currencyTextField) >
-                          (widget.ccategoriesSum)) {
-                        // Action_CreateBudgetStep1
+              child: FFButtonWidget(
+                onPressed: () async {
+                  if ((FFAppState().currencyTextField) >
+                      (widget.ccategoriesSum)) {
+                    // Action_CreateBudgetStep1
 
-                        final budgetsUpdateData = createBudgetsRecordData(
-                          budgetAmount: FFAppState().currencyTextField,
-                          budgetDuration: dropDownValue,
-                          unallocatedAmount: functions.subInt(
-                              FFAppState().currencyTextField,
-                              widget.ccategoriesSum),
-                        );
-                        await widget.budget.reference.update(budgetsUpdateData);
-                        var confirmDialogResponse = await showDialog<bool>(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text(
-                                      'Proceed to edit budget categories?'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(
-                                          alertDialogContext, false),
-                                      child: Text('No'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(
-                                          alertDialogContext, true),
-                                      child: Text('Yes'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            ) ??
-                            false;
-                        if (confirmDialogResponse) {
-                          Navigator.pop(context);
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EditBudgetCategoriesWidget(
-                                createdBudget: widget.budget,
-                              ),
-                            ),
-                          );
-                        } else {
-                          Navigator.pop(context);
-                        }
-                      } else {
-                        await showDialog(
+                    final budgetsUpdateData = createBudgetsRecordData(
+                      budgetAmount: FFAppState().currencyTextField,
+                      budgetDuration: dropDownValue,
+                      unallocatedAmount: functions.subInt(
+                          FFAppState().currencyTextField,
+                          widget.ccategoriesSum),
+                    );
+                    await widget.budget.reference.update(budgetsUpdateData);
+                    var confirmDialogResponse = await showDialog<bool>(
                           context: context,
                           builder: (alertDialogContext) {
                             return AlertDialog(
-                              title: Text('Invalid entry'),
-                              content: Text(
-                                  'Budget amount should be greater than the sum of existing categories within it.'),
+                              title: Text('Proceed to edit budget categories?'),
                               actions: [
                                 TextButton(
                                   onPressed: () =>
-                                      Navigator.pop(alertDialogContext),
-                                  child: Text('Okay'),
+                                      Navigator.pop(alertDialogContext, false),
+                                  child: Text('No'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, true),
+                                  child: Text('Yes'),
                                 ),
                               ],
                             );
                           },
+                        ) ??
+                        false;
+                    if (confirmDialogResponse) {
+                      Navigator.pop(context);
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditBudgetCategoriesWidget(
+                            createdBudget: widget.budget,
+                          ),
+                        ),
+                      );
+                    } else {
+                      Navigator.pop(context);
+                    }
+                  } else {
+                    await showDialog(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('Invalid entry'),
+                          content: Text(
+                              'Budget amount should be greater than the sum of existing categories within it.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext),
+                              child: Text('Okay'),
+                            ),
+                          ],
                         );
-                      }
-                    },
-                    text: 'Save',
-                    options: FFButtonOptions(
-                      width: double.infinity,
-                      height: 60,
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      textStyle:
-                          FlutterFlowTheme.of(context).subtitle2.override(
-                                fontFamily: 'Source Sans Pro',
-                                color: Colors.white,
-                              ),
-                      elevation: 0,
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      ),
-                      borderRadius: 16,
-                    ),
-                  );
+                      },
+                    );
+                  }
                 },
+                text: 'Save',
+                options: FFButtonOptions(
+                  width: double.infinity,
+                  height: 60,
+                  color: FlutterFlowTheme.of(context).primaryColor,
+                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: 'Source Sans Pro',
+                        color: Colors.white,
+                      ),
+                  elevation: 0,
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
+                  ),
+                  borderRadius: 16,
+                ),
               ),
             ),
           ],
