@@ -23,6 +23,7 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
   void initState() {
     super.initState();
     inputEmailController = TextEditingController();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'LoginCopy'});
   }
 
   @override

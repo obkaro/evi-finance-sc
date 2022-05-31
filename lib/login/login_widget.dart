@@ -28,6 +28,7 @@ class _LoginWidgetState extends State<LoginWidget> {
     inputEmailController = TextEditingController();
     inputPasswordController = TextEditingController();
     inputPasswordVisibility = false;
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Login'});
   }
 
   @override

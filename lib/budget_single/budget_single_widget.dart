@@ -24,6 +24,13 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'BudgetSingle'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<BudgetCategoriesRecord>>(
       stream: queryBudgetCategoriesRecord(

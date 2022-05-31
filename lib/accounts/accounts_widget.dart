@@ -20,6 +20,12 @@ class _AccountsWidgetState extends State<AccountsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Accounts'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<AccountsRecord>>(
       stream: queryAccountsRecord(

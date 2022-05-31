@@ -37,6 +37,13 @@ class _EditBudgetCategoriesWidgetState
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'editBudgetCategories'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<BudgetCategoriesRecord>>(
       stream: queryBudgetCategoriesRecord(

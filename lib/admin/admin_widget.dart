@@ -20,6 +20,12 @@ class _AdminWidgetState extends State<AdminWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Admin'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,

@@ -34,6 +34,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     inputUsernameController = TextEditingController();
     inputPasswordController = TextEditingController();
     inputPasswordVisibility = false;
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'SignUp'});
   }
 
   @override
