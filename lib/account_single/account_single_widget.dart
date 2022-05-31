@@ -37,6 +37,13 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'AccountSingle'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<BudgetCategoriesRecord>>(
       future: queryBudgetCategoriesRecordOnce(
