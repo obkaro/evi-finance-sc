@@ -100,7 +100,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
               child: FlutterFlowDropDown(
                 initialOption: dropDownValue ??= 'Monthly',
-                options: ['Weekly', 'Monthly'].toList(),
+                options: ['Weekly', 'Monthly'],
                 onChanged: (val) => setState(() => dropDownValue = val),
                 width: double.infinity,
                 height: 55,
@@ -163,7 +163,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                             final budgetsUpdateData = createBudgetsRecordData(
                               budgetStart: calendarSelectedDay?.start,
                               budgetEnd: functions.addDaysToDate(
-                                  calendarSelectedDay.end, 30),
+                                  calendarSelectedDay?.end, 30),
                               budgetDuration: dropDownValue,
                             );
                             await widget.budget.reference
@@ -173,7 +173,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                               final budgetsUpdateData = createBudgetsRecordData(
                                 budgetStart: calendarSelectedDay?.start,
                                 budgetEnd: functions.addDaysToDate(
-                                    calendarSelectedDay.end, 7),
+                                    calendarSelectedDay?.end, 7),
                                 budgetDuration: dropDownValue,
                               );
                               await widget.budget.reference

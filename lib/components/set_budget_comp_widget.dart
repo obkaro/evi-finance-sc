@@ -27,6 +27,7 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
     'containerOnActionTriggerAnimation': AnimationInfo(
       trigger: AnimationTrigger.onActionTrigger,
       duration: 230,
+      hideBeforeAnimating: false,
       initialState: AnimationState(
         offset: Offset(0, 0),
         scale: 1,

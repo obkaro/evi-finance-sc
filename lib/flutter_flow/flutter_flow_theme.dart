@@ -51,7 +51,7 @@ abstract class FlutterFlowTheme {
         fontFamily: 'Spline Sans',
         color: secondaryText,
         fontWeight: FontWeight.bold,
-        fontSize: 22,
+        fontSize: 20,
       );
   TextStyle get title3 => TextStyle(
         fontFamily: 'Spline Sans',
@@ -81,7 +81,7 @@ abstract class FlutterFlowTheme {
         'Source Sans Pro',
         color: secondaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 14,
+        fontSize: 12,
       );
 }
 

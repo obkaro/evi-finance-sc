@@ -7,6 +7,7 @@ import '../transaction_single/transaction_single_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -67,13 +68,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
             automaticallyImplyLeading: true,
             title: Text(
               widget.category.categoryName,
-              style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: 'Spline Sans',
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    useGoogleFonts: false,
-                  ),
+              style: FlutterFlowTheme.of(context).title3,
             ),
             actions: [
               StreamBuilder<List<TransactionsRecord>>(
@@ -420,10 +415,11 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                       BorderRadius
                                                                           .circular(
                                                                               12),
-                                                                  child: Image
-                                                                      .network(
-                                                                    imageConstInstitutionLogosRecord
-                                                                        .institutionLogo,
+                                                                  child:
+                                                                      CachedNetworkImage(
+                                                                    imageUrl:
+                                                                        imageConstInstitutionLogosRecord
+                                                                            .institutionLogo,
                                                                     width: 40,
                                                                     height: 40,
                                                                     fit: BoxFit

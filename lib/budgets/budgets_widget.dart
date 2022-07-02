@@ -40,13 +40,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
         automaticallyImplyLeading: true,
         title: Text(
           'Budget History',
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Spline Sans',
-                color: FlutterFlowTheme.of(context).primaryText,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                useGoogleFonts: false,
-              ),
+          style: FlutterFlowTheme.of(context).title3,
         ),
         actions: [],
         centerTitle: true,

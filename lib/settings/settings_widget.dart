@@ -29,7 +29,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100),
+        preferredSize: Size.fromHeight(72),
         child: AppBar(
           backgroundColor: Color(0x00FF0054),
           automaticallyImplyLeading: false,
@@ -74,12 +74,10 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                   child: Text(
                                     'Settings',
                                     style: FlutterFlowTheme.of(context)
-                                        .title1
+                                        .title3
                                         .override(
                                           fontFamily: 'Spline Sans',
-                                          color: Colors.white,
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xFFF9F9F9),
                                           useGoogleFonts: false,
                                         ),
                                   ),

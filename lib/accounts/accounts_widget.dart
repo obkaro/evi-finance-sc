@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,7 +51,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(100),
+            preferredSize: Size.fromHeight(72),
             child: AppBar(
               backgroundColor: Color(0x00FF0054),
               automaticallyImplyLeading: false,
@@ -96,12 +97,10 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                       child: Text(
                                         'Accounts',
                                         style: FlutterFlowTheme.of(context)
-                                            .title1
+                                            .title3
                                             .override(
                                               fontFamily: 'Spline Sans',
-                                              color: Colors.white,
-                                              fontSize: 32,
-                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFFF9F9F9),
                                               useGoogleFonts: false,
                                             ),
                                       ),
@@ -283,9 +282,11 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(12),
-                                                        child: Image.network(
-                                                          imageConstInstitutionLogosRecord
-                                                              .institutionLogo,
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          imageUrl:
+                                                              imageConstInstitutionLogosRecord
+                                                                  .institutionLogo,
                                                           width: 45,
                                                           height: 45,
                                                           fit: BoxFit.cover,
