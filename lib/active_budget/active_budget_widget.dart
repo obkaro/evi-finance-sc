@@ -39,7 +39,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100),
+        preferredSize: Size.fromHeight(72),
         child: AppBar(
           backgroundColor: Color(0x00FF0054),
           automaticallyImplyLeading: false,
@@ -50,7 +50,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  height: 100,
+                  height: 200,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryColor,
                     borderRadius: BorderRadius.only(
@@ -82,12 +82,10 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                 child: Text(
                                   'Budget',
                                   style: FlutterFlowTheme.of(context)
-                                      .title1
+                                      .title3
                                       .override(
                                         fontFamily: 'Spline Sans',
-                                        color: Colors.white,
-                                        fontSize: 32,
-                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFFF9F9F9),
                                         useGoogleFonts: false,
                                       ),
                                 ),

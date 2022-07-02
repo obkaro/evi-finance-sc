@@ -63,13 +63,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
             automaticallyImplyLeading: true,
             title: Text(
               '${dateTimeFormat('MEd', widget.budget.budgetStart)} - ${dateTimeFormat('MEd', widget.budget.budgetEnd)}',
-              style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: 'Spline Sans',
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    useGoogleFonts: false,
-                  ),
+              style: FlutterFlowTheme.of(context).title3,
             ),
             actions: [],
             centerTitle: true,
