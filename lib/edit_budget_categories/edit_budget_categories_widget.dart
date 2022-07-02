@@ -19,13 +19,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditBudgetCategoriesWidget extends StatefulWidget {
   const EditBudgetCategoriesWidget({
-    Key key,
+    Key? key,
     this.createdBudget,
     this.uncategorized,
   }) : super(key: key);
 
-  final BudgetsRecord createdBudget;
-  final BudgetCategoriesRecord uncategorized;
+  final BudgetsRecord? createdBudget;
+  final BudgetCategoriesRecord? uncategorized;
 
   @override
   _EditBudgetCategoriesWidgetState createState() =>
@@ -48,7 +48,7 @@ class _EditBudgetCategoriesWidgetState
     return StreamBuilder<List<BudgetCategoriesRecord>>(
       stream: queryBudgetCategoriesRecord(
         queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
-            .where('categoryBudget', isEqualTo: widget.createdBudget.reference)
+            .where('categoryBudget', isEqualTo: widget.createdBudget!.reference)
             .where('categoryName', isNotEqualTo: 'dummy'),
       ),
       builder: (context, snapshot) {
@@ -66,7 +66,7 @@ class _EditBudgetCategoriesWidgetState
           );
         }
         List<BudgetCategoriesRecord>
-            editBudgetCategoriesBudgetCategoriesRecordList = snapshot.data;
+            editBudgetCategoriesBudgetCategoriesRecordList = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -93,7 +93,7 @@ class _EditBudgetCategoriesWidgetState
                     padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 0),
                     child: StreamBuilder<BudgetsRecord>(
                       stream: BudgetsRecord.getDocument(
-                          widget.createdBudget.reference),
+                          widget.createdBudget!.reference),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
                         if (!snapshot.hasData) {
@@ -109,7 +109,7 @@ class _EditBudgetCategoriesWidgetState
                             ),
                           );
                         }
-                        final columnBudgetsRecord = snapshot.data;
+                        final columnBudgetsRecord = snapshot.data!;
                         return Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -154,7 +154,7 @@ class _EditBudgetCategoriesWidgetState
                                           alignment: AlignmentDirectional(0, 0),
                                           child: Text(
                                             functions.formatBudgetCurrency(
-                                                columnBudgetsRecord
+                                                columnBudgetsRecord!
                                                     .unallocatedAmount),
                                             textAlign: TextAlign.end,
                                             style: FlutterFlowTheme.of(context)
@@ -185,7 +185,7 @@ class _EditBudgetCategoriesWidgetState
                                               alignment:
                                                   AlignmentDirectional(0, 0),
                                               child: Text(
-                                                'Start: ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)}',
+                                                'Start: ${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetStart)}',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .subtitle1,
@@ -214,7 +214,7 @@ class _EditBudgetCategoriesWidgetState
                                                   FieldValue.increment(
                                                       -(100000)),
                                             };
-                                            await columnBudgetsRecord.reference
+                                            await columnBudgetsRecord!.reference
                                                 .update(budgetsUpdateData);
                                           },
                                         ),
@@ -252,7 +252,7 @@ class _EditBudgetCategoriesWidgetState
                                                 AlignmentDirectional(0, 0),
                                             child: Text(
                                               functions.formatBudgetCurrency(
-                                                  columnBudgetsRecord
+                                                  columnBudgetsRecord!
                                                       .budgetAmount),
                                               textAlign: TextAlign.end,
                                               style:
@@ -281,7 +281,7 @@ class _EditBudgetCategoriesWidgetState
                                               'unallocatedAmount':
                                                   FieldValue.increment(100000),
                                             };
-                                            await columnBudgetsRecord.reference
+                                            await columnBudgetsRecord!.reference
                                                 .update(budgetsUpdateData);
                                           },
                                         ),
@@ -332,18 +332,15 @@ class _EditBudgetCategoriesWidgetState
                                             List<ConstBudgetCategoriesRecord>>(
                                           stream:
                                               queryConstBudgetCategoriesRecord(
-                                            queryBuilder:
-                                                (constBudgetCategoriesRecord) =>
-                                                    constBudgetCategoriesRecord
-                                                        .where(
-                                                            'categoryName',
-                                                            whereNotIn:
-                                                                editBudgetCategoriesBudgetCategoriesRecordList
-                                                                    .map((e) => e
-                                                                        .categoryName)
-                                                                    .toList())
-                                                        .orderBy(
-                                                            'categoryName'),
+                                            queryBuilder: (constBudgetCategoriesRecord) =>
+                                                constBudgetCategoriesRecord
+                                                    .where('categoryName',
+                                                        whereNotIn:
+                                                            editBudgetCategoriesBudgetCategoriesRecordList
+                                                                .map((e) => e!
+                                                                    .categoryName!)
+                                                                .toList())
+                                                    .orderBy('categoryName'),
                                           ),
                                           builder: (context, snapshot) {
                                             // Customize what your widget looks like when it's loading.
@@ -363,7 +360,7 @@ class _EditBudgetCategoriesWidgetState
                                             }
                                             List<ConstBudgetCategoriesRecord>
                                                 gridViewConstBudgetCategoriesRecordList =
-                                                snapshot.data;
+                                                snapshot.data!;
                                             return GridView.builder(
                                               padding: EdgeInsets.zero,
                                               gridDelegate:
@@ -441,8 +438,8 @@ class _EditBudgetCategoriesWidgetState
                                                           ),
                                                         ),
                                                         AutoSizeText(
-                                                          gridViewConstBudgetCategoriesRecord
-                                                              .categoryName,
+                                                          gridViewConstBudgetCategoriesRecord!
+                                                              .categoryName!,
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: FlutterFlowTheme
@@ -603,8 +600,8 @@ class _EditBudgetCategoriesWidgetState
                                                                           0),
                                                                   child:
                                                                       AutoSizeText(
-                                                                    editExistingCatsItem
-                                                                        .categoryName,
+                                                                    editExistingCatsItem!
+                                                                        .categoryName!,
                                                                     textAlign:
                                                                         TextAlign
                                                                             .start,
@@ -632,7 +629,7 @@ class _EditBudgetCategoriesWidgetState
                                                                   0, 0),
                                                           child: Text(
                                                             functions.formatBudgetCurrency(
-                                                                editExistingCatsItem
+                                                                editExistingCatsItem!
                                                                     .allocatedAmount),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
@@ -691,7 +688,7 @@ class _EditBudgetCategoriesWidgetState
                                                                 transactionsRecord.where(
                                                                     'linkedCategory',
                                                                     isEqualTo:
-                                                                        editExistingCatsItem
+                                                                        editExistingCatsItem!
                                                                             .reference),
                                                           ),
                                                           builder: (context,
@@ -715,7 +712,7 @@ class _EditBudgetCategoriesWidgetState
                                                             }
                                                             List<TransactionsRecord>
                                                                 iconButtonTransactionsRecordList =
-                                                                snapshot.data;
+                                                                snapshot.data!;
                                                             return FlutterFlowIconButton(
                                                               borderColor: Colors
                                                                   .transparent,
@@ -761,9 +758,9 @@ class _EditBudgetCategoriesWidgetState
                                                                       {
                                                                     'unallocatedAmount':
                                                                         FieldValue.increment(
-                                                                            editExistingCatsItem.allocatedAmount),
+                                                                            editExistingCatsItem!.allocatedAmount),
                                                                   };
-                                                                  await columnBudgetsRecord
+                                                                  await columnBudgetsRecord!
                                                                       .reference
                                                                       .update(
                                                                           budgetsUpdateData);
@@ -774,7 +771,7 @@ class _EditBudgetCategoriesWidgetState
                                                                     editExistingCatsItem,
                                                                   );
                                                                   // Action_DeleteCategory
-                                                                  await editExistingCatsItem
+                                                                  await editExistingCatsItem!
                                                                       .reference
                                                                       .delete();
                                                                 } else {
@@ -811,7 +808,7 @@ class _EditBudgetCategoriesWidgetState
                                                     budgetCategoriesRecord.where(
                                                         'categoryBudget',
                                                         isEqualTo:
-                                                            columnBudgetsRecord
+                                                            columnBudgetsRecord!
                                                                 .reference),
                                           ),
                                           builder: (context, snapshot) {
@@ -832,7 +829,7 @@ class _EditBudgetCategoriesWidgetState
                                             }
                                             List<BudgetCategoriesRecord>
                                                 buttonBudgetCategoriesRecordList =
-                                                snapshot.data;
+                                                snapshot.data!;
                                             return FFButtonWidget(
                                               onPressed: () async {
                                                 var confirmDialogResponse =

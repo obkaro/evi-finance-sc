@@ -11,13 +11,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class SetTransCategoryWidget extends StatefulWidget {
   const SetTransCategoryWidget({
-    Key key,
+    Key? key,
     this.transaction,
     this.recievedBudget,
   }) : super(key: key);
 
-  final TransactionsRecord transaction;
-  final DocumentReference recievedBudget;
+  final TransactionsRecord? transaction;
+  final DocumentReference? recievedBudget;
 
   @override
   _SetTransCategoryWidgetState createState() => _SetTransCategoryWidgetState();
@@ -108,7 +108,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                   future: queryBudgetCategoriesRecordOnce(
                     queryBuilder: (budgetCategoriesRecord) =>
                         budgetCategoriesRecord.where('categoryBudget',
-                            isEqualTo: currentUserDocument?.activeBudget),
+                            isEqualTo: currentUserDocument!.activeBudget),
                   ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
@@ -125,7 +125,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                       );
                     }
                     List<BudgetCategoriesRecord>
-                        columnBudgetCategoriesRecordList = snapshot.data;
+                        columnBudgetCategoriesRecordList = snapshot.data!;
                     return Column(
                       mainAxisSize: MainAxisSize.max,
                       children:
@@ -137,8 +137,13 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: InkWell(
                             onTap: () async {
+                              if (animationsMap[
+                                      'containerOnActionTriggerAnimation'] ==
+                                  null) {
+                                return;
+                              }
                               await (animationsMap[
-                                          'containerOnActionTriggerAnimation']
+                                          'containerOnActionTriggerAnimation']!
                                       .curvedAnimation
                                       .parent as AnimationController)
                                   .forward(from: 0.0);
@@ -146,17 +151,17 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                               final transactionsUpdateData =
                                   createTransactionsRecordData(
                                 linkedCategory:
-                                    columnBudgetCategoriesRecord.reference,
+                                    columnBudgetCategoriesRecord!.reference,
                                 isCategorized: true,
                               );
-                              await widget.transaction.reference
+                              await widget.transaction!.reference
                                   .update(transactionsUpdateData);
 
                               final budgetCategoriesUpdateData = {
                                 'linkedTransactions': FieldValue.arrayUnion(
-                                    [widget.transaction.reference]),
+                                    [widget.transaction!.reference]),
                               };
-                              await columnBudgetCategoriesRecord.reference
+                              await columnBudgetCategoriesRecord!.reference
                                   .update(budgetCategoriesUpdateData);
                               Navigator.pop(context);
                               Navigator.pop(context);
@@ -178,7 +183,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      columnBudgetCategoriesRecord.categoryName,
+                                      columnBudgetCategoriesRecord!
+                                          .categoryName!,
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1,
                                     ),
@@ -187,7 +193,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                           0, 16, 0, 0),
                                       child: Text(
                                         functions.formatBudgetCurrency(
-                                            columnBudgetCategoriesRecord
+                                            columnBudgetCategoriesRecord!
                                                 .allocatedAmount),
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle2,
@@ -198,7 +204,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                               ),
                             ),
                           ).animated([
-                            animationsMap['containerOnActionTriggerAnimation']
+                            animationsMap['containerOnActionTriggerAnimation']!
                           ]),
                         );
                       }),

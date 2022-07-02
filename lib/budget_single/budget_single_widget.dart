@@ -10,11 +10,11 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 class BudgetSingleWidget extends StatefulWidget {
   const BudgetSingleWidget({
-    Key key,
+    Key? key,
     this.budget,
   }) : super(key: key);
 
-  final BudgetsRecord budget;
+  final BudgetsRecord? budget;
 
   @override
   _BudgetSingleWidgetState createState() => _BudgetSingleWidgetState();
@@ -35,7 +35,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
     return StreamBuilder<List<BudgetCategoriesRecord>>(
       stream: queryBudgetCategoriesRecord(
         queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
-            .where('categoryBudget', isEqualTo: widget.budget.reference)
+            .where('categoryBudget', isEqualTo: widget.budget!.reference)
             .where('categoryName', isNotEqualTo: 'dummy'),
       ),
       builder: (context, snapshot) {
@@ -53,7 +53,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
           );
         }
         List<BudgetCategoriesRecord> budgetSingleBudgetCategoriesRecordList =
-            snapshot.data;
+            snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -62,7 +62,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                 IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
             automaticallyImplyLeading: true,
             title: Text(
-              '${dateTimeFormat('MEd', widget.budget.budgetStart)} - ${dateTimeFormat('MEd', widget.budget.budgetEnd)}',
+              '${dateTimeFormat('MEd', widget.budget!.budgetStart)} - ${dateTimeFormat('MEd', widget.budget!.budgetEnd)}',
               style: FlutterFlowTheme.of(context).title3,
             ),
             actions: [],
@@ -94,7 +94,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                             'linkedCategory',
                                             whereIn:
                                                 budgetSingleBudgetCategoriesRecordList
-                                                    .map((e) => e.reference)
+                                                    .map((e) => e!.reference)
                                                     .toList()),
                                   ),
                                   builder: (context, snapshot) {
@@ -114,7 +114,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                     }
                                     List<TransactionsRecord>
                                         containerTransactionsRecordList =
-                                        snapshot.data;
+                                        snapshot.data!;
                                     return Container(
                                       width: double.infinity,
                                       decoration: BoxDecoration(),
@@ -144,7 +144,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                 context)
                                                             .eviredTransparent,
                                                     center: Text(
-                                                      '${functions.formatBudgetCurrency(widget.budget.budgetAmount)} Left',
+                                                      '${functions.formatBudgetCurrency(widget.budget!.budgetAmount)} Left',
                                                       textAlign:
                                                           TextAlign.center,
                                                       style:
@@ -187,7 +187,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                 context)
                                                             .eviredTransparent,
                                                     center: Text(
-                                                      '${functions.subtractCurrency(widget.budget.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                      '${functions.subtractCurrency(widget.budget!.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                       textAlign:
                                                           TextAlign.center,
                                                       style:
@@ -271,7 +271,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                       Text(
                                                         functions
                                                             .formatBudgetCurrency(
-                                                                widget.budget
+                                                                widget.budget!
                                                                     .budgetAmount),
                                                         style:
                                                             FlutterFlowTheme.of(
@@ -306,7 +306,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                         .where('categoryName',
                                             isEqualTo: 'Uncategorized')
                                         .where('categoryBudget',
-                                            isEqualTo: widget.budget.reference),
+                                            isEqualTo:
+                                                widget.budget!.reference),
                                 singleRecord: true,
                               ),
                               builder: (context, snapshot) {
@@ -326,17 +327,13 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                 }
                                 List<BudgetCategoriesRecord>
                                     containerBudgetCategoriesRecordList =
-                                    snapshot.data;
+                                    snapshot.data!;
                                 // Return an empty Container when the document does not exist.
-                                if (snapshot.data.isEmpty) {
+                                if (snapshot.data!.isEmpty) {
                                   return Container();
                                 }
                                 final containerBudgetCategoriesRecord =
-                                    containerBudgetCategoriesRecordList
-                                            .isNotEmpty
-                                        ? containerBudgetCategoriesRecordList
-                                            .first
-                                        : null;
+                                    containerBudgetCategoriesRecordList.first;
                                 return Container(
                                   width: MediaQuery.of(context).size.width,
                                   height: 60,
@@ -376,7 +373,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                 ),
                                                 Text(
                                                   functions.formatBudgetCurrency(
-                                                      widget.budget
+                                                      widget.budget!
                                                           .unallocatedAmount),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -420,7 +417,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                               transactionsRecord.where(
                                                   'linkedCategory',
                                                   isEqualTo:
-                                                      budgetCategoriesItem
+                                                      budgetCategoriesItem!
                                                           .reference),
                                         ),
                                         builder: (context, snapshot) {
@@ -441,7 +438,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                           }
                                           List<TransactionsRecord>
                                               containerTransactionsRecordList =
-                                              snapshot.data;
+                                              snapshot.data!;
                                           return InkWell(
                                             onTap: () async {
                                               // Action_ViewSingleCategory
@@ -502,8 +499,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                         0,
                                                                         10),
                                                             child: Text(
-                                                              budgetCategoriesItem
-                                                                  .categoryName,
+                                                              budgetCategoriesItem!
+                                                                  .categoryName!,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .subtitle1,
@@ -518,7 +515,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                         0,
                                                                         10),
                                                             child: Text(
-                                                              '${functions.subtractCurrencyLine(budgetCategoriesItem.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                              '${functions.subtractCurrencyLine(budgetCategoriesItem!.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyText1,

@@ -19,11 +19,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CreateBudgetCategoriesWidget extends StatefulWidget {
   const CreateBudgetCategoriesWidget({
-    Key key,
+    Key? key,
     this.createdBudget,
   }) : super(key: key);
 
-  final BudgetsRecord createdBudget;
+  final BudgetsRecord? createdBudget;
 
   @override
   _CreateBudgetCategoriesWidgetState createState() =>
@@ -46,7 +46,7 @@ class _CreateBudgetCategoriesWidgetState
     return StreamBuilder<List<BudgetCategoriesRecord>>(
       stream: queryBudgetCategoriesRecord(
         queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
-            .where('categoryBudget', isEqualTo: widget.createdBudget.reference)
+            .where('categoryBudget', isEqualTo: widget.createdBudget!.reference)
             .where('categoryName', isNotEqualTo: 'dummy'),
       ),
       builder: (context, snapshot) {
@@ -64,7 +64,7 @@ class _CreateBudgetCategoriesWidgetState
           );
         }
         List<BudgetCategoriesRecord>
-            createBudgetCategoriesBudgetCategoriesRecordList = snapshot.data;
+            createBudgetCategoriesBudgetCategoriesRecordList = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -91,7 +91,7 @@ class _CreateBudgetCategoriesWidgetState
                     padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 0),
                     child: StreamBuilder<BudgetsRecord>(
                       stream: BudgetsRecord.getDocument(
-                          widget.createdBudget.reference),
+                          widget.createdBudget!.reference),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
                         if (!snapshot.hasData) {
@@ -107,7 +107,7 @@ class _CreateBudgetCategoriesWidgetState
                             ),
                           );
                         }
-                        final columnBudgetsRecord = snapshot.data;
+                        final columnBudgetsRecord = snapshot.data!;
                         return Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -152,7 +152,7 @@ class _CreateBudgetCategoriesWidgetState
                                           alignment: AlignmentDirectional(0, 0),
                                           child: Text(
                                             functions.formatBudgetCurrency(
-                                                columnBudgetsRecord
+                                                columnBudgetsRecord!
                                                     .unallocatedAmount),
                                             textAlign: TextAlign.end,
                                             style: FlutterFlowTheme.of(context)
@@ -183,7 +183,7 @@ class _CreateBudgetCategoriesWidgetState
                                               alignment:
                                                   AlignmentDirectional(0, 0),
                                               child: Text(
-                                                'Start: ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)}',
+                                                'Start: ${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetStart)}',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .subtitle1,
@@ -212,7 +212,7 @@ class _CreateBudgetCategoriesWidgetState
                                                   FieldValue.increment(
                                                       -(100000)),
                                             };
-                                            await columnBudgetsRecord.reference
+                                            await columnBudgetsRecord!.reference
                                                 .update(budgetsUpdateData);
                                           },
                                         ),
@@ -250,7 +250,7 @@ class _CreateBudgetCategoriesWidgetState
                                                 AlignmentDirectional(0, 0),
                                             child: Text(
                                               functions.formatBudgetCurrency(
-                                                  columnBudgetsRecord
+                                                  columnBudgetsRecord!
                                                       .budgetAmount),
                                               textAlign: TextAlign.end,
                                               style:
@@ -279,7 +279,7 @@ class _CreateBudgetCategoriesWidgetState
                                               'unallocatedAmount':
                                                   FieldValue.increment(100000),
                                             };
-                                            await columnBudgetsRecord.reference
+                                            await columnBudgetsRecord!.reference
                                                 .update(budgetsUpdateData);
                                           },
                                         ),
@@ -354,7 +354,7 @@ class _CreateBudgetCategoriesWidgetState
                                             }
                                             List<ConstBudgetCategoriesRecord>
                                                 gridViewConstBudgetCategoriesRecordList =
-                                                snapshot.data;
+                                                snapshot.data!;
                                             return GridView.builder(
                                               padding: EdgeInsets.zero,
                                               gridDelegate:
@@ -432,8 +432,8 @@ class _CreateBudgetCategoriesWidgetState
                                                           ),
                                                         ),
                                                         AutoSizeText(
-                                                          gridViewConstBudgetCategoriesRecord
-                                                              .categoryName,
+                                                          gridViewConstBudgetCategoriesRecord!
+                                                              .categoryName!,
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: FlutterFlowTheme
@@ -595,8 +595,8 @@ class _CreateBudgetCategoriesWidgetState
                                                                           0),
                                                                   child:
                                                                       AutoSizeText(
-                                                                    existingCategoriesItem
-                                                                        .categoryName,
+                                                                    existingCategoriesItem!
+                                                                        .categoryName!,
                                                                     textAlign:
                                                                         TextAlign
                                                                             .start,
@@ -624,7 +624,7 @@ class _CreateBudgetCategoriesWidgetState
                                                                   0, 0),
                                                           child: Text(
                                                             functions.formatBudgetCurrency(
-                                                                existingCategoriesItem
+                                                                existingCategoriesItem!
                                                                     .allocatedAmount),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
@@ -693,16 +693,16 @@ class _CreateBudgetCategoriesWidgetState
                                                                 {
                                                               'unallocatedAmount':
                                                                   FieldValue.increment(
-                                                                      existingCategoriesItem
+                                                                      existingCategoriesItem!
                                                                           .allocatedAmount),
                                                             };
                                                             await widget
-                                                                .createdBudget
+                                                                .createdBudget!
                                                                 .reference
                                                                 .update(
                                                                     budgetsUpdateData);
                                                             // Action_DeleteCategory
-                                                            await existingCategoriesItem
+                                                            await existingCategoriesItem!
                                                                 .reference
                                                                 .delete();
                                                           },

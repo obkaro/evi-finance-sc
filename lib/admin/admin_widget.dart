@@ -10,7 +10,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AdminWidget extends StatefulWidget {
-  const AdminWidget({Key key}) : super(key: key);
+  const AdminWidget({Key? key}) : super(key: key);
 
   @override
   _AdminWidgetState createState() => _AdminWidgetState();
@@ -85,7 +85,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                   }
                                   List<AccountsRecord>
                                       containerAccountsRecordList =
-                                      snapshot.data;
+                                      snapshot.data!;
                                   return Container(
                                     width: double.infinity,
                                     height: 70,
@@ -102,7 +102,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                   whereNotIn:
                                                       containerAccountsRecordList
                                                           .map((e) =>
-                                                              e.reference)
+                                                              e!.reference)
                                                           .toList()),
                                         ),
                                         builder: (context, snapshot) {
@@ -123,7 +123,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                           }
                                           List<TransactionsRecord>
                                               buttonTransactionsRecordList =
-                                              snapshot.data;
+                                              snapshot.data!;
                                           return FFButtonWidget(
                                             onPressed: () async {
                                               await actions.deleteTransactions(
@@ -178,7 +178,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                   }
                                   List<BudgetsRecord>
                                       containerBudgetsRecordList =
-                                      snapshot.data;
+                                      snapshot.data!;
                                   return Container(
                                     width: double.infinity,
                                     height: 70,
@@ -195,7 +195,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                   whereNotIn:
                                                       containerBudgetsRecordList
                                                           .map((e) =>
-                                                              e.reference)
+                                                              e!.reference)
                                                           .toList()),
                                         ),
                                         builder: (context, snapshot) {
@@ -216,7 +216,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                           }
                                           List<BudgetCategoriesRecord>
                                               buttonBudgetCategoriesRecordList =
-                                              snapshot.data;
+                                              snapshot.data!;
                                           return FFButtonWidget(
                                             onPressed: () async {
                                               await actions.deleteCategories(

@@ -13,11 +13,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TransactionSingleWidget extends StatefulWidget {
   const TransactionSingleWidget({
-    Key key,
+    Key? key,
     this.transaction,
   }) : super(key: key);
 
-  final TransactionsRecord transaction;
+  final TransactionsRecord? transaction;
 
   @override
   _TransactionSingleWidgetState createState() =>
@@ -40,7 +40,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
       stream: queryBudgetCategoriesRecord(
         queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord.where(
             'linkedTransactions',
-            arrayContains: widget.transaction.reference),
+            arrayContains: widget.transaction!.reference),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -57,7 +57,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
           );
         }
         List<BudgetCategoriesRecord>
-            transactionSingleBudgetCategoriesRecordList = snapshot.data;
+            transactionSingleBudgetCategoriesRecordList = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -81,7 +81,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                       child: FutureBuilder<AccountsRecord>(
                         future: AccountsRecord.getDocumentOnce(
-                            widget.transaction.account),
+                            widget.transaction!.account!),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
                           if (!snapshot.hasData) {
@@ -97,7 +97,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                               ),
                             );
                           }
-                          final columnAccountsRecord = snapshot.data;
+                          final columnAccountsRecord = snapshot.data!;
                           return SingleChildScrollView(
                             primary: false,
                             child: Column(
@@ -144,7 +144,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                         .where(
                                                             'institutionCode',
                                                             isEqualTo:
-                                                                columnAccountsRecord
+                                                                columnAccountsRecord!
                                                                     .bankCode),
                                             singleRecord: true,
                                           ),
@@ -166,24 +166,21 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                             }
                                             List<ConstInstitutionLogosRecord>
                                                 imageConstInstitutionLogosRecordList =
-                                                snapshot.data;
+                                                snapshot.data!;
                                             // Return an empty Container when the document does not exist.
-                                            if (snapshot.data.isEmpty) {
+                                            if (snapshot.data!.isEmpty) {
                                               return Container();
                                             }
                                             final imageConstInstitutionLogosRecord =
                                                 imageConstInstitutionLogosRecordList
-                                                        .isNotEmpty
-                                                    ? imageConstInstitutionLogosRecordList
-                                                        .first
-                                                    : null;
+                                                    .first;
                                             return ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(12),
                                               child: CachedNetworkImage(
                                                 imageUrl:
-                                                    imageConstInstitutionLogosRecord
-                                                        .institutionLogo,
+                                                    imageConstInstitutionLogosRecord!
+                                                        .institutionLogo!,
                                                 width: 100,
                                                 height: 100,
                                                 fit: BoxFit.cover,
@@ -204,7 +201,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           0, 0, 0, 10),
                                       child: Text(
                                         functions.formatTransCurrency(widget
-                                            .transaction.transactionAmount),
+                                            .transaction!.transactionAmount),
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1
                                             .override(
@@ -289,8 +286,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                             children: [
                                                               Text(
                                                                 widget
-                                                                    .transaction
-                                                                    .transactionNarration,
+                                                                    .transaction!
+                                                                    .transactionNarration!,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .subtitle1,
@@ -365,8 +362,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                 dateTimeFormat(
                                                                     'MMMMEEEEd',
                                                                     widget
-                                                                        .transaction
-                                                                        .trasactionDate),
+                                                                        .transaction!
+                                                                        .trasactionDate!),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .subtitle1,
@@ -446,8 +443,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                   Clip.none,
                                                               children: [
                                                                 Text(
-                                                                  columnAccountsRecord
-                                                                      .accountName,
+                                                                  columnAccountsRecord!
+                                                                      .accountName!,
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .subtitle1,
@@ -476,8 +473,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                 Clip.none,
                                                             children: [
                                                               Text(
-                                                                columnAccountsRecord
-                                                                    .accountNumber,
+                                                                columnAccountsRecord!
+                                                                    .accountNumber!,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .subtitle1,
@@ -550,7 +547,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                             children: [
                                                               Text(
                                                                 functions.formatTransCurrency(widget
-                                                                    .transaction
+                                                                    .transaction!
                                                                     .balanceAfter),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
@@ -569,7 +566,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           Column(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              if ((widget.transaction
+                                              if ((widget.transaction!
                                                       .isCategorized) ==
                                                   true)
                                                 Padding(
@@ -577,11 +574,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                       .fromSTEB(0, 10, 0, 10),
                                                   child: StreamBuilder<
                                                       BudgetCategoriesRecord>(
-                                                    stream:
-                                                        BudgetCategoriesRecord
-                                                            .getDocument(widget
-                                                                .transaction
-                                                                .linkedCategory),
+                                                    stream: BudgetCategoriesRecord
+                                                        .getDocument(widget
+                                                            .transaction!
+                                                            .linkedCategory!),
                                                     builder:
                                                         (context, snapshot) {
                                                       // Customize what your widget looks like when it's loading.
@@ -600,7 +596,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                         );
                                                       }
                                                       final columnBudgetCategoriesRecord =
-                                                          snapshot.data;
+                                                          snapshot.data!;
                                                       return Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
@@ -641,8 +637,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                       .max,
                                                               children: [
                                                                 Text(
-                                                                  columnBudgetCategoriesRecord
-                                                                      .categoryName,
+                                                                  columnBudgetCategoriesRecord!
+                                                                      .categoryName!,
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .subtitle1,
@@ -665,7 +661,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                 Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    if ((widget.transaction.transactionType) ==
+                                    if ((widget.transaction!.transactionType) ==
                                         'debit')
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -675,8 +671,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            if ((currentUserDocument
-                                                    ?.activeBudget !=
+                                            if ((currentUserDocument!
+                                                    .activeBudget !=
                                                 null))
                                               Expanded(
                                                 child: AuthUserStreamWidget(
@@ -700,8 +696,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                               transaction: widget
                                                                   .transaction,
                                                               recievedBudget:
-                                                                  currentUserDocument
-                                                                      ?.activeBudget,
+                                                                  currentUserDocument!
+                                                                      .activeBudget,
                                                             ),
                                                           );
                                                         },
@@ -742,7 +738,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           ],
                                         ),
                                       ),
-                                    if ((widget.transaction.transactionType) ==
+                                    if ((widget.transaction!.transactionType) ==
                                         'debit')
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -752,7 +748,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            if ((widget.transaction
+                                            if ((widget.transaction!
                                                     .linkedCategory !=
                                                 null))
                                               Expanded(
@@ -769,7 +765,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                           FieldValue.delete(),
                                                     };
                                                     await widget
-                                                        .transaction.reference
+                                                        .transaction!.reference
                                                         .update(
                                                             transactionsUpdateData);
 
@@ -778,12 +774,12 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                       'linkedTransactions':
                                                           FieldValue
                                                               .arrayRemove([
-                                                        widget.transaction
+                                                        widget.transaction!
                                                             .reference
                                                       ]),
                                                     };
-                                                    await widget.transaction
-                                                        .linkedCategory
+                                                    await widget.transaction!
+                                                        .linkedCategory!
                                                         .update(
                                                             budgetCategoriesUpdateData);
                                                     Navigator.pop(context);

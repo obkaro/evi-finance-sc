@@ -13,14 +13,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BudgetsWidget extends StatefulWidget {
-  const BudgetsWidget({Key key}) : super(key: key);
+  const BudgetsWidget({Key? key}) : super(key: key);
 
   @override
   _BudgetsWidgetState createState() => _BudgetsWidgetState();
 }
 
 class _BudgetsWidgetState extends State<BudgetsWidget> {
-  BudgetsRecord createdBudget2;
+  BudgetsRecord? createdBudget2;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -48,13 +48,13 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: Visibility(
-        visible: (currentUserDocument?.activeBudget != null),
+        visible: (currentUserDocument!.activeBudget != null),
         child: AuthUserStreamWidget(
           child: StreamBuilder<List<BudgetCategoriesRecord>>(
             stream: queryBudgetCategoriesRecord(
               queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
                   .where('categoryBudget',
-                      isEqualTo: currentUserDocument?.activeBudget)
+                      isEqualTo: currentUserDocument!.activeBudget)
                   .where('categoryName', isNotEqualTo: 'Uncategorized'),
             ),
             builder: (context, snapshot) {
@@ -73,7 +73,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
               }
               List<BudgetCategoriesRecord>
                   floatingActionButtonBudgetCategoriesRecordList =
-                  snapshot.data;
+                  snapshot.data!;
               return FloatingActionButton(
                 onPressed: () async {
                   final budgetsCreateData = createBudgetsRecordData(
@@ -161,7 +161,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                             );
                           }
                           List<BudgetsRecord> columnBudgetsRecordList =
-                              snapshot.data;
+                              snapshot.data!;
                           return SingleChildScrollView(
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -192,7 +192,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                   budgetCategoriesRecord
                                                       .where('categoryBudget',
                                                           isEqualTo:
-                                                              columnBudgetsRecord
+                                                              columnBudgetsRecord!
                                                                   .reference)
                                                       .where('categoryName',
                                                           isNotEqualTo:
@@ -217,7 +217,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                               }
                                               List<BudgetCategoriesRecord>
                                                   listTileBudgetCategoriesRecordList =
-                                                  snapshot.data;
+                                                  snapshot.data!;
                                               return InkWell(
                                                 onTap: () async {
                                                   final budgetsUpdateData =
@@ -225,7 +225,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                     lastViewed:
                                                         getCurrentTimestamp,
                                                   );
-                                                  await columnBudgetsRecord
+                                                  await columnBudgetsRecord!
                                                       .reference
                                                       .update(
                                                           budgetsUpdateData);
@@ -251,10 +251,10 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                       icon:
                                                           Icons.delete_rounded,
                                                       onTap: () async {
-                                                        if ((columnBudgetsRecord
+                                                        if ((columnBudgetsRecord!
                                                                 .reference) ==
-                                                            (currentUserDocument
-                                                                ?.activeBudget)) {
+                                                            (currentUserDocument!
+                                                                .activeBudget)) {
                                                           var confirmDialogResponse =
                                                               await showDialog<
                                                                       bool>(
@@ -292,13 +292,13 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                                   FieldValue
                                                                       .delete(),
                                                             };
-                                                            await currentUserReference
+                                                            await currentUserReference!
                                                                 .update(
                                                                     usersUpdateData);
                                                           }
                                                         }
                                                         // Action_DeleteBudget
-                                                        await columnBudgetsRecord
+                                                        await columnBudgetsRecord!
                                                             .reference
                                                             .delete();
                                                       },
@@ -314,10 +314,10 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                         final usersUpdateData =
                                                             createUsersRecordData(
                                                           activeBudget:
-                                                              columnBudgetsRecord
+                                                              columnBudgetsRecord!
                                                                   .reference,
                                                         );
-                                                        await currentUserReference
+                                                        await currentUserReference!
                                                             .update(
                                                                 usersUpdateData);
                                                       },
@@ -325,7 +325,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                   ],
                                                   child: ListTile(
                                                     title: Text(
-                                                      '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
+                                                      '${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetEnd)}',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -339,7 +339,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                     subtitle: Text(
                                                       functions
                                                           .formatBudgetCurrency(
-                                                              columnBudgetsRecord
+                                                              columnBudgetsRecord!
                                                                   .budgetAmount),
                                                       style:
                                                           FlutterFlowTheme.of(

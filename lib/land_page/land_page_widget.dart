@@ -8,7 +8,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LandPageWidget extends StatefulWidget {
-  const LandPageWidget({Key key}) : super(key: key);
+  const LandPageWidget({Key? key}) : super(key: key);
 
   @override
   _LandPageWidgetState createState() => _LandPageWidgetState();

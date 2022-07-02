@@ -6,7 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EmptyLinkedAccountsWidget extends StatefulWidget {
-  const EmptyLinkedAccountsWidget({Key key}) : super(key: key);
+  const EmptyLinkedAccountsWidget({Key? key}) : super(key: key);
 
   @override
   _EmptyLinkedAccountsWidgetState createState() =>

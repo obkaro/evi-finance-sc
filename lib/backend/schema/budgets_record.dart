@@ -10,42 +10,31 @@ abstract class BudgetsRecord
     implements Built<BudgetsRecord, BudgetsRecordBuilder> {
   static Serializer<BudgetsRecord> get serializer => _$budgetsRecordSerializer;
 
-  @nullable
-  DocumentReference get budgetOwner;
+  DocumentReference? get budgetOwner;
 
-  @nullable
-  int get budgetAmount;
+  int? get budgetAmount;
 
-  @nullable
-  DateTime get budgetStart;
+  DateTime? get budgetStart;
 
-  @nullable
-  DateTime get budgetEnd;
+  DateTime? get budgetEnd;
 
-  @nullable
-  DateTime get budgetDateCreated;
+  DateTime? get budgetDateCreated;
 
-  @nullable
-  bool get isRecurring;
+  bool? get isRecurring;
 
-  @nullable
-  String get budgetID;
+  String? get budgetID;
 
-  @nullable
-  DateTime get lastViewed;
+  DateTime? get lastViewed;
 
-  @nullable
-  bool get isActive;
+  bool? get isActive;
 
-  @nullable
-  String get budgetDuration;
+  String? get budgetDuration;
 
-  @nullable
-  int get unallocatedAmount;
+  int? get unallocatedAmount;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ref;
+  DocumentReference get reference => ref!;
 
   static void _initializeBuilder(BudgetsRecordBuilder builder) => builder
     ..budgetAmount = 0
@@ -60,11 +49,11 @@ abstract class BudgetsRecord
 
   static Stream<BudgetsRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<BudgetsRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   BudgetsRecord._();
   factory BudgetsRecord([void Function(BudgetsRecordBuilder) updates]) =
@@ -73,21 +62,21 @@ abstract class BudgetsRecord
   static BudgetsRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createBudgetsRecordData({
-  DocumentReference budgetOwner,
-  int budgetAmount,
-  DateTime budgetStart,
-  DateTime budgetEnd,
-  DateTime budgetDateCreated,
-  bool isRecurring,
-  String budgetID,
-  DateTime lastViewed,
-  bool isActive,
-  String budgetDuration,
-  int unallocatedAmount,
+  DocumentReference? budgetOwner,
+  int? budgetAmount,
+  DateTime? budgetStart,
+  DateTime? budgetEnd,
+  DateTime? budgetDateCreated,
+  bool? isRecurring,
+  String? budgetID,
+  DateTime? lastViewed,
+  bool? isActive,
+  String? budgetDuration,
+  int? unallocatedAmount,
 }) =>
     serializers.toFirestore(
         BudgetsRecord.serializer,

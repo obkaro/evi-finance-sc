@@ -11,45 +11,33 @@ abstract class TransactionsRecord
   static Serializer<TransactionsRecord> get serializer =>
       _$transactionsRecordSerializer;
 
-  @nullable
-  DateTime get trasactionDate;
+  DateTime? get trasactionDate;
 
-  @nullable
-  DocumentReference get account;
+  DocumentReference? get account;
 
-  @nullable
-  String get monoCategory;
+  String? get monoCategory;
 
-  @nullable
-  DocumentReference get transactionOwner;
+  DocumentReference? get transactionOwner;
 
-  @nullable
-  int get balanceAfter;
+  int? get balanceAfter;
 
-  @nullable
-  String get transactionMonoID;
+  String? get transactionMonoID;
 
-  @nullable
-  int get transactionAmount;
+  int? get transactionAmount;
 
-  @nullable
-  String get transactionType;
+  String? get transactionType;
 
-  @nullable
-  String get transactionNarration;
+  String? get transactionNarration;
 
-  @nullable
-  DocumentReference get linkedCategory;
+  DocumentReference? get linkedCategory;
 
-  @nullable
-  bool get isCategorized;
+  bool? get isCategorized;
 
-  @nullable
-  String get transactionID;
+  String? get transactionID;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ref;
+  DocumentReference get reference => ref!;
 
   static void _initializeBuilder(TransactionsRecordBuilder builder) => builder
     ..monoCategory = ''
@@ -66,11 +54,11 @@ abstract class TransactionsRecord
 
   static Stream<TransactionsRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<TransactionsRecord> getDocumentOnce(DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   TransactionsRecord._();
   factory TransactionsRecord(
@@ -80,22 +68,22 @@ abstract class TransactionsRecord
   static TransactionsRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createTransactionsRecordData({
-  DateTime trasactionDate,
-  DocumentReference account,
-  String monoCategory,
-  DocumentReference transactionOwner,
-  int balanceAfter,
-  String transactionMonoID,
-  int transactionAmount,
-  String transactionType,
-  String transactionNarration,
-  DocumentReference linkedCategory,
-  bool isCategorized,
-  String transactionID,
+  DateTime? trasactionDate,
+  DocumentReference? account,
+  String? monoCategory,
+  DocumentReference? transactionOwner,
+  int? balanceAfter,
+  String? transactionMonoID,
+  int? transactionAmount,
+  String? transactionType,
+  String? transactionNarration,
+  DocumentReference? linkedCategory,
+  bool? isCategorized,
+  String? transactionID,
 }) =>
     serializers.toFirestore(
         TransactionsRecord.serializer,

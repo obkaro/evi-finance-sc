@@ -16,11 +16,11 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 class CategorySingleWidget extends StatefulWidget {
   const CategorySingleWidget({
-    Key key,
+    Key? key,
     this.category,
   }) : super(key: key);
 
-  final BudgetCategoriesRecord category;
+  final BudgetCategoriesRecord? category;
 
   @override
   _CategorySingleWidgetState createState() => _CategorySingleWidgetState();
@@ -41,7 +41,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
     return StreamBuilder<List<TransactionsRecord>>(
       stream: queryTransactionsRecord(
         queryBuilder: (transactionsRecord) => transactionsRecord
-            .where('linkedCategory', isEqualTo: widget.category.reference),
+            .where('linkedCategory', isEqualTo: widget.category!.reference),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -58,7 +58,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
           );
         }
         List<TransactionsRecord> categorySingleTransactionsRecordList =
-            snapshot.data;
+            snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -67,7 +67,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                 IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
             automaticallyImplyLeading: true,
             title: Text(
-              widget.category.categoryName,
+              widget.category!.categoryName!,
               style: FlutterFlowTheme.of(context).title3,
             ),
             actions: [
@@ -75,7 +75,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                 stream: queryTransactionsRecord(
                   queryBuilder: (transactionsRecord) =>
                       transactionsRecord.where('linkedCategory',
-                          isEqualTo: widget.category.reference),
+                          isEqualTo: widget.category!.reference),
                 ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
@@ -92,7 +92,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                     );
                   }
                   List<TransactionsRecord> iconButtonTransactionsRecordList =
-                      snapshot.data;
+                      snapshot.data!;
                   return FlutterFlowIconButton(
                     borderColor: Colors.transparent,
                     borderRadius: 30,
@@ -113,7 +113,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                       final budgetCategoriesUpdateData = {
                         'linkedTransactions': FieldValue.delete(),
                       };
-                      await widget.category.reference
+                      await widget.category!.reference
                           .update(budgetCategoriesUpdateData);
                     },
                   );
@@ -153,7 +153,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                               backgroundColor: FlutterFlowTheme.of(context)
                                   .eviredTransparent,
                               center: Text(
-                                '${functions.subtractCurrency(widget.category.allocatedAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList()))}',
+                                '${functions.subtractCurrency(widget.category!.allocatedAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList()))}',
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
                                     .subtitle1
@@ -201,7 +201,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                 ),
                                 Text(
                                   functions.formatBudgetCurrency(
-                                      widget.category.allocatedAmount),
+                                      widget.category!.allocatedAmount),
                                   style: FlutterFlowTheme.of(context).subtitle1,
                                 ),
                               ],
@@ -249,7 +249,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                             isEqualTo: 'debit')
                                         .where('linkedCategory',
                                             isEqualTo:
-                                                widget.category.reference)
+                                                widget.category!.reference)
                                         .orderBy('trasactionDate',
                                             descending: true),
                               ),
@@ -270,7 +270,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                 }
                                 List<TransactionsRecord>
                                     columnTransactionsRecordList =
-                                    snapshot.data;
+                                    snapshot.data!;
                                 return SingleChildScrollView(
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -293,8 +293,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                 FutureBuilder<AccountsRecord>(
                                               future: AccountsRecord
                                                   .getDocumentOnce(
-                                                      columnTransactionsRecord
-                                                          .account),
+                                                      columnTransactionsRecord!
+                                                          .account!),
                                               builder: (context, snapshot) {
                                                 // Customize what your widget looks like when it's loading.
                                                 if (!snapshot.hasData) {
@@ -313,7 +313,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                   );
                                                 }
                                                 final rowAccountsRecord =
-                                                    snapshot.data;
+                                                    snapshot.data!;
                                                 return InkWell(
                                                   onTap: () async {
                                                     // Action_TransactionSingle
@@ -368,7 +368,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                 queryBuilder: (constInstitutionLogosRecord) => constInstitutionLogosRecord.where(
                                                                     'institutionCode',
                                                                     isEqualTo:
-                                                                        rowAccountsRecord
+                                                                        rowAccountsRecord!
                                                                             .bankCode),
                                                                 singleRecord:
                                                                     true,
@@ -397,19 +397,16 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                 List<ConstInstitutionLogosRecord>
                                                                     imageConstInstitutionLogosRecordList =
                                                                     snapshot
-                                                                        .data;
+                                                                        .data!;
                                                                 // Return an empty Container when the document does not exist.
                                                                 if (snapshot
-                                                                    .data
+                                                                    .data!
                                                                     .isEmpty) {
                                                                   return Container();
                                                                 }
                                                                 final imageConstInstitutionLogosRecord =
                                                                     imageConstInstitutionLogosRecordList
-                                                                            .isNotEmpty
-                                                                        ? imageConstInstitutionLogosRecordList
-                                                                            .first
-                                                                        : null;
+                                                                        .first;
                                                                 return ClipRRect(
                                                                   borderRadius:
                                                                       BorderRadius
@@ -418,8 +415,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                   child:
                                                                       CachedNetworkImage(
                                                                     imageUrl:
-                                                                        imageConstInstitutionLogosRecord
-                                                                            .institutionLogo,
+                                                                        imageConstInstitutionLogosRecord!
+                                                                            .institutionLogo!,
                                                                     width: 40,
                                                                     height: 40,
                                                                     fit: BoxFit
@@ -478,7 +475,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                           CrossAxisAlignment
                                                                               .start,
                                                                       children: [
-                                                                        if (columnTransactionsRecord.isCategorized ??
+                                                                        if (columnTransactionsRecord!.isCategorized ??
                                                                             true)
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
@@ -488,7 +485,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                                 8),
                                                                             child:
                                                                                 StreamBuilder<BudgetCategoriesRecord>(
-                                                                              stream: BudgetCategoriesRecord.getDocument(columnTransactionsRecord.linkedCategory),
+                                                                              stream: BudgetCategoriesRecord.getDocument(columnTransactionsRecord!.linkedCategory!),
                                                                               builder: (context, snapshot) {
                                                                                 // Customize what your widget looks like when it's loading.
                                                                                 if (!snapshot.hasData) {
@@ -503,9 +500,9 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                                     ),
                                                                                   );
                                                                                 }
-                                                                                final textBudgetCategoriesRecord = snapshot.data;
+                                                                                final textBudgetCategoriesRecord = snapshot.data!;
                                                                                 return AutoSizeText(
-                                                                                  textBudgetCategoriesRecord.categoryName.maybeHandleOverflow(
+                                                                                  textBudgetCategoriesRecord!.categoryName!.maybeHandleOverflow(
                                                                                     maxChars: 25,
                                                                                     replacement: '…',
                                                                                   ),
@@ -514,7 +511,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                               },
                                                                             ),
                                                                           ),
-                                                                        if (!(columnTransactionsRecord.isCategorized) ??
+                                                                        if (!(columnTransactionsRecord!.isCategorized!) ??
                                                                             true)
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
@@ -533,7 +530,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                             ),
                                                                           ),
                                                                         Text(
-                                                                          '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
+                                                                          '${dateTimeFormat('Hm', columnTransactionsRecord!.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord!.trasactionDate)}',
                                                                           textAlign:
                                                                               TextAlign.start,
                                                                           style:
@@ -567,7 +564,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                         child:
                                                                             AutoSizeText(
                                                                           functions
-                                                                              .formatTransCurrency(columnTransactionsRecord.transactionAmount)
+                                                                              .formatTransCurrency(columnTransactionsRecord!.transactionAmount)
                                                                               .maybeHandleOverflow(
                                                                                 maxChars: 15,
                                                                                 replacement: '…',
@@ -581,8 +578,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                         ),
                                                                       ),
                                                                       AutoSizeText(
-                                                                        columnTransactionsRecord
-                                                                            .transactionType
+                                                                        columnTransactionsRecord!
+                                                                            .transactionType!
                                                                             .maybeHandleOverflow(
                                                                           maxChars:
                                                                               15,

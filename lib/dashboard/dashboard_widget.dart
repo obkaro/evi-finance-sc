@@ -19,13 +19,13 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 class DashboardWidget extends StatefulWidget {
   const DashboardWidget({
-    Key key,
+    Key? key,
     this.command,
     this.newAccount,
   }) : super(key: key);
 
-  final String command;
-  final DocumentReference newAccount;
+  final String? command;
+  final DocumentReference? newAccount;
 
   @override
   _DashboardWidgetState createState() => _DashboardWidgetState();
@@ -96,7 +96,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                       );
                                     }
                                     List<AccountsRecord>
-                                        textAccountsRecordList = snapshot.data;
+                                        textAccountsRecordList = snapshot.data!;
                                     return Text(
                                       functions.formatTransCurrency(
                                           functions.sumAccountBalances(
@@ -180,7 +180,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                         );
                       }
                       List<AccountsRecord> rowAccountsRecordList =
-                          snapshot.data;
+                          snapshot.data!;
                       if (rowAccountsRecordList.isEmpty) {
                         return Center(
                           child: EmptyLinkedAccountsWidget(),
@@ -257,7 +257,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                           .where(
                                                               'institutionCode',
                                                               isEqualTo:
-                                                                  rowAccountsRecord
+                                                                  rowAccountsRecord!
                                                                       .bankCode),
                                                   singleRecord: true,
                                                 ),
@@ -279,25 +279,22 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                   }
                                                   List<ConstInstitutionLogosRecord>
                                                       imageConstInstitutionLogosRecordList =
-                                                      snapshot.data;
+                                                      snapshot.data!;
                                                   // Return an empty Container when the document does not exist.
-                                                  if (snapshot.data.isEmpty) {
+                                                  if (snapshot.data!.isEmpty) {
                                                     return Container();
                                                   }
                                                   final imageConstInstitutionLogosRecord =
                                                       imageConstInstitutionLogosRecordList
-                                                              .isNotEmpty
-                                                          ? imageConstInstitutionLogosRecordList
-                                                              .first
-                                                          : null;
+                                                          .first;
                                                   return ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             12),
                                                     child: CachedNetworkImage(
                                                       imageUrl:
-                                                          imageConstInstitutionLogosRecord
-                                                              .institutionLogo,
+                                                          imageConstInstitutionLogosRecord!
+                                                              .institutionLogo!,
                                                       width: 40,
                                                       height: 40,
                                                       fit: BoxFit.cover,
@@ -314,7 +311,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                   0, 10, 0, 0),
                                           child: Text(
                                             functions.formatTransCurrency(
-                                                rowAccountsRecord
+                                                rowAccountsRecord!
                                                     .accountBalance),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1,
@@ -332,7 +329,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     },
                   ),
                 ),
-                if ((currentUserDocument?.activeBudget != null))
+                if ((currentUserDocument!.activeBudget != null))
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                     child: AuthUserStreamWidget(
@@ -369,13 +366,13 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       ),
                     ),
                   ),
-                if ((currentUserDocument?.activeBudget != null))
+                if ((currentUserDocument!.activeBudget != null))
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 0),
                     child: AuthUserStreamWidget(
                       child: StreamBuilder<BudgetsRecord>(
                         stream: BudgetsRecord.getDocument(
-                            currentUserDocument?.activeBudget),
+                            currentUserDocument!.activeBudget!),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
                           if (!snapshot.hasData) {
@@ -391,7 +388,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                               ),
                             );
                           }
-                          final containerBudgetsRecord = snapshot.data;
+                          final containerBudgetsRecord = snapshot.data!;
                           return Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
@@ -404,7 +401,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                 queryBuilder: (budgetCategoriesRecord) =>
                                     budgetCategoriesRecord
                                         .where('categoryBudget',
-                                            isEqualTo: containerBudgetsRecord
+                                            isEqualTo: containerBudgetsRecord!
                                                 .reference)
                                         .where('categoryName',
                                             isNotEqualTo: 'Uncategorized'),
@@ -426,7 +423,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                 }
                                 List<BudgetCategoriesRecord>
                                     containerBudgetCategoriesRecordList =
-                                    snapshot.data;
+                                    snapshot.data!;
                                 return InkWell(
                                   onTap: () async {
                                     await Navigator.push(
@@ -455,8 +452,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                         'linkedCategory',
                                                         whereIn:
                                                             containerBudgetCategoriesRecordList
-                                                                .map((e) =>
-                                                                    e.reference)
+                                                                .map((e) => e!
+                                                                    .reference)
                                                                 .toList()),
                                               ),
                                               builder: (context, snapshot) {
@@ -478,7 +475,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                 }
                                                 List<TransactionsRecord>
                                                     containerTransactionsRecordList =
-                                                    snapshot.data;
+                                                    snapshot.data!;
                                                 return Container(
                                                   width: 100,
                                                   decoration: BoxDecoration(),
@@ -531,14 +528,14 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                             0,
                                                                             8),
                                                                 child: Text(
-                                                                  '${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetEnd)}',
+                                                                  '${dateTimeFormat('MMMEd', containerBudgetsRecord!.budgetStart)} - ${dateTimeFormat('MMMEd', containerBudgetsRecord!.budgetEnd)}',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .subtitle1,
                                                                 ),
                                                               ),
                                                               Text(
-                                                                '${functions.subtractCurrencyLine(containerBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                                '${functions.subtractCurrencyLine(containerBudgetsRecord!.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .subtitle2,
@@ -632,7 +629,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                             );
                           }
                           List<TransactionsRecord>
-                              columnTransactionsRecordList = snapshot.data;
+                              columnTransactionsRecordList = snapshot.data!;
                           return SingleChildScrollView(
                             primary: false,
                             child: Column(
@@ -651,7 +648,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                           0, 8, 0, 8),
                                       child: FutureBuilder<AccountsRecord>(
                                         future: AccountsRecord.getDocumentOnce(
-                                            columnTransactionsRecord.account),
+                                            columnTransactionsRecord!.account!),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
                                           if (!snapshot.hasData) {
@@ -669,7 +666,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             );
                                           }
                                           final rowAccountsRecord =
-                                              snapshot.data;
+                                              snapshot.data!;
                                           return InkWell(
                                             onTap: () async {
                                               // Action_TransactionSingle
@@ -723,7 +720,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                               constInstitutionLogosRecord.where(
                                                                   'institutionCode',
                                                                   isEqualTo:
-                                                                      rowAccountsRecord
+                                                                      rowAccountsRecord!
                                                                           .bankCode),
                                                           singleRecord: true,
                                                         ),
@@ -748,18 +745,15 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                           }
                                                           List<ConstInstitutionLogosRecord>
                                                               imageConstInstitutionLogosRecordList =
-                                                              snapshot.data;
+                                                              snapshot.data!;
                                                           // Return an empty Container when the document does not exist.
                                                           if (snapshot
-                                                              .data.isEmpty) {
+                                                              .data!.isEmpty) {
                                                             return Container();
                                                           }
                                                           final imageConstInstitutionLogosRecord =
                                                               imageConstInstitutionLogosRecordList
-                                                                      .isNotEmpty
-                                                                  ? imageConstInstitutionLogosRecordList
-                                                                      .first
-                                                                  : null;
+                                                                  .first;
                                                           return ClipRRect(
                                                             borderRadius:
                                                                 BorderRadius
@@ -768,8 +762,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                             child:
                                                                 CachedNetworkImage(
                                                               imageUrl:
-                                                                  imageConstInstitutionLogosRecord
-                                                                      .institutionLogo,
+                                                                  imageConstInstitutionLogosRecord!
+                                                                      .institutionLogo!,
                                                               width: 40,
                                                               height: 40,
                                                               fit: BoxFit.cover,
@@ -822,7 +816,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                     CrossAxisAlignment
                                                                         .start,
                                                                 children: [
-                                                                  if (columnTransactionsRecord
+                                                                  if (columnTransactionsRecord!
                                                                           .isCategorized ??
                                                                       true)
                                                                     Padding(
@@ -835,7 +829,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                       child: StreamBuilder<
                                                                           BudgetCategoriesRecord>(
                                                                         stream:
-                                                                            BudgetCategoriesRecord.getDocument(columnTransactionsRecord.linkedCategory),
+                                                                            BudgetCategoriesRecord.getDocument(columnTransactionsRecord!.linkedCategory!),
                                                                         builder:
                                                                             (context,
                                                                                 snapshot) {
@@ -854,9 +848,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                             );
                                                                           }
                                                                           final textBudgetCategoriesRecord =
-                                                                              snapshot.data;
+                                                                              snapshot.data!;
                                                                           return AutoSizeText(
-                                                                            textBudgetCategoriesRecord.categoryName.maybeHandleOverflow(
+                                                                            textBudgetCategoriesRecord!.categoryName!.maybeHandleOverflow(
                                                                               maxChars: 25,
                                                                               replacement: '…',
                                                                             ),
@@ -866,8 +860,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                         },
                                                                       ),
                                                                     ),
-                                                                  if (!(columnTransactionsRecord
-                                                                          .isCategorized) ??
+                                                                  if (!(columnTransactionsRecord!
+                                                                          .isCategorized!) ??
                                                                       true)
                                                                     Padding(
                                                                       padding: EdgeInsetsDirectional
@@ -889,7 +883,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                       ),
                                                                     ),
                                                                   Text(
-                                                                    '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
+                                                                    '${dateTimeFormat('Hm', columnTransactionsRecord!.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord!.trasactionDate)}',
                                                                     textAlign:
                                                                         TextAlign
                                                                             .start,
@@ -927,7 +921,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                       AutoSizeText(
                                                                     functions
                                                                         .formatTransCurrency(
-                                                                            columnTransactionsRecord.transactionAmount)
+                                                                            columnTransactionsRecord!.transactionAmount)
                                                                         .maybeHandleOverflow(
                                                                           maxChars:
                                                                               15,
@@ -947,12 +941,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                 ),
                                                                 Stack(
                                                                   children: [
-                                                                    if ((columnTransactionsRecord
+                                                                    if ((columnTransactionsRecord!
                                                                             .transactionType) ==
                                                                         'debit')
                                                                       AutoSizeText(
-                                                                        columnTransactionsRecord
-                                                                            .transactionType
+                                                                        columnTransactionsRecord!
+                                                                            .transactionType!
                                                                             .maybeHandleOverflow(
                                                                           maxChars:
                                                                               15,
@@ -968,12 +962,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                               color: Color(0xFFFF0003),
                                                                             ),
                                                                       ),
-                                                                    if ((columnTransactionsRecord
+                                                                    if ((columnTransactionsRecord!
                                                                             .transactionType) ==
                                                                         'credit')
                                                                       AutoSizeText(
-                                                                        columnTransactionsRecord
-                                                                            .transactionType
+                                                                        columnTransactionsRecord!
+                                                                            .transactionType!
                                                                             .maybeHandleOverflow(
                                                                           maxChars:
                                                                               15,

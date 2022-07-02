@@ -11,60 +11,43 @@ abstract class AccountsRecord
   static Serializer<AccountsRecord> get serializer =>
       _$accountsRecordSerializer;
 
-  @nullable
-  String get accountName;
+  String? get accountName;
 
-  @nullable
-  DocumentReference get accountOwner;
+  DocumentReference? get accountOwner;
 
-  @nullable
-  String get dataStatus;
+  String? get dataStatus;
 
-  @nullable
-  String get accountType;
+  String? get accountType;
 
-  @nullable
-  String get institutionType;
+  String? get institutionType;
 
-  @nullable
-  String get authMethod;
+  String? get authMethod;
 
-  @nullable
-  String get currency;
+  String? get currency;
 
-  @nullable
-  String get authID;
+  String? get authID;
 
-  @nullable
-  String get institutionName;
+  String? get institutionName;
 
-  @nullable
-  int get accountBalance;
+  int? get accountBalance;
 
-  @nullable
-  String get bankCode;
+  String? get bankCode;
 
-  @nullable
-  String get accountNumber;
+  String? get accountNumber;
 
-  @nullable
-  String get bvn;
+  String? get bvn;
 
-  @nullable
-  DateTime get dateLinked;
+  DateTime? get dateLinked;
 
-  @nullable
-  String get accountLogo;
+  String? get accountLogo;
 
-  @nullable
-  bool get reauthRequired;
+  bool? get reauthRequired;
 
-  @nullable
-  DateTime get lastSync;
+  DateTime? get lastSync;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ref;
+  DocumentReference get reference => ref!;
 
   static void _initializeBuilder(AccountsRecordBuilder builder) => builder
     ..accountName = ''
@@ -87,11 +70,11 @@ abstract class AccountsRecord
 
   static Stream<AccountsRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<AccountsRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   AccountsRecord._();
   factory AccountsRecord([void Function(AccountsRecordBuilder) updates]) =
@@ -100,27 +83,27 @@ abstract class AccountsRecord
   static AccountsRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createAccountsRecordData({
-  String accountName,
-  DocumentReference accountOwner,
-  String dataStatus,
-  String accountType,
-  String institutionType,
-  String authMethod,
-  String currency,
-  String authID,
-  String institutionName,
-  int accountBalance,
-  String bankCode,
-  String accountNumber,
-  String bvn,
-  DateTime dateLinked,
-  String accountLogo,
-  bool reauthRequired,
-  DateTime lastSync,
+  String? accountName,
+  DocumentReference? accountOwner,
+  String? dataStatus,
+  String? accountType,
+  String? institutionType,
+  String? authMethod,
+  String? currency,
+  String? authID,
+  String? institutionName,
+  int? accountBalance,
+  String? bankCode,
+  String? accountNumber,
+  String? bvn,
+  DateTime? dateLinked,
+  String? accountLogo,
+  bool? reauthRequired,
+  DateTime? lastSync,
 }) =>
     serializers.toFirestore(
         AccountsRecord.serializer,

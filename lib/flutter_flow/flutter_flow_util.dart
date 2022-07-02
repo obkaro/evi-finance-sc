@@ -21,10 +21,10 @@ export 'package:cloud_firestore/cloud_firestore.dart' show DocumentReference;
 export 'package:page_transition/page_transition.dart';
 export '../backend/firebase_analytics/analytics.dart';
 
-T valueOrDefault<T>(T value, T defaultValue) =>
+T valueOrDefault<T>(T? value, T defaultValue) =>
     (value is String && value.isEmpty) || value == null ? defaultValue : value;
 
-String dateTimeFormat(String format, DateTime dateTime) {
+String dateTimeFormat(String format, DateTime? dateTime) {
   if (dateTime == null) {
     return '';
   }
@@ -59,18 +59,18 @@ enum DecimalType {
 }
 
 String formatNumber(
-  num value, {
-  FormatType formatType,
-  DecimalType decimalType,
-  String currency,
+  num? value, {
+  required FormatType formatType,
+  DecimalType? decimalType,
+  String? currency,
   bool toLowerCase = false,
-  String format,
-  String locale,
+  String? format,
+  String? locale,
 }) {
   var formattedValue = '';
   switch (formatType) {
     case FormatType.decimal:
-      switch (decimalType) {
+      switch (decimalType!) {
         case DecimalType.automatic:
           formattedValue = NumberFormat.decimalPattern().format(value);
           break;
@@ -139,7 +139,7 @@ bool get isAndroid => !kIsWeb && Platform.isAndroid;
 bool get isiOS => !kIsWeb && Platform.isIOS;
 bool get isWeb => kIsWeb;
 bool responsiveVisibility({
-  @required BuildContext context,
+  required BuildContext context,
   bool phone = true,
   bool tablet = true,
   bool tabletLandscape = true,
@@ -204,7 +204,7 @@ void showSnackbar(
 }
 
 extension FFStringExt on String {
-  String maybeHandleOverflow({int maxChars, String replacement = ''}) =>
+  String maybeHandleOverflow({int? maxChars, String replacement = ''}) =>
       maxChars != null && length > maxChars
           ? replaceRange(maxChars, null, replacement)
           : this;

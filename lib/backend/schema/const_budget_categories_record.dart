@@ -12,21 +12,17 @@ abstract class ConstBudgetCategoriesRecord
   static Serializer<ConstBudgetCategoriesRecord> get serializer =>
       _$constBudgetCategoriesRecordSerializer;
 
-  @nullable
-  String get categoryName;
+  String? get categoryName;
 
-  @nullable
-  int get categoryWeight;
+  int? get categoryWeight;
 
-  @nullable
-  DocumentReference get categoryOwner;
+  DocumentReference? get categoryOwner;
 
-  @nullable
-  String get categoryIcon;
+  String? get categoryIcon;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ref;
+  DocumentReference get reference => ref!;
 
   static void _initializeBuilder(ConstBudgetCategoriesRecordBuilder builder) =>
       builder
@@ -40,12 +36,12 @@ abstract class ConstBudgetCategoriesRecord
   static Stream<ConstBudgetCategoriesRecord> getDocument(
           DocumentReference ref) =>
       ref.snapshots().map(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<ConstBudgetCategoriesRecord> getDocumentOnce(
           DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   ConstBudgetCategoriesRecord._();
   factory ConstBudgetCategoriesRecord(
@@ -55,14 +51,14 @@ abstract class ConstBudgetCategoriesRecord
   static ConstBudgetCategoriesRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createConstBudgetCategoriesRecordData({
-  String categoryName,
-  int categoryWeight,
-  DocumentReference categoryOwner,
-  String categoryIcon,
+  String? categoryName,
+  int? categoryWeight,
+  DocumentReference? categoryOwner,
+  String? categoryIcon,
 }) =>
     serializers.toFirestore(
         ConstBudgetCategoriesRecord.serializer,
