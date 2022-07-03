@@ -11,24 +11,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../auth/auth_util.dart';
 
 int calculateRemBudgetCat(
-  List<BudgetCategoriesRecord>? categoriesToCalc,
-  BudgetsRecord? budget,
+  List<BudgetCategoriesRecord> categoriesToCalc,
+  BudgetsRecord budget,
 ) {
   // Add your function code here!
   int total = 0;
   for (var i = 0; i < categoriesToCalc.length; i++) {
     //var currentCat = categoriesToCalc[i];
 
-    total += categoriesToCalc[i].allocatedAmount;
+    total += categoriesToCalc[i].allocatedAmount as int;
   }
-  int remaining = budget.budgetAmount - total;
+  int remaining = budget.budgetAmount! - total;
 
   return remaining;
 }
 
 String calcRemCatCurrency(
-  List<BudgetCategoriesRecord>? categoriesToCalc,
-  BudgetsRecord? budget,
+  List<BudgetCategoriesRecord> categoriesToCalc,
+  BudgetsRecord budget,
 ) {
   // Add your function code here!
   final formatCurrency = NumberFormat.simpleCurrency(
@@ -38,9 +38,9 @@ String calcRemCatCurrency(
   for (var i = 0; i < categoriesToCalc.length; i++) {
     //var currentCat = categoriesToCalc[i];
 
-    total += categoriesToCalc[i].allocatedAmount;
+    total += categoriesToCalc[i].allocatedAmount as int;
   }
-  int remaining = budget.budgetAmount - total;
+  int remaining = budget.budgetAmount! - total;
 
   return formatCurrency.format(remaining);
 }
