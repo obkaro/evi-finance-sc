@@ -474,7 +474,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               .transparent,
                                                           width: 1,
                                                         ),
-                                                        borderRadius: 16,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(16),
                                                       ),
                                                     );
                                                   },
@@ -803,7 +805,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               .transparent,
                                                           width: 1,
                                                         ),
-                                                        borderRadius: 16,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(16),
                                                       ),
                                                     );
                                                   },
@@ -893,7 +897,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             Colors.transparent,
                                                         width: 1,
                                                       ),
-                                                      borderRadius: 16,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16),
                                                     ),
                                                   );
                                                 },

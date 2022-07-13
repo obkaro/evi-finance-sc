@@ -400,7 +400,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 16,
+                                            borderRadius:
+                                                BorderRadius.circular(16),
                                           ),
                                         ),
                                       ],

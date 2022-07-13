@@ -300,7 +300,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                     color: Colors.transparent,
                     width: 1,
                   ),
-                  borderRadius: 16,
+                  borderRadius: BorderRadius.circular(16),
                 ),
               ),
             ),

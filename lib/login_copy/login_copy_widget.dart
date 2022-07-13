@@ -205,7 +205,8 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 16,
+                                            borderRadius:
+                                                BorderRadius.circular(16),
                                           ),
                                         ),
                                       ],

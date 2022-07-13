@@ -24,8 +24,8 @@ abstract class BudgetCategoriesRecord
   String? get categoryID;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ref;
-  DocumentReference get reference => ref!;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(BudgetCategoriesRecordBuilder builder) =>
       builder

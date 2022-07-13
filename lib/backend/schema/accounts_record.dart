@@ -46,8 +46,8 @@ abstract class AccountsRecord
   DateTime? get lastSync;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ref;
-  DocumentReference get reference => ref!;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(AccountsRecordBuilder builder) => builder
     ..accountName = ''

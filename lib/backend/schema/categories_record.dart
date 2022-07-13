@@ -27,10 +27,10 @@ abstract class CategoriesRecord
   DocumentReference? get categoryOwner;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ref;
-  DocumentReference get reference => ref!;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
-  DocumentReference get parentReference => reference.parent.parent;
+  DocumentReference get parentReference => reference.parent.parent!;
 
   static void _initializeBuilder(CategoriesRecordBuilder builder) => builder
     ..categoryName = ''

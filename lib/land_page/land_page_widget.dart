@@ -195,7 +195,8 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                   color: Color(0xFF010101),
                                                   width: 1,
                                                 ),
-                                                borderRadius: 16,
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
                                               ),
                                             ),
                                           ),

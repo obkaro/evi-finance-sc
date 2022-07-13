@@ -19,8 +19,8 @@ abstract class ConstInstitutionLogosRecord
   String? get institutionCode;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ref;
-  DocumentReference get reference => ref!;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(ConstInstitutionLogosRecordBuilder builder) =>
       builder

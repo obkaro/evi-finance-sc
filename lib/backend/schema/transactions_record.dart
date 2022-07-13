@@ -36,8 +36,8 @@ abstract class TransactionsRecord
   String? get transactionID;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ref;
-  DocumentReference get reference => ref!;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(TransactionsRecordBuilder builder) => builder
     ..monoCategory = ''

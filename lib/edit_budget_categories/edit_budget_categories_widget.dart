@@ -523,7 +523,8 @@ class _EditBudgetCategoriesWidgetState
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 16,
+                                            borderRadius:
+                                                BorderRadius.circular(16),
                                           ),
                                         ),
                                       ],
@@ -758,7 +759,7 @@ class _EditBudgetCategoriesWidgetState
                                                                       {
                                                                     'unallocatedAmount':
                                                                         FieldValue.increment(
-                                                                            editExistingCatsItem!.allocatedAmount),
+                                                                            editExistingCatsItem!.allocatedAmount!),
                                                                   };
                                                                   await columnBudgetsRecord!
                                                                       .reference
@@ -896,7 +897,8 @@ class _EditBudgetCategoriesWidgetState
                                                   color: Colors.transparent,
                                                   width: 1,
                                                 ),
-                                                borderRadius: 16,
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
                                               ),
                                             );
                                           },
@@ -951,7 +953,8 @@ class _EditBudgetCategoriesWidgetState
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 16,
+                                            borderRadius:
+                                                BorderRadius.circular(16),
                                           ),
                                         ),
                                       ],

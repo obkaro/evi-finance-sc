@@ -518,7 +518,8 @@ class _CreateBudgetCategoriesWidgetState
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 16,
+                                            borderRadius:
+                                                BorderRadius.circular(16),
                                           ),
                                         ),
                                       ],
@@ -694,7 +695,7 @@ class _CreateBudgetCategoriesWidgetState
                                                               'unallocatedAmount':
                                                                   FieldValue.increment(
                                                                       existingCategoriesItem!
-                                                                          .allocatedAmount),
+                                                                          .allocatedAmount!),
                                                             };
                                                             await widget
                                                                 .createdBudget!
@@ -790,7 +791,8 @@ class _CreateBudgetCategoriesWidgetState
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 16,
+                                            borderRadius:
+                                                BorderRadius.circular(16),
                                           ),
                                         ),
                                         FFButtonWidget(
@@ -843,7 +845,8 @@ class _CreateBudgetCategoriesWidgetState
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 16,
+                                            borderRadius:
+                                                BorderRadius.circular(16),
                                           ),
                                         ),
                                       ],

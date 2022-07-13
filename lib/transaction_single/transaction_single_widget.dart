@@ -730,7 +730,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                             Colors.transparent,
                                                         width: 1,
                                                       ),
-                                                      borderRadius: 16,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16),
                                                     ),
                                                   ),
                                                 ),
@@ -807,7 +809,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                       color: Colors.transparent,
                                                       width: 1,
                                                     ),
-                                                    borderRadius: 16,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
                                                   ),
                                                 ),
                                               ),

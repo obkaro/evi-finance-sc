@@ -12,7 +12,7 @@ import 'package:collection/collection.dart';
 
 Future<List<DocumentReference>> writeTransactions(
   dynamic transactionJsonResponse,
-  AccountsRecord buttonAccountsRecord,
+  AccountsRecord? buttonAccountsRecord,
   List<TransactionsRecord> accountTransactions,
 ) async {
   // Add your function code here!
