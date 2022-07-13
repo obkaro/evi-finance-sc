@@ -10,10 +10,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AccountsRecord.serializer)
       ..add(BudgetCategoriesRecord.serializer)
       ..add(BudgetsRecord.serializer)
-<<<<<<< HEAD
-=======
       ..add(CategoriesRecord.serializer)
->>>>>>> flutterflow
       ..add(ConstBudgetCategoriesRecord.serializer)
       ..add(ConstInstitutionLogosRecord.serializer)
       ..add(TransactionsRecord.serializer)
