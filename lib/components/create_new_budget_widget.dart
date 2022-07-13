@@ -15,19 +15,19 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CreateNewBudgetWidget extends StatefulWidget {
   const CreateNewBudgetWidget({
-    Key key,
+    Key? key,
     this.budget,
   }) : super(key: key);
 
-  final BudgetsRecord budget;
+  final BudgetsRecord? budget;
 
   @override
   _CreateNewBudgetWidgetState createState() => _CreateNewBudgetWidgetState();
 }
 
 class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
-  DateTimeRange calendarSelectedDay;
-  String dropDownValue;
+  DateTimeRange? calendarSelectedDay;
+  String? dropDownValue;
 
   @override
   void initState() {
@@ -159,7 +159,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                         iconColor: FlutterFlowTheme.of(context).secondaryText,
                         weekFormat: false,
                         weekStartsMonday: false,
-                        onChange: (DateTimeRange newSelectedDate) async {
+                        onChange: (DateTimeRange? newSelectedDate) async {
                           calendarSelectedDay = newSelectedDate;
                           if ((dropDownValue) == 'Monthly') {
                             final budgetsUpdateData = createBudgetsRecordData(
@@ -168,7 +168,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                                   calendarSelectedDay?.end, 30),
                               budgetDuration: dropDownValue,
                             );
-                            await widget.budget.reference
+                            await widget.budget!.reference
                                 .update(budgetsUpdateData);
                           } else {
                             if ((dropDownValue) == 'Weekly') {
@@ -178,7 +178,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                                     calendarSelectedDay?.end, 7),
                                 budgetDuration: dropDownValue,
                               );
-                              await widget.budget.reference
+                              await widget.budget!.reference
                                   .update(budgetsUpdateData);
                             } else {
                               await showDialog(
@@ -231,17 +231,17 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                     budgetDuration: dropDownValue,
                     unallocatedAmount: FFAppState().currencyTextField,
                   );
-                  await widget.budget.reference.update(budgetsUpdateData);
+                  await widget.budget!.reference.update(budgetsUpdateData);
 
                   final usersUpdateData = createUsersRecordData(
-                    activeBudget: widget.budget.reference,
+                    activeBudget: widget.budget!.reference,
                   );
-                  await currentUserReference.update(usersUpdateData);
+                  await currentUserReference!.update(usersUpdateData);
 
                   final budgetCategoriesCreateData =
                       createBudgetCategoriesRecordData(
                     categoryName: 'dummy',
-                    categoryBudget: widget.budget.reference,
+                    categoryBudget: widget.budget!.reference,
                     allocatedAmount: 0,
                   );
                   await BudgetCategoriesRecord.collection
@@ -271,7 +271,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                     color: Colors.transparent,
                     width: 1,
                   ),
-                  borderRadius: 16,
+                  borderRadius: BorderRadius.circular(16),
                 ),
               ),
             ),

@@ -6,7 +6,7 @@ export 'api_manager.dart' show ApiCallResponse;
 
 class GetPermanentAuthCall {
   static Future<ApiCallResponse> call({
-    String tempKey = 'no temp key',
+    String? tempKey = 'no temp key',
   }) {
     final body = '''
 {
@@ -33,7 +33,7 @@ class GetPermanentAuthCall {
 
 class GetAccountInfoCall {
   static Future<ApiCallResponse> call({
-    String authID = '',
+    String? authID = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'getAccountInfo',
@@ -96,7 +96,7 @@ class GetAccountInfoCall {
 
 class GetTransactionsCall {
   static Future<ApiCallResponse> call({
-    String authID = '',
+    String? authID = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'getTransactions',
@@ -114,7 +114,7 @@ class GetTransactionsCall {
 
 class UnlinkMonoCall {
   static Future<ApiCallResponse> call({
-    String authID = '',
+    String? authID = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'unlinkMono',
@@ -133,7 +133,7 @@ class UnlinkMonoCall {
 
 class DataSyncMonoCall {
   static Future<ApiCallResponse> call({
-    String authID = '',
+    String? authID = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'dataSyncMono',
@@ -152,7 +152,7 @@ class DataSyncMonoCall {
 
 class ReauthMonoCall {
   static Future<ApiCallResponse> call({
-    String authID = '',
+    String? authID = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'reauthMono',

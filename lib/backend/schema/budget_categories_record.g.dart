@@ -20,11 +20,11 @@ class _$BudgetCategoriesRecordSerializer
   final String wireName = 'BudgetCategoriesRecord';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, BudgetCategoriesRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.categoryName;
     if (value != null) {
       result
@@ -38,7 +38,7 @@ class _$BudgetCategoriesRecordSerializer
         ..add('categoryBudget')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.allocatedAmount;
     if (value != null) {
@@ -52,7 +52,7 @@ class _$BudgetCategoriesRecordSerializer
         ..add('budgetOwner')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.linkedTransactions;
     if (value != null) {
@@ -60,7 +60,8 @@ class _$BudgetCategoriesRecordSerializer
         ..add('linkedTransactions')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(BuiltList, const [
-              const FullType(DocumentReference, const [const FullType(Object)])
+              const FullType(
+                  DocumentReference, const [const FullType.nullable(Object)])
             ])));
     }
     value = object.categoryID;
@@ -70,20 +71,20 @@ class _$BudgetCategoriesRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   BudgetCategoriesRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new BudgetCategoriesRecordBuilder();
 
@@ -91,44 +92,44 @@ class _$BudgetCategoriesRecordSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'categoryName':
           result.categoryName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'categoryBudget':
           result.categoryBudget = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'allocatedAmount':
           result.allocatedAmount = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'budgetOwner':
           result.budgetOwner = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'linkedTransactions':
           result.linkedTransactions.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
                 const FullType(
-                    DocumentReference, const [const FullType(Object)])
-              ])) as BuiltList<Object>);
+                    DocumentReference, const [const FullType.nullable(Object)])
+              ]))! as BuiltList<Object?>);
           break;
         case 'categoryID':
           result.categoryID = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -139,22 +140,22 @@ class _$BudgetCategoriesRecordSerializer
 
 class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
   @override
-  final String categoryName;
+  final String? categoryName;
   @override
-  final DocumentReference<Object> categoryBudget;
+  final DocumentReference<Object?>? categoryBudget;
   @override
-  final int allocatedAmount;
+  final int? allocatedAmount;
   @override
-  final DocumentReference<Object> budgetOwner;
+  final DocumentReference<Object?>? budgetOwner;
   @override
-  final BuiltList<DocumentReference<Object>> linkedTransactions;
+  final BuiltList<DocumentReference<Object?>>? linkedTransactions;
   @override
-  final String categoryID;
+  final String? categoryID;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
   factory _$BudgetCategoriesRecord(
-          [void Function(BudgetCategoriesRecordBuilder) updates]) =>
+          [void Function(BudgetCategoriesRecordBuilder)? updates]) =>
       (new BudgetCategoriesRecordBuilder()..update(updates)).build();
 
   _$BudgetCategoriesRecord._(
@@ -164,7 +165,7 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
       this.budgetOwner,
       this.linkedTransactions,
       this.categoryID,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -186,7 +187,7 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
         budgetOwner == other.budgetOwner &&
         linkedTransactions == other.linkedTransactions &&
         categoryID == other.categoryID &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -202,7 +203,7 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
                     budgetOwner.hashCode),
                 linkedTransactions.hashCode),
             categoryID.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -214,50 +215,49 @@ class _$BudgetCategoriesRecord extends BudgetCategoriesRecord {
           ..add('budgetOwner', budgetOwner)
           ..add('linkedTransactions', linkedTransactions)
           ..add('categoryID', categoryID)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class BudgetCategoriesRecordBuilder
     implements Builder<BudgetCategoriesRecord, BudgetCategoriesRecordBuilder> {
-  _$BudgetCategoriesRecord _$v;
+  _$BudgetCategoriesRecord? _$v;
 
-  String _categoryName;
-  String get categoryName => _$this._categoryName;
-  set categoryName(String categoryName) => _$this._categoryName = categoryName;
+  String? _categoryName;
+  String? get categoryName => _$this._categoryName;
+  set categoryName(String? categoryName) => _$this._categoryName = categoryName;
 
-  DocumentReference<Object> _categoryBudget;
-  DocumentReference<Object> get categoryBudget => _$this._categoryBudget;
-  set categoryBudget(DocumentReference<Object> categoryBudget) =>
+  DocumentReference<Object?>? _categoryBudget;
+  DocumentReference<Object?>? get categoryBudget => _$this._categoryBudget;
+  set categoryBudget(DocumentReference<Object?>? categoryBudget) =>
       _$this._categoryBudget = categoryBudget;
 
-  int _allocatedAmount;
-  int get allocatedAmount => _$this._allocatedAmount;
-  set allocatedAmount(int allocatedAmount) =>
+  int? _allocatedAmount;
+  int? get allocatedAmount => _$this._allocatedAmount;
+  set allocatedAmount(int? allocatedAmount) =>
       _$this._allocatedAmount = allocatedAmount;
 
-  DocumentReference<Object> _budgetOwner;
-  DocumentReference<Object> get budgetOwner => _$this._budgetOwner;
-  set budgetOwner(DocumentReference<Object> budgetOwner) =>
+  DocumentReference<Object?>? _budgetOwner;
+  DocumentReference<Object?>? get budgetOwner => _$this._budgetOwner;
+  set budgetOwner(DocumentReference<Object?>? budgetOwner) =>
       _$this._budgetOwner = budgetOwner;
 
-  ListBuilder<DocumentReference<Object>> _linkedTransactions;
-  ListBuilder<DocumentReference<Object>> get linkedTransactions =>
+  ListBuilder<DocumentReference<Object?>>? _linkedTransactions;
+  ListBuilder<DocumentReference<Object?>> get linkedTransactions =>
       _$this._linkedTransactions ??=
-          new ListBuilder<DocumentReference<Object>>();
+          new ListBuilder<DocumentReference<Object?>>();
   set linkedTransactions(
-          ListBuilder<DocumentReference<Object>> linkedTransactions) =>
+          ListBuilder<DocumentReference<Object?>>? linkedTransactions) =>
       _$this._linkedTransactions = linkedTransactions;
 
-  String _categoryID;
-  String get categoryID => _$this._categoryID;
-  set categoryID(String categoryID) => _$this._categoryID = categoryID;
+  String? _categoryID;
+  String? get categoryID => _$this._categoryID;
+  set categoryID(String? categoryID) => _$this._categoryID = categoryID;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   BudgetCategoriesRecordBuilder() {
     BudgetCategoriesRecord._initializeBuilder(this);
@@ -272,7 +272,7 @@ class BudgetCategoriesRecordBuilder
       _budgetOwner = $v.budgetOwner;
       _linkedTransactions = $v.linkedTransactions?.toBuilder();
       _categoryID = $v.categoryID;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -285,7 +285,7 @@ class BudgetCategoriesRecordBuilder
   }
 
   @override
-  void update(void Function(BudgetCategoriesRecordBuilder) updates) {
+  void update(void Function(BudgetCategoriesRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -301,9 +301,9 @@ class BudgetCategoriesRecordBuilder
               budgetOwner: budgetOwner,
               linkedTransactions: _linkedTransactions?.build(),
               categoryID: categoryID,
-              reference: reference);
+              ffRef: ffRef);
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'linkedTransactions';
         _linkedTransactions?.build();

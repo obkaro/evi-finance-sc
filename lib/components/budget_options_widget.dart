@@ -10,13 +10,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BudgetOptionsWidget extends StatefulWidget {
   const BudgetOptionsWidget({
-    Key key,
+    Key? key,
     this.budget,
     this.categoriesSum,
   }) : super(key: key);
 
-  final DocumentReference budget;
-  final int categoriesSum;
+  final DocumentReference? budget;
+  final int? categoriesSum;
 
   @override
   _BudgetOptionsWidgetState createState() => _BudgetOptionsWidgetState();
@@ -42,7 +42,7 @@ class _BudgetOptionsWidgetState extends State<BudgetOptionsWidget> {
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
             child: StreamBuilder<BudgetsRecord>(
-              stream: BudgetsRecord.getDocument(widget.budget),
+              stream: BudgetsRecord.getDocument(widget.budget!),
               builder: (context, snapshot) {
                 // Customize what your widget looks like when it's loading.
                 if (!snapshot.hasData) {
@@ -57,7 +57,7 @@ class _BudgetOptionsWidgetState extends State<BudgetOptionsWidget> {
                     ),
                   );
                 }
-                final listTileBudgetsRecord = snapshot.data;
+                final listTileBudgetsRecord = snapshot.data!;
                 return InkWell(
                   onTap: () async {
                     Navigator.pop(context);

@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 Future unlinkAllTransCategories(
   List<TransactionsRecord> transactions,
-  BudgetCategoriesRecord category,
+  BudgetCategoriesRecord? category,
 ) async {
   // Add your function code here!
   for (var i = 0; i < transactions.length; i++) {

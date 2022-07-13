@@ -15,21 +15,21 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditNewBudgetWidget extends StatefulWidget {
   const EditNewBudgetWidget({
-    Key key,
+    Key? key,
     this.budget,
     this.ccategoriesSum,
   }) : super(key: key);
 
-  final BudgetsRecord budget;
-  final int ccategoriesSum;
+  final BudgetsRecord? budget;
+  final int? ccategoriesSum;
 
   @override
   _EditNewBudgetWidgetState createState() => _EditNewBudgetWidgetState();
 }
 
 class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
-  DateTimeRange calendarSelectedDay;
-  String dropDownValue;
+  DateTimeRange? calendarSelectedDay;
+  String? dropDownValue;
 
   @override
   void initState() {
@@ -92,7 +92,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
             custom_widgets.CurrencyTextField(
               width: MediaQuery.of(context).size.width,
               height: 50,
-              amount: widget.budget.budgetAmount,
+              amount: widget.budget!.budgetAmount,
               labelText: 'Amount',
               hintText: 'Enter amount',
             ),
@@ -156,8 +156,8 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                         iconColor: FlutterFlowTheme.of(context).secondaryText,
                         weekFormat: false,
                         weekStartsMonday: false,
-                        initialDate: widget.budget.budgetStart,
-                        onChange: (DateTimeRange newSelectedDate) async {
+                        initialDate: widget.budget!.budgetStart,
+                        onChange: (DateTimeRange? newSelectedDate) async {
                           calendarSelectedDay = newSelectedDate;
                           if ((dropDownValue) == 'Monthly') {
                             final budgetsUpdateData = createBudgetsRecordData(
@@ -166,7 +166,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                                   calendarSelectedDay?.end, 30),
                               budgetDuration: dropDownValue,
                             );
-                            await widget.budget.reference
+                            await widget.budget!.reference
                                 .update(budgetsUpdateData);
                           } else {
                             if ((dropDownValue) == 'Weekly') {
@@ -176,7 +176,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                                     calendarSelectedDay?.end, 7),
                                 budgetDuration: dropDownValue,
                               );
-                              await widget.budget.reference
+                              await widget.budget!.reference
                                   .update(budgetsUpdateData);
                             } else {
                               await showDialog(
@@ -220,8 +220,8 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
               child: FFButtonWidget(
                 onPressed: () async {
-                  if ((FFAppState().currencyTextField) >
-                      (widget.ccategoriesSum)) {
+                  if ((FFAppState().currencyTextField!) >
+                      (widget.ccategoriesSum!)) {
                     // Action_CreateBudgetStep1
 
                     final budgetsUpdateData = createBudgetsRecordData(
@@ -231,7 +231,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                           FFAppState().currencyTextField,
                           widget.ccategoriesSum),
                     );
-                    await widget.budget.reference.update(budgetsUpdateData);
+                    await widget.budget!.reference.update(budgetsUpdateData);
                     var confirmDialogResponse = await showDialog<bool>(
                           context: context,
                           builder: (alertDialogContext) {
@@ -300,7 +300,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                     color: Colors.transparent,
                     width: 1,
                   ),
-                  borderRadius: 16,
+                  borderRadius: BorderRadius.circular(16),
                 ),
               ),
             ),

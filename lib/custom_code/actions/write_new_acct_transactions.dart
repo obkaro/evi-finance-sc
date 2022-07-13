@@ -52,7 +52,7 @@ Future writeNewAcctTransactions(
 class TransactionList {
   final List<Transaction> data;
 
-  TransactionList({this.data});
+  TransactionList({required this.data});
 
   factory TransactionList.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['data'] as List;
@@ -75,13 +75,13 @@ class Transaction {
   final String monoCategory;
 
   Transaction(
-      {this.id,
-      this.type,
-      this.amount,
-      this.balance,
-      this.date,
-      this.narration,
-      this.monoCategory});
+      {required this.id,
+      required this.type,
+      required this.amount,
+      required this.balance,
+      required this.date,
+      required this.narration,
+      required this.monoCategory});
 
   factory Transaction.fromJson(Map<String, dynamic> parsedJson) {
     return Transaction(

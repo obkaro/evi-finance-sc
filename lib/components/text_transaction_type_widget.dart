@@ -6,11 +6,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TextTransactionTypeWidget extends StatefulWidget {
   const TextTransactionTypeWidget({
-    Key key,
+    Key? key,
     this.transactionType,
   }) : super(key: key);
 
-  final String transactionType;
+  final String? transactionType;
 
   @override
   _TextTransactionTypeWidgetState createState() =>

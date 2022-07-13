@@ -17,23 +17,23 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AccountSingleWidget extends StatefulWidget {
   const AccountSingleWidget({
-    Key key,
+    Key? key,
     this.account,
   }) : super(key: key);
 
-  final AccountsRecord account;
+  final AccountsRecord? account;
 
   @override
   _AccountSingleWidgetState createState() => _AccountSingleWidgetState();
 }
 
 class _AccountSingleWidgetState extends State<AccountSingleWidget> {
-  ApiCallResponse accountRespons;
-  ApiCallResponse accountResponse;
-  ApiCallResponse dataSyncResponse;
-  ApiCallResponse reauthCode;
-  ApiCallResponse transactionJsonResponse;
-  ApiCallResponse transactionJsonRespons;
+  ApiCallResponse? accountRespons;
+  ApiCallResponse? accountResponse;
+  ApiCallResponse? dataSyncResponse;
+  ApiCallResponse? reauthCode;
+  ApiCallResponse? transactionJsonResponse;
+  ApiCallResponse? transactionJsonRespons;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -65,7 +65,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
           );
         }
         List<BudgetCategoriesRecord> accountSingleBudgetCategoriesRecordList =
-            snapshot.data;
+            snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -133,7 +133,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                         .where(
                                                             'institutionCode',
                                                             isEqualTo: widget
-                                                                .account
+                                                                .account!
                                                                 .bankCode),
                                             singleRecord: true,
                                           ),
@@ -155,24 +155,21 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                             }
                                             List<ConstInstitutionLogosRecord>
                                                 imageConstInstitutionLogosRecordList =
-                                                snapshot.data;
+                                                snapshot.data!;
                                             // Return an empty Container when the document does not exist.
-                                            if (snapshot.data.isEmpty) {
+                                            if (snapshot.data!.isEmpty) {
                                               return Container();
                                             }
                                             final imageConstInstitutionLogosRecord =
                                                 imageConstInstitutionLogosRecordList
-                                                        .isNotEmpty
-                                                    ? imageConstInstitutionLogosRecordList
-                                                        .first
-                                                    : null;
+                                                    .first;
                                             return ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(12),
                                               child: CachedNetworkImage(
                                                 imageUrl:
-                                                    imageConstInstitutionLogosRecord
-                                                        .institutionLogo,
+                                                    imageConstInstitutionLogosRecord!
+                                                        .institutionLogo!,
                                                 width: 100,
                                                 height: 100,
                                                 fit: BoxFit.cover,
@@ -192,7 +189,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        widget.account.accountName,
+                                        widget.account!.accountName!,
                                         style:
                                             FlutterFlowTheme.of(context).title3,
                                       ),
@@ -226,7 +223,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                         children: [
                                           Text(
                                             functions.formatTransCurrency(
-                                                widget.account.accountBalance),
+                                                widget.account!.accountBalance),
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle1,
                                           ),
@@ -261,7 +258,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Text(
-                                            widget.account.institutionName,
+                                            widget.account!.institutionName!,
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle1,
                                           ),
@@ -296,7 +293,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Text(
-                                            widget.account.accountNumber,
+                                            widget.account!.accountNumber!,
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle1,
                                           ),
@@ -331,7 +328,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Text(
-                                            widget.account.accountType,
+                                            widget.account!.accountType!,
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle1,
                                           ),
@@ -368,7 +365,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             transactionsRecord.where(
                                                                 'account',
                                                                 isEqualTo: widget
-                                                                    .account
+                                                                    .account!
                                                                     .reference),
                                                   ),
                                                   builder: (context, snapshot) {
@@ -389,7 +386,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                     }
                                                     List<TransactionsRecord>
                                                         buttonTransactionsRecordList =
-                                                        snapshot.data;
+                                                        snapshot.data!;
                                                     return FFButtonWidget(
                                                       onPressed: () async {
                                                         var confirmDialogResponse =
@@ -433,10 +430,11 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                           await UnlinkMonoCall
                                                               .call(
                                                             authID: widget
-                                                                .account.authID,
+                                                                .account!
+                                                                .authID,
                                                           );
-                                                          await widget
-                                                              .account.reference
+                                                          await widget.account!
+                                                              .reference
                                                               .delete();
                                                           await Navigator.push(
                                                             context,
@@ -476,7 +474,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               .transparent,
                                                           width: 1,
                                                         ),
-                                                        borderRadius: 16,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(16),
                                                       ),
                                                     );
                                                   },
@@ -500,7 +500,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             transactionsRecord.where(
                                                                 'account',
                                                                 isEqualTo: widget
-                                                                    .account
+                                                                    .account!
                                                                     .reference),
                                                   ),
                                                   builder: (context, snapshot) {
@@ -521,7 +521,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                     }
                                                     List<TransactionsRecord>
                                                         buttonTransactionsRecordList =
-                                                        snapshot.data;
+                                                        snapshot.data!;
                                                     return FFButtonWidget(
                                                       onPressed: () async {
                                                         var _shouldSetState =
@@ -531,14 +531,14 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             await DataSyncMonoCall
                                                                 .call(
                                                           authID: widget
-                                                              .account.authID,
+                                                              .account!.authID,
                                                         );
                                                         _shouldSetState = true;
                                                         setState(() =>
                                                             FFAppState()
                                                                     .dataSyncCode =
                                                                 getJsonField(
-                                                              (dataSyncResponse
+                                                              (dataSyncResponse!
                                                                       ?.jsonBody ??
                                                                   ''),
                                                               r'''$.code''',
@@ -547,7 +547,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             FFAppState()
                                                                     .hasNewData =
                                                                 getJsonField(
-                                                              (dataSyncResponse
+                                                              (dataSyncResponse!
                                                                       ?.jsonBody ??
                                                                   ''),
                                                               r'''$.hasNewData''',
@@ -560,7 +560,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               await ReauthMonoCall
                                                                   .call(
                                                             authID: widget
-                                                                .account.authID,
+                                                                .account!
+                                                                .authID,
                                                           );
                                                           _shouldSetState =
                                                               true;
@@ -579,7 +580,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               await GetAccountInfoCall
                                                                   .call(
                                                             authID: widget
-                                                                .account.authID,
+                                                                .account!
+                                                                .authID,
                                                           );
                                                           _shouldSetState =
                                                               true;
@@ -587,7 +589,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               await GetTransactionsCall
                                                                   .call(
                                                             authID: widget
-                                                                .account.authID,
+                                                                .account!
+                                                                .authID,
                                                           );
                                                           _shouldSetState =
                                                               true;
@@ -619,8 +622,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               r'''$.account.balance''',
                                                             ),
                                                           );
-                                                          await widget
-                                                              .account.reference
+                                                          await widget.account!
+                                                              .reference
                                                               .update(
                                                                   accountsUpdateData);
                                                           ScaffoldMessenger.of(
@@ -659,7 +662,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                 await GetAccountInfoCall
                                                                     .call(
                                                               authID: widget
-                                                                  .account
+                                                                  .account!
                                                                   .authID,
                                                             );
                                                             _shouldSetState =
@@ -684,7 +687,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               lastSync:
                                                                   getCurrentTimestamp,
                                                             );
-                                                            await widget.account
+                                                            await widget
+                                                                .account!
                                                                 .reference
                                                                 .update(
                                                                     accountsUpdateData);
@@ -692,7 +696,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                 await GetTransactionsCall
                                                                     .call(
                                                               authID: widget
-                                                                  .account
+                                                                  .account!
                                                                   .authID,
                                                             );
                                                             _shouldSetState =
@@ -801,7 +805,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               .transparent,
                                                           width: 1,
                                                         ),
-                                                        borderRadius: 16,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(16),
                                                       ),
                                                     );
                                                   },
@@ -834,7 +840,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                           transactionsRecord.where(
                                                               'account',
                                                               isEqualTo: widget
-                                                                  .account
+                                                                  .account!
                                                                   .reference),
                                                 ),
                                                 builder: (context, snapshot) {
@@ -855,7 +861,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                   }
                                                   List<TransactionsRecord>
                                                       buttonTransactionsRecordList =
-                                                      snapshot.data;
+                                                      snapshot.data!;
                                                   return FFButtonWidget(
                                                     onPressed: () async {
                                                       await actions
@@ -891,7 +897,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             Colors.transparent,
                                                         width: 1,
                                                       ),
-                                                      borderRadius: 16,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16),
                                                     ),
                                                   );
                                                 },
@@ -936,7 +944,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                   .where('transactionOwner',
                                       isEqualTo: currentUserReference)
                                   .where('account',
-                                      isEqualTo: widget.account.reference)
+                                      isEqualTo: widget.account!.reference)
                                   .orderBy('trasactionDate', descending: true),
                         ),
                         builder: (context, snapshot) {
@@ -955,7 +963,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                             );
                           }
                           List<TransactionsRecord>
-                              columnTransactionsRecordList = snapshot.data;
+                              columnTransactionsRecordList = snapshot.data!;
                           return SingleChildScrollView(
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -1029,15 +1037,15 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            if (columnTransactionsRecord
+                                                            if (columnTransactionsRecord!
                                                                     .isCategorized ??
                                                                 true)
                                                               StreamBuilder<
                                                                   BudgetCategoriesRecord>(
                                                                 stream: BudgetCategoriesRecord
                                                                     .getDocument(
-                                                                        columnTransactionsRecord
-                                                                            .linkedCategory),
+                                                                        columnTransactionsRecord!
+                                                                            .linkedCategory!),
                                                                 builder: (context,
                                                                     snapshot) {
                                                                   // Customize what your widget looks like when it's loading.
@@ -1062,10 +1070,10 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                   }
                                                                   final textBudgetCategoriesRecord =
                                                                       snapshot
-                                                                          .data;
+                                                                          .data!;
                                                                   return AutoSizeText(
-                                                                    textBudgetCategoriesRecord
-                                                                        .categoryName
+                                                                    textBudgetCategoriesRecord!
+                                                                        .categoryName!
                                                                         .maybeHandleOverflow(
                                                                       maxChars:
                                                                           25,
@@ -1078,8 +1086,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                   );
                                                                 },
                                                               ),
-                                                            if (!(columnTransactionsRecord
-                                                                    .isCategorized) ??
+                                                            if (!(columnTransactionsRecord!
+                                                                    .isCategorized!) ??
                                                                 true)
                                                               AutoSizeText(
                                                                 'Uncategorized',
@@ -1097,7 +1105,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                     ),
                                                               ),
                                                             Text(
-                                                              '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
+                                                              '${dateTimeFormat('Hm', columnTransactionsRecord!.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord!.trasactionDate)}',
                                                               textAlign:
                                                                   TextAlign
                                                                       .start,
@@ -1129,7 +1137,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             AutoSizeText(
                                                               functions
                                                                   .formatTransCurrency(
-                                                                      columnTransactionsRecord
+                                                                      columnTransactionsRecord!
                                                                           .transactionAmount)
                                                                   .maybeHandleOverflow(
                                                                     maxChars:
@@ -1143,12 +1151,12 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             ),
                                                             Stack(
                                                               children: [
-                                                                if ((columnTransactionsRecord
+                                                                if ((columnTransactionsRecord!
                                                                         .transactionType) ==
                                                                     'debit')
                                                                   AutoSizeText(
-                                                                    columnTransactionsRecord
-                                                                        .transactionType
+                                                                    columnTransactionsRecord!
+                                                                        .transactionType!
                                                                         .maybeHandleOverflow(
                                                                       maxChars:
                                                                           15,
@@ -1168,12 +1176,12 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                               Color(0xFFFF0003),
                                                                         ),
                                                                   ),
-                                                                if ((columnTransactionsRecord
+                                                                if ((columnTransactionsRecord!
                                                                         .transactionType) ==
                                                                     'credit')
                                                                   AutoSizeText(
-                                                                    columnTransactionsRecord
-                                                                        .transactionType
+                                                                    columnTransactionsRecord!
+                                                                        .transactionType!
                                                                         .maybeHandleOverflow(
                                                                       maxChars:
                                                                           15,

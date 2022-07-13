@@ -11,38 +11,33 @@ abstract class CategoriesRecord
   static Serializer<CategoriesRecord> get serializer =>
       _$categoriesRecordSerializer;
 
-  @nullable
   @BuiltValueField(wireName: 'category_name')
-  String get categoryName;
+  String? get categoryName;
 
-  @nullable
   @BuiltValueField(wireName: 'category_id')
-  String get categoryId;
+  String? get categoryId;
 
-  @nullable
   @BuiltValueField(wireName: 'category_budget')
-  DocumentReference get categoryBudget;
+  DocumentReference? get categoryBudget;
 
-  @nullable
   @BuiltValueField(wireName: 'category_amount')
-  int get categoryAmount;
+  int? get categoryAmount;
 
-  @nullable
   @BuiltValueField(wireName: 'category_owner')
-  DocumentReference get categoryOwner;
+  DocumentReference? get categoryOwner;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
-  DocumentReference get parentReference => reference.parent.parent;
+  DocumentReference get parentReference => reference.parent.parent!;
 
   static void _initializeBuilder(CategoriesRecordBuilder builder) => builder
     ..categoryName = ''
     ..categoryId = ''
     ..categoryAmount = 0;
 
-  static Query<Map<String, dynamic>> collection([DocumentReference parent]) =>
+  static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
           ? parent.collection('categories')
           : FirebaseFirestore.instance.collectionGroup('categories');
@@ -52,11 +47,11 @@ abstract class CategoriesRecord
 
   static Stream<CategoriesRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<CategoriesRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   CategoriesRecord._();
   factory CategoriesRecord([void Function(CategoriesRecordBuilder) updates]) =
@@ -65,15 +60,15 @@ abstract class CategoriesRecord
   static CategoriesRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createCategoriesRecordData({
-  String categoryName,
-  String categoryId,
-  DocumentReference categoryBudget,
-  int categoryAmount,
-  DocumentReference categoryOwner,
+  String? categoryName,
+  String? categoryId,
+  DocumentReference? categoryBudget,
+  int? categoryAmount,
+  DocumentReference? categoryOwner,
 }) =>
     serializers.toFirestore(
         CategoriesRecord.serializer,

@@ -9,16 +9,16 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginWidget extends StatefulWidget {
-  const LoginWidget({Key key}) : super(key: key);
+  const LoginWidget({Key? key}) : super(key: key);
 
   @override
   _LoginWidgetState createState() => _LoginWidgetState();
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  TextEditingController inputEmailController;
-  TextEditingController inputPasswordController;
-  bool inputPasswordVisibility;
+  TextEditingController? inputEmailController;
+  TextEditingController? inputPasswordController;
+  late bool inputPasswordVisibility;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -223,7 +223,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             if (formKey.currentState == null ||
-                                                !formKey.currentState
+                                                !formKey.currentState!
                                                     .validate()) {
                                               return;
                                             }
@@ -232,8 +232,8 @@ class _LoginWidgetState extends State<LoginWidget> {
 
                                             final user = await signInWithEmail(
                                               context,
-                                              inputEmailController.text,
-                                              inputPasswordController.text,
+                                              inputEmailController!.text,
+                                              inputPasswordController!.text,
                                             );
                                             if (user == null) {
                                               return;
@@ -267,7 +267,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 16,
+                                            borderRadius:
+                                                BorderRadius.circular(16),
                                           ),
                                         ),
                                         FFButtonWidget(
@@ -294,7 +295,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 16,
+                                            borderRadius:
+                                                BorderRadius.circular(16),
                                           ),
                                         ),
                                       ],

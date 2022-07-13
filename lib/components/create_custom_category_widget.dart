@@ -12,11 +12,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CreateCustomCategoryWidget extends StatefulWidget {
   const CreateCustomCategoryWidget({
-    Key key,
+    Key? key,
     this.budget,
   }) : super(key: key);
 
-  final BudgetsRecord budget;
+  final BudgetsRecord? budget;
 
   @override
   _CreateCustomCategoryWidgetState createState() =>
@@ -25,7 +25,7 @@ class CreateCustomCategoryWidget extends StatefulWidget {
 
 class _CreateCustomCategoryWidgetState
     extends State<CreateCustomCategoryWidget> {
-  TextEditingController textController;
+  TextEditingController? textController;
 
   @override
   void initState() {
@@ -81,7 +81,7 @@ class _CreateCustomCategoryWidgetState
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '(Unallocated: ${functions.formatBudgetCurrency(widget.budget.unallocatedAmount)})',
+                    '(Unallocated: ${functions.formatBudgetCurrency(widget.budget!.unallocatedAmount)})',
                     style: FlutterFlowTheme.of(context).subtitle2.override(
                           fontFamily: 'Source Sans Pro',
                           color: FlutterFlowTheme.of(context).secondaryText,
@@ -130,20 +130,20 @@ class _CreateCustomCategoryWidgetState
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    if ((FFAppState().currencyTextField) <=
-                        (widget.budget.unallocatedAmount)) {
+                    if ((FFAppState().currencyTextField!) <=
+                        (widget.budget!.unallocatedAmount!)) {
                       final budgetsUpdateData = {
                         'unallocatedAmount': FieldValue.increment(
-                            -(FFAppState().currencyTextField)),
+                            -(FFAppState().currencyTextField!)),
                       };
-                      await widget.budget.reference.update(budgetsUpdateData);
+                      await widget.budget!.reference.update(budgetsUpdateData);
 
                       final budgetCategoriesCreateData =
                           createBudgetCategoriesRecordData(
-                        categoryName: textController.text,
+                        categoryName: textController!.text,
                         allocatedAmount: FFAppState().currencyTextField,
                         budgetOwner: currentUserReference,
-                        categoryBudget: widget.budget.reference,
+                        categoryBudget: widget.budget!.reference,
                       );
                       await BudgetCategoriesRecord.collection
                           .doc()
@@ -182,7 +182,7 @@ class _CreateCustomCategoryWidgetState
                       color: Colors.transparent,
                       width: 1,
                     ),
-                    borderRadius: 16,
+                    borderRadius: BorderRadius.circular(16),
                   ),
                 ),
               ),
@@ -201,7 +201,7 @@ class _CreateCustomCategoryWidgetState
                     color: Colors.transparent,
                     width: 1,
                   ),
-                  borderRadius: 16,
+                  borderRadius: BorderRadius.circular(16),
                 ),
               ),
             ],

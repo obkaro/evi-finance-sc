@@ -8,14 +8,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginCopyWidget extends StatefulWidget {
-  const LoginCopyWidget({Key key}) : super(key: key);
+  const LoginCopyWidget({Key? key}) : super(key: key);
 
   @override
   _LoginCopyWidgetState createState() => _LoginCopyWidgetState();
 }
 
 class _LoginCopyWidgetState extends State<LoginCopyWidget> {
-  TextEditingController inputEmailController;
+  TextEditingController? inputEmailController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -157,13 +157,13 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             if (formKey.currentState == null ||
-                                                !formKey.currentState
+                                                !formKey.currentState!
                                                     .validate()) {
                                               return;
                                             }
 
                                             // Action_SignUp
-                                            if (inputEmailController
+                                            if (inputEmailController!
                                                 .text.isEmpty) {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
@@ -176,7 +176,7 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                               return;
                                             }
                                             await resetPassword(
-                                              email: inputEmailController.text,
+                                              email: inputEmailController!.text,
                                               context: context,
                                             );
                                             await Navigator.push(
@@ -205,7 +205,8 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 16,
+                                            borderRadius:
+                                                BorderRadius.circular(16),
                                           ),
                                         ),
                                       ],

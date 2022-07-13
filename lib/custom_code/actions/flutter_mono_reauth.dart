@@ -9,10 +9,11 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 //import 'package:mono_flutter/mono_flutter.dart';
 //import 'package:mono_flutter/mono_web_view.dart';
-import '../mono_custom/mono_flutter.dart';
+//import '../mono_custom/mono_flutter.dart';
 import 'package:evi/auth/auth_util.dart';
 import 'package:evi/backend/api_requests/api_calls.dart';
 import 'package:evi/dashboard/dashboard_widget.dart';
+import 'package:mono_flutter/mono_flutter.dart';
 
 extension CustomContext on BuildContext {
   double screenHeight([double percent = 1]) =>
@@ -39,10 +40,10 @@ Future flutterMonoReauth(
                       borderRadius: BorderRadius.all(
                         const Radius.circular(24.0),
                       ),
-                      child: ReauthMonoWebView(
+                      child: MonoWebView(
                         apiKey: 'live_pk_dNWUp8sYwG5mGXq3mFOT',
                         //config: "abc",
-                        token: reauthCode,
+                        reAuthCode: reauthCode,
                         onEvent: (event, data) {
                           print('event: $event, data: $data');
                         },
@@ -60,7 +61,7 @@ Future flutterMonoReauth(
                           final usersUpdateData = createUsersRecordData(
                             tempAuthCode: '$code',
                           );
-                          await currentUserReference.update(usersUpdateData);
+                          await currentUserReference!.update(usersUpdateData);
 
                           //Print temporary key
                           //print(currentUserDocument?.tempAuthCode);

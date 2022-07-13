@@ -8,7 +8,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LandPageWidget extends StatefulWidget {
-  const LandPageWidget({Key key}) : super(key: key);
+  const LandPageWidget({Key? key}) : super(key: key);
 
   @override
   _LandPageWidgetState createState() => _LandPageWidgetState();
@@ -195,7 +195,8 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                   color: Color(0xFF010101),
                                                   width: 1,
                                                 ),
-                                                borderRadius: 16,
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
                                               ),
                                             ),
                                           ),

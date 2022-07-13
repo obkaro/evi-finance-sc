@@ -11,11 +11,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class SetBudgetCompWidget extends StatefulWidget {
   const SetBudgetCompWidget({
-    Key key,
+    Key? key,
     this.transaction,
   }) : super(key: key);
 
-  final TransactionsRecord transaction;
+  final TransactionsRecord? transaction;
 
   @override
   _SetBudgetCompWidgetState createState() => _SetBudgetCompWidgetState();
@@ -120,7 +120,7 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
                       ),
                     );
                   }
-                  List<BudgetsRecord> columnBudgetsRecordList = snapshot.data;
+                  List<BudgetsRecord> columnBudgetsRecordList = snapshot.data!;
                   return Column(
                     mainAxisSize: MainAxisSize.max,
                     children: List.generate(columnBudgetsRecordList.length,
@@ -131,8 +131,13 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: InkWell(
                           onTap: () async {
+                            if (animationsMap[
+                                    'containerOnActionTriggerAnimation'] ==
+                                null) {
+                              return;
+                            }
                             await (animationsMap[
-                                        'containerOnActionTriggerAnimation']
+                                        'containerOnActionTriggerAnimation']!
                                     .curvedAnimation
                                     .parent as AnimationController)
                                 .forward(from: 0.0);
@@ -148,7 +153,7 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
                                   child: SetTransCategoryWidget(
                                     transaction: widget.transaction,
                                     recievedBudget:
-                                        columnBudgetsRecord.reference,
+                                        columnBudgetsRecord!.reference,
                                   ),
                                 );
                               },
@@ -171,7 +176,7 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
+                                    '${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetEnd)}',
                                     style:
                                         FlutterFlowTheme.of(context).subtitle1,
                                   ),
@@ -180,7 +185,7 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
                                         0, 16, 0, 0),
                                     child: Text(
                                       functions.formatBudgetCurrency(
-                                          columnBudgetsRecord.budgetAmount),
+                                          columnBudgetsRecord!.budgetAmount),
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle2,
                                     ),
@@ -190,7 +195,7 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
                             ),
                           ),
                         ).animated([
-                          animationsMap['containerOnActionTriggerAnimation']
+                          animationsMap['containerOnActionTriggerAnimation']!
                         ]),
                       );
                     }),

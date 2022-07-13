@@ -11,7 +11,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AccountsWidget extends StatefulWidget {
-  const AccountsWidget({Key key}) : super(key: key);
+  const AccountsWidget({Key? key}) : super(key: key);
 
   @override
   _AccountsWidgetState createState() => _AccountsWidgetState();
@@ -47,7 +47,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
             ),
           );
         }
-        List<AccountsRecord> accountsAccountsRecordList = snapshot.data;
+        List<AccountsRecord> accountsAccountsRecordList = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: PreferredSize(
@@ -169,7 +169,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                               );
                             }
                             List<AccountsRecord> listViewAccountsRecordList =
-                                snapshot.data;
+                                snapshot.data!;
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
@@ -243,7 +243,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                           constInstitutionLogosRecord.where(
                                                               'institutionCode',
                                                               isEqualTo:
-                                                                  listViewAccountsRecord
+                                                                  listViewAccountsRecord!
                                                                       .bankCode),
                                                       singleRecord: true,
                                                     ),
@@ -266,18 +266,15 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                       }
                                                       List<ConstInstitutionLogosRecord>
                                                           imageConstInstitutionLogosRecordList =
-                                                          snapshot.data;
+                                                          snapshot.data!;
                                                       // Return an empty Container when the document does not exist.
                                                       if (snapshot
-                                                          .data.isEmpty) {
+                                                          .data!.isEmpty) {
                                                         return Container();
                                                       }
                                                       final imageConstInstitutionLogosRecord =
                                                           imageConstInstitutionLogosRecordList
-                                                                  .isNotEmpty
-                                                              ? imageConstInstitutionLogosRecordList
-                                                                  .first
-                                                              : null;
+                                                              .first;
                                                       return ClipRRect(
                                                         borderRadius:
                                                             BorderRadius
@@ -285,8 +282,8 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                         child:
                                                             CachedNetworkImage(
                                                           imageUrl:
-                                                              imageConstInstitutionLogosRecord
-                                                                  .institutionLogo,
+                                                              imageConstInstitutionLogosRecord!
+                                                                  .institutionLogo!,
                                                           width: 45,
                                                           height: 45,
                                                           fit: BoxFit.cover,
@@ -316,8 +313,8 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                               .fromSTEB(
                                                                   0, 0, 0, 10),
                                                       child: Text(
-                                                        listViewAccountsRecord
-                                                            .accountName,
+                                                        listViewAccountsRecord!
+                                                            .accountName!,
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -333,7 +330,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                       children: [
                                                         Text(
                                                           functions.formatTransCurrency(
-                                                              listViewAccountsRecord
+                                                              listViewAccountsRecord!
                                                                   .accountBalance),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
@@ -356,7 +353,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                           },
                         ),
                       ),
-                      if ((accountsAccountsRecordList.length) == 0)
+                      if ((accountsAccountsRecordList?.length) == 0)
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: Container(

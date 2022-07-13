@@ -12,18 +12,15 @@ abstract class ConstInstitutionLogosRecord
   static Serializer<ConstInstitutionLogosRecord> get serializer =>
       _$constInstitutionLogosRecordSerializer;
 
-  @nullable
-  String get institutionName;
+  String? get institutionName;
 
-  @nullable
-  String get institutionLogo;
+  String? get institutionLogo;
 
-  @nullable
-  String get institutionCode;
+  String? get institutionCode;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(ConstInstitutionLogosRecordBuilder builder) =>
       builder
@@ -37,12 +34,12 @@ abstract class ConstInstitutionLogosRecord
   static Stream<ConstInstitutionLogosRecord> getDocument(
           DocumentReference ref) =>
       ref.snapshots().map(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<ConstInstitutionLogosRecord> getDocumentOnce(
           DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   ConstInstitutionLogosRecord._();
   factory ConstInstitutionLogosRecord(
@@ -52,13 +49,13 @@ abstract class ConstInstitutionLogosRecord
   static ConstInstitutionLogosRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createConstInstitutionLogosRecordData({
-  String institutionName,
-  String institutionLogo,
-  String institutionCode,
+  String? institutionName,
+  String? institutionLogo,
+  String? institutionCode,
 }) =>
     serializers.toFirestore(
         ConstInstitutionLogosRecord.serializer,

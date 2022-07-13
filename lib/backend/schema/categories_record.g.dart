@@ -17,10 +17,10 @@ class _$CategoriesRecordSerializer
   final String wireName = 'CategoriesRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, CategoriesRecord object,
+  Iterable<Object?> serialize(Serializers serializers, CategoriesRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.categoryName;
     if (value != null) {
       result
@@ -41,7 +41,7 @@ class _$CategoriesRecordSerializer
         ..add('category_budget')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.categoryAmount;
     if (value != null) {
@@ -55,22 +55,22 @@ class _$CategoriesRecordSerializer
         ..add('category_owner')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   CategoriesRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CategoriesRecordBuilder();
 
@@ -78,37 +78,37 @@ class _$CategoriesRecordSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'category_name':
           result.categoryName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'category_id':
           result.categoryId = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'category_budget':
           result.categoryBudget = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'category_amount':
           result.categoryAmount = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'category_owner':
           result.categoryOwner = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -119,20 +119,20 @@ class _$CategoriesRecordSerializer
 
 class _$CategoriesRecord extends CategoriesRecord {
   @override
-  final String categoryName;
+  final String? categoryName;
   @override
-  final String categoryId;
+  final String? categoryId;
   @override
-  final DocumentReference<Object> categoryBudget;
+  final DocumentReference<Object?>? categoryBudget;
   @override
-  final int categoryAmount;
+  final int? categoryAmount;
   @override
-  final DocumentReference<Object> categoryOwner;
+  final DocumentReference<Object?>? categoryOwner;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
   factory _$CategoriesRecord(
-          [void Function(CategoriesRecordBuilder) updates]) =>
+          [void Function(CategoriesRecordBuilder)? updates]) =>
       (new CategoriesRecordBuilder()..update(updates)).build();
 
   _$CategoriesRecord._(
@@ -141,7 +141,7 @@ class _$CategoriesRecord extends CategoriesRecord {
       this.categoryBudget,
       this.categoryAmount,
       this.categoryOwner,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -161,7 +161,7 @@ class _$CategoriesRecord extends CategoriesRecord {
         categoryBudget == other.categoryBudget &&
         categoryAmount == other.categoryAmount &&
         categoryOwner == other.categoryOwner &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -173,7 +173,7 @@ class _$CategoriesRecord extends CategoriesRecord {
                     categoryBudget.hashCode),
                 categoryAmount.hashCode),
             categoryOwner.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -184,42 +184,41 @@ class _$CategoriesRecord extends CategoriesRecord {
           ..add('categoryBudget', categoryBudget)
           ..add('categoryAmount', categoryAmount)
           ..add('categoryOwner', categoryOwner)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class CategoriesRecordBuilder
     implements Builder<CategoriesRecord, CategoriesRecordBuilder> {
-  _$CategoriesRecord _$v;
+  _$CategoriesRecord? _$v;
 
-  String _categoryName;
-  String get categoryName => _$this._categoryName;
-  set categoryName(String categoryName) => _$this._categoryName = categoryName;
+  String? _categoryName;
+  String? get categoryName => _$this._categoryName;
+  set categoryName(String? categoryName) => _$this._categoryName = categoryName;
 
-  String _categoryId;
-  String get categoryId => _$this._categoryId;
-  set categoryId(String categoryId) => _$this._categoryId = categoryId;
+  String? _categoryId;
+  String? get categoryId => _$this._categoryId;
+  set categoryId(String? categoryId) => _$this._categoryId = categoryId;
 
-  DocumentReference<Object> _categoryBudget;
-  DocumentReference<Object> get categoryBudget => _$this._categoryBudget;
-  set categoryBudget(DocumentReference<Object> categoryBudget) =>
+  DocumentReference<Object?>? _categoryBudget;
+  DocumentReference<Object?>? get categoryBudget => _$this._categoryBudget;
+  set categoryBudget(DocumentReference<Object?>? categoryBudget) =>
       _$this._categoryBudget = categoryBudget;
 
-  int _categoryAmount;
-  int get categoryAmount => _$this._categoryAmount;
-  set categoryAmount(int categoryAmount) =>
+  int? _categoryAmount;
+  int? get categoryAmount => _$this._categoryAmount;
+  set categoryAmount(int? categoryAmount) =>
       _$this._categoryAmount = categoryAmount;
 
-  DocumentReference<Object> _categoryOwner;
-  DocumentReference<Object> get categoryOwner => _$this._categoryOwner;
-  set categoryOwner(DocumentReference<Object> categoryOwner) =>
+  DocumentReference<Object?>? _categoryOwner;
+  DocumentReference<Object?>? get categoryOwner => _$this._categoryOwner;
+  set categoryOwner(DocumentReference<Object?>? categoryOwner) =>
       _$this._categoryOwner = categoryOwner;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   CategoriesRecordBuilder() {
     CategoriesRecord._initializeBuilder(this);
@@ -233,7 +232,7 @@ class CategoriesRecordBuilder
       _categoryBudget = $v.categoryBudget;
       _categoryAmount = $v.categoryAmount;
       _categoryOwner = $v.categoryOwner;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -246,7 +245,7 @@ class CategoriesRecordBuilder
   }
 
   @override
-  void update(void Function(CategoriesRecordBuilder) updates) {
+  void update(void Function(CategoriesRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -259,7 +258,7 @@ class CategoriesRecordBuilder
             categoryBudget: categoryBudget,
             categoryAmount: categoryAmount,
             categoryOwner: categoryOwner,
-            reference: reference);
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

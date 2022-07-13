@@ -9,8 +9,8 @@ export 'transactions/transactions_widget.dart' show TransactionsWidget;
 export 'transaction_single/transaction_single_widget.dart'
     show TransactionSingleWidget;
 export 'active_budget/active_budget_widget.dart' show ActiveBudgetWidget;
-export 'budget_single/budget_single_widget.dart' show BudgetSingleWidget;
 export 'budgets/budgets_widget.dart' show BudgetsWidget;
+export 'budget_single/budget_single_widget.dart' show BudgetSingleWidget;
 export 'category_single/category_single_widget.dart' show CategorySingleWidget;
 export 'create_budget_categories/create_budget_categories_widget.dart'
     show CreateBudgetCategoriesWidget;

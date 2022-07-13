@@ -11,27 +11,21 @@ abstract class BudgetCategoriesRecord
   static Serializer<BudgetCategoriesRecord> get serializer =>
       _$budgetCategoriesRecordSerializer;
 
-  @nullable
-  String get categoryName;
+  String? get categoryName;
 
-  @nullable
-  DocumentReference get categoryBudget;
+  DocumentReference? get categoryBudget;
 
-  @nullable
-  int get allocatedAmount;
+  int? get allocatedAmount;
 
-  @nullable
-  DocumentReference get budgetOwner;
+  DocumentReference? get budgetOwner;
 
-  @nullable
-  BuiltList<DocumentReference> get linkedTransactions;
+  BuiltList<DocumentReference>? get linkedTransactions;
 
-  @nullable
-  String get categoryID;
+  String? get categoryID;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(BudgetCategoriesRecordBuilder builder) =>
       builder
@@ -45,12 +39,12 @@ abstract class BudgetCategoriesRecord
 
   static Stream<BudgetCategoriesRecord> getDocument(DocumentReference ref) =>
       ref.snapshots().map(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<BudgetCategoriesRecord> getDocumentOnce(
           DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   BudgetCategoriesRecord._();
   factory BudgetCategoriesRecord(
@@ -60,15 +54,15 @@ abstract class BudgetCategoriesRecord
   static BudgetCategoriesRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createBudgetCategoriesRecordData({
-  String categoryName,
-  DocumentReference categoryBudget,
-  int allocatedAmount,
-  DocumentReference budgetOwner,
-  String categoryID,
+  String? categoryName,
+  DocumentReference? categoryBudget,
+  int? allocatedAmount,
+  DocumentReference? budgetOwner,
+  String? categoryID,
 }) =>
     serializers.toFirestore(
         BudgetCategoriesRecord.serializer,

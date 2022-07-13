@@ -12,13 +12,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditBudgetAmountWidget extends StatefulWidget {
   const EditBudgetAmountWidget({
-    Key key,
+    Key? key,
     this.budget,
     this.categoryTotal,
   }) : super(key: key);
 
-  final BudgetsRecord budget;
-  final int categoryTotal;
+  final BudgetsRecord? budget;
+  final int? categoryTotal;
 
   @override
   _EditBudgetAmountWidgetState createState() => _EditBudgetAmountWidgetState();
@@ -88,7 +88,7 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                 child: custom_widgets.CurrencyTextField(
                   width: MediaQuery.of(context).size.width,
                   height: 50,
-                  amount: widget.budget.budgetAmount,
+                  amount: widget.budget!.budgetAmount,
                   labelText: 'Amount',
                   hintText: 'Enter amount',
                 ),
@@ -97,16 +97,16 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    if ((FFAppState().currencyTextField) <=
+                    if ((FFAppState().currencyTextField!) <=
                         (functions.subInt(widget.categoryTotal,
-                            widget.budget.unallocatedAmount))) {
+                            widget.budget!.unallocatedAmount))) {
                       final budgetsUpdateData = createBudgetsRecordData(
                         budgetAmount: FFAppState().currencyTextField,
                         unallocatedAmount: functions.subInt(
                             FFAppState().currencyTextField,
                             widget.categoryTotal),
                       );
-                      await widget.budget.reference.update(budgetsUpdateData);
+                      await widget.budget!.reference.update(budgetsUpdateData);
                       Navigator.pop(context);
                     } else {
                       await showDialog(
@@ -141,7 +141,7 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                       color: Colors.transparent,
                       width: 1,
                     ),
-                    borderRadius: 12,
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
               ),
@@ -160,7 +160,7 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                     color: Colors.transparent,
                     width: 1,
                   ),
-                  borderRadius: 16,
+                  borderRadius: BorderRadius.circular(16),
                 ),
               ),
             ],

@@ -13,9 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:evi/auth/auth_util.dart';
 import 'package:collection/collection.dart';
 
-Future<List<DocumentReference>> writeTransactions(
+Future<List<DocumentReference>?> writeTransactions(
   dynamic transactionJsonResponse,
-  AccountsRecord buttonAccountsRecord,
+  AccountsRecord? buttonAccountsRecord,
   List<TransactionsRecord> accountTransactions,
 ) async {
   // Add your function code here!
@@ -30,16 +30,16 @@ Future<List<DocumentReference>> writeTransactions(
   // final List<String> existingIDS =
   //     accountTransactions.map((e) => e.transactionMonoID).toList();
 
-  final List<int> existingAmounts =
+  final List<int?> existingAmounts =
       accountTransactions.map((e) => e.transactionAmount).toList();
 
-  final List<String> existingNarrations =
+  final List<String?> existingNarrations =
       accountTransactions.map((e) => e.transactionNarration).toList();
 
-  final List<int> existingBalances =
+  final List<int?> existingBalances =
       accountTransactions.map((e) => e.balanceAfter).toList();
 
-  final List<DateTime> existingDates =
+  final List<DateTime?> existingDates =
       accountTransactions.map((e) => e.trasactionDate).toList();
 
   // final List<String> existingTypes =
@@ -50,7 +50,7 @@ Future<List<DocumentReference>> writeTransactions(
   for (final quads in IterableZip(
       [existingAmounts, existingNarrations, existingBalances, existingDates])) {
     myUniqueKeys.add(quads[0].toString() +
-        quads[1] +
+        quads[1].toString() +
         quads[2].toString() +
         quads[3].toString());
   }
@@ -88,7 +88,7 @@ Future<List<DocumentReference>> writeTransactions(
 
     if (!myUniqueKeys.contains(transactionKey)) {
       final transactionsCreateData = createTransactionsRecordData(
-        account: buttonAccountsRecord.reference,
+        account: buttonAccountsRecord!.reference,
         trasactionDate: DateTime.parse(transaction.data[i].date),
         //monoCategory: transaction.data[i].,
         transactionOwner: currentUserReference,
@@ -112,7 +112,7 @@ Future<List<DocumentReference>> writeTransactions(
 class TransactionList {
   final List<Transaction> data;
 
-  TransactionList({this.data});
+  TransactionList({required this.data});
 
   factory TransactionList.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['data'] as List;
@@ -135,13 +135,13 @@ class Transaction {
   final String monoCategory;
 
   Transaction(
-      {this.id,
-      this.type,
-      this.amount,
-      this.balance,
-      this.date,
-      this.narration,
-      this.monoCategory});
+      {required this.id,
+      required this.type,
+      required this.amount,
+      required this.balance,
+      required this.date,
+      required this.narration,
+      required this.monoCategory});
 
   factory Transaction.fromJson(Map<String, dynamic> parsedJson) {
     return Transaction(

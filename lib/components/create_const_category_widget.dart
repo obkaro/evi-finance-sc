@@ -12,13 +12,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CreateConstCategoryWidget extends StatefulWidget {
   const CreateConstCategoryWidget({
-    Key key,
+    Key? key,
     this.constCategory,
     this.budget,
   }) : super(key: key);
 
-  final ConstBudgetCategoriesRecord constCategory;
-  final BudgetsRecord budget;
+  final ConstBudgetCategoriesRecord? constCategory;
+  final BudgetsRecord? budget;
 
   @override
   _CreateConstCategoryWidgetState createState() =>
@@ -82,13 +82,13 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                           child: Text(
-                            widget.constCategory.categoryName,
+                            widget.constCategory!.categoryName!,
                             textAlign: TextAlign.start,
                             style: FlutterFlowTheme.of(context).subtitle1,
                           ),
                         ),
                         Text(
-                          '(Unallocated: ${functions.formatBudgetCurrency(widget.budget.unallocatedAmount)})',
+                          '(Unallocated: ${functions.formatBudgetCurrency(widget.budget!.unallocatedAmount)})',
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.of(context)
                               .subtitle2
@@ -116,20 +116,20 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    if ((FFAppState().currencyTextField) <=
-                        (widget.budget.unallocatedAmount)) {
+                    if ((FFAppState().currencyTextField!) <=
+                        (widget.budget!.unallocatedAmount!)) {
                       final budgetsUpdateData = {
                         'unallocatedAmount': FieldValue.increment(
-                            -(FFAppState().currencyTextField)),
+                            -(FFAppState().currencyTextField!)),
                       };
-                      await widget.budget.reference.update(budgetsUpdateData);
+                      await widget.budget!.reference.update(budgetsUpdateData);
 
                       final budgetCategoriesCreateData =
                           createBudgetCategoriesRecordData(
-                        categoryName: widget.constCategory.categoryName,
+                        categoryName: widget.constCategory!.categoryName,
                         allocatedAmount: FFAppState().currencyTextField,
                         budgetOwner: currentUserReference,
-                        categoryBudget: widget.budget.reference,
+                        categoryBudget: widget.budget!.reference,
                       );
                       await BudgetCategoriesRecord.collection
                           .doc()
@@ -168,7 +168,7 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                       color: Colors.transparent,
                       width: 1,
                     ),
-                    borderRadius: 16,
+                    borderRadius: BorderRadius.circular(16),
                   ),
                 ),
               ),
@@ -187,7 +187,7 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                     color: Colors.transparent,
                     width: 1,
                   ),
-                  borderRadius: 16,
+                  borderRadius: BorderRadius.circular(16),
                 ),
               ),
             ],

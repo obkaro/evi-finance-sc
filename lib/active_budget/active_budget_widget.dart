@@ -16,15 +16,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class ActiveBudgetWidget extends StatefulWidget {
-  const ActiveBudgetWidget({Key key}) : super(key: key);
+  const ActiveBudgetWidget({Key? key}) : super(key: key);
 
   @override
   _ActiveBudgetWidgetState createState() => _ActiveBudgetWidgetState();
 }
 
 class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
-  BudgetsRecord createdBudget2;
-  BudgetsRecord createdBudget;
+  BudgetsRecord? createdBudget2;
+  BudgetsRecord? createdBudget;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -106,13 +106,13 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: Visibility(
-        visible: (currentUserDocument?.activeBudget != null),
+        visible: (currentUserDocument!.activeBudget != null),
         child: AuthUserStreamWidget(
           child: StreamBuilder<List<BudgetCategoriesRecord>>(
             stream: queryBudgetCategoriesRecord(
               queryBuilder: (budgetCategoriesRecord) =>
                   budgetCategoriesRecord.where('categoryBudget',
-                      isEqualTo: currentUserDocument?.activeBudget),
+                      isEqualTo: currentUserDocument!.activeBudget),
             ),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
@@ -130,7 +130,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
               }
               List<BudgetCategoriesRecord>
                   floatingActionButtonBudgetCategoriesRecordList =
-                  snapshot.data;
+                  snapshot.data!;
               return FloatingActionButton(
                 onPressed: () async {
                   await showModalBottomSheet(
@@ -141,7 +141,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                       return Padding(
                         padding: MediaQuery.of(context).viewInsets,
                         child: BudgetOptionsWidget(
-                          budget: currentUserDocument?.activeBudget,
+                          budget: currentUserDocument!.activeBudget,
                           categoriesSum: functions.sumCategoryAmounts(
                               floatingActionButtonBudgetCategoriesRecordList
                                   .toList()),
@@ -170,11 +170,11 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if ((currentUserDocument?.activeBudget != null))
+                if ((currentUserDocument!.activeBudget != null))
                   AuthUserStreamWidget(
                     child: StreamBuilder<BudgetsRecord>(
                       stream: BudgetsRecord.getDocument(
-                          currentUserDocument?.activeBudget),
+                          currentUserDocument!.activeBudget!),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
                         if (!snapshot.hasData) {
@@ -190,18 +190,18 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                             ),
                           );
                         }
-                        final columnBudgetsRecord = snapshot.data;
+                        final columnBudgetsRecord = snapshot.data!;
                         return Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            if ((currentUserDocument?.activeBudget != null))
+                            if ((currentUserDocument!.activeBudget != null))
                               StreamBuilder<List<BudgetCategoriesRecord>>(
                                 stream: queryBudgetCategoriesRecord(
                                   queryBuilder: (budgetCategoriesRecord) =>
                                       budgetCategoriesRecord
                                           .where('categoryBudget',
-                                              isEqualTo:
-                                                  columnBudgetsRecord.reference)
+                                              isEqualTo: columnBudgetsRecord!
+                                                  .reference)
                                           .where('categoryName',
                                               isNotEqualTo: 'dummy'),
                                 ),
@@ -222,7 +222,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                   }
                                   List<BudgetCategoriesRecord>
                                       containerBudgetCategoriesRecordList =
-                                      snapshot.data;
+                                      snapshot.data!;
                                   return Container(
                                     width: double.infinity,
                                     decoration: BoxDecoration(),
@@ -260,7 +260,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                   'linkedCategory',
                                                                   whereIn: containerBudgetCategoriesRecordList
                                                                       .map((e) =>
-                                                                          e.reference)
+                                                                          e!.reference)
                                                                       .toList()),
                                                             ),
                                                             builder: (context,
@@ -285,7 +285,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                               }
                                                               List<TransactionsRecord>
                                                                   containerTransactionsRecordList =
-                                                                  snapshot.data;
+                                                                  snapshot
+                                                                      .data!;
                                                               return Container(
                                                                 width: double
                                                                     .infinity,
@@ -315,7 +316,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               progressColor: FlutterFlowTheme.of(context).primaryColor,
                                                                               backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
                                                                               center: Text(
-                                                                                '${functions.formatBudgetCurrency(columnBudgetsRecord.budgetAmount)} ',
+                                                                                '${functions.formatBudgetCurrency(columnBudgetsRecord!.budgetAmount)} ',
                                                                                 textAlign: TextAlign.center,
                                                                                 style: FlutterFlowTheme.of(context).subtitle1.override(
                                                                                       fontFamily: 'Source Sans Pro',
@@ -342,7 +343,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               progressColor: FlutterFlowTheme.of(context).primaryColor,
                                                                               backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
                                                                               center: Text(
-                                                                                '${functions.subtractCurrency(columnBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                                                '${functions.subtractCurrency(columnBudgetsRecord!.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                                                 textAlign: TextAlign.center,
                                                                                 style: FlutterFlowTheme.of(context).subtitle1.override(
                                                                                       fontFamily: 'Source Sans Pro',
@@ -369,7 +370,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                             MainAxisAlignment.center,
                                                                         children: [
                                                                           Text(
-                                                                            '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
+                                                                            '${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetEnd)}',
                                                                             style:
                                                                                 FlutterFlowTheme.of(context).bodyText1,
                                                                           ),
@@ -420,7 +421,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                   style: FlutterFlowTheme.of(context).bodyText2,
                                                                                 ),
                                                                                 Text(
-                                                                                  functions.formatBudgetCurrency(columnBudgetsRecord.budgetAmount),
+                                                                                  functions.formatBudgetCurrency(columnBudgetsRecord!.budgetAmount),
                                                                                   style: FlutterFlowTheme.of(context).subtitle1.override(
                                                                                         fontFamily: 'Source Sans Pro',
                                                                                         fontSize: 20,
@@ -503,7 +504,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                 ),
                                                                 Text(
                                                                   functions.formatBudgetCurrency(
-                                                                      columnBudgetsRecord
+                                                                      columnBudgetsRecord!
                                                                           .unallocatedAmount),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
@@ -552,7 +553,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                   transactionsRecord.where(
                                                                       'linkedCategory',
                                                                       isEqualTo:
-                                                                          displayedCategoriesItem
+                                                                          displayedCategoriesItem!
                                                                               .reference),
                                                             ),
                                                             builder: (context,
@@ -577,7 +578,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                               }
                                                               List<TransactionsRecord>
                                                                   containerTransactionsRecordList =
-                                                                  snapshot.data;
+                                                                  snapshot
+                                                                      .data!;
                                                               return InkWell(
                                                                 onTap:
                                                                     () async {
@@ -648,11 +650,11 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                               children: [
                                                                                 Text(
-                                                                                  displayedCategoriesItem.categoryName,
+                                                                                  displayedCategoriesItem!.categoryName!,
                                                                                   style: FlutterFlowTheme.of(context).subtitle2,
                                                                                 ),
                                                                                 Text(
-                                                                                  '${functions.subtractCurrencyLine(displayedCategoriesItem.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                                                  '${functions.subtractCurrencyLine(displayedCategoriesItem!.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                                                   style: FlutterFlowTheme.of(context).bodyText1,
                                                                                 ),
                                                                               ],
@@ -703,7 +705,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                   );
                                 },
                               ),
-                            if ((columnBudgetsRecord.reference != null))
+                            if ((columnBudgetsRecord!.reference != null))
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     16, 0, 16, 16),
@@ -720,6 +722,14 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                         16, 16, 16, 16),
                                     child: InkWell(
                                       onTap: () async {
+                                        final categoriesCreateData =
+                                            createCategoriesRecordData(
+                                          categoryName: 'asda',
+                                          categoryAmount: 3223451,
+                                        );
+                                        await CategoriesRecord.createDoc(
+                                                columnBudgetsRecord!.reference)
+                                            .set(categoriesCreateData);
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
                                           backgroundColor: Colors.transparent,
@@ -795,7 +805,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                     ),
                   ),
                 if ((functions
-                        .isBudgetExising(currentUserDocument?.activeBudget)) ==
+                        .isBudgetExising(currentUserDocument!.activeBudget)) ==
                     0)
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),

@@ -3,11 +3,11 @@ import 'package:rxdart/rxdart.dart';
 
 class EviFirebaseUser {
   EviFirebaseUser(this.user);
-  User user;
+  User? user;
   bool get loggedIn => user != null;
 }
 
-EviFirebaseUser currentUser;
+EviFirebaseUser? currentUser;
 bool get loggedIn => currentUser?.loggedIn ?? false;
 Stream<EviFirebaseUser> eviFirebaseUserStream() => FirebaseAuth.instance
     .authStateChanges()

@@ -9,52 +9,39 @@ part 'users_record.g.dart';
 abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   static Serializer<UsersRecord> get serializer => _$usersRecordSerializer;
 
-  @nullable
-  String get email;
+  String? get email;
 
-  @nullable
   @BuiltValueField(wireName: 'display_name')
-  String get displayName;
+  String? get displayName;
 
-  @nullable
   @BuiltValueField(wireName: 'photo_url')
-  String get photoUrl;
+  String? get photoUrl;
 
-  @nullable
-  String get uid;
+  String? get uid;
 
-  @nullable
   @BuiltValueField(wireName: 'created_time')
-  DateTime get createdTime;
+  DateTime? get createdTime;
 
-  @nullable
   @BuiltValueField(wireName: 'phone_number')
-  String get phoneNumber;
+  String? get phoneNumber;
 
-  @nullable
-  int get age;
+  int? get age;
 
-  @nullable
-  double get income;
+  double? get income;
 
-  @nullable
-  String get tempAuthCode;
+  String? get tempAuthCode;
 
-  @nullable
-  BuiltList<DocumentReference> get accountsList;
+  BuiltList<DocumentReference>? get accountsList;
 
-  @nullable
-  BuiltList<DocumentReference> get budgetList;
+  BuiltList<DocumentReference>? get budgetList;
 
-  @nullable
-  DocumentReference get activeBudget;
+  DocumentReference? get activeBudget;
 
-  @nullable
-  DocumentReference get defaultAccount;
+  DocumentReference? get defaultAccount;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(UsersRecordBuilder builder) => builder
     ..email = ''
@@ -73,11 +60,11 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
 
   static Stream<UsersRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<UsersRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   UsersRecord._();
   factory UsersRecord([void Function(UsersRecordBuilder) updates]) =
@@ -86,21 +73,21 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   static UsersRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createUsersRecordData({
-  String email,
-  String displayName,
-  String photoUrl,
-  String uid,
-  DateTime createdTime,
-  String phoneNumber,
-  int age,
-  double income,
-  String tempAuthCode,
-  DocumentReference activeBudget,
-  DocumentReference defaultAccount,
+  String? email,
+  String? displayName,
+  String? photoUrl,
+  String? uid,
+  DateTime? createdTime,
+  String? phoneNumber,
+  int? age,
+  double? income,
+  String? tempAuthCode,
+  DocumentReference? activeBudget,
+  DocumentReference? defaultAccount,
 }) =>
     serializers.toFirestore(
         UsersRecord.serializer,

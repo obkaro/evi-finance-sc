@@ -13,7 +13,8 @@ import '../../index.dart';
 import '../../main.dart';
 
 class PushNotificationsHandler extends StatefulWidget {
-  const PushNotificationsHandler({Key key, this.child}) : super(key: key);
+  const PushNotificationsHandler({Key? key, required this.child})
+      : super(key: key);
 
   final Widget child;
 
@@ -92,11 +93,11 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
             data, 'transaction', TransactionsRecord.serializer),
       ),
   'ActiveBudget': (data) async => NavBarPage(initialPage: 'ActiveBudget'),
+  'Budgets': (data) async => BudgetsWidget(),
   'BudgetSingle': (data) async => BudgetSingleWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
       ),
-  'Budgets': (data) async => BudgetsWidget(),
   'CategorySingle': (data) async => CategorySingleWidget(
         category: await getDocumentParameter(
             data, 'category', BudgetCategoriesRecord.serializer),

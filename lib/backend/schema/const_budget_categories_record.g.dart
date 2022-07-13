@@ -21,11 +21,11 @@ class _$ConstBudgetCategoriesRecordSerializer
   final String wireName = 'ConstBudgetCategoriesRecord';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, ConstBudgetCategoriesRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.categoryName;
     if (value != null) {
       result
@@ -45,7 +45,7 @@ class _$ConstBudgetCategoriesRecordSerializer
         ..add('categoryOwner')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.categoryIcon;
     if (value != null) {
@@ -54,20 +54,20 @@ class _$ConstBudgetCategoriesRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   ConstBudgetCategoriesRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ConstBudgetCategoriesRecordBuilder();
 
@@ -75,31 +75,31 @@ class _$ConstBudgetCategoriesRecordSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'categoryName':
           result.categoryName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'categoryWeight':
           result.categoryWeight = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'categoryOwner':
           result.categoryOwner = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'categoryIcon':
           result.categoryIcon = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -110,18 +110,18 @@ class _$ConstBudgetCategoriesRecordSerializer
 
 class _$ConstBudgetCategoriesRecord extends ConstBudgetCategoriesRecord {
   @override
-  final String categoryName;
+  final String? categoryName;
   @override
-  final int categoryWeight;
+  final int? categoryWeight;
   @override
-  final DocumentReference<Object> categoryOwner;
+  final DocumentReference<Object?>? categoryOwner;
   @override
-  final String categoryIcon;
+  final String? categoryIcon;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
   factory _$ConstBudgetCategoriesRecord(
-          [void Function(ConstBudgetCategoriesRecordBuilder) updates]) =>
+          [void Function(ConstBudgetCategoriesRecordBuilder)? updates]) =>
       (new ConstBudgetCategoriesRecordBuilder()..update(updates)).build();
 
   _$ConstBudgetCategoriesRecord._(
@@ -129,7 +129,7 @@ class _$ConstBudgetCategoriesRecord extends ConstBudgetCategoriesRecord {
       this.categoryWeight,
       this.categoryOwner,
       this.categoryIcon,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -149,7 +149,7 @@ class _$ConstBudgetCategoriesRecord extends ConstBudgetCategoriesRecord {
         categoryWeight == other.categoryWeight &&
         categoryOwner == other.categoryOwner &&
         categoryIcon == other.categoryIcon &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -159,7 +159,7 @@ class _$ConstBudgetCategoriesRecord extends ConstBudgetCategoriesRecord {
             $jc($jc($jc(0, categoryName.hashCode), categoryWeight.hashCode),
                 categoryOwner.hashCode),
             categoryIcon.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -169,7 +169,7 @@ class _$ConstBudgetCategoriesRecord extends ConstBudgetCategoriesRecord {
           ..add('categoryWeight', categoryWeight)
           ..add('categoryOwner', categoryOwner)
           ..add('categoryIcon', categoryIcon)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
@@ -178,30 +178,29 @@ class ConstBudgetCategoriesRecordBuilder
     implements
         Builder<ConstBudgetCategoriesRecord,
             ConstBudgetCategoriesRecordBuilder> {
-  _$ConstBudgetCategoriesRecord _$v;
+  _$ConstBudgetCategoriesRecord? _$v;
 
-  String _categoryName;
-  String get categoryName => _$this._categoryName;
-  set categoryName(String categoryName) => _$this._categoryName = categoryName;
+  String? _categoryName;
+  String? get categoryName => _$this._categoryName;
+  set categoryName(String? categoryName) => _$this._categoryName = categoryName;
 
-  int _categoryWeight;
-  int get categoryWeight => _$this._categoryWeight;
-  set categoryWeight(int categoryWeight) =>
+  int? _categoryWeight;
+  int? get categoryWeight => _$this._categoryWeight;
+  set categoryWeight(int? categoryWeight) =>
       _$this._categoryWeight = categoryWeight;
 
-  DocumentReference<Object> _categoryOwner;
-  DocumentReference<Object> get categoryOwner => _$this._categoryOwner;
-  set categoryOwner(DocumentReference<Object> categoryOwner) =>
+  DocumentReference<Object?>? _categoryOwner;
+  DocumentReference<Object?>? get categoryOwner => _$this._categoryOwner;
+  set categoryOwner(DocumentReference<Object?>? categoryOwner) =>
       _$this._categoryOwner = categoryOwner;
 
-  String _categoryIcon;
-  String get categoryIcon => _$this._categoryIcon;
-  set categoryIcon(String categoryIcon) => _$this._categoryIcon = categoryIcon;
+  String? _categoryIcon;
+  String? get categoryIcon => _$this._categoryIcon;
+  set categoryIcon(String? categoryIcon) => _$this._categoryIcon = categoryIcon;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   ConstBudgetCategoriesRecordBuilder() {
     ConstBudgetCategoriesRecord._initializeBuilder(this);
@@ -214,7 +213,7 @@ class ConstBudgetCategoriesRecordBuilder
       _categoryWeight = $v.categoryWeight;
       _categoryOwner = $v.categoryOwner;
       _categoryIcon = $v.categoryIcon;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -227,7 +226,7 @@ class ConstBudgetCategoriesRecordBuilder
   }
 
   @override
-  void update(void Function(ConstBudgetCategoriesRecordBuilder) updates) {
+  void update(void Function(ConstBudgetCategoriesRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -239,7 +238,7 @@ class ConstBudgetCategoriesRecordBuilder
             categoryWeight: categoryWeight,
             categoryOwner: categoryOwner,
             categoryIcon: categoryIcon,
-            reference: reference);
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

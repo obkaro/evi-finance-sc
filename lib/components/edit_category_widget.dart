@@ -12,28 +12,28 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditCategoryWidget extends StatefulWidget {
   const EditCategoryWidget({
-    Key key,
+    Key? key,
     this.budget,
     this.categoryToEdit,
     this.categoriesTotal,
   }) : super(key: key);
 
-  final BudgetsRecord budget;
-  final BudgetCategoriesRecord categoryToEdit;
-  final int categoriesTotal;
+  final BudgetsRecord? budget;
+  final BudgetCategoriesRecord? categoryToEdit;
+  final int? categoriesTotal;
 
   @override
   _EditCategoryWidgetState createState() => _EditCategoryWidgetState();
 }
 
 class _EditCategoryWidgetState extends State<EditCategoryWidget> {
-  TextEditingController textController;
+  TextEditingController? textController;
 
   @override
   void initState() {
     super.initState();
     textController =
-        TextEditingController(text: widget.categoryToEdit.categoryName);
+        TextEditingController(text: widget.categoryToEdit!.categoryName);
   }
 
   @override
@@ -84,7 +84,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '(Unallocated: ${functions.formatBudgetCurrency(widget.budget.unallocatedAmount)})',
+                    '(Unallocated: ${functions.formatBudgetCurrency(widget.budget!.unallocatedAmount)})',
                     style: FlutterFlowTheme.of(context).subtitle2.override(
                           fontFamily: 'Source Sans Pro',
                           color: FlutterFlowTheme.of(context).secondaryText,
@@ -125,7 +125,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                 child: custom_widgets.CurrencyTextField(
                   width: MediaQuery.of(context).size.width,
                   height: 50,
-                  amount: widget.categoryToEdit.allocatedAmount,
+                  amount: widget.categoryToEdit!.allocatedAmount,
                   labelText: 'Amount',
                   hintText: 'Enter amount',
                 ),
@@ -135,34 +135,36 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                 child: FFButtonWidget(
                   onPressed: () async {
                     if ((functions.checkEditCatTotal(
-                            widget.budget.unallocatedAmount,
+                            widget.budget!.unallocatedAmount,
                             FFAppState().currencyTextField,
-                            widget.categoryToEdit.allocatedAmount)) >=
+                            widget.categoryToEdit!.allocatedAmount)) >=
                         0) {
-                      if ((FFAppState().currencyTextField) >
-                          (widget.categoryToEdit.allocatedAmount)) {
+                      if ((FFAppState().currencyTextField!) >
+                          (widget.categoryToEdit!.allocatedAmount!)) {
                         final budgetsUpdateData = {
                           'unallocatedAmount': FieldValue.increment(
                               -(functions.subInt(FFAppState().currencyTextField,
-                                  widget.categoryToEdit.allocatedAmount))),
+                                  widget.categoryToEdit!.allocatedAmount))),
                         };
-                        await widget.budget.reference.update(budgetsUpdateData);
+                        await widget.budget!.reference
+                            .update(budgetsUpdateData);
                       } else {
                         final budgetsUpdateData = {
                           'unallocatedAmount': FieldValue.increment(
                               functions.subInt(
-                                  widget.categoryToEdit.allocatedAmount,
+                                  widget.categoryToEdit!.allocatedAmount,
                                   FFAppState().currencyTextField)),
                         };
-                        await widget.budget.reference.update(budgetsUpdateData);
+                        await widget.budget!.reference
+                            .update(budgetsUpdateData);
                       }
 
                       final budgetCategoriesUpdateData =
                           createBudgetCategoriesRecordData(
                         allocatedAmount: FFAppState().currencyTextField,
-                        categoryName: textController.text,
+                        categoryName: textController!.text,
                       );
-                      await widget.categoryToEdit.reference
+                      await widget.categoryToEdit!.reference
                           .update(budgetCategoriesUpdateData);
                       Navigator.pop(context);
                     } else {
@@ -198,7 +200,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                       color: Colors.transparent,
                       width: 1,
                     ),
-                    borderRadius: 16,
+                    borderRadius: BorderRadius.circular(16),
                   ),
                 ),
               ),
@@ -217,7 +219,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                     color: Colors.transparent,
                     width: 1,
                   ),
-                  borderRadius: 16,
+                  borderRadius: BorderRadius.circular(16),
                 ),
               ),
             ],

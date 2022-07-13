@@ -10,16 +10,16 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileSettingsWidget extends StatefulWidget {
-  const ProfileSettingsWidget({Key key}) : super(key: key);
+  const ProfileSettingsWidget({Key? key}) : super(key: key);
 
   @override
   _ProfileSettingsWidgetState createState() => _ProfileSettingsWidgetState();
 }
 
 class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
-  TextEditingController textController1;
-  TextEditingController textController2;
-  TextEditingController textController3;
+  TextEditingController? textController1;
+  TextEditingController? textController2;
+  TextEditingController? textController3;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -192,16 +192,16 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                           child: FFButtonWidget(
                             onPressed: () async {
                               if (formKey.currentState == null ||
-                                  !formKey.currentState.validate()) {
+                                  !formKey.currentState!.validate()) {
                                 return;
                               }
 
                               final usersUpdateData = createUsersRecordData(
-                                displayName: textController1.text,
-                                email: textController2.text,
-                                phoneNumber: textController3.text,
+                                displayName: textController1!.text,
+                                email: textController2!.text,
+                                phoneNumber: textController3!.text,
                               );
-                              await currentUserReference
+                              await currentUserReference!
                                   .update(usersUpdateData);
                               Navigator.pop(context);
                             },
@@ -220,7 +220,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                 color: Colors.transparent,
                                 width: 1,
                               ),
-                              borderRadius: 16,
+                              borderRadius: BorderRadius.circular(16),
                             ),
                           ),
                         ),

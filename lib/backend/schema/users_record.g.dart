@@ -15,10 +15,10 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
   final String wireName = 'UsersRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, UsersRecord object,
+  Iterable<Object?> serialize(Serializers serializers, UsersRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.email;
     if (value != null) {
       result
@@ -87,7 +87,8 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add('accountsList')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(BuiltList, const [
-              const FullType(DocumentReference, const [const FullType(Object)])
+              const FullType(
+                  DocumentReference, const [const FullType.nullable(Object)])
             ])));
     }
     value = object.budgetList;
@@ -96,7 +97,8 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add('budgetList')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(BuiltList, const [
-              const FullType(DocumentReference, const [const FullType(Object)])
+              const FullType(
+                  DocumentReference, const [const FullType.nullable(Object)])
             ])));
     }
     value = object.activeBudget;
@@ -105,7 +107,7 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add('activeBudget')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.defaultAccount;
     if (value != null) {
@@ -113,21 +115,21 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add('defaultAccount')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
-  UsersRecord deserialize(Serializers serializers, Iterable<Object> serialized,
+  UsersRecord deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new UsersRecordBuilder();
 
@@ -135,75 +137,75 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'email':
           result.email = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'display_name':
           result.displayName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'photo_url':
           result.photoUrl = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'uid':
           result.uid = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'created_time':
           result.createdTime = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'phone_number':
           result.phoneNumber = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'age':
           result.age = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'income':
           result.income = serializers.deserialize(value,
-              specifiedType: const FullType(double)) as double;
+              specifiedType: const FullType(double)) as double?;
           break;
         case 'tempAuthCode':
           result.tempAuthCode = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'accountsList':
           result.accountsList.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
                 const FullType(
-                    DocumentReference, const [const FullType(Object)])
-              ])) as BuiltList<Object>);
+                    DocumentReference, const [const FullType.nullable(Object)])
+              ]))! as BuiltList<Object?>);
           break;
         case 'budgetList':
           result.budgetList.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
                 const FullType(
-                    DocumentReference, const [const FullType(Object)])
-              ])) as BuiltList<Object>);
+                    DocumentReference, const [const FullType.nullable(Object)])
+              ]))! as BuiltList<Object?>);
           break;
         case 'activeBudget':
           result.activeBudget = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'defaultAccount':
           result.defaultAccount = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -214,35 +216,35 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
 
 class _$UsersRecord extends UsersRecord {
   @override
-  final String email;
+  final String? email;
   @override
-  final String displayName;
+  final String? displayName;
   @override
-  final String photoUrl;
+  final String? photoUrl;
   @override
-  final String uid;
+  final String? uid;
   @override
-  final DateTime createdTime;
+  final DateTime? createdTime;
   @override
-  final String phoneNumber;
+  final String? phoneNumber;
   @override
-  final int age;
+  final int? age;
   @override
-  final double income;
+  final double? income;
   @override
-  final String tempAuthCode;
+  final String? tempAuthCode;
   @override
-  final BuiltList<DocumentReference<Object>> accountsList;
+  final BuiltList<DocumentReference<Object?>>? accountsList;
   @override
-  final BuiltList<DocumentReference<Object>> budgetList;
+  final BuiltList<DocumentReference<Object?>>? budgetList;
   @override
-  final DocumentReference<Object> activeBudget;
+  final DocumentReference<Object?>? activeBudget;
   @override
-  final DocumentReference<Object> defaultAccount;
+  final DocumentReference<Object?>? defaultAccount;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
-  factory _$UsersRecord([void Function(UsersRecordBuilder) updates]) =>
+  factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
       (new UsersRecordBuilder()..update(updates)).build();
 
   _$UsersRecord._(
@@ -259,7 +261,7 @@ class _$UsersRecord extends UsersRecord {
       this.budgetList,
       this.activeBudget,
       this.defaultAccount,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -286,7 +288,7 @@ class _$UsersRecord extends UsersRecord {
         budgetList == other.budgetList &&
         activeBudget == other.activeBudget &&
         defaultAccount == other.defaultAccount &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -316,7 +318,7 @@ class _$UsersRecord extends UsersRecord {
                     budgetList.hashCode),
                 activeBudget.hashCode),
             defaultAccount.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -335,76 +337,75 @@ class _$UsersRecord extends UsersRecord {
           ..add('budgetList', budgetList)
           ..add('activeBudget', activeBudget)
           ..add('defaultAccount', defaultAccount)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
-  _$UsersRecord _$v;
+  _$UsersRecord? _$v;
 
-  String _email;
-  String get email => _$this._email;
-  set email(String email) => _$this._email = email;
+  String? _email;
+  String? get email => _$this._email;
+  set email(String? email) => _$this._email = email;
 
-  String _displayName;
-  String get displayName => _$this._displayName;
-  set displayName(String displayName) => _$this._displayName = displayName;
+  String? _displayName;
+  String? get displayName => _$this._displayName;
+  set displayName(String? displayName) => _$this._displayName = displayName;
 
-  String _photoUrl;
-  String get photoUrl => _$this._photoUrl;
-  set photoUrl(String photoUrl) => _$this._photoUrl = photoUrl;
+  String? _photoUrl;
+  String? get photoUrl => _$this._photoUrl;
+  set photoUrl(String? photoUrl) => _$this._photoUrl = photoUrl;
 
-  String _uid;
-  String get uid => _$this._uid;
-  set uid(String uid) => _$this._uid = uid;
+  String? _uid;
+  String? get uid => _$this._uid;
+  set uid(String? uid) => _$this._uid = uid;
 
-  DateTime _createdTime;
-  DateTime get createdTime => _$this._createdTime;
-  set createdTime(DateTime createdTime) => _$this._createdTime = createdTime;
+  DateTime? _createdTime;
+  DateTime? get createdTime => _$this._createdTime;
+  set createdTime(DateTime? createdTime) => _$this._createdTime = createdTime;
 
-  String _phoneNumber;
-  String get phoneNumber => _$this._phoneNumber;
-  set phoneNumber(String phoneNumber) => _$this._phoneNumber = phoneNumber;
+  String? _phoneNumber;
+  String? get phoneNumber => _$this._phoneNumber;
+  set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
 
-  int _age;
-  int get age => _$this._age;
-  set age(int age) => _$this._age = age;
+  int? _age;
+  int? get age => _$this._age;
+  set age(int? age) => _$this._age = age;
 
-  double _income;
-  double get income => _$this._income;
-  set income(double income) => _$this._income = income;
+  double? _income;
+  double? get income => _$this._income;
+  set income(double? income) => _$this._income = income;
 
-  String _tempAuthCode;
-  String get tempAuthCode => _$this._tempAuthCode;
-  set tempAuthCode(String tempAuthCode) => _$this._tempAuthCode = tempAuthCode;
+  String? _tempAuthCode;
+  String? get tempAuthCode => _$this._tempAuthCode;
+  set tempAuthCode(String? tempAuthCode) => _$this._tempAuthCode = tempAuthCode;
 
-  ListBuilder<DocumentReference<Object>> _accountsList;
-  ListBuilder<DocumentReference<Object>> get accountsList =>
-      _$this._accountsList ??= new ListBuilder<DocumentReference<Object>>();
-  set accountsList(ListBuilder<DocumentReference<Object>> accountsList) =>
+  ListBuilder<DocumentReference<Object?>>? _accountsList;
+  ListBuilder<DocumentReference<Object?>> get accountsList =>
+      _$this._accountsList ??= new ListBuilder<DocumentReference<Object?>>();
+  set accountsList(ListBuilder<DocumentReference<Object?>>? accountsList) =>
       _$this._accountsList = accountsList;
 
-  ListBuilder<DocumentReference<Object>> _budgetList;
-  ListBuilder<DocumentReference<Object>> get budgetList =>
-      _$this._budgetList ??= new ListBuilder<DocumentReference<Object>>();
-  set budgetList(ListBuilder<DocumentReference<Object>> budgetList) =>
+  ListBuilder<DocumentReference<Object?>>? _budgetList;
+  ListBuilder<DocumentReference<Object?>> get budgetList =>
+      _$this._budgetList ??= new ListBuilder<DocumentReference<Object?>>();
+  set budgetList(ListBuilder<DocumentReference<Object?>>? budgetList) =>
       _$this._budgetList = budgetList;
 
-  DocumentReference<Object> _activeBudget;
-  DocumentReference<Object> get activeBudget => _$this._activeBudget;
-  set activeBudget(DocumentReference<Object> activeBudget) =>
+  DocumentReference<Object?>? _activeBudget;
+  DocumentReference<Object?>? get activeBudget => _$this._activeBudget;
+  set activeBudget(DocumentReference<Object?>? activeBudget) =>
       _$this._activeBudget = activeBudget;
 
-  DocumentReference<Object> _defaultAccount;
-  DocumentReference<Object> get defaultAccount => _$this._defaultAccount;
-  set defaultAccount(DocumentReference<Object> defaultAccount) =>
+  DocumentReference<Object?>? _defaultAccount;
+  DocumentReference<Object?>? get defaultAccount => _$this._defaultAccount;
+  set defaultAccount(DocumentReference<Object?>? defaultAccount) =>
       _$this._defaultAccount = defaultAccount;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   UsersRecordBuilder() {
     UsersRecord._initializeBuilder(this);
@@ -426,7 +427,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _budgetList = $v.budgetList?.toBuilder();
       _activeBudget = $v.activeBudget;
       _defaultAccount = $v.defaultAccount;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -439,7 +440,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   }
 
   @override
-  void update(void Function(UsersRecordBuilder) updates) {
+  void update(void Function(UsersRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -462,9 +463,9 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
               budgetList: _budgetList?.build(),
               activeBudget: activeBudget,
               defaultAccount: defaultAccount,
-              reference: reference);
+              ffRef: ffRef);
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'accountsList';
         _accountsList?.build();

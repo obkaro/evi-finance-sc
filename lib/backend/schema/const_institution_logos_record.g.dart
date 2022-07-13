@@ -21,11 +21,11 @@ class _$ConstInstitutionLogosRecordSerializer
   final String wireName = 'ConstInstitutionLogosRecord';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, ConstInstitutionLogosRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.institutionName;
     if (value != null) {
       result
@@ -47,20 +47,20 @@ class _$ConstInstitutionLogosRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   ConstInstitutionLogosRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ConstInstitutionLogosRecordBuilder();
 
@@ -68,25 +68,25 @@ class _$ConstInstitutionLogosRecordSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'institutionName':
           result.institutionName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'institutionLogo':
           result.institutionLogo = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'institutionCode':
           result.institutionCode = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -97,23 +97,23 @@ class _$ConstInstitutionLogosRecordSerializer
 
 class _$ConstInstitutionLogosRecord extends ConstInstitutionLogosRecord {
   @override
-  final String institutionName;
+  final String? institutionName;
   @override
-  final String institutionLogo;
+  final String? institutionLogo;
   @override
-  final String institutionCode;
+  final String? institutionCode;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
   factory _$ConstInstitutionLogosRecord(
-          [void Function(ConstInstitutionLogosRecordBuilder) updates]) =>
+          [void Function(ConstInstitutionLogosRecordBuilder)? updates]) =>
       (new ConstInstitutionLogosRecordBuilder()..update(updates)).build();
 
   _$ConstInstitutionLogosRecord._(
       {this.institutionName,
       this.institutionLogo,
       this.institutionCode,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -132,7 +132,7 @@ class _$ConstInstitutionLogosRecord extends ConstInstitutionLogosRecord {
         institutionName == other.institutionName &&
         institutionLogo == other.institutionLogo &&
         institutionCode == other.institutionCode &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -140,7 +140,7 @@ class _$ConstInstitutionLogosRecord extends ConstInstitutionLogosRecord {
     return $jf($jc(
         $jc($jc($jc(0, institutionName.hashCode), institutionLogo.hashCode),
             institutionCode.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -149,7 +149,7 @@ class _$ConstInstitutionLogosRecord extends ConstInstitutionLogosRecord {
           ..add('institutionName', institutionName)
           ..add('institutionLogo', institutionLogo)
           ..add('institutionCode', institutionCode)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
@@ -158,27 +158,26 @@ class ConstInstitutionLogosRecordBuilder
     implements
         Builder<ConstInstitutionLogosRecord,
             ConstInstitutionLogosRecordBuilder> {
-  _$ConstInstitutionLogosRecord _$v;
+  _$ConstInstitutionLogosRecord? _$v;
 
-  String _institutionName;
-  String get institutionName => _$this._institutionName;
-  set institutionName(String institutionName) =>
+  String? _institutionName;
+  String? get institutionName => _$this._institutionName;
+  set institutionName(String? institutionName) =>
       _$this._institutionName = institutionName;
 
-  String _institutionLogo;
-  String get institutionLogo => _$this._institutionLogo;
-  set institutionLogo(String institutionLogo) =>
+  String? _institutionLogo;
+  String? get institutionLogo => _$this._institutionLogo;
+  set institutionLogo(String? institutionLogo) =>
       _$this._institutionLogo = institutionLogo;
 
-  String _institutionCode;
-  String get institutionCode => _$this._institutionCode;
-  set institutionCode(String institutionCode) =>
+  String? _institutionCode;
+  String? get institutionCode => _$this._institutionCode;
+  set institutionCode(String? institutionCode) =>
       _$this._institutionCode = institutionCode;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   ConstInstitutionLogosRecordBuilder() {
     ConstInstitutionLogosRecord._initializeBuilder(this);
@@ -190,7 +189,7 @@ class ConstInstitutionLogosRecordBuilder
       _institutionName = $v.institutionName;
       _institutionLogo = $v.institutionLogo;
       _institutionCode = $v.institutionCode;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -203,7 +202,7 @@ class ConstInstitutionLogosRecordBuilder
   }
 
   @override
-  void update(void Function(ConstInstitutionLogosRecordBuilder) updates) {
+  void update(void Function(ConstInstitutionLogosRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -214,7 +213,7 @@ class ConstInstitutionLogosRecordBuilder
             institutionName: institutionName,
             institutionLogo: institutionLogo,
             institutionCode: institutionCode,
-            reference: reference);
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

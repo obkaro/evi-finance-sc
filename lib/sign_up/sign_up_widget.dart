@@ -9,19 +9,19 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SignUpWidget extends StatefulWidget {
-  const SignUpWidget({Key key}) : super(key: key);
+  const SignUpWidget({Key? key}) : super(key: key);
 
   @override
   _SignUpWidgetState createState() => _SignUpWidgetState();
 }
 
 class _SignUpWidgetState extends State<SignUpWidget> {
-  TextEditingController inputConfirmPasswordController;
-  bool inputConfirmPasswordVisibility;
-  TextEditingController inputEmailController;
-  TextEditingController inputUsernameController;
-  TextEditingController inputPasswordController;
-  bool inputPasswordVisibility;
+  TextEditingController? inputConfirmPasswordController;
+  late bool inputConfirmPasswordVisibility;
+  TextEditingController? inputEmailController;
+  TextEditingController? inputUsernameController;
+  TextEditingController? inputPasswordController;
+  late bool inputPasswordVisibility;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -334,7 +334,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             if (formKey.currentState == null ||
-                                                !formKey.currentState
+                                                !formKey.currentState!
                                                     .validate()) {
                                               return;
                                             }
@@ -357,8 +357,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                             final user =
                                                 await createAccountWithEmail(
                                               context,
-                                              inputEmailController.text,
-                                              inputPasswordController.text,
+                                              inputEmailController!.text,
+                                              inputPasswordController!.text,
                                             );
                                             if (user == null) {
                                               return;
@@ -366,9 +366,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
 
                                             final usersCreateData =
                                                 createUsersRecordData(
-                                              email: inputEmailController.text,
+                                              email: inputEmailController!.text,
                                               displayName:
-                                                  inputUsernameController.text,
+                                                  inputUsernameController!.text,
                                             );
                                             await UsersRecord.collection
                                                 .doc(user.uid)
@@ -400,7 +400,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 16,
+                                            borderRadius:
+                                                BorderRadius.circular(16),
                                           ),
                                         ),
                                       ],

@@ -18,9 +18,9 @@ class FFAppState {
     prefs = await SharedPreferences.getInstance();
   }
 
-  SharedPreferences prefs;
+  late SharedPreferences prefs;
 
-  DocumentReference selectedAccount;
+  DocumentReference? selectedAccount;
 
   String selectedAcctName = '';
 
@@ -35,7 +35,7 @@ class FFAppState {
   int initPageViewNumber = 0;
 }
 
-LatLng _latLngFromString(String val) {
+LatLng? _latLngFromString(String? val) {
   if (val == null) {
     return null;
   }

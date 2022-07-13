@@ -28,15 +28,15 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 
   static _MyAppState of(BuildContext context) =>
-      context.findAncestorStateOfType<_MyAppState>();
+      context.findAncestorStateOfType<_MyAppState>()!;
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _locale;
+  Locale? _locale;
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
 
-  Stream<EviFirebaseUser> userStream;
-  EviFirebaseUser initialUser;
+  late Stream<EviFirebaseUser> userStream;
+  EviFirebaseUser? initialUser;
   bool displaySplashImage = true;
 
   final authUserSub = authenticatedUserStream.listen((_) {});
@@ -94,7 +94,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             )
-          : currentUser.loggedIn
+          : currentUser!.loggedIn
               ? PushNotificationsHandler(child: NavBarPage())
               : LandPageWidget(),
     );
@@ -102,9 +102,9 @@ class _MyAppState extends State<MyApp> {
 }
 
 class NavBarPage extends StatefulWidget {
-  NavBarPage({Key key, this.initialPage}) : super(key: key);
+  NavBarPage({Key? key, this.initialPage}) : super(key: key);
 
-  final String initialPage;
+  final String? initialPage;
 
   @override
   _NavBarPageState createState() => _NavBarPageState();

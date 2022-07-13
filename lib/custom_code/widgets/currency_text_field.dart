@@ -9,11 +9,11 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 
 // Begin custom widget code
-import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 class CurrencyTextField extends StatefulWidget {
   const CurrencyTextField({
-    Key key,
+    Key? key,
     this.width,
     this.height,
     this.amount,
@@ -22,11 +22,11 @@ class CurrencyTextField extends StatefulWidget {
     //this.moneyController,
   }) : super(key: key);
 
-  final double width;
-  final double height;
-  final int amount;
-  final String labelText;
-  final String hintText;
+  final double? width;
+  final double? height;
+  final int? amount;
+  final String? labelText;
+  final String? hintText;
   //final MoneyMaskedTextController moneyController;
 
   @override
@@ -34,7 +34,7 @@ class CurrencyTextField extends StatefulWidget {
 }
 
 class _CurrencyTextFieldState extends State<CurrencyTextField> {
-  TextEditingController textController;
+  TextEditingController? textController;
   var controller = new MaskedTextController(mask: '000.000.000-000');
 
   var moneyController = new MoneyMaskedTextController(
@@ -51,8 +51,8 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
     // }
     super.initState();
     if (widget.amount != null) {
-      WidgetsBinding.instance.addPostFrameCallback(
-          (_) => moneyController.updateValue(widget.amount / 100));
+      WidgetsBinding.instance?.addPostFrameCallback(
+          (_) => moneyController.updateValue(widget.amount! / 100));
     }
   }
 
