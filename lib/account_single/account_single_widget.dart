@@ -543,15 +543,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                   ''),
                                                               r'''$.code''',
                                                             ).toString());
-                                                        setState(() =>
-                                                            FFAppState()
-                                                                    .hasNewData =
-                                                                getJsonField(
-                                                              (dataSyncResponse!
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                              r'''$.hasNewData''',
-                                                            ));
                                                         if ((FFAppState()
                                                                 .dataSyncCode) ==
                                                             'REAUTHORISATION_REQUIRED') {
