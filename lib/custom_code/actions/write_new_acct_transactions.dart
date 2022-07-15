@@ -40,7 +40,6 @@ Future writeNewAcctTransactions(
       transactionType: transaction.data[i].type,
       transactionNarration: transaction.data[i].narration,
       monoCategory: transaction.data[i].monoCategory,
-      isCategorized: false,
     );
     await TransactionsRecord.collection.doc().set(transactionsCreateData);
   }
