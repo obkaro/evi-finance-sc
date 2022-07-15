@@ -98,11 +98,7 @@ class _CreateCustomCategoryWidgetState
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Category Name',
-                    labelStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyText1Family,
-                          color: FlutterFlowTheme.of(context).primaryColor,
-                        ),
+                    labelStyle: FlutterFlowTheme.of(context).bodyText2,
                     hintText: 'Enter Category Name',
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(

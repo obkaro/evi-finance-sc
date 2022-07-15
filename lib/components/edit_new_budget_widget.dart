@@ -223,7 +223,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
               child: FFButtonWidget(
                 onPressed: () async {
-                  if ((FFAppState().currencyTextField!) >
+                  if ((FFAppState().currencyTextField!) >=
                       (widget.ccategoriesSum!)) {
                     // Action_CreateBudgetStep1
 
