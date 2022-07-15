@@ -46,8 +46,8 @@ class _CreateBudgetCategoriesWidgetState
     return StreamBuilder<List<CategoriesRecord>>(
       stream: queryCategoriesRecord(
         parent: widget.createdBudget!.reference,
-        queryBuilder: (categoriesRecord) =>
-            categoriesRecord.where('category_name', isNotEqualTo: 'dummy'),
+        queryBuilder: (categoriesRecord) => categoriesRecord
+            .where('category_name', isNotEqualTo: 'Unallocated'),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
