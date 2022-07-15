@@ -111,6 +111,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
           child: StreamBuilder<List<CategoriesRecord>>(
             stream: queryCategoriesRecord(
               parent: currentUserDocument!.activeBudget,
+              queryBuilder: (categoriesRecord) => categoriesRecord
+                  .where('category_name', isNotEqualTo: 'Unallocated'),
             ),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.

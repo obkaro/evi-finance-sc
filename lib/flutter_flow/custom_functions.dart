@@ -155,12 +155,12 @@ String subtractCurrency(
 
   if (value1! > value2!) {
     result = value1 - value2;
-    formatedResult = formatCurrency.format(result / 100) + '\nleft';
+    formatedResult = formatCurrency.format(result / 100) + '\nRemaining';
   } else if (value2 == value1) {
     formatedResult = 'Exhausted';
   } else if (value2 > value1) {
     result = value2 - value1;
-    formatedResult = formatCurrency.format(result / 100) + '\nover';
+    formatedResult = formatCurrency.format(result / 100) + '\nOver';
   } else {
     formatedResult = "error";
   }
@@ -180,12 +180,12 @@ String subtractCurrencyLine(
 
   if (value1! > value2!) {
     result = value1 - value2;
-    formatedResult = formatCurrency.format(result / 100) + ' left';
+    formatedResult = formatCurrency.format(result / 100) + ' Remaining';
   } else if (value2 == value1) {
     formatedResult = 'Exhausted';
   } else if (value2 > value1) {
     result = value2 - value1;
-    formatedResult = formatCurrency.format(result / 100) + ' over';
+    formatedResult = formatCurrency.format(result / 100) + ' Over';
   } else {
     formatedResult = "error";
   }
