@@ -25,7 +25,7 @@ class EditBudgetCategoriesWidget extends StatefulWidget {
   }) : super(key: key);
 
   final BudgetsRecord? createdBudget;
-  final BudgetCategoriesRecord? uncategorized;
+  final CategoriesRecord? uncategorized;
 
   @override
   _EditBudgetCategoriesWidgetState createState() =>
@@ -45,11 +45,11 @@ class _EditBudgetCategoriesWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<BudgetCategoriesRecord>>(
-      stream: queryBudgetCategoriesRecord(
-        queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
-            .where('categoryBudget', isEqualTo: widget.createdBudget!.reference)
-            .where('categoryName', isNotEqualTo: 'dummy'),
+    return StreamBuilder<List<CategoriesRecord>>(
+      stream: queryCategoriesRecord(
+        parent: widget.createdBudget!.reference,
+        queryBuilder: (categoriesRecord) =>
+            categoriesRecord.where('category_name', isNotEqualTo: 'dummy'),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -65,8 +65,8 @@ class _EditBudgetCategoriesWidgetState
             ),
           );
         }
-        List<BudgetCategoriesRecord>
-            editBudgetCategoriesBudgetCategoriesRecordList = snapshot.data!;
+        List<CategoriesRecord> editBudgetCategoriesCategoriesRecordList =
+            snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -160,7 +160,10 @@ class _EditBudgetCategoriesWidgetState
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText2
                                                 .override(
-                                                  fontFamily: 'Source Sans Pro',
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyText2Family,
                                                   color: Color(0xFFFF0003),
                                                 ),
                                           ),
@@ -235,7 +238,7 @@ class _EditBudgetCategoriesWidgetState
                                                     budget: columnBudgetsRecord,
                                                     categoryTotal: functions
                                                         .sumCategoryAmounts(
-                                                            editBudgetCategoriesBudgetCategoriesRecordList
+                                                            editBudgetCategoriesCategoriesRecordList
                                                                 .toList()),
                                                   ),
                                                 );
@@ -336,7 +339,7 @@ class _EditBudgetCategoriesWidgetState
                                                 constBudgetCategoriesRecord
                                                     .where('categoryName',
                                                         whereNotIn:
-                                                            editBudgetCategoriesBudgetCategoriesRecordList
+                                                            editBudgetCategoriesCategoriesRecordList
                                                                 .map((e) => e!
                                                                     .categoryName!)
                                                                 .toList())
@@ -446,8 +449,9 @@ class _EditBudgetCategoriesWidgetState
                                                                   .of(context)
                                                               .bodyText1
                                                               .override(
-                                                                fontFamily:
-                                                                    'Source Sans Pro',
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family,
                                                                 fontSize: 12,
                                                               ),
                                                         ),
@@ -516,7 +520,9 @@ class _EditBudgetCategoriesWidgetState
                                                     .subtitle2
                                                     .override(
                                                       fontFamily:
-                                                          'Source Sans Pro',
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2Family,
                                                       color: Colors.white,
                                                     ),
                                             borderSide: BorderSide(
@@ -546,7 +552,7 @@ class _EditBudgetCategoriesWidgetState
                                         child: Builder(
                                           builder: (context) {
                                             final editExistingCats =
-                                                editBudgetCategoriesBudgetCategoriesRecordList
+                                                editBudgetCategoriesCategoriesRecordList
                                                         ?.toList() ??
                                                     [];
                                             return SingleChildScrollView(
@@ -631,7 +637,7 @@ class _EditBudgetCategoriesWidgetState
                                                           child: Text(
                                                             functions.formatBudgetCurrency(
                                                                 editExistingCatsItem!
-                                                                    .allocatedAmount),
+                                                                    .categoryAmount),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyText1,
@@ -673,7 +679,7 @@ class _EditBudgetCategoriesWidgetState
                                                                         editExistingCatsItem,
                                                                     categoriesTotal:
                                                                         functions
-                                                                            .sumCategoryAmounts(editBudgetCategoriesBudgetCategoriesRecordList.toList()),
+                                                                            .sumCategoryAmounts(editBudgetCategoriesCategoriesRecordList.toList()),
                                                                   ),
                                                                 );
                                                               },
@@ -687,7 +693,7 @@ class _EditBudgetCategoriesWidgetState
                                                               queryTransactionsRecord(
                                                             queryBuilder: (transactionsRecord) =>
                                                                 transactionsRecord.where(
-                                                                    'linkedCategory',
+                                                                    'transactionCategory',
                                                                     isEqualTo:
                                                                         editExistingCatsItem!
                                                                             .reference),
@@ -759,7 +765,7 @@ class _EditBudgetCategoriesWidgetState
                                                                       {
                                                                     'unallocatedAmount':
                                                                         FieldValue.increment(
-                                                                            editExistingCatsItem!.allocatedAmount!),
+                                                                            editExistingCatsItem!.categoryAmount!),
                                                                   };
                                                                   await columnBudgetsRecord!
                                                                       .reference
@@ -801,16 +807,11 @@ class _EditBudgetCategoriesWidgetState
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        StreamBuilder<
-                                            List<BudgetCategoriesRecord>>(
-                                          stream: queryBudgetCategoriesRecord(
-                                            queryBuilder:
-                                                (budgetCategoriesRecord) =>
-                                                    budgetCategoriesRecord.where(
-                                                        'categoryBudget',
-                                                        isEqualTo:
-                                                            columnBudgetsRecord!
-                                                                .reference),
+                                        StreamBuilder<List<CategoriesRecord>>(
+                                          stream: queryCategoriesRecord(
+                                            parent:
+                                                columnBudgetsRecord!.reference,
+                                            singleRecord: true,
                                           ),
                                           builder: (context, snapshot) {
                                             // Customize what your widget looks like when it's loading.
@@ -828,9 +829,16 @@ class _EditBudgetCategoriesWidgetState
                                                 ),
                                               );
                                             }
-                                            List<BudgetCategoriesRecord>
-                                                buttonBudgetCategoriesRecordList =
+                                            List<CategoriesRecord>
+                                                buttonCategoriesRecordList =
                                                 snapshot.data!;
+                                            // Return an empty Container when the document does not exist.
+                                            if (snapshot.data!.isEmpty) {
+                                              return Container();
+                                            }
+                                            final buttonCategoriesRecord =
+                                                buttonCategoriesRecordList
+                                                    .first;
                                             return FFButtonWidget(
                                               onPressed: () async {
                                                 var confirmDialogResponse =
@@ -869,7 +877,7 @@ class _EditBudgetCategoriesWidgetState
                                                   // Action_ResetCategories
                                                   await actions
                                                       .deleteCategories(
-                                                    buttonBudgetCategoriesRecordList
+                                                    editBudgetCategoriesCategoriesRecordList
                                                         .toList(),
                                                   );
                                                 } else {
@@ -888,7 +896,9 @@ class _EditBudgetCategoriesWidgetState
                                                         .subtitle2
                                                         .override(
                                                           fontFamily:
-                                                              'Source Sans Pro',
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle2Family,
                                                           color:
                                                               Color(0xFF5D5B5B),
                                                         ),
@@ -915,7 +925,9 @@ class _EditBudgetCategoriesWidgetState
                                                       .bodyText2
                                                       .override(
                                                         fontFamily:
-                                                            'Source Sans Pro',
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText2Family,
                                                         color:
                                                             Color(0xFFF9F9F9),
                                                       ),
@@ -946,7 +958,9 @@ class _EditBudgetCategoriesWidgetState
                                                     .subtitle2
                                                     .override(
                                                       fontFamily:
-                                                          'Source Sans Pro',
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2Family,
                                                       color: Colors.white,
                                                     ),
                                             borderSide: BorderSide(

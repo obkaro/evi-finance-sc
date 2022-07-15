@@ -38,24 +38,23 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         iconTheme:
             IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
         automaticallyImplyLeading: true,
         title: Text(
           'Profile Settings',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Spline Sans',
+                fontFamily: FlutterFlowTheme.of(context).title2Family,
                 color: FlutterFlowTheme.of(context).primaryText,
                 fontSize: 22,
-                useGoogleFonts: false,
               ),
         ),
         actions: [],
         centerTitle: true,
         elevation: 0,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -65,11 +64,10 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                  padding: EdgeInsetsDirectional.fromSTEB(24, 24, 24, 24),
                   child: Form(
                     key: formKey,
                     autovalidateMode: AutovalidateMode.disabled,
@@ -77,7 +75,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 16),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 24),
                           child: AuthUserStreamWidget(
                             child: TextFormField(
                               controller: textController1,
@@ -107,7 +105,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                    .primaryBackground,
                               ),
                               style: FlutterFlowTheme.of(context).bodyText1,
                               keyboardType: TextInputType.name,
@@ -142,14 +140,14 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             filled: true,
-                            fillColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            fillColor:
+                                FlutterFlowTheme.of(context).primaryBackground,
                           ),
                           style: FlutterFlowTheme.of(context).bodyText1,
                           keyboardType: TextInputType.emailAddress,
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                           child: AuthUserStreamWidget(
                             child: TextFormField(
                               controller: textController3,
@@ -180,7 +178,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                    .primaryBackground,
                               ),
                               style: FlutterFlowTheme.of(context).bodyText1,
                               keyboardType: TextInputType.phone,
@@ -213,7 +211,8 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               textStyle: FlutterFlowTheme.of(context)
                                   .subtitle2
                                   .override(
-                                    fontFamily: 'Source Sans Pro',
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .subtitle2Family,
                                     color: Colors.white,
                                   ),
                               borderSide: BorderSide(

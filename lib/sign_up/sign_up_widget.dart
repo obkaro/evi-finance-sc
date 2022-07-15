@@ -94,10 +94,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .title1
                                       .override(
-                                        fontFamily: 'Spline Sans',
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .title1Family,
                                         color: Colors.white,
                                         fontSize: 32,
-                                        useGoogleFonts: false,
                                       ),
                                 ),
                               ),
@@ -393,7 +393,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                     .subtitle2
                                                     .override(
                                                       fontFamily:
-                                                          'Source Sans Pro',
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2Family,
                                                       color: Colors.white,
                                                     ),
                                             borderSide: BorderSide(

@@ -7,7 +7,6 @@ import '../actions/index.dart'; // Imports custom actions
 import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
-
 // Begin custom widget code
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 

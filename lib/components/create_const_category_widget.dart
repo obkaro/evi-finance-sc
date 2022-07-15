@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
+import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -93,7 +94,8 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                           style: FlutterFlowTheme.of(context)
                               .subtitle2
                               .override(
-                                fontFamily: 'Source Sans Pro',
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .subtitle2Family,
                                 color:
                                     FlutterFlowTheme.of(context).secondaryText,
                               ),
@@ -124,16 +126,20 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                       };
                       await widget.budget!.reference.update(budgetsUpdateData);
 
-                      final budgetCategoriesCreateData =
-                          createBudgetCategoriesRecordData(
+                      final categoriesCreateData = createCategoriesRecordData(
                         categoryName: widget.constCategory!.categoryName,
-                        allocatedAmount: FFAppState().currencyTextField,
-                        budgetOwner: currentUserReference,
+                        categoryAmount: FFAppState().currencyTextField,
                         categoryBudget: widget.budget!.reference,
+                        categoryId: random_data.randomString(
+                          24,
+                          24,
+                          true,
+                          true,
+                          true,
+                        ),
                       );
-                      await BudgetCategoriesRecord.collection
-                          .doc()
-                          .set(budgetCategoriesCreateData);
+                      await CategoriesRecord.createDoc(widget.budget!.reference)
+                          .set(categoriesCreateData);
                       Navigator.pop(context);
                     } else {
                       await showDialog(
@@ -161,7 +167,8 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                     height: 60,
                     color: FlutterFlowTheme.of(context).primaryColor,
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily: 'Source Sans Pro',
+                          fontFamily:
+                              FlutterFlowTheme.of(context).subtitle2Family,
                           color: Colors.white,
                         ),
                     borderSide: BorderSide(

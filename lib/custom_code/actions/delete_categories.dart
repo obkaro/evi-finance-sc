@@ -7,9 +7,9 @@ import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 
 // Begin custom action code
-Future deleteCategories(List<BudgetCategoriesRecord> createdCategories) async {
+Future deleteCategories(List<CategoriesRecord>? createdCategories) async {
   // Add your function code here!
-  for (var i = 0; i < createdCategories.length; i++) {
+  for (var i = 0; i < createdCategories!.length; i++) {
     await createdCategories[i].reference.delete();
   }
 }

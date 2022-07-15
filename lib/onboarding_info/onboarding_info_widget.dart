@@ -226,11 +226,13 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                       width: double.infinity,
                       height: 50,
                       color: FlutterFlowTheme.of(context).primaryColor,
-                      textStyle:
-                          FlutterFlowTheme.of(context).subtitle2.override(
-                                fontFamily: 'Source Sans Pro',
-                                color: Colors.white,
-                              ),
+                      textStyle: FlutterFlowTheme.of(context)
+                          .subtitle2
+                          .override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).subtitle2Family,
+                            color: Colors.white,
+                          ),
                       borderSide: BorderSide(
                         color: Colors.transparent,
                         width: 1,

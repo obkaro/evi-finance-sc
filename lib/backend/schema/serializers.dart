@@ -4,7 +4,6 @@ import 'users_record.dart';
 import 'accounts_record.dart';
 import 'transactions_record.dart';
 import 'budgets_record.dart';
-import 'budget_categories_record.dart';
 import 'const_budget_categories_record.dart';
 import 'const_institution_logos_record.dart';
 import 'categories_record.dart';
@@ -23,7 +22,6 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   AccountsRecord,
   TransactionsRecord,
   BudgetsRecord,
-  BudgetCategoriesRecord,
   ConstBudgetCategoriesRecord,
   ConstInstitutionLogosRecord,
   CategoriesRecord,

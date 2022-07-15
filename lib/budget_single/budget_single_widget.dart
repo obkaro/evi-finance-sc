@@ -32,11 +32,11 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<BudgetCategoriesRecord>>(
-      stream: queryBudgetCategoriesRecord(
-        queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
-            .where('categoryBudget', isEqualTo: widget.budget!.reference)
-            .where('categoryName', isNotEqualTo: 'dummy'),
+    return StreamBuilder<List<CategoriesRecord>>(
+      stream: queryCategoriesRecord(
+        parent: widget.budget!.reference,
+        queryBuilder: (categoriesRecord) =>
+            categoriesRecord.where('category_name', isNotEqualTo: 'dummy'),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -52,7 +52,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
             ),
           );
         }
-        List<BudgetCategoriesRecord> budgetSingleBudgetCategoriesRecordList =
+        List<CategoriesRecord> budgetSingleCategoriesRecordList =
             snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
@@ -91,9 +91,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                   stream: queryTransactionsRecord(
                                     queryBuilder: (transactionsRecord) =>
                                         transactionsRecord.where(
-                                            'linkedCategory',
+                                            'transactionCategory',
                                             whereIn:
-                                                budgetSingleBudgetCategoriesRecordList
+                                                budgetSingleCategoriesRecordList
                                                     .map((e) => e!.reference)
                                                     .toList()),
                                   ),
@@ -132,7 +132,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                   child:
                                                       CircularPercentIndicator(
                                                     percent: 0,
-                                                    radius: 112.5,
+                                                    radius: 90,
                                                     lineWidth: 16,
                                                     animation: true,
                                                     progressColor:
@@ -152,8 +152,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                   context)
                                                               .subtitle1
                                                               .override(
-                                                                fontFamily:
-                                                                    'Source Sans Pro',
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle1Family,
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryText,
@@ -174,8 +175,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                         .calcBudgetChart(
                                                             widget.budget,
                                                             containerTransactionsRecordList
-                                                                .toList()),
-                                                    radius: 112.5,
+                                                                .toList())!,
+                                                    radius: 90,
                                                     lineWidth: 16,
                                                     animation: true,
                                                     progressColor:
@@ -195,8 +196,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                   context)
                                                               .subtitle1
                                                               .override(
-                                                                fontFamily:
-                                                                    'Source Sans Pro',
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle1Family,
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryText,
@@ -244,8 +246,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                     context)
                                                                 .subtitle1
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'Source Sans Pro',
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1Family,
                                                                   fontSize: 20,
                                                                 ),
                                                       ),
@@ -278,8 +281,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                     context)
                                                                 .subtitle1
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'Source Sans Pro',
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1Family,
                                                                   fontSize: 20,
                                                                 ),
                                                       ),
@@ -299,15 +303,12 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                            child: FutureBuilder<List<BudgetCategoriesRecord>>(
-                              future: queryBudgetCategoriesRecordOnce(
-                                queryBuilder: (budgetCategoriesRecord) =>
-                                    budgetCategoriesRecord
-                                        .where('categoryName',
-                                            isEqualTo: 'Uncategorized')
-                                        .where('categoryBudget',
-                                            isEqualTo:
-                                                widget.budget!.reference),
+                            child: FutureBuilder<List<CategoriesRecord>>(
+                              future: queryCategoriesRecordOnce(
+                                parent: widget.budget!.reference,
+                                queryBuilder: (categoriesRecord) =>
+                                    categoriesRecord.where('category_name',
+                                        isEqualTo: 'Unallocated'),
                                 singleRecord: true,
                               ),
                               builder: (context, snapshot) {
@@ -325,15 +326,15 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                     ),
                                   );
                                 }
-                                List<BudgetCategoriesRecord>
-                                    containerBudgetCategoriesRecordList =
+                                List<CategoriesRecord>
+                                    containerCategoriesRecordList =
                                     snapshot.data!;
                                 // Return an empty Container when the document does not exist.
                                 if (snapshot.data!.isEmpty) {
                                   return Container();
                                 }
-                                final containerBudgetCategoriesRecord =
-                                    containerBudgetCategoriesRecordList.first;
+                                final containerCategoriesRecord =
+                                    containerCategoriesRecordList.first;
                                 return Container(
                                   width: MediaQuery.of(context).size.width,
                                   height: 60,
@@ -397,7 +398,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                             child: Builder(
                               builder: (context) {
                                 final budgetCategories =
-                                    budgetSingleBudgetCategoriesRecordList
+                                    budgetSingleCategoriesRecordList
                                             ?.toList() ??
                                         [];
                                 return Column(
@@ -415,7 +416,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                         stream: queryTransactionsRecord(
                                           queryBuilder: (transactionsRecord) =>
                                               transactionsRecord.where(
-                                                  'linkedCategory',
+                                                  'transactionCategory',
                                                   isEqualTo:
                                                       budgetCategoriesItem!
                                                           .reference),
@@ -515,7 +516,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                         0,
                                                                         10),
                                                             child: Text(
-                                                              '${functions.subtractCurrencyLine(budgetCategoriesItem!.allocatedAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                              '${functions.subtractCurrencyLine(budgetCategoriesItem!.categoryAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyText1,

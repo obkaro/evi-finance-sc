@@ -29,11 +29,9 @@ abstract class TransactionsRecord
 
   String? get transactionNarration;
 
-  DocumentReference? get linkedCategory;
-
-  bool? get isCategorized;
-
   String? get transactionID;
+
+  DocumentReference? get transactionCategory;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -46,7 +44,6 @@ abstract class TransactionsRecord
     ..transactionAmount = 0
     ..transactionType = ''
     ..transactionNarration = ''
-    ..isCategorized = false
     ..transactionID = '';
 
   static CollectionReference get collection =>
@@ -81,9 +78,8 @@ Map<String, dynamic> createTransactionsRecordData({
   int? transactionAmount,
   String? transactionType,
   String? transactionNarration,
-  DocumentReference? linkedCategory,
-  bool? isCategorized,
   String? transactionID,
+  DocumentReference? transactionCategory,
 }) =>
     serializers.toFirestore(
         TransactionsRecord.serializer,
@@ -97,6 +93,5 @@ Map<String, dynamic> createTransactionsRecordData({
           ..transactionAmount = transactionAmount
           ..transactionType = transactionType
           ..transactionNarration = transactionNarration
-          ..linkedCategory = linkedCategory
-          ..isCategorized = isCategorized
-          ..transactionID = transactionID));
+          ..transactionID = transactionID
+          ..transactionCategory = transactionCategory));

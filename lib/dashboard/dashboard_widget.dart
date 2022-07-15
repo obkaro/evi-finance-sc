@@ -104,7 +104,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1
                                           .override(
-                                            fontFamily: 'Source Sans Pro',
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle1Family,
                                             fontSize: 24,
                                           ),
                                     );
@@ -147,7 +149,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           style: FlutterFlowTheme.of(context)
                               .subtitle2
                               .override(
-                                fontFamily: 'Source Sans Pro',
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .subtitle2Family,
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold,
@@ -355,7 +358,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .subtitle2
                                   .override(
-                                    fontFamily: 'Source Sans Pro',
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .subtitle2Family,
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
                                     fontWeight: FontWeight.bold,
@@ -396,15 +400,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(16),
                             ),
-                            child: StreamBuilder<List<BudgetCategoriesRecord>>(
-                              stream: queryBudgetCategoriesRecord(
-                                queryBuilder: (budgetCategoriesRecord) =>
-                                    budgetCategoriesRecord
-                                        .where('categoryBudget',
-                                            isEqualTo: containerBudgetsRecord!
-                                                .reference)
-                                        .where('categoryName',
-                                            isNotEqualTo: 'Uncategorized'),
+                            child: StreamBuilder<List<CategoriesRecord>>(
+                              stream: queryCategoriesRecord(
+                                parent: containerBudgetsRecord!.reference,
+                                queryBuilder: (categoriesRecord) =>
+                                    categoriesRecord.where('category_name',
+                                        isNotEqualTo: 'Unallocated'),
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -421,8 +422,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                     ),
                                   );
                                 }
-                                List<BudgetCategoriesRecord>
-                                    containerBudgetCategoriesRecordList =
+                                List<CategoriesRecord>
+                                    containerCategoriesRecordList =
                                     snapshot.data!;
                                 return InkWell(
                                   onTap: () async {
@@ -449,9 +450,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                               stream: queryTransactionsRecord(
                                                 queryBuilder: (transactionsRecord) =>
                                                     transactionsRecord.where(
-                                                        'linkedCategory',
+                                                        'transactionCategory',
                                                         whereIn:
-                                                            containerBudgetCategoriesRecordList
+                                                            containerCategoriesRecordList
                                                                 .map((e) => e!
                                                                     .reference)
                                                                 .toList()),
@@ -488,9 +489,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                             .calcBudgetChart(
                                                                 containerBudgetsRecord,
                                                                 containerTransactionsRecordList
-                                                                    .toList()),
+                                                                    .toList())!,
                                                         radius: 32,
-                                                        lineWidth: 6,
+                                                        lineWidth: 12,
                                                         animation: true,
                                                         progressColor:
                                                             FlutterFlowTheme.of(
@@ -586,7 +587,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           style: FlutterFlowTheme.of(context)
                               .subtitle2
                               .override(
-                                fontFamily: 'Source Sans Pro',
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .subtitle2Family,
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
                               ),
@@ -816,9 +818,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                     CrossAxisAlignment
                                                                         .start,
                                                                 children: [
-                                                                  if (columnTransactionsRecord!
-                                                                          .isCategorized ??
-                                                                      true)
+                                                                  if ((columnTransactionsRecord!
+                                                                          .transactionCategory !=
+                                                                      null))
                                                                     Padding(
                                                                       padding: EdgeInsetsDirectional
                                                                           .fromSTEB(
@@ -827,9 +829,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                               0,
                                                                               8),
                                                                       child: StreamBuilder<
-                                                                          BudgetCategoriesRecord>(
+                                                                          CategoriesRecord>(
                                                                         stream:
-                                                                            BudgetCategoriesRecord.getDocument(columnTransactionsRecord!.linkedCategory!),
+                                                                            CategoriesRecord.getDocument(columnTransactionsRecord!.transactionCategory!),
                                                                         builder:
                                                                             (context,
                                                                                 snapshot) {
@@ -847,10 +849,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                               ),
                                                                             );
                                                                           }
-                                                                          final textBudgetCategoriesRecord =
+                                                                          final textCategoriesRecord =
                                                                               snapshot.data!;
                                                                           return AutoSizeText(
-                                                                            textBudgetCategoriesRecord!.categoryName!.maybeHandleOverflow(
+                                                                            textCategoriesRecord!.categoryName!.maybeHandleOverflow(
                                                                               maxChars: 25,
                                                                               replacement: '…',
                                                                             ),
@@ -860,9 +862,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                         },
                                                                       ),
                                                                     ),
-                                                                  if (!(columnTransactionsRecord!
-                                                                          .isCategorized!) ??
-                                                                      true)
+                                                                  if ((columnTransactionsRecord!
+                                                                          .transactionCategory ==
+                                                                      null))
                                                                     Padding(
                                                                       padding: EdgeInsetsDirectional
                                                                           .fromSTEB(
@@ -876,7 +878,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyText1
                                                                             .override(
-                                                                              fontFamily: 'Source Sans Pro',
+                                                                              fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                               color: Color(0xFFFF0003),
                                                                               fontStyle: FontStyle.italic,
                                                                             ),
@@ -933,7 +935,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                         .subtitle1
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Source Sans Pro',
+                                                                              FlutterFlowTheme.of(context).subtitle1Family,
                                                                           fontSize:
                                                                               16,
                                                                         ),
@@ -958,7 +960,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyText2
                                                                             .override(
-                                                                              fontFamily: 'Source Sans Pro',
+                                                                              fontFamily: FlutterFlowTheme.of(context).bodyText2Family,
                                                                               color: Color(0xFFFF0003),
                                                                             ),
                                                                       ),
@@ -979,7 +981,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyText2
                                                                             .override(
-                                                                              fontFamily: 'Source Sans Pro',
+                                                                              fontFamily: FlutterFlowTheme.of(context).bodyText2Family,
                                                                               color: FlutterFlowTheme.of(context).tertiaryColor,
                                                                             ),
                                                                       ),

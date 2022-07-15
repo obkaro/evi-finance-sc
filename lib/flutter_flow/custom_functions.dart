@@ -11,7 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../auth/auth_util.dart';
 
 int calculateRemBudgetCat(
-  List<BudgetCategoriesRecord> categoriesToCalc,
+  List<CategoriesRecord> categoriesToCalc,
   BudgetsRecord budget,
 ) {
   // Add your function code here!
@@ -19,7 +19,7 @@ int calculateRemBudgetCat(
   for (var i = 0; i < categoriesToCalc.length; i++) {
     //var currentCat = categoriesToCalc[i];
 
-    total += categoriesToCalc[i].allocatedAmount as int;
+    total += categoriesToCalc[i].categoryAmount as int;
   }
   int remaining = budget.budgetAmount! - total;
 
@@ -27,7 +27,7 @@ int calculateRemBudgetCat(
 }
 
 String calcRemCatCurrency(
-  List<BudgetCategoriesRecord> categoriesToCalc,
+  List<CategoriesRecord> categoriesToCalc,
   BudgetsRecord budget,
 ) {
   // Add your function code here!
@@ -38,14 +38,14 @@ String calcRemCatCurrency(
   for (var i = 0; i < categoriesToCalc.length; i++) {
     //var currentCat = categoriesToCalc[i];
 
-    total += categoriesToCalc[i].allocatedAmount as int;
+    total += categoriesToCalc[i].categoryAmount as int;
   }
   int remaining = budget.budgetAmount! - total;
 
   return formatCurrency.format(remaining);
 }
 
-double calcBudgetChart(
+double? calcBudgetChart(
   BudgetsRecord? budget,
   List<TransactionsRecord> transactions,
 ) {
@@ -67,7 +67,7 @@ double calcBudgetChart(
 }
 
 double calcCategoryPercent(
-  BudgetCategoriesRecord? category,
+  CategoriesRecord? category,
   List<TransactionsRecord>? transactions,
 ) {
   // Add your function code here!
@@ -77,9 +77,9 @@ double calcCategoryPercent(
     totalTransactions += transactions[i].transactionAmount as int;
   }
 
-  double percent = (totalTransactions / (category!.allocatedAmount as int));
+  double percent = (totalTransactions / (category!.categoryAmount as int));
 
-  if (totalTransactions >= (category.allocatedAmount as int)) {
+  if (totalTransactions >= (category.categoryAmount as int)) {
     percent = 1.0;
   }
 
@@ -218,11 +218,11 @@ String overOrUnder(
   return result;
 }
 
-int sumCategoryAmounts(List<BudgetCategoriesRecord> categories) {
+int sumCategoryAmounts(List<CategoriesRecord> categories) {
   // Add your function code here!
   int total = 0;
   for (var i = 0; i < categories.length; i++) {
-    total += categories[i].allocatedAmount as int;
+    total += categories[i].categoryAmount as int;
   }
 
   return total;

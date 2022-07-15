@@ -6,8 +6,6 @@ import 'index.dart'; // Imports other custom actions
 import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom action code
-
-// Begin custom action code
 // Begin custom action code
 import 'package:evi/auth/auth_util.dart';
 
@@ -42,7 +40,6 @@ Future writeNewAcctTransactions(
       transactionType: transaction.data[i].type,
       transactionNarration: transaction.data[i].narration,
       monoCategory: transaction.data[i].monoCategory,
-      isCategorized: false,
     );
     await TransactionsRecord.collection.doc().set(transactionsCreateData);
   }

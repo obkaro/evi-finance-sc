@@ -61,12 +61,6 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.age;
-    if (value != null) {
-      result
-        ..add('age')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
     value = object.income;
     if (value != null) {
       result
@@ -163,10 +157,6 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
           result.phoneNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'age':
-          result.age = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
-          break;
         case 'income':
           result.income = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
@@ -228,8 +218,6 @@ class _$UsersRecord extends UsersRecord {
   @override
   final String? phoneNumber;
   @override
-  final int? age;
-  @override
   final double? income;
   @override
   final String? tempAuthCode;
@@ -254,7 +242,6 @@ class _$UsersRecord extends UsersRecord {
       this.uid,
       this.createdTime,
       this.phoneNumber,
-      this.age,
       this.income,
       this.tempAuthCode,
       this.accountsList,
@@ -281,7 +268,6 @@ class _$UsersRecord extends UsersRecord {
         uid == other.uid &&
         createdTime == other.createdTime &&
         phoneNumber == other.phoneNumber &&
-        age == other.age &&
         income == other.income &&
         tempAuthCode == other.tempAuthCode &&
         accountsList == other.accountsList &&
@@ -304,14 +290,12 @@ class _$UsersRecord extends UsersRecord {
                                     $jc(
                                         $jc(
                                             $jc(
-                                                $jc(
-                                                    $jc($jc(0, email.hashCode),
-                                                        displayName.hashCode),
-                                                    photoUrl.hashCode),
-                                                uid.hashCode),
-                                            createdTime.hashCode),
-                                        phoneNumber.hashCode),
-                                    age.hashCode),
+                                                $jc($jc(0, email.hashCode),
+                                                    displayName.hashCode),
+                                                photoUrl.hashCode),
+                                            uid.hashCode),
+                                        createdTime.hashCode),
+                                    phoneNumber.hashCode),
                                 income.hashCode),
                             tempAuthCode.hashCode),
                         accountsList.hashCode),
@@ -330,7 +314,6 @@ class _$UsersRecord extends UsersRecord {
           ..add('uid', uid)
           ..add('createdTime', createdTime)
           ..add('phoneNumber', phoneNumber)
-          ..add('age', age)
           ..add('income', income)
           ..add('tempAuthCode', tempAuthCode)
           ..add('accountsList', accountsList)
@@ -368,10 +351,6 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   String? _phoneNumber;
   String? get phoneNumber => _$this._phoneNumber;
   set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
-
-  int? _age;
-  int? get age => _$this._age;
-  set age(int? age) => _$this._age = age;
 
   double? _income;
   double? get income => _$this._income;
@@ -420,7 +399,6 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _uid = $v.uid;
       _createdTime = $v.createdTime;
       _phoneNumber = $v.phoneNumber;
-      _age = $v.age;
       _income = $v.income;
       _tempAuthCode = $v.tempAuthCode;
       _accountsList = $v.accountsList?.toBuilder();
@@ -456,7 +434,6 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
               uid: uid,
               createdTime: createdTime,
               phoneNumber: phoneNumber,
-              age: age,
               income: income,
               tempAuthCode: tempAuthCode,
               accountsList: _accountsList?.build(),

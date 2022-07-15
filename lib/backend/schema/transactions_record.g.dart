@@ -85,27 +85,20 @@ class _$TransactionsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.linkedCategory;
-    if (value != null) {
-      result
-        ..add('linkedCategory')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                DocumentReference, const [const FullType.nullable(Object)])));
-    }
-    value = object.isCategorized;
-    if (value != null) {
-      result
-        ..add('isCategorized')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
     value = object.transactionID;
     if (value != null) {
       result
         ..add('transactionID')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
+    }
+    value = object.transactionCategory;
+    if (value != null) {
+      result
+        ..add('transactionCategory')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.ffRef;
     if (value != null) {
@@ -170,19 +163,15 @@ class _$TransactionsRecordSerializer
           result.transactionNarration = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'linkedCategory':
-          result.linkedCategory = serializers.deserialize(value,
-              specifiedType: const FullType(DocumentReference, const [
-                const FullType.nullable(Object)
-              ])) as DocumentReference<Object?>?;
-          break;
-        case 'isCategorized':
-          result.isCategorized = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool?;
-          break;
         case 'transactionID':
           result.transactionID = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
+          break;
+        case 'transactionCategory':
+          result.transactionCategory = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
@@ -217,11 +206,9 @@ class _$TransactionsRecord extends TransactionsRecord {
   @override
   final String? transactionNarration;
   @override
-  final DocumentReference<Object?>? linkedCategory;
-  @override
-  final bool? isCategorized;
-  @override
   final String? transactionID;
+  @override
+  final DocumentReference<Object?>? transactionCategory;
   @override
   final DocumentReference<Object?>? ffRef;
 
@@ -239,9 +226,8 @@ class _$TransactionsRecord extends TransactionsRecord {
       this.transactionAmount,
       this.transactionType,
       this.transactionNarration,
-      this.linkedCategory,
-      this.isCategorized,
       this.transactionID,
+      this.transactionCategory,
       this.ffRef})
       : super._();
 
@@ -267,9 +253,8 @@ class _$TransactionsRecord extends TransactionsRecord {
         transactionAmount == other.transactionAmount &&
         transactionType == other.transactionType &&
         transactionNarration == other.transactionNarration &&
-        linkedCategory == other.linkedCategory &&
-        isCategorized == other.isCategorized &&
         transactionID == other.transactionID &&
+        transactionCategory == other.transactionCategory &&
         ffRef == other.ffRef;
   }
 
@@ -285,23 +270,17 @@ class _$TransactionsRecord extends TransactionsRecord {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc(
-                                                $jc(
-                                                    $jc(
-                                                        0,
-                                                        trasactionDate
-                                                            .hashCode),
-                                                    account.hashCode),
-                                                monoCategory.hashCode),
-                                            transactionOwner.hashCode),
-                                        balanceAfter.hashCode),
-                                    transactionMonoID.hashCode),
-                                transactionAmount.hashCode),
-                            transactionType.hashCode),
-                        transactionNarration.hashCode),
-                    linkedCategory.hashCode),
-                isCategorized.hashCode),
-            transactionID.hashCode),
+                                            $jc($jc(0, trasactionDate.hashCode),
+                                                account.hashCode),
+                                            monoCategory.hashCode),
+                                        transactionOwner.hashCode),
+                                    balanceAfter.hashCode),
+                                transactionMonoID.hashCode),
+                            transactionAmount.hashCode),
+                        transactionType.hashCode),
+                    transactionNarration.hashCode),
+                transactionID.hashCode),
+            transactionCategory.hashCode),
         ffRef.hashCode));
   }
 
@@ -317,9 +296,8 @@ class _$TransactionsRecord extends TransactionsRecord {
           ..add('transactionAmount', transactionAmount)
           ..add('transactionType', transactionType)
           ..add('transactionNarration', transactionNarration)
-          ..add('linkedCategory', linkedCategory)
-          ..add('isCategorized', isCategorized)
           ..add('transactionID', transactionID)
+          ..add('transactionCategory', transactionCategory)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -371,20 +349,16 @@ class TransactionsRecordBuilder
   set transactionNarration(String? transactionNarration) =>
       _$this._transactionNarration = transactionNarration;
 
-  DocumentReference<Object?>? _linkedCategory;
-  DocumentReference<Object?>? get linkedCategory => _$this._linkedCategory;
-  set linkedCategory(DocumentReference<Object?>? linkedCategory) =>
-      _$this._linkedCategory = linkedCategory;
-
-  bool? _isCategorized;
-  bool? get isCategorized => _$this._isCategorized;
-  set isCategorized(bool? isCategorized) =>
-      _$this._isCategorized = isCategorized;
-
   String? _transactionID;
   String? get transactionID => _$this._transactionID;
   set transactionID(String? transactionID) =>
       _$this._transactionID = transactionID;
+
+  DocumentReference<Object?>? _transactionCategory;
+  DocumentReference<Object?>? get transactionCategory =>
+      _$this._transactionCategory;
+  set transactionCategory(DocumentReference<Object?>? transactionCategory) =>
+      _$this._transactionCategory = transactionCategory;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -406,9 +380,8 @@ class TransactionsRecordBuilder
       _transactionAmount = $v.transactionAmount;
       _transactionType = $v.transactionType;
       _transactionNarration = $v.transactionNarration;
-      _linkedCategory = $v.linkedCategory;
-      _isCategorized = $v.isCategorized;
       _transactionID = $v.transactionID;
+      _transactionCategory = $v.transactionCategory;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -439,9 +412,8 @@ class TransactionsRecordBuilder
             transactionAmount: transactionAmount,
             transactionType: transactionType,
             transactionNarration: transactionNarration,
-            linkedCategory: linkedCategory,
-            isCategorized: isCategorized,
             transactionID: transactionID,
+            transactionCategory: transactionCategory,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

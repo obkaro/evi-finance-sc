@@ -99,9 +99,10 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .title3
                                             .override(
-                                              fontFamily: 'Spline Sans',
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .title3Family,
                                               color: Color(0xFFF9F9F9),
-                                              useGoogleFonts: false,
                                             ),
                                       ),
                                     ),

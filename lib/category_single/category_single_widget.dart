@@ -1,4 +1,3 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -8,7 +7,6 @@ import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,7 +18,7 @@ class CategorySingleWidget extends StatefulWidget {
     this.category,
   }) : super(key: key);
 
-  final BudgetCategoriesRecord? category;
+  final CategoriesRecord? category;
 
   @override
   _CategorySingleWidgetState createState() => _CategorySingleWidgetState();
@@ -40,8 +38,9 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
   Widget build(BuildContext context) {
     return StreamBuilder<List<TransactionsRecord>>(
       stream: queryTransactionsRecord(
-        queryBuilder: (transactionsRecord) => transactionsRecord
-            .where('linkedCategory', isEqualTo: widget.category!.reference),
+        queryBuilder: (transactionsRecord) => transactionsRecord.where(
+            'transactionCategory',
+            isEqualTo: widget.category!.reference),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -74,7 +73,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
               StreamBuilder<List<TransactionsRecord>>(
                 stream: queryTransactionsRecord(
                   queryBuilder: (transactionsRecord) =>
-                      transactionsRecord.where('linkedCategory',
+                      transactionsRecord.where('transactionCategory',
                           isEqualTo: widget.category!.reference),
                 ),
                 builder: (context, snapshot) {
@@ -109,12 +108,6 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                         iconButtonTransactionsRecordList.toList(),
                         widget.category,
                       );
-
-                      final budgetCategoriesUpdateData = {
-                        'linkedTransactions': FieldValue.delete(),
-                      };
-                      await widget.category!.reference
-                          .update(budgetCategoriesUpdateData);
                     },
                   );
                 },
@@ -145,7 +138,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                   widget.category,
                                   categorySingleTransactionsRecordList
                                       .toList()),
-                              radius: 112.5,
+                              radius: 90,
                               lineWidth: 16,
                               animation: true,
                               progressColor:
@@ -153,12 +146,13 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                               backgroundColor: FlutterFlowTheme.of(context)
                                   .eviredTransparent,
                               center: Text(
-                                '${functions.subtractCurrency(widget.category!.allocatedAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList()))}',
+                                '${functions.subtractCurrency(widget.category!.categoryAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList()))}',
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
                                     .subtitle1
                                     .override(
-                                      fontFamily: 'Source Sans Pro',
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .subtitle1Family,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
                                     ),
@@ -201,7 +195,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                 ),
                                 Text(
                                   functions.formatBudgetCurrency(
-                                      widget.category!.allocatedAmount),
+                                      widget.category!.categoryAmount),
                                   style: FlutterFlowTheme.of(context).subtitle1,
                                 ),
                               ],
@@ -242,12 +236,9 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                               stream: queryTransactionsRecord(
                                 queryBuilder: (transactionsRecord) =>
                                     transactionsRecord
-                                        .where(
-                                            'transactionOwner',
-                                            isEqualTo: currentUserReference)
                                         .where('transactionType',
                                             isEqualTo: 'debit')
-                                        .where('linkedCategory',
+                                        .where('transactionCategory',
                                             isEqualTo:
                                                 widget.category!.reference)
                                         .orderBy('trasactionDate',
@@ -475,8 +466,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                           CrossAxisAlignment
                                                                               .start,
                                                                       children: [
-                                                                        if (columnTransactionsRecord!.isCategorized ??
-                                                                            true)
+                                                                        if ((columnTransactionsRecord!.transactionCategory !=
+                                                                            null))
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 0,
@@ -484,8 +475,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                                 0,
                                                                                 8),
                                                                             child:
-                                                                                StreamBuilder<BudgetCategoriesRecord>(
-                                                                              stream: BudgetCategoriesRecord.getDocument(columnTransactionsRecord!.linkedCategory!),
+                                                                                StreamBuilder<CategoriesRecord>(
+                                                                              stream: CategoriesRecord.getDocument(columnTransactionsRecord!.transactionCategory!),
                                                                               builder: (context, snapshot) {
                                                                                 // Customize what your widget looks like when it's loading.
                                                                                 if (!snapshot.hasData) {
@@ -500,9 +491,9 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                                     ),
                                                                                   );
                                                                                 }
-                                                                                final textBudgetCategoriesRecord = snapshot.data!;
+                                                                                final textCategoriesRecord = snapshot.data!;
                                                                                 return AutoSizeText(
-                                                                                  textBudgetCategoriesRecord!.categoryName!.maybeHandleOverflow(
+                                                                                  textCategoriesRecord!.categoryName!.maybeHandleOverflow(
                                                                                     maxChars: 25,
                                                                                     replacement: '…',
                                                                                   ),
@@ -511,8 +502,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                               },
                                                                             ),
                                                                           ),
-                                                                        if (!(columnTransactionsRecord!.isCategorized!) ??
-                                                                            true)
+                                                                        if ((columnTransactionsRecord!.transactionCategory ==
+                                                                            null))
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 0,
@@ -523,7 +514,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                                 AutoSizeText(
                                                                               'Uncategorized',
                                                                               style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'Source Sans Pro',
+                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                                     color: Color(0xFFFF0003),
                                                                                     fontStyle: FontStyle.italic,
                                                                                   ),
@@ -572,7 +563,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .subtitle1
                                                                               .override(
-                                                                                fontFamily: 'Source Sans Pro',
+                                                                                fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                                 fontSize: 16,
                                                                               ),
                                                                         ),
