@@ -16,17 +16,17 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
   final String wireName = 'BudgetsRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, BudgetsRecord object,
+  Iterable<Object?> serialize(Serializers serializers, BudgetsRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.budgetOwner;
     if (value != null) {
       result
         ..add('budgetOwner')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.budgetAmount;
     if (value != null) {
@@ -96,20 +96,20 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         ..add('unallocatedAmount')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   BudgetsRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new BudgetsRecordBuilder();
 
@@ -117,59 +117,59 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'budgetOwner':
           result.budgetOwner = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'budgetAmount':
           result.budgetAmount = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'budgetStart':
           result.budgetStart = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'budgetEnd':
           result.budgetEnd = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'budgetDateCreated':
           result.budgetDateCreated = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'isRecurring':
           result.isRecurring = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool)) as bool?;
           break;
         case 'budgetID':
           result.budgetID = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'lastViewed':
           result.lastViewed = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'isActive':
           result.isActive = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool)) as bool?;
           break;
         case 'budgetDuration':
           result.budgetDuration = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'unallocatedAmount':
           result.unallocatedAmount = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -180,31 +180,31 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
 
 class _$BudgetsRecord extends BudgetsRecord {
   @override
-  final DocumentReference<Object> budgetOwner;
+  final DocumentReference<Object?>? budgetOwner;
   @override
-  final int budgetAmount;
+  final int? budgetAmount;
   @override
-  final DateTime budgetStart;
+  final DateTime? budgetStart;
   @override
-  final DateTime budgetEnd;
+  final DateTime? budgetEnd;
   @override
-  final DateTime budgetDateCreated;
+  final DateTime? budgetDateCreated;
   @override
-  final bool isRecurring;
+  final bool? isRecurring;
   @override
-  final String budgetID;
+  final String? budgetID;
   @override
-  final DateTime lastViewed;
+  final DateTime? lastViewed;
   @override
-  final bool isActive;
+  final bool? isActive;
   @override
-  final String budgetDuration;
+  final String? budgetDuration;
   @override
-  final int unallocatedAmount;
+  final int? unallocatedAmount;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
-  factory _$BudgetsRecord([void Function(BudgetsRecordBuilder) updates]) =>
+  factory _$BudgetsRecord([void Function(BudgetsRecordBuilder)? updates]) =>
       (new BudgetsRecordBuilder()..update(updates)).build();
 
   _$BudgetsRecord._(
@@ -219,7 +219,7 @@ class _$BudgetsRecord extends BudgetsRecord {
       this.isActive,
       this.budgetDuration,
       this.unallocatedAmount,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -244,7 +244,7 @@ class _$BudgetsRecord extends BudgetsRecord {
         isActive == other.isActive &&
         budgetDuration == other.budgetDuration &&
         unallocatedAmount == other.unallocatedAmount &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -270,7 +270,7 @@ class _$BudgetsRecord extends BudgetsRecord {
                     isActive.hashCode),
                 budgetDuration.hashCode),
             unallocatedAmount.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -287,67 +287,66 @@ class _$BudgetsRecord extends BudgetsRecord {
           ..add('isActive', isActive)
           ..add('budgetDuration', budgetDuration)
           ..add('unallocatedAmount', unallocatedAmount)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class BudgetsRecordBuilder
     implements Builder<BudgetsRecord, BudgetsRecordBuilder> {
-  _$BudgetsRecord _$v;
+  _$BudgetsRecord? _$v;
 
-  DocumentReference<Object> _budgetOwner;
-  DocumentReference<Object> get budgetOwner => _$this._budgetOwner;
-  set budgetOwner(DocumentReference<Object> budgetOwner) =>
+  DocumentReference<Object?>? _budgetOwner;
+  DocumentReference<Object?>? get budgetOwner => _$this._budgetOwner;
+  set budgetOwner(DocumentReference<Object?>? budgetOwner) =>
       _$this._budgetOwner = budgetOwner;
 
-  int _budgetAmount;
-  int get budgetAmount => _$this._budgetAmount;
-  set budgetAmount(int budgetAmount) => _$this._budgetAmount = budgetAmount;
+  int? _budgetAmount;
+  int? get budgetAmount => _$this._budgetAmount;
+  set budgetAmount(int? budgetAmount) => _$this._budgetAmount = budgetAmount;
 
-  DateTime _budgetStart;
-  DateTime get budgetStart => _$this._budgetStart;
-  set budgetStart(DateTime budgetStart) => _$this._budgetStart = budgetStart;
+  DateTime? _budgetStart;
+  DateTime? get budgetStart => _$this._budgetStart;
+  set budgetStart(DateTime? budgetStart) => _$this._budgetStart = budgetStart;
 
-  DateTime _budgetEnd;
-  DateTime get budgetEnd => _$this._budgetEnd;
-  set budgetEnd(DateTime budgetEnd) => _$this._budgetEnd = budgetEnd;
+  DateTime? _budgetEnd;
+  DateTime? get budgetEnd => _$this._budgetEnd;
+  set budgetEnd(DateTime? budgetEnd) => _$this._budgetEnd = budgetEnd;
 
-  DateTime _budgetDateCreated;
-  DateTime get budgetDateCreated => _$this._budgetDateCreated;
-  set budgetDateCreated(DateTime budgetDateCreated) =>
+  DateTime? _budgetDateCreated;
+  DateTime? get budgetDateCreated => _$this._budgetDateCreated;
+  set budgetDateCreated(DateTime? budgetDateCreated) =>
       _$this._budgetDateCreated = budgetDateCreated;
 
-  bool _isRecurring;
-  bool get isRecurring => _$this._isRecurring;
-  set isRecurring(bool isRecurring) => _$this._isRecurring = isRecurring;
+  bool? _isRecurring;
+  bool? get isRecurring => _$this._isRecurring;
+  set isRecurring(bool? isRecurring) => _$this._isRecurring = isRecurring;
 
-  String _budgetID;
-  String get budgetID => _$this._budgetID;
-  set budgetID(String budgetID) => _$this._budgetID = budgetID;
+  String? _budgetID;
+  String? get budgetID => _$this._budgetID;
+  set budgetID(String? budgetID) => _$this._budgetID = budgetID;
 
-  DateTime _lastViewed;
-  DateTime get lastViewed => _$this._lastViewed;
-  set lastViewed(DateTime lastViewed) => _$this._lastViewed = lastViewed;
+  DateTime? _lastViewed;
+  DateTime? get lastViewed => _$this._lastViewed;
+  set lastViewed(DateTime? lastViewed) => _$this._lastViewed = lastViewed;
 
-  bool _isActive;
-  bool get isActive => _$this._isActive;
-  set isActive(bool isActive) => _$this._isActive = isActive;
+  bool? _isActive;
+  bool? get isActive => _$this._isActive;
+  set isActive(bool? isActive) => _$this._isActive = isActive;
 
-  String _budgetDuration;
-  String get budgetDuration => _$this._budgetDuration;
-  set budgetDuration(String budgetDuration) =>
+  String? _budgetDuration;
+  String? get budgetDuration => _$this._budgetDuration;
+  set budgetDuration(String? budgetDuration) =>
       _$this._budgetDuration = budgetDuration;
 
-  int _unallocatedAmount;
-  int get unallocatedAmount => _$this._unallocatedAmount;
-  set unallocatedAmount(int unallocatedAmount) =>
+  int? _unallocatedAmount;
+  int? get unallocatedAmount => _$this._unallocatedAmount;
+  set unallocatedAmount(int? unallocatedAmount) =>
       _$this._unallocatedAmount = unallocatedAmount;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   BudgetsRecordBuilder() {
     BudgetsRecord._initializeBuilder(this);
@@ -367,7 +366,7 @@ class BudgetsRecordBuilder
       _isActive = $v.isActive;
       _budgetDuration = $v.budgetDuration;
       _unallocatedAmount = $v.unallocatedAmount;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -380,7 +379,7 @@ class BudgetsRecordBuilder
   }
 
   @override
-  void update(void Function(BudgetsRecordBuilder) updates) {
+  void update(void Function(BudgetsRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -399,7 +398,7 @@ class BudgetsRecordBuilder
             isActive: isActive,
             budgetDuration: budgetDuration,
             unallocatedAmount: unallocatedAmount,
-            reference: reference);
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

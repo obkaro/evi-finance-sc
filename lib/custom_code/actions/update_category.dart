@@ -10,12 +10,12 @@ import 'package:evi/auth/auth_util.dart';
 import 'package:collection/collection.dart';
 
 Future updateCategory(
-  BudgetCategoriesRecord category,
+  CategoriesRecord category,
   int value,
 ) async {
   // Add your function code here!
-  final budgetCategoriesUpdateData = createBudgetCategoriesRecordData(
-    allocatedAmount: value,
+  final CategoriesUpdateData = createCategoriesRecordData(
+    categoryAmount: value,
   );
-  await category.reference.update(budgetCategoriesUpdateData);
+  await category.reference.update(CategoriesUpdateData);
 }

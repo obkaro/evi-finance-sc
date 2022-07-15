@@ -104,11 +104,9 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
               child: AuthUserStreamWidget(
-                child: FutureBuilder<List<BudgetCategoriesRecord>>(
-                  future: queryBudgetCategoriesRecordOnce(
-                    queryBuilder: (budgetCategoriesRecord) =>
-                        budgetCategoriesRecord.where('categoryBudget',
-                            isEqualTo: currentUserDocument!.activeBudget),
+                child: FutureBuilder<List<CategoriesRecord>>(
+                  future: queryCategoriesRecordOnce(
+                    parent: currentUserDocument!.activeBudget,
                   ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
@@ -124,15 +122,14 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                         ),
                       );
                     }
-                    List<BudgetCategoriesRecord>
-                        columnBudgetCategoriesRecordList = snapshot.data!;
+                    List<CategoriesRecord> columnCategoriesRecordList =
+                        snapshot.data!;
                     return Column(
                       mainAxisSize: MainAxisSize.max,
-                      children:
-                          List.generate(columnBudgetCategoriesRecordList.length,
-                              (columnIndex) {
-                        final columnBudgetCategoriesRecord =
-                            columnBudgetCategoriesRecordList[columnIndex];
+                      children: List.generate(columnCategoriesRecordList.length,
+                          (columnIndex) {
+                        final columnCategoriesRecord =
+                            columnCategoriesRecordList[columnIndex];
                         return Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: InkWell(
@@ -150,19 +147,11 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
 
                               final transactionsUpdateData =
                                   createTransactionsRecordData(
-                                linkedCategory:
-                                    columnBudgetCategoriesRecord!.reference,
-                                isCategorized: true,
+                                transactionCategory:
+                                    columnCategoriesRecord!.reference,
                               );
                               await widget.transaction!.reference
                                   .update(transactionsUpdateData);
-
-                              final budgetCategoriesUpdateData = {
-                                'linkedTransactions': FieldValue.arrayUnion(
-                                    [widget.transaction!.reference]),
-                              };
-                              await columnBudgetCategoriesRecord!.reference
-                                  .update(budgetCategoriesUpdateData);
                               Navigator.pop(context);
                               Navigator.pop(context);
                             },
@@ -183,8 +172,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      columnBudgetCategoriesRecord!
-                                          .categoryName!,
+                                      columnCategoriesRecord!.categoryName!,
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1,
                                     ),
@@ -193,8 +181,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                           0, 16, 0, 0),
                                       child: Text(
                                         functions.formatBudgetCurrency(
-                                            columnBudgetCategoriesRecord!
-                                                .allocatedAmount),
+                                            columnCategoriesRecord!
+                                                .categoryAmount),
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle2,
                                       ),

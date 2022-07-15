@@ -8,7 +8,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 const kThemeModeKey = '__theme_mode__';
 SharedPreferences? _prefs;
 
+enum DeviceSize {
+  mobile,
+  tablet,
+  desktop,
+}
+
 abstract class FlutterFlowTheme {
+  static DeviceSize deviceSize = DeviceSize.mobile;
+
   static Future initialize() async =>
       _prefs = await SharedPreferences.getInstance();
   static ThemeMode get themeMode {
@@ -40,6 +48,12 @@ abstract class FlutterFlowTheme {
 
   late Color eviredTransparent;
   late Color neutralGray;
+  late Color grayIcon;
+  late Color gray200;
+  late Color gray600;
+  late Color black600;
+  late Color tertiary400;
+  late Color textColor;
 
   String get title1Family => typography.title1Family;
   TextStyle get title1 => typography.title1;
@@ -56,7 +70,22 @@ abstract class FlutterFlowTheme {
   String get bodyText2Family => typography.bodyText2Family;
   TextStyle get bodyText2 => typography.bodyText2;
 
-  Typography get typography => ThemeTypography(this);
+  Typography get typography => {
+        DeviceSize.mobile: MobileTypography(this),
+        DeviceSize.tablet: TabletTypography(this),
+        DeviceSize.desktop: DesktopTypography(this),
+      }[deviceSize]!;
+}
+
+DeviceSize getDeviceSize(BuildContext context) {
+  final width = MediaQuery.of(context).size.width;
+  if (width < 479) {
+    return DeviceSize.mobile;
+  } else if (width < 991) {
+    return DeviceSize.tablet;
+  } else {
+    return DeviceSize.desktop;
+  }
 }
 
 class LightModeTheme extends FlutterFlowTheme {
@@ -64,13 +93,19 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color secondaryColor = const Color(0xFF1B2124);
   late Color tertiaryColor = const Color(0xFF1B998B);
   late Color alternate = const Color(0xFFFAA916);
-  late Color primaryBackground = const Color(0xFFF5F5F5);
+  late Color primaryBackground = const Color(0xF3F3F3F3);
   late Color secondaryBackground = const Color(0xFFFFFFFF);
-  late Color primaryText = const Color(0xFF262626);
+  late Color primaryText = const Color(0xFF101010);
   late Color secondaryText = const Color(0xFF595959);
 
   late Color eviredTransparent = Color(0x28FF0054);
   late Color neutralGray = Color(0xFF747474);
+  late Color grayIcon = Color(0xFF95A1AC);
+  late Color gray200 = Color(0xFFDBE2E7);
+  late Color gray600 = Color(0xFF262D34);
+  late Color black600 = Color(0xFF090F13);
+  late Color tertiary400 = Color(0xFF39D2C0);
+  late Color textColor = Color(0xFF1E2429);
 }
 
 abstract class Typography {
@@ -90,8 +125,120 @@ abstract class Typography {
   TextStyle get bodyText2;
 }
 
-class ThemeTypography extends Typography {
-  ThemeTypography(this.theme);
+class MobileTypography extends Typography {
+  MobileTypography(this.theme);
+
+  final FlutterFlowTheme theme;
+
+  String get title1Family => 'Spline Sans';
+  TextStyle get title1 => TextStyle(
+        fontFamily: 'Spline Sans',
+        color: theme.primaryText,
+        fontWeight: FontWeight.bold,
+        fontSize: 24,
+      );
+  String get title2Family => 'Spline Sans';
+  TextStyle get title2 => TextStyle(
+        fontFamily: 'Spline Sans',
+        color: theme.secondaryText,
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+      );
+  String get title3Family => 'Spline Sans';
+  TextStyle get title3 => TextStyle(
+        fontFamily: 'Spline Sans',
+        color: theme.primaryText,
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+      );
+  String get subtitle1Family => 'Source Sans Pro';
+  TextStyle get subtitle1 => GoogleFonts.getFont(
+        'Source Sans Pro',
+        color: theme.primaryText,
+        fontWeight: FontWeight.bold,
+        fontSize: 18,
+      );
+  String get subtitle2Family => 'Source Sans Pro';
+  TextStyle get subtitle2 => GoogleFonts.getFont(
+        'Source Sans Pro',
+        color: theme.secondaryText,
+        fontWeight: FontWeight.bold,
+        fontSize: 16,
+      );
+  String get bodyText1Family => 'Source Sans Pro';
+  TextStyle get bodyText1 => GoogleFonts.getFont(
+        'Source Sans Pro',
+        color: theme.primaryText,
+        fontWeight: FontWeight.bold,
+        fontSize: 14,
+      );
+  String get bodyText2Family => 'Source Sans Pro';
+  TextStyle get bodyText2 => GoogleFonts.getFont(
+        'Source Sans Pro',
+        color: theme.secondaryText,
+        fontWeight: FontWeight.w600,
+        fontSize: 12,
+      );
+}
+
+class TabletTypography extends Typography {
+  TabletTypography(this.theme);
+
+  final FlutterFlowTheme theme;
+
+  String get title1Family => 'Spline Sans';
+  TextStyle get title1 => TextStyle(
+        fontFamily: 'Spline Sans',
+        color: theme.primaryText,
+        fontWeight: FontWeight.bold,
+        fontSize: 24,
+      );
+  String get title2Family => 'Spline Sans';
+  TextStyle get title2 => TextStyle(
+        fontFamily: 'Spline Sans',
+        color: theme.secondaryText,
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+      );
+  String get title3Family => 'Spline Sans';
+  TextStyle get title3 => TextStyle(
+        fontFamily: 'Spline Sans',
+        color: theme.primaryText,
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+      );
+  String get subtitle1Family => 'Source Sans Pro';
+  TextStyle get subtitle1 => GoogleFonts.getFont(
+        'Source Sans Pro',
+        color: theme.primaryText,
+        fontWeight: FontWeight.bold,
+        fontSize: 18,
+      );
+  String get subtitle2Family => 'Source Sans Pro';
+  TextStyle get subtitle2 => GoogleFonts.getFont(
+        'Source Sans Pro',
+        color: theme.secondaryText,
+        fontWeight: FontWeight.bold,
+        fontSize: 16,
+      );
+  String get bodyText1Family => 'Source Sans Pro';
+  TextStyle get bodyText1 => GoogleFonts.getFont(
+        'Source Sans Pro',
+        color: theme.primaryText,
+        fontWeight: FontWeight.bold,
+        fontSize: 14,
+      );
+  String get bodyText2Family => 'Source Sans Pro';
+  TextStyle get bodyText2 => GoogleFonts.getFont(
+        'Source Sans Pro',
+        color: theme.secondaryText,
+        fontWeight: FontWeight.w600,
+        fontSize: 12,
+      );
+}
+
+class DesktopTypography extends Typography {
+  DesktopTypography(this.theme);
 
   final FlutterFlowTheme theme;
 
@@ -151,13 +298,19 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color secondaryColor = const Color(0xFF494949);
   late Color tertiaryColor = const Color(0xFF1B998B);
   late Color alternate = const Color(0xFFFAA916);
-  late Color primaryBackground = const Color(0xFF151515);
+  late Color primaryBackground = const Color(0xFF101010);
   late Color secondaryBackground = const Color(0xFF1D1D1D);
   late Color primaryText = const Color(0xFFE0E0E0);
   late Color secondaryText = const Color(0xFFD2D2D2);
 
   late Color eviredTransparent = Color(0x2AFF0054);
   late Color neutralGray = Color(0xFF747474);
+  late Color grayIcon = Color(0xFF95A1AC);
+  late Color gray200 = Color(0xFFDBE2E7);
+  late Color gray600 = Color(0xFF262D34);
+  late Color black600 = Color(0xFF090F13);
+  late Color tertiary400 = Color(0xFF39D2C0);
+  late Color textColor = Color(0xFF1E2429);
 }
 
 extension TextStyleHelper on TextStyle {

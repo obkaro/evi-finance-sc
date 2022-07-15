@@ -25,8 +25,6 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   @BuiltValueField(wireName: 'phone_number')
   String? get phoneNumber;
 
-  int? get age;
-
   double? get income;
 
   String? get tempAuthCode;
@@ -49,7 +47,6 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..photoUrl = ''
     ..uid = ''
     ..phoneNumber = ''
-    ..age = 0
     ..income = 0.0
     ..tempAuthCode = ''
     ..accountsList = ListBuilder()
@@ -83,7 +80,6 @@ Map<String, dynamic> createUsersRecordData({
   String? uid,
   DateTime? createdTime,
   String? phoneNumber,
-  int? age,
   double? income,
   String? tempAuthCode,
   DocumentReference? activeBudget,
@@ -98,7 +94,6 @@ Map<String, dynamic> createUsersRecordData({
           ..uid = uid
           ..createdTime = createdTime
           ..phoneNumber = phoneNumber
-          ..age = age
           ..income = income
           ..tempAuthCode = tempAuthCode
           ..accountsList = null

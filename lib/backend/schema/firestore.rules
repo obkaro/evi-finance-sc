@@ -29,13 +29,6 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-    match /budgetCategories/{document} {
-      allow create: if true;
-      allow read: if request.auth != null;
-      allow write: if request.auth != null;
-      allow delete: if false;
-    }
-
     match /constBudgetCategories/{document} {
       allow create: if true;
       allow read: if true;

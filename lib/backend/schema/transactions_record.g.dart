@@ -17,10 +17,11 @@ class _$TransactionsRecordSerializer
   final String wireName = 'TransactionsRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, TransactionsRecord object,
+  Iterable<Object?> serialize(
+      Serializers serializers, TransactionsRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.trasactionDate;
     if (value != null) {
       result
@@ -34,7 +35,7 @@ class _$TransactionsRecordSerializer
         ..add('account')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.monoCategory;
     if (value != null) {
@@ -49,7 +50,7 @@ class _$TransactionsRecordSerializer
         ..add('transactionOwner')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.balanceAfter;
     if (value != null) {
@@ -84,21 +85,6 @@ class _$TransactionsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.linkedCategory;
-    if (value != null) {
-      result
-        ..add('linkedCategory')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
-    }
-    value = object.isCategorized;
-    if (value != null) {
-      result
-        ..add('isCategorized')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
     value = object.transactionID;
     if (value != null) {
       result
@@ -106,20 +92,28 @@ class _$TransactionsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.transactionCategory;
+    if (value != null) {
+      result
+        ..add('transactionCategory')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
+    }
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   TransactionsRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new TransactionsRecordBuilder();
 
@@ -127,67 +121,63 @@ class _$TransactionsRecordSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'trasactionDate':
           result.trasactionDate = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'account':
           result.account = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'monoCategory':
           result.monoCategory = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'transactionOwner':
           result.transactionOwner = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'balanceAfter':
           result.balanceAfter = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'transactionMonoID':
           result.transactionMonoID = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'transactionAmount':
           result.transactionAmount = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'transactionType':
           result.transactionType = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'transactionNarration':
           result.transactionNarration = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
-          break;
-        case 'linkedCategory':
-          result.linkedCategory = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
-          break;
-        case 'isCategorized':
-          result.isCategorized = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'transactionID':
           result.transactionID = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'transactionCategory':
+          result.transactionCategory = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -198,34 +188,32 @@ class _$TransactionsRecordSerializer
 
 class _$TransactionsRecord extends TransactionsRecord {
   @override
-  final DateTime trasactionDate;
+  final DateTime? trasactionDate;
   @override
-  final DocumentReference<Object> account;
+  final DocumentReference<Object?>? account;
   @override
-  final String monoCategory;
+  final String? monoCategory;
   @override
-  final DocumentReference<Object> transactionOwner;
+  final DocumentReference<Object?>? transactionOwner;
   @override
-  final int balanceAfter;
+  final int? balanceAfter;
   @override
-  final String transactionMonoID;
+  final String? transactionMonoID;
   @override
-  final int transactionAmount;
+  final int? transactionAmount;
   @override
-  final String transactionType;
+  final String? transactionType;
   @override
-  final String transactionNarration;
+  final String? transactionNarration;
   @override
-  final DocumentReference<Object> linkedCategory;
+  final String? transactionID;
   @override
-  final bool isCategorized;
+  final DocumentReference<Object?>? transactionCategory;
   @override
-  final String transactionID;
-  @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
   factory _$TransactionsRecord(
-          [void Function(TransactionsRecordBuilder) updates]) =>
+          [void Function(TransactionsRecordBuilder)? updates]) =>
       (new TransactionsRecordBuilder()..update(updates)).build();
 
   _$TransactionsRecord._(
@@ -238,10 +226,9 @@ class _$TransactionsRecord extends TransactionsRecord {
       this.transactionAmount,
       this.transactionType,
       this.transactionNarration,
-      this.linkedCategory,
-      this.isCategorized,
       this.transactionID,
-      this.reference})
+      this.transactionCategory,
+      this.ffRef})
       : super._();
 
   @override
@@ -266,10 +253,9 @@ class _$TransactionsRecord extends TransactionsRecord {
         transactionAmount == other.transactionAmount &&
         transactionType == other.transactionType &&
         transactionNarration == other.transactionNarration &&
-        linkedCategory == other.linkedCategory &&
-        isCategorized == other.isCategorized &&
         transactionID == other.transactionID &&
-        reference == other.reference;
+        transactionCategory == other.transactionCategory &&
+        ffRef == other.ffRef;
   }
 
   @override
@@ -284,24 +270,18 @@ class _$TransactionsRecord extends TransactionsRecord {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc(
-                                                $jc(
-                                                    $jc(
-                                                        0,
-                                                        trasactionDate
-                                                            .hashCode),
-                                                    account.hashCode),
-                                                monoCategory.hashCode),
-                                            transactionOwner.hashCode),
-                                        balanceAfter.hashCode),
-                                    transactionMonoID.hashCode),
-                                transactionAmount.hashCode),
-                            transactionType.hashCode),
-                        transactionNarration.hashCode),
-                    linkedCategory.hashCode),
-                isCategorized.hashCode),
-            transactionID.hashCode),
-        reference.hashCode));
+                                            $jc($jc(0, trasactionDate.hashCode),
+                                                account.hashCode),
+                                            monoCategory.hashCode),
+                                        transactionOwner.hashCode),
+                                    balanceAfter.hashCode),
+                                transactionMonoID.hashCode),
+                            transactionAmount.hashCode),
+                        transactionType.hashCode),
+                    transactionNarration.hashCode),
+                transactionID.hashCode),
+            transactionCategory.hashCode),
+        ffRef.hashCode));
   }
 
   @override
@@ -316,79 +296,73 @@ class _$TransactionsRecord extends TransactionsRecord {
           ..add('transactionAmount', transactionAmount)
           ..add('transactionType', transactionType)
           ..add('transactionNarration', transactionNarration)
-          ..add('linkedCategory', linkedCategory)
-          ..add('isCategorized', isCategorized)
           ..add('transactionID', transactionID)
-          ..add('reference', reference))
+          ..add('transactionCategory', transactionCategory)
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class TransactionsRecordBuilder
     implements Builder<TransactionsRecord, TransactionsRecordBuilder> {
-  _$TransactionsRecord _$v;
+  _$TransactionsRecord? _$v;
 
-  DateTime _trasactionDate;
-  DateTime get trasactionDate => _$this._trasactionDate;
-  set trasactionDate(DateTime trasactionDate) =>
+  DateTime? _trasactionDate;
+  DateTime? get trasactionDate => _$this._trasactionDate;
+  set trasactionDate(DateTime? trasactionDate) =>
       _$this._trasactionDate = trasactionDate;
 
-  DocumentReference<Object> _account;
-  DocumentReference<Object> get account => _$this._account;
-  set account(DocumentReference<Object> account) => _$this._account = account;
+  DocumentReference<Object?>? _account;
+  DocumentReference<Object?>? get account => _$this._account;
+  set account(DocumentReference<Object?>? account) => _$this._account = account;
 
-  String _monoCategory;
-  String get monoCategory => _$this._monoCategory;
-  set monoCategory(String monoCategory) => _$this._monoCategory = monoCategory;
+  String? _monoCategory;
+  String? get monoCategory => _$this._monoCategory;
+  set monoCategory(String? monoCategory) => _$this._monoCategory = monoCategory;
 
-  DocumentReference<Object> _transactionOwner;
-  DocumentReference<Object> get transactionOwner => _$this._transactionOwner;
-  set transactionOwner(DocumentReference<Object> transactionOwner) =>
+  DocumentReference<Object?>? _transactionOwner;
+  DocumentReference<Object?>? get transactionOwner => _$this._transactionOwner;
+  set transactionOwner(DocumentReference<Object?>? transactionOwner) =>
       _$this._transactionOwner = transactionOwner;
 
-  int _balanceAfter;
-  int get balanceAfter => _$this._balanceAfter;
-  set balanceAfter(int balanceAfter) => _$this._balanceAfter = balanceAfter;
+  int? _balanceAfter;
+  int? get balanceAfter => _$this._balanceAfter;
+  set balanceAfter(int? balanceAfter) => _$this._balanceAfter = balanceAfter;
 
-  String _transactionMonoID;
-  String get transactionMonoID => _$this._transactionMonoID;
-  set transactionMonoID(String transactionMonoID) =>
+  String? _transactionMonoID;
+  String? get transactionMonoID => _$this._transactionMonoID;
+  set transactionMonoID(String? transactionMonoID) =>
       _$this._transactionMonoID = transactionMonoID;
 
-  int _transactionAmount;
-  int get transactionAmount => _$this._transactionAmount;
-  set transactionAmount(int transactionAmount) =>
+  int? _transactionAmount;
+  int? get transactionAmount => _$this._transactionAmount;
+  set transactionAmount(int? transactionAmount) =>
       _$this._transactionAmount = transactionAmount;
 
-  String _transactionType;
-  String get transactionType => _$this._transactionType;
-  set transactionType(String transactionType) =>
+  String? _transactionType;
+  String? get transactionType => _$this._transactionType;
+  set transactionType(String? transactionType) =>
       _$this._transactionType = transactionType;
 
-  String _transactionNarration;
-  String get transactionNarration => _$this._transactionNarration;
-  set transactionNarration(String transactionNarration) =>
+  String? _transactionNarration;
+  String? get transactionNarration => _$this._transactionNarration;
+  set transactionNarration(String? transactionNarration) =>
       _$this._transactionNarration = transactionNarration;
 
-  DocumentReference<Object> _linkedCategory;
-  DocumentReference<Object> get linkedCategory => _$this._linkedCategory;
-  set linkedCategory(DocumentReference<Object> linkedCategory) =>
-      _$this._linkedCategory = linkedCategory;
-
-  bool _isCategorized;
-  bool get isCategorized => _$this._isCategorized;
-  set isCategorized(bool isCategorized) =>
-      _$this._isCategorized = isCategorized;
-
-  String _transactionID;
-  String get transactionID => _$this._transactionID;
-  set transactionID(String transactionID) =>
+  String? _transactionID;
+  String? get transactionID => _$this._transactionID;
+  set transactionID(String? transactionID) =>
       _$this._transactionID = transactionID;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _transactionCategory;
+  DocumentReference<Object?>? get transactionCategory =>
+      _$this._transactionCategory;
+  set transactionCategory(DocumentReference<Object?>? transactionCategory) =>
+      _$this._transactionCategory = transactionCategory;
+
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   TransactionsRecordBuilder() {
     TransactionsRecord._initializeBuilder(this);
@@ -406,10 +380,9 @@ class TransactionsRecordBuilder
       _transactionAmount = $v.transactionAmount;
       _transactionType = $v.transactionType;
       _transactionNarration = $v.transactionNarration;
-      _linkedCategory = $v.linkedCategory;
-      _isCategorized = $v.isCategorized;
       _transactionID = $v.transactionID;
-      _reference = $v.reference;
+      _transactionCategory = $v.transactionCategory;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -422,7 +395,7 @@ class TransactionsRecordBuilder
   }
 
   @override
-  void update(void Function(TransactionsRecordBuilder) updates) {
+  void update(void Function(TransactionsRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -439,10 +412,9 @@ class TransactionsRecordBuilder
             transactionAmount: transactionAmount,
             transactionType: transactionType,
             transactionNarration: transactionNarration,
-            linkedCategory: linkedCategory,
-            isCategorized: isCategorized,
             transactionID: transactionID,
-            reference: reference);
+            transactionCategory: transactionCategory,
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

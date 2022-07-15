@@ -8,13 +8,13 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 import '../../main.dart';
 
-Future<DateTimeRange> selectDateRangeExisting(
+Future<DateTimeRange?> selectDateRangeExisting(
   BuildContext context,
   BudgetsRecord createdBudget,
   //DateTimeRange oldRange,
 ) async {
   // Add your function code here!
-  DateTimeRange newRange = await showDateRangePicker(
+  DateTimeRange? newRange = await showDateRangePicker(
     context: context,
     firstDate: DateTime(2022),
     lastDate: DateTime(2023),

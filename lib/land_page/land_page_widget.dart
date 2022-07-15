@@ -77,11 +77,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .title1
                                             .override(
-                                              fontFamily: 'Spline Sans',
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .title1Family,
                                               color: Color(0xFF010101),
                                               fontSize: 48,
                                               fontWeight: FontWeight.bold,
-                                              useGoogleFonts: false,
                                             ),
                                       ),
                                       Text(
@@ -90,13 +91,14 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .title1
                                             .override(
-                                              fontFamily: 'Spline Sans',
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .title1Family,
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
                                               fontSize: 48,
                                               fontWeight: FontWeight.bold,
-                                              useGoogleFonts: false,
                                             ),
                                       ),
                                       Text(
@@ -105,11 +107,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .title1
                                             .override(
-                                              fontFamily: 'Spline Sans',
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .title1Family,
                                               color: Color(0xFF010101),
                                               fontSize: 48,
                                               fontWeight: FontWeight.bold,
-                                              useGoogleFonts: false,
                                             ),
                                       ),
                                       Padding(
@@ -121,7 +124,9 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .subtitle1
                                               .override(
-                                                fontFamily: 'Source Sans Pro',
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle1Family,
                                                 color: Color(0xFF010101),
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w600,
@@ -186,7 +191,9 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                         .subtitle2
                                                         .override(
                                                           fontFamily:
-                                                              'Source Sans Pro',
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle2Family,
                                                           color:
                                                               Color(0xFF454545),
                                                         ),

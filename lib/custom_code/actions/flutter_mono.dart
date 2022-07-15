@@ -7,11 +7,12 @@ import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom action code
 // Begin custom action code
-import '../mono_custom/mono_flutter.dart';
+//import '../mono_custom/mono_flutter.dart';
 import 'package:evi/auth/auth_util.dart';
 import 'package:evi/backend/api_requests/api_calls.dart';
 import 'package:evi/dashboard/dashboard_widget.dart';
 import '../actions/index.dart' as actions;
+import 'package:mono_flutter/mono_flutter.dart';
 
 extension CustomContext on BuildContext {
   double screenHeight([double percent = 1]) =>
@@ -70,7 +71,7 @@ Future flutterMono(
                           final usersUpdateData = createUsersRecordData(
                             tempAuthCode: '$code',
                           );
-                          await currentUserReference.update(usersUpdateData);
+                          await currentUserReference!.update(usersUpdateData);
 
                           //Print temporary key
                           //print(currentUserDocument?.tempAuthCode);
@@ -106,14 +107,14 @@ Future flutterMono(
                                 FieldValue.arrayUnion([newacct.reference]),
                           };
 
-                          await currentUserReference.update(usersUpdateData2);
+                          await currentUserReference!.update(usersUpdateData2);
 
                           ApiCallResponse acctInfoResponse =
                               await GetAccountInfoCall.call(
                             authID: newacct.authID,
                           );
 
-                          print((acctInfoResponse?.jsonBody ?? '').toString());
+                          //print((acctInfoResponse?.jsonBody ?? '').toString());
                           final accountsUpdateData = createAccountsRecordData(
                             accountName: getJsonField(
                               (acctInfoResponse?.jsonBody ?? ''),

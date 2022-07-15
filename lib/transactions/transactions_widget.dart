@@ -331,12 +331,12 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                           crossAxisAlignment:
                                                                               CrossAxisAlignment.start,
                                                                           children: [
-                                                                            if (columnTransactionsRecord!.isCategorized ??
-                                                                                true)
+                                                                            if ((columnTransactionsRecord!.transactionCategory !=
+                                                                                null))
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                                                                child: StreamBuilder<BudgetCategoriesRecord>(
-                                                                                  stream: BudgetCategoriesRecord.getDocument(columnTransactionsRecord!.linkedCategory!),
+                                                                                child: StreamBuilder<CategoriesRecord>(
+                                                                                  stream: CategoriesRecord.getDocument(columnTransactionsRecord!.transactionCategory!),
                                                                                   builder: (context, snapshot) {
                                                                                     // Customize what your widget looks like when it's loading.
                                                                                     if (!snapshot.hasData) {
@@ -351,9 +351,9 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                         ),
                                                                                       );
                                                                                     }
-                                                                                    final textBudgetCategoriesRecord = snapshot.data!;
+                                                                                    final textCategoriesRecord = snapshot.data!;
                                                                                     return AutoSizeText(
-                                                                                      textBudgetCategoriesRecord!.categoryName!.maybeHandleOverflow(
+                                                                                      textCategoriesRecord!.categoryName!.maybeHandleOverflow(
                                                                                         maxChars: 25,
                                                                                         replacement: '…',
                                                                                       ),
@@ -362,14 +362,14 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                   },
                                                                                 ),
                                                                               ),
-                                                                            if (!(columnTransactionsRecord!.isCategorized!) ??
-                                                                                true)
+                                                                            if ((columnTransactionsRecord!.transactionCategory ==
+                                                                                null))
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                                                                 child: AutoSizeText(
                                                                                   'Uncategorized',
                                                                                   style: FlutterFlowTheme.of(context).subtitle1.override(
-                                                                                        fontFamily: 'Source Sans Pro',
+                                                                                        fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                                         color: Color(0xFFFF0003),
                                                                                         fontStyle: FontStyle.italic,
                                                                                       ),
@@ -413,7 +413,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                     replacement: '…',
                                                                                   ),
                                                                               style: FlutterFlowTheme.of(context).subtitle1.override(
-                                                                                    fontFamily: 'Source Sans Pro',
+                                                                                    fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                                     fontSize: 16,
                                                                                   ),
                                                                             ),
@@ -666,12 +666,12 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                           crossAxisAlignment:
                                                                               CrossAxisAlignment.start,
                                                                           children: [
-                                                                            if (columnTransactionsRecord!.isCategorized ??
-                                                                                true)
+                                                                            if ((columnTransactionsRecord!.transactionCategory !=
+                                                                                null))
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                                                                child: FutureBuilder<BudgetCategoriesRecord>(
-                                                                                  future: BudgetCategoriesRecord.getDocumentOnce(columnTransactionsRecord!.linkedCategory!),
+                                                                                child: FutureBuilder<CategoriesRecord>(
+                                                                                  future: CategoriesRecord.getDocumentOnce(columnTransactionsRecord!.transactionCategory!),
                                                                                   builder: (context, snapshot) {
                                                                                     // Customize what your widget looks like when it's loading.
                                                                                     if (!snapshot.hasData) {
@@ -686,9 +686,9 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                         ),
                                                                                       );
                                                                                     }
-                                                                                    final textBudgetCategoriesRecord = snapshot.data!;
+                                                                                    final textCategoriesRecord = snapshot.data!;
                                                                                     return AutoSizeText(
-                                                                                      textBudgetCategoriesRecord!.categoryName!.maybeHandleOverflow(
+                                                                                      textCategoriesRecord!.categoryName!.maybeHandleOverflow(
                                                                                         maxChars: 25,
                                                                                         replacement: '…',
                                                                                       ),
@@ -697,14 +697,14 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                   },
                                                                                 ),
                                                                               ),
-                                                                            if (!(columnTransactionsRecord!.isCategorized!) ??
-                                                                                true)
+                                                                            if ((columnTransactionsRecord!.transactionCategory ==
+                                                                                null))
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                                                                 child: AutoSizeText(
                                                                                   'Uncategorized',
                                                                                   style: FlutterFlowTheme.of(context).subtitle1.override(
-                                                                                        fontFamily: 'Source Sans Pro',
+                                                                                        fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                                         color: Color(0xFFFF0003),
                                                                                         fontStyle: FontStyle.italic,
                                                                                       ),
@@ -748,7 +748,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                     replacement: '…',
                                                                                   ),
                                                                               style: FlutterFlowTheme.of(context).subtitle1.override(
-                                                                                    fontFamily: 'Source Sans Pro',
+                                                                                    fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                                     fontSize: 16,
                                                                                   ),
                                                                             ),

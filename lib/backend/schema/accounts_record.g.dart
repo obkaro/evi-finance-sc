@@ -17,10 +17,10 @@ class _$AccountsRecordSerializer
   final String wireName = 'AccountsRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, AccountsRecord object,
+  Iterable<Object?> serialize(Serializers serializers, AccountsRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.accountName;
     if (value != null) {
       result
@@ -34,7 +34,7 @@ class _$AccountsRecordSerializer
         ..add('accountOwner')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.dataStatus;
     if (value != null) {
@@ -140,20 +140,20 @@ class _$AccountsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   AccountsRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new AccountsRecordBuilder();
 
@@ -161,83 +161,83 @@ class _$AccountsRecordSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'accountName':
           result.accountName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'accountOwner':
           result.accountOwner = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'dataStatus':
           result.dataStatus = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'accountType':
           result.accountType = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'institutionType':
           result.institutionType = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'authMethod':
           result.authMethod = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'currency':
           result.currency = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'authID':
           result.authID = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'institutionName':
           result.institutionName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'accountBalance':
           result.accountBalance = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'bankCode':
           result.bankCode = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'accountNumber':
           result.accountNumber = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'bvn':
           result.bvn = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'dateLinked':
           result.dateLinked = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'accountLogo':
           result.accountLogo = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'reauthRequired':
           result.reauthRequired = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool)) as bool?;
           break;
         case 'lastSync':
           result.lastSync = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -248,43 +248,43 @@ class _$AccountsRecordSerializer
 
 class _$AccountsRecord extends AccountsRecord {
   @override
-  final String accountName;
+  final String? accountName;
   @override
-  final DocumentReference<Object> accountOwner;
+  final DocumentReference<Object?>? accountOwner;
   @override
-  final String dataStatus;
+  final String? dataStatus;
   @override
-  final String accountType;
+  final String? accountType;
   @override
-  final String institutionType;
+  final String? institutionType;
   @override
-  final String authMethod;
+  final String? authMethod;
   @override
-  final String currency;
+  final String? currency;
   @override
-  final String authID;
+  final String? authID;
   @override
-  final String institutionName;
+  final String? institutionName;
   @override
-  final int accountBalance;
+  final int? accountBalance;
   @override
-  final String bankCode;
+  final String? bankCode;
   @override
-  final String accountNumber;
+  final String? accountNumber;
   @override
-  final String bvn;
+  final String? bvn;
   @override
-  final DateTime dateLinked;
+  final DateTime? dateLinked;
   @override
-  final String accountLogo;
+  final String? accountLogo;
   @override
-  final bool reauthRequired;
+  final bool? reauthRequired;
   @override
-  final DateTime lastSync;
+  final DateTime? lastSync;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
-  factory _$AccountsRecord([void Function(AccountsRecordBuilder) updates]) =>
+  factory _$AccountsRecord([void Function(AccountsRecordBuilder)? updates]) =>
       (new AccountsRecordBuilder()..update(updates)).build();
 
   _$AccountsRecord._(
@@ -305,7 +305,7 @@ class _$AccountsRecord extends AccountsRecord {
       this.accountLogo,
       this.reauthRequired,
       this.lastSync,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -337,7 +337,7 @@ class _$AccountsRecord extends AccountsRecord {
         accountLogo == other.accountLogo &&
         reauthRequired == other.reauthRequired &&
         lastSync == other.lastSync &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -383,7 +383,7 @@ class _$AccountsRecord extends AccountsRecord {
                     accountLogo.hashCode),
                 reauthRequired.hashCode),
             lastSync.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -406,93 +406,92 @@ class _$AccountsRecord extends AccountsRecord {
           ..add('accountLogo', accountLogo)
           ..add('reauthRequired', reauthRequired)
           ..add('lastSync', lastSync)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class AccountsRecordBuilder
     implements Builder<AccountsRecord, AccountsRecordBuilder> {
-  _$AccountsRecord _$v;
+  _$AccountsRecord? _$v;
 
-  String _accountName;
-  String get accountName => _$this._accountName;
-  set accountName(String accountName) => _$this._accountName = accountName;
+  String? _accountName;
+  String? get accountName => _$this._accountName;
+  set accountName(String? accountName) => _$this._accountName = accountName;
 
-  DocumentReference<Object> _accountOwner;
-  DocumentReference<Object> get accountOwner => _$this._accountOwner;
-  set accountOwner(DocumentReference<Object> accountOwner) =>
+  DocumentReference<Object?>? _accountOwner;
+  DocumentReference<Object?>? get accountOwner => _$this._accountOwner;
+  set accountOwner(DocumentReference<Object?>? accountOwner) =>
       _$this._accountOwner = accountOwner;
 
-  String _dataStatus;
-  String get dataStatus => _$this._dataStatus;
-  set dataStatus(String dataStatus) => _$this._dataStatus = dataStatus;
+  String? _dataStatus;
+  String? get dataStatus => _$this._dataStatus;
+  set dataStatus(String? dataStatus) => _$this._dataStatus = dataStatus;
 
-  String _accountType;
-  String get accountType => _$this._accountType;
-  set accountType(String accountType) => _$this._accountType = accountType;
+  String? _accountType;
+  String? get accountType => _$this._accountType;
+  set accountType(String? accountType) => _$this._accountType = accountType;
 
-  String _institutionType;
-  String get institutionType => _$this._institutionType;
-  set institutionType(String institutionType) =>
+  String? _institutionType;
+  String? get institutionType => _$this._institutionType;
+  set institutionType(String? institutionType) =>
       _$this._institutionType = institutionType;
 
-  String _authMethod;
-  String get authMethod => _$this._authMethod;
-  set authMethod(String authMethod) => _$this._authMethod = authMethod;
+  String? _authMethod;
+  String? get authMethod => _$this._authMethod;
+  set authMethod(String? authMethod) => _$this._authMethod = authMethod;
 
-  String _currency;
-  String get currency => _$this._currency;
-  set currency(String currency) => _$this._currency = currency;
+  String? _currency;
+  String? get currency => _$this._currency;
+  set currency(String? currency) => _$this._currency = currency;
 
-  String _authID;
-  String get authID => _$this._authID;
-  set authID(String authID) => _$this._authID = authID;
+  String? _authID;
+  String? get authID => _$this._authID;
+  set authID(String? authID) => _$this._authID = authID;
 
-  String _institutionName;
-  String get institutionName => _$this._institutionName;
-  set institutionName(String institutionName) =>
+  String? _institutionName;
+  String? get institutionName => _$this._institutionName;
+  set institutionName(String? institutionName) =>
       _$this._institutionName = institutionName;
 
-  int _accountBalance;
-  int get accountBalance => _$this._accountBalance;
-  set accountBalance(int accountBalance) =>
+  int? _accountBalance;
+  int? get accountBalance => _$this._accountBalance;
+  set accountBalance(int? accountBalance) =>
       _$this._accountBalance = accountBalance;
 
-  String _bankCode;
-  String get bankCode => _$this._bankCode;
-  set bankCode(String bankCode) => _$this._bankCode = bankCode;
+  String? _bankCode;
+  String? get bankCode => _$this._bankCode;
+  set bankCode(String? bankCode) => _$this._bankCode = bankCode;
 
-  String _accountNumber;
-  String get accountNumber => _$this._accountNumber;
-  set accountNumber(String accountNumber) =>
+  String? _accountNumber;
+  String? get accountNumber => _$this._accountNumber;
+  set accountNumber(String? accountNumber) =>
       _$this._accountNumber = accountNumber;
 
-  String _bvn;
-  String get bvn => _$this._bvn;
-  set bvn(String bvn) => _$this._bvn = bvn;
+  String? _bvn;
+  String? get bvn => _$this._bvn;
+  set bvn(String? bvn) => _$this._bvn = bvn;
 
-  DateTime _dateLinked;
-  DateTime get dateLinked => _$this._dateLinked;
-  set dateLinked(DateTime dateLinked) => _$this._dateLinked = dateLinked;
+  DateTime? _dateLinked;
+  DateTime? get dateLinked => _$this._dateLinked;
+  set dateLinked(DateTime? dateLinked) => _$this._dateLinked = dateLinked;
 
-  String _accountLogo;
-  String get accountLogo => _$this._accountLogo;
-  set accountLogo(String accountLogo) => _$this._accountLogo = accountLogo;
+  String? _accountLogo;
+  String? get accountLogo => _$this._accountLogo;
+  set accountLogo(String? accountLogo) => _$this._accountLogo = accountLogo;
 
-  bool _reauthRequired;
-  bool get reauthRequired => _$this._reauthRequired;
-  set reauthRequired(bool reauthRequired) =>
+  bool? _reauthRequired;
+  bool? get reauthRequired => _$this._reauthRequired;
+  set reauthRequired(bool? reauthRequired) =>
       _$this._reauthRequired = reauthRequired;
 
-  DateTime _lastSync;
-  DateTime get lastSync => _$this._lastSync;
-  set lastSync(DateTime lastSync) => _$this._lastSync = lastSync;
+  DateTime? _lastSync;
+  DateTime? get lastSync => _$this._lastSync;
+  set lastSync(DateTime? lastSync) => _$this._lastSync = lastSync;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   AccountsRecordBuilder() {
     AccountsRecord._initializeBuilder(this);
@@ -518,7 +517,7 @@ class AccountsRecordBuilder
       _accountLogo = $v.accountLogo;
       _reauthRequired = $v.reauthRequired;
       _lastSync = $v.lastSync;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -531,7 +530,7 @@ class AccountsRecordBuilder
   }
 
   @override
-  void update(void Function(AccountsRecordBuilder) updates) {
+  void update(void Function(AccountsRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -556,7 +555,7 @@ class AccountsRecordBuilder
             accountLogo: accountLogo,
             reauthRequired: reauthRequired,
             lastSync: lastSync,
-            reference: reference);
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

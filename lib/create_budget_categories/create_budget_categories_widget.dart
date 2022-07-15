@@ -43,11 +43,11 @@ class _CreateBudgetCategoriesWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<BudgetCategoriesRecord>>(
-      stream: queryBudgetCategoriesRecord(
-        queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
-            .where('categoryBudget', isEqualTo: widget.createdBudget!.reference)
-            .where('categoryName', isNotEqualTo: 'dummy'),
+    return StreamBuilder<List<CategoriesRecord>>(
+      stream: queryCategoriesRecord(
+        parent: widget.createdBudget!.reference,
+        queryBuilder: (categoriesRecord) =>
+            categoriesRecord.where('category_name', isNotEqualTo: 'dummy'),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -63,8 +63,8 @@ class _CreateBudgetCategoriesWidgetState
             ),
           );
         }
-        List<BudgetCategoriesRecord>
-            createBudgetCategoriesBudgetCategoriesRecordList = snapshot.data!;
+        List<CategoriesRecord> createBudgetCategoriesCategoriesRecordList =
+            snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -158,7 +158,10 @@ class _CreateBudgetCategoriesWidgetState
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText2
                                                 .override(
-                                                  fontFamily: 'Source Sans Pro',
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyText2Family,
                                                   color: Color(0xFFFF0003),
                                                 ),
                                           ),
@@ -233,7 +236,7 @@ class _CreateBudgetCategoriesWidgetState
                                                     budget: columnBudgetsRecord,
                                                     categoryTotal: functions
                                                         .sumCategoryAmounts(
-                                                            createBudgetCategoriesBudgetCategoriesRecordList
+                                                            createBudgetCategoriesCategoriesRecordList
                                                                 .toList()),
                                                   ),
                                                 );
@@ -440,8 +443,9 @@ class _CreateBudgetCategoriesWidgetState
                                                                   .of(context)
                                                               .bodyText1
                                                               .override(
-                                                                fontFamily:
-                                                                    'Source Sans Pro',
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family,
                                                                 fontSize: 12,
                                                               ),
                                                         ),
@@ -510,7 +514,9 @@ class _CreateBudgetCategoriesWidgetState
                                                     .subtitle2
                                                     .override(
                                                       fontFamily:
-                                                          'Source Sans Pro',
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2Family,
                                                       color: Colors.white,
                                                       fontSize: 16,
                                                     ),
@@ -541,7 +547,7 @@ class _CreateBudgetCategoriesWidgetState
                                         child: Builder(
                                           builder: (context) {
                                             final existingCategories =
-                                                createBudgetCategoriesBudgetCategoriesRecordList
+                                                createBudgetCategoriesCategoriesRecordList
                                                         ?.toList() ??
                                                     [];
                                             return SingleChildScrollView(
@@ -626,7 +632,7 @@ class _CreateBudgetCategoriesWidgetState
                                                           child: Text(
                                                             functions.formatBudgetCurrency(
                                                                 existingCategoriesItem!
-                                                                    .allocatedAmount),
+                                                                    .categoryAmount),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyText1,
@@ -668,7 +674,7 @@ class _CreateBudgetCategoriesWidgetState
                                                                         existingCategoriesItem,
                                                                     categoriesTotal:
                                                                         functions
-                                                                            .sumCategoryAmounts(createBudgetCategoriesBudgetCategoriesRecordList.toList()),
+                                                                            .sumCategoryAmounts(createBudgetCategoriesCategoriesRecordList.toList()),
                                                                   ),
                                                                 );
                                                               },
@@ -695,7 +701,7 @@ class _CreateBudgetCategoriesWidgetState
                                                               'unallocatedAmount':
                                                                   FieldValue.increment(
                                                                       existingCategoriesItem!
-                                                                          .allocatedAmount!),
+                                                                          .categoryAmount!),
                                                             };
                                                             await widget
                                                                 .createdBudget!
@@ -764,7 +770,7 @@ class _CreateBudgetCategoriesWidgetState
                                             if (confirmDialogResponse) {
                                               // Action_ResetCategories
                                               await actions.deleteCategories(
-                                                createBudgetCategoriesBudgetCategoriesRecordList
+                                                createBudgetCategoriesCategoriesRecordList
                                                     .toList(),
                                               );
                                             } else {
@@ -777,15 +783,19 @@ class _CreateBudgetCategoriesWidgetState
                                             height: 60,
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryBackground,
-                                            textStyle: FlutterFlowTheme.of(
-                                                    context)
-                                                .subtitle1
-                                                .override(
-                                                  fontFamily: 'Source Sans Pro',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                ),
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle1
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle1Family,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                    ),
                                             elevation: 0,
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
@@ -807,7 +817,9 @@ class _CreateBudgetCategoriesWidgetState
                                                       .bodyText2
                                                       .override(
                                                         fontFamily:
-                                                            'Source Sans Pro',
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText2Family,
                                                         color:
                                                             Color(0xFFF9F9F9),
                                                       ),
@@ -838,7 +850,9 @@ class _CreateBudgetCategoriesWidgetState
                                                     .subtitle1
                                                     .override(
                                                       fontFamily:
-                                                          'Source Sans Pro',
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle1Family,
                                                       color: Colors.white,
                                                     ),
                                             borderSide: BorderSide(

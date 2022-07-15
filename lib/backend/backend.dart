@@ -8,7 +8,6 @@ import 'schema/users_record.dart';
 import 'schema/accounts_record.dart';
 import 'schema/transactions_record.dart';
 import 'schema/budgets_record.dart';
-import 'schema/budget_categories_record.dart';
 import 'schema/const_budget_categories_record.dart';
 import 'schema/const_institution_logos_record.dart';
 import 'schema/categories_record.dart';
@@ -23,7 +22,6 @@ export 'schema/users_record.dart';
 export 'schema/accounts_record.dart';
 export 'schema/transactions_record.dart';
 export 'schema/budgets_record.dart';
-export 'schema/budget_categories_record.dart';
 export 'schema/const_budget_categories_record.dart';
 export 'schema/const_institution_logos_record.dart';
 export 'schema/categories_record.dart';
@@ -195,49 +193,6 @@ Future<FFFirestorePage<BudgetsRecord>> queryBudgetsRecordPage({
       pageSize: pageSize,
       isStream: isStream,
     );
-
-/// Functions to query BudgetCategoriesRecords (as a Stream and as a Future).
-Stream<List<BudgetCategoriesRecord>> queryBudgetCategoriesRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      BudgetCategoriesRecord.collection,
-      BudgetCategoriesRecord.serializer,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<BudgetCategoriesRecord>> queryBudgetCategoriesRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      BudgetCategoriesRecord.collection,
-      BudgetCategoriesRecord.serializer,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<FFFirestorePage<BudgetCategoriesRecord>>
-    queryBudgetCategoriesRecordPage({
-  Query Function(Query)? queryBuilder,
-  DocumentSnapshot? nextPageMarker,
-  required int pageSize,
-  required bool isStream,
-}) =>
-        queryCollectionPage(
-          BudgetCategoriesRecord.collection,
-          BudgetCategoriesRecord.serializer,
-          queryBuilder: queryBuilder,
-          nextPageMarker: nextPageMarker,
-          pageSize: pageSize,
-          isStream: isStream,
-        );
 
 /// Functions to query ConstBudgetCategoriesRecords (as a Stream and as a Future).
 Stream<List<ConstBudgetCategoriesRecord>> queryConstBudgetCategoriesRecord({

@@ -50,12 +50,12 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
       floatingActionButton: Visibility(
         visible: (currentUserDocument!.activeBudget != null),
         child: AuthUserStreamWidget(
-          child: StreamBuilder<List<BudgetCategoriesRecord>>(
-            stream: queryBudgetCategoriesRecord(
-              queryBuilder: (budgetCategoriesRecord) => budgetCategoriesRecord
-                  .where('categoryBudget',
-                      isEqualTo: currentUserDocument!.activeBudget)
-                  .where('categoryName', isNotEqualTo: 'Uncategorized'),
+          child: StreamBuilder<List<CategoriesRecord>>(
+            stream: queryCategoriesRecord(
+              parent: currentUserDocument!.activeBudget,
+              queryBuilder: (categoriesRecord) => categoriesRecord
+                  .where('category_name', isNotEqualTo: 'unallocated'),
+              singleRecord: true,
             ),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
@@ -71,9 +71,14 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                   ),
                 );
               }
-              List<BudgetCategoriesRecord>
-                  floatingActionButtonBudgetCategoriesRecordList =
+              List<CategoriesRecord> floatingActionButtonCategoriesRecordList =
                   snapshot.data!;
+              // Return an empty Container when the document does not exist.
+              if (snapshot.data!.isEmpty) {
+                return Container();
+              }
+              final floatingActionButtonCategoriesRecord =
+                  floatingActionButtonCategoriesRecordList.first;
               return FloatingActionButton(
                 onPressed: () async {
                   final budgetsCreateData = createBudgetsRecordData(
@@ -185,186 +190,150 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   10, 0, 10, 0),
-                                          child: StreamBuilder<
-                                              List<BudgetCategoriesRecord>>(
-                                            stream: queryBudgetCategoriesRecord(
-                                              queryBuilder: (budgetCategoriesRecord) =>
-                                                  budgetCategoriesRecord
-                                                      .where('categoryBudget',
-                                                          isEqualTo:
-                                                              columnBudgetsRecord!
-                                                                  .reference)
-                                                      .where('categoryName',
-                                                          isNotEqualTo:
-                                                              'Uncategorized'),
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child: SpinKitRing(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      size: 50,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<BudgetCategoriesRecord>
-                                                  listTileBudgetCategoriesRecordList =
-                                                  snapshot.data!;
-                                              return InkWell(
-                                                onTap: () async {
-                                                  final budgetsUpdateData =
-                                                      createBudgetsRecordData(
-                                                    lastViewed:
-                                                        getCurrentTimestamp,
-                                                  );
-                                                  await columnBudgetsRecord!
-                                                      .reference
-                                                      .update(
-                                                          budgetsUpdateData);
-                                                  // Action_BudgetSingle
-                                                  await Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          BudgetSingleWidget(
-                                                        budget:
-                                                            columnBudgetsRecord,
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                                child: Slidable(
-                                                  actionPane:
-                                                      const SlidableScrollActionPane(),
-                                                  secondaryActions: [
-                                                    IconSlideAction(
-                                                      caption: 'Delete',
-                                                      color: Color(0xFFC72323),
-                                                      icon:
-                                                          Icons.delete_rounded,
-                                                      onTap: () async {
-                                                        if ((columnBudgetsRecord!
-                                                                .reference) ==
-                                                            (currentUserDocument!
-                                                                .activeBudget)) {
-                                                          var confirmDialogResponse =
-                                                              await showDialog<
-                                                                      bool>(
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        (alertDialogContext) {
-                                                                      return AlertDialog(
-                                                                        title: Text(
-                                                                            'Are you sure?'),
-                                                                        content:
-                                                                            Text('This is your current active budget'),
-                                                                        actions: [
-                                                                          TextButton(
-                                                                            onPressed: () =>
-                                                                                Navigator.pop(alertDialogContext, false),
-                                                                            child:
-                                                                                Text('Cancel'),
-                                                                          ),
-                                                                          TextButton(
-                                                                            onPressed: () =>
-                                                                                Navigator.pop(alertDialogContext, true),
-                                                                            child:
-                                                                                Text('Delete'),
-                                                                          ),
-                                                                        ],
-                                                                      );
-                                                                    },
-                                                                  ) ??
-                                                                  false;
-                                                          if (confirmDialogResponse) {
-                                                            final usersUpdateData =
-                                                                {
-                                                              'activeBudget':
-                                                                  FieldValue
-                                                                      .delete(),
-                                                            };
-                                                            await currentUserReference!
-                                                                .update(
-                                                                    usersUpdateData);
-                                                          }
-                                                        }
-                                                        // Action_DeleteBudget
-                                                        await columnBudgetsRecord!
-                                                            .reference
-                                                            .delete();
-                                                      },
-                                                    ),
-                                                    IconSlideAction(
-                                                      caption: 'Activate',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .tertiaryColor,
-                                                      icon: Icons.check_rounded,
-                                                      onTap: () async {
-                                                        final usersUpdateData =
-                                                            createUsersRecordData(
-                                                          activeBudget:
-                                                              columnBudgetsRecord!
-                                                                  .reference,
-                                                        );
-                                                        await currentUserReference!
-                                                            .update(
-                                                                usersUpdateData);
-                                                      },
-                                                    ),
-                                                  ],
-                                                  child: ListTile(
-                                                    title: Text(
-                                                      '${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetEnd)}',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Source Sans Pro',
-                                                                lineHeight: 2,
-                                                              ),
-                                                    ),
-                                                    subtitle: Text(
-                                                      functions
-                                                          .formatBudgetCurrency(
-                                                              columnBudgetsRecord!
-                                                                  .budgetAmount),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText2
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Source Sans Pro',
-                                                                lineHeight: 2,
-                                                              ),
-                                                    ),
-                                                    trailing: Icon(
-                                                      Icons.arrow_forward_ios,
-                                                      color: Color(0xFF303030),
-                                                      size: 20,
-                                                    ),
-                                                    dense: false,
-                                                    contentPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                20, 10, 20, 10),
+                                          child: InkWell(
+                                            onTap: () async {
+                                              final budgetsUpdateData =
+                                                  createBudgetsRecordData(
+                                                lastViewed: getCurrentTimestamp,
+                                              );
+                                              await columnBudgetsRecord!
+                                                  .reference
+                                                  .update(budgetsUpdateData);
+                                              // Action_BudgetSingle
+                                              await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      BudgetSingleWidget(
+                                                    budget: columnBudgetsRecord,
                                                   ),
                                                 ),
                                               );
                                             },
+                                            child: Slidable(
+                                              actionPane:
+                                                  const SlidableScrollActionPane(),
+                                              secondaryActions: [
+                                                IconSlideAction(
+                                                  caption: 'Delete',
+                                                  color: Color(0xFFC72323),
+                                                  icon: Icons.delete_rounded,
+                                                  onTap: () async {
+                                                    if ((columnBudgetsRecord!
+                                                            .reference) ==
+                                                        (currentUserDocument!
+                                                            .activeBudget)) {
+                                                      var confirmDialogResponse =
+                                                          await showDialog<
+                                                                  bool>(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (alertDialogContext) {
+                                                                  return AlertDialog(
+                                                                    title: Text(
+                                                                        'Are you sure?'),
+                                                                    content: Text(
+                                                                        'This is your current active budget'),
+                                                                    actions: [
+                                                                      TextButton(
+                                                                        onPressed: () => Navigator.pop(
+                                                                            alertDialogContext,
+                                                                            false),
+                                                                        child: Text(
+                                                                            'Cancel'),
+                                                                      ),
+                                                                      TextButton(
+                                                                        onPressed: () => Navigator.pop(
+                                                                            alertDialogContext,
+                                                                            true),
+                                                                        child: Text(
+                                                                            'Delete'),
+                                                                      ),
+                                                                    ],
+                                                                  );
+                                                                },
+                                                              ) ??
+                                                              false;
+                                                      if (confirmDialogResponse) {
+                                                        final usersUpdateData =
+                                                            {
+                                                          'activeBudget':
+                                                              FieldValue
+                                                                  .delete(),
+                                                        };
+                                                        await currentUserReference!
+                                                            .update(
+                                                                usersUpdateData);
+                                                      }
+                                                    }
+                                                    // Action_DeleteBudget
+                                                    await columnBudgetsRecord!
+                                                        .reference
+                                                        .delete();
+                                                  },
+                                                ),
+                                                IconSlideAction(
+                                                  caption: 'Activate',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .tertiaryColor,
+                                                  icon: Icons.check_rounded,
+                                                  onTap: () async {
+                                                    final usersUpdateData =
+                                                        createUsersRecordData(
+                                                      activeBudget:
+                                                          columnBudgetsRecord!
+                                                              .reference,
+                                                    );
+                                                    await currentUserReference!
+                                                        .update(
+                                                            usersUpdateData);
+                                                  },
+                                                ),
+                                              ],
+                                              child: ListTile(
+                                                title: Text(
+                                                  '${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetEnd)}',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .subtitle1
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .subtitle1Family,
+                                                        lineHeight: 2,
+                                                      ),
+                                                ),
+                                                subtitle: Text(
+                                                  functions
+                                                      .formatBudgetCurrency(
+                                                          columnBudgetsRecord!
+                                                              .budgetAmount),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText2
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText2Family,
+                                                        lineHeight: 2,
+                                                      ),
+                                                ),
+                                                trailing: Icon(
+                                                  Icons.arrow_forward_ios,
+                                                  color: Color(0xFF303030),
+                                                  size: 20,
+                                                ),
+                                                dense: false,
+                                                contentPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                            20, 10, 20, 10),
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -399,7 +368,8 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                             textAlign: TextAlign.center,
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Source Sans Pro',
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyText1Family,
                                       lineHeight: 1.4,
                                     ),
                           ),

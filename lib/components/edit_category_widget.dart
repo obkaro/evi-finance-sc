@@ -19,7 +19,7 @@ class EditCategoryWidget extends StatefulWidget {
   }) : super(key: key);
 
   final BudgetsRecord? budget;
-  final BudgetCategoriesRecord? categoryToEdit;
+  final CategoriesRecord? categoryToEdit;
   final int? categoriesTotal;
 
   @override
@@ -86,7 +86,8 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                   Text(
                     '(Unallocated: ${functions.formatBudgetCurrency(widget.budget!.unallocatedAmount)})',
                     style: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily: 'Source Sans Pro',
+                          fontFamily:
+                              FlutterFlowTheme.of(context).subtitle2Family,
                           color: FlutterFlowTheme.of(context).secondaryText,
                         ),
                   ),
@@ -125,7 +126,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                 child: custom_widgets.CurrencyTextField(
                   width: MediaQuery.of(context).size.width,
                   height: 50,
-                  amount: widget.categoryToEdit!.allocatedAmount,
+                  amount: widget.categoryToEdit!.categoryAmount,
                   labelText: 'Amount',
                   hintText: 'Enter amount',
                 ),
@@ -137,14 +138,14 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                     if ((functions.checkEditCatTotal(
                             widget.budget!.unallocatedAmount,
                             FFAppState().currencyTextField,
-                            widget.categoryToEdit!.allocatedAmount)) >=
+                            widget.categoryToEdit!.categoryAmount)) >=
                         0) {
                       if ((FFAppState().currencyTextField!) >
-                          (widget.categoryToEdit!.allocatedAmount!)) {
+                          (widget.categoryToEdit!.categoryAmount!)) {
                         final budgetsUpdateData = {
                           'unallocatedAmount': FieldValue.increment(
                               -(functions.subInt(FFAppState().currencyTextField,
-                                  widget.categoryToEdit!.allocatedAmount))),
+                                  widget.categoryToEdit!.categoryAmount))),
                         };
                         await widget.budget!.reference
                             .update(budgetsUpdateData);
@@ -152,20 +153,19 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                         final budgetsUpdateData = {
                           'unallocatedAmount': FieldValue.increment(
                               functions.subInt(
-                                  widget.categoryToEdit!.allocatedAmount,
+                                  widget.categoryToEdit!.categoryAmount,
                                   FFAppState().currencyTextField)),
                         };
                         await widget.budget!.reference
                             .update(budgetsUpdateData);
                       }
 
-                      final budgetCategoriesUpdateData =
-                          createBudgetCategoriesRecordData(
-                        allocatedAmount: FFAppState().currencyTextField,
+                      final categoriesUpdateData = createCategoriesRecordData(
+                        categoryAmount: FFAppState().currencyTextField,
                         categoryName: textController!.text,
                       );
                       await widget.categoryToEdit!.reference
-                          .update(budgetCategoriesUpdateData);
+                          .update(categoriesUpdateData);
                       Navigator.pop(context);
                     } else {
                       await showDialog(
@@ -193,7 +193,8 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                     height: 60,
                     color: FlutterFlowTheme.of(context).primaryColor,
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily: 'Source Sans Pro',
+                          fontFamily:
+                              FlutterFlowTheme.of(context).subtitle2Family,
                           color: Colors.white,
                         ),
                     borderSide: BorderSide(

@@ -83,10 +83,10 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .title1
                                       .override(
-                                        fontFamily: 'Spline Sans',
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .title1Family,
                                         color: Colors.white,
                                         fontSize: 32,
-                                        useGoogleFonts: false,
                                       ),
                                 ),
                               ),
@@ -198,7 +198,9 @@ class _LoginCopyWidgetState extends State<LoginCopyWidget> {
                                                     .subtitle2
                                                     .override(
                                                       fontFamily:
-                                                          'Source Sans Pro',
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2Family,
                                                       color: Colors.white,
                                                     ),
                                             borderSide: BorderSide(

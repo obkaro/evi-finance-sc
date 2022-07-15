@@ -11,7 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../auth/auth_util.dart';
 
 int calculateRemBudgetCat(
-  List<BudgetCategoriesRecord> categoriesToCalc,
+  List<CategoriesRecord> categoriesToCalc,
   BudgetsRecord budget,
 ) {
   // Add your function code here!
@@ -19,7 +19,7 @@ int calculateRemBudgetCat(
   for (var i = 0; i < categoriesToCalc.length; i++) {
     //var currentCat = categoriesToCalc[i];
 
-    total += categoriesToCalc[i].allocatedAmount as int;
+    total += categoriesToCalc[i].categoryAmount as int;
   }
   int remaining = budget.budgetAmount! - total;
 
@@ -27,7 +27,7 @@ int calculateRemBudgetCat(
 }
 
 String calcRemCatCurrency(
-  List<BudgetCategoriesRecord> categoriesToCalc,
+  List<CategoriesRecord> categoriesToCalc,
   BudgetsRecord budget,
 ) {
   // Add your function code here!
@@ -38,75 +38,52 @@ String calcRemCatCurrency(
   for (var i = 0; i < categoriesToCalc.length; i++) {
     //var currentCat = categoriesToCalc[i];
 
-    total += categoriesToCalc[i].allocatedAmount as int;
+    total += categoriesToCalc[i].categoryAmount as int;
   }
   int remaining = budget.budgetAmount! - total;
 
   return formatCurrency.format(remaining);
 }
 
-List<String> getCategoryNames(List<BudgetCategoriesRecord>? listForNames) {
-  // Add your function code here!
-  List<String> list;
-
-  for (var i = 0; i < listForNames.length; i++) {
-    list.add(listForNames[i].categoryName);
-  }
-  return list;
-}
-
-double calcBudgetChart(
+double? calcBudgetChart(
   BudgetsRecord? budget,
-  List<TransactionsRecord>? transactions,
+  List<TransactionsRecord> transactions,
 ) {
   // Add your function code here!
 
   int totalCategoriesSpent = 0;
 
   for (var e = 0; e < transactions.length; e++) {
-    totalCategoriesSpent += transactions[e].transactionAmount;
+    totalCategoriesSpent += transactions[e].transactionAmount as int;
   }
 
-  double budgPercent = (totalCategoriesSpent / budget.budgetAmount);
+  double budgPercent = (totalCategoriesSpent / (budget!.budgetAmount as int));
 
-  if (totalCategoriesSpent >= budget.budgetAmount) {
+  if (totalCategoriesSpent >= (budget.budgetAmount as int)) {
     budgPercent = 1.0;
   }
 
   return budgPercent;
 }
 
-String calcRemBudgetCopy(BudgetsRecord? budget) {
-  // Add your function code here!
-  final formatCurrency = NumberFormat.simpleCurrency(
-      locale: 'en_US', name: 'NGN', decimalDigits: 0);
-  int remaining = budget.budgetAmount - budget.budgetSpent;
-  return formatCurrency.format(remaining);
-}
-
 double calcCategoryPercent(
-  BudgetCategoriesRecord? category,
+  CategoriesRecord? category,
   List<TransactionsRecord>? transactions,
 ) {
   // Add your function code here!
   int totalTransactions = 0;
 
-  for (var i = 0; i < transactions.length; i++) {
-    totalTransactions += transactions[i].transactionAmount;
+  for (var i = 0; i < transactions!.length; i++) {
+    totalTransactions += transactions[i].transactionAmount as int;
   }
 
-  double percent = (totalTransactions / category.allocatedAmount);
+  double percent = (totalTransactions / (category!.categoryAmount as int));
 
-  if (totalTransactions >= category.allocatedAmount) {
+  if (totalTransactions >= (category.categoryAmount as int)) {
     percent = 1.0;
   }
 
   return percent;
-}
-
-int returnNegative(int? positiveNum) {
-  // Add your function code here!
-  return 0 - positiveNum;
 }
 
 int subInt(
@@ -114,7 +91,7 @@ int subInt(
   int? value2,
 ) {
   // Add your function code here!
-  int result = value1 - value2;
+  int result = value1! - value2!;
 
   if (value2 > value1) {
     result = value2 - value1;
@@ -128,17 +105,9 @@ int addInt(
   int? value2,
 ) {
   // Add your function code here!
-  int result = value1 + value2;
+  int result = value1! + value2!;
 
   return result;
-}
-
-int budgetRemMinusAmt(
-  int? amountFromWidget,
-  int? budgetRemaining,
-) {
-  // Add your function code here!
-  return budgetRemaining - amountFromWidget;
 }
 
 int checkEditCatTotal(
@@ -153,12 +122,7 @@ int checkEditCatTotal(
   //by adding the existing category amount back into the remaining budget amount
   //and then subtracting the new amount from it. If it results -ve, the new amount is too big
 
-  return (budgetRemaining + originalCategoryAmt) - widgetStateAmount;
-}
-
-int koboToNaira(int? koboValue) {
-  // Add your function code here!
-  return (koboValue / 100).round();
+  return (budgetRemaining! + originalCategoryAmt!) - widgetStateAmount!;
 }
 
 String formatTransCurrency(int? num) {
@@ -167,7 +131,7 @@ String formatTransCurrency(int? num) {
   final formatCurrency = NumberFormat.simpleCurrency(
       locale: 'en_US', name: 'NGN', decimalDigits: 2);
 
-  return formatCurrency.format(num / 100);
+  return formatCurrency.format(num! / 100);
 }
 
 String formatBudgetCurrency(int? num) {
@@ -176,7 +140,7 @@ String formatBudgetCurrency(int? num) {
   final formatCurrency = NumberFormat.simpleCurrency(
       locale: 'en_US', name: 'NGN', decimalDigits: 0);
 
-  return formatCurrency.format(num / 100);
+  return formatCurrency.format(num! / 100);
 }
 
 String subtractCurrency(
@@ -189,7 +153,7 @@ String subtractCurrency(
   final formatCurrency = NumberFormat.simpleCurrency(
       locale: 'en_US', name: 'NGN', decimalDigits: 0);
 
-  if (value1 > value2) {
+  if (value1! > value2!) {
     result = value1 - value2;
     formatedResult = formatCurrency.format(result / 100) + '\nleft';
   } else if (value2 == value1) {
@@ -197,6 +161,8 @@ String subtractCurrency(
   } else if (value2 > value1) {
     result = value2 - value1;
     formatedResult = formatCurrency.format(result / 100) + '\nover';
+  } else {
+    formatedResult = "error";
   }
 
   return formatedResult;
@@ -212,7 +178,7 @@ String subtractCurrencyLine(
   final formatCurrency = NumberFormat.simpleCurrency(
       locale: 'en_US', name: 'NGN', decimalDigits: 0);
 
-  if (value1 > value2) {
+  if (value1! > value2!) {
     result = value1 - value2;
     formatedResult = formatCurrency.format(result / 100) + ' left';
   } else if (value2 == value1) {
@@ -220,44 +186,19 @@ String subtractCurrencyLine(
   } else if (value2 > value1) {
     result = value2 - value1;
     formatedResult = formatCurrency.format(result / 100) + ' over';
+  } else {
+    formatedResult = "error";
   }
 
   return formatedResult;
 }
 
-int sumTotalCategoriesSpent(
-  List<BudgetCategoriesRecord>? categoriesToSum,
-  List<TransactionsRecord>? transactions,
-) {
-  // Add your function code here!
-  //This function takes a number of categories and outputs the sum of their spent amounts
-
-  int totalSpent = 0;
-
-  for (var i = 0; i < transactions.length; i++) {
-    totalSpent += transactions[i].transactionAmount;
-  }
-
-  return totalSpent;
-}
-
-String repeatingOrOnce(bool? repeatingSwitch) {
-  // Add your function code here!
-  String rTrue = 'Repeating';
-  String rFalse = 'One Time';
-  if (repeatingSwitch = true) {
-    return rTrue;
-  } else {
-    return rFalse;
-  }
-}
-
-int sumTransactionAmounts(List<TransactionsRecord>? transactions) {
+int sumTransactionAmounts(List<TransactionsRecord> transactions) {
   // Add your function code here!
   int total = 0;
 
   for (var i = 0; i < transactions.length; i++) {
-    total += transactions[i].transactionAmount;
+    total += transactions[i].transactionAmount as int;
   }
 
   return total;
@@ -270,33 +211,28 @@ String overOrUnder(
   // Add your function code here!
   String result = 'Left';
 
-  if (value2 > value1) {
+  if (value2! > value1!) {
     result = 'Over';
   }
 
   return result;
 }
 
-int listCounterBudgets(List<BudgetsRecord>? budgets) {
-  // Add your function code here!
-  return budgets.length;
-}
-
-int sumCategoryAmounts(List<BudgetCategoriesRecord>? categories) {
+int sumCategoryAmounts(List<CategoriesRecord> categories) {
   // Add your function code here!
   int total = 0;
   for (var i = 0; i < categories.length; i++) {
-    total += categories[i].allocatedAmount;
+    total += categories[i].categoryAmount as int;
   }
 
   return total;
 }
 
-int sumAccountBalances(List<AccountsRecord>? accounts) {
+int sumAccountBalances(List<AccountsRecord> accounts) {
   // Add your function code here!
   int total = 0;
   for (int i = 0; i < accounts.length; i++) {
-    total += accounts[i].accountBalance;
+    total += accounts[i].accountBalance as int;
   }
 
   return total;
@@ -307,24 +243,10 @@ DateTime addDaysToDate(
   int? daysToAdd,
 ) {
   // Add your function code here!
-  var newDate =
-      DateTime(startDate.year, startDate.month, startDate.day + daysToAdd);
+  var newDate = DateTime(
+      startDate!.year, startDate.month, startDate.day + (daysToAdd as int));
 
   return newDate;
-}
-
-bool listChecker(List<BudgetCategoriesRecord>? listToCheck) {
-  // Add your function code here!
-  int count = 0;
-  bool emptyOrNot = false;
-  for (int i = 0; i < listToCheck.length; i++) {
-    count++;
-  }
-  if (count < 1) {
-    emptyOrNot = true;
-  }
-  return emptyOrNot;
-  //true = empty, false = not empty.
 }
 
 int isBudgetExising(DocumentReference? userBudget) {

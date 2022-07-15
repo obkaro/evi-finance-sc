@@ -134,7 +134,8 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                     height: 60,
                     color: FlutterFlowTheme.of(context).primaryColor,
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily: 'Source Sans Pro',
+                          fontFamily:
+                              FlutterFlowTheme.of(context).subtitle2Family,
                           color: Colors.white,
                         ),
                     borderSide: BorderSide(

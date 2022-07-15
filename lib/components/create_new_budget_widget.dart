@@ -108,7 +108,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                 width: double.infinity,
                 height: 55,
                 textStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                      fontFamily: 'Source Sans Pro',
+                      fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                       color: FlutterFlowTheme.of(context).primaryText,
                     ),
                 hintText: 'Please select...',
@@ -144,7 +144,8 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyText1
                                 .override(
-                                  fontFamily: 'Source Sans Pro',
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyText1Family,
                                   color:
                                       FlutterFlowTheme.of(context).primaryColor,
                                 ),
@@ -206,11 +207,13 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                         titleStyle: FlutterFlowTheme.of(context).bodyText1,
                         dayOfWeekStyle: FlutterFlowTheme.of(context).bodyText2,
                         dateStyle: FlutterFlowTheme.of(context).bodyText2,
-                        selectedDateStyle:
-                            FlutterFlowTheme.of(context).bodyText1.override(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Colors.white,
-                                ),
+                        selectedDateStyle: FlutterFlowTheme.of(context)
+                            .bodyText1
+                            .override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyText1Family,
+                              color: Colors.white,
+                            ),
                         inactiveDateStyle: TextStyle(),
                       ),
                     ),
@@ -238,15 +241,13 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                   );
                   await currentUserReference!.update(usersUpdateData);
 
-                  final budgetCategoriesCreateData =
-                      createBudgetCategoriesRecordData(
-                    categoryName: 'dummy',
+                  final categoriesCreateData = createCategoriesRecordData(
+                    categoryName: 'Unallocated',
                     categoryBudget: widget.budget!.reference,
-                    allocatedAmount: 0,
+                    categoryAmount: FFAppState().currencyTextField,
                   );
-                  await BudgetCategoriesRecord.collection
-                      .doc()
-                      .set(budgetCategoriesCreateData);
+                  await CategoriesRecord.createDoc(widget.budget!.reference)
+                      .set(categoriesCreateData);
                   Navigator.pop(context);
                   await Navigator.push(
                     context,
@@ -263,7 +264,8 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                   height: 60,
                   color: FlutterFlowTheme.of(context).primaryColor,
                   textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: 'Source Sans Pro',
+                        fontFamily:
+                            FlutterFlowTheme.of(context).subtitle2Family,
                         color: Colors.white,
                       ),
                   elevation: 0,

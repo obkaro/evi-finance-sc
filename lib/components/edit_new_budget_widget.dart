@@ -105,7 +105,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                 width: double.infinity,
                 height: 55,
                 textStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                      fontFamily: 'Source Sans Pro',
+                      fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                       color: FlutterFlowTheme.of(context).primaryText,
                     ),
                 hintText: 'Please select...',
@@ -141,7 +141,8 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyText1
                                 .override(
-                                  fontFamily: 'Source Sans Pro',
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyText1Family,
                                   color:
                                       FlutterFlowTheme.of(context).primaryColor,
                                 ),
@@ -204,11 +205,13 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                         titleStyle: FlutterFlowTheme.of(context).bodyText1,
                         dayOfWeekStyle: FlutterFlowTheme.of(context).bodyText2,
                         dateStyle: FlutterFlowTheme.of(context).bodyText2,
-                        selectedDateStyle:
-                            FlutterFlowTheme.of(context).bodyText1.override(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Colors.white,
-                                ),
+                        selectedDateStyle: FlutterFlowTheme.of(context)
+                            .bodyText1
+                            .override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyText1Family,
+                              color: Colors.white,
+                            ),
                         inactiveDateStyle: TextStyle(),
                       ),
                     ),
@@ -292,7 +295,8 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                   height: 60,
                   color: FlutterFlowTheme.of(context).primaryColor,
                   textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: 'Source Sans Pro',
+                        fontFamily:
+                            FlutterFlowTheme.of(context).subtitle2Family,
                         color: Colors.white,
                       ),
                   elevation: 0,
