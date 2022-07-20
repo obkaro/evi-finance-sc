@@ -42,8 +42,8 @@ class _CreateCustomCategoryWidgetState
         color: FlutterFlowTheme.of(context).primaryBackground,
         boxShadow: [
           BoxShadow(
-            blurRadius: 5,
-            color: Color(0x3B1D2429),
+            blurRadius: 14,
+            color: FlutterFlowTheme.of(context).customColor1,
             offset: Offset(0, -3),
           )
         ],
@@ -186,6 +186,7 @@ class _CreateCustomCategoryWidgetState
                               FlutterFlowTheme.of(context).subtitle2Family,
                           color: Colors.white,
                         ),
+                    elevation: 2,
                     borderSide: BorderSide(
                       color: Colors.transparent,
                       width: 1,

@@ -133,7 +133,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                       CircularPercentIndicator(
                                                     percent: 0,
                                                     radius: 90,
-                                                    lineWidth: 16,
+                                                    lineWidth: 20,
                                                     animation: true,
                                                     progressColor:
                                                         FlutterFlowTheme.of(
@@ -177,7 +177,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                             containerTransactionsRecordList
                                                                 .toList())!,
                                                     radius: 90,
-                                                    lineWidth: 16,
+                                                    lineWidth: 20,
                                                     animation: true,
                                                     progressColor:
                                                         FlutterFlowTheme.of(
@@ -341,6 +341,13 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 14,
+                                        color: FlutterFlowTheme.of(context)
+                                            .customColor1,
+                                      )
+                                    ],
                                     borderRadius: BorderRadius.circular(16),
                                   ),
                                   alignment: AlignmentDirectional(0, 0),

@@ -485,6 +485,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                     color: Colors
                                                                         .white,
                                                                   ),
+                                                          elevation: 2,
                                                           borderSide:
                                                               BorderSide(
                                                             color: Colors
@@ -813,6 +814,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                     color: Colors
                                                                         .white,
                                                                   ),
+                                                          elevation: 2,
                                                           borderSide:
                                                               BorderSide(
                                                             color: Colors
