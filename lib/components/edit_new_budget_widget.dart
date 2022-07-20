@@ -48,9 +48,8 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
         color: FlutterFlowTheme.of(context).primaryBackground,
         boxShadow: [
           BoxShadow(
-            blurRadius: 5,
-            color: Color(0x3B1D2429),
-            offset: Offset(0, -3),
+            blurRadius: 14,
+            color: FlutterFlowTheme.of(context).customColor1,
           )
         ],
         borderRadius: BorderRadius.only(
@@ -124,6 +123,12 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 14,
+                      color: FlutterFlowTheme.of(context).customColor1,
+                    )
+                  ],
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Column(
@@ -299,7 +304,7 @@ class _EditNewBudgetWidgetState extends State<EditNewBudgetWidget> {
                             FlutterFlowTheme.of(context).subtitle2Family,
                         color: Colors.white,
                       ),
-                  elevation: 0,
+                  elevation: 2,
                   borderSide: BorderSide(
                     color: Colors.transparent,
                     width: 1,

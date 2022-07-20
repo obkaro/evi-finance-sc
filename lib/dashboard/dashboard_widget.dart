@@ -59,6 +59,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 14,
+                          color: Color(0x0A000000),
+                        )
+                      ],
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Padding(
@@ -131,7 +137,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Your Linked Accounts',
+                        'Connected Accounts',
                         style: FlutterFlowTheme.of(context).subtitle2,
                       ),
                       InkWell(
@@ -216,6 +222,13 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 14,
+                                        color: FlutterFlowTheme.of(context)
+                                            .customColor1,
+                                      )
+                                    ],
                                     borderRadius: BorderRadius.circular(16),
                                   ),
                                   child: Padding(
@@ -398,6 +411,13 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 14,
+                                  color:
+                                      FlutterFlowTheme.of(context).customColor1,
+                                )
+                              ],
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: StreamBuilder<List<CategoriesRecord>>(
@@ -603,6 +623,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 14,
+                          color: FlutterFlowTheme.of(context).customColor1,
+                        )
+                      ],
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Padding(

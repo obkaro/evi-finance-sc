@@ -234,6 +234,13 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 14,
+                                            color: FlutterFlowTheme.of(context)
+                                                .customColor1,
+                                          )
+                                        ],
                                         borderRadius: BorderRadius.circular(16),
                                       ),
                                       child: Padding(
@@ -744,6 +751,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                 color: Colors
                                                                     .white,
                                                               ),
+                                                      elevation: 2,
                                                       borderSide: BorderSide(
                                                         color:
                                                             Colors.transparent,

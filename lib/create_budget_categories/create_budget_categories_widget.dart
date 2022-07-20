@@ -116,6 +116,13 @@ class _CreateBudgetCategoriesWidgetState
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 14,
+                                    color: FlutterFlowTheme.of(context)
+                                        .customColor1,
+                                  )
+                                ],
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: Padding(
@@ -319,6 +326,13 @@ class _CreateBudgetCategoriesWidgetState
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 14,
+                                            color: FlutterFlowTheme.of(context)
+                                                .customColor1,
+                                          )
+                                        ],
                                         borderRadius: BorderRadius.circular(16),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
@@ -384,6 +398,15 @@ class _CreateBudgetCategoriesWidgetState
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .secondaryBackground,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        blurRadius: 14,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .customColor1,
+                                                      )
+                                                    ],
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             16),
@@ -520,6 +543,7 @@ class _CreateBudgetCategoriesWidgetState
                                                       color: Colors.white,
                                                       fontSize: 16,
                                                     ),
+                                            elevation: 2,
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1,
@@ -539,6 +563,13 @@ class _CreateBudgetCategoriesWidgetState
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 14,
+                                            color: FlutterFlowTheme.of(context)
+                                                .customColor1,
+                                          )
+                                        ],
                                         borderRadius: BorderRadius.circular(16),
                                       ),
                                       child: Padding(
@@ -855,6 +886,7 @@ class _CreateBudgetCategoriesWidgetState
                                                               .subtitle1Family,
                                                       color: Colors.white,
                                                     ),
+                                            elevation: 2,
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1,

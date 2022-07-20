@@ -112,6 +112,12 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 14,
+                          color: FlutterFlowTheme.of(context).customColor1,
+                        )
+                      ],
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Column(

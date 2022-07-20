@@ -44,9 +44,8 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
         color: FlutterFlowTheme.of(context).primaryBackground,
         boxShadow: [
           BoxShadow(
-            blurRadius: 5,
-            color: Color(0x3B1D2429),
-            offset: Offset(0, -3),
+            blurRadius: 14,
+            color: FlutterFlowTheme.of(context).customColor1,
           )
         ],
         borderRadius: BorderRadius.only(
@@ -197,6 +196,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                               FlutterFlowTheme.of(context).subtitle2Family,
                           color: Colors.white,
                         ),
+                    elevation: 2,
                     borderSide: BorderSide(
                       color: Colors.transparent,
                       width: 1,

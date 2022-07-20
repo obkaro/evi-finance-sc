@@ -60,6 +60,12 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
       height: 420,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 14,
+            color: FlutterFlowTheme.of(context).customColor1,
+          )
+        ],
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0),
           bottomRight: Radius.circular(0),
@@ -107,6 +113,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                 child: FutureBuilder<List<CategoriesRecord>>(
                   future: queryCategoriesRecordOnce(
                     parent: currentUserDocument!.activeBudget,
+                    queryBuilder: (categoriesRecord) => categoriesRecord
+                        .where('category_name', isNotEqualTo: 'Unallocated'),
                   ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
@@ -161,6 +169,13 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 14,
+                                    color: FlutterFlowTheme.of(context)
+                                        .customColor1,
+                                  )
+                                ],
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: Padding(
@@ -174,7 +189,14 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                     Text(
                                       columnCategoriesRecord!.categoryName!,
                                       style: FlutterFlowTheme.of(context)
-                                          .subtitle1,
+                                          .subtitle2
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2Family,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -184,7 +206,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                             columnCategoriesRecord!
                                                 .categoryAmount),
                                         style: FlutterFlowTheme.of(context)
-                                            .subtitle2,
+                                            .bodyText1,
                                       ),
                                     ),
                                   ],
