@@ -215,6 +215,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                         .subtitle2Family,
                                     color: Colors.white,
                                   ),
+                              elevation: 2,
                               borderSide: BorderSide(
                                 color: Colors.transparent,
                                 width: 1,

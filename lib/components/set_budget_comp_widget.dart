@@ -58,6 +58,12 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
       height: 420,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 14,
+            color: FlutterFlowTheme.of(context).customColor1,
+          )
+        ],
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0),
           bottomRight: Radius.circular(0),
@@ -165,6 +171,13 @@ class _SetBudgetCompWidgetState extends State<SetBudgetCompWidget>
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 14,
+                                  color:
+                                      FlutterFlowTheme.of(context).customColor1,
+                                )
+                              ],
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: Padding(

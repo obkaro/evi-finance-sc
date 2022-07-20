@@ -307,7 +307,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                 CircularPercentIndicator(
                                                                               percent: 0,
                                                                               radius: 90,
-                                                                              lineWidth: 16,
+                                                                              lineWidth: 20,
                                                                               animation: true,
                                                                               progressColor: FlutterFlowTheme.of(context).primaryColor,
                                                                               backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
@@ -334,7 +334,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                 CircularPercentIndicator(
                                                                               percent: functions.calcBudgetChart(columnBudgetsRecord, containerTransactionsRecordList.toList())!,
                                                                               radius: 90,
-                                                                              lineWidth: 16,
+                                                                              lineWidth: 20,
                                                                               animation: true,
                                                                               progressColor: FlutterFlowTheme.of(context).primaryColor,
                                                                               backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
@@ -450,6 +450,15 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .secondaryBackground,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        blurRadius: 14,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .customColor1,
+                                                      )
+                                                    ],
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             16),
@@ -611,6 +620,14 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .secondaryBackground,
+                                                                    boxShadow: [
+                                                                      BoxShadow(
+                                                                        blurRadius:
+                                                                            14,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .customColor1,
+                                                                      )
+                                                                    ],
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             16),
