@@ -92,7 +92,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           children: [
                             AuthUserStreamWidget(
                               child: Text(
-                                'Welcome back, ${currentUserDisplayName} 😊',
+                                'Welcome back, ${valueOrDefault(currentUserDocument?.username, '')} 😊',
                                 style: FlutterFlowTheme.of(context).title3,
                               ),
                             ),

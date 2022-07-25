@@ -216,21 +216,22 @@ class _OnboardingPageViewWidgetState extends State<OnboardingPageViewWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      if ((valueOrDefault(
-                              currentUserDocument?.onboardingStep, 0) ==
-                          null)) {
+                      if ((valueOrDefault(currentUserDocument?.username, '') !=
+                              null &&
+                          valueOrDefault(currentUserDocument?.username, '') !=
+                              '')) {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => WelcomeToEviWidget(),
+                            builder: (context) =>
+                                NavBarPage(initialPage: 'Dashboard'),
                           ),
                         );
                       } else {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                NavBarPage(initialPage: 'Dashboard'),
+                            builder: (context) => WelcomeToEviWidget(),
                           ),
                         );
                       }
