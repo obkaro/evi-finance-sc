@@ -76,13 +76,6 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
-    value = object.isActive;
-    if (value != null) {
-      result
-        ..add('isActive')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
     value = object.budgetDuration;
     if (value != null) {
       result
@@ -94,6 +87,19 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
     if (value != null) {
       result
         ..add('unallocatedAmount')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.status;
+    if (value != null) {
+      result
+        ..add('status')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.duration;
+    if (value != null) {
+      result
+        ..add('duration')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
     value = object.ffRef;
@@ -153,16 +159,20 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
           result.lastViewed = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
-        case 'isActive':
-          result.isActive = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool?;
-          break;
         case 'budgetDuration':
           result.budgetDuration = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
         case 'unallocatedAmount':
           result.unallocatedAmount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'status':
+          result.status = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'duration':
+          result.duration = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
         case 'Document__Reference__Field':
@@ -196,11 +206,13 @@ class _$BudgetsRecord extends BudgetsRecord {
   @override
   final DateTime? lastViewed;
   @override
-  final bool? isActive;
-  @override
   final String? budgetDuration;
   @override
   final int? unallocatedAmount;
+  @override
+  final String? status;
+  @override
+  final int? duration;
   @override
   final DocumentReference<Object?>? ffRef;
 
@@ -216,9 +228,10 @@ class _$BudgetsRecord extends BudgetsRecord {
       this.isRecurring,
       this.budgetID,
       this.lastViewed,
-      this.isActive,
       this.budgetDuration,
       this.unallocatedAmount,
+      this.status,
+      this.duration,
       this.ffRef})
       : super._();
 
@@ -241,9 +254,10 @@ class _$BudgetsRecord extends BudgetsRecord {
         isRecurring == other.isRecurring &&
         budgetID == other.budgetID &&
         lastViewed == other.lastViewed &&
-        isActive == other.isActive &&
         budgetDuration == other.budgetDuration &&
         unallocatedAmount == other.unallocatedAmount &&
+        status == other.status &&
+        duration == other.duration &&
         ffRef == other.ffRef;
   }
 
@@ -259,17 +273,21 @@ class _$BudgetsRecord extends BudgetsRecord {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc($jc(0, budgetOwner.hashCode),
-                                                budgetAmount.hashCode),
-                                            budgetStart.hashCode),
-                                        budgetEnd.hashCode),
-                                    budgetDateCreated.hashCode),
-                                isRecurring.hashCode),
-                            budgetID.hashCode),
-                        lastViewed.hashCode),
-                    isActive.hashCode),
-                budgetDuration.hashCode),
-            unallocatedAmount.hashCode),
+                                            $jc(
+                                                $jc(
+                                                    $jc(0,
+                                                        budgetOwner.hashCode),
+                                                    budgetAmount.hashCode),
+                                                budgetStart.hashCode),
+                                            budgetEnd.hashCode),
+                                        budgetDateCreated.hashCode),
+                                    isRecurring.hashCode),
+                                budgetID.hashCode),
+                            lastViewed.hashCode),
+                        budgetDuration.hashCode),
+                    unallocatedAmount.hashCode),
+                status.hashCode),
+            duration.hashCode),
         ffRef.hashCode));
   }
 
@@ -284,9 +302,10 @@ class _$BudgetsRecord extends BudgetsRecord {
           ..add('isRecurring', isRecurring)
           ..add('budgetID', budgetID)
           ..add('lastViewed', lastViewed)
-          ..add('isActive', isActive)
           ..add('budgetDuration', budgetDuration)
           ..add('unallocatedAmount', unallocatedAmount)
+          ..add('status', status)
+          ..add('duration', duration)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -330,10 +349,6 @@ class BudgetsRecordBuilder
   DateTime? get lastViewed => _$this._lastViewed;
   set lastViewed(DateTime? lastViewed) => _$this._lastViewed = lastViewed;
 
-  bool? _isActive;
-  bool? get isActive => _$this._isActive;
-  set isActive(bool? isActive) => _$this._isActive = isActive;
-
   String? _budgetDuration;
   String? get budgetDuration => _$this._budgetDuration;
   set budgetDuration(String? budgetDuration) =>
@@ -343,6 +358,14 @@ class BudgetsRecordBuilder
   int? get unallocatedAmount => _$this._unallocatedAmount;
   set unallocatedAmount(int? unallocatedAmount) =>
       _$this._unallocatedAmount = unallocatedAmount;
+
+  String? _status;
+  String? get status => _$this._status;
+  set status(String? status) => _$this._status = status;
+
+  int? _duration;
+  int? get duration => _$this._duration;
+  set duration(int? duration) => _$this._duration = duration;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -363,9 +386,10 @@ class BudgetsRecordBuilder
       _isRecurring = $v.isRecurring;
       _budgetID = $v.budgetID;
       _lastViewed = $v.lastViewed;
-      _isActive = $v.isActive;
       _budgetDuration = $v.budgetDuration;
       _unallocatedAmount = $v.unallocatedAmount;
+      _status = $v.status;
+      _duration = $v.duration;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -395,9 +419,10 @@ class BudgetsRecordBuilder
             isRecurring: isRecurring,
             budgetID: budgetID,
             lastViewed: lastViewed,
-            isActive: isActive,
             budgetDuration: budgetDuration,
             unallocatedAmount: unallocatedAmount,
+            status: status,
+            duration: duration,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 Future deleteCategories(List<CategoriesRecord>? createdCategories) async {
   // Add your function code here!
   for (var i = 0; i < createdCategories!.length; i++) {
-    await createdCategories[i].reference.delete();
+    if (createdCategories[i].categoryName! != "Bank Charges") {
+      await createdCategories[i].reference.delete();
+    }
   }
 }

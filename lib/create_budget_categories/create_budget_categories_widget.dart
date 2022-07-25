@@ -703,9 +703,6 @@ class _CreateBudgetCategoriesWidgetState
                                                                         columnBudgetsRecord,
                                                                     categoryToEdit:
                                                                         existingCategoriesItem,
-                                                                    categoriesTotal:
-                                                                        functions
-                                                                            .sumCategoryAmounts(createBudgetCategoriesCategoriesRecordList.toList()),
                                                                   ),
                                                                 );
                                                               },

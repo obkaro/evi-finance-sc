@@ -16,7 +16,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class ActiveBudgetWidget extends StatefulWidget {
-  const ActiveBudgetWidget({Key? key}) : super(key: key);
+  const ActiveBudgetWidget({
+    Key? key,
+    this.command,
+  }) : super(key: key);
+
+  final String? command;
 
   @override
   _ActiveBudgetWidgetState createState() => _ActiveBudgetWidgetState();
@@ -39,7 +44,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(72),
+        preferredSize: Size.fromHeight(96),
         child: AppBar(
           backgroundColor: Color(0x00FF0054),
           automaticallyImplyLeading: false,
@@ -80,7 +85,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     16, 20, 24, 20),
                                 child: Text(
-                                  'Budget',
+                                  'Active Budget',
                                   style: FlutterFlowTheme.of(context)
                                       .title3
                                       .override(
@@ -530,7 +535,12 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                   ),
                                                 ),
                                               ),
-                                              Divider(),
+                                              Divider(
+                                                thickness: 1,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .fadedDivider,
+                                              ),
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(0, 10, 0, 0),

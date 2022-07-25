@@ -1,20 +1,23 @@
+import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
+import '../welcome_to_evi/welcome_to_evi_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class OnboardingInfoWidget extends StatefulWidget {
-  const OnboardingInfoWidget({Key? key}) : super(key: key);
+class OnboardingPageViewWidget extends StatefulWidget {
+  const OnboardingPageViewWidget({Key? key}) : super(key: key);
 
   @override
-  _OnboardingInfoWidgetState createState() => _OnboardingInfoWidgetState();
+  _OnboardingPageViewWidgetState createState() =>
+      _OnboardingPageViewWidgetState();
 }
 
-class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
+class _OnboardingPageViewWidgetState extends State<OnboardingPageViewWidget> {
   PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -22,7 +25,7 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'OnboardingInfo'});
+        parameters: {'screen_name': 'OnboardingPageView'});
   }
 
   @override
@@ -213,13 +216,24 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              NavBarPage(initialPage: 'Accounts'),
-                        ),
-                      );
+                      if ((valueOrDefault(
+                              currentUserDocument?.onboardingStep, 0) ==
+                          null)) {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WelcomeToEviWidget(),
+                          ),
+                        );
+                      } else {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                NavBarPage(initialPage: 'Dashboard'),
+                          ),
+                        );
+                      }
                     },
                     text: 'Let\'s Go!',
                     options: FFButtonOptions(
@@ -233,6 +247,7 @@ class _OnboardingInfoWidgetState extends State<OnboardingInfoWidget> {
                                 FlutterFlowTheme.of(context).subtitle2Family,
                             color: Colors.white,
                           ),
+                      elevation: 2,
                       borderSide: BorderSide(
                         color: Colors.transparent,
                         width: 1,

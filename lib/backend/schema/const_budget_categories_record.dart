@@ -59,11 +59,17 @@ Map<String, dynamic> createConstBudgetCategoriesRecordData({
   int? categoryWeight,
   DocumentReference? categoryOwner,
   String? categoryIcon,
-}) =>
-    serializers.toFirestore(
-        ConstBudgetCategoriesRecord.serializer,
-        ConstBudgetCategoriesRecord((c) => c
-          ..categoryName = categoryName
-          ..categoryWeight = categoryWeight
-          ..categoryOwner = categoryOwner
-          ..categoryIcon = categoryIcon));
+}) {
+  final firestoreData = serializers.toFirestore(
+    ConstBudgetCategoriesRecord.serializer,
+    ConstBudgetCategoriesRecord(
+      (c) => c
+        ..categoryName = categoryName
+        ..categoryWeight = categoryWeight
+        ..categoryOwner = categoryOwner
+        ..categoryIcon = categoryIcon,
+    ),
+  );
+
+  return firestoreData;
+}

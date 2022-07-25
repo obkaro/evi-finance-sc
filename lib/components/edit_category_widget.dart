@@ -15,12 +15,10 @@ class EditCategoryWidget extends StatefulWidget {
     Key? key,
     this.budget,
     this.categoryToEdit,
-    this.categoriesTotal,
   }) : super(key: key);
 
   final BudgetsRecord? budget;
   final CategoriesRecord? categoryToEdit;
-  final int? categoriesTotal;
 
   @override
   _EditCategoryWidgetState createState() => _EditCategoryWidgetState();

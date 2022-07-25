@@ -56,10 +56,16 @@ Map<String, dynamic> createConstInstitutionLogosRecordData({
   String? institutionName,
   String? institutionLogo,
   String? institutionCode,
-}) =>
-    serializers.toFirestore(
-        ConstInstitutionLogosRecord.serializer,
-        ConstInstitutionLogosRecord((c) => c
-          ..institutionName = institutionName
-          ..institutionLogo = institutionLogo
-          ..institutionCode = institutionCode));
+}) {
+  final firestoreData = serializers.toFirestore(
+    ConstInstitutionLogosRecord.serializer,
+    ConstInstitutionLogosRecord(
+      (c) => c
+        ..institutionName = institutionName
+        ..institutionLogo = institutionLogo
+        ..institutionCode = institutionCode,
+    ),
+  );
+
+  return firestoreData;
+}

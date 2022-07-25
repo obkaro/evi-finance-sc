@@ -173,6 +173,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                               budgetEnd: functions.addDaysToDate(
                                   calendarSelectedDay?.end, 30),
                               budgetDuration: dropDownValue,
+                              duration: 30,
                             );
                             await widget.budget!.reference
                                 .update(budgetsUpdateData);
@@ -183,6 +184,7 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                                 budgetEnd: functions.addDaysToDate(
                                     calendarSelectedDay?.end, 7),
                                 budgetDuration: dropDownValue,
+                                duration: 7,
                               );
                               await widget.budget!.reference
                                   .update(budgetsUpdateData);
@@ -235,9 +237,9 @@ class _CreateNewBudgetWidgetState extends State<CreateNewBudgetWidget> {
                   final budgetsUpdateData = createBudgetsRecordData(
                     budgetOwner: currentUserReference,
                     budgetAmount: FFAppState().currencyTextField,
-                    isActive: true,
                     budgetDuration: dropDownValue,
                     unallocatedAmount: FFAppState().currencyTextField,
+                    status: 'active',
                   );
                   await widget.budget!.reference.update(budgetsUpdateData);
 

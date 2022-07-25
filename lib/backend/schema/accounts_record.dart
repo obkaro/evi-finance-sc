@@ -104,24 +104,30 @@ Map<String, dynamic> createAccountsRecordData({
   String? accountLogo,
   bool? reauthRequired,
   DateTime? lastSync,
-}) =>
-    serializers.toFirestore(
-        AccountsRecord.serializer,
-        AccountsRecord((a) => a
-          ..accountName = accountName
-          ..accountOwner = accountOwner
-          ..dataStatus = dataStatus
-          ..accountType = accountType
-          ..institutionType = institutionType
-          ..authMethod = authMethod
-          ..currency = currency
-          ..authID = authID
-          ..institutionName = institutionName
-          ..accountBalance = accountBalance
-          ..bankCode = bankCode
-          ..accountNumber = accountNumber
-          ..bvn = bvn
-          ..dateLinked = dateLinked
-          ..accountLogo = accountLogo
-          ..reauthRequired = reauthRequired
-          ..lastSync = lastSync));
+}) {
+  final firestoreData = serializers.toFirestore(
+    AccountsRecord.serializer,
+    AccountsRecord(
+      (a) => a
+        ..accountName = accountName
+        ..accountOwner = accountOwner
+        ..dataStatus = dataStatus
+        ..accountType = accountType
+        ..institutionType = institutionType
+        ..authMethod = authMethod
+        ..currency = currency
+        ..authID = authID
+        ..institutionName = institutionName
+        ..accountBalance = accountBalance
+        ..bankCode = bankCode
+        ..accountNumber = accountNumber
+        ..bvn = bvn
+        ..dateLinked = dateLinked
+        ..accountLogo = accountLogo
+        ..reauthRequired = reauthRequired
+        ..lastSync = lastSync,
+    ),
+  );
+
+  return firestoreData;
+}
