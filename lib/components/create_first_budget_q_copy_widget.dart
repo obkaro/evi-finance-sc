@@ -35,260 +35,211 @@ class _CreateFirstBudgetQCopyWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<TransactionsRecord>>(
-      stream: queryTransactionsRecord(
-        queryBuilder: (transactionsRecord) => transactionsRecord
-            .where('account', isEqualTo: widget.account!.reference),
-      ),
-      builder: (context, snapshot) {
-        // Customize what your widget looks like when it's loading.
-        if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 50,
-              height: 50,
-              child: SpinKitRing(
-                color: FlutterFlowTheme.of(context).primaryColor,
-                size: 50,
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+      child: StreamBuilder<List<TransactionsRecord>>(
+        stream: queryTransactionsRecord(
+          queryBuilder: (transactionsRecord) => transactionsRecord
+              .where('account', isEqualTo: widget.account!.reference),
+        ),
+        builder: (context, snapshot) {
+          // Customize what your widget looks like when it's loading.
+          if (!snapshot.hasData) {
+            return Center(
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: SpinKitRing(
+                  color: FlutterFlowTheme.of(context).primaryColor,
+                  size: 50,
+                ),
               ),
+            );
+          }
+          List<TransactionsRecord> containerTransactionsRecordList =
+              snapshot.data!;
+          return Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: FlutterFlowTheme.of(context).primaryBackground,
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 14,
+                  color: FlutterFlowTheme.of(context).customColor1,
+                )
+              ],
+              borderRadius: BorderRadius.circular(32),
             ),
-          );
-        }
-        List<TransactionsRecord> containerTransactionsRecordList =
-            snapshot.data!;
-        return Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: FlutterFlowTheme.of(context).primaryBackground,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 14,
-                color: FlutterFlowTheme.of(context).customColor1,
-              )
-            ],
-            borderRadius: BorderRadius.circular(32),
-          ),
-          child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Account Data Refresh',
-                          style: FlutterFlowTheme.of(context).title3,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Icon(
-                    Icons.refresh_rounded,
-                    color: FlutterFlowTheme.of(context).secondaryText,
-                    size: 72,
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Wrap(
-                            spacing: 0,
-                            runSpacing: 0,
-                            alignment: WrapAlignment.start,
-                            crossAxisAlignment: WrapCrossAlignment.start,
-                            direction: Axis.horizontal,
-                            runAlignment: WrapAlignment.start,
-                            verticalDirection: VerticalDirection.down,
-                            clipBehavior: Clip.none,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    12, 0, 12, 0),
-                                child: Text(
-                                  'Due to connection protocols from ${widget.account!.institutionName}, you need to authenticate account data and transactions refresh.',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText1Family,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                ),
-                              ),
-                            ],
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Account Data Refresh',
+                            style: FlutterFlowTheme.of(context).title3,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Divider(
-                    thickness: 1,
-                    color: FlutterFlowTheme.of(context).fadedDivider,
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      ConnectFirstAccountWidget(),
-                                ),
-                              );
-                            },
-                            text: 'Don\'t Refresh',
-                            options: FFButtonOptions(
-                              width: double.infinity,
-                              height: 30,
-                              color: Color(0x00D2D2D2),
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .subtitle2Family,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
+                    Icon(
+                      Icons.refresh_rounded,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 72,
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Wrap(
+                              spacing: 0,
+                              runSpacing: 0,
+                              alignment: WrapAlignment.start,
+                              crossAxisAlignment: WrapCrossAlignment.start,
+                              direction: Axis.horizontal,
+                              runAlignment: WrapAlignment.start,
+                              verticalDirection: VerticalDirection.down,
+                              clipBehavior: Clip.none,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      12, 0, 12, 0),
+                                  child: Text(
+                                    'Due to connection protocols from ${widget.account!.institutionName}, you need to authenticate account data and transactions refresh.',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText1Family,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                   ),
-                              elevation: 0,
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(16),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        Container(
-                          width: 20,
-                          decoration: BoxDecoration(),
-                        ),
-                        Expanded(
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              var _shouldSetState = false;
-                              Navigator.pop(context);
-                              // Action_dataSyncCall
-                              dataSyncResponse = await DataSyncMonoCall.call(
-                                authID: widget.account!.authID,
-                              );
-                              _shouldSetState = true;
-                              setState(() =>
-                                  FFAppState().dataSyncCode = getJsonField(
-                                    (dataSyncResponse!?.jsonBody ?? ''),
-                                    r'''$.code''',
-                                  ).toString());
-                              if ((FFAppState().dataSyncCode) ==
-                                  'REAUTHORISATION_REQUIRED') {
-                                // Action_ReauthCall
-                                reauthCode = await ReauthMonoCall.call(
-                                  authID: widget.account!.authID,
-                                );
-                                _shouldSetState = true;
-                                // Action_ReauthAcct
-                                await actions.flutterMonoReauth(
+                        ],
+                      ),
+                    ),
+                    Divider(
+                      thickness: 1,
+                      color: FlutterFlowTheme.of(context).fadedDivider,
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                await Navigator.push(
                                   context,
-                                  getJsonField(
-                                    (reauthCode?.jsonBody ?? ''),
-                                    r'''$.token''',
-                                  ).toString(),
-                                );
-                                accountResponse = await GetAccountInfoCall.call(
-                                  authID: widget.account!.authID,
-                                );
-                                _shouldSetState = true;
-                                transactionJsonResponse =
-                                    await GetTransactionsCall.call(
-                                  authID: widget.account!.authID,
-                                );
-                                _shouldSetState = true;
-                                // Action_writeTransactions
-                                await actions.writeTransactions(
-                                  (transactionJsonResponse!?.jsonBody ?? ''),
-                                  widget.account,
-                                  containerTransactionsRecordList.toList(),
-                                );
-
-                                final accountsUpdateData =
-                                    createAccountsRecordData(
-                                  dataStatus: getJsonField(
-                                    (accountResponse?.jsonBody ?? ''),
-                                    r'''$.meta.data_status''',
-                                  ).toString(),
-                                  accountBalance: getJsonField(
-                                    (accountResponse?.jsonBody ?? ''),
-                                    r'''$.account.balance''',
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        ConnectFirstAccountWidget(),
                                   ),
                                 );
-                                await widget.account!.reference
-                                    .update(accountsUpdateData);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Synchronization Successful',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
-                                            color: Color(0xFFD1D1D1),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.normal,
-                                          ),
+                              },
+                              text: 'Don\'t Refresh',
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: 30,
+                                color: Color(0x00D2D2D2),
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .subtitle2Family,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
                                     ),
-                                    duration: Duration(milliseconds: 4000),
-                                    backgroundColor: Colors.black,
-                                  ),
+                                elevation: 0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 20,
+                            decoration: BoxDecoration(),
+                          ),
+                          Expanded(
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                var _shouldSetState = false;
+                                Navigator.pop(context);
+                                // Action_dataSyncCall
+                                dataSyncResponse = await DataSyncMonoCall.call(
+                                  authID: widget.account!.authID,
                                 );
-                              } else {
+                                _shouldSetState = true;
+                                setState(() =>
+                                    FFAppState().dataSyncCode = getJsonField(
+                                      (dataSyncResponse!?.jsonBody ?? ''),
+                                      r'''$.code''',
+                                    ).toString());
                                 if ((FFAppState().dataSyncCode) ==
-                                    'SYNC_SUCCESSFUL') {
-                                  accountRespons =
+                                    'REAUTHORISATION_REQUIRED') {
+                                  // Action_ReauthCall
+                                  reauthCode = await ReauthMonoCall.call(
+                                    authID: widget.account!.authID,
+                                  );
+                                  _shouldSetState = true;
+                                  // Action_ReauthAcct
+                                  await actions.flutterMonoReauth(
+                                    context,
+                                    getJsonField(
+                                      (reauthCode?.jsonBody ?? ''),
+                                      r'''$.token''',
+                                    ).toString(),
+                                  );
+                                  accountResponse =
                                       await GetAccountInfoCall.call(
                                     authID: widget.account!.authID,
                                   );
                                   _shouldSetState = true;
-
-                                  final accountsUpdateData =
-                                      createAccountsRecordData(
-                                    dataStatus: getJsonField(
-                                      (accountRespons?.jsonBody ?? ''),
-                                      r'''$.meta.data_status''',
-                                    ).toString(),
-                                    accountBalance: getJsonField(
-                                      (accountRespons?.jsonBody ?? ''),
-                                      r'''$.account.balance''',
-                                    ),
-                                    lastSync: getCurrentTimestamp,
-                                  );
-                                  await widget.account!.reference
-                                      .update(accountsUpdateData);
-                                  transactionJsonRespons =
+                                  transactionJsonResponse =
                                       await GetTransactionsCall.call(
                                     authID: widget.account!.authID,
                                   );
                                   _shouldSetState = true;
                                   // Action_writeTransactions
                                   await actions.writeTransactions(
-                                    (transactionJsonRespons!?.jsonBody ?? ''),
+                                    (transactionJsonResponse!?.jsonBody ?? ''),
                                     widget.account,
                                     containerTransactionsRecordList.toList(),
                                   );
+
+                                  final accountsUpdateData =
+                                      createAccountsRecordData(
+                                    dataStatus: getJsonField(
+                                      (accountResponse?.jsonBody ?? ''),
+                                      r'''$.meta.data_status''',
+                                    ).toString(),
+                                    accountBalance: getJsonField(
+                                      (accountResponse?.jsonBody ?? ''),
+                                      r'''$.account.balance''',
+                                    ),
+                                  );
+                                  await widget.account!.reference
+                                      .update(accountsUpdateData);
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
@@ -299,7 +250,7 @@ class _CreateFirstBudgetQCopyWidgetState
                                               fontFamily:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyText1Family,
-                                              color: Color(0xFFC1C1C1),
+                                              color: Color(0xFFD1D1D1),
                                               fontSize: 12,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -309,63 +260,118 @@ class _CreateFirstBudgetQCopyWidgetState
                                     ),
                                   );
                                 } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Synchronization Error: Please try again later',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1Family,
-                                              color: Color(0xFFE7E7E7),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.normal,
-                                            ),
+                                  if ((FFAppState().dataSyncCode) ==
+                                      'SYNC_SUCCESSFUL') {
+                                    accountRespons =
+                                        await GetAccountInfoCall.call(
+                                      authID: widget.account!.authID,
+                                    );
+                                    _shouldSetState = true;
+
+                                    final accountsUpdateData =
+                                        createAccountsRecordData(
+                                      dataStatus: getJsonField(
+                                        (accountRespons?.jsonBody ?? ''),
+                                        r'''$.meta.data_status''',
+                                      ).toString(),
+                                      accountBalance: getJsonField(
+                                        (accountRespons?.jsonBody ?? ''),
+                                        r'''$.account.balance''',
                                       ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor: Colors.black,
-                                    ),
-                                  );
+                                      lastSync: getCurrentTimestamp,
+                                    );
+                                    await widget.account!.reference
+                                        .update(accountsUpdateData);
+                                    transactionJsonRespons =
+                                        await GetTransactionsCall.call(
+                                      authID: widget.account!.authID,
+                                    );
+                                    _shouldSetState = true;
+                                    // Action_writeTransactions
+                                    await actions.writeTransactions(
+                                      (transactionJsonRespons!?.jsonBody ?? ''),
+                                      widget.account,
+                                      containerTransactionsRecordList.toList(),
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Synchronization Successful',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1Family,
+                                                color: Color(0xFFC1C1C1),
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor: Colors.black,
+                                      ),
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Synchronization Error: Please try again later',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1Family,
+                                                color: Color(0xFFE7E7E7),
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor: Colors.black,
+                                      ),
+                                    );
+                                  }
+
+                                  if (_shouldSetState) setState(() {});
+                                  return;
                                 }
 
                                 if (_shouldSetState) setState(() {});
-                                return;
-                              }
-
-                              if (_shouldSetState) setState(() {});
-                            },
-                            text: 'Continue',
-                            options: FFButtonOptions(
-                              width: double.infinity,
-                              height: 60,
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .subtitle2Family,
-                                    color: Colors.white,
-                                  ),
-                              elevation: 2,
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
+                              },
+                              text: 'Continue',
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: 60,
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .subtitle2Family,
+                                      color: Colors.white,
+                                    ),
+                                elevation: 2,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(16),
                               ),
-                              borderRadius: BorderRadius.circular(16),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
