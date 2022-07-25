@@ -226,7 +226,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                               MediaQuery.of(context).size.width,
                                           height: 50,
                                           child: custom_widgets
-                                              .currencyTextFieldCopy(
+                                              .CurrencyTextFieldCopy(
                                             width: MediaQuery.of(context)
                                                 .size
                                                 .width,
