@@ -298,12 +298,12 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                   '${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetEnd)}',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .subtitle1
+                                                      .bodyText1
                                                       .override(
                                                         fontFamily:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .subtitle1Family,
+                                                                .bodyText1Family,
                                                         lineHeight: 2,
                                                       ),
                                                 ),
@@ -368,9 +368,9 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                             'This is where your budgets live. \nSwipe left on a single budget for more options.',
                             textAlign: TextAlign.center,
                             style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
+                                FlutterFlowTheme.of(context).bodyText2.override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
+                                          .bodyText2Family,
                                       lineHeight: 1.4,
                                     ),
                           ),

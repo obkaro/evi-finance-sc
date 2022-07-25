@@ -146,7 +146,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                               alignment:
                                                   AlignmentDirectional(1, 0),
                                               child: Text(
-                                                'Left to allocate:',
+                                                'Left to allocate: ',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyText2,
@@ -163,7 +163,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                               functions.formatBudgetCurrency(
                                                   columnBudgetsRecord!
                                                       .unallocatedAmount),
-                                              textAlign: TextAlign.end,
+                                              textAlign: TextAlign.start,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyText2
@@ -196,10 +196,10 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                 alignment:
                                                     AlignmentDirectional(0, 0),
                                                 child: Text(
-                                                  'Start: ${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetStart)}',
+                                                  'From ${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetStart)}',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .subtitle1,
+                                                      .bodyText1,
                                                 ),
                                               ),
                                             ),
@@ -317,7 +317,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 20, 20, 0),
+                                      20, 20, 20, 4),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.end,
@@ -802,7 +802,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                     children: [
                                       Expanded(
                                         child: Container(
-                                          height: 100,
                                           decoration: BoxDecoration(),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
