@@ -111,6 +111,19 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
+    value = object.onboardingStep;
+    if (value != null) {
+      result
+        ..add('onboardingStep')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.experience;
+    if (value != null) {
+      result
+        ..add('experience')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -191,6 +204,14 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
+        case 'onboardingStep':
+          result.onboardingStep = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'experience':
+          result.experience = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -230,6 +251,10 @@ class _$UsersRecord extends UsersRecord {
   @override
   final DocumentReference<Object?>? defaultAccount;
   @override
+  final int? onboardingStep;
+  @override
+  final String? experience;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
@@ -248,6 +273,8 @@ class _$UsersRecord extends UsersRecord {
       this.budgetList,
       this.activeBudget,
       this.defaultAccount,
+      this.onboardingStep,
+      this.experience,
       this.ffRef})
       : super._();
 
@@ -274,6 +301,8 @@ class _$UsersRecord extends UsersRecord {
         budgetList == other.budgetList &&
         activeBudget == other.activeBudget &&
         defaultAccount == other.defaultAccount &&
+        onboardingStep == other.onboardingStep &&
+        experience == other.experience &&
         ffRef == other.ffRef;
   }
 
@@ -290,18 +319,25 @@ class _$UsersRecord extends UsersRecord {
                                     $jc(
                                         $jc(
                                             $jc(
-                                                $jc($jc(0, email.hashCode),
-                                                    displayName.hashCode),
-                                                photoUrl.hashCode),
-                                            uid.hashCode),
-                                        createdTime.hashCode),
-                                    phoneNumber.hashCode),
-                                income.hashCode),
-                            tempAuthCode.hashCode),
-                        accountsList.hashCode),
-                    budgetList.hashCode),
-                activeBudget.hashCode),
-            defaultAccount.hashCode),
+                                                $jc(
+                                                    $jc(
+                                                        $jc(
+                                                            $jc(0,
+                                                                email.hashCode),
+                                                            displayName
+                                                                .hashCode),
+                                                        photoUrl.hashCode),
+                                                    uid.hashCode),
+                                                createdTime.hashCode),
+                                            phoneNumber.hashCode),
+                                        income.hashCode),
+                                    tempAuthCode.hashCode),
+                                accountsList.hashCode),
+                            budgetList.hashCode),
+                        activeBudget.hashCode),
+                    defaultAccount.hashCode),
+                onboardingStep.hashCode),
+            experience.hashCode),
         ffRef.hashCode));
   }
 
@@ -320,6 +356,8 @@ class _$UsersRecord extends UsersRecord {
           ..add('budgetList', budgetList)
           ..add('activeBudget', activeBudget)
           ..add('defaultAccount', defaultAccount)
+          ..add('onboardingStep', onboardingStep)
+          ..add('experience', experience)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -382,6 +420,15 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   set defaultAccount(DocumentReference<Object?>? defaultAccount) =>
       _$this._defaultAccount = defaultAccount;
 
+  int? _onboardingStep;
+  int? get onboardingStep => _$this._onboardingStep;
+  set onboardingStep(int? onboardingStep) =>
+      _$this._onboardingStep = onboardingStep;
+
+  String? _experience;
+  String? get experience => _$this._experience;
+  set experience(String? experience) => _$this._experience = experience;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -405,6 +452,8 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _budgetList = $v.budgetList?.toBuilder();
       _activeBudget = $v.activeBudget;
       _defaultAccount = $v.defaultAccount;
+      _onboardingStep = $v.onboardingStep;
+      _experience = $v.experience;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -440,6 +489,8 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
               budgetList: _budgetList?.build(),
               activeBudget: activeBudget,
               defaultAccount: defaultAccount,
+              onboardingStep: onboardingStep,
+              experience: experience,
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;

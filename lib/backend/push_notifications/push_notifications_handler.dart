@@ -83,16 +83,30 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
 
 final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'LandPage': (data) async => LandPageWidget(),
-  'SignUp': (data) async => SignUpWidget(),
-  'Login': (data) async => LoginWidget(),
-  'LoginCopy': (data) async => LoginCopyWidget(),
-  'OnboardingInfo': (data) async => OnboardingInfoWidget(),
   'Transactions': (data) async => TransactionsWidget(),
+  'NewBudgetCategories': (data) async => NewBudgetCategoriesWidget(
+        createdBudget: await getDocumentParameter(
+            data, 'createdBudget', BudgetsRecord.serializer),
+      ),
+  'ConnectFirstAccount': (data) async => ConnectFirstAccountWidget(),
   'TransactionSingle': (data) async => TransactionSingleWidget(
         transaction: await getDocumentParameter(
             data, 'transaction', TransactionsRecord.serializer),
       ),
-  'ActiveBudget': (data) async => NavBarPage(initialPage: 'ActiveBudget'),
+  'ActiveBudget': (data) async => hasMatchingParameters(data, {'command'})
+      ? ActiveBudgetWidget(
+          command: getParameter(data, 'command'),
+        )
+      : NavBarPage(initialPage: 'ActiveBudget'),
+  'CreateBudget': (data) async => CreateBudgetWidget(
+        budget: await getDocumentParameter(
+            data, 'budget', BudgetsRecord.serializer),
+      ),
+  'EditBudget': (data) async => EditBudgetWidget(
+        budget: await getDocumentParameter(
+            data, 'budget', BudgetsRecord.serializer),
+        categoriesSum: getParameter(data, 'categoriesSum'),
+      ),
   'Budgets': (data) async => BudgetsWidget(),
   'BudgetSingle': (data) async => BudgetSingleWidget(
         budget: await getDocumentParameter(
@@ -103,6 +117,10 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
             data, 'category', CategoriesRecord.serializer),
       ),
   'createBudgetCategories': (data) async => CreateBudgetCategoriesWidget(
+        createdBudget: await getDocumentParameter(
+            data, 'createdBudget', BudgetsRecord.serializer),
+      ),
+  'AllocateBudget': (data) async => AllocateBudgetWidget(
         createdBudget: await getDocumentParameter(
             data, 'createdBudget', BudgetsRecord.serializer),
       ),
@@ -118,8 +136,13 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
             data, 'account', AccountsRecord.serializer),
       ),
   'Settings': (data) async => NavBarPage(initialPage: 'Settings'),
-  'Admin': (data) async => AdminWidget(),
   'ProfileSettings': (data) async => ProfileSettingsWidget(),
+  'OnboardingPageView': (data) async => OnboardingPageViewWidget(),
+  'WelcomeToEvi': (data) async => WelcomeToEviWidget(),
+  'FirstBudget': (data) async => FirstBudgetWidget(
+        budget: await getDocumentParameter(
+            data, 'budget', BudgetsRecord.serializer),
+      ),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

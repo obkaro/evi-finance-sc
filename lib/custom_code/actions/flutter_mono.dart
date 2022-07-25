@@ -161,6 +161,7 @@ Future flutterMono(
                             //   r'''$.account.accountNumber''',
                             // ).toString(),
                             dateLinked: getCurrentTimestamp,
+                            reauthRequired: false,
                             // lastSync: getCurrentTimestamp,
                           );
                           await newacct.reference.update(accountsUpdateData);

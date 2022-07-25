@@ -1,7 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../budget_single/budget_single_widget.dart';
-import '../components/create_new_budget_widget.dart';
+import '../create_budget/create_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -95,18 +95,13 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                   await budgetsRecordReference.set(budgetsCreateData);
                   createdBudget2 = BudgetsRecord.getDocumentFromData(
                       budgetsCreateData, budgetsRecordReference);
-                  await showModalBottomSheet(
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    context: context,
-                    builder: (context) {
-                      return Padding(
-                        padding: MediaQuery.of(context).viewInsets,
-                        child: CreateNewBudgetWidget(
-                          budget: createdBudget2,
-                        ),
-                      );
-                    },
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateBudgetWidget(
+                        budget: createdBudget2,
+                      ),
+                    ),
                   );
 
                   setState(() {});

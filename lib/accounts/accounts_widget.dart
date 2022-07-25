@@ -51,7 +51,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(72),
+            preferredSize: Size.fromHeight(96),
             child: AppBar(
               backgroundColor: Color(0x00FF0054),
               automaticallyImplyLeading: false,
