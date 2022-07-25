@@ -26,11 +26,13 @@ abstract class BudgetsRecord
 
   DateTime? get lastViewed;
 
-  bool? get isActive;
-
   String? get budgetDuration;
 
   int? get unallocatedAmount;
+
+  String? get status;
+
+  int? get duration;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -40,9 +42,10 @@ abstract class BudgetsRecord
     ..budgetAmount = 0
     ..isRecurring = false
     ..budgetID = ''
-    ..isActive = false
     ..budgetDuration = ''
-    ..unallocatedAmount = 0;
+    ..unallocatedAmount = 0
+    ..status = ''
+    ..duration = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('budgets');
@@ -74,21 +77,29 @@ Map<String, dynamic> createBudgetsRecordData({
   bool? isRecurring,
   String? budgetID,
   DateTime? lastViewed,
-  bool? isActive,
   String? budgetDuration,
   int? unallocatedAmount,
-}) =>
-    serializers.toFirestore(
-        BudgetsRecord.serializer,
-        BudgetsRecord((b) => b
-          ..budgetOwner = budgetOwner
-          ..budgetAmount = budgetAmount
-          ..budgetStart = budgetStart
-          ..budgetEnd = budgetEnd
-          ..budgetDateCreated = budgetDateCreated
-          ..isRecurring = isRecurring
-          ..budgetID = budgetID
-          ..lastViewed = lastViewed
-          ..isActive = isActive
-          ..budgetDuration = budgetDuration
-          ..unallocatedAmount = unallocatedAmount));
+  String? status,
+  int? duration,
+}) {
+  final firestoreData = serializers.toFirestore(
+    BudgetsRecord.serializer,
+    BudgetsRecord(
+      (b) => b
+        ..budgetOwner = budgetOwner
+        ..budgetAmount = budgetAmount
+        ..budgetStart = budgetStart
+        ..budgetEnd = budgetEnd
+        ..budgetDateCreated = budgetDateCreated
+        ..isRecurring = isRecurring
+        ..budgetID = budgetID
+        ..lastViewed = lastViewed
+        ..budgetDuration = budgetDuration
+        ..unallocatedAmount = unallocatedAmount
+        ..status = status
+        ..duration = duration,
+    ),
+  );
+
+  return firestoreData;
+}

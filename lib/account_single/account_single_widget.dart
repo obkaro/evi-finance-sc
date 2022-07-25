@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
+import '../components/create_first_budget_q_copy_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -12,6 +13,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,6 +41,27 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
   @override
   void initState() {
     super.initState();
+    // On page load action.
+    SchedulerBinding.instance?.addPostFrameCallback((_) async {
+      if ((widget.account!.reauthRequired) == true) {
+        await showModalBottomSheet(
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          context: context,
+          builder: (context) {
+            return Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: CreateFirstBudgetQCopyWidget(
+                account: widget.account,
+              ),
+            );
+          },
+        );
+      } else {
+        return;
+      }
+    });
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AccountSingle'});
   }
@@ -180,6 +203,20 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                               );
                                             },
                                           ),
+                                          if ((widget
+                                                  .account!.reauthRequired) ==
+                                              true)
+                                            Align(
+                                              alignment:
+                                                  AlignmentDirectional(1, -1),
+                                              child: Icon(
+                                                Icons.warning_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                size: 32,
+                                              ),
+                                            ),
                                         ],
                                       ),
                                     ),

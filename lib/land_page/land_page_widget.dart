@@ -2,7 +2,7 @@ import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../onboarding_info/onboarding_info_widget.dart';
+import '../onboarding_page_view/onboarding_page_view_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -172,11 +172,11 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        OnboardingInfoWidget(),
+                                                        OnboardingPageViewWidget(),
                                                   ),
                                                 );
                                               },
-                                              text: 'Sign in with Google',
+                                              text: 'Continue with Google',
                                               icon: Icon(
                                                 Icons.add,
                                                 color: Colors.transparent,

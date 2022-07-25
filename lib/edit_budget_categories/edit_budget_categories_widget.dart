@@ -708,9 +708,6 @@ class _EditBudgetCategoriesWidgetState
                                                                         columnBudgetsRecord,
                                                                     categoryToEdit:
                                                                         editExistingCatsItem,
-                                                                    categoriesTotal:
-                                                                        functions
-                                                                            .sumCategoryAmounts(editBudgetCategoriesCategoriesRecordList.toList()),
                                                                   ),
                                                                 );
                                                               },

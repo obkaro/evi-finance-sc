@@ -2,6 +2,7 @@ import '../account_single/account_single_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../budgets/budgets_widget.dart';
+import '../components/create_first_budget_q_copy_copy_widget.dart';
 import '../components/empty_linked_accounts_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -13,6 +14,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -37,6 +39,25 @@ class _DashboardWidgetState extends State<DashboardWidget> {
   @override
   void initState() {
     super.initState();
+    // On page load action.
+    SchedulerBinding.instance?.addPostFrameCallback((_) async {
+      if ((widget.command) == 'first_account_connected') {
+        await showModalBottomSheet(
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          context: context,
+          builder: (context) {
+            return Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: CreateFirstBudgetQCopyCopyWidget(),
+            );
+          },
+        );
+      } else {
+        return;
+      }
+    });
+
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
   }
 
@@ -55,6 +76,34 @@ class _DashboardWidgetState extends State<DashboardWidget> {
               children: [
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Wrap(
+                          spacing: 0,
+                          runSpacing: 0,
+                          alignment: WrapAlignment.start,
+                          crossAxisAlignment: WrapCrossAlignment.start,
+                          direction: Axis.horizontal,
+                          runAlignment: WrapAlignment.start,
+                          verticalDirection: VerticalDirection.down,
+                          clipBehavior: Clip.none,
+                          children: [
+                            AuthUserStreamWidget(
+                              child: Text(
+                                'Welcome back, ${currentUserDisplayName} 😊',
+                                style: FlutterFlowTheme.of(context).title3,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -318,6 +367,21 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                   );
                                                 },
                                               ),
+                                              if ((rowAccountsRecord!
+                                                      .reauthRequired) ==
+                                                  true)
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          1, -1),
+                                                  child: Icon(
+                                                    Icons.warning_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate,
+                                                    size: 32,
+                                                  ),
+                                                ),
                                             ],
                                           ),
                                         ),

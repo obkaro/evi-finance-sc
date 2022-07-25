@@ -69,12 +69,18 @@ Map<String, dynamic> createCategoriesRecordData({
   DocumentReference? categoryBudget,
   int? categoryAmount,
   DocumentReference? categoryOwner,
-}) =>
-    serializers.toFirestore(
-        CategoriesRecord.serializer,
-        CategoriesRecord((c) => c
-          ..categoryName = categoryName
-          ..categoryId = categoryId
-          ..categoryBudget = categoryBudget
-          ..categoryAmount = categoryAmount
-          ..categoryOwner = categoryOwner));
+}) {
+  final firestoreData = serializers.toFirestore(
+    CategoriesRecord.serializer,
+    CategoriesRecord(
+      (c) => c
+        ..categoryName = categoryName
+        ..categoryId = categoryId
+        ..categoryBudget = categoryBudget
+        ..categoryAmount = categoryAmount
+        ..categoryOwner = categoryOwner,
+    ),
+  );
+
+  return firestoreData;
+}

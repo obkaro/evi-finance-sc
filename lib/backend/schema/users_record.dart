@@ -37,6 +37,10 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
 
   DocumentReference? get defaultAccount;
 
+  int? get onboardingStep;
+
+  String? get experience;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -50,7 +54,9 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..income = 0.0
     ..tempAuthCode = ''
     ..accountsList = ListBuilder()
-    ..budgetList = ListBuilder();
+    ..budgetList = ListBuilder()
+    ..onboardingStep = 0
+    ..experience = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -84,19 +90,29 @@ Map<String, dynamic> createUsersRecordData({
   String? tempAuthCode,
   DocumentReference? activeBudget,
   DocumentReference? defaultAccount,
-}) =>
-    serializers.toFirestore(
-        UsersRecord.serializer,
-        UsersRecord((u) => u
-          ..email = email
-          ..displayName = displayName
-          ..photoUrl = photoUrl
-          ..uid = uid
-          ..createdTime = createdTime
-          ..phoneNumber = phoneNumber
-          ..income = income
-          ..tempAuthCode = tempAuthCode
-          ..accountsList = null
-          ..budgetList = null
-          ..activeBudget = activeBudget
-          ..defaultAccount = defaultAccount));
+  int? onboardingStep,
+  String? experience,
+}) {
+  final firestoreData = serializers.toFirestore(
+    UsersRecord.serializer,
+    UsersRecord(
+      (u) => u
+        ..email = email
+        ..displayName = displayName
+        ..photoUrl = photoUrl
+        ..uid = uid
+        ..createdTime = createdTime
+        ..phoneNumber = phoneNumber
+        ..income = income
+        ..tempAuthCode = tempAuthCode
+        ..accountsList = null
+        ..budgetList = null
+        ..activeBudget = activeBudget
+        ..defaultAccount = defaultAccount
+        ..onboardingStep = onboardingStep
+        ..experience = experience,
+    ),
+  );
+
+  return firestoreData;
+}

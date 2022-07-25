@@ -80,18 +80,24 @@ Map<String, dynamic> createTransactionsRecordData({
   String? transactionNarration,
   String? transactionID,
   DocumentReference? transactionCategory,
-}) =>
-    serializers.toFirestore(
-        TransactionsRecord.serializer,
-        TransactionsRecord((t) => t
-          ..trasactionDate = trasactionDate
-          ..account = account
-          ..monoCategory = monoCategory
-          ..transactionOwner = transactionOwner
-          ..balanceAfter = balanceAfter
-          ..transactionMonoID = transactionMonoID
-          ..transactionAmount = transactionAmount
-          ..transactionType = transactionType
-          ..transactionNarration = transactionNarration
-          ..transactionID = transactionID
-          ..transactionCategory = transactionCategory));
+}) {
+  final firestoreData = serializers.toFirestore(
+    TransactionsRecord.serializer,
+    TransactionsRecord(
+      (t) => t
+        ..trasactionDate = trasactionDate
+        ..account = account
+        ..monoCategory = monoCategory
+        ..transactionOwner = transactionOwner
+        ..balanceAfter = balanceAfter
+        ..transactionMonoID = transactionMonoID
+        ..transactionAmount = transactionAmount
+        ..transactionType = transactionType
+        ..transactionNarration = transactionNarration
+        ..transactionID = transactionID
+        ..transactionCategory = transactionCategory,
+    ),
+  );
+
+  return firestoreData;
+}

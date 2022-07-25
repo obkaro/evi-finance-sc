@@ -1,5 +1,6 @@
 import '../backend/backend.dart';
 import '../category_single/category_single_widget.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -65,7 +66,22 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
               '${dateTimeFormat('MEd', widget.budget!.budgetStart)} - ${dateTimeFormat('MEd', widget.budget!.budgetEnd)}',
               style: FlutterFlowTheme.of(context).title3,
             ),
-            actions: [],
+            actions: [
+              FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30,
+                borderWidth: 1,
+                buttonSize: 60,
+                icon: Icon(
+                  Icons.edit_rounded,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  size: 24,
+                ),
+                onPressed: () {
+                  print('IconButton pressed ...');
+                },
+              ),
+            ],
             centerTitle: true,
             elevation: 0,
           ),
@@ -377,7 +393,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                   'Unallocated',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .subtitle1,
+                                                      .subtitle2,
                                                 ),
                                                 Text(
                                                   functions.formatBudgetCurrency(
@@ -385,7 +401,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                           .unallocatedAmount),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .subtitle1,
+                                                      .bodyText2,
                                                 ),
                                               ],
                                             ),
@@ -398,7 +414,10 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                               },
                             ),
                           ),
-                          Divider(),
+                          Divider(
+                            thickness: 1,
+                            color: FlutterFlowTheme.of(context).fadedDivider,
+                          ),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),

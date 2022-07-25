@@ -1,4 +1,3 @@
-import '../admin/admin_widget.dart';
 import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -29,7 +28,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(72),
+        preferredSize: Size.fromHeight(96),
         child: AppBar(
           backgroundColor: Color(0x00FF0054),
           automaticallyImplyLeading: false,
@@ -296,14 +295,6 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           onTap: () async {
                             await launchURL('https://www.evifinance.com');
                           },
-                          onLongPress: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AdminWidget(),
-                              ),
-                            );
-                          },
                           child: ListTile(
                             leading: Icon(
                               Icons.info_rounded,
@@ -338,14 +329,6 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                 builder: (context) => LandPageWidget(),
                               ),
                               (r) => false,
-                            );
-                          },
-                          onLongPress: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AdminWidget(),
-                              ),
                             );
                           },
                           child: ListTile(

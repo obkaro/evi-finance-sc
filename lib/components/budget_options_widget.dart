@@ -1,6 +1,6 @@
 import '../backend/backend.dart';
 import '../budgets/budgets_widget.dart';
-import '../components/edit_new_budget_widget.dart';
+import '../edit_budget/edit_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -61,19 +61,14 @@ class _BudgetOptionsWidgetState extends State<BudgetOptionsWidget> {
                 return InkWell(
                   onTap: () async {
                     Navigator.pop(context);
-                    await showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      builder: (context) {
-                        return Padding(
-                          padding: MediaQuery.of(context).viewInsets,
-                          child: EditNewBudgetWidget(
-                            budget: listTileBudgetsRecord,
-                            ccategoriesSum: widget.categoriesSum,
-                          ),
-                        );
-                      },
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditBudgetWidget(
+                          budget: listTileBudgetsRecord,
+                          categoriesSum: widget.categoriesSum,
+                        ),
+                      ),
                     );
                   },
                   child: ListTile(
