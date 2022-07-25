@@ -830,35 +830,14 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                     .fromSTEB(0, 0, 0, 16),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          'Saved',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText2
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText2Family,
-                                                                color: Color(
-                                                                    0xFFF9F9F9),
-                                                              ),
-                                                        ),
-                                                        duration: Duration(
-                                                            milliseconds: 4000),
-                                                        backgroundColor:
-                                                            Colors.black,
-                                                      ),
-                                                    );
-                                                    await Navigator.push(
+                                                    await Navigator
+                                                        .pushAndRemoveUntil(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             ConnectFirstAccountWidget(),
                                                       ),
+                                                      (r) => false,
                                                     );
                                                   },
                                                   text: 'Save',

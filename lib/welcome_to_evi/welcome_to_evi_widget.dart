@@ -202,7 +202,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                               ),
                               Padding(
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(4, 18, 0, 0),
+                                    EdgeInsetsDirectional.fromSTEB(4, 16, 0, 4),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -222,11 +222,14 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Container(
-                                          width: double.infinity,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           height: 50,
-                                          child:
-                                              custom_widgets.CurrencyTextField(
-                                            width: double.infinity,
+                                          child: custom_widgets
+                                              .currencyTextFieldCopy(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
                                             height: 50,
                                           ),
                                         ),
@@ -237,7 +240,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                               ),
                               Padding(
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 18, 0, 0),
+                                    EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
