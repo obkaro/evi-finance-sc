@@ -389,12 +389,12 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                       null)) {
                                     final usersUpdateData =
                                         createUsersRecordData(
-                                      displayName: textController!.text,
                                       income: FFAppState()
                                           .currencyTextField
                                           ?.toDouble(),
                                       experience: dropDownValue2,
                                       onboardingStep: 1,
+                                      username: textController!.text,
                                     );
                                     await currentUserReference!
                                         .update(usersUpdateData);
