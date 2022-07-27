@@ -157,7 +157,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                           .primaryText,
                                     ),
                               ),
-                              startAngle: 0,
+                              startAngle: 180,
                             ),
                           ),
                         ],
@@ -177,7 +177,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                   style: FlutterFlowTheme.of(context).bodyText2,
                                 ),
                                 Text(
-                                  functions.formatBudgetCurrency(
+                                  functions.formatTransCurrency(
                                       functions.sumTransactionAmounts(
                                           categorySingleTransactionsRecordList
                                               .toList())),
@@ -194,7 +194,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                   style: FlutterFlowTheme.of(context).bodyText2,
                                 ),
                                 Text(
-                                  functions.formatBudgetCurrency(
+                                  functions.formatTransCurrency(
                                       widget.category!.categoryAmount),
                                   style: FlutterFlowTheme.of(context).subtitle1,
                                 ),
@@ -230,8 +230,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                             boxShadow: [
                               BoxShadow(
                                 blurRadius: 14,
-                                color:
-                                    FlutterFlowTheme.of(context).customColor1,
+                                color: FlutterFlowTheme.of(context).shadowGray,
                               )
                             ],
                             borderRadius: BorderRadius.circular(16),

@@ -72,8 +72,13 @@ class _CurrencyTextFieldCopyState extends State<CurrencyTextFieldCopy> {
         controller: moneyController,
         obscureText: false,
         decoration: InputDecoration(
-          labelText: widget.labelText,
+          //labelText: widget.labelText,
           hintText: widget.hintText,
+          hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                color: FlutterFlowTheme.of(context).secondaryText,
+                fontWeight: FontWeight.w500,
+              ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Color(0x00000000),

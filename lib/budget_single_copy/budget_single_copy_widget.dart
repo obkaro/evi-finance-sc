@@ -1,5 +1,6 @@
 import '../backend/backend.dart';
 import '../category_single/category_single_widget.dart';
+import '../flutter_flow/flutter_flow_charts.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -9,8 +10,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class BudgetSingleWidget extends StatefulWidget {
-  const BudgetSingleWidget({
+class BudgetSingleCopyWidget extends StatefulWidget {
+  const BudgetSingleCopyWidget({
     Key? key,
     this.budget,
   }) : super(key: key);
@@ -18,17 +19,17 @@ class BudgetSingleWidget extends StatefulWidget {
   final BudgetsRecord? budget;
 
   @override
-  _BudgetSingleWidgetState createState() => _BudgetSingleWidgetState();
+  _BudgetSingleCopyWidgetState createState() => _BudgetSingleCopyWidgetState();
 }
 
-class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
+class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'BudgetSingle'});
+        parameters: {'screen_name': 'BudgetSingleCopy'});
   }
 
   @override
@@ -53,7 +54,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
             ),
           );
         }
-        List<CategoriesRecord> budgetSingleCategoriesRecordList =
+        List<CategoriesRecord> budgetSingleCopyCategoriesRecordList =
             snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
@@ -109,7 +110,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                         transactionsRecord.where(
                                             'transactionCategory',
                                             whereIn:
-                                                budgetSingleCategoriesRecordList
+                                                budgetSingleCopyCategoriesRecordList
                                                     .map((e) => e!.reference)
                                                     .toList()),
                                   ),
@@ -137,93 +138,63 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Stack(
-                                            children: [
-                                              if ((containerTransactionsRecordList
-                                                      .length) <=
-                                                  0)
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 20, 0, 20),
-                                                  child:
-                                                      CircularPercentIndicator(
-                                                    percent: 0,
-                                                    radius: 90,
-                                                    lineWidth: 20,
-                                                    animation: true,
-                                                    progressColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryColor,
-                                                    backgroundColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .eviredTransparent,
-                                                    center: Text(
-                                                      '${functions.formatBudgetCurrency(widget.budget!.budgetAmount)} Left',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle1
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle1Family,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                              ),
+                                          Container(
+                                            width: double.infinity,
+                                            height: 300,
+                                            child: FlutterFlowLineChart(
+                                              data: [
+                                                FFLineChartData(
+                                                  xData:
+                                                      containerTransactionsRecordList
+                                                          .map((d) =>
+                                                              d.trasactionDate)
+                                                          .toList(),
+                                                  yData:
+                                                      containerTransactionsRecordList
+                                                          .map((d) => d
+                                                              .transactionAmount)
+                                                          .toList(),
+                                                  settings: LineChartBarData(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryColor,
+                                                    barWidth: 0.5,
+                                                    isCurved: true,
+                                                    dotData:
+                                                        FlDotData(show: false),
+                                                    belowBarData: BarAreaData(
+                                                      show: true,
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .eviredTransparent,
                                                     ),
-                                                    startAngle: 0,
                                                   ),
-                                                ),
-                                              if ((containerTransactionsRecordList
-                                                      .length) >
-                                                  0)
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 20, 0, 20),
-                                                  child:
-                                                      CircularPercentIndicator(
-                                                    percent: functions
-                                                        .calcBudgetChart(
-                                                            widget.budget,
-                                                            containerTransactionsRecordList
-                                                                .toList())!,
-                                                    radius: 90,
-                                                    lineWidth: 20,
-                                                    animation: true,
-                                                    progressColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryColor,
-                                                    backgroundColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .eviredTransparent,
-                                                    center: Text(
-                                                      '${functions.subtractCurrency(widget.budget!.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle1
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle1Family,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                              ),
-                                                    ),
-                                                    startAngle: 180,
-                                                  ),
-                                                ),
-                                            ],
+                                                )
+                                              ],
+                                              backgroundColor:
+                                                  Color(0x00FFFFFF),
+                                              axisBounds: AxisBounds(),
+                                              xAxisLabelInfo: AxisLabelInfo(
+                                                showLabels: true,
+                                                labelTextStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText2
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText2Family,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
+                                                          fontSize: 8,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                labelInterval: 10,
+                                              ),
+                                              yAxisLabelInfo: AxisLabelInfo(),
+                                            ),
                                           ),
                                           Padding(
                                             padding:
@@ -424,7 +395,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                             child: Builder(
                               builder: (context) {
                                 final budgetCategories =
-                                    budgetSingleCategoriesRecordList
+                                    budgetSingleCopyCategoriesRecordList
                                             ?.toList() ??
                                         [];
                                 return Column(

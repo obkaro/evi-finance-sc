@@ -139,7 +139,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                     BoxShadow(
                                       blurRadius: 14,
                                       color: FlutterFlowTheme.of(context)
-                                          .customColor1,
+                                          .shadowGray,
                                     )
                                   ],
                                   borderRadius: BorderRadius.circular(16),
@@ -423,7 +423,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .customColor1,
+                                                                .shadowGray,
                                                       )
                                                     ],
                                                     borderRadius:
@@ -521,7 +521,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                         BoxShadow(
                                           blurRadius: 14,
                                           color: FlutterFlowTheme.of(context)
-                                              .customColor1,
+                                              .shadowGray,
                                         )
                                       ],
                                       borderRadius: BorderRadius.circular(16),
@@ -736,7 +736,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                   blurRadius: 14,
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .customColor1,
+                                                      .shadowGray,
                                                 )
                                               ],
                                               borderRadius:

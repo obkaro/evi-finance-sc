@@ -165,6 +165,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                             .secondaryText,
                                         weekFormat: false,
                                         weekStartsMonday: false,
+                                        initialDate: getCurrentTimestamp,
                                         rowHeight: 40,
                                         onChange: (DateTimeRange?
                                             newSelectedDate) async {

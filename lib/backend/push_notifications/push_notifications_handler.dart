@@ -116,19 +116,9 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         category: await getDocumentParameter(
             data, 'category', CategoriesRecord.serializer),
       ),
-  'createBudgetCategories': (data) async => CreateBudgetCategoriesWidget(
-        createdBudget: await getDocumentParameter(
-            data, 'createdBudget', BudgetsRecord.serializer),
-      ),
   'AllocateBudget': (data) async => AllocateBudgetWidget(
         createdBudget: await getDocumentParameter(
             data, 'createdBudget', BudgetsRecord.serializer),
-      ),
-  'editBudgetCategories': (data) async => EditBudgetCategoriesWidget(
-        createdBudget: await getDocumentParameter(
-            data, 'createdBudget', BudgetsRecord.serializer),
-        uncategorized: await getDocumentParameter(
-            data, 'uncategorized', CategoriesRecord.serializer),
       ),
   'Accounts': (data) async => NavBarPage(initialPage: 'Accounts'),
   'AccountSingle': (data) async => AccountSingleWidget(
@@ -140,6 +130,10 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'OnboardingPageView': (data) async => OnboardingPageViewWidget(),
   'WelcomeToEvi': (data) async => WelcomeToEviWidget(),
   'FirstBudget': (data) async => FirstBudgetWidget(
+        budget: await getDocumentParameter(
+            data, 'budget', BudgetsRecord.serializer),
+      ),
+  'BudgetSingleCopy': (data) async => BudgetSingleCopyWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
       ),

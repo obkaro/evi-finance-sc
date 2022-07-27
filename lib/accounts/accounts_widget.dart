@@ -147,7 +147,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 20),
                         child: StreamBuilder<List<AccountsRecord>>(
                           stream: queryAccountsRecord(
                             queryBuilder: (accountsRecord) =>
@@ -204,7 +204,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                           BoxShadow(
                                             blurRadius: 14,
                                             color: FlutterFlowTheme.of(context)
-                                                .customColor1,
+                                                .shadowGray,
                                           )
                                         ],
                                         borderRadius: BorderRadius.circular(16),
@@ -299,6 +299,22 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                       );
                                                     },
                                                   ),
+                                                  if ((listViewAccountsRecord!
+                                                          .reauthRequired) ==
+                                                      true)
+                                                    Align(
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              1, -1),
+                                                      child: Icon(
+                                                        Icons.warning_rounded,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        size: 16,
+                                                      ),
+                                                    ),
                                                 ],
                                               ),
                                             ),
@@ -360,6 +376,10 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                             );
                           },
                         ),
+                      ),
+                      Divider(
+                        thickness: 1,
+                        color: FlutterFlowTheme.of(context).fadedDivider,
                       ),
                       if ((accountsAccountsRecordList?.length) == 0)
                         Padding(

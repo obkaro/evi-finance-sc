@@ -2,7 +2,6 @@ import '../account_single/account_single_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../budgets/budgets_widget.dart';
-import '../components/create_first_budget_q_copy_copy_widget.dart';
 import '../components/empty_linked_accounts_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -14,7 +13,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -39,25 +37,6 @@ class _DashboardWidgetState extends State<DashboardWidget> {
   @override
   void initState() {
     super.initState();
-    // On page load action.
-    SchedulerBinding.instance?.addPostFrameCallback((_) async {
-      if ((widget.command) == 'first_account_connected') {
-        await showModalBottomSheet(
-          isScrollControlled: true,
-          backgroundColor: Colors.transparent,
-          context: context,
-          builder: (context) {
-            return Padding(
-              padding: MediaQuery.of(context).viewInsets,
-              child: CreateFirstBudgetQCopyCopyWidget(),
-            );
-          },
-        );
-      } else {
-        return;
-      }
-    });
-
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
   }
 
@@ -92,8 +71,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           children: [
                             AuthUserStreamWidget(
                               child: Text(
-                                'Welcome back, ${valueOrDefault(currentUserDocument?.username, '')} 😊',
-                                style: FlutterFlowTheme.of(context).title3,
+                                'Hi, ${valueOrDefault(currentUserDocument?.username, '')}👋',
+                                style: FlutterFlowTheme.of(context).subtitle1,
                               ),
                             ),
                           ],
@@ -103,7 +82,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -180,7 +159,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 4),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -200,7 +179,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           );
                         },
                         child: Text(
-                          'See All',
+                          'View All',
                           style: FlutterFlowTheme.of(context)
                               .subtitle2
                               .override(
@@ -254,7 +233,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                 rowAccountsRecordList[rowIndex];
                             return Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(10, 10, 0, 10),
+                                  EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
                               child: InkWell(
                                 onTap: () async {
                                   await Navigator.push(
@@ -275,7 +254,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                       BoxShadow(
                                         blurRadius: 14,
                                         color: FlutterFlowTheme.of(context)
-                                            .customColor1,
+                                            .shadowGray,
                                       )
                                     ],
                                     borderRadius: BorderRadius.circular(16),
@@ -379,7 +358,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .alternate,
-                                                    size: 32,
+                                                    size: 16,
                                                   ),
                                                 ),
                                             ],
@@ -411,7 +390,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                 ),
                 if ((currentUserDocument?.activeBudget != null))
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 4),
                     child: AuthUserStreamWidget(
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -431,7 +410,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                               );
                             },
                             child: Text(
-                              'See All',
+                              'View All',
                               style: FlutterFlowTheme.of(context)
                                   .subtitle2
                                   .override(
@@ -449,7 +428,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                   ),
                 if ((currentUserDocument?.activeBudget != null))
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                     child: AuthUserStreamWidget(
                       child: StreamBuilder<BudgetsRecord>(
                         stream: BudgetsRecord.getDocument(
@@ -479,7 +458,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                 BoxShadow(
                                   blurRadius: 14,
                                   color:
-                                      FlutterFlowTheme.of(context).customColor1,
+                                      FlutterFlowTheme.of(context).shadowGray,
                                 )
                               ],
                               borderRadius: BorderRadius.circular(16),
@@ -585,7 +564,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .eviredTransparent,
-                                                        startAngle: 0,
+                                                        startAngle: 180,
                                                       ),
                                                       Expanded(
                                                         child: Padding(
@@ -596,7 +575,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                           child: Column(
                                                             mainAxisSize:
                                                                 MainAxisSize
-                                                                    .min,
+                                                                    .max,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .spaceAround,
@@ -612,18 +591,56 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                             0,
                                                                             0,
                                                                             8),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Text(
+                                                                      functions.subtractCurrencyDecimal(
+                                                                          containerBudgetsRecord!
+                                                                              .budgetAmount,
+                                                                          functions
+                                                                              .sumTransactionAmounts(containerTransactionsRecordList.toList())),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .subtitle1,
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              4,
+                                                                              0,
+                                                                              0,
+                                                                              0),
+                                                                      child:
+                                                                          Text(
+                                                                        '${functions.subtractCurrencyText(containerBudgetsRecord!.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .subtitle1
+                                                                            .override(
+                                                                              fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
+                                                                              fontWeight: FontWeight.w500,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0,
+                                                                            0,
+                                                                            0,
+                                                                            8),
                                                                 child: Text(
                                                                   '${dateTimeFormat('MMMEd', containerBudgetsRecord!.budgetStart)} - ${dateTimeFormat('MMMEd', containerBudgetsRecord!.budgetEnd)}',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle1,
+                                                                      .subtitle2,
                                                                 ),
-                                                              ),
-                                                              Text(
-                                                                '${functions.subtractCurrencyLine(containerBudgetsRecord!.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle2,
                                                               ),
                                                             ],
                                                           ),
@@ -648,7 +665,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     ),
                   ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 4),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -667,7 +684,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           );
                         },
                         child: Text(
-                          'See All',
+                          'View All',
                           style: FlutterFlowTheme.of(context)
                               .subtitle2
                               .override(
@@ -682,7 +699,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 10),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 10),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -690,7 +707,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 14,
-                          color: FlutterFlowTheme.of(context).customColor1,
+                          color: FlutterFlowTheme.of(context).shadowGray,
                         )
                       ],
                       borderRadius: BorderRadius.circular(16),
@@ -969,7 +986,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                             .bodyText1
                                                                             .override(
                                                                               fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
-                                                                              color: Color(0xFFFF0003),
+                                                                              color: Color(0xFFD40F0F),
                                                                               fontStyle: FontStyle.italic,
                                                                             ),
                                                                       ),

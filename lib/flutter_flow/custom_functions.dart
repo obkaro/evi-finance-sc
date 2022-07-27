@@ -152,16 +152,16 @@ String subtractCurrency(
   String formatedResult;
   int result;
   final formatCurrency = NumberFormat.simpleCurrency(
-      locale: 'en_US', name: 'NGN', decimalDigits: 0);
+      locale: 'en_US', name: 'NGN', decimalDigits: 2);
 
   if (value1! > value2!) {
     result = value1 - value2;
-    formatedResult = formatCurrency.format(result / 100) + '\nRemaining';
+    formatedResult = formatCurrency.format(result / 100) + '\nAvailable';
   } else if (value2 == value1) {
     formatedResult = 'Exhausted';
   } else if (value2 > value1) {
     result = value2 - value1;
-    formatedResult = formatCurrency.format(result / 100) + '\nOver';
+    formatedResult = formatCurrency.format(result / 100) + '\nOverspent';
   } else {
     formatedResult = "error";
   }
@@ -169,7 +169,7 @@ String subtractCurrency(
   return formatedResult;
 }
 
-String subtractCurrencyLine(
+String subtractCurrencyText(
   int? value1,
   int? value2,
 ) {
@@ -177,16 +177,75 @@ String subtractCurrencyLine(
   String formatedResult;
   int result;
   final formatCurrency = NumberFormat.simpleCurrency(
-      locale: 'en_US', name: 'NGN', decimalDigits: 0);
+      locale: 'en_US', name: 'NGN', decimalDigits: 2);
 
   if (value1! > value2!) {
     result = value1 - value2;
-    formatedResult = formatCurrency.format(result / 100) + ' Remaining';
+    formatedResult = 'Available';
   } else if (value2 == value1) {
     formatedResult = 'Exhausted';
   } else if (value2 > value1) {
     result = value2 - value1;
-    formatedResult = formatCurrency.format(result / 100) + ' Over';
+    formatedResult = 'Overspent';
+  } else {
+    formatedResult = "error";
+  }
+
+  return formatedResult;
+}
+
+String subtractCurrencyDecimal(
+  int? value1,
+  int? value2,
+) {
+  // Add your function code here!
+  String formatedResult;
+  int result;
+  final formatCurrency = NumberFormat.simpleCurrency(
+      locale: 'en_US', name: 'NGN', decimalDigits: 2);
+
+  if (value1! > value2!) {
+    result = value1 - value2;
+    formatedResult = formatCurrency.format(result / 100);
+  } else if (value2 == value1) {
+    formatedResult = 'Exhausted';
+  } else if (value2 > value1) {
+    result = value2 - value1;
+    formatedResult = formatCurrency.format(result / 100);
+  } else {
+    formatedResult = "error";
+  }
+
+  return formatedResult;
+}
+
+String subtractCurrencyOf(
+  int? value1,
+  int? value2,
+) {
+  // Add your function code here!
+  String formatedResult;
+  int result;
+  final formatCurrency = NumberFormat.simpleCurrency(
+      locale: 'en_US', name: 'NGN', decimalDigits: 2);
+
+  if (value2! == 0) {
+    result = value1! - value2;
+    formatedResult = formatCurrency.format(result / 100) + ' Available';
+  } else if (value1! > value2!) {
+    result = value1 - value2;
+    formatedResult = formatCurrency.format(result / 100) +
+        ' of ' +
+        formatCurrency.format(value1 / 100) +
+        ' Available';
+  } else if (value2 == value1) {
+    formatedResult = 'Exhausted';
+  } else if (value2 > value1) {
+    result = value2 - value1;
+    formatedResult = formatCurrency.format(result / 100) +
+        ' of ' +
+        formatCurrency.format(value1 / 100) +
+        ' Overspent';
   } else {
     formatedResult = "error";
   }
