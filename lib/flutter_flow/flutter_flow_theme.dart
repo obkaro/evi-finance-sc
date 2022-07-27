@@ -54,7 +54,7 @@ abstract class FlutterFlowTheme {
   late Color fadedDivider;
   late Color tertiary400;
   late Color textColor;
-  late Color customColor1;
+  late Color shadowGray;
 
   String get title1Family => typography.title1Family;
   TextStyle get title1 => typography.title1;
@@ -94,7 +94,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color secondaryColor = const Color(0xFF1B2124);
   late Color tertiaryColor = const Color(0xFF1B998B);
   late Color alternate = const Color(0xFFFAA916);
-  late Color primaryBackground = const Color(0xF3F3F3F3);
+  late Color primaryBackground = const Color(0xFFECECEC);
   late Color secondaryBackground = const Color(0xFFFFFFFF);
   late Color primaryText = const Color(0xFF101010);
   late Color secondaryText = const Color(0xFF595959);
@@ -107,7 +107,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color fadedDivider = Color(0xFFDDDDDD);
   late Color tertiary400 = Color(0xFF39D2C0);
   late Color textColor = Color(0xFF1E2429);
-  late Color customColor1 = Color(0x0A000000);
+  late Color shadowGray = Color(0x0A000000);
 }
 
 abstract class Typography {
@@ -313,7 +313,7 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color fadedDivider = Color(0xFF1F1F1F);
   late Color tertiary400 = Color(0xFF39D2C0);
   late Color textColor = Color(0xFF1E2429);
-  late Color customColor1 = Color(0x0A000000);
+  late Color shadowGray = Color(0x0A000000);
 }
 
 extension TextStyleHelper on TextStyle {

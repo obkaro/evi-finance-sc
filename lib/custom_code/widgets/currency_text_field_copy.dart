@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
-class CurrencyTextField extends StatefulWidget {
-  const CurrencyTextField({
+class CurrencyTextFieldCopy extends StatefulWidget {
+  const CurrencyTextFieldCopy({
     Key? key,
     this.width,
     this.height,
@@ -32,7 +32,7 @@ class CurrencyTextField extends StatefulWidget {
   _CurrencyTextFieldState createState() => _CurrencyTextFieldState();
 }
 
-class _CurrencyTextFieldState extends State<CurrencyTextField> {
+class _CurrencyTextFieldState extends State<CurrencyTextFieldCopy> {
   TextEditingController? textController;
   var controller = new MaskedTextController(mask: '000.000.000-000');
 
@@ -72,8 +72,13 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
         controller: moneyController,
         obscureText: false,
         decoration: InputDecoration(
-          labelText: widget.labelText,
+          //labelText: widget.labelText,
           hintText: widget.hintText,
+          hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                color: FlutterFlowTheme.of(context).secondaryText,
+                fontWeight: FontWeight.w500,
+              ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Color(0x00000000),

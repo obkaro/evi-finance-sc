@@ -3,7 +3,7 @@ import '../backend/backend.dart';
 import '../category_single/category_single_widget.dart';
 import '../components/budget_options_widget.dart';
 import '../components/create_custom_category_widget.dart';
-import '../components/create_new_budget_widget.dart';
+import '../create_budget/create_budget_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -351,7 +351,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                       color: FlutterFlowTheme.of(context).primaryText,
                                                                                     ),
                                                                               ),
-                                                                              startAngle: 0,
+                                                                              startAngle: 180,
                                                                             ),
                                                                           ),
                                                                       ],
@@ -483,7 +483,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                           blurRadius: 14,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .customColor1,
+                                                              .shadowGray,
                                                         )
                                                       ],
                                                       borderRadius:
@@ -664,7 +664,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                         blurRadius:
                                                                             14,
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .customColor1,
+                                                                            .shadowGray,
                                                                       )
                                                                     ],
                                                                     borderRadius:
@@ -715,10 +715,10 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                       ),
                                                                                 ),
                                                                                 Text(
-                                                                                  '${functions.subtractCurrencyLine(displayedCategoriesItem!.categoryAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
-                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
-                                                                                        fontWeight: FontWeight.w500,
+                                                                                  functions.subtractCurrencyOf(displayedCategoriesItem!.categoryAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList())),
+                                                                                  style: FlutterFlowTheme.of(context).subtitle2.override(
+                                                                                        fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
+                                                                                        color: FlutterFlowTheme.of(context).primaryText,
                                                                                       ),
                                                                                 ),
                                                                               ],
@@ -779,6 +779,12 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                     );
                                                   },
                                                 ),
+                                              ),
+                                              Divider(
+                                                thickness: 1,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .fadedDivider,
                                               ),
                                             ],
                                           ),
@@ -880,24 +886,20 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                               true,
                               true,
                             ),
+                            status: 'unattached',
                           );
                           var budgetsRecordReference =
                               BudgetsRecord.collection.doc();
                           await budgetsRecordReference.set(budgetsCreateData);
                           createdBudget = BudgetsRecord.getDocumentFromData(
                               budgetsCreateData, budgetsRecordReference);
-                          await showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            context: context,
-                            builder: (context) {
-                              return Padding(
-                                padding: MediaQuery.of(context).viewInsets,
-                                child: CreateNewBudgetWidget(
-                                  budget: createdBudget,
-                                ),
-                              );
-                            },
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CreateBudgetWidget(
+                                budget: createdBudget,
+                              ),
+                            ),
                           );
 
                           setState(() {});
@@ -950,6 +952,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                         true,
                                         true,
                                       ),
+                                      status: 'unattached',
                                     );
                                     var budgetsRecordReference =
                                         BudgetsRecord.collection.doc();
@@ -959,19 +962,14 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                         BudgetsRecord.getDocumentFromData(
                                             budgetsCreateData,
                                             budgetsRecordReference);
-                                    await showModalBottomSheet(
-                                      isScrollControlled: true,
-                                      backgroundColor: Colors.transparent,
-                                      context: context,
-                                      builder: (context) {
-                                        return Padding(
-                                          padding:
-                                              MediaQuery.of(context).viewInsets,
-                                          child: CreateNewBudgetWidget(
-                                            budget: createdBudget2,
-                                          ),
-                                        );
-                                      },
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            CreateBudgetWidget(
+                                          budget: createdBudget2,
+                                        ),
+                                      ),
                                     );
 
                                     setState(() {});

@@ -14,11 +14,7 @@ export 'edit_budget/edit_budget_widget.dart' show EditBudgetWidget;
 export 'budgets/budgets_widget.dart' show BudgetsWidget;
 export 'budget_single/budget_single_widget.dart' show BudgetSingleWidget;
 export 'category_single/category_single_widget.dart' show CategorySingleWidget;
-export 'create_budget_categories/create_budget_categories_widget.dart'
-    show CreateBudgetCategoriesWidget;
 export 'allocate_budget/allocate_budget_widget.dart' show AllocateBudgetWidget;
-export 'edit_budget_categories/edit_budget_categories_widget.dart'
-    show EditBudgetCategoriesWidget;
 export 'accounts/accounts_widget.dart' show AccountsWidget;
 export 'account_single/account_single_widget.dart' show AccountSingleWidget;
 export 'settings/settings_widget.dart' show SettingsWidget;
@@ -28,3 +24,5 @@ export 'onboarding_page_view/onboarding_page_view_widget.dart'
     show OnboardingPageViewWidget;
 export 'welcome_to_evi/welcome_to_evi_widget.dart' show WelcomeToEviWidget;
 export 'first_budget/first_budget_widget.dart' show FirstBudgetWidget;
+export 'budget_single_copy/budget_single_copy_widget.dart'
+    show BudgetSingleCopyWidget;

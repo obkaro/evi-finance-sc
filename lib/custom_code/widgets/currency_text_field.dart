@@ -67,13 +67,18 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
     setState(() {});
 
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
       child: TextFormField(
         controller: moneyController,
         obscureText: false,
         decoration: InputDecoration(
-          labelText: widget.labelText,
+          //labelText: widget.labelText,
           hintText: widget.hintText,
+          hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                color: FlutterFlowTheme.of(context).secondaryText,
+                fontWeight: FontWeight.w500,
+              ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Color(0x00000000),
