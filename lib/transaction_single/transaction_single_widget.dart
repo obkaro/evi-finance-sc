@@ -238,7 +238,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           BoxShadow(
                                             blurRadius: 14,
                                             color: FlutterFlowTheme.of(context)
-                                                .customColor1,
+                                                .shadowGray,
                                           )
                                         ],
                                         borderRadius: BorderRadius.circular(16),

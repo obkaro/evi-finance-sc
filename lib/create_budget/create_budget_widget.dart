@@ -167,7 +167,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                             .secondaryText,
                                         weekFormat: false,
                                         weekStartsMonday: false,
-                                        initialDate: widget.budget!.budgetStart,
+                                        initialDate: getCurrentTimestamp,
                                         rowHeight: 40,
                                         onChange: (DateTimeRange?
                                             newSelectedDate) async {

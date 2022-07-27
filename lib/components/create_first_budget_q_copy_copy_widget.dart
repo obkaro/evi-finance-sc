@@ -36,7 +36,7 @@ class _CreateFirstBudgetQCopyCopyWidgetState
           boxShadow: [
             BoxShadow(
               blurRadius: 14,
-              color: FlutterFlowTheme.of(context).customColor1,
+              color: FlutterFlowTheme.of(context).shadowGray,
             )
           ],
           borderRadius: BorderRadius.circular(32),

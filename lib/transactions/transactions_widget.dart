@@ -62,7 +62,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 14,
-                          color: FlutterFlowTheme.of(context).customColor1,
+                          color: FlutterFlowTheme.of(context).shadowGray,
                         )
                       ],
                       borderRadius: BorderRadius.circular(16),
@@ -324,8 +324,6 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                           Container(
                                                                         width:
                                                                             100,
-                                                                        height:
-                                                                            100,
                                                                         decoration:
                                                                             BoxDecoration(),
                                                                         child:
@@ -374,9 +372,9 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                                                                 child: AutoSizeText(
                                                                                   'Uncategorized',
-                                                                                  style: FlutterFlowTheme.of(context).subtitle1.override(
-                                                                                        fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
-                                                                                        color: Color(0xFFFF0003),
+                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                                        color: Color(0xFFD40F0F),
                                                                                         fontStyle: FontStyle.italic,
                                                                                       ),
                                                                                 ),
@@ -392,8 +390,6 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                     ),
                                                                     Container(
                                                                       width:
-                                                                          100,
-                                                                      height:
                                                                           100,
                                                                       decoration:
                                                                           BoxDecoration(),
@@ -659,8 +655,6 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                           Container(
                                                                         width:
                                                                             100,
-                                                                        height:
-                                                                            100,
                                                                         decoration:
                                                                             BoxDecoration(),
                                                                         child:
@@ -709,9 +703,9 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                                                                 child: AutoSizeText(
                                                                                   'Uncategorized',
-                                                                                  style: FlutterFlowTheme.of(context).subtitle1.override(
-                                                                                        fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
-                                                                                        color: Color(0xFFFF0003),
+                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                                        color: Color(0xFFD40F0F),
                                                                                         fontStyle: FontStyle.italic,
                                                                                       ),
                                                                                 ),
@@ -727,8 +721,6 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                     ),
                                                                     Container(
                                                                       width:
-                                                                          100,
-                                                                      height:
                                                                           100,
                                                                       decoration:
                                                                           BoxDecoration(),
