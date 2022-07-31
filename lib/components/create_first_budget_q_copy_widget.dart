@@ -1,4 +1,3 @@
-import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../connect_first_account/connect_first_account_widget.dart';
@@ -6,7 +5,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -192,10 +190,10 @@ class _CreateFirstBudgetQCopyWidgetState
                                 _shouldSetState = true;
                                 setState(() =>
                                     FFAppState().dataSyncCode = getJsonField(
-                                      (dataSyncResponse!?.jsonBody ?? ''),
+                                      (dataSyncResponse?.jsonBody ?? ''),
                                       r'''$.code''',
                                     ).toString());
-                                if ((FFAppState().dataSyncCode) ==
+                                if (FFAppState().dataSyncCode ==
                                     'REAUTHORISATION_REQUIRED') {
                                   // Action_ReauthCall
                                   reauthCode = await ReauthMonoCall.call(
@@ -222,24 +220,10 @@ class _CreateFirstBudgetQCopyWidgetState
                                   _shouldSetState = true;
                                   // Action_writeTransactions
                                   await actions.writeTransactions(
-                                    (transactionJsonResponse!?.jsonBody ?? ''),
+                                    (transactionJsonResponse?.jsonBody ?? ''),
                                     widget.account,
                                     containerTransactionsRecordList.toList(),
                                   );
-
-                                  final accountsUpdateData =
-                                      createAccountsRecordData(
-                                    dataStatus: getJsonField(
-                                      (accountResponse?.jsonBody ?? ''),
-                                      r'''$.meta.data_status''',
-                                    ).toString(),
-                                    accountBalance: getJsonField(
-                                      (accountResponse?.jsonBody ?? ''),
-                                      r'''$.account.balance''',
-                                    ),
-                                  );
-                                  await widget.account!.reference
-                                      .update(accountsUpdateData);
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
@@ -260,28 +244,13 @@ class _CreateFirstBudgetQCopyWidgetState
                                     ),
                                   );
                                 } else {
-                                  if ((FFAppState().dataSyncCode) ==
+                                  if (FFAppState().dataSyncCode ==
                                       'SYNC_SUCCESSFUL') {
                                     accountRespons =
                                         await GetAccountInfoCall.call(
                                       authID: widget.account!.authID,
                                     );
                                     _shouldSetState = true;
-
-                                    final accountsUpdateData =
-                                        createAccountsRecordData(
-                                      dataStatus: getJsonField(
-                                        (accountRespons?.jsonBody ?? ''),
-                                        r'''$.meta.data_status''',
-                                      ).toString(),
-                                      accountBalance: getJsonField(
-                                        (accountRespons?.jsonBody ?? ''),
-                                        r'''$.account.balance''',
-                                      ),
-                                      lastSync: getCurrentTimestamp,
-                                    );
-                                    await widget.account!.reference
-                                        .update(accountsUpdateData);
                                     transactionJsonRespons =
                                         await GetTransactionsCall.call(
                                       authID: widget.account!.authID,
@@ -289,7 +258,7 @@ class _CreateFirstBudgetQCopyWidgetState
                                     _shouldSetState = true;
                                     // Action_writeTransactions
                                     await actions.writeTransactions(
-                                      (transactionJsonRespons!?.jsonBody ?? ''),
+                                      (transactionJsonRespons?.jsonBody ?? ''),
                                       widget.account,
                                       containerTransactionsRecordList.toList(),
                                     );

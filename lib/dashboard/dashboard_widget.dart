@@ -90,7 +90,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 14,
-                          color: Color(0x0A000000),
+                          color: FlutterFlowTheme.of(context).shadowGray,
                         )
                       ],
                       borderRadius: BorderRadius.circular(16),
@@ -159,7 +159,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 4),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -181,13 +181,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                         child: Text(
                           'View All',
                           style: FlutterFlowTheme.of(context)
-                              .subtitle2
+                              .bodyText2
                               .override(
                                 fontFamily: FlutterFlowTheme.of(context)
-                                    .subtitle2Family,
+                                    .bodyText2Family,
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
-                                fontWeight: FontWeight.bold,
                               ),
                         ),
                       ),
@@ -233,7 +232,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                 rowAccountsRecordList[rowIndex];
                             return Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                                  EdgeInsetsDirectional.fromSTEB(10, 8, 0, 16),
                               child: InkWell(
                                 onTap: () async {
                                   await Navigator.push(
@@ -301,7 +300,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                           .where(
                                                               'institutionCode',
                                                               isEqualTo:
-                                                                  rowAccountsRecord!
+                                                                  rowAccountsRecord
                                                                       .bankCode),
                                                   singleRecord: true,
                                                 ),
@@ -337,7 +336,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                             12),
                                                     child: CachedNetworkImage(
                                                       imageUrl:
-                                                          imageConstInstitutionLogosRecord!
+                                                          imageConstInstitutionLogosRecord
                                                               .institutionLogo!,
                                                       width: 40,
                                                       height: 40,
@@ -346,9 +345,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                   );
                                                 },
                                               ),
-                                              if ((rowAccountsRecord!
-                                                      .reauthRequired) ==
-                                                  true)
+                                              if ((rowAccountsRecord
+                                                      .reauthRequired ==
+                                                  true))
                                                 Align(
                                                   alignment:
                                                       AlignmentDirectional(
@@ -370,7 +369,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                   0, 10, 0, 0),
                                           child: Text(
                                             functions.formatTransCurrency(
-                                                rowAccountsRecord!
+                                                rowAccountsRecord
                                                     .accountBalance),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1,
@@ -390,7 +389,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                 ),
                 if ((currentUserDocument!.activeBudget != null))
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 4),
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 4),
                     child: AuthUserStreamWidget(
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -412,13 +411,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                             child: Text(
                               'View All',
                               style: FlutterFlowTheme.of(context)
-                                  .subtitle2
+                                  .bodyText2
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
-                                        .subtitle2Family,
+                                        .bodyText2Family,
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
-                                    fontWeight: FontWeight.bold,
                                   ),
                             ),
                           ),
@@ -465,7 +463,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                             ),
                             child: StreamBuilder<List<CategoriesRecord>>(
                               stream: queryCategoriesRecord(
-                                parent: containerBudgetsRecord!.reference,
+                                parent: containerBudgetsRecord.reference,
                                 queryBuilder: (categoriesRecord) =>
                                     categoriesRecord.where('category_name',
                                         isNotEqualTo: 'Unallocated'),
@@ -516,8 +514,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                         'transactionCategory',
                                                         whereIn:
                                                             containerCategoriesRecordList
-                                                                .map((e) => e!
-                                                                    .reference)
+                                                                .map((e) =>
+                                                                    e.reference)
                                                                 .toList()),
                                               ),
                                               builder: (context, snapshot) {
@@ -598,7 +596,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                   children: [
                                                                     Text(
                                                                       functions.subtractCurrencyDecimal(
-                                                                          containerBudgetsRecord!
+                                                                          containerBudgetsRecord
                                                                               .budgetAmount,
                                                                           functions
                                                                               .sumTransactionAmounts(containerTransactionsRecordList.toList())),
@@ -615,13 +613,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                               0),
                                                                       child:
                                                                           Text(
-                                                                        '${functions.subtractCurrencyText(containerBudgetsRecord!.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
+                                                                        '${functions.subtractCurrencyText(containerBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                                         style: FlutterFlowTheme.of(context)
-                                                                            .subtitle1
-                                                                            .override(
-                                                                              fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
-                                                                              fontWeight: FontWeight.w500,
-                                                                            ),
+                                                                            .bodyText1,
                                                                       ),
                                                                     ),
                                                                   ],
@@ -636,7 +630,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                             0,
                                                                             8),
                                                                 child: Text(
-                                                                  '${dateTimeFormat('MMMEd', containerBudgetsRecord!.budgetStart)} - ${dateTimeFormat('MMMEd', containerBudgetsRecord!.budgetEnd)}',
+                                                                  '${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetEnd)}',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .subtitle2,
@@ -686,10 +680,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                         child: Text(
                           'View All',
                           style: FlutterFlowTheme.of(context)
-                              .subtitle2
+                              .bodyText2
                               .override(
                                 fontFamily: FlutterFlowTheme.of(context)
-                                    .subtitle2Family,
+                                    .bodyText2Family,
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
                               ),
@@ -757,7 +751,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                           0, 8, 0, 8),
                                       child: FutureBuilder<AccountsRecord>(
                                         future: AccountsRecord.getDocumentOnce(
-                                            columnTransactionsRecord!.account!),
+                                            columnTransactionsRecord.account!),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
                                           if (!snapshot.hasData) {
@@ -829,7 +823,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                               constInstitutionLogosRecord.where(
                                                                   'institutionCode',
                                                                   isEqualTo:
-                                                                      rowAccountsRecord!
+                                                                      rowAccountsRecord
                                                                           .bankCode),
                                                           singleRecord: true,
                                                         ),
@@ -871,7 +865,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                             child:
                                                                 CachedNetworkImage(
                                                               imageUrl:
-                                                                  imageConstInstitutionLogosRecord!
+                                                                  imageConstInstitutionLogosRecord
                                                                       .institutionLogo!,
                                                               width: 40,
                                                               height: 40,
@@ -925,7 +919,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                     CrossAxisAlignment
                                                                         .start,
                                                                 children: [
-                                                                  if ((columnTransactionsRecord!
+                                                                  if ((columnTransactionsRecord
                                                                           .transactionCategory !=
                                                                       null))
                                                                     Padding(
@@ -938,7 +932,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                       child: StreamBuilder<
                                                                           CategoriesRecord>(
                                                                         stream:
-                                                                            CategoriesRecord.getDocument(columnTransactionsRecord!.transactionCategory!),
+                                                                            CategoriesRecord.getDocument(columnTransactionsRecord.transactionCategory!),
                                                                         builder:
                                                                             (context,
                                                                                 snapshot) {
@@ -959,7 +953,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                           final textCategoriesRecord =
                                                                               snapshot.data!;
                                                                           return AutoSizeText(
-                                                                            textCategoriesRecord!.categoryName!.maybeHandleOverflow(
+                                                                            textCategoriesRecord.categoryName!.maybeHandleOverflow(
                                                                               maxChars: 25,
                                                                               replacement: '…',
                                                                             ),
@@ -969,7 +963,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                         },
                                                                       ),
                                                                     ),
-                                                                  if ((columnTransactionsRecord!
+                                                                  if ((columnTransactionsRecord
                                                                           .transactionCategory ==
                                                                       null))
                                                                     Padding(
@@ -992,7 +986,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                       ),
                                                                     ),
                                                                   Text(
-                                                                    '${dateTimeFormat('Hm', columnTransactionsRecord!.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord!.trasactionDate)}',
+                                                                    '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
                                                                     textAlign:
                                                                         TextAlign
                                                                             .start,
@@ -1030,7 +1024,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                       AutoSizeText(
                                                                     functions
                                                                         .formatTransCurrency(
-                                                                            columnTransactionsRecord!.transactionAmount)
+                                                                            columnTransactionsRecord.transactionAmount)
                                                                         .maybeHandleOverflow(
                                                                           maxChars:
                                                                               15,
@@ -1050,11 +1044,11 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                 ),
                                                                 Stack(
                                                                   children: [
-                                                                    if ((columnTransactionsRecord!
-                                                                            .transactionType) ==
-                                                                        'debit')
+                                                                    if ((columnTransactionsRecord
+                                                                            .transactionType ==
+                                                                        'debit'))
                                                                       AutoSizeText(
-                                                                        columnTransactionsRecord!
+                                                                        columnTransactionsRecord
                                                                             .transactionType!
                                                                             .maybeHandleOverflow(
                                                                           maxChars:
@@ -1071,11 +1065,11 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                               color: Color(0xFFFF0003),
                                                                             ),
                                                                       ),
-                                                                    if ((columnTransactionsRecord!
-                                                                            .transactionType) ==
-                                                                        'credit')
+                                                                    if ((columnTransactionsRecord
+                                                                            .transactionType ==
+                                                                        'credit'))
                                                                       AutoSizeText(
-                                                                        columnTransactionsRecord!
+                                                                        columnTransactionsRecord
                                                                             .transactionType!
                                                                             .maybeHandleOverflow(
                                                                           maxChars:

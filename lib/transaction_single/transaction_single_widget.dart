@@ -155,7 +155,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                           .where(
                                                               'institutionCode',
                                                               isEqualTo:
-                                                                  columnAccountsRecord!
+                                                                  columnAccountsRecord
                                                                       .bankCode),
                                               singleRecord: true,
                                             ),
@@ -191,7 +191,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                     BorderRadius.circular(12),
                                                 child: CachedNetworkImage(
                                                   imageUrl:
-                                                      imageConstInstitutionLogosRecord!
+                                                      imageConstInstitutionLogosRecord
                                                           .institutionLogo!,
                                                   width: 100,
                                                   height: 100,
@@ -464,7 +464,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                     Clip.none,
                                                                 children: [
                                                                   Text(
-                                                                    columnAccountsRecord!
+                                                                    columnAccountsRecord
                                                                         .accountName!,
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
@@ -494,7 +494,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                   Clip.none,
                                                               children: [
                                                                 Text(
-                                                                  columnAccountsRecord!
+                                                                  columnAccountsRecord
                                                                       .accountNumber!,
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
@@ -661,7 +661,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                         .max,
                                                                 children: [
                                                                   Text(
-                                                                    columnCategoriesRecord!
+                                                                    columnCategoriesRecord
                                                                         .categoryName!,
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
@@ -686,8 +686,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       if ((widget
-                                              .transaction!.transactionType) ==
-                                          'debit')
+                                              .transaction!.transactionType ==
+                                          'debit'))
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -767,8 +767,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           ),
                                         ),
                                       if ((widget
-                                              .transaction!.transactionType) ==
-                                          'debit')
+                                              .transaction!.transactionType ==
+                                          'debit'))
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(

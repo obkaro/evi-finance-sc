@@ -136,8 +136,8 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             filled: true,
-                            fillColor:
-                                FlutterFlowTheme.of(context).primaryBackground,
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                           ),
                           style: FlutterFlowTheme.of(context).bodyText1,
                           keyboardType: TextInputType.emailAddress,
@@ -174,7 +174,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
+                                    .secondaryBackground,
                               ),
                               style: FlutterFlowTheme.of(context).bodyText1,
                               keyboardType: TextInputType.phone,

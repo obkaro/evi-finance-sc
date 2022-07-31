@@ -29,10 +29,10 @@ class CurrencyTextFieldCopy extends StatefulWidget {
   //final MoneyMaskedTextController moneyController;
 
   @override
-  _CurrencyTextFieldState createState() => _CurrencyTextFieldState();
+  _CurrencyTextFieldCopyState createState() => _CurrencyTextFieldCopyState();
 }
 
-class _CurrencyTextFieldState extends State<CurrencyTextFieldCopy> {
+class _CurrencyTextFieldCopyState extends State<CurrencyTextFieldCopy> {
   TextEditingController? textController;
   var controller = new MaskedTextController(mask: '000.000.000-000');
 

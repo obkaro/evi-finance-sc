@@ -153,13 +153,13 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            if ((functions.checkEditCatTotal(
+                            if (functions.checkEditCatTotal(
                                     widget.budget!.unallocatedAmount,
                                     FFAppState().currencyTextField,
-                                    widget.categoryToEdit!.categoryAmount)) >=
+                                    widget.categoryToEdit!.categoryAmount) >=
                                 0) {
-                              if ((FFAppState().currencyTextField!) >
-                                  (widget.categoryToEdit!.categoryAmount!)) {
+                              if (FFAppState().currencyTextField >
+                                  widget.categoryToEdit!.categoryAmount!) {
                                 final budgetsUpdateData = {
                                   'unallocatedAmount': FieldValue.increment(
                                       -(functions.subInt(

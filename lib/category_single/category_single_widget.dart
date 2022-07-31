@@ -290,7 +290,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                 FutureBuilder<AccountsRecord>(
                                               future: AccountsRecord
                                                   .getDocumentOnce(
-                                                      columnTransactionsRecord!
+                                                      columnTransactionsRecord
                                                           .account!),
                                               builder: (context, snapshot) {
                                                 // Customize what your widget looks like when it's loading.
@@ -365,7 +365,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                 queryBuilder: (constInstitutionLogosRecord) => constInstitutionLogosRecord.where(
                                                                     'institutionCode',
                                                                     isEqualTo:
-                                                                        rowAccountsRecord!
+                                                                        rowAccountsRecord
                                                                             .bankCode),
                                                                 singleRecord:
                                                                     true,
@@ -412,7 +412,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                   child:
                                                                       CachedNetworkImage(
                                                                     imageUrl:
-                                                                        imageConstInstitutionLogosRecord!
+                                                                        imageConstInstitutionLogosRecord
                                                                             .institutionLogo!,
                                                                     width: 40,
                                                                     height: 40,
@@ -472,7 +472,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                           CrossAxisAlignment
                                                                               .start,
                                                                       children: [
-                                                                        if ((columnTransactionsRecord!.transactionCategory !=
+                                                                        if ((columnTransactionsRecord.transactionCategory !=
                                                                             null))
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
@@ -482,7 +482,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                                 8),
                                                                             child:
                                                                                 StreamBuilder<CategoriesRecord>(
-                                                                              stream: CategoriesRecord.getDocument(columnTransactionsRecord!.transactionCategory!),
+                                                                              stream: CategoriesRecord.getDocument(columnTransactionsRecord.transactionCategory!),
                                                                               builder: (context, snapshot) {
                                                                                 // Customize what your widget looks like when it's loading.
                                                                                 if (!snapshot.hasData) {
@@ -499,7 +499,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                                 }
                                                                                 final textCategoriesRecord = snapshot.data!;
                                                                                 return AutoSizeText(
-                                                                                  textCategoriesRecord!.categoryName!.maybeHandleOverflow(
+                                                                                  textCategoriesRecord.categoryName!.maybeHandleOverflow(
                                                                                     maxChars: 25,
                                                                                     replacement: '…',
                                                                                   ),
@@ -508,7 +508,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                               },
                                                                             ),
                                                                           ),
-                                                                        if ((columnTransactionsRecord!.transactionCategory ==
+                                                                        if ((columnTransactionsRecord.transactionCategory ==
                                                                             null))
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
@@ -527,7 +527,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                             ),
                                                                           ),
                                                                         Text(
-                                                                          '${dateTimeFormat('Hm', columnTransactionsRecord!.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord!.trasactionDate)}',
+                                                                          '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
                                                                           textAlign:
                                                                               TextAlign.start,
                                                                           style:
@@ -561,7 +561,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                         child:
                                                                             AutoSizeText(
                                                                           functions
-                                                                              .formatTransCurrency(columnTransactionsRecord!.transactionAmount)
+                                                                              .formatTransCurrency(columnTransactionsRecord.transactionAmount)
                                                                               .maybeHandleOverflow(
                                                                                 maxChars: 15,
                                                                                 replacement: '…',
@@ -575,7 +575,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                         ),
                                                                       ),
                                                                       AutoSizeText(
-                                                                        columnTransactionsRecord!
+                                                                        columnTransactionsRecord
                                                                             .transactionType!
                                                                             .maybeHandleOverflow(
                                                                           maxChars:

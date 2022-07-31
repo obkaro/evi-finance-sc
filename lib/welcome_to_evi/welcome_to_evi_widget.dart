@@ -145,17 +145,9 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           hintText: 'Username',
-                                          hintStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1Family,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                              ),
+                                          hintStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText2,
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0x00000000),
@@ -388,13 +380,24 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  if ((FFAppState().currencyTextField !=
-                                      null)) {
+                                  if (formKey.currentState == null ||
+                                      !formKey.currentState!.validate()) {
+                                    return;
+                                  }
+
+                                  if (dropDownValue1 == null) {
+                                    return;
+                                  }
+                                  if (dropDownValue2 == null) {
+                                    return;
+                                  }
+
+                                  if (FFAppState().currencyTextField != null) {
                                     final usersUpdateData =
                                         createUsersRecordData(
                                       income: FFAppState()
                                           .currencyTextField
-                                          ?.toDouble(),
+                                          .toDouble(),
                                       experience: dropDownValue2,
                                       onboardingStep: 1,
                                       username: textController!.text,

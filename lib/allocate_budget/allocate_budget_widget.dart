@@ -161,7 +161,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                 AlignmentDirectional(0, 0),
                                             child: Text(
                                               functions.formatBudgetCurrency(
-                                                  columnBudgetsRecord!
+                                                  columnBudgetsRecord
                                                       .unallocatedAmount),
                                               textAlign: TextAlign.start,
                                               style:
@@ -198,7 +198,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                 alignment:
                                                     AlignmentDirectional(0, 0),
                                                 child: Text(
-                                                  'From ${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetStart)}',
+                                                  'From ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)}',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1,
@@ -229,7 +229,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                     FieldValue.increment(
                                                         -(100000)),
                                               };
-                                              await columnBudgetsRecord!
+                                              await columnBudgetsRecord
                                                   .reference
                                                   .update(budgetsUpdateData);
                                             },
@@ -270,7 +270,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                   AlignmentDirectional(0, 0),
                                               child: Text(
                                                 functions.formatBudgetCurrency(
-                                                    columnBudgetsRecord!
+                                                    columnBudgetsRecord
                                                         .budgetAmount),
                                                 textAlign: TextAlign.end,
                                                 style:
@@ -302,7 +302,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                     FieldValue.increment(
                                                         100000),
                                               };
-                                              await columnBudgetsRecord!
+                                              await columnBudgetsRecord
                                                   .reference
                                                   .update(budgetsUpdateData);
                                             },
@@ -317,9 +317,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                             Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                if ((allocateBudgetCategoriesRecordList
-                                        .length) >
-                                    10)
+                                if ((allocateBudgetCategoriesRecordList.length >
+                                    10))
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 20, 0, 0),
@@ -365,7 +364,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                       'categoryName',
                                                       whereNotIn:
                                                           allocateBudgetCategoriesRecordList
-                                                              .map((e) => e!
+                                                              .map((e) => e
                                                                   .categoryName!)
                                                               .toList()),
                                             ),
@@ -434,6 +433,9 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                         child: Container(
                                                           decoration:
                                                               BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryBackground,
                                                             boxShadow: [
                                                               BoxShadow(
                                                                 blurRadius: 14,
@@ -496,7 +498,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                             0),
                                                                         child:
                                                                             AutoSizeText(
-                                                                          rowConstBudgetCategoriesRecord!
+                                                                          rowConstBudgetCategoriesRecord
                                                                               .categoryName!,
                                                                           textAlign:
                                                                               TextAlign.center,
@@ -551,8 +553,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                         builder: (context) {
                                           final existingCategories =
                                               allocateBudgetCategoriesRecordList
-                                                      ?.toList() ??
-                                                  [];
+                                                  .toList();
                                           return SingleChildScrollView(
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
@@ -601,7 +602,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                             0),
                                                                 child:
                                                                     AutoSizeText(
-                                                                  existingCategoriesItem!
+                                                                  existingCategoriesItem
                                                                       .categoryName!,
                                                                   textAlign:
                                                                       TextAlign
@@ -629,7 +630,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                 0, 0),
                                                         child: Text(
                                                           functions.formatBudgetCurrency(
-                                                              existingCategoriesItem!
+                                                              existingCategoriesItem
                                                                   .categoryAmount),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
@@ -693,7 +694,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                               {
                                                             'unallocatedAmount':
                                                                 FieldValue.increment(
-                                                                    existingCategoriesItem!
+                                                                    existingCategoriesItem
                                                                         .categoryAmount!),
                                                           };
                                                           await widget
@@ -702,7 +703,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                               .update(
                                                                   budgetsUpdateData);
                                                           // Action_DeleteCategory
-                                                          await existingCategoriesItem!
+                                                          await existingCategoriesItem
                                                               .reference
                                                               .delete();
                                                         },
@@ -749,6 +750,9 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
                                               boxShadow: [
                                                 BoxShadow(
                                                   blurRadius: 14,
@@ -964,10 +968,17 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primaryBackground,
-                                                    textStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .subtitle2,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle2Family,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
                                                     elevation: 0,
                                                     borderSide: BorderSide(
                                                       color: Colors.transparent,
