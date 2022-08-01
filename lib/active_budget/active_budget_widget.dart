@@ -696,9 +696,9 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                         children: [
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                2,
                                                                                 0,
-                                                                                0,
-                                                                                0,
+                                                                                2,
                                                                                 8),
                                                                             child:
                                                                                 Row(
@@ -770,15 +770,22 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               ],
                                                                             ),
                                                                           ),
-                                                                          Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            children: [
-                                                                              Text(
-                                                                                functions.subtractCurrencyOf(displayedCategoriesItem.categoryAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList())),
-                                                                                style: FlutterFlowTheme.of(context).bodyText1,
-                                                                              ),
-                                                                            ],
+                                                                          Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                2,
+                                                                                0,
+                                                                                2,
+                                                                                0),
+                                                                            child:
+                                                                                Row(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              children: [
+                                                                                Text(
+                                                                                  functions.subtractCurrencyOf(displayedCategoriesItem.categoryAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList())),
+                                                                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                                                                ),
+                                                                              ],
+                                                                            ),
                                                                           ),
                                                                         ],
                                                                       ),
