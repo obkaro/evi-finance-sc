@@ -512,12 +512,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                               stream: queryTransactionsRecord(
                                                 queryBuilder: (transactionsRecord) =>
                                                     transactionsRecord.where(
-                                                        'transactionCategory',
-                                                        whereIn:
-                                                            containerCategoriesRecordList
-                                                                .map((e) =>
-                                                                    e.reference)
-                                                                .toList()),
+                                                        'transactionBudget',
+                                                        isEqualTo:
+                                                            containerBudgetsRecord
+                                                                .reference),
                                               ),
                                               builder: (context, snapshot) {
                                                 // Customize what your widget looks like when it's loading.
