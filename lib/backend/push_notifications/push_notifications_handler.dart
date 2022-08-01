@@ -88,6 +88,8 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         createdBudget: await getDocumentParameter(
             data, 'createdBudget', BudgetsRecord.serializer),
       ),
+  'EmailAuth': (data) async => EmailAuthWidget(),
+  'EmailAuthCopy': (data) async => EmailAuthCopyWidget(),
   'ConnectFirstAccount': (data) async => ConnectFirstAccountWidget(),
   'TransactionSingle': (data) async => TransactionSingleWidget(
         transaction: await getDocumentParameter(
@@ -98,6 +100,10 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
           command: getParameter(data, 'command'),
         )
       : NavBarPage(initialPage: 'ActiveBudget'),
+  'BudgetSingle': (data) async => BudgetSingleWidget(
+        budget: await getDocumentParameter(
+            data, 'budget', BudgetsRecord.serializer),
+      ),
   'CreateBudget': (data) async => CreateBudgetWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
@@ -108,10 +114,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         categoriesSum: getParameter(data, 'categoriesSum'),
       ),
   'Budgets': (data) async => BudgetsWidget(),
-  'BudgetSingle': (data) async => BudgetSingleWidget(
-        budget: await getDocumentParameter(
-            data, 'budget', BudgetsRecord.serializer),
-      ),
   'CategorySingle': (data) async => CategorySingleWidget(
         category: await getDocumentParameter(
             data, 'category', CategoriesRecord.serializer),
@@ -126,8 +128,8 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
             data, 'account', AccountsRecord.serializer),
       ),
   'Settings': (data) async => NavBarPage(initialPage: 'Settings'),
-  'ProfileSettings': (data) async => ProfileSettingsWidget(),
   'OnboardingPageView': (data) async => OnboardingPageViewWidget(),
+  'ProfileSettings': (data) async => ProfileSettingsWidget(),
   'WelcomeToEvi': (data) async => WelcomeToEviWidget(),
   'FirstBudget': (data) async => FirstBudgetWidget(
         budget: await getDocumentParameter(

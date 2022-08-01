@@ -94,7 +94,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color secondaryColor = const Color(0xFF1B2124);
   late Color tertiaryColor = const Color(0xFF1B998B);
   late Color alternate = const Color(0xFFFAA916);
-  late Color primaryBackground = const Color(0xFFECECEC);
+  late Color primaryBackground = const Color(0xFFF6F6F6);
   late Color secondaryBackground = const Color(0xFFFFFFFF);
   late Color primaryText = const Color(0xFF101010);
   late Color secondaryText = const Color(0xFF595959);
@@ -107,7 +107,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color fadedDivider = Color(0xFFDDDDDD);
   late Color tertiary400 = Color(0xFF39D2C0);
   late Color textColor = Color(0xFF1E2429);
-  late Color shadowGray = Color(0x0A000000);
+  late Color shadowGray = Color(0x13000000);
 }
 
 abstract class Typography {
@@ -153,30 +153,30 @@ class MobileTypography extends Typography {
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get subtitle1Family => 'Source Sans Pro';
-  TextStyle get subtitle1 => GoogleFonts.getFont(
-        'Source Sans Pro',
+  String get subtitle1Family => 'Spline Sans';
+  TextStyle get subtitle1 => TextStyle(
+        fontFamily: 'Spline Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 18,
       );
-  String get subtitle2Family => 'Source Sans Pro';
-  TextStyle get subtitle2 => GoogleFonts.getFont(
-        'Source Sans Pro',
+  String get subtitle2Family => 'Spline Sans';
+  TextStyle get subtitle2 => TextStyle(
+        fontFamily: 'Spline Sans',
         color: theme.secondaryText,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w600,
         fontSize: 16,
       );
-  String get bodyText1Family => 'Source Sans Pro';
-  TextStyle get bodyText1 => GoogleFonts.getFont(
-        'Source Sans Pro',
+  String get bodyText1Family => 'Spline Sans';
+  TextStyle get bodyText1 => TextStyle(
+        fontFamily: 'Spline Sans',
         color: theme.primaryText,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w600,
         fontSize: 14,
       );
-  String get bodyText2Family => 'Source Sans Pro';
-  TextStyle get bodyText2 => GoogleFonts.getFont(
-        'Source Sans Pro',
+  String get bodyText2Family => 'Spline Sans';
+  TextStyle get bodyText2 => TextStyle(
+        fontFamily: 'Spline Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 12,

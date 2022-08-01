@@ -111,9 +111,9 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            if ((FFAppState().currencyTextField!) <=
-                                (functions.subInt(widget.categoryTotal,
-                                    widget.budget!.unallocatedAmount))) {
+                            if (FFAppState().currencyTextField <=
+                                functions.subInt(widget.categoryTotal,
+                                    widget.budget!.unallocatedAmount)) {
                               final budgetsUpdateData = createBudgetsRecordData(
                                 budgetAmount: FFAppState().currencyTextField,
                                 unallocatedAmount: functions.subInt(

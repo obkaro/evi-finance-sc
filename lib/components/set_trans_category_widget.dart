@@ -156,7 +156,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                               final transactionsUpdateData =
                                   createTransactionsRecordData(
                                 transactionCategory:
-                                    columnCategoriesRecord!.reference,
+                                    columnCategoriesRecord.reference,
                               );
                               await widget.transaction!.reference
                                   .update(transactionsUpdateData);
@@ -187,7 +187,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      columnCategoriesRecord!.categoryName!,
+                                      columnCategoriesRecord.categoryName!,
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle2
                                           .override(
@@ -203,7 +203,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                           0, 16, 0, 0),
                                       child: Text(
                                         functions.formatBudgetCurrency(
-                                            columnCategoriesRecord!
+                                            columnCategoriesRecord
                                                 .categoryAmount),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1,

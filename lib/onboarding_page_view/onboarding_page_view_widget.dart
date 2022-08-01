@@ -84,14 +84,14 @@ class _OnboardingPageViewWidgetState extends State<OnboardingPageViewWidget> {
                                       'Securely link your bank account to automatically import income and expenses into Evi.',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
+                                          .bodyText1,
                                     ),
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 16, 0, 0),
                                     child: Text(
-                                      'This only gives Evi limited access to your transaction data via a secure link. ',
+                                      '*This only gives Evi limited access to your transaction data via a secure link. ',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText2,
@@ -129,7 +129,7 @@ class _OnboardingPageViewWidgetState extends State<OnboardingPageViewWidget> {
                                       'Build and manage budget categories to keep track of expenses.',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
+                                          .bodyText1,
                                     ),
                                   ),
                                 ],
@@ -168,7 +168,7 @@ class _OnboardingPageViewWidgetState extends State<OnboardingPageViewWidget> {
                                       'Come back into the app often to categorize your transactions and ensure your financial goals are met.',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
+                                          .bodyText1,
                                     ),
                                   ),
                                 ],
@@ -216,10 +216,10 @@ class _OnboardingPageViewWidgetState extends State<OnboardingPageViewWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      if ((valueOrDefault(currentUserDocument?.username, '') !=
+                      if (valueOrDefault(currentUserDocument?.username, '') !=
                               null &&
                           valueOrDefault(currentUserDocument?.username, '') !=
-                              '')) {
+                              '') {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(

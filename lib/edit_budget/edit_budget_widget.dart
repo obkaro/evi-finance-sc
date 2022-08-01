@@ -124,12 +124,15 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                           ],
                         ),
                       ),
-                      custom_widgets.CurrencyTextField(
-                        width: MediaQuery.of(context).size.width,
-                        height: 50,
-                        amount: widget.budget!.budgetAmount,
-                        labelText: 'Amount',
-                        hintText: 'Enter amount',
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                        child: custom_widgets.CurrencyTextField(
+                          width: MediaQuery.of(context).size.width,
+                          height: 50,
+                          amount: widget.budget!.budgetAmount,
+                          labelText: 'Amount',
+                          hintText: 'Enter amount',
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
@@ -165,7 +168,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
                                         iconColor: FlutterFlowTheme.of(context)
-                                            .secondaryText,
+                                            .primaryText,
                                         weekFormat: false,
                                         weekStartsMonday: false,
                                         initialDate: widget.budget!.budgetStart,
@@ -173,7 +176,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                         onChange: (DateTimeRange?
                                             newSelectedDate) async {
                                           calendarSelectedDay = newSelectedDate;
-                                          if ((dropDownValue) ==
+                                          if (dropDownValue ==
                                               'Monthly Budget') {
                                             final budgetsUpdateData =
                                                 createBudgetsRecordData(
@@ -229,7 +232,15 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                           setState(() {});
                                         },
                                         titleStyle: FlutterFlowTheme.of(context)
-                                            .subtitle2,
+                                            .subtitle2
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2Family,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
                                         dayOfWeekStyle: FlutterFlowTheme.of(
                                                 context)
                                             .bodyText2
@@ -237,7 +248,9 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                               fontFamily:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyText2Family,
-                                              fontWeight: FontWeight.normal,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                             ),
                                         dateStyle: FlutterFlowTheme.of(context)
                                             .bodyText2
@@ -301,8 +314,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          if ((FFAppState().currencyTextField!) >=
-                              (widget.categoriesSum!)) {
+                          if (FFAppState().currencyTextField >=
+                              widget.categoriesSum!) {
                             // Action_CreateBudgetStep1
 
                             final budgetsUpdateData = createBudgetsRecordData(

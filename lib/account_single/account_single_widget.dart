@@ -42,8 +42,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
   void initState() {
     super.initState();
     // On page load action.
-    SchedulerBinding.instance?.addPostFrameCallback((_) async {
-      if ((widget.account!.reauthRequired) == true) {
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (widget.account!.reauthRequired == true) {
         await showModalBottomSheet(
           isScrollControlled: true,
           backgroundColor: Colors.transparent,
@@ -194,7 +194,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                     BorderRadius.circular(12),
                                                 child: CachedNetworkImage(
                                                   imageUrl:
-                                                      imageConstInstitutionLogosRecord!
+                                                      imageConstInstitutionLogosRecord
                                                           .institutionLogo!,
                                                   width: 100,
                                                   height: 100,
@@ -203,9 +203,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                               );
                                             },
                                           ),
-                                          if ((widget
-                                                  .account!.reauthRequired) ==
-                                              true)
+                                          if ((widget.account!.reauthRequired ==
+                                              true))
                                             Align(
                                               alignment:
                                                   AlignmentDirectional(1, -1),
@@ -596,13 +595,13 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               FFAppState()
                                                                       .dataSyncCode =
                                                                   getJsonField(
-                                                                (dataSyncResponse!
+                                                                (dataSyncResponse
                                                                         ?.jsonBody ??
                                                                     ''),
                                                                 r'''$.code''',
                                                               ).toString());
-                                                          if ((FFAppState()
-                                                                  .dataSyncCode) ==
+                                                          if (FFAppState()
+                                                                  .dataSyncCode ==
                                                               'REAUTHORISATION_REQUIRED') {
                                                             // Action_ReauthCall
                                                             reauthCode =
@@ -646,7 +645,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             // Action_writeTransactions
                                                             await actions
                                                                 .writeTransactions(
-                                                              (transactionJsonResponse!
+                                                              (transactionJsonResponse
                                                                       ?.jsonBody ??
                                                                   ''),
                                                               widget.account,
@@ -705,8 +704,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               ),
                                                             );
                                                           } else {
-                                                            if ((FFAppState()
-                                                                    .dataSyncCode) ==
+                                                            if (FFAppState()
+                                                                    .dataSyncCode ==
                                                                 'SYNC_SUCCESSFUL') {
                                                               accountRespons =
                                                                   await GetAccountInfoCall
@@ -754,7 +753,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               // Action_writeTransactions
                                                               await actions
                                                                   .writeTransactions(
-                                                                (transactionJsonRespons!
+                                                                (transactionJsonRespons
                                                                         ?.jsonBody ??
                                                                     ''),
                                                                 widget.account,
@@ -1095,7 +1094,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
-                                                              if ((columnTransactionsRecord!
+                                                              if ((columnTransactionsRecord
                                                                       .transactionCategory !=
                                                                   null))
                                                                 Padding(
@@ -1108,7 +1107,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                   child: StreamBuilder<
                                                                       CategoriesRecord>(
                                                                     stream: CategoriesRecord.getDocument(
-                                                                        columnTransactionsRecord!
+                                                                        columnTransactionsRecord
                                                                             .transactionCategory!),
                                                                     builder:
                                                                         (context,
@@ -1135,7 +1134,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                           snapshot
                                                                               .data!;
                                                                       return AutoSizeText(
-                                                                        textCategoriesRecord!
+                                                                        textCategoriesRecord
                                                                             .categoryName!
                                                                             .maybeHandleOverflow(
                                                                           maxChars:
@@ -1149,7 +1148,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                     },
                                                                   ),
                                                                 ),
-                                                              if ((columnTransactionsRecord!
+                                                              if ((columnTransactionsRecord
                                                                       .transactionCategory ==
                                                                   null))
                                                                 Padding(
@@ -1176,7 +1175,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                   ),
                                                                 ),
                                                               Text(
-                                                                '${dateTimeFormat('Hm', columnTransactionsRecord!.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord!.trasactionDate)}',
+                                                                '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
                                                                 textAlign:
                                                                     TextAlign
                                                                         .start,
@@ -1208,7 +1207,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               AutoSizeText(
                                                                 functions
                                                                     .formatTransCurrency(
-                                                                        columnTransactionsRecord!
+                                                                        columnTransactionsRecord
                                                                             .transactionAmount)
                                                                     .maybeHandleOverflow(
                                                                       maxChars:
@@ -1222,11 +1221,11 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               ),
                                                               Stack(
                                                                 children: [
-                                                                  if ((columnTransactionsRecord!
-                                                                          .transactionType) ==
-                                                                      'debit')
+                                                                  if ((columnTransactionsRecord
+                                                                          .transactionType ==
+                                                                      'debit'))
                                                                     AutoSizeText(
-                                                                      columnTransactionsRecord!
+                                                                      columnTransactionsRecord
                                                                           .transactionType!
                                                                           .maybeHandleOverflow(
                                                                         maxChars:
@@ -1247,11 +1246,11 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                                 Color(0xFFFF0003),
                                                                           ),
                                                                     ),
-                                                                  if ((columnTransactionsRecord!
-                                                                          .transactionType) ==
-                                                                      'credit')
+                                                                  if ((columnTransactionsRecord
+                                                                          .transactionType ==
+                                                                      'credit'))
                                                                     AutoSizeText(
-                                                                      columnTransactionsRecord!
+                                                                      columnTransactionsRecord
                                                                           .transactionType!
                                                                           .maybeHandleOverflow(
                                                                         maxChars:

@@ -200,7 +200,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                   lastViewed:
                                                       getCurrentTimestamp,
                                                 );
-                                                await columnBudgetsRecord!
+                                                await columnBudgetsRecord
                                                     .reference
                                                     .update(budgetsUpdateData);
                                                 await Navigator.push(
@@ -223,10 +223,10 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                     color: Color(0xFFC72323),
                                                     icon: Icons.delete_rounded,
                                                     onTap: () async {
-                                                      if ((columnBudgetsRecord!
-                                                              .reference) ==
-                                                          (currentUserDocument!
-                                                              .activeBudget)) {
+                                                      if (columnBudgetsRecord
+                                                              .reference ==
+                                                          currentUserDocument!
+                                                              .activeBudget) {
                                                         var confirmDialogResponse =
                                                             await showDialog<
                                                                     bool>(
@@ -272,7 +272,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                         }
                                                       }
                                                       // Action_DeleteBudget
-                                                      await columnBudgetsRecord!
+                                                      await columnBudgetsRecord
                                                           .reference
                                                           .delete();
                                                     },
@@ -287,7 +287,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                       final usersUpdateData =
                                                           createUsersRecordData(
                                                         activeBudget:
-                                                            columnBudgetsRecord!
+                                                            columnBudgetsRecord
                                                                 .reference,
                                                       );
                                                       await currentUserReference!
@@ -300,7 +300,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                   title: Text(
                                                     functions
                                                         .formatTransCurrency(
-                                                            columnBudgetsRecord!
+                                                            columnBudgetsRecord
                                                                 .budgetAmount),
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -314,7 +314,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                         ),
                                                   ),
                                                   subtitle: Text(
-                                                    '${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetEnd)}',
+                                                    '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText2

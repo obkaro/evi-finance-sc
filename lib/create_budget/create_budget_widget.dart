@@ -48,6 +48,8 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
       key: scaffoldKey,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        iconTheme:
+            IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
         automaticallyImplyLeading: true,
         title: Text(
           'Budget Setup',
@@ -123,12 +125,15 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                           ],
                         ),
                       ),
-                      custom_widgets.CurrencyTextField(
-                        width: MediaQuery.of(context).size.width,
-                        height: 50,
-                        amount: widget.budget!.budgetAmount,
-                        labelText: 'Amount',
-                        hintText: 'Enter amount',
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                        child: custom_widgets.CurrencyTextField(
+                          width: MediaQuery.of(context).size.width,
+                          height: 50,
+                          amount: widget.budget!.budgetAmount,
+                          labelText: 'Amount',
+                          hintText: 'Enter amount',
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
@@ -164,7 +169,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
                                         iconColor: FlutterFlowTheme.of(context)
-                                            .secondaryText,
+                                            .primaryText,
                                         weekFormat: false,
                                         weekStartsMonday: false,
                                         initialDate: getCurrentTimestamp,
@@ -172,7 +177,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                         onChange: (DateTimeRange?
                                             newSelectedDate) async {
                                           calendarSelectedDay = newSelectedDate;
-                                          if ((dropDownValue) ==
+                                          if (dropDownValue ==
                                               'Monthly Budget') {
                                             final budgetsUpdateData =
                                                 createBudgetsRecordData(
@@ -228,7 +233,15 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                           setState(() {});
                                         },
                                         titleStyle: FlutterFlowTheme.of(context)
-                                            .subtitle2,
+                                            .subtitle2
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2Family,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
                                         dayOfWeekStyle: FlutterFlowTheme.of(
                                                 context)
                                             .bodyText2
@@ -236,7 +249,9 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                               fontFamily:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyText2Family,
-                                              fontWeight: FontWeight.normal,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                             ),
                                         dateStyle: FlutterFlowTheme.of(context)
                                             .bodyText2

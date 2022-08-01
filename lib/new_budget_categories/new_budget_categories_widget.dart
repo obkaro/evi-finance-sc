@@ -39,7 +39,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
   void initState() {
     super.initState();
     // On page load action.
-    SchedulerBinding.instance?.addPostFrameCallback((_) async {
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
       await showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
@@ -179,7 +179,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                 AlignmentDirectional(0, 0),
                                             child: Text(
                                               functions.formatBudgetCurrency(
-                                                  columnBudgetsRecord!
+                                                  columnBudgetsRecord
                                                       .unallocatedAmount),
                                               textAlign: TextAlign.end,
                                               style:
@@ -214,7 +214,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                 alignment:
                                                     AlignmentDirectional(0, 0),
                                                 child: Text(
-                                                  'Start: ${dateTimeFormat('MMMEd', columnBudgetsRecord!.budgetStart)}',
+                                                  'Start: ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)}',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .subtitle1,
@@ -245,7 +245,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                     FieldValue.increment(
                                                         -(100000)),
                                               };
-                                              await columnBudgetsRecord!
+                                              await columnBudgetsRecord
                                                   .reference
                                                   .update(budgetsUpdateData);
                                             },
@@ -286,7 +286,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                   AlignmentDirectional(0, 0),
                                               child: Text(
                                                 functions.formatBudgetCurrency(
-                                                    columnBudgetsRecord!
+                                                    columnBudgetsRecord
                                                         .budgetAmount),
                                                 textAlign: TextAlign.end,
                                                 style:
@@ -318,7 +318,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                     FieldValue.increment(
                                                         100000),
                                               };
-                                              await columnBudgetsRecord!
+                                              await columnBudgetsRecord
                                                   .reference
                                                   .update(budgetsUpdateData);
                                             },
@@ -476,7 +476,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                                             0),
                                                                 child:
                                                                     AutoSizeText(
-                                                                  rowConstBudgetCategoriesRecord!
+                                                                  rowConstBudgetCategoriesRecord
                                                                       .categoryName!,
                                                                   textAlign:
                                                                       TextAlign
@@ -533,8 +533,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                         builder: (context) {
                                           final existingCategories =
                                               newBudgetCategoriesCategoriesRecordList
-                                                      ?.toList() ??
-                                                  [];
+                                                  .toList();
                                           return SingleChildScrollView(
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
@@ -583,7 +582,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                                             0),
                                                                 child:
                                                                     AutoSizeText(
-                                                                  existingCategoriesItem!
+                                                                  existingCategoriesItem
                                                                       .categoryName!,
                                                                   textAlign:
                                                                       TextAlign
@@ -611,7 +610,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                                 0, 0),
                                                         child: Text(
                                                           functions.formatBudgetCurrency(
-                                                              existingCategoriesItem!
+                                                              existingCategoriesItem
                                                                   .categoryAmount),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
@@ -675,7 +674,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                               {
                                                             'unallocatedAmount':
                                                                 FieldValue.increment(
-                                                                    existingCategoriesItem!
+                                                                    existingCategoriesItem
                                                                         .categoryAmount!),
                                                           };
                                                           await widget
@@ -684,7 +683,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                               .update(
                                                                   budgetsUpdateData);
                                                           // Action_DeleteCategory
-                                                          await existingCategoriesItem!
+                                                          await existingCategoriesItem
                                                               .reference
                                                               .delete();
                                                         },

@@ -135,11 +135,11 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            if ((FFAppState().currencyTextField!) <=
-                                (widget.budget!.unallocatedAmount!)) {
+                            if (FFAppState().currencyTextField <=
+                                widget.budget!.unallocatedAmount!) {
                               final budgetsUpdateData = {
                                 'unallocatedAmount': FieldValue.increment(
-                                    -(FFAppState().currencyTextField!)),
+                                    -(FFAppState().currencyTextField)),
                               };
                               await widget.budget!.reference
                                   .update(budgetsUpdateData);

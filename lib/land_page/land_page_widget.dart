@@ -1,8 +1,10 @@
 import '../auth/auth_util.dart';
+import '../email_auth/email_auth_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../onboarding_page_view/onboarding_page_view_widget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -148,7 +150,7 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                 alignment: AlignmentDirectional(0, 0),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 48),
+                                      0, 0, 0, 16),
                                   child: Container(
                                     width: double.infinity,
                                     height: 60,
@@ -176,7 +178,7 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                   ),
                                                 );
                                               },
-                                              text: 'Continue with Google',
+                                              text: 'Sign in with Google',
                                               icon: Icon(
                                                 Icons.add,
                                                 color: Colors.transparent,
@@ -218,14 +220,83 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                             ),
-                                            child: Image.network(
-                                              'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
+                                            child: CachedNetworkImage(
+                                              imageUrl:
+                                                  'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
                                               fit: BoxFit.contain,
                                             ),
                                           ),
                                         ),
                                       ],
                                     ),
+                                  ),
+                                ),
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional(0, 0),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 60,
+                                  child: Stack(
+                                    children: [
+                                      Align(
+                                        alignment: AlignmentDirectional(0, 0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 0, 1),
+                                          child: FFButtonWidget(
+                                            onPressed: () async {
+                                              await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EmailAuthWidget(),
+                                                ),
+                                              );
+                                            },
+                                            text: 'Continue with Email',
+                                            icon: Icon(
+                                              Icons.add,
+                                              color: Colors.transparent,
+                                              size: 20,
+                                            ),
+                                            options: FFButtonOptions(
+                                              width: double.infinity,
+                                              height: 60,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .subtitle2Family,
+                                                        color: Colors.white,
+                                                      ),
+                                              elevation: 0,
+                                              borderSide: BorderSide(
+                                                width: 0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(-0.83, 0),
+                                        child: Icon(
+                                          Icons.email_rounded,
+                                          color: Colors.white,
+                                          size: 24,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),

@@ -251,7 +251,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                           constInstitutionLogosRecord.where(
                                                               'institutionCode',
                                                               isEqualTo:
-                                                                  listViewAccountsRecord!
+                                                                  listViewAccountsRecord
                                                                       .bankCode),
                                                       singleRecord: true,
                                                     ),
@@ -290,7 +290,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                         child:
                                                             CachedNetworkImage(
                                                           imageUrl:
-                                                              imageConstInstitutionLogosRecord!
+                                                              imageConstInstitutionLogosRecord
                                                                   .institutionLogo!,
                                                           width: 45,
                                                           height: 45,
@@ -299,9 +299,9 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                       );
                                                     },
                                                   ),
-                                                  if ((listViewAccountsRecord!
-                                                          .reauthRequired) ==
-                                                      true)
+                                                  if ((listViewAccountsRecord
+                                                          .reauthRequired ==
+                                                      true))
                                                     Align(
                                                       alignment:
                                                           AlignmentDirectional(
@@ -337,7 +337,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                               .fromSTEB(
                                                                   0, 0, 0, 10),
                                                       child: Text(
-                                                        listViewAccountsRecord!
+                                                        listViewAccountsRecord
                                                             .accountName!,
                                                         style:
                                                             FlutterFlowTheme.of(
@@ -354,7 +354,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                       children: [
                                                         Text(
                                                           functions.formatTransCurrency(
-                                                              listViewAccountsRecord!
+                                                              listViewAccountsRecord
                                                                   .accountBalance),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
@@ -381,7 +381,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                         thickness: 1,
                         color: FlutterFlowTheme.of(context).fadedDivider,
                       ),
-                      if ((accountsAccountsRecordList?.length) == 0)
+                      if ((accountsAccountsRecordList.length == 0))
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: Container(
@@ -403,7 +403,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                     'View your linked accounts here. Tap the + button to link a new account.',
                                     textAlign: TextAlign.center,
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                        FlutterFlowTheme.of(context).bodyText2,
                                   ),
                                 ],
                               ),

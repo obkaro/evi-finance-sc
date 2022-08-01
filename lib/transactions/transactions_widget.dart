@@ -188,7 +188,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                         AccountsRecord>(
                                                       future: AccountsRecord
                                                           .getDocumentOnce(
-                                                              columnTransactionsRecord!
+                                                              columnTransactionsRecord
                                                                   .account!),
                                                       builder:
                                                           (context, snapshot) {
@@ -244,7 +244,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                       queryBuilder: (constInstitutionLogosRecord) => constInstitutionLogosRecord.where(
                                                                           'institutionCode',
                                                                           isEqualTo:
-                                                                              rowAccountsRecord!.bankCode),
+                                                                              rowAccountsRecord.bankCode),
                                                                       singleRecord:
                                                                           true,
                                                                     ),
@@ -288,7 +288,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                         child:
                                                                             CachedNetworkImage(
                                                                           imageUrl:
-                                                                              imageConstInstitutionLogosRecord!.institutionLogo!,
+                                                                              imageConstInstitutionLogosRecord.institutionLogo!,
                                                                           width:
                                                                               40,
                                                                           height:
@@ -335,12 +335,12 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                           crossAxisAlignment:
                                                                               CrossAxisAlignment.start,
                                                                           children: [
-                                                                            if ((columnTransactionsRecord!.transactionCategory !=
+                                                                            if ((columnTransactionsRecord.transactionCategory !=
                                                                                 null))
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                                                                 child: StreamBuilder<CategoriesRecord>(
-                                                                                  stream: CategoriesRecord.getDocument(columnTransactionsRecord!.transactionCategory!),
+                                                                                  stream: CategoriesRecord.getDocument(columnTransactionsRecord.transactionCategory!),
                                                                                   builder: (context, snapshot) {
                                                                                     // Customize what your widget looks like when it's loading.
                                                                                     if (!snapshot.hasData) {
@@ -357,7 +357,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                     }
                                                                                     final textCategoriesRecord = snapshot.data!;
                                                                                     return AutoSizeText(
-                                                                                      textCategoriesRecord!.categoryName!.maybeHandleOverflow(
+                                                                                      textCategoriesRecord.categoryName!.maybeHandleOverflow(
                                                                                         maxChars: 25,
                                                                                         replacement: '…',
                                                                                       ),
@@ -366,7 +366,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                   },
                                                                                 ),
                                                                               ),
-                                                                            if ((columnTransactionsRecord!.transactionCategory ==
+                                                                            if ((columnTransactionsRecord.transactionCategory ==
                                                                                 null))
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
@@ -380,7 +380,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                 ),
                                                                               ),
                                                                             Text(
-                                                                              '${dateTimeFormat('Hm', columnTransactionsRecord!.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord!.trasactionDate)}',
+                                                                              '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
                                                                               textAlign: TextAlign.start,
                                                                               style: FlutterFlowTheme.of(context).bodyText2,
                                                                             ),
@@ -410,7 +410,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                 8),
                                                                             child:
                                                                                 AutoSizeText(
-                                                                              functions.formatTransCurrency(columnTransactionsRecord!.transactionAmount).maybeHandleOverflow(
+                                                                              functions.formatTransCurrency(columnTransactionsRecord.transactionAmount).maybeHandleOverflow(
                                                                                     maxChars: 15,
                                                                                     replacement: '…',
                                                                                   ),
@@ -421,7 +421,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                             ),
                                                                           ),
                                                                           AutoSizeText(
-                                                                            columnTransactionsRecord!.transactionType!.maybeHandleOverflow(
+                                                                            columnTransactionsRecord.transactionType!.maybeHandleOverflow(
                                                                               maxChars: 15,
                                                                               replacement: '…',
                                                                             ),
@@ -519,7 +519,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                         AccountsRecord>(
                                                       future: AccountsRecord
                                                           .getDocumentOnce(
-                                                              columnTransactionsRecord!
+                                                              columnTransactionsRecord
                                                                   .account!),
                                                       builder:
                                                           (context, snapshot) {
@@ -575,7 +575,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                       queryBuilder: (constInstitutionLogosRecord) => constInstitutionLogosRecord.where(
                                                                           'institutionCode',
                                                                           isEqualTo:
-                                                                              rowAccountsRecord!.bankCode),
+                                                                              rowAccountsRecord.bankCode),
                                                                       singleRecord:
                                                                           true,
                                                                     ),
@@ -618,7 +618,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                             BorderRadius.circular(12),
                                                                         child: Image
                                                                             .network(
-                                                                          imageConstInstitutionLogosRecord!
+                                                                          imageConstInstitutionLogosRecord
                                                                               .institutionLogo!,
                                                                           width:
                                                                               40,
@@ -666,12 +666,12 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                           crossAxisAlignment:
                                                                               CrossAxisAlignment.start,
                                                                           children: [
-                                                                            if ((columnTransactionsRecord!.transactionCategory !=
+                                                                            if ((columnTransactionsRecord.transactionCategory !=
                                                                                 null))
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                                                                 child: FutureBuilder<CategoriesRecord>(
-                                                                                  future: CategoriesRecord.getDocumentOnce(columnTransactionsRecord!.transactionCategory!),
+                                                                                  future: CategoriesRecord.getDocumentOnce(columnTransactionsRecord.transactionCategory!),
                                                                                   builder: (context, snapshot) {
                                                                                     // Customize what your widget looks like when it's loading.
                                                                                     if (!snapshot.hasData) {
@@ -688,7 +688,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                     }
                                                                                     final textCategoriesRecord = snapshot.data!;
                                                                                     return AutoSizeText(
-                                                                                      textCategoriesRecord!.categoryName!.maybeHandleOverflow(
+                                                                                      textCategoriesRecord.categoryName!.maybeHandleOverflow(
                                                                                         maxChars: 25,
                                                                                         replacement: '…',
                                                                                       ),
@@ -697,7 +697,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                   },
                                                                                 ),
                                                                               ),
-                                                                            if ((columnTransactionsRecord!.transactionCategory ==
+                                                                            if ((columnTransactionsRecord.transactionCategory ==
                                                                                 null))
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
@@ -711,7 +711,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                 ),
                                                                               ),
                                                                             Text(
-                                                                              '${dateTimeFormat('Hm', columnTransactionsRecord!.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord!.trasactionDate)}',
+                                                                              '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
                                                                               textAlign: TextAlign.start,
                                                                               style: FlutterFlowTheme.of(context).bodyText2,
                                                                             ),
@@ -741,7 +741,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                 8),
                                                                             child:
                                                                                 AutoSizeText(
-                                                                              functions.formatTransCurrency(columnTransactionsRecord!.transactionAmount).maybeHandleOverflow(
+                                                                              functions.formatTransCurrency(columnTransactionsRecord.transactionAmount).maybeHandleOverflow(
                                                                                     maxChars: 15,
                                                                                     replacement: '…',
                                                                                   ),
@@ -752,7 +752,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                             ),
                                                                           ),
                                                                           AutoSizeText(
-                                                                            columnTransactionsRecord!.transactionType!.maybeHandleOverflow(
+                                                                            columnTransactionsRecord.transactionType!.maybeHandleOverflow(
                                                                               maxChars: 15,
                                                                               replacement: '…',
                                                                             ),

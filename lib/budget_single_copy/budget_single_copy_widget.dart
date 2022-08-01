@@ -111,7 +111,7 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                             'transactionCategory',
                                             whereIn:
                                                 budgetSingleCopyCategoriesRecordList
-                                                    .map((e) => e!.reference)
+                                                    .map((e) => e.reference)
                                                     .toList()),
                                   ),
                                   builder: (context, snapshot) {
@@ -207,8 +207,8 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                                       .spaceBetween,
                                               children: [
                                                 if ((containerTransactionsRecordList
-                                                        .length) >
-                                                    0)
+                                                        .length >
+                                                    0))
                                                   Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -242,8 +242,8 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                                     ],
                                                   ),
                                                 if ((containerTransactionsRecordList
-                                                        .length) >
-                                                    0)
+                                                        .length >
+                                                    0))
                                                   Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -396,8 +396,7 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                               builder: (context) {
                                 final budgetCategories =
                                     budgetSingleCopyCategoriesRecordList
-                                            ?.toList() ??
-                                        [];
+                                        .toList();
                                 return Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children:
@@ -415,7 +414,7 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                               transactionsRecord.where(
                                                   'transactionCategory',
                                                   isEqualTo:
-                                                      budgetCategoriesItem!
+                                                      budgetCategoriesItem
                                                           .reference),
                                         ),
                                         builder: (context, snapshot) {
@@ -497,7 +496,7 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                                                         0,
                                                                         10),
                                                             child: Text(
-                                                              budgetCategoriesItem!
+                                                              budgetCategoriesItem
                                                                   .categoryName!,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
@@ -514,7 +513,7 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                                                         10),
                                                             child: Text(
                                                               functions.subtractCurrencyOf(
-                                                                  budgetCategoriesItem!
+                                                                  budgetCategoriesItem
                                                                       .categoryAmount,
                                                                   functions.sumTransactionAmounts(
                                                                       containerTransactionsRecordList
