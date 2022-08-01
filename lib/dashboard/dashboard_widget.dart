@@ -6,7 +6,6 @@ import '../components/empty_linked_accounts_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../main.dart';
-import '../transaction_single/transaction_single_widget.dart';
 import '../transaction_single_copy/transaction_single_copy_widget.dart';
 import '../transactions/transactions_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -512,12 +511,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                               stream: queryTransactionsRecord(
                                                 queryBuilder: (transactionsRecord) =>
                                                     transactionsRecord.where(
-                                                        'transactionCategory',
-                                                        whereIn:
-                                                            containerCategoriesRecordList
-                                                                .map((e) =>
-                                                                    e.reference)
-                                                                .toList()),
+                                                        'transactionBudget',
+                                                        isEqualTo:
+                                                            containerBudgetsRecord
+                                                                .reference),
                                               ),
                                               builder: (context, snapshot) {
                                                 // Customize what your widget looks like when it's loading.
@@ -888,217 +885,224 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                         EdgeInsetsDirectional
                                                             .fromSTEB(
                                                                 16, 0, 0, 0),
-                                                    child: InkWell(
-                                                      onTap: () async {
-                                                        await Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                TransactionSingleWidget(
-                                                              transaction:
-                                                                  columnTransactionsRecord,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Expanded(
-                                                            child: Container(
-                                                              width: 100,
-                                                              decoration:
-                                                                  BoxDecoration(),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  if ((columnTransactionsRecord
-                                                                          .transactionCategory !=
-                                                                      null))
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              0,
-                                                                              8),
-                                                                      child: StreamBuilder<
-                                                                          CategoriesRecord>(
-                                                                        stream:
-                                                                            CategoriesRecord.getDocument(columnTransactionsRecord.transactionCategory!),
-                                                                        builder:
-                                                                            (context,
-                                                                                snapshot) {
-                                                                          // Customize what your widget looks like when it's loading.
-                                                                          if (!snapshot
-                                                                              .hasData) {
-                                                                            return Center(
-                                                                              child: SizedBox(
-                                                                                width: 50,
-                                                                                height: 50,
-                                                                                child: SpinKitRing(
-                                                                                  color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                  size: 50,
-                                                                                ),
-                                                                              ),
-                                                                            );
-                                                                          }
-                                                                          final textCategoriesRecord =
-                                                                              snapshot.data!;
-                                                                          return AutoSizeText(
-                                                                            textCategoriesRecord.categoryName!.maybeHandleOverflow(
-                                                                              maxChars: 25,
-                                                                              replacement: '…',
-                                                                            ),
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).subtitle1,
-                                                                          );
-                                                                        },
-                                                                      ),
-                                                                    ),
-                                                                  if ((columnTransactionsRecord
-                                                                          .transactionCategory ==
-                                                                      null))
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              0,
-                                                                              8),
-                                                                      child:
-                                                                          AutoSizeText(
-                                                                        '-',
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1
-                                                                            .override(
-                                                                              fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
-                                                                              color: Color(0xFFD40F0F),
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontStyle: FontStyle.italic,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                  Text(
-                                                                    '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText2,
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Container(
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Container(
                                                             width: 100,
                                                             decoration:
                                                                 BoxDecoration(),
                                                             child: Column(
                                                               mainAxisSize:
                                                                   MainAxisSize
-                                                                      .min,
+                                                                      .max,
                                                               mainAxisAlignment:
                                                                   MainAxisAlignment
                                                                       .center,
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
-                                                                      .end,
+                                                                      .start,
                                                               children: [
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          0,
-                                                                          0,
-                                                                          8),
-                                                                  child:
-                                                                      AutoSizeText(
-                                                                    functions
-                                                                        .formatTransCurrency(
-                                                                            columnTransactionsRecord.transactionAmount)
-                                                                        .maybeHandleOverflow(
-                                                                          maxChars:
-                                                                              15,
-                                                                          replacement:
-                                                                              '…',
-                                                                        ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .subtitle1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              FlutterFlowTheme.of(context).subtitle1Family,
-                                                                          fontSize:
-                                                                              16,
-                                                                        ),
+                                                                if ((columnTransactionsRecord
+                                                                        .transactionCategory !=
+                                                                    null))
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0,
+                                                                            0,
+                                                                            0,
+                                                                            8),
+                                                                    child: StreamBuilder<
+                                                                        CategoriesRecord>(
+                                                                      stream: CategoriesRecord.getDocument(
+                                                                          columnTransactionsRecord
+                                                                              .transactionCategory!),
+                                                                      builder:
+                                                                          (context,
+                                                                              snapshot) {
+                                                                        // Customize what your widget looks like when it's loading.
+                                                                        if (!snapshot
+                                                                            .hasData) {
+                                                                          return Center(
+                                                                            child:
+                                                                                SizedBox(
+                                                                              width: 50,
+                                                                              height: 50,
+                                                                              child: SpinKitRing(
+                                                                                color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                size: 50,
+                                                                              ),
+                                                                            ),
+                                                                          );
+                                                                        }
+                                                                        final textCategoriesRecord =
+                                                                            snapshot.data!;
+                                                                        return AutoSizeText(
+                                                                          textCategoriesRecord
+                                                                              .categoryName!
+                                                                              .maybeHandleOverflow(
+                                                                            maxChars:
+                                                                                25,
+                                                                            replacement:
+                                                                                '…',
+                                                                          ),
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).subtitle1,
+                                                                        );
+                                                                      },
+                                                                    ),
                                                                   ),
-                                                                ),
-                                                                Stack(
-                                                                  children: [
-                                                                    if ((columnTransactionsRecord
-                                                                            .transactionType ==
-                                                                        'debit'))
-                                                                      AutoSizeText(
-                                                                        columnTransactionsRecord
-                                                                            .transactionType!
-                                                                            .maybeHandleOverflow(
-                                                                          maxChars:
-                                                                              15,
-                                                                          replacement:
-                                                                              '…',
-                                                                        ),
-                                                                        textAlign:
-                                                                            TextAlign.start,
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText2
-                                                                            .override(
-                                                                              fontFamily: FlutterFlowTheme.of(context).bodyText2Family,
-                                                                              color: Color(0xFFFF0003),
-                                                                            ),
-                                                                      ),
-                                                                    if ((columnTransactionsRecord
-                                                                            .transactionType ==
-                                                                        'credit'))
-                                                                      AutoSizeText(
-                                                                        columnTransactionsRecord
-                                                                            .transactionType!
-                                                                            .maybeHandleOverflow(
-                                                                          maxChars:
-                                                                              15,
-                                                                          replacement:
-                                                                              '…',
-                                                                        ),
-                                                                        textAlign:
-                                                                            TextAlign.start,
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText2
-                                                                            .override(
-                                                                              fontFamily: FlutterFlowTheme.of(context).bodyText2Family,
-                                                                              color: FlutterFlowTheme.of(context).tertiaryColor,
-                                                                            ),
-                                                                      ),
-                                                                  ],
+                                                                if ((columnTransactionsRecord
+                                                                        .transactionCategory ==
+                                                                    null))
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0,
+                                                                            0,
+                                                                            0,
+                                                                            8),
+                                                                    child:
+                                                                        AutoSizeText(
+                                                                      '-',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                FlutterFlowTheme.of(context).bodyText1Family,
+                                                                            color:
+                                                                                Color(0xFFD40F0F),
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            fontStyle:
+                                                                                FontStyle.italic,
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                Text(
+                                                                  '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .start,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText2,
                                                                 ),
                                                               ],
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
+                                                        ),
+                                                        Container(
+                                                          width: 100,
+                                                          decoration:
+                                                              BoxDecoration(),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0,
+                                                                            0,
+                                                                            0,
+                                                                            8),
+                                                                child:
+                                                                    AutoSizeText(
+                                                                  functions
+                                                                      .formatTransCurrency(
+                                                                          columnTransactionsRecord
+                                                                              .transactionAmount)
+                                                                      .maybeHandleOverflow(
+                                                                        maxChars:
+                                                                            15,
+                                                                        replacement:
+                                                                            '…',
+                                                                      ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).subtitle1Family,
+                                                                        fontSize:
+                                                                            16,
+                                                                      ),
+                                                                ),
+                                                              ),
+                                                              Stack(
+                                                                children: [
+                                                                  if ((columnTransactionsRecord
+                                                                          .transactionType ==
+                                                                      'debit'))
+                                                                    AutoSizeText(
+                                                                      columnTransactionsRecord
+                                                                          .transactionType!
+                                                                          .maybeHandleOverflow(
+                                                                        maxChars:
+                                                                            15,
+                                                                        replacement:
+                                                                            '…',
+                                                                      ),
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .start,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText2
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                FlutterFlowTheme.of(context).bodyText2Family,
+                                                                            color:
+                                                                                Color(0xFFFF0003),
+                                                                          ),
+                                                                    ),
+                                                                  if ((columnTransactionsRecord
+                                                                          .transactionType ==
+                                                                      'credit'))
+                                                                    AutoSizeText(
+                                                                      columnTransactionsRecord
+                                                                          .transactionType!
+                                                                          .maybeHandleOverflow(
+                                                                        maxChars:
+                                                                            15,
+                                                                        replacement:
+                                                                            '…',
+                                                                      ),
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .start,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText2
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                FlutterFlowTheme.of(context).bodyText2Family,
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).tertiaryColor,
+                                                                          ),
+                                                                    ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),

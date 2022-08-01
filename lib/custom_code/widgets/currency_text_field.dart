@@ -96,7 +96,7 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
           filled: true,
           fillColor: FlutterFlowTheme.of(context).secondaryBackground,
         ),
-        style: FlutterFlowTheme.of(context).subtitle1,
+        style: FlutterFlowTheme.of(context).bodyText1,
         keyboardType: TextInputType.number,
       ),
     );
