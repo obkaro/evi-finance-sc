@@ -172,14 +172,14 @@ class MobileTypography extends Typography {
         'Source Sans Pro',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 14,
+        fontSize: 16,
       );
   String get bodyText2Family => 'Source Sans Pro';
   TextStyle get bodyText2 => GoogleFonts.getFont(
         'Source Sans Pro',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 12,
+        fontSize: 14,
       );
 }
 

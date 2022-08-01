@@ -28,3 +28,5 @@ export 'welcome_to_evi/welcome_to_evi_widget.dart' show WelcomeToEviWidget;
 export 'first_budget/first_budget_widget.dart' show FirstBudgetWidget;
 export 'budget_single_copy/budget_single_copy_widget.dart'
     show BudgetSingleCopyWidget;
+export 'transaction_single_copy/transaction_single_copy_widget.dart'
+    show TransactionSingleCopyWidget;

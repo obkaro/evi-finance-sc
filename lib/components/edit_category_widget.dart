@@ -77,14 +77,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       hintText: 'Enter Amount',
-                      hintStyle: FlutterFlowTheme.of(context)
-                          .bodyText1
-                          .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyText1Family,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            fontWeight: FontWeight.w500,
-                          ),
+                      hintStyle: FlutterFlowTheme.of(context).bodyText2,
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
@@ -104,6 +97,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                           FlutterFlowTheme.of(context).secondaryBackground,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1,
+                    keyboardType: TextInputType.name,
                   ),
                 ),
                 Padding(
@@ -135,12 +129,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                             width: double.infinity,
                             height: 60,
                             color: Color(0x00D2D2D2),
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context).bodyText2,
                             elevation: 0,
                             borderSide: BorderSide(
                               color: Colors.transparent,

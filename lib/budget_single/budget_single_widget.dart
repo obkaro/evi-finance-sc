@@ -94,7 +94,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -281,7 +281,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        'Target',
+                                                        'Limit',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -531,7 +531,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                         padding:
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(
-                                                                    0, 0, 0, 8),
+                                                                    2, 0, 2, 8),
                                                         child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -544,15 +544,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                   .categoryName!,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .subtitle2
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .subtitle2Family,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryText,
-                                                                  ),
+                                                                  .subtitle1,
                                                             ),
                                                             Text(
                                                               functions.formatTransCurrency(
@@ -560,15 +552,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                       .categoryAmount),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .subtitle2
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .subtitle2Family,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryText,
-                                                                  ),
+                                                                  .bodyText1,
                                                             ),
                                                           ],
                                                         ),
@@ -623,22 +607,28 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                           ],
                                                         ),
                                                       ),
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Text(
-                                                            functions.subtractCurrencyOf(
-                                                                budgetCategoriesItem
-                                                                    .categoryAmount,
-                                                                functions.sumTransactionAmounts(
-                                                                    containerTransactionsRecordList
-                                                                        .toList())),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1,
-                                                          ),
-                                                        ],
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    2, 0, 2, 0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Text(
+                                                              functions.subtractCurrencyOf(
+                                                                  budgetCategoriesItem
+                                                                      .categoryAmount,
+                                                                  functions.sumTransactionAmounts(
+                                                                      containerTransactionsRecordList
+                                                                          .toList())),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1,
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ],
                                                   ),

@@ -89,7 +89,7 @@ class _CreateFirstBudgetQCopyWidgetState
                     ),
                     Icon(
                       Icons.refresh_rounded,
-                      color: FlutterFlowTheme.of(context).secondaryText,
+                      color: FlutterFlowTheme.of(context).primaryText,
                       size: 72,
                     ),
                     Padding(
@@ -157,14 +157,8 @@ class _CreateFirstBudgetQCopyWidgetState
                                 width: double.infinity,
                                 height: 30,
                                 color: Color(0x00D2D2D2),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                                textStyle:
+                                    FlutterFlowTheme.of(context).bodyText2,
                                 elevation: 0,
                                 borderSide: BorderSide(
                                   color: Colors.transparent,

@@ -126,13 +126,7 @@ class _CreateFirstBudgetQWidgetState extends State<CreateFirstBudgetQWidget> {
                             width: double.infinity,
                             height: 30,
                             color: Color(0x00D2D2D2),
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context).bodyText2,
                             elevation: 0,
                             borderSide: BorderSide(
                               color: Colors.transparent,

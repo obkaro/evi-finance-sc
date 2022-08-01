@@ -167,7 +167,14 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                 'Left to allocate:',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodyText2
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText2Family,
+                                                          fontSize: 14,
+                                                        ),
                                               ),
                                             ),
                                           ),
@@ -192,6 +199,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                                 .bodyText2Family,
                                                         color:
                                                             Color(0xFFFF0003),
+                                                        fontSize: 14,
                                                       ),
                                             ),
                                           ),
@@ -359,7 +367,16 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                       20, 4, 0, 0),
                                   child: StreamBuilder<
                                       List<ConstBudgetCategoriesRecord>>(
-                                    stream: queryConstBudgetCategoriesRecord(),
+                                    stream: queryConstBudgetCategoriesRecord(
+                                      queryBuilder: (constBudgetCategoriesRecord) =>
+                                          constBudgetCategoriesRecord.where(
+                                              'categoryName',
+                                              whereNotIn:
+                                                  newBudgetCategoriesCategoriesRecordList
+                                                      .map((e) =>
+                                                          e.categoryName!)
+                                                      .toList()),
+                                    ),
                                     builder: (context, snapshot) {
                                       // Customize what your widget looks like when it's loading.
                                       if (!snapshot.hasData) {
@@ -417,15 +434,6 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                 },
                                                 child: Container(
                                                   decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        blurRadius: 14,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .shadowGray,
-                                                      )
-                                                    ],
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             16),
@@ -589,7 +597,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                                           .start,
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyText1,
+                                                                      .subtitle1,
                                                                 ),
                                                               ),
                                                             ),
@@ -730,14 +738,6 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 14,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .shadowGray,
-                                                )
-                                              ],
                                               borderRadius:
                                                   BorderRadius.circular(16),
                                               shape: BoxShape.rectangle,
@@ -907,6 +907,18 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                       newBudgetCategoriesCategoriesRecordList
                                                           .toList(),
                                                     );
+
+                                                    final budgetsUpdateData = {
+                                                      'unallocatedAmount': FieldValue
+                                                          .increment(functions
+                                                              .sumCategoryAmounts(
+                                                                  newBudgetCategoriesCategoriesRecordList
+                                                                      .toList())),
+                                                    };
+                                                    await columnBudgetsRecord
+                                                        .reference
+                                                        .update(
+                                                            budgetsUpdateData);
                                                   } else {
                                                     return;
                                                   }
@@ -924,7 +936,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                   textStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .subtitle2,
+                                                          .bodyText2,
                                                   elevation: 0,
                                                   borderSide: BorderSide(
                                                     color: Colors.transparent,

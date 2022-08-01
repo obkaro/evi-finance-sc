@@ -61,7 +61,7 @@ class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
                 ),
                 Icon(
                   Icons.table_chart,
-                  color: FlutterFlowTheme.of(context).secondaryText,
+                  color: FlutterFlowTheme.of(context).primaryText,
                   size: 72,
                 ),
                 Padding(

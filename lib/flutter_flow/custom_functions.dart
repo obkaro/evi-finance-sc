@@ -319,3 +319,13 @@ int isBudgetExising(DocumentReference? userBudget) {
 
   return existing;
 }
+
+String transactionTypeColor(String transactionType) {
+  // Add your function code here!
+
+  String color = "";
+  if (transactionType == "credit") {
+    color = "0xFFFF0003";
+  }
+  return color;
+}
