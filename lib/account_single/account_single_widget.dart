@@ -42,7 +42,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
   void initState() {
     super.initState();
     // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
+    SchedulerBinding.instance!.addPostFrameCallback((_) async {
       if (widget.account!.reauthRequired == true) {
         await showModalBottomSheet(
           isScrollControlled: true,
