@@ -819,7 +819,6 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                     children: [
                                       Expanded(
                                         child: Container(
-                                          height: 100,
                                           decoration: BoxDecoration(),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
