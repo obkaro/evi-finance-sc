@@ -107,6 +107,14 @@ class _$TransactionsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.transactionBudget;
+    if (value != null) {
+      result
+        ..add('transactionBudget')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -184,6 +192,12 @@ class _$TransactionsRecordSerializer
           result.notes = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'transactionBudget':
+          result.transactionBudget = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -223,6 +237,8 @@ class _$TransactionsRecord extends TransactionsRecord {
   @override
   final String? notes;
   @override
+  final DocumentReference<Object?>? transactionBudget;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$TransactionsRecord(
@@ -242,6 +258,7 @@ class _$TransactionsRecord extends TransactionsRecord {
       this.transactionID,
       this.transactionCategory,
       this.notes,
+      this.transactionBudget,
       this.ffRef})
       : super._();
 
@@ -270,6 +287,7 @@ class _$TransactionsRecord extends TransactionsRecord {
         transactionID == other.transactionID &&
         transactionCategory == other.transactionCategory &&
         notes == other.notes &&
+        transactionBudget == other.transactionBudget &&
         ffRef == other.ffRef;
   }
 
@@ -288,20 +306,22 @@ class _$TransactionsRecord extends TransactionsRecord {
                                             $jc(
                                                 $jc(
                                                     $jc(
-                                                        0,
-                                                        trasactionDate
-                                                            .hashCode),
-                                                    account.hashCode),
-                                                monoCategory.hashCode),
-                                            transactionOwner.hashCode),
-                                        balanceAfter.hashCode),
-                                    transactionMonoID.hashCode),
-                                transactionAmount.hashCode),
-                            transactionType.hashCode),
-                        transactionNarration.hashCode),
-                    transactionID.hashCode),
-                transactionCategory.hashCode),
-            notes.hashCode),
+                                                        $jc(
+                                                            0,
+                                                            trasactionDate
+                                                                .hashCode),
+                                                        account.hashCode),
+                                                    monoCategory.hashCode),
+                                                transactionOwner.hashCode),
+                                            balanceAfter.hashCode),
+                                        transactionMonoID.hashCode),
+                                    transactionAmount.hashCode),
+                                transactionType.hashCode),
+                            transactionNarration.hashCode),
+                        transactionID.hashCode),
+                    transactionCategory.hashCode),
+                notes.hashCode),
+            transactionBudget.hashCode),
         ffRef.hashCode));
   }
 
@@ -320,6 +340,7 @@ class _$TransactionsRecord extends TransactionsRecord {
           ..add('transactionID', transactionID)
           ..add('transactionCategory', transactionCategory)
           ..add('notes', notes)
+          ..add('transactionBudget', transactionBudget)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -386,6 +407,12 @@ class TransactionsRecordBuilder
   String? get notes => _$this._notes;
   set notes(String? notes) => _$this._notes = notes;
 
+  DocumentReference<Object?>? _transactionBudget;
+  DocumentReference<Object?>? get transactionBudget =>
+      _$this._transactionBudget;
+  set transactionBudget(DocumentReference<Object?>? transactionBudget) =>
+      _$this._transactionBudget = transactionBudget;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -409,6 +436,7 @@ class TransactionsRecordBuilder
       _transactionID = $v.transactionID;
       _transactionCategory = $v.transactionCategory;
       _notes = $v.notes;
+      _transactionBudget = $v.transactionBudget;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -444,6 +472,7 @@ class TransactionsRecordBuilder
             transactionID: transactionID,
             transactionCategory: transactionCategory,
             notes: notes,
+            transactionBudget: transactionBudget,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

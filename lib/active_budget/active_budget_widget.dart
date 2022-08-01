@@ -257,12 +257,12 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                   TransactionsRecord>>(
                                                             stream:
                                                                 queryTransactionsRecord(
-                                                              queryBuilder: (transactionsRecord) => transactionsRecord.where(
-                                                                  'transactionCategory',
-                                                                  whereIn: containerCategoriesRecordList
-                                                                      .map((e) =>
-                                                                          e.reference)
-                                                                      .toList()),
+                                                              queryBuilder: (transactionsRecord) =>
+                                                                  transactionsRecord.where(
+                                                                      'transactionBudget',
+                                                                      isEqualTo:
+                                                                          columnBudgetsRecord
+                                                                              .reference),
                                                             ),
                                                             builder: (context,
                                                                 snapshot) {

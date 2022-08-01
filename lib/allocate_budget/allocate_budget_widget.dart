@@ -317,7 +317,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                             Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                if ((allocateBudgetCategoriesRecordList.length >
+                                if ((allocateBudgetCategoriesRecordList
+                                        .length <=
                                     10))
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
