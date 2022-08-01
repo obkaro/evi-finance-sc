@@ -149,7 +149,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                               ),
                               Text(
                                 'Total Balance',
-                                style: FlutterFlowTheme.of(context).bodyText2,
+                                style: FlutterFlowTheme.of(context).bodyText1,
                               ),
                             ],
                           ),
@@ -615,7 +615,11 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                           Text(
                                                                         '${functions.subtractCurrencyText(containerBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                                         style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1,
+                                                                            .subtitle1
+                                                                            .override(
+                                                                              fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
+                                                                              fontWeight: FontWeight.w500,
+                                                                            ),
                                                                       ),
                                                                     ),
                                                                   ],
@@ -975,12 +979,13 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                               8),
                                                                       child:
                                                                           AutoSizeText(
-                                                                        'Uncategorized',
+                                                                        '-',
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyText1
                                                                             .override(
                                                                               fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                               color: Color(0xFFD40F0F),
+                                                                              fontWeight: FontWeight.bold,
                                                                               fontStyle: FontStyle.italic,
                                                                             ),
                                                                       ),

@@ -707,17 +707,11 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               children: [
                                                                                 Text(
                                                                                   displayedCategoriesItem.categoryName!,
-                                                                                  style: FlutterFlowTheme.of(context).subtitle2.override(
-                                                                                        fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
-                                                                                        color: FlutterFlowTheme.of(context).primaryText,
-                                                                                      ),
+                                                                                  style: FlutterFlowTheme.of(context).subtitle1,
                                                                                 ),
                                                                                 Text(
                                                                                   functions.formatTransCurrency(displayedCategoriesItem.categoryAmount),
-                                                                                  style: FlutterFlowTheme.of(context).subtitle2.override(
-                                                                                        fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
-                                                                                        color: FlutterFlowTheme.of(context).primaryText,
-                                                                                      ),
+                                                                                  style: FlutterFlowTheme.of(context).bodyText1,
                                                                                 ),
                                                                               ],
                                                                             ),
