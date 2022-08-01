@@ -153,30 +153,30 @@ class MobileTypography extends Typography {
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get subtitle1Family => 'Spline Sans';
+  String get subtitle1Family => 'Source Sans Pro';
   TextStyle get subtitle1 => GoogleFonts.getFont(
-        'Spline Sans',
+        'Source Sans Pro',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 18,
       );
-  String get subtitle2Family => 'Spline Sans';
+  String get subtitle2Family => 'Source Sans Pro';
   TextStyle get subtitle2 => GoogleFonts.getFont(
-        'Spline Sans',
+        'Source Sans Pro',
         color: theme.secondaryText,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.bold,
         fontSize: 16,
       );
-  String get bodyText1Family => 'Spline Sans';
+  String get bodyText1Family => 'Source Sans Pro';
   TextStyle get bodyText1 => GoogleFonts.getFont(
-        'Spline Sans',
+        'Source Sans Pro',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 14,
       );
-  String get bodyText2Family => 'Spline Sans';
+  String get bodyText2Family => 'Source Sans Pro';
   TextStyle get bodyText2 => GoogleFonts.getFont(
-        'Spline Sans',
+        'Source Sans Pro',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 12,
@@ -188,23 +188,23 @@ class TabletTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Spline Sans';
+  String get title1Family => 'Source Sans Pro';
   TextStyle get title1 => GoogleFonts.getFont(
-        'Spline Sans',
+        'Source Sans Pro',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 24,
       );
-  String get title2Family => 'Spline Sans';
+  String get title2Family => 'Source Sans Pro';
   TextStyle get title2 => GoogleFonts.getFont(
-        'Spline Sans',
+        'Source Sans Pro',
         color: theme.secondaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get title3Family => 'Spline Sans';
+  String get title3Family => 'Source Sans Pro';
   TextStyle get title3 => GoogleFonts.getFont(
-        'Spline Sans',
+        'Source Sans Pro',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
@@ -244,23 +244,23 @@ class DesktopTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Spline Sans';
+  String get title1Family => 'Source Sans Pro';
   TextStyle get title1 => GoogleFonts.getFont(
-        'Spline Sans',
+        'Source Sans Pro',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 24,
       );
-  String get title2Family => 'Spline Sans';
+  String get title2Family => 'Source Sans Pro';
   TextStyle get title2 => GoogleFonts.getFont(
-        'Spline Sans',
+        'Source Sans Pro',
         color: theme.secondaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get title3Family => 'Spline Sans';
+  String get title3Family => 'Source Sans Pro';
   TextStyle get title3 => GoogleFonts.getFont(
-        'Spline Sans',
+        'Source Sans Pro',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
