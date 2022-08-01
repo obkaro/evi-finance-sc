@@ -418,7 +418,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                                               children: [
                                                                                 Text(
-                                                                                  'Target',
+                                                                                  'Limit',
                                                                                   style: FlutterFlowTheme.of(context).bodyText2,
                                                                                 ),
                                                                                 Text(

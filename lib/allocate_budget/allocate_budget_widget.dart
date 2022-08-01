@@ -436,14 +436,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .primaryBackground,
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                blurRadius: 14,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .shadowGray,
-                                                              )
-                                                            ],
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
@@ -753,14 +745,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 14,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .shadowGray,
-                                                )
-                                              ],
                                               borderRadius:
                                                   BorderRadius.circular(16),
                                               shape: BoxShape.rectangle,
@@ -954,6 +938,19 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                         allocateBudgetCategoriesRecordList
                                                             .toList(),
                                                       );
+
+                                                      final budgetsUpdateData =
+                                                          {
+                                                        'unallocatedAmount': FieldValue
+                                                            .increment(functions
+                                                                .sumCategoryAmounts(
+                                                                    allocateBudgetCategoriesRecordList
+                                                                        .toList())),
+                                                      };
+                                                      await columnBudgetsRecord
+                                                          .reference
+                                                          .update(
+                                                              budgetsUpdateData);
                                                     } else {
                                                       return;
                                                     }
@@ -968,17 +965,10 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primaryBackground,
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .subtitle2
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .subtitle2Family,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
+                                                    textStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText2,
                                                     elevation: 0,
                                                     borderSide: BorderSide(
                                                       color: Colors.transparent,

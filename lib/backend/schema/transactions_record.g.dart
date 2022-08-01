@@ -100,6 +100,13 @@ class _$TransactionsRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
+    value = object.notes;
+    if (value != null) {
+      result
+        ..add('notes')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -119,7 +126,7 @@ class _$TransactionsRecordSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -173,6 +180,10 @@ class _$TransactionsRecordSerializer
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
+        case 'notes':
+          result.notes = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -210,11 +221,13 @@ class _$TransactionsRecord extends TransactionsRecord {
   @override
   final DocumentReference<Object?>? transactionCategory;
   @override
+  final String? notes;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$TransactionsRecord(
           [void Function(TransactionsRecordBuilder)? updates]) =>
-      (new TransactionsRecordBuilder()..update(updates)).build();
+      (new TransactionsRecordBuilder()..update(updates))._build();
 
   _$TransactionsRecord._(
       {this.trasactionDate,
@@ -228,6 +241,7 @@ class _$TransactionsRecord extends TransactionsRecord {
       this.transactionNarration,
       this.transactionID,
       this.transactionCategory,
+      this.notes,
       this.ffRef})
       : super._();
 
@@ -255,6 +269,7 @@ class _$TransactionsRecord extends TransactionsRecord {
         transactionNarration == other.transactionNarration &&
         transactionID == other.transactionID &&
         transactionCategory == other.transactionCategory &&
+        notes == other.notes &&
         ffRef == other.ffRef;
   }
 
@@ -270,23 +285,29 @@ class _$TransactionsRecord extends TransactionsRecord {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc($jc(0, trasactionDate.hashCode),
-                                                account.hashCode),
-                                            monoCategory.hashCode),
-                                        transactionOwner.hashCode),
-                                    balanceAfter.hashCode),
-                                transactionMonoID.hashCode),
-                            transactionAmount.hashCode),
-                        transactionType.hashCode),
-                    transactionNarration.hashCode),
-                transactionID.hashCode),
-            transactionCategory.hashCode),
+                                            $jc(
+                                                $jc(
+                                                    $jc(
+                                                        0,
+                                                        trasactionDate
+                                                            .hashCode),
+                                                    account.hashCode),
+                                                monoCategory.hashCode),
+                                            transactionOwner.hashCode),
+                                        balanceAfter.hashCode),
+                                    transactionMonoID.hashCode),
+                                transactionAmount.hashCode),
+                            transactionType.hashCode),
+                        transactionNarration.hashCode),
+                    transactionID.hashCode),
+                transactionCategory.hashCode),
+            notes.hashCode),
         ffRef.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('TransactionsRecord')
+    return (newBuiltValueToStringHelper(r'TransactionsRecord')
           ..add('trasactionDate', trasactionDate)
           ..add('account', account)
           ..add('monoCategory', monoCategory)
@@ -298,6 +319,7 @@ class _$TransactionsRecord extends TransactionsRecord {
           ..add('transactionNarration', transactionNarration)
           ..add('transactionID', transactionID)
           ..add('transactionCategory', transactionCategory)
+          ..add('notes', notes)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -360,6 +382,10 @@ class TransactionsRecordBuilder
   set transactionCategory(DocumentReference<Object?>? transactionCategory) =>
       _$this._transactionCategory = transactionCategory;
 
+  String? _notes;
+  String? get notes => _$this._notes;
+  set notes(String? notes) => _$this._notes = notes;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -382,6 +408,7 @@ class TransactionsRecordBuilder
       _transactionNarration = $v.transactionNarration;
       _transactionID = $v.transactionID;
       _transactionCategory = $v.transactionCategory;
+      _notes = $v.notes;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -400,7 +427,9 @@ class TransactionsRecordBuilder
   }
 
   @override
-  _$TransactionsRecord build() {
+  TransactionsRecord build() => _build();
+
+  _$TransactionsRecord _build() {
     final _$result = _$v ??
         new _$TransactionsRecord._(
             trasactionDate: trasactionDate,
@@ -414,10 +443,11 @@ class TransactionsRecordBuilder
             transactionNarration: transactionNarration,
             transactionID: transactionID,
             transactionCategory: transactionCategory,
+            notes: notes,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas

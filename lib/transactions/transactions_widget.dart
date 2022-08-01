@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../transaction_single/transaction_single_widget.dart';
+import '../transaction_single_copy/transaction_single_copy_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -65,7 +66,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                           color: FlutterFlowTheme.of(context).shadowGray,
                         )
                       ],
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(32),
                     ),
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
@@ -167,7 +168,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        TransactionSingleWidget(
+                                                        TransactionSingleCopyWidget(
                                                       transaction:
                                                           columnTransactionsRecord,
                                                     ),
@@ -183,7 +184,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                     padding:
                                                         EdgeInsetsDirectional
                                                             .fromSTEB(
-                                                                8, 0, 8, 0),
+                                                                8, 8, 8, 8),
                                                     child: FutureBuilder<
                                                         AccountsRecord>(
                                                       future: AccountsRecord

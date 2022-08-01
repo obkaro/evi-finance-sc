@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../main.dart';
 import '../transaction_single/transaction_single_widget.dart';
+import '../transaction_single_copy/transaction_single_copy_widget.dart';
 import '../transactions/transactions_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
@@ -781,7 +782,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      TransactionSingleWidget(
+                                                      TransactionSingleCopyWidget(
                                                     transaction:
                                                         columnTransactionsRecord,
                                                   ),

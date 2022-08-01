@@ -139,6 +139,10 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
       ),
+  'TransactionSingleCopy': (data) async => TransactionSingleCopyWidget(
+        transaction: await getDocumentParameter(
+            data, 'transaction', TransactionsRecord.serializer),
+      ),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

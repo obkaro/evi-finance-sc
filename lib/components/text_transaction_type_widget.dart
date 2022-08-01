@@ -21,8 +21,8 @@ class _TextTransactionTypeWidgetState extends State<TextTransactionTypeWidget> {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Hello World',
-      style: FlutterFlowTheme.of(context).bodyText1,
+      widget.transactionType!,
+      style: FlutterFlowTheme.of(context).bodyText2,
     );
   }
 }
