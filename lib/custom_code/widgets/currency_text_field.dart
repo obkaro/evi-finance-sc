@@ -40,7 +40,7 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
       decimalSeparator: '',
       thousandSeparator: ',',
       leftSymbol: '\₦',
-      initialValue: 0,
+      //initialValue: 0,
       precision: 0);
 
   @override
@@ -73,7 +73,7 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
         obscureText: false,
         decoration: InputDecoration(
           //labelText: widget.labelText,
-          hintText: widget.hintText,
+          hintText: "₦50",
           hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
                 fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                 color: FlutterFlowTheme.of(context).secondaryText,

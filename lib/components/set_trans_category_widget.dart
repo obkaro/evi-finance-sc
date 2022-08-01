@@ -157,6 +157,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                   createTransactionsRecordData(
                                 transactionCategory:
                                     columnCategoriesRecord.reference,
+                                transactionBudget:
+                                    columnCategoriesRecord.categoryBudget,
                               );
                               await widget.transaction!.reference
                                   .update(transactionsUpdateData);

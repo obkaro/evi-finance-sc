@@ -107,11 +107,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                   stream: queryTransactionsRecord(
                                     queryBuilder: (transactionsRecord) =>
                                         transactionsRecord.where(
-                                            'transactionCategory',
-                                            whereIn:
-                                                budgetSingleCategoriesRecordList
-                                                    .map((e) => e.reference)
-                                                    .toList()),
+                                            'transactionBudget',
+                                            isEqualTo:
+                                                widget.budget!.reference),
                                   ),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
