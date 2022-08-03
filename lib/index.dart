@@ -4,7 +4,7 @@ export 'transactions/transactions_widget.dart' show TransactionsWidget;
 export 'new_budget_categories/new_budget_categories_widget.dart'
     show NewBudgetCategoriesWidget;
 export 'email_auth/email_auth_widget.dart' show EmailAuthWidget;
-export 'email_auth_copy/email_auth_copy_widget.dart' show EmailAuthCopyWidget;
+export 'forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
 export 'dashboard/dashboard_widget.dart' show DashboardWidget;
 export 'connect_first_account/connect_first_account_widget.dart'
     show ConnectFirstAccountWidget;

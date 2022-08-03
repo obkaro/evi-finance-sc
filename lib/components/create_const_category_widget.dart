@@ -69,15 +69,14 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                             ),
                           ),
                           Text(
-                            '${functions.formatBudgetCurrency(widget.budget!.unallocatedAmount)} Left to allocate',
+                            'Left to allocate: ${functions.formatTransCurrency(widget.budget!.unallocatedAmount)}',
                             textAlign: TextAlign.start,
-                            style: FlutterFlowTheme.of(context)
-                                .bodyText1
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText1Family,
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyText1Family,
+                                      color: Color(0xFFB50C0C),
+                                    ),
                           ),
                         ],
                       ),

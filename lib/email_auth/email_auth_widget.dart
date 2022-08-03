@@ -1,9 +1,9 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../email_auth_copy/email_auth_copy_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../forgot_password/forgot_password_widget.dart';
 import '../onboarding_page_view/onboarding_page_view_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -356,7 +356,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          EmailAuthCopyWidget(),
+                                                          ForgotPasswordWidget(),
                                                     ),
                                                   );
                                                 },

@@ -28,7 +28,7 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.googleusercontent.apps.819008749583-je43bvpml1m0seae7ho57a2hhqid5oh1</string>
+                <string>com.googleusercontent.apps.492150333214-gnibee8bsuq5gfpkgg374j0v5vvseaq4</string>
                 
             </array>
         </dict>
@@ -40,6 +40,7 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+
 
 
     <key>UIBackgroundModes</key>

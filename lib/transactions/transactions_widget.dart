@@ -336,8 +336,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                           crossAxisAlignment:
                                                                               CrossAxisAlignment.start,
                                                                           children: [
-                                                                            if ((columnTransactionsRecord.transactionCategory !=
-                                                                                null))
+                                                                            if (columnTransactionsRecord.transactionCategory !=
+                                                                                null)
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                                                                 child: StreamBuilder<CategoriesRecord>(
@@ -367,8 +367,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                   },
                                                                                 ),
                                                                               ),
-                                                                            if ((columnTransactionsRecord.transactionCategory ==
-                                                                                null))
+                                                                            if (columnTransactionsRecord.transactionCategory ==
+                                                                                null)
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                                                                 child: AutoSizeText(
@@ -667,8 +667,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                           crossAxisAlignment:
                                                                               CrossAxisAlignment.start,
                                                                           children: [
-                                                                            if ((columnTransactionsRecord.transactionCategory !=
-                                                                                null))
+                                                                            if (columnTransactionsRecord.transactionCategory !=
+                                                                                null)
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                                                                 child: FutureBuilder<CategoriesRecord>(
@@ -698,8 +698,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                   },
                                                                                 ),
                                                                               ),
-                                                                            if ((columnTransactionsRecord.transactionCategory ==
-                                                                                null))
+                                                                            if (columnTransactionsRecord.transactionCategory ==
+                                                                                null)
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                                                                 child: AutoSizeText(

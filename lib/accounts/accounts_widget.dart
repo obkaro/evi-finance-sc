@@ -299,9 +299,9 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                       );
                                                     },
                                                   ),
-                                                  if ((listViewAccountsRecord
+                                                  if (listViewAccountsRecord
                                                           .reauthRequired ==
-                                                      true))
+                                                      true)
                                                     Align(
                                                       alignment:
                                                           AlignmentDirectional(
@@ -381,7 +381,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                         thickness: 1,
                         color: FlutterFlowTheme.of(context).fadedDivider,
                       ),
-                      if ((accountsAccountsRecordList.length == 0))
+                      if (accountsAccountsRecordList.length == 0)
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: Container(

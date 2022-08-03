@@ -587,9 +587,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                             Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                if ((widget.transaction!
+                                                if (widget.transaction!
                                                         .transactionCategory !=
-                                                    null))
+                                                    null)
                                                   Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
@@ -685,9 +685,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                   Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      if ((widget
-                                              .transaction!.transactionType ==
-                                          'debit'))
+                                      if (widget.transaction!.transactionType ==
+                                          'debit')
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -697,9 +696,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              if ((currentUserDocument!
+                                              if (currentUserDocument!
                                                       .activeBudget !=
-                                                  null))
+                                                  null)
                                                 Expanded(
                                                   child: FFButtonWidget(
                                                     onPressed: () async {
@@ -766,9 +765,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                             ],
                                           ),
                                         ),
-                                      if ((widget
-                                              .transaction!.transactionType ==
-                                          'debit'))
+                                      if (widget.transaction!.transactionType ==
+                                          'debit')
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -778,9 +776,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              if ((widget.transaction!
+                                              if (widget.transaction!
                                                       .transactionCategory !=
-                                                  null))
+                                                  null)
                                                 Expanded(
                                                   child: FFButtonWidget(
                                                     onPressed: () async {

@@ -137,9 +137,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                         children: [
                                           Stack(
                                             children: [
-                                              if ((containerTransactionsRecordList
+                                              if (containerTransactionsRecordList
                                                       .length <=
-                                                  0))
+                                                  0)
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 20, 0, 20),
@@ -177,9 +177,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                     startAngle: 0,
                                                   ),
                                                 ),
-                                              if ((containerTransactionsRecordList
+                                              if (containerTransactionsRecordList
                                                       .length >
-                                                  0))
+                                                  0)
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 20, 0, 20),
@@ -233,9 +233,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                if ((containerTransactionsRecordList
+                                                if (containerTransactionsRecordList
                                                         .length >
-                                                    0))
+                                                    0)
                                                   Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -268,9 +268,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                       ),
                                                     ],
                                                   ),
-                                                if ((containerTransactionsRecordList
+                                                if (containerTransactionsRecordList
                                                         .length >
-                                                    0))
+                                                    0)
                                                   Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,

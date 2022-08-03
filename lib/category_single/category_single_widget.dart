@@ -472,8 +472,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                           CrossAxisAlignment
                                                                               .start,
                                                                       children: [
-                                                                        if ((columnTransactionsRecord.transactionCategory !=
-                                                                            null))
+                                                                        if (columnTransactionsRecord.transactionCategory !=
+                                                                            null)
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 0,
@@ -508,8 +508,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                               },
                                                                             ),
                                                                           ),
-                                                                        if ((columnTransactionsRecord.transactionCategory ==
-                                                                            null))
+                                                                        if (columnTransactionsRecord.transactionCategory ==
+                                                                            null)
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 0,

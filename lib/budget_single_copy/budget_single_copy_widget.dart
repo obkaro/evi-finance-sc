@@ -206,9 +206,9 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                if ((containerTransactionsRecordList
+                                                if (containerTransactionsRecordList
                                                         .length >
-                                                    0))
+                                                    0)
                                                   Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -241,9 +241,9 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                                       ),
                                                     ],
                                                   ),
-                                                if ((containerTransactionsRecordList
+                                                if (containerTransactionsRecordList
                                                         .length >
-                                                    0))
+                                                    0)
                                                   Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,

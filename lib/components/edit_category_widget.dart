@@ -61,11 +61,11 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '(Unallocated: ${functions.formatBudgetCurrency(widget.budget!.unallocatedAmount)})',
+                      'Left to allocate: ${functions.formatBudgetCurrency(widget.budget!.unallocatedAmount)}',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).bodyText1Family,
-                            color: FlutterFlowTheme.of(context).alternate,
+                            color: Color(0xFFB50C0C),
                           ),
                     ),
                   ],

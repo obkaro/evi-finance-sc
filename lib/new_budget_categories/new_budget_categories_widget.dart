@@ -274,7 +274,8 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                     child:
                                                         EditBudgetAmountWidget(
                                                       budget:
-                                                          columnBudgetsRecord,
+                                                          columnBudgetsRecord
+                                                              .reference,
                                                       categoryTotal: functions
                                                           .sumCategoryAmounts(
                                                               newBudgetCategoriesCategoriesRecordList
@@ -341,9 +342,9 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                             Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                if ((newBudgetCategoriesCategoriesRecordList
+                                if (newBudgetCategoriesCategoriesRecordList
                                         .length <=
-                                    10))
+                                    10)
                                   Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -614,7 +615,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                                           .start,
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle1,
+                                                                      .bodyText1,
                                                                 ),
                                                               ),
                                                             ),

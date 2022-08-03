@@ -173,9 +173,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                     context)
                                                                 .bodyText1Family,
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
+                                                            Color(0xFFD40F0F),
                                                       ),
                                             ),
                                           ),
@@ -250,7 +248,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                     child:
                                                         EditBudgetAmountWidget(
                                                       budget:
-                                                          columnBudgetsRecord,
+                                                          columnBudgetsRecord
+                                                              .reference,
                                                       categoryTotal: functions
                                                           .sumCategoryAmounts(
                                                               allocateBudgetCategoriesRecordList
@@ -317,9 +316,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                             Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                if ((allocateBudgetCategoriesRecordList
-                                        .length <=
-                                    10))
+                                if (allocateBudgetCategoriesRecordList.length <=
+                                    10)
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 20, 0, 0),

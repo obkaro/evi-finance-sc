@@ -48,7 +48,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: Visibility(
-        visible: (currentUserDocument!.activeBudget != null),
+        visible: currentUserDocument!.activeBudget != null,
         child: AuthUserStreamWidget(
           child: StreamBuilder<List<CategoriesRecord>>(
             stream: queryCategoriesRecord(

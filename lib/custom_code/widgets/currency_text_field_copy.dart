@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
-class CurrencyTextFieldCopy extends StatefulWidget {
-  const CurrencyTextFieldCopy({
+class CurrencyTextField extends StatefulWidget {
+  const CurrencyTextField({
     Key? key,
     this.width,
     this.height,
@@ -29,10 +29,10 @@ class CurrencyTextFieldCopy extends StatefulWidget {
   //final MoneyMaskedTextController moneyController;
 
   @override
-  _CurrencyTextFieldCopyState createState() => _CurrencyTextFieldCopyState();
+  _CurrencyTextFieldState createState() => _CurrencyTextFieldState();
 }
 
-class _CurrencyTextFieldCopyState extends State<CurrencyTextFieldCopy> {
+class _CurrencyTextFieldState extends State<CurrencyTextField> {
   TextEditingController? textController;
   var controller = new MaskedTextController(mask: '000.000.000-000');
 
@@ -40,7 +40,7 @@ class _CurrencyTextFieldCopyState extends State<CurrencyTextFieldCopy> {
       decimalSeparator: '',
       thousandSeparator: ',',
       leftSymbol: '\₦',
-      initialValue: 0,
+      //initialValue: 0,
       precision: 0);
 
   @override
@@ -73,7 +73,7 @@ class _CurrencyTextFieldCopyState extends State<CurrencyTextFieldCopy> {
         obscureText: false,
         decoration: InputDecoration(
           //labelText: widget.labelText,
-          hintText: widget.hintText,
+          hintText: "₦50",
           hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
                 fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                 color: FlutterFlowTheme.of(context).secondaryText,
@@ -96,7 +96,7 @@ class _CurrencyTextFieldCopyState extends State<CurrencyTextFieldCopy> {
           filled: true,
           fillColor: FlutterFlowTheme.of(context).secondaryBackground,
         ),
-        style: FlutterFlowTheme.of(context).subtitle1,
+        style: FlutterFlowTheme.of(context).bodyText1,
         keyboardType: TextInputType.number,
       ),
     );

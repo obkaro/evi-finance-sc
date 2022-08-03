@@ -345,9 +345,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                   );
                                                 },
                                               ),
-                                              if ((rowAccountsRecord
+                                              if (rowAccountsRecord
                                                       .reauthRequired ==
-                                                  true))
+                                                  true)
                                                 Align(
                                                   alignment:
                                                       AlignmentDirectional(
@@ -387,9 +387,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     },
                   ),
                 ),
-                if ((currentUserDocument!.activeBudget != null))
+                if (currentUserDocument!.activeBudget != null)
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 4),
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 8),
                     child: AuthUserStreamWidget(
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -424,7 +424,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       ),
                     ),
                   ),
-                if ((currentUserDocument!.activeBudget != null))
+                if (currentUserDocument!.activeBudget != null)
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                     child: AuthUserStreamWidget(
@@ -661,7 +661,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     ),
                   ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 4),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 8),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -908,9 +908,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                   CrossAxisAlignment
                                                                       .start,
                                                               children: [
-                                                                if ((columnTransactionsRecord
+                                                                if (columnTransactionsRecord
                                                                         .transactionCategory !=
-                                                                    null))
+                                                                    null)
                                                                   Padding(
                                                                     padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
@@ -958,9 +958,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                       },
                                                                     ),
                                                                   ),
-                                                                if ((columnTransactionsRecord
+                                                                if (columnTransactionsRecord
                                                                         .transactionCategory ==
-                                                                    null))
+                                                                    null)
                                                                   Padding(
                                                                     padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
@@ -1047,9 +1047,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                               ),
                                                               Stack(
                                                                 children: [
-                                                                  if ((columnTransactionsRecord
+                                                                  if (columnTransactionsRecord
                                                                           .transactionType ==
-                                                                      'debit'))
+                                                                      'debit')
                                                                     AutoSizeText(
                                                                       columnTransactionsRecord
                                                                           .transactionType!
@@ -1072,9 +1072,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                                 Color(0xFFFF0003),
                                                                           ),
                                                                     ),
-                                                                  if ((columnTransactionsRecord
+                                                                  if (columnTransactionsRecord
                                                                           .transactionType ==
-                                                                      'credit'))
+                                                                      'credit')
                                                                     AutoSizeText(
                                                                       columnTransactionsRecord
                                                                           .transactionType!

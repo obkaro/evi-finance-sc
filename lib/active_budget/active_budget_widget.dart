@@ -111,7 +111,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: Visibility(
-        visible: (currentUserDocument!.activeBudget != null),
+        visible: currentUserDocument!.activeBudget != null,
         child: AuthUserStreamWidget(
           child: StreamBuilder<List<CategoriesRecord>>(
             stream: queryCategoriesRecord(
@@ -174,7 +174,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if ((currentUserDocument!.activeBudget != null))
+                if (currentUserDocument!.activeBudget != null)
                   AuthUserStreamWidget(
                     child: StreamBuilder<BudgetsRecord>(
                       stream: BudgetsRecord.getDocument(
@@ -198,7 +198,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                         return Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            if ((currentUserDocument!.activeBudget != null))
+                            if (currentUserDocument!.activeBudget != null)
                               StreamBuilder<List<CategoriesRecord>>(
                                 stream: queryCategoriesRecord(
                                   parent: columnBudgetsRecord.reference,
@@ -241,9 +241,9 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                 alignment:
                                                     AlignmentDirectional(1, -1),
                                                 children: [
-                                                  if ((containerCategoriesRecordList
+                                                  if (containerCategoriesRecordList
                                                           .length >
-                                                      0))
+                                                      0)
                                                     Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -300,8 +300,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                   children: [
                                                                     Stack(
                                                                       children: [
-                                                                        if ((containerTransactionsRecordList.length <=
-                                                                            0))
+                                                                        if (containerTransactionsRecordList.length <=
+                                                                            0)
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 0,
@@ -327,8 +327,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               startAngle: 0,
                                                                             ),
                                                                           ),
-                                                                        if ((containerTransactionsRecordList.length >
-                                                                            0))
+                                                                        if (containerTransactionsRecordList.length >
+                                                                            0)
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 0,
@@ -392,8 +392,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                         mainAxisAlignment:
                                                                             MainAxisAlignment.spaceBetween,
                                                                         children: [
-                                                                          if ((containerTransactionsRecordList.length >
-                                                                              0))
+                                                                          if (containerTransactionsRecordList.length >
+                                                                              0)
                                                                             Column(
                                                                               mainAxisSize: MainAxisSize.max,
                                                                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -411,8 +411,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                 ),
                                                                               ],
                                                                             ),
-                                                                          if ((containerTransactionsRecordList.length >
-                                                                              0))
+                                                                          if (containerTransactionsRecordList.length >
+                                                                              0)
                                                                             Column(
                                                                               mainAxisSize: MainAxisSize.max,
                                                                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -809,7 +809,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                   );
                                 },
                               ),
-                            if ((columnBudgetsRecord.reference != null))
+                            if (columnBudgetsRecord.reference != null)
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     16, 0, 16, 16),
@@ -886,7 +886,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                       },
                     ),
                   ),
-                if ((currentUserDocument!.activeBudget == null))
+                if (currentUserDocument!.activeBudget == null)
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                     child: AuthUserStreamWidget(

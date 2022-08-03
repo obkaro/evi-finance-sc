@@ -249,14 +249,13 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                   await actions.flutterMono(
                                     context,
                                   );
-                                  await Navigator.pushAndRemoveUntil(
+                                  await Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => DashboardWidget(
                                         command: 'first_account_connected',
                                       ),
                                     ),
-                                    (r) => false,
                                   );
                                 },
                                 text: 'Continue',

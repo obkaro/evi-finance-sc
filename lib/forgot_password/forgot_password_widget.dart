@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EmailAuthCopyWidget extends StatefulWidget {
-  const EmailAuthCopyWidget({Key? key}) : super(key: key);
+class ForgotPasswordWidget extends StatefulWidget {
+  const ForgotPasswordWidget({Key? key}) : super(key: key);
 
   @override
-  _EmailAuthCopyWidgetState createState() => _EmailAuthCopyWidgetState();
+  _ForgotPasswordWidgetState createState() => _ForgotPasswordWidgetState();
 }
 
-class _EmailAuthCopyWidgetState extends State<EmailAuthCopyWidget> {
+class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
   TextEditingController? signInEmailController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -23,7 +23,7 @@ class _EmailAuthCopyWidgetState extends State<EmailAuthCopyWidget> {
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'EmailAuthCopy'});
+        parameters: {'screen_name': 'ForgotPassword'});
     signInEmailController = TextEditingController();
   }
 

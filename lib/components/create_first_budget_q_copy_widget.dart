@@ -1,6 +1,5 @@
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
-import '../connect_first_account/connect_first_account_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -144,13 +143,7 @@ class _CreateFirstBudgetQCopyWidgetState
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        ConnectFirstAccountWidget(),
-                                  ),
-                                );
+                                Navigator.pop(context);
                               },
                               text: 'Don\'t Refresh',
                               options: FFButtonOptions(
@@ -175,13 +168,10 @@ class _CreateFirstBudgetQCopyWidgetState
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
-                                var _shouldSetState = false;
-                                Navigator.pop(context);
                                 // Action_dataSyncCall
                                 dataSyncResponse = await DataSyncMonoCall.call(
                                   authID: widget.account!.authID,
                                 );
-                                _shouldSetState = true;
                                 setState(() =>
                                     FFAppState().dataSyncCode = getJsonField(
                                       (dataSyncResponse?.jsonBody ?? ''),
@@ -193,7 +183,6 @@ class _CreateFirstBudgetQCopyWidgetState
                                   reauthCode = await ReauthMonoCall.call(
                                     authID: widget.account!.authID,
                                   );
-                                  _shouldSetState = true;
                                   // Action_ReauthAcct
                                   await actions.flutterMonoReauth(
                                     context,
@@ -206,12 +195,10 @@ class _CreateFirstBudgetQCopyWidgetState
                                       await GetAccountInfoCall.call(
                                     authID: widget.account!.authID,
                                   );
-                                  _shouldSetState = true;
                                   transactionJsonResponse =
                                       await GetTransactionsCall.call(
                                     authID: widget.account!.authID,
                                   );
-                                  _shouldSetState = true;
                                   // Action_writeTransactions
                                   await actions.writeTransactions(
                                     (transactionJsonResponse?.jsonBody ?? ''),
@@ -244,12 +231,10 @@ class _CreateFirstBudgetQCopyWidgetState
                                         await GetAccountInfoCall.call(
                                       authID: widget.account!.authID,
                                     );
-                                    _shouldSetState = true;
                                     transactionJsonRespons =
                                         await GetTransactionsCall.call(
                                       authID: widget.account!.authID,
                                     );
-                                    _shouldSetState = true;
                                     // Action_writeTransactions
                                     await actions.writeTransactions(
                                       (transactionJsonRespons?.jsonBody ?? ''),
@@ -297,11 +282,12 @@ class _CreateFirstBudgetQCopyWidgetState
                                     );
                                   }
 
-                                  if (_shouldSetState) setState(() {});
-                                  return;
+                                  Navigator.pop(context);
                                 }
 
-                                if (_shouldSetState) setState(() {});
+                                Navigator.pop(context);
+
+                                setState(() {});
                               },
                               text: 'Continue',
                               options: FFButtonOptions(

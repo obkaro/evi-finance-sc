@@ -89,7 +89,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
             data, 'createdBudget', BudgetsRecord.serializer),
       ),
   'EmailAuth': (data) async => EmailAuthWidget(),
-  'EmailAuthCopy': (data) async => EmailAuthCopyWidget(),
+  'ForgotPassword': (data) async => ForgotPasswordWidget(),
   'ConnectFirstAccount': (data) async => ConnectFirstAccountWidget(),
   'TransactionSingle': (data) async => TransactionSingleWidget(
         transaction: await getDocumentParameter(
