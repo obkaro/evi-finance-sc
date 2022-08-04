@@ -197,7 +197,7 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                                       context)
                                                                   .subtitle2Family,
                                                           color:
-                                                              Color(0xFF454545),
+                                                              Color(0xFFB50C0C),
                                                         ),
                                                 elevation: 2,
                                                 borderSide: BorderSide(
