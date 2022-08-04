@@ -146,7 +146,7 @@ class Transaction {
         amount: parsedJson['amount'],
         narration: parsedJson['narration'],
         date: parsedJson['date'],
-        balance: parsedJson['balance'],
+        balance: parsedJson['balance'] ?? 0,
         monoCategory: parsedJson['category'] ?? '');
   }
 }

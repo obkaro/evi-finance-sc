@@ -1,7 +1,8 @@
 {
   "projects": {
     "default": "evi-finance-dev",
-    "staging": "evi-finance-dev"
+    "dev": "evi-finance-dev",
+    "prod": "evi-finance-prod"
   },
   "targets": {},
   "etags": {}
