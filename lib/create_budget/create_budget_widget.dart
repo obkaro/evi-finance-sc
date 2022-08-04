@@ -325,6 +325,8 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                       fontWeight:
                                                           FontWeight.w300,
                                                     ),
+                                            locale: FFLocalizations.of(context)
+                                                .languageCode,
                                           ),
                                         ),
                                       ),

@@ -321,6 +321,8 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                                       fontWeight:
                                                           FontWeight.w300,
                                                     ),
+                                            locale: FFLocalizations.of(context)
+                                                .languageCode,
                                           ),
                                         ),
                                       ),

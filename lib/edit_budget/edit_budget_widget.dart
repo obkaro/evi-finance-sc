@@ -325,6 +325,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                       fontWeight:
                                                           FontWeight.w300,
                                                     ),
+                                            locale: FFLocalizations.of(context)
+                                                .languageCode,
                                           ),
                                         ),
                                       ),

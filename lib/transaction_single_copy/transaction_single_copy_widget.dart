@@ -388,6 +388,18 @@ class _TransactionSingleCopyWidgetState
                                                               currentTime: widget
                                                                   .transaction!
                                                                   .trasactionDate!,
+                                                              locale: LocaleType
+                                                                  .values
+                                                                  .firstWhere(
+                                                                (l) =>
+                                                                    l.name ==
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .languageCode,
+                                                                orElse: () =>
+                                                                    LocaleType
+                                                                        .en,
+                                                              ),
                                                             );
 
                                                             final transactionsUpdateData =

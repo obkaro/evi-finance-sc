@@ -222,14 +222,11 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Container(
-                                          width:
-                                              MediaQuery.of(context).size.width,
+                                          width: double.infinity,
                                           height: 50,
-                                          child: custom_widgets
-                                              .currencyTextFieldCopy(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
+                                          child:
+                                              custom_widgets.CurrencyTextField(
+                                            width: double.infinity,
                                             height: 50,
                                           ),
                                         ),
