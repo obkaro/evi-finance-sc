@@ -223,11 +223,11 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                       children: [
                                         Container(
                                           width: double.infinity,
-                                          height: 50,
+                                          height: 55,
                                           child:
                                               custom_widgets.CurrencyTextField(
                                             width: double.infinity,
-                                            height: 50,
+                                            height: 55,
                                           ),
                                         ),
                                       ],
@@ -269,7 +269,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                               onChanged: (val) => setState(
                                                   () => dropDownValue1 = val),
                                               width: double.infinity,
-                                              height: 50,
+                                              height: 55,
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyText1
@@ -338,7 +338,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                               onChanged: (val) => setState(
                                                   () => dropDownValue2 = val),
                                               width: double.infinity,
-                                              height: 50,
+                                              height: 55,
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyText1
