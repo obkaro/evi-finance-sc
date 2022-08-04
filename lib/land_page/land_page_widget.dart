@@ -201,7 +201,7 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                         ),
                                                 elevation: 2,
                                                 borderSide: BorderSide(
-                                                  width: 1,
+                                                  width: 0,
                                                 ),
                                                 borderRadius:
                                                     BorderRadius.circular(16),
