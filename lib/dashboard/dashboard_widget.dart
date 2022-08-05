@@ -11,21 +11,13 @@ import '../transactions/transactions_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class DashboardWidget extends StatefulWidget {
-  const DashboardWidget({
-    Key? key,
-    this.command,
-    this.newAccount,
-  }) : super(key: key);
-
-  final String? command;
-  final DocumentReference? newAccount;
+  const DashboardWidget({Key? key}) : super(key: key);
 
   @override
   _DashboardWidgetState createState() => _DashboardWidgetState();
@@ -555,12 +547,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                         progressColor:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primaryColor,
+                                                                .darkPrimary,
                                                         backgroundColor:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .eviredTransparent,
-                                                        startAngle: 180,
+                                                                .primaryColor,
+                                                        startAngle: 0,
                                                       ),
                                                       Expanded(
                                                         child: Padding(

@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../category_single/category_single_widget.dart';
 import '../components/budget_options_widget.dart';
 import '../components/create_custom_category_widget.dart';
+import '../components/edit_category_widget.dart';
 import '../create_budget/create_budget_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -313,7 +314,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               percent: 1,
                                                                               radius: 90,
                                                                               lineWidth: 20,
-                                                                              animation: true,
+                                                                              animation: false,
                                                                               progressColor: FlutterFlowTheme.of(context).primaryColor,
                                                                               backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
                                                                               center: Text(
@@ -340,9 +341,9 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               percent: functions.calcBudgetChart(columnBudgetsRecord, containerTransactionsRecordList.toList())!,
                                                                               radius: 90,
                                                                               lineWidth: 20,
-                                                                              animation: true,
-                                                                              progressColor: FlutterFlowTheme.of(context).primaryColor,
-                                                                              backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
+                                                                              animation: false,
+                                                                              progressColor: FlutterFlowTheme.of(context).darkPrimary,
+                                                                              backgroundColor: FlutterFlowTheme.of(context).primaryColor,
                                                                               center: Text(
                                                                                 '${functions.subtractCurrency(columnBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                                                 textAlign: TextAlign.center,
@@ -351,7 +352,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                       color: FlutterFlowTheme.of(context).primaryText,
                                                                                     ),
                                                                               ),
-                                                                              startAngle: 180,
+                                                                              startAngle: 0,
                                                                             ),
                                                                           ),
                                                                       ],
@@ -644,6 +645,32 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                             displayedCategoriesItem,
                                                                       ),
                                                                     ),
+                                                                  );
+                                                                },
+                                                                onLongPress:
+                                                                    () async {
+                                                                  await showModalBottomSheet(
+                                                                    isScrollControlled:
+                                                                        true,
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (context) {
+                                                                      return Padding(
+                                                                        padding:
+                                                                            MediaQuery.of(context).viewInsets,
+                                                                        child:
+                                                                            EditCategoryWidget(
+                                                                          budget:
+                                                                              columnBudgetsRecord,
+                                                                          categoryToEdit:
+                                                                              displayedCategoriesItem,
+                                                                        ),
+                                                                      );
+                                                                    },
                                                                   );
                                                                 },
                                                                 child:
