@@ -57,8 +57,7 @@ double? calcBudgetChart(
     totalCategoriesSpent += transactions[e].transactionAmount as int;
   }
 
-  double budgPercent =
-      1 - (totalCategoriesSpent / (budget!.budgetAmount as int));
+  double budgPercent = (totalCategoriesSpent / (budget!.budgetAmount as int));
 
   if (totalCategoriesSpent >= (budget.budgetAmount as int)) {
     budgPercent = 0;
