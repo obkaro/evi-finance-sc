@@ -196,9 +196,8 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .subtitle2Family,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryColor,
+                                                          color:
+                                                              Color(0xFF0C0C0C),
                                                         ),
                                                 elevation: 0,
                                                 borderSide: BorderSide(
