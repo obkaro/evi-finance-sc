@@ -545,7 +545,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                   .subtitle1,
                                                             ),
                                                             Text(
-                                                              functions.formatTransCurrency(
+                                                              functions.formatBudgetCurrency(
                                                                   budgetCategoriesItem
                                                                       .categoryAmount),
                                                               style: FlutterFlowTheme

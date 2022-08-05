@@ -341,7 +341,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               percent: functions.calcBudgetChart(columnBudgetsRecord, containerTransactionsRecordList.toList())!,
                                                                               radius: 90,
                                                                               lineWidth: 20,
-                                                                              animation: false,
+                                                                              animation: true,
                                                                               progressColor: FlutterFlowTheme.of(context).darkPrimary,
                                                                               backgroundColor: FlutterFlowTheme.of(context).primaryColor,
                                                                               center: Text(
@@ -737,7 +737,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                   style: FlutterFlowTheme.of(context).subtitle1,
                                                                                 ),
                                                                                 Text(
-                                                                                  functions.formatTransCurrency(displayedCategoriesItem.categoryAmount),
+                                                                                  functions.formatBudgetCurrency(displayedCategoriesItem.categoryAmount),
                                                                                   style: FlutterFlowTheme.of(context).bodyText1,
                                                                                 ),
                                                                               ],

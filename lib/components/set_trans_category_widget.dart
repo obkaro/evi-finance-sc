@@ -139,7 +139,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                         final columnCategoriesRecord =
                             columnCategoriesRecordList[columnIndex];
                         return Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                           child: StreamBuilder<List<TransactionsRecord>>(
                             stream: queryTransactionsRecord(
                               queryBuilder: (transactionsRecord) =>
@@ -207,13 +207,13 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                   ),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 8, 20, 8),
+                                        12, 12, 12, 12),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           columnCategoriesRecord.categoryName!,
