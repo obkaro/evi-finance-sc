@@ -555,12 +555,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                         progressColor:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primaryColor,
+                                                                .darkPrimary,
                                                         backgroundColor:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .eviredTransparent,
-                                                        startAngle: 180,
+                                                                .primaryColor,
+                                                        startAngle: 0,
                                                       ),
                                                       Expanded(
                                                         child: Padding(

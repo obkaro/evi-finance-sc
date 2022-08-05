@@ -253,6 +253,40 @@ String subtractCurrencyOf(
   return formatedResult;
 }
 
+String subtractCurrencyOfCopy(
+  int? value1,
+  int? value2,
+) {
+  // Add your function code here!
+  String formatedResult;
+  int result;
+  final formatCurrency = NumberFormat.simpleCurrency(
+      locale: 'en_US', name: 'NGN', decimalDigits: 2);
+
+  if (value2! == 0) {
+    result = value1! - value2;
+    formatedResult = formatCurrency.format(result / 100) + ' Available';
+  } else if (value1! > value2!) {
+    result = value1 - value2;
+    formatedResult = formatCurrency.format(result / 100) +
+        ' of ' +
+        formatCurrency.format(value1 / 100) +
+        ' Available';
+  } else if (value2 == value1) {
+    formatedResult = 'Exhausted';
+  } else if (value2 > value1) {
+    result = value2 - value1;
+    formatedResult = formatCurrency.format(result / 100) +
+        ' of ' +
+        formatCurrency.format(value1 / 100) +
+        ' Overspent';
+  } else {
+    formatedResult = "error";
+  }
+
+  return formatedResult;
+}
+
 int sumTransactionAmounts(List<TransactionsRecord> transactions) {
   // Add your function code here!
   int total = 0;

@@ -1,6 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../budget_single_copy/budget_single_copy_widget.dart';
+import '../budget_single/budget_single_widget.dart';
 import '../create_budget/create_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -207,7 +207,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        BudgetSingleCopyWidget(
+                                                        BudgetSingleWidget(
                                                       budget:
                                                           columnBudgetsRecord,
                                                     ),

@@ -84,7 +84,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 16),
                   child: Container(
-                    width: 60,
+                    width: 45,
                     height: 6,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -101,8 +101,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Select Category',
-                    style: FlutterFlowTheme.of(context).subtitle1,
+                    'Assign Category',
+                    style: FlutterFlowTheme.of(context).title3,
                   ),
                 ],
               ),
@@ -140,84 +140,128 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                             columnCategoriesRecordList[columnIndex];
                         return Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                          child: InkWell(
-                            onTap: () async {
-                              if (animationsMap[
-                                      'containerOnActionTriggerAnimation'] ==
-                                  null) {
-                                return;
-                              }
-                              await (animationsMap[
-                                          'containerOnActionTriggerAnimation']!
-                                      .curvedAnimation
-                                      .parent as AnimationController)
-                                  .forward(from: 0.0);
-
-                              final transactionsUpdateData =
-                                  createTransactionsRecordData(
-                                transactionCategory:
-                                    columnCategoriesRecord.reference,
-                                transactionBudget:
-                                    columnCategoriesRecord.categoryBudget,
-                              );
-                              await widget.transaction!.reference
-                                  .update(transactionsUpdateData);
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 14,
-                                    color:
-                                        FlutterFlowTheme.of(context).shadowGray,
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 0, 20, 0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      columnCategoriesRecord.categoryName!,
-                                      style: FlutterFlowTheme.of(context)
-                                          .subtitle2
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2Family,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                          ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 16, 0, 0),
-                                      child: Text(
-                                        functions.formatBudgetCurrency(
-                                            columnCategoriesRecord
-                                                .categoryAmount),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                          child: StreamBuilder<List<TransactionsRecord>>(
+                            stream: queryTransactionsRecord(
+                              queryBuilder: (transactionsRecord) =>
+                                  transactionsRecord.where(
+                                      'transactionCategory',
+                                      isEqualTo:
+                                          columnCategoriesRecord.reference),
                             ),
-                          ).animated([
-                            animationsMap['containerOnActionTriggerAnimation']!
-                          ]),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: SpinKitRing(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      size: 50,
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<TransactionsRecord>
+                                  containerTransactionsRecordList =
+                                  snapshot.data!;
+                              return InkWell(
+                                onTap: () async {
+                                  if (animationsMap[
+                                          'containerOnActionTriggerAnimation'] ==
+                                      null) {
+                                    return;
+                                  }
+                                  await (animationsMap[
+                                              'containerOnActionTriggerAnimation']!
+                                          .curvedAnimation
+                                          .parent as AnimationController)
+                                      .forward(from: 0.0);
+
+                                  final transactionsUpdateData =
+                                      createTransactionsRecordData(
+                                    transactionCategory:
+                                        columnCategoriesRecord.reference,
+                                    transactionBudget:
+                                        columnCategoriesRecord.categoryBudget,
+                                  );
+                                  await widget.transaction!.reference
+                                      .update(transactionsUpdateData);
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 14,
+                                        color: FlutterFlowTheme.of(context)
+                                            .shadowGray,
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 8, 20, 8),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          columnCategoriesRecord.categoryName!,
+                                          style: FlutterFlowTheme.of(context)
+                                              .subtitle2
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle2Family,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 8, 0, 0),
+                                          child: Text(
+                                            functions.subtractCurrencyOfCopy(
+                                                columnCategoriesRecord
+                                                    .categoryAmount,
+                                                functions.sumTransactionAmounts(
+                                                    containerTransactionsRecordList
+                                                        .toList())),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyText1Family,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ).animated([
+                                animationsMap[
+                                    'containerOnActionTriggerAnimation']!
+                              ]);
+                            },
+                          ),
                         );
                       }),
                     );

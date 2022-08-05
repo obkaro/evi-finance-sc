@@ -142,9 +142,9 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                               lineWidth: 20,
                               animation: true,
                               progressColor:
+                                  FlutterFlowTheme.of(context).darkPrimary,
+                              backgroundColor:
                                   FlutterFlowTheme.of(context).primaryColor,
-                              backgroundColor: FlutterFlowTheme.of(context)
-                                  .eviredTransparent,
                               center: Text(
                                 '${functions.subtractCurrency(widget.category!.categoryAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList()))}',
                                 textAlign: TextAlign.center,
@@ -157,7 +157,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                           .primaryText,
                                     ),
                               ),
-                              startAngle: 180,
+                              startAngle: 0,
                             ),
                           ),
                         ],

@@ -201,6 +201,7 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                         ),
                                                 elevation: 0,
                                                 borderSide: BorderSide(
+                                                  color: Colors.transparent,
                                                   width: 0,
                                                 ),
                                                 borderRadius:
@@ -278,6 +279,7 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                       ),
                                               elevation: 2,
                                               borderSide: BorderSide(
+                                                color: Colors.transparent,
                                                 width: 0,
                                               ),
                                               borderRadius:
