@@ -8,6 +8,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../main.dart';
 import '../transaction_single_copy/transaction_single_copy_widget.dart';
 import '../transactions/transactions_widget.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -71,6 +72,14 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Container(
+                      width: 0,
+                      height: 0,
+                      child: custom_widgets.BackButtonControl(
+                        width: 0,
+                        height: 0,
+                      ),
+                    ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                       child: Row(

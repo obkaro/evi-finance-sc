@@ -65,6 +65,7 @@ dependencies:
   json_path: 0.4.1
   json_serializable: 6.3.1
   launch_review: ^3.0.1
+  minimize_app: ^0.1.1
   mono_flutter:  1.1.2
   package_info_plus: ^1.4.3
   page_transition: 2.0.9
