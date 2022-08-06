@@ -2,6 +2,7 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/create_const_category_widget.dart';
 import '../components/create_custom_category_widget.dart';
+import '../components/dialog_box_widget.dart';
 import '../components/edit_budget_amount_widget.dart';
 import '../components/edit_category_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -524,10 +525,12 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                   ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 20, 0, 0),
+                                      20, 20, 20, 0),
                                   child: Container(
                                     width: double.infinity,
                                     decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
                                       boxShadow: [
                                         BoxShadow(
                                           blurRadius: 14,
@@ -583,9 +586,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                   child: Container(
                                                     width: double.infinity,
                                                     decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               16),
@@ -950,37 +950,36 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                     .fromSTEB(0, 0, 0, 16),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
-                                                    var confirmDialogResponse =
-                                                        await showDialog<bool>(
-                                                              context: context,
-                                                              builder:
-                                                                  (alertDialogContext) {
-                                                                return AlertDialog(
-                                                                  title: Text(
-                                                                      'Confirm Reset'),
-                                                                  content: Text(
-                                                                      'This will delete all categories'),
-                                                                  actions: [
-                                                                    TextButton(
-                                                                      onPressed: () => Navigator.pop(
-                                                                          alertDialogContext,
-                                                                          false),
-                                                                      child: Text(
-                                                                          'Cancel'),
-                                                                    ),
-                                                                    TextButton(
-                                                                      onPressed: () => Navigator.pop(
-                                                                          alertDialogContext,
-                                                                          true),
-                                                                      child: Text(
-                                                                          'Confirm'),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              },
-                                                            ) ??
-                                                            false;
-                                                    if (confirmDialogResponse) {
+                                                    setState(() => FFAppState()
+                                                            .dialogBoxReturn =
+                                                        false);
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return Padding(
+                                                          padding:
+                                                              MediaQuery.of(
+                                                                      context)
+                                                                  .viewInsets,
+                                                          child:
+                                                              DialogBoxWidget(
+                                                            heading:
+                                                                'Confirm Reset',
+                                                            body:
+                                                                'A reset will delete all categories from this budget',
+                                                            buttonYes: 'Delete',
+                                                            buttonNo:
+                                                                'Don\'t delete',
+                                                            information: false,
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                    if (FFAppState()
+                                                        .dialogBoxReturn) {
                                                       // Action_ResetCategories
                                                       await actions
                                                           .deleteCategories(

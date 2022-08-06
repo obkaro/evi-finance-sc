@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/lat_lng.dart';
 
 class FFAppState {
@@ -20,8 +18,6 @@ class FFAppState {
 
   late SharedPreferences prefs;
 
-  DocumentReference? selectedAccount;
-
   String selectedAcctName = '';
 
   int currencyTextField = 0;
@@ -33,6 +29,8 @@ class FFAppState {
   String dataSyncCode = '';
 
   int initPageViewNumber = 0;
+
+  bool dialogBoxReturn = false;
 }
 
 LatLng? _latLngFromString(String? val) {

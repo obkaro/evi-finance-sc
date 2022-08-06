@@ -430,19 +430,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                         },
                                       ) ??
                                       false;
-                              if (confirmDialogResponse) {
-                                Navigator.pop(context);
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AllocateBudgetWidget(
-                                      createdBudget: widget.budget,
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                Navigator.pop(context);
-                              }
                             } else {
                               await showDialog(
                                 context: context,
@@ -462,6 +449,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                 },
                               );
                             }
+
+                            Navigator.pop(context);
                           },
                           text: 'Save',
                           options: FFButtonOptions(
