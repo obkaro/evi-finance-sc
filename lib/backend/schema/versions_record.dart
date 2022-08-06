@@ -15,11 +15,11 @@ abstract class VersionsRecord
 
   DateTime? get releaseDate;
 
-  int? get versionNumber;
-
   bool? get forceUpdate;
 
   String? get releaseNotes;
+
+  String? get versionNumberString;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -27,9 +27,9 @@ abstract class VersionsRecord
 
   static void _initializeBuilder(VersionsRecordBuilder builder) => builder
     ..platform = ''
-    ..versionNumber = 0
     ..forceUpdate = false
-    ..releaseNotes = '';
+    ..releaseNotes = ''
+    ..versionNumberString = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('versions');
@@ -55,9 +55,9 @@ abstract class VersionsRecord
 Map<String, dynamic> createVersionsRecordData({
   String? platform,
   DateTime? releaseDate,
-  int? versionNumber,
   bool? forceUpdate,
   String? releaseNotes,
+  String? versionNumberString,
 }) {
   final firestoreData = serializers.toFirestore(
     VersionsRecord.serializer,
@@ -65,9 +65,9 @@ Map<String, dynamic> createVersionsRecordData({
       (v) => v
         ..platform = platform
         ..releaseDate = releaseDate
-        ..versionNumber = versionNumber
         ..forceUpdate = forceUpdate
-        ..releaseNotes = releaseNotes,
+        ..releaseNotes = releaseNotes
+        ..versionNumberString = versionNumberString,
     ),
   );
 
