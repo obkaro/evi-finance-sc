@@ -35,12 +35,6 @@ class _$VersionsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
-    value = object.versionNumber;
-    if (value != null) {
-      result
-        ..add('versionNumber')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
     value = object.forceUpdate;
     if (value != null) {
       result
@@ -52,6 +46,13 @@ class _$VersionsRecordSerializer
     if (value != null) {
       result
         ..add('releaseNotes')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.versionNumberString;
+    if (value != null) {
+      result
+        ..add('versionNumberString')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -86,16 +87,16 @@ class _$VersionsRecordSerializer
           result.releaseDate = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
-        case 'versionNumber':
-          result.versionNumber = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
-          break;
         case 'forceUpdate':
           result.forceUpdate = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
         case 'releaseNotes':
           result.releaseNotes = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'versionNumberString':
+          result.versionNumberString = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
         case 'Document__Reference__Field':
@@ -117,11 +118,11 @@ class _$VersionsRecord extends VersionsRecord {
   @override
   final DateTime? releaseDate;
   @override
-  final int? versionNumber;
-  @override
   final bool? forceUpdate;
   @override
   final String? releaseNotes;
+  @override
+  final String? versionNumberString;
   @override
   final DocumentReference<Object?>? ffRef;
 
@@ -131,9 +132,9 @@ class _$VersionsRecord extends VersionsRecord {
   _$VersionsRecord._(
       {this.platform,
       this.releaseDate,
-      this.versionNumber,
       this.forceUpdate,
       this.releaseNotes,
+      this.versionNumberString,
       this.ffRef})
       : super._();
 
@@ -151,9 +152,9 @@ class _$VersionsRecord extends VersionsRecord {
     return other is VersionsRecord &&
         platform == other.platform &&
         releaseDate == other.releaseDate &&
-        versionNumber == other.versionNumber &&
         forceUpdate == other.forceUpdate &&
         releaseNotes == other.releaseNotes &&
+        versionNumberString == other.versionNumberString &&
         ffRef == other.ffRef;
   }
 
@@ -163,9 +164,9 @@ class _$VersionsRecord extends VersionsRecord {
         $jc(
             $jc(
                 $jc($jc($jc(0, platform.hashCode), releaseDate.hashCode),
-                    versionNumber.hashCode),
-                forceUpdate.hashCode),
-            releaseNotes.hashCode),
+                    forceUpdate.hashCode),
+                releaseNotes.hashCode),
+            versionNumberString.hashCode),
         ffRef.hashCode));
   }
 
@@ -174,9 +175,9 @@ class _$VersionsRecord extends VersionsRecord {
     return (newBuiltValueToStringHelper(r'VersionsRecord')
           ..add('platform', platform)
           ..add('releaseDate', releaseDate)
-          ..add('versionNumber', versionNumber)
           ..add('forceUpdate', forceUpdate)
           ..add('releaseNotes', releaseNotes)
+          ..add('versionNumberString', versionNumberString)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -194,11 +195,6 @@ class VersionsRecordBuilder
   DateTime? get releaseDate => _$this._releaseDate;
   set releaseDate(DateTime? releaseDate) => _$this._releaseDate = releaseDate;
 
-  int? _versionNumber;
-  int? get versionNumber => _$this._versionNumber;
-  set versionNumber(int? versionNumber) =>
-      _$this._versionNumber = versionNumber;
-
   bool? _forceUpdate;
   bool? get forceUpdate => _$this._forceUpdate;
   set forceUpdate(bool? forceUpdate) => _$this._forceUpdate = forceUpdate;
@@ -206,6 +202,11 @@ class VersionsRecordBuilder
   String? _releaseNotes;
   String? get releaseNotes => _$this._releaseNotes;
   set releaseNotes(String? releaseNotes) => _$this._releaseNotes = releaseNotes;
+
+  String? _versionNumberString;
+  String? get versionNumberString => _$this._versionNumberString;
+  set versionNumberString(String? versionNumberString) =>
+      _$this._versionNumberString = versionNumberString;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -220,9 +221,9 @@ class VersionsRecordBuilder
     if ($v != null) {
       _platform = $v.platform;
       _releaseDate = $v.releaseDate;
-      _versionNumber = $v.versionNumber;
       _forceUpdate = $v.forceUpdate;
       _releaseNotes = $v.releaseNotes;
+      _versionNumberString = $v.versionNumberString;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -248,9 +249,9 @@ class VersionsRecordBuilder
         new _$VersionsRecord._(
             platform: platform,
             releaseDate: releaseDate,
-            versionNumber: versionNumber,
             forceUpdate: forceUpdate,
             releaseNotes: releaseNotes,
+            versionNumberString: versionNumberString,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
