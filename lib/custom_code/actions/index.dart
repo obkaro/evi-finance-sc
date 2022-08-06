@@ -8,4 +8,4 @@ export 'unlink_all_trans_categories.dart' show unlinkAllTransCategories;
 export 'select_date_range.dart' show selectDateRange;
 export 'select_date_range_existing.dart' show selectDateRangeExisting;
 export 'update_category.dart' show updateCategory;
-export 'check_force_update.dart' show checkForceUpdate;
+export 'launch_store.dart' show launchStore;

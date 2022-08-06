@@ -7,6 +7,7 @@ import '../actions/index.dart'; // Imports custom actions
 import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
+// Begin custom widget code
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../components/new_version_found_widget.dart';
