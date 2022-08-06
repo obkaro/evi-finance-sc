@@ -65,6 +65,7 @@ dependencies:
   json_path: 0.4.1
   json_serializable: 6.3.1
   mono_flutter:  1.1.2
+  package_info_plus: ^1.4.3
   page_transition: 2.0.9
   percent_indicator: 4.2.2
   plugin_platform_interface: 2.1.2

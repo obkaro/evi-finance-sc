@@ -84,7 +84,7 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                       child: custom_widgets.CurrencyTextField(
                         width: MediaQuery.of(context).size.width,
-                        height: 50,
+                        height: 55,
                         amount: containerBudgetsRecord.budgetAmount,
                         labelText: 'Amount',
                         hintText: 'Enter amount',
@@ -110,8 +110,13 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                                 height: 60,
                                 color: FlutterFlowTheme.of(context)
                                     .primaryBackground,
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .bodyText2
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyText2Family,
+                                      fontSize: 14,
+                                    ),
                                 elevation: 0,
                                 borderSide: BorderSide(
                                   color: Colors.transparent,

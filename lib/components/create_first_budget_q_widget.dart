@@ -1,6 +1,5 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../connect_first_account/connect_first_account_widget.dart';
 import '../first_budget/first_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -110,36 +109,6 @@ class _CreateFirstBudgetQWidgetState extends State<CreateFirstBudgetQWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    ConnectFirstAccountWidget(),
-                              ),
-                            );
-                          },
-                          text: 'Skip (I\'ll do this later)',
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 30,
-                            color: Color(0x00D2D2D2),
-                            textStyle: FlutterFlowTheme.of(context).bodyText2,
-                            elevation: 0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 20,
-                        decoration: BoxDecoration(),
-                      ),
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {

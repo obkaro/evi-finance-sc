@@ -207,7 +207,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                   ),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        12, 12, 12, 12),
+                                        16, 16, 16, 16),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -218,15 +218,7 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                         Text(
                                           columnCategoriesRecord.categoryName!,
                                           style: FlutterFlowTheme.of(context)
-                                              .subtitle2
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle2Family,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                              ),
+                                              .subtitle1,
                                         ),
                                         Padding(
                                           padding:

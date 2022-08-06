@@ -150,7 +150,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                             child: custom_widgets.CurrencyTextField(
                               width: MediaQuery.of(context).size.width,
-                              height: 50,
+                              height: 55,
                               amount: widget.budget!.budgetAmount,
                               labelText: 'Amount',
                               hintText: 'Enter amount',

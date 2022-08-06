@@ -83,7 +83,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               autofocus: true,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: 'Username',
                                 hintText: 'New username here',
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -119,7 +118,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                           readOnly: true,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Email',
                             hintText: 'Email address here',
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -156,7 +154,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               readOnly: true,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: 'Phone',
                                 hintText: 'Phone number here',
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(

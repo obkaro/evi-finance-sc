@@ -491,7 +491,7 @@ class _TransactionSingleCopyWidgetState
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
                                                                           .primaryText,
-                                                                      size: 24,
+                                                                      size: 16,
                                                                     ),
                                                                   ),
                                                                 ],
@@ -970,7 +970,7 @@ class _TransactionSingleCopyWidgetState
                                                     text: 'Categorize',
                                                     icon: Icon(
                                                       Icons.edit_rounded,
-                                                      size: 15,
+                                                      size: 16,
                                                     ),
                                                     options: FFButtonOptions(
                                                       width: 130,

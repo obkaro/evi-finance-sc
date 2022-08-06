@@ -14,6 +14,7 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -149,12 +150,11 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                 'Left to allocate: ',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1,
+                                                        .bodyText2,
                                               ),
                                             ),
                                           ),
                                           Container(
-                                            width: 100,
                                             height: 30,
                                             decoration: BoxDecoration(),
                                             alignment:
@@ -173,7 +173,9 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                     context)
                                                                 .bodyText1Family,
                                                         color:
-                                                            Color(0xFFD40F0F),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
                                                       ),
                                             ),
                                           ),
@@ -199,7 +201,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                   'From ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)}',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText1,
+                                                      .subtitle1,
                                                 ),
                                               ),
                                             ),
@@ -552,178 +554,201 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                               return Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(20, 0, 20, 10),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        blurRadius: 14,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .shadowGray,
-                                                      )
-                                                    ],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            16),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                10, 10, 10, 10),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      children: [
-                                                        Expanded(
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        16,
-                                                                        0,
-                                                                        0,
-                                                                        0),
-                                                            child: Container(
-                                                              width:
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                              height: 36,
-                                                              decoration:
-                                                                  BoxDecoration(),
-                                                              child: Align(
-                                                                alignment:
-                                                                    AlignmentDirectional(
-                                                                        -1, 0),
-                                                                child: Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                child: InkWell(
+                                                  onLongPress: () async {
+                                                    HapticFeedback
+                                                        .lightImpact();
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return Padding(
+                                                          padding:
+                                                              MediaQuery.of(
+                                                                      context)
+                                                                  .viewInsets,
+                                                          child:
+                                                              EditCategoryWidget(
+                                                            budget:
+                                                                columnBudgetsRecord,
+                                                            categoryToEdit:
+                                                                existingCategoriesItem,
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(10, 10,
+                                                                  10, 10),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceEvenly,
+                                                        children: [
+                                                          Expanded(
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
+                                                                          16,
                                                                           0,
                                                                           0,
-                                                                          10,
+                                                                          0),
+                                                              child: Container(
+                                                                width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                                height: 36,
+                                                                decoration:
+                                                                    BoxDecoration(),
+                                                                child: Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          -1,
                                                                           0),
                                                                   child:
-                                                                      AutoSizeText(
-                                                                    existingCategoriesItem
-                                                                        .categoryName!,
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1,
+                                                                      Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0,
+                                                                            0,
+                                                                            10,
+                                                                            0),
+                                                                    child:
+                                                                        AutoSizeText(
+                                                                      existingCategoriesItem
+                                                                          .categoryName!,
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .start,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1,
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
                                                             ),
                                                           ),
-                                                        ),
-                                                        Container(
-                                                          width: 75,
-                                                          height: 36,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        12),
+                                                          Container(
+                                                            width: 75,
+                                                            height: 36,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12),
+                                                            ),
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    0, 0),
+                                                            child: Text(
+                                                              functions.formatBudgetCurrency(
+                                                                  existingCategoriesItem
+                                                                      .categoryAmount),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1,
+                                                            ),
                                                           ),
-                                                          alignment:
-                                                              AlignmentDirectional(
-                                                                  0, 0),
-                                                          child: Text(
-                                                            functions.formatBudgetCurrency(
-                                                                existingCategoriesItem
-                                                                    .categoryAmount),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1,
+                                                          FlutterFlowIconButton(
+                                                            borderColor: Colors
+                                                                .transparent,
+                                                            borderRadius: 30,
+                                                            borderWidth: 1,
+                                                            buttonSize: 60,
+                                                            icon: Icon(
+                                                              Icons
+                                                                  .edit_rounded,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryText,
+                                                              size: 24,
+                                                            ),
+                                                            onPressed:
+                                                                () async {
+                                                              // Action_BSEditCateogoryAmt
+                                                              await showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return Padding(
+                                                                    padding: MediaQuery.of(
+                                                                            context)
+                                                                        .viewInsets,
+                                                                    child:
+                                                                        EditCategoryWidget(
+                                                                      budget:
+                                                                          columnBudgetsRecord,
+                                                                      categoryToEdit:
+                                                                          existingCategoriesItem,
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              );
+                                                            },
                                                           ),
-                                                        ),
-                                                        FlutterFlowIconButton(
-                                                          borderColor: Colors
-                                                              .transparent,
-                                                          borderRadius: 30,
-                                                          borderWidth: 1,
-                                                          buttonSize: 60,
-                                                          icon: Icon(
-                                                            Icons.edit_rounded,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryText,
-                                                            size: 24,
+                                                          FlutterFlowIconButton(
+                                                            borderColor: Colors
+                                                                .transparent,
+                                                            borderRadius: 30,
+                                                            borderWidth: 1,
+                                                            buttonSize: 60,
+                                                            icon: Icon(
+                                                              Icons
+                                                                  .delete_rounded,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryText,
+                                                              size: 24,
+                                                            ),
+                                                            onPressed:
+                                                                () async {
+                                                              final budgetsUpdateData =
+                                                                  {
+                                                                'unallocatedAmount':
+                                                                    FieldValue.increment(
+                                                                        existingCategoriesItem
+                                                                            .categoryAmount!),
+                                                              };
+                                                              await widget
+                                                                  .createdBudget!
+                                                                  .reference
+                                                                  .update(
+                                                                      budgetsUpdateData);
+                                                              // Action_DeleteCategory
+                                                              await existingCategoriesItem
+                                                                  .reference
+                                                                  .delete();
+                                                            },
                                                           ),
-                                                          onPressed: () async {
-                                                            // Action_BSEditCateogoryAmt
-                                                            await showModalBottomSheet(
-                                                              isScrollControlled:
-                                                                  true,
-                                                              backgroundColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              context: context,
-                                                              builder:
-                                                                  (context) {
-                                                                return Padding(
-                                                                  padding: MediaQuery.of(
-                                                                          context)
-                                                                      .viewInsets,
-                                                                  child:
-                                                                      EditCategoryWidget(
-                                                                    budget:
-                                                                        columnBudgetsRecord,
-                                                                    categoryToEdit:
-                                                                        existingCategoriesItem,
-                                                                  ),
-                                                                );
-                                                              },
-                                                            );
-                                                          },
-                                                        ),
-                                                        FlutterFlowIconButton(
-                                                          borderColor: Colors
-                                                              .transparent,
-                                                          borderRadius: 30,
-                                                          borderWidth: 1,
-                                                          buttonSize: 60,
-                                                          icon: Icon(
-                                                            Icons
-                                                                .delete_rounded,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryText,
-                                                            size: 24,
-                                                          ),
-                                                          onPressed: () async {
-                                                            final budgetsUpdateData =
-                                                                {
-                                                              'unallocatedAmount':
-                                                                  FieldValue.increment(
-                                                                      existingCategoriesItem
-                                                                          .categoryAmount!),
-                                                            };
-                                                            await widget
-                                                                .createdBudget!
-                                                                .reference
-                                                                .update(
-                                                                    budgetsUpdateData);
-                                                            // Action_DeleteCategory
-                                                            await existingCategoriesItem
-                                                                .reference
-                                                                .delete();
-                                                          },
-                                                        ),
-                                                      ],
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),

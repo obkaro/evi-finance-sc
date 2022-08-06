@@ -61,13 +61,25 @@ class _CreateCustomCategoryWidgetState
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Left to allocate: ${functions.formatBudgetCurrency(widget.budget!.unallocatedAmount)}',
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyText1Family,
-                            color: Color(0xFFB50C0C),
-                          ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          'Left to allocate: ',
+                          style: FlutterFlowTheme.of(context).subtitle2,
+                        ),
+                        Text(
+                          '${functions.formatBudgetCurrency(widget.budget!.unallocatedAmount)}',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyText1Family,
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                              ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -68,15 +68,27 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                               style: FlutterFlowTheme.of(context).title3,
                             ),
                           ),
-                          Text(
-                            'Left to allocate: ${functions.formatTransCurrency(widget.budget!.unallocatedAmount)}',
-                            textAlign: TextAlign.start,
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'Left to allocate: ',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.of(context).bodyText2,
+                              ),
+                              Text(
+                                '${functions.formatTransCurrency(widget.budget!.unallocatedAmount)}',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .bodyText1Family,
-                                      color: Color(0xFFB50C0C),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
                                     ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -87,7 +99,7 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                   child: custom_widgets.CurrencyTextField(
                     width: MediaQuery.of(context).size.width,
-                    height: 50,
+                    height: 55,
                     labelText: 'Amount',
                     hintText: 'Enter amount',
                   ),
@@ -113,10 +125,10 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
                             textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
+                                FlutterFlowTheme.of(context).bodyText2.override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      fontWeight: FontWeight.normal,
+                                          .bodyText2Family,
+                                      fontSize: 14,
                                     ),
                             elevation: 0,
                             borderSide: BorderSide(
