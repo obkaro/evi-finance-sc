@@ -27,6 +27,8 @@ class BackButtonControl extends StatefulWidget {
 }
 
 class _BackButtonControlState extends State<BackButtonControl> {
+  var _androidAppRetain = MethodChannel("android_app_retain");
+
   @override
   Widget build(BuildContext context) {
     DateTime timeBackPressed = DateTime.now();
@@ -57,7 +59,8 @@ class _BackButtonControlState extends State<BackButtonControl> {
           if (Platform.isAndroid) {
             SystemChannels.platform.invokeMethod('SystemNavigator.pop');
           } else {
-            MinimizeApp.minimizeApp();
+            _androidAppRetain.invokeMethod("sendToBackground");
+            //MinimizeApp.minimizeApp();
           }
           return true;
         }

@@ -72,6 +72,8 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
 
             bool forceUpdateCalc = false;
 
+            var _androidAppRetain = MethodChannel("android_app_retain");
+
             final List<int> currentVersion = version
                 .split('.')
                 .map((String number) => int.parse(number))
@@ -138,7 +140,8 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
                             SystemChannels.platform
                                 .invokeMethod('SystemNavigator.pop');
                           } else {
-                            MinimizeApp.minimizeApp();
+                            _androidAppRetain.invokeMethod("sendToBackground");
+                            //MinimizeApp.minimizeApp();
                           }
                           return true;
                         }
