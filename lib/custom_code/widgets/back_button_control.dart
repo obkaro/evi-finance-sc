@@ -8,7 +8,7 @@ import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
 // Begin custom widget code
-import 'package:minimize_app/minimize_app.dart';
+//import 'package:minimize_app/minimize_app.dart';
 import 'dart:io' show Platform;
 import 'package:flutter/services.dart';
 

@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../components/new_version_found_widget.dart';
-import 'package:minimize_app/minimize_app.dart';
+//import 'package:minimize_app/minimize_app.dart';
 import 'dart:io' show Platform;
 import 'package:flutter/services.dart';
 
