@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../components/new_version_found_widget.dart';
-import 'package:minimize_app/minimize_app.dart';
+//import 'package:minimize_app/minimize_app.dart';
 import 'dart:io' show Platform;
 import 'package:flutter/services.dart';
 
@@ -71,6 +71,8 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
             String buildNumber = packageInfo.buildNumber;
 
             bool forceUpdateCalc = false;
+
+            var _androidAppRetain = MethodChannel("android_app_retain");
 
             final List<int> currentVersion = version
                 .split('.')
@@ -138,7 +140,8 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
                             SystemChannels.platform
                                 .invokeMethod('SystemNavigator.pop');
                           } else {
-                            MinimizeApp.minimizeApp();
+                            _androidAppRetain.invokeMethod("sendToBackground");
+                            //MinimizeApp.minimizeApp();
                           }
                           return true;
                         }

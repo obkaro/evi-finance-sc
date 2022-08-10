@@ -8,7 +8,7 @@ import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
 // Begin custom widget code
-import 'package:minimize_app/minimize_app.dart';
+//import 'package:minimize_app/minimize_app.dart';
 import 'dart:io' show Platform;
 import 'package:flutter/services.dart';
 
@@ -27,6 +27,8 @@ class BackButtonControl extends StatefulWidget {
 }
 
 class _BackButtonControlState extends State<BackButtonControl> {
+  var _androidAppRetain = MethodChannel("android_app_retain");
+
   @override
   Widget build(BuildContext context) {
     DateTime timeBackPressed = DateTime.now();
@@ -57,7 +59,8 @@ class _BackButtonControlState extends State<BackButtonControl> {
           if (Platform.isAndroid) {
             SystemChannels.platform.invokeMethod('SystemNavigator.pop');
           } else {
-            MinimizeApp.minimizeApp();
+            _androidAppRetain.invokeMethod("sendToBackground");
+            //MinimizeApp.minimizeApp();
           }
           return true;
         }

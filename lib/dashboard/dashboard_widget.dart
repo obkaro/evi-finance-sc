@@ -1024,7 +1024,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                         ),
                                                                       ),
                                                                     Text(
-                                                                      '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
+                                                                      '${dateTimeFormat('jm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
                                                                       textAlign:
                                                                           TextAlign
                                                                               .start,
