@@ -11,6 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../components/new_version_found_widget.dart';
+import 'package:minimize_app/minimize_app.dart';
+import 'dart:io' show Platform;
+import 'package:flutter/services.dart';
 
 class ForceUpdateWidget extends StatefulWidget {
   const ForceUpdateWidget({
@@ -103,8 +106,43 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
                 backgroundColor: Colors.transparent,
                 context: context,
                 builder: (context) {
+                  DateTime timeBackPressed = DateTime.now();
                   return WillPopScope(
-                      onWillPop: () async => false,
+                      onWillPop: () async {
+                        final difference =
+                            DateTime.now().difference(timeBackPressed);
+                        timeBackPressed = DateTime.now();
+                        if (difference >= Duration(seconds: 2)) {
+                          final String msg = 'Press the back button to exit';
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                msg,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyText1Family,
+                                      color: Color(0xFFE7E7E7),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor: Colors.black,
+                            ),
+                          );
+                          return false;
+                        } else {
+                          if (Platform.isAndroid) {
+                            SystemChannels.platform
+                                .invokeMethod('SystemNavigator.pop');
+                          } else {
+                            MinimizeApp.minimizeApp();
+                          }
+                          return true;
+                        }
+                      },
                       child: Padding(
                         padding: MediaQuery.of(context).viewInsets,
                         child: NewVersionFoundWidget(
