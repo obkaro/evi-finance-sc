@@ -7,7 +7,10 @@ import '../actions/index.dart'; // Imports custom actions
 import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
+// Begin custom widget code
 import 'package:minimize_app/minimize_app.dart';
+import 'dart:io' show Platform;
+import 'package:flutter/services.dart';
 
 class BackButtonControl extends StatefulWidget {
   const BackButtonControl({
@@ -30,17 +33,32 @@ class _BackButtonControlState extends State<BackButtonControl> {
     return WillPopScope(
       child: SizedBox.shrink(),
       onWillPop: () async {
-        final differeance = DateTime.now().difference(timeBackPressed);
+        final difference = DateTime.now().difference(timeBackPressed);
         timeBackPressed = DateTime.now();
-        if (differeance >= Duration(seconds: 2)) {
+        if (difference >= Duration(seconds: 2)) {
           final String msg = 'Press the back button to exit';
-          Fluttertoast.showToast(
-            msg: msg,
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                msg,
+                style: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                      color: Color(0xFFE7E7E7),
+                      fontSize: 12,
+                      fontWeight: FontWeight.normal,
+                    ),
+              ),
+              duration: Duration(milliseconds: 4000),
+              backgroundColor: Colors.black,
+            ),
           );
           return false;
         } else {
-          Fluttertoast.cancel();
-          SystemNavigator.pop();
+          if (Platform.isAndroid) {
+            SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+          } else {
+            MinimizeApp.minimizeApp();
+          }
           return true;
         }
       },
