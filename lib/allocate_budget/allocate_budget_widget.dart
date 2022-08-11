@@ -280,7 +280,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                 textAlign: TextAlign.end,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .subtitle1,
+                                                        .title3,
                                               ),
                                             ),
                                           ),
@@ -707,37 +707,80 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                             );
                                                           },
                                                         ),
-                                                        FlutterFlowIconButton(
-                                                          borderColor: Colors
-                                                              .transparent,
-                                                          borderRadius: 30,
-                                                          borderWidth: 1,
-                                                          buttonSize: 60,
-                                                          icon: Icon(
-                                                            Icons
-                                                                .delete_rounded,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryText,
-                                                            size: 24,
+                                                        StreamBuilder<
+                                                            List<
+                                                                TransactionsRecord>>(
+                                                          stream:
+                                                              queryTransactionsRecord(
+                                                            queryBuilder: (transactionsRecord) =>
+                                                                transactionsRecord.where(
+                                                                    'transactionCategory',
+                                                                    isEqualTo:
+                                                                        existingCategoriesItem
+                                                                            .reference),
                                                           ),
-                                                          onPressed: () async {
-                                                            final budgetsUpdateData =
-                                                                {
-                                                              'unallocatedAmount':
-                                                                  FieldValue.increment(
-                                                                      existingCategoriesItem
-                                                                          .categoryAmount!),
-                                                            };
-                                                            await widget
-                                                                .createdBudget!
-                                                                .reference
-                                                                .update(
-                                                                    budgetsUpdateData);
-                                                            // Action_DeleteCategory
-                                                            await existingCategoriesItem
-                                                                .reference
-                                                                .delete();
+                                                          builder: (context,
+                                                              snapshot) {
+                                                            // Customize what your widget looks like when it's loading.
+                                                            if (!snapshot
+                                                                .hasData) {
+                                                              return Center(
+                                                                child: SizedBox(
+                                                                  width: 50,
+                                                                  height: 50,
+                                                                  child:
+                                                                      SpinKitRing(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryColor,
+                                                                    size: 50,
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            }
+                                                            List<TransactionsRecord>
+                                                                iconButtonTransactionsRecordList =
+                                                                snapshot.data!;
+                                                            return FlutterFlowIconButton(
+                                                              borderColor: Colors
+                                                                  .transparent,
+                                                              borderRadius: 30,
+                                                              borderWidth: 1,
+                                                              buttonSize: 60,
+                                                              icon: Icon(
+                                                                Icons
+                                                                    .delete_rounded,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                                size: 24,
+                                                              ),
+                                                              onPressed:
+                                                                  () async {
+                                                                final budgetsUpdateData =
+                                                                    {
+                                                                  'unallocatedAmount':
+                                                                      FieldValue.increment(
+                                                                          existingCategoriesItem
+                                                                              .categoryAmount!),
+                                                                };
+                                                                await widget
+                                                                    .createdBudget!
+                                                                    .reference
+                                                                    .update(
+                                                                        budgetsUpdateData);
+                                                                await actions
+                                                                    .unlinkAllTransCategories(
+                                                                  iconButtonTransactionsRecordList
+                                                                      .toList(),
+                                                                  existingCategoriesItem,
+                                                                );
+                                                                // Action_DeleteCategory
+                                                                await existingCategoriesItem
+                                                                    .reference
+                                                                    .delete();
+                                                              },
+                                                            );
                                                           },
                                                         ),
                                                       ],
@@ -977,6 +1020,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                           .deleteCategories(
                                                         allocateBudgetCategoriesRecordList
                                                             .toList(),
+                                                        columnBudgetsRecord,
                                                       );
 
                                                       final budgetsUpdateData =

@@ -20,12 +20,12 @@ export 'allocate_budget/allocate_budget_widget.dart' show AllocateBudgetWidget;
 export 'accounts/accounts_widget.dart' show AccountsWidget;
 export 'account_single/account_single_widget.dart' show AccountSingleWidget;
 export 'settings/settings_widget.dart' show SettingsWidget;
-export 'onboarding_page_view/onboarding_page_view_widget.dart'
-    show OnboardingPageViewWidget;
 export 'profile_settings/profile_settings_widget.dart'
     show ProfileSettingsWidget;
 export 'welcome_to_evi/welcome_to_evi_widget.dart' show WelcomeToEviWidget;
 export 'first_budget/first_budget_widget.dart' show FirstBudgetWidget;
+export 'onboarding_page_view/onboarding_page_view_widget.dart'
+    show OnboardingPageViewWidget;
 export 'budget_single_copy/budget_single_copy_widget.dart'
     show BudgetSingleCopyWidget;
 export 'transaction_single_copy/transaction_single_copy_widget.dart'
