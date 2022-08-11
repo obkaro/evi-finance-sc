@@ -399,11 +399,8 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                   .set(categoriesCreateData);
                               await Navigator.push(
                                 context,
-                                PageTransition(
-                                  type: PageTransitionType.rightToLeft,
-                                  duration: Duration(milliseconds: 400),
-                                  reverseDuration: Duration(milliseconds: 400),
-                                  child: AllocateBudgetWidget(
+                                MaterialPageRoute(
+                                  builder: (context) => AllocateBudgetWidget(
                                     createdBudget: widget.budget,
                                   ),
                                 ),

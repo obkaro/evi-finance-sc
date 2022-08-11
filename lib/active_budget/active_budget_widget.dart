@@ -8,6 +8,7 @@ import '../create_budget/create_budget_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -232,6 +233,15 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
+                                        Container(
+                                          width: 0,
+                                          height: 0,
+                                          child:
+                                              custom_widgets.BackButtonControl(
+                                            width: 0,
+                                            height: 0,
+                                          ),
+                                        ),
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -836,7 +846,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                             if (columnBudgetsRecord.reference != null)
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 0, 16, 16),
+                                    20, 0, 20, 20),
                                 child: InkWell(
                                   onTap: () async {
                                     await showModalBottomSheet(
@@ -895,8 +905,25 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                       .primaryColor,
                                               size: 48,
                                             ),
-                                            onPressed: () {
-                                              print('IconButton pressed ...');
+                                            onPressed: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets,
+                                                    child:
+                                                        CreateCustomCategoryWidget(
+                                                      budget:
+                                                          columnBudgetsRecord,
+                                                    ),
+                                                  );
+                                                },
+                                              );
                                             },
                                           ),
                                         ],

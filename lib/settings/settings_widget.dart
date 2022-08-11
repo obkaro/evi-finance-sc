@@ -4,6 +4,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../land_page/land_page_widget.dart';
 import '../profile_settings/profile_settings_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -113,6 +114,14 @@ class _SettingsWidgetState extends State<SettingsWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
+                Container(
+                  width: 0,
+                  height: 0,
+                  child: custom_widgets.BackButtonControl(
+                    width: 0,
+                    height: 0,
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                   child: Container(
@@ -372,7 +381,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,

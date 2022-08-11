@@ -732,7 +732,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                         },
                                                       );
                                                     },
-                                                    text: 'Categorize',
+                                                    text: 'Assign\n',
                                                     icon: Icon(
                                                       Icons.edit_rounded,
                                                       size: 15,

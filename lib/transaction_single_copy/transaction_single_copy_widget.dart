@@ -967,7 +967,7 @@ class _TransactionSingleCopyWidgetState
                                                         },
                                                       );
                                                     },
-                                                    text: 'Categorize',
+                                                    text: 'Assign\n',
                                                     icon: Icon(
                                                       Icons.edit_rounded,
                                                       size: 16,

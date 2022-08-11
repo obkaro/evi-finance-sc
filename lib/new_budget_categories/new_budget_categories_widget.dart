@@ -307,7 +307,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                 textAlign: TextAlign.end,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .subtitle1,
+                                                        .title3,
                                               ),
                                             ),
                                           ),
@@ -931,6 +931,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                         .deleteCategories(
                                                       newBudgetCategoriesCategoriesRecordList
                                                           .toList(),
+                                                      columnBudgetsRecord,
                                                     );
 
                                                     final budgetsUpdateData = {

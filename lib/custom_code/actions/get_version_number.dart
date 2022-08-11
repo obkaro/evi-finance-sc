@@ -17,5 +17,7 @@ Future<String> getVersionNumber() async {
   String version = packageInfo.version;
   String buildNumber = packageInfo.buildNumber;
 
+  print("VERSION NUMBER: $version");
+
   return version;
 }

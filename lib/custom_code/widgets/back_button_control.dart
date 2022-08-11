@@ -38,7 +38,7 @@ class _BackButtonControlState extends State<BackButtonControl> {
         final difference = DateTime.now().difference(timeBackPressed);
         timeBackPressed = DateTime.now();
         if (difference >= Duration(seconds: 2)) {
-          final String msg = 'Press the back button to exit';
+          final String msg = 'Press the back button again to exit';
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
