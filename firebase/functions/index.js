@@ -51,35 +51,35 @@ exports.accountupdate = functions.https.onRequest(async (req, res) => {
         url: 'https://api.withmono.com/accounts/' + req.body.data.account._id + '/transactions',
         headers: { Accept: 'application/json', 'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid' }
       };
-      axios
-        .request(options)
-        .then(async function (response) {
+      // axios
+      //   .request(options)
+      //   .then(async function (response) {
 
-          response.data.forEach(element => {
+      //     response.data.forEach(element => {
 
-            const id = element.amount + element.narration + element.date + element.balance;
-            const parsedDate = Date.parse(element.date);
+      //       const id = element.amount + element.narration + element.date + element.balance;
+      //       const parsedDate = Date.parse(element.date);
 
-            const writetransactions = await admin.firestore().collection('transactions').doc(id).set(
-              {
-                account: account.docs[0].ref.path,
-                trasactionDate: admin.firestore.Timestamp.fromDate(parsedDate),
-                //monoCategory: transaction.data[i].,
-                transactionOwner: account.docs[0].accountOwner.path,
-                balanceAfter: element.balance,
-                transactionAmount: element.amount,
-                transactionMonoID: element._id,
-                transactionType: element.type,
-                transactionNarration: element.narration,
-                monoCategory: element.category,
-              }, { merge: true }
-            )
-          });
-          functions.logger.log(response.data);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
+      //       const writetransactions = await admin.firestore().collection('transactions').doc(id).set(
+      //         {
+      //           account: account.docs[0].ref.path,
+      //           trasactionDate: admin.firestore.Timestamp.fromDate(parsedDate),
+      //           //monoCategory: transaction.data[i].,
+      //           transactionOwner: account.docs[0].accountOwner.path,
+      //           balanceAfter: element.balance,
+      //           transactionAmount: element.amount,
+      //           transactionMonoID: element._id,
+      //           transactionType: element.type,
+      //           transactionNarration: element.narration,
+      //           monoCategory: element.category,
+      //         }, { merge: true }
+      //       )
+      //     });
+      //     functions.logger.log(response.data);
+      //   })
+      //   .catch(function (error) {
+      //     console.error(error);
+      //   });
     } else {
       functions.logger.log("ACCOUNT NOT FOUND", account);
     }
