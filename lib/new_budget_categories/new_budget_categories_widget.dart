@@ -150,23 +150,29 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Expanded(
-                                            child: Container(
-                                              width: 100,
-                                              height: 30,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                              ),
-                                              alignment:
-                                                  AlignmentDirectional(1, 0),
-                                              child: Text(
-                                                'Left to allocate:',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 20, 0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                width: 100,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                alignment:
+                                                    AlignmentDirectional(1, 0),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 4, 0),
+                                                  child: Text(
+                                                    'Left to allocate: ',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .bodyText2
                                                         .override(
                                                           fontFamily:
@@ -175,35 +181,36 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                                   .bodyText2Family,
                                                           fontSize: 14,
                                                         ),
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Container(
-                                            width: 100,
-                                            height: 30,
-                                            decoration: BoxDecoration(),
-                                            alignment:
-                                                AlignmentDirectional(0, 0),
-                                            child: Text(
-                                              functions.formatBudgetCurrency(
-                                                  columnBudgetsRecord
-                                                      .unallocatedAmount),
-                                              textAlign: TextAlign.end,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText2Family,
-                                                        color:
-                                                            Color(0xFFFF0003),
-                                                        fontSize: 14,
-                                                      ),
+                                            Container(
+                                              height: 30,
+                                              decoration: BoxDecoration(),
+                                              alignment:
+                                                  AlignmentDirectional(0, 0),
+                                              child: Text(
+                                                functions.formatBudgetCurrency(
+                                                    columnBudgetsRecord
+                                                        .unallocatedAmount),
+                                                textAlign: TextAlign.end,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText1Family,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
+                                                        ),
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -225,7 +232,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                   'Start: ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)}',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .subtitle1,
+                                                      .bodyText1,
                                                 ),
                                               ),
                                             ),
@@ -300,7 +307,14 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                 textAlign: TextAlign.end,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .subtitle1,
+                                                        .subtitle1
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle1Family,
+                                                          fontSize: 22,
+                                                        ),
                                               ),
                                             ),
                                           ),
@@ -924,6 +938,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                         .deleteCategories(
                                                       newBudgetCategoriesCategoriesRecordList
                                                           .toList(),
+                                                      columnBudgetsRecord,
                                                     );
 
                                                     final budgetsUpdateData = {

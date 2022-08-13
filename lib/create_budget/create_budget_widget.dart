@@ -150,7 +150,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                             child: custom_widgets.CurrencyTextField(
                               width: MediaQuery.of(context).size.width,
-                              height: 50,
+                              height: 55,
                               amount: widget.budget!.budgetAmount,
                               labelText: 'Amount',
                               hintText: 'Enter amount',
@@ -367,8 +367,8 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                 budgetOwner: currentUserReference,
                                 budgetAmount: FFAppState().currencyTextField,
                                 budgetDuration: dropDownValue,
-                                unallocatedAmount:
-                                    FFAppState().currencyTextField,
+                                unallocatedAmount: functions.subInt(
+                                    FFAppState().currencyTextField, 50000),
                                 status: 'active',
                               );
                               await widget.budget!.reference
@@ -399,11 +399,8 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                   .set(categoriesCreateData);
                               await Navigator.push(
                                 context,
-                                PageTransition(
-                                  type: PageTransitionType.rightToLeft,
-                                  duration: Duration(milliseconds: 400),
-                                  reverseDuration: Duration(milliseconds: 400),
-                                  child: AllocateBudgetWidget(
+                                MaterialPageRoute(
+                                  builder: (context) => AllocateBudgetWidget(
                                     createdBudget: widget.budget,
                                   ),
                                 ),

@@ -28,7 +28,8 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ProfileSettings'});
-    textController1 = TextEditingController(text: currentUserDisplayName);
+    textController1 = TextEditingController(
+        text: valueOrDefault(currentUserDocument?.username, ''));
     textController2 = TextEditingController(text: currentUserEmail);
     textController3 = TextEditingController(text: currentPhoneNumber);
   }
@@ -83,7 +84,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               autofocus: true,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: 'Username',
                                 hintText: 'New username here',
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -119,7 +119,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                           readOnly: true,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Email',
                             hintText: 'Email address here',
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -156,7 +155,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               readOnly: true,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: 'Phone',
                                 hintText: 'Phone number here',
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(

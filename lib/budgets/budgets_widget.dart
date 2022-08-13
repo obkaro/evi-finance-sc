@@ -1,9 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../budget_single_copy/budget_single_copy_widget.dart';
+import '../budget_single/budget_single_widget.dart';
+import '../components/dialog_box_widget.dart';
 import '../create_budget/create_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -126,7 +128,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
                   child: Material(
                     color: Colors.transparent,
                     elevation: 0,
@@ -145,55 +147,74 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                         ],
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
-                        child: StreamBuilder<List<BudgetsRecord>>(
-                          stream: queryBudgetsRecord(
-                            queryBuilder: (budgetsRecord) =>
-                                budgetsRecord.where('budgetOwner',
-                                    isEqualTo: currentUserReference),
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: SpinKitRing(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    size: 50,
-                                  ),
+                      child: StreamBuilder<List<BudgetsRecord>>(
+                        stream: queryBudgetsRecord(
+                          queryBuilder: (budgetsRecord) => budgetsRecord.where(
+                              'budgetOwner',
+                              isEqualTo: currentUserReference),
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: SpinKitRing(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  size: 50,
                                 ),
-                              );
-                            }
-                            List<BudgetsRecord> columnBudgetsRecordList =
-                                snapshot.data!;
-                            return SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: List.generate(
-                                    columnBudgetsRecordList.length,
-                                    (columnIndex) {
-                                  final columnBudgetsRecord =
-                                      columnBudgetsRecordList[columnIndex];
-                                  return Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Material(
-                                        color: Colors.transparent,
-                                        elevation: 0,
-                                        child: Container(
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          decoration: BoxDecoration(),
-                                          alignment: AlignmentDirectional(0, 0),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10, 0, 10, 0),
-                                            child: InkWell(
+                              ),
+                            );
+                          }
+                          List<BudgetsRecord> columnBudgetsRecordList =
+                              snapshot.data!;
+                          return SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children:
+                                  List.generate(columnBudgetsRecordList.length,
+                                      (columnIndex) {
+                                final columnBudgetsRecord =
+                                    columnBudgetsRecordList[columnIndex];
+                                return Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Material(
+                                      color: Colors.transparent,
+                                      elevation: 0,
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(),
+                                        alignment: AlignmentDirectional(0, 0),
+                                        child: StreamBuilder<
+                                            List<CategoriesRecord>>(
+                                          stream: queryCategoriesRecord(
+                                            parent:
+                                                columnBudgetsRecord.reference,
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50,
+                                                  height: 50,
+                                                  child: SpinKitRing(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryColor,
+                                                    size: 50,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<CategoriesRecord>
+                                                listTileCategoriesRecordList =
+                                                snapshot.data!;
+                                            return InkWell(
                                               onTap: () async {
                                                 final budgetsUpdateData =
                                                     createBudgetsRecordData(
@@ -207,7 +228,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        BudgetSingleCopyWidget(
+                                                        BudgetSingleWidget(
                                                       budget:
                                                           columnBudgetsRecord,
                                                     ),
@@ -259,7 +280,46 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                                   },
                                                                 ) ??
                                                                 false;
-                                                        if (confirmDialogResponse) {
+                                                        setState(() => FFAppState()
+                                                                .dialogBoxReturn =
+                                                            false);
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return Padding(
+                                                              padding: MediaQuery
+                                                                      .of(context)
+                                                                  .viewInsets,
+                                                              child:
+                                                                  DialogBoxWidget(
+                                                                heading:
+                                                                    'Delete active budget?',
+                                                                body:
+                                                                    'You will be required to create a new budget on the active budget page',
+                                                                buttonYes:
+                                                                    'Delete',
+                                                                buttonNo:
+                                                                    'Don\'t delete',
+                                                                information:
+                                                                    false,
+                                                              ),
+                                                            );
+                                                          },
+                                                        );
+                                                        if (FFAppState()
+                                                            .dialogBoxReturn) {
+                                                          await actions
+                                                              .deleteCategories(
+                                                            listTileCategoriesRecordList
+                                                                .toList(),
+                                                            columnBudgetsRecord,
+                                                          );
+
                                                           final usersUpdateData =
                                                               {
                                                             'activeBudget':
@@ -269,12 +329,22 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                           await currentUserReference!
                                                               .update(
                                                                   usersUpdateData);
+                                                          await columnBudgetsRecord
+                                                              .reference
+                                                              .delete();
                                                         }
+                                                      } else {
+                                                        await actions
+                                                            .deleteCategories(
+                                                          listTileCategoriesRecordList
+                                                              .toList(),
+                                                          columnBudgetsRecord,
+                                                        );
+                                                        // Action_DeleteBudget
+                                                        await columnBudgetsRecord
+                                                            .reference
+                                                            .delete();
                                                       }
-                                                      // Action_DeleteBudget
-                                                      await columnBudgetsRecord
-                                                          .reference
-                                                          .delete();
                                                     },
                                                   ),
                                                   IconSlideAction(
@@ -338,29 +408,23 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                               20, 10, 20, 10),
                                                 ),
                                               ),
-                                            ),
-                                          ),
+                                            );
+                                          },
                                         ),
                                       ),
-                                    ],
-                                  );
-                                }),
-                              ),
-                            );
-                          },
-                        ),
+                                    ),
+                                  ],
+                                );
+                              }),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),
                 ),
-                Divider(
-                  thickness: 1,
-                  indent: 20,
-                  endIndent: 20,
-                  color: FlutterFlowTheme.of(context).fadedDivider,
-                ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 16),
                   child: Container(
                     width: double.infinity,
                     height: 100,

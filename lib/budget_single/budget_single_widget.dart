@@ -196,11 +196,11 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                     progressColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .primaryColor,
+                                                            .darkPrimary,
                                                     backgroundColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .eviredTransparent,
+                                                            .primaryColor,
                                                     center: Text(
                                                       '${functions.subtractCurrency(widget.budget!.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                       textAlign:
@@ -218,7 +218,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                     .primaryText,
                                                               ),
                                                     ),
-                                                    startAngle: 180,
+                                                    startAngle: 0,
                                                   ),
                                                 ),
                                             ],
@@ -545,7 +545,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                   .subtitle1,
                                                             ),
                                                             Text(
-                                                              functions.formatTransCurrency(
+                                                              functions.formatBudgetCurrency(
                                                                   budgetCategoriesItem
                                                                       .categoryAmount),
                                                               style: FlutterFlowTheme

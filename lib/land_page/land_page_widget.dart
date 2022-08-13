@@ -1,9 +1,11 @@
 import '../auth/auth_util.dart';
+import '../components/new_version_found_widget.dart';
 import '../email_auth/email_auth_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../onboarding_page_view/onboarding_page_view_widget.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -73,6 +75,14 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
+                                      Container(
+                                        width: 0,
+                                        height: 0,
+                                        child: custom_widgets.ForceUpdateWidget(
+                                          width: 0,
+                                          height: 0,
+                                        ),
+                                      ),
                                       Text(
                                         'Maximize \nyour income.',
                                         textAlign: TextAlign.start,
@@ -196,12 +206,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .subtitle2Family,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryColor,
+                                                          color:
+                                                              Color(0xFF0C0C0C),
                                                         ),
                                                 elevation: 0,
                                                 borderSide: BorderSide(
+                                                  color: Colors.transparent,
                                                   width: 0,
                                                 ),
                                                 borderRadius:
@@ -254,6 +264,23 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                       EmailAuthWidget(),
                                                 ),
                                               );
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets,
+                                                    child:
+                                                        NewVersionFoundWidget(
+                                                      forceUpdate: false,
+                                                    ),
+                                                  );
+                                                },
+                                              );
                                             },
                                             text: 'Continue with Email',
                                             icon: Icon(
@@ -279,6 +306,7 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                       ),
                                               elevation: 2,
                                               borderSide: BorderSide(
+                                                color: Colors.transparent,
                                                 width: 0,
                                               ),
                                               borderRadius:

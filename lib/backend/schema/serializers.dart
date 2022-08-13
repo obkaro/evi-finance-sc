@@ -7,6 +7,7 @@ import 'budgets_record.dart';
 import 'const_budget_categories_record.dart';
 import 'const_institution_logos_record.dart';
 import 'categories_record.dart';
+import 'versions_record.dart';
 
 import 'index.dart';
 
@@ -24,6 +25,8 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   ConstBudgetCategoriesRecord,
   ConstInstitutionLogosRecord,
   CategoriesRecord,
+  VersionsRecord,
+  VersionStruct,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

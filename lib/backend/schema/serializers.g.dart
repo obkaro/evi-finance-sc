@@ -14,6 +14,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ConstInstitutionLogosRecord.serializer)
       ..add(TransactionsRecord.serializer)
       ..add(UsersRecord.serializer)
+      ..add(VersionStruct.serializer)
+      ..add(VersionsRecord.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType(

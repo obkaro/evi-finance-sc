@@ -3,14 +3,17 @@ import '../backend/backend.dart';
 import '../category_single/category_single_widget.dart';
 import '../components/budget_options_widget.dart';
 import '../components/create_custom_category_widget.dart';
+import '../components/edit_category_widget.dart';
 import '../create_budget/create_budget_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -230,10 +233,19 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
+                                        Container(
+                                          width: 0,
+                                          height: 0,
+                                          child:
+                                              custom_widgets.BackButtonControl(
+                                            width: 0,
+                                            height: 0,
+                                          ),
+                                        ),
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  20, 16, 20, 16),
+                                                  20, 16, 20, 0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
@@ -313,7 +325,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               percent: 1,
                                                                               radius: 90,
                                                                               lineWidth: 20,
-                                                                              animation: true,
+                                                                              animation: false,
                                                                               progressColor: FlutterFlowTheme.of(context).primaryColor,
                                                                               backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
                                                                               center: Text(
@@ -341,8 +353,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               radius: 90,
                                                                               lineWidth: 20,
                                                                               animation: true,
-                                                                              progressColor: FlutterFlowTheme.of(context).primaryColor,
-                                                                              backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
+                                                                              progressColor: FlutterFlowTheme.of(context).darkPrimary,
+                                                                              backgroundColor: FlutterFlowTheme.of(context).primaryColor,
                                                                               center: Text(
                                                                                 '${functions.subtractCurrency(columnBudgetsRecord.budgetAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList()))}',
                                                                                 textAlign: TextAlign.center,
@@ -351,7 +363,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                       color: FlutterFlowTheme.of(context).primaryText,
                                                                                     ),
                                                                               ),
-                                                                              startAngle: 180,
+                                                                              startAngle: 0,
                                                                             ),
                                                                           ),
                                                                       ],
@@ -646,6 +658,34 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                     ),
                                                                   );
                                                                 },
+                                                                onLongPress:
+                                                                    () async {
+                                                                  HapticFeedback
+                                                                      .lightImpact();
+                                                                  await showModalBottomSheet(
+                                                                    isScrollControlled:
+                                                                        true,
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (context) {
+                                                                      return Padding(
+                                                                        padding:
+                                                                            MediaQuery.of(context).viewInsets,
+                                                                        child:
+                                                                            EditCategoryWidget(
+                                                                          budget:
+                                                                              columnBudgetsRecord,
+                                                                          categoryToEdit:
+                                                                              displayedCategoriesItem,
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  );
+                                                                },
                                                                 child:
                                                                     Container(
                                                                   width: MediaQuery.of(
@@ -710,7 +750,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                   style: FlutterFlowTheme.of(context).subtitle1,
                                                                                 ),
                                                                                 Text(
-                                                                                  functions.formatTransCurrency(displayedCategoriesItem.categoryAmount),
+                                                                                  functions.formatBudgetCurrency(displayedCategoriesItem.categoryAmount),
                                                                                   style: FlutterFlowTheme.of(context).bodyText1,
                                                                                 ),
                                                                               ],
@@ -795,12 +835,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                   },
                                                 ),
                                               ),
-                                              Divider(
-                                                thickness: 1,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .fadedDivider,
-                                              ),
                                             ],
                                           ),
                                         ),
@@ -812,7 +846,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                             if (columnBudgetsRecord.reference != null)
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 0, 16, 16),
+                                    20, 0, 20, 20),
                                 child: InkWell(
                                   onTap: () async {
                                     await showModalBottomSheet(
@@ -871,8 +905,25 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                       .primaryColor,
                                               size: 48,
                                             ),
-                                            onPressed: () {
-                                              print('IconButton pressed ...');
+                                            onPressed: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets,
+                                                    child:
+                                                        CreateCustomCategoryWidget(
+                                                      budget:
+                                                          columnBudgetsRecord,
+                                                    ),
+                                                  );
+                                                },
+                                              );
                                             },
                                           ),
                                         ],

@@ -11,6 +11,7 @@ import 'schema/budgets_record.dart';
 import 'schema/const_budget_categories_record.dart';
 import 'schema/const_institution_logos_record.dart';
 import 'schema/categories_record.dart';
+import 'schema/versions_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -25,6 +26,7 @@ export 'schema/budgets_record.dart';
 export 'schema/const_budget_categories_record.dart';
 export 'schema/const_institution_logos_record.dart';
 export 'schema/categories_record.dart';
+export 'schema/versions_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord({
@@ -319,6 +321,48 @@ Future<FFFirestorePage<CategoriesRecord>> queryCategoriesRecordPage({
     queryCollectionPage(
       CategoriesRecord.collection(parent),
       CategoriesRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query VersionsRecords (as a Stream and as a Future).
+Stream<List<VersionsRecord>> queryVersionsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      VersionsRecord.collection,
+      VersionsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<VersionsRecord>> queryVersionsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      VersionsRecord.collection,
+      VersionsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<VersionsRecord>> queryVersionsRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      VersionsRecord.collection,
+      VersionsRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
