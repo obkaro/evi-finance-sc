@@ -77,6 +77,26 @@ double calcCategoryPercent(
     totalTransactions += transactions[i].transactionAmount as int;
   }
 
+  double percent = 1 - (totalTransactions / (category!.categoryAmount as int));
+
+  if (totalTransactions >= (category.categoryAmount as int)) {
+    percent = 0;
+  }
+
+  return percent;
+}
+
+double calcCategoryPercentCircle(
+  CategoriesRecord? category,
+  List<TransactionsRecord>? transactions,
+) {
+  // Add your function code here!
+  int totalTransactions = 0;
+
+  for (var i = 0; i < transactions!.length; i++) {
+    totalTransactions += transactions[i].transactionAmount as int;
+  }
+
   double percent = (totalTransactions / (category!.categoryAmount as int));
 
   if (totalTransactions >= (category.categoryAmount as int)) {
