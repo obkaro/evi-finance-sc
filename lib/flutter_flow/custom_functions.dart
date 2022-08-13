@@ -77,7 +77,7 @@ double calcCategoryPercent(
     totalTransactions += transactions[i].transactionAmount as int;
   }
 
-  double percent = 1 - (totalTransactions / (category!.categoryAmount as int));
+  double percent = (totalTransactions / (category!.categoryAmount as int));
 
   if (totalTransactions >= (category.categoryAmount as int)) {
     percent = 0;

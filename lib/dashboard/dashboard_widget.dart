@@ -56,10 +56,6 @@ class _DashboardWidgetState extends State<DashboardWidget> {
           );
         }
         List<VersionsRecord> dashboardVersionsRecordList = snapshot.data!;
-        // Return an empty Container when the document does not exist.
-        if (snapshot.data!.isEmpty) {
-          return Container();
-        }
         final dashboardVersionsRecord = dashboardVersionsRecordList.first;
         return Scaffold(
           key: scaffoldKey,
