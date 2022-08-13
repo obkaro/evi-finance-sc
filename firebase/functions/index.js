@@ -6,6 +6,9 @@ const admin = require('firebase-admin');
 const { firebaseConfig } = require("firebase-functions");
 admin.initializeApp();
 
+const sdk = require('api')('@mono/v1.0#33hmc2izkyejmoej');
+const axios = require('axios');
+
 
 exports.accountupdate = functions.https.onRequest(async (req, res) => {
 
@@ -42,6 +45,41 @@ exports.accountupdate = functions.https.onRequest(async (req, res) => {
     if (!account.empty) {
       const snapshot = account.docs[0];
       await snapshot.ref.update(update);
+
+      const options = {
+        method: 'GET',
+        url: 'https://api.withmono.com/accounts/' + req.body.data.account._id + '/transactions',
+        headers: { Accept: 'application/json', 'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid' }
+      };
+      axios
+        .request(options)
+        .then(async function (response) {
+
+          response.data.forEach(element => {
+
+            const id = element.amount + element.narration + element.date + element.balance;
+            const parsedDate = Date.parse(element.date);
+
+            const writetransactions = await admin.firestore().collection('transactions').doc(id).set(
+              {
+                account: account.docs[0].ref.path,
+                trasactionDate: admin.firestore.Timestamp.fromDate(parsedDate),
+                //monoCategory: transaction.data[i].,
+                transactionOwner: account.docs[0].accountOwner.path,
+                balanceAfter: element.balance,
+                transactionAmount: element.amount,
+                transactionMonoID: element._id,
+                transactionType: element.type,
+                transactionNarration: element.narration,
+                monoCategory: element.category,
+              }, { merge: true }
+            )
+          });
+          functions.logger.log(response.data);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
     } else {
       functions.logger.log("ACCOUNT NOT FOUND", account);
     }
@@ -54,29 +92,44 @@ exports.accountupdate = functions.https.onRequest(async (req, res) => {
 })
 
 
-exports.needsreauth = functions.runWith({timeoutSeconds: 300}).https.onRequest(async (req, res) => {
+exports.needsreauth = functions.runWith({ timeoutSeconds: 300 }).https.onRequest(async (req, res) => {
 
-  let accountid = req.body.data.account._id;
+  if (req.body.event == "mono.events.reauthorisation_required") {
+    let accountid = req.body.data.account._id;
 
-  functions.logger.log("RESPONSE FROM MONO:", req.body);
+    functions.logger.log("RESPONSE FROM MONO:", req.body);
 
-  const account = await admin.firestore().collection('accounts').where('authID', '==', accountid).get();
+    const account = await admin.firestore().collection('accounts').where('authID', '==', accountid).get();
 
-  functions.logger.log("ACCOUNT EXISTING DATA", account.data());
+    functions.logger.log("ACCOUNT EXISTING DATA", account.docs[0].data());
 
-  const update = { reauthRequired: true };
+    const update = { reauthRequired: true };
 
-  if (!account.empty) {
+    if (!account.empty) {
+      const snapshot = account.docs[0];
+      await snapshot.ref.update(update);
 
-    const snapshot = account.docs[0];
+      const userid = snapshot.data().accountOwner.path.toString().substring(6);
 
-    await snapshot.ref.update(update);
+      const user = await admin.firestore().collection('users').doc(userid).get();
 
-  } else {
-    functions.logger.log("ACCOUNT NOT FOUND", account);
+      const reauthNotif = await admin.firestore().collection('ff_push_notifications').add({
+        initial_page_name: 'Accounts',
+        notification_sound: 'default',
+        notification_text: 'Hi ' + user.data().username + ', your authentication is required to update one of your accounts. Kindly ignore this message if you have provided authentication in the last few minutes.',
+        notification_title: 'Evi',
+        timestamp: time,
+        user_refs: snapshot.data().accountOwner.path.toString()
+      });
+
+
+    } else {
+      functions.logger.log("ACCOUNT NOT FOUND", account);
+    }
   }
 
   res.status(200).send();
+
 })
 
 
@@ -94,12 +147,12 @@ exports.renewbudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (co
         const endOffset = documentSnapshot.data().duration + 1;
 
         functions.logger.log("EXISTING END", existingEnd.toString());
-   
+
         const newStart = new Date(existingEnd.getTime() + 86400000);
 
         functions.logger.log("after start:", existingEnd.getTime());
 
-        const newEnd = new Date(existingEnd.getTime() + (endOffset*86400000));
+        const newEnd = new Date(existingEnd.getTime() + (endOffset * 86400000));
 
         functions.logger.log("end offset:", endOffset);
 
@@ -131,7 +184,7 @@ exports.renewbudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (co
 
         functions.logger.log(userID);
 
-        const user = await admin.firestore().collection('users').doc(userID).update({
+        const userUpdate = await admin.firestore().collection('users').doc(userID).update({
           activeBudget: newBudget
         })
 
@@ -149,6 +202,21 @@ exports.renewbudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (co
             });
           })
         })
+
+        const user = await admin.firestore().collection('users').doc(userID).get();
+
+        functions.logger.log('USER DATA = ', user.data());
+
+        const renewedNotif = await admin.firestore().collection('ff_push_notifications').add({
+          initial_page_name: 'Budgets',
+          notification_sound: 'default',
+          notification_text: 'Hey ' + user.data().username + ', your ' + documentSnapshot.data().budgetDuration + ' has been renewed. Come check it out!',
+          notification_title: 'Evi',
+          timestamp: time,
+          user_refs: documentSnapshot.data().budgetOwner.path.toString()
+        });
+
+
       })
     })
 
@@ -156,26 +224,34 @@ exports.renewbudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (co
 })
 
 
-exports.testNotifications = functions.https.onRequest(async (req,res) => {
+exports.testNotifications = functions.https.onRequest(async (req, res) => {
 
-  const notification = req.body;
-  //const user_refs = ""
-  const timestamp = admin.firestore.Timestamp.now();
+  // const notification = req.body;
+  // //const user_refs = ""
+  // const timestamp = admin.firestore.Timestamp.now();
 
-  const newNotification = await admin.firestore().collection('ff_push_notifications').add(
-    {
-      initial_page_name: req.body.initial_page_name,
-      notification_sound: req.body.notification_sound,
-      notification_text: req.body.notification_text,
-      notification_title: req.body.notification_title,
-      parameter_data: req.body.parameter_data,
-      user_refs: req.body.user_refs,
-      timestamp: timestamp
-    }
-  );
+  // const newNotification = await admin.firestore().collection('ff_push_notifications').add(
+  //   {
+  //     initial_page_name: req.body.initial_page_name,
+  //     notification_sound: req.body.notification_sound,
+  //     notification_text: req.body.notification_text,
+  //     notification_title: req.body.notification_title,
+  //     parameter_data: req.body.parameter_data,
+  //     user_refs: req.body.user_refs,
+  //     timestamp: timestamp
+  //   }
+  // );
 
-  functions.logger.log("NOTIFICATION:", newNotification.data());
+  // functions.logger.log("NOTIFICATION:", newNotification.data());
 
-  res.status(200).send(newNotification.data());
+  // res.status(200).send(newNotification.data());
+
+  //const action = admin.firestore().collection('transactions').
 
 })
+
+exports.budgetCreated = functions.firestore.document('budgets/{budgetID}').onCreate((snap, context) => {
+  const createdBudget = snap.data();
+
+
+});
