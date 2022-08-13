@@ -361,7 +361,8 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                               budgetOwner: currentUserReference,
                               budgetAmount: FFAppState().currencyTextField,
                               budgetDuration: dropDownValue,
-                              unallocatedAmount: FFAppState().currencyTextField,
+                              unallocatedAmount: functions.subInt(
+                                  FFAppState().currencyTextField, 50000),
                               status: 'active',
                             );
                             await widget.budget!.reference

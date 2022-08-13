@@ -367,8 +367,8 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                 budgetOwner: currentUserReference,
                                 budgetAmount: FFAppState().currencyTextField,
                                 budgetDuration: dropDownValue,
-                                unallocatedAmount:
-                                    FFAppState().currencyTextField,
+                                unallocatedAmount: functions.subInt(
+                                    FFAppState().currencyTextField, 50000),
                                 status: 'active',
                               );
                               await widget.budget!.reference

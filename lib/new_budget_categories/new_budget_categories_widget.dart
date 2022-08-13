@@ -307,7 +307,14 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                 textAlign: TextAlign.end,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .title3,
+                                                        .subtitle1
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle1Family,
+                                                          fontSize: 22,
+                                                        ),
                                               ),
                                             ),
                                           ),
