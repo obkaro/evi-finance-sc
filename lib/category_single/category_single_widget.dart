@@ -134,7 +134,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
                             child: CircularPercentIndicator(
-                              percent: functions.calcCategoryPercent(
+                              percent: functions.calcCategoryPercentCircle(
                                   widget.category,
                                   categorySingleTransactionsRecordList
                                       .toList()),
