@@ -129,12 +129,12 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
       ),
   'Settings': (data) async => NavBarPage(initialPage: 'Settings'),
   'ProfileSettings': (data) async => ProfileSettingsWidget(),
+  'OnboardingPageView': (data) async => OnboardingPageViewWidget(),
   'WelcomeToEvi': (data) async => WelcomeToEviWidget(),
   'FirstBudget': (data) async => FirstBudgetWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
       ),
-  'OnboardingPageView': (data) async => OnboardingPageViewWidget(),
   'BudgetSingleCopy': (data) async => BudgetSingleCopyWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
