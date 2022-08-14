@@ -209,7 +209,7 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                           color:
                                                               Color(0xFF0C0C0C),
                                                         ),
-                                                elevation: 0,
+                                                elevation: 2,
                                                 borderSide: BorderSide(
                                                   color: Colors.transparent,
                                                   width: 0,
