@@ -6,11 +6,9 @@ export 'new_budget_categories/new_budget_categories_widget.dart'
 export 'email_auth/email_auth_widget.dart' show EmailAuthWidget;
 export 'forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
 export 'dashboard/dashboard_widget.dart' show DashboardWidget;
+export 'active_budget/active_budget_widget.dart' show ActiveBudgetWidget;
 export 'connect_first_account/connect_first_account_widget.dart'
     show ConnectFirstAccountWidget;
-export 'transaction_single/transaction_single_widget.dart'
-    show TransactionSingleWidget;
-export 'active_budget/active_budget_widget.dart' show ActiveBudgetWidget;
 export 'budget_single/budget_single_widget.dart' show BudgetSingleWidget;
 export 'create_budget/create_budget_widget.dart' show CreateBudgetWidget;
 export 'edit_budget/edit_budget_widget.dart' show EditBudgetWidget;
@@ -28,5 +26,9 @@ export 'welcome_to_evi/welcome_to_evi_widget.dart' show WelcomeToEviWidget;
 export 'first_budget/first_budget_widget.dart' show FirstBudgetWidget;
 export 'budget_single_copy/budget_single_copy_widget.dart'
     show BudgetSingleCopyWidget;
-export 'transaction_single_copy/transaction_single_copy_widget.dart'
-    show TransactionSingleCopyWidget;
+export 'recurring_payments/recurring_payments_widget.dart'
+    show RecurringPaymentsWidget;
+export 'transaction_single/transaction_single_widget.dart'
+    show TransactionSingleWidget;
+export 'create_recurring/create_recurring_widget.dart'
+    show CreateRecurringWidget;

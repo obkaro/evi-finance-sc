@@ -51,6 +51,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
           .where((anim) => anim.trigger == AnimationTrigger.onActionTrigger),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -98,13 +100,8 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
               padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Assign Category',
-                    style: FlutterFlowTheme.of(context).title3,
-                  ),
-                ],
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [],
               ),
             ),
             Padding(

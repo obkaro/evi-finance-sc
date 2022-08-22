@@ -166,19 +166,19 @@ Future flutterMono(
                           );
                           await newacct.reference.update(accountsUpdateData);
 
-                          logFirebaseEvent('Initial_Write_Transactions');
-                          ApiCallResponse transactionsResponse =
-                              await GetTransactionsCall.call(
-                            authID: newacct.authID,
-                          );
+                          //logFirebaseEvent('Initial_Write_Transactions');
+                          //ApiCallResponse transactionsResponse =
+                          //    await GetTransactionsCall.call(
+                          //  authID: newacct.authID,
+                          //);
                           //print(transactionsResponse?.jsonBody ?? '');
                           // logFirebaseEvent(
                           //     'FloatingActionButton-Custom-Action');
                           //print('ABOUT TO RUN TRANSACTION WRITE');
-                          await actions.writeNewAcctTransactions(
-                            (transactionsResponse.jsonBody ?? ''),
-                            newacct,
-                          );
+                          //await actions.writeNewAcctTransactions(
+                          //  (transactionsResponse.jsonBody ?? ''),
+                          //  newacct,
+                          //);
                         },
                       )),
                 ))

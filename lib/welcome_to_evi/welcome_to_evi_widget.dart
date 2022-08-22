@@ -56,365 +56,392 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'WelcomeToEvi'});
     textController = TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 36, 20, 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
+    return Title(
+        title: 'WelcomeToEvi',
+        color: FlutterFlowTheme.of(context).primaryColor,
+        child: Scaffold(
+          key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          body: SafeArea(
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 36, 20, 0),
+                      child: Column(
                         mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Welcome to Evi 👋',
-                            style: FlutterFlowTheme.of(context).title1,
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'Welcome to Evi 👋',
+                                style: FlutterFlowTheme.of(context).title1,
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Let\'s get you set up. You can change these details later.',
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle2
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2Family,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                           Expanded(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Let\'s get you set up. You can change these details later.',
-                                  style: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .subtitle2Family,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
-                          child: Form(
-                            key: formKey,
-                            autovalidateMode: AutovalidateMode.always,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      4, 0, 0, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        'What do you like to be called?',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Row(
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                              child: Form(
+                                key: formKey,
+                                autovalidateMode: AutovalidateMode.always,
+                                child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 4, 0, 0),
-                                        child: TextFormField(
-                                          controller: textController,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            hintText: 'Username',
-                                            hintStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1Family,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                    ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            filled: true,
-                                            fillColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          4, 0, 0, 0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            'What do you like to be called?',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2,
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                          keyboardType: TextInputType.name,
-                                          validator: (val) {
-                                            if (val == null || val.isEmpty) {
-                                              return 'Field is required';
-                                            }
-                                            if (val.length < 2) {
-                                              return 'Requires at least 2 characters.';
-                                            }
+                                        ],
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 4, 0, 0),
+                                            child: TextFormField(
+                                              controller: textController,
+                                              obscureText: false,
+                                              decoration: InputDecoration(
+                                                hintText: 'Username',
+                                                hintStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText1Family,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                        ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                filled: true,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1,
+                                              keyboardType: TextInputType.name,
+                                              validator: (val) {
+                                                if (val == null ||
+                                                    val.isEmpty) {
+                                                  return 'Field is required';
+                                                }
+                                                if (val.length < 2) {
+                                                  return 'Requires at least 2 characters.';
+                                                }
 
-                                            if (!RegExp(
-                                                    kTextValidatorUsernameRegex)
-                                                .hasMatch(val)) {
-                                              return 'Must start with a letter and can only contain letters, digits and - or _.';
-                                            }
-                                            return null;
-                                          },
+                                                if (!RegExp(
+                                                        kTextValidatorUsernameRegex)
+                                                    .hasMatch(val)) {
+                                                  return 'Must start with a letter and can only contain letters, digits and - or _.';
+                                                }
+                                                return null;
+                                              },
+                                            ),
+                                          ),
                                         ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 16, 0, 0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(4, 0, 0, 0),
+                                                  child: Text(
+                                                    'How much prior experience have you had with personal finance management?',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText2,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 4, 0, 0),
+                                                  child: FlutterFlowDropDown(
+                                                    options: [
+                                                      'None',
+                                                      'Limited',
+                                                      'Lots'
+                                                    ],
+                                                    onChanged: (val) =>
+                                                        setState(() =>
+                                                            dropDownValue1 =
+                                                                val),
+                                                    width: double.infinity,
+                                                    height: 55,
+                                                    textStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1
+                                                            .override(
+                                                              fontFamily:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1Family,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryText,
+                                                            ),
+                                                    hintText:
+                                                        'Please select...',
+                                                    fillColor: FlutterFlowTheme
+                                                            .of(context)
+                                                        .secondaryBackground,
+                                                    elevation: 2,
+                                                    borderColor:
+                                                        Colors.transparent,
+                                                    borderWidth: 0,
+                                                    borderRadius: 12,
+                                                    margin:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                12, 4, 12, 4),
+                                                    hidesUnderline: true,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 18, 0, 0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(4, 0, 0, 0),
+                                                  child: Text(
+                                                    'How did you hear about us?',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText2,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 4, 0, 0),
+                                                  child: FlutterFlowDropDown(
+                                                    options: [
+                                                      'Friends',
+                                                      'Search Engine',
+                                                      'Social Media'
+                                                    ],
+                                                    onChanged: (val) =>
+                                                        setState(() =>
+                                                            dropDownValue2 =
+                                                                val),
+                                                    width: double.infinity,
+                                                    height: 55,
+                                                    textStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1
+                                                            .override(
+                                                              fontFamily:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1Family,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryText,
+                                                            ),
+                                                    hintText:
+                                                        'Please select...',
+                                                    fillColor: FlutterFlowTheme
+                                                            .of(context)
+                                                        .secondaryBackground,
+                                                    elevation: 2,
+                                                    borderColor:
+                                                        Colors.transparent,
+                                                    borderWidth: 0,
+                                                    borderRadius: 12,
+                                                    margin:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                12, 4, 12, 4),
+                                                    hidesUnderline: true,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 16, 0, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(4, 0, 0, 0),
-                                              child: Text(
-                                                'How much prior experience have you had with personal finance management?',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText2,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 4, 0, 0),
-                                              child: FlutterFlowDropDown(
-                                                options: [
-                                                  'None',
-                                                  'Limited',
-                                                  'Lots'
-                                                ],
-                                                onChanged: (val) => setState(
-                                                    () => dropDownValue1 = val),
-                                                width: double.infinity,
-                                                height: 55,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText1Family,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                        ),
-                                                hintText: 'Please select...',
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                elevation: 2,
-                                                borderColor: Colors.transparent,
-                                                borderWidth: 0,
-                                                borderRadius: 12,
-                                                margin: EdgeInsetsDirectional
-                                                    .fromSTEB(12, 4, 12, 4),
-                                                hidesUnderline: true,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 18, 0, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(4, 0, 0, 0),
-                                              child: Text(
-                                                'How did you hear about us?',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText2,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 4, 0, 0),
-                                              child: FlutterFlowDropDown(
-                                                options: [
-                                                  'Friends',
-                                                  'Search Engine',
-                                                  'Social Media'
-                                                ],
-                                                onChanged: (val) => setState(
-                                                    () => dropDownValue2 = val),
-                                                width: double.infinity,
-                                                height: 55,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText1Family,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                        ),
-                                                hintText: 'Please select...',
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                elevation: 2,
-                                                borderColor: Colors.transparent,
-                                                borderWidth: 0,
-                                                borderRadius: 12,
-                                                margin: EdgeInsetsDirectional
-                                                    .fromSTEB(12, 4, 12, 4),
-                                                hidesUnderline: true,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                if (formKey.currentState == null ||
-                                    !formKey.currentState!.validate()) {
-                                  return;
-                                }
-
-                                if (dropDownValue1 == null) {
-                                  return;
-                                }
-                                if (dropDownValue2 == null) {
-                                  return;
-                                }
-
-                                if (FFAppState().currencyTextField != null) {
-                                  final usersUpdateData = createUsersRecordData(
-                                    income: FFAppState()
-                                        .currencyTextField
-                                        .toDouble(),
-                                    experience: dropDownValue2,
-                                    onboardingStep: 1,
-                                    username: textController!.text,
-                                  );
-                                  await currentUserReference!
-                                      .update(usersUpdateData);
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    context: context,
-                                    builder: (context) {
-                                      return Padding(
-                                        padding:
-                                            MediaQuery.of(context).viewInsets,
-                                        child: CreateFirstBudgetQWidget(),
-                                      );
-                                    },
-                                  );
-                                }
-                              },
-                              text: 'Continue',
-                              options: FFButtonOptions(
-                                width: double.infinity,
-                                height: 60,
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      color: Colors.white,
-                                    ),
-                                elevation: 2,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(16),
                               ),
                             ),
                           ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    if (formKey.currentState == null ||
+                                        !formKey.currentState!.validate()) {
+                                      return;
+                                    }
+
+                                    if (dropDownValue1 == null) {
+                                      return;
+                                    }
+                                    if (dropDownValue2 == null) {
+                                      return;
+                                    }
+
+                                    if (FFAppState().currencyTextField !=
+                                        null) {
+                                      final usersUpdateData =
+                                          createUsersRecordData(
+                                        income: FFAppState()
+                                            .currencyTextField
+                                            .toDouble(),
+                                        experience: dropDownValue2,
+                                        onboardingStep: 1,
+                                        username: textController!.text,
+                                      );
+                                      await currentUserReference!
+                                          .update(usersUpdateData);
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        context: context,
+                                        builder: (context) {
+                                          return Padding(
+                                            padding: MediaQuery.of(context)
+                                                .viewInsets,
+                                            child: CreateFirstBudgetQWidget(),
+                                          );
+                                        },
+                                      );
+                                    }
+                                  },
+                                  text: 'Continue',
+                                  options: FFButtonOptions(
+                                    width: double.infinity,
+                                    height: 60,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2Family,
+                                          color: Colors.white,
+                                        ),
+                                    elevation: 2,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            ],
-          ).animated([animationsMap['columnOnPageLoadAnimation']!]),
-        ),
-      ),
-    );
+                ],
+              ).animated([animationsMap['columnOnPageLoadAnimation']!]),
+            ),
+          ),
+        ));
   }
 }

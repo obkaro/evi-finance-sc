@@ -12,6 +12,8 @@ import 'schema/const_budget_categories_record.dart';
 import 'schema/const_institution_logos_record.dart';
 import 'schema/categories_record.dart';
 import 'schema/versions_record.dart';
+import 'schema/subscriptions_record.dart';
+import 'schema/const_recurring_payments_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -27,6 +29,8 @@ export 'schema/const_budget_categories_record.dart';
 export 'schema/const_institution_logos_record.dart';
 export 'schema/categories_record.dart';
 export 'schema/versions_record.dart';
+export 'schema/subscriptions_record.dart';
+export 'schema/const_recurring_payments_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord({
@@ -368,6 +372,92 @@ Future<FFFirestorePage<VersionsRecord>> queryVersionsRecordPage({
       pageSize: pageSize,
       isStream: isStream,
     );
+
+/// Functions to query SubscriptionsRecords (as a Stream and as a Future).
+Stream<List<SubscriptionsRecord>> querySubscriptionsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      SubscriptionsRecord.collection,
+      SubscriptionsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<SubscriptionsRecord>> querySubscriptionsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      SubscriptionsRecord.collection,
+      SubscriptionsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<SubscriptionsRecord>> querySubscriptionsRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      SubscriptionsRecord.collection,
+      SubscriptionsRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query ConstRecurringPaymentsRecords (as a Stream and as a Future).
+Stream<List<ConstRecurringPaymentsRecord>> queryConstRecurringPaymentsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ConstRecurringPaymentsRecord.collection,
+      ConstRecurringPaymentsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ConstRecurringPaymentsRecord>>
+    queryConstRecurringPaymentsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+        queryCollectionOnce(
+          ConstRecurringPaymentsRecord.collection,
+          ConstRecurringPaymentsRecord.serializer,
+          queryBuilder: queryBuilder,
+          limit: limit,
+          singleRecord: singleRecord,
+        );
+
+Future<FFFirestorePage<ConstRecurringPaymentsRecord>>
+    queryConstRecurringPaymentsRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+        queryCollectionPage(
+          ConstRecurringPaymentsRecord.collection,
+          ConstRecurringPaymentsRecord.serializer,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        );
 
 Stream<List<T>> queryCollection<T>(Query collection, Serializer<T> serializer,
     {Query Function(Query)? queryBuilder,
