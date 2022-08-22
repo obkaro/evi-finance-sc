@@ -232,18 +232,18 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                 ),
                                                                 onPressed:
                                                                     () async {
-                                                                  if (animationsMap[
-                                                                          'containerOnActionTriggerAnimation'] ==
-                                                                      null) {
-                                                                    return;
-                                                                  }
-                                                                  await (animationsMap['containerOnActionTriggerAnimation']!
-                                                                              .curvedAnimation
-                                                                              .parent
-                                                                          as AnimationController)
-                                                                      .forward(
-                                                                          from:
-                                                                              0.0);
+                                                                  // if (animationsMap[
+                                                                  //         'containerOnActionTriggerAnimation'] ==
+                                                                  //     null) {
+                                                                  //   return;
+                                                                  // }
+                                                                  // await (animationsMap['containerOnActionTriggerAnimation']!
+                                                                  //             .curvedAnimation
+                                                                  //             .parent
+                                                                  //         as AnimationController)
+                                                                  //     .forward(
+                                                                  //         from:
+                                                                  //             0.0);
 
                                                                   final transactionsUpdateData =
                                                                       createTransactionsRecordData(
@@ -500,18 +500,18 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                               ),
                                                               onPressed:
                                                                   () async {
-                                                                if (animationsMap[
-                                                                        'containerOnActionTriggerAnimation'] ==
-                                                                    null) {
-                                                                  return;
-                                                                }
-                                                                await (animationsMap['containerOnActionTriggerAnimation']!
-                                                                            .curvedAnimation
-                                                                            .parent
-                                                                        as AnimationController)
-                                                                    .forward(
-                                                                        from:
-                                                                            0.0);
+                                                                // if (animationsMap[
+                                                                //         'containerOnActionTriggerAnimation'] ==
+                                                                //     null) {
+                                                                //   return;
+                                                                // }
+                                                                // await (animationsMap['containerOnActionTriggerAnimation']!
+                                                                //             .curvedAnimation
+                                                                //             .parent
+                                                                //         as AnimationController)
+                                                                //     .forward(
+                                                                //         from:
+                                                                //             0.0);
 
                                                                 final transactionsUpdateData =
                                                                     createTransactionsRecordData(
