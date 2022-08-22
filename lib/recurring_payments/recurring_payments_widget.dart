@@ -3,8 +3,10 @@ import '../backend/backend.dart';
 import '../components/add_recurring_payment_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,6 +20,7 @@ class RecurringPaymentsWidget extends StatefulWidget {
 }
 
 class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
+  SubscriptionsRecord? newRecurring;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -51,6 +54,18 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
+              final subscriptionsCreateData = createSubscriptionsRecordData(
+                notification: true,
+                icon: random_data.randomImageUrl(
+                  0,
+                  0,
+                ),
+              );
+              var subscriptionsRecordReference =
+                  SubscriptionsRecord.collection.doc();
+              await subscriptionsRecordReference.set(subscriptionsCreateData);
+              newRecurring = SubscriptionsRecord.getDocumentFromData(
+                  subscriptionsCreateData, subscriptionsRecordReference);
               await showModalBottomSheet(
                 isScrollControlled: true,
                 backgroundColor: Colors.transparent,
@@ -58,10 +73,14 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                 builder: (context) {
                   return Padding(
                     padding: MediaQuery.of(context).viewInsets,
-                    child: AddRecurringPaymentWidget(),
+                    child: AddRecurringPaymentWidget(
+                      recurringPayment: newRecurring,
+                    ),
                   );
                 },
               );
+
+              setState(() {});
             },
             backgroundColor: FlutterFlowTheme.of(context).primaryColor,
             elevation: 3,
