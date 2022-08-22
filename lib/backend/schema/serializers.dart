@@ -33,8 +33,6 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   VersionStruct,
   MoneyStruct,
   PaymentPlanStruct,
-  DurationStruct,
-  DurationListStruct,
   ReminderStruct,
 ])
 final Serializers serializers = (_$serializers.toBuilder()

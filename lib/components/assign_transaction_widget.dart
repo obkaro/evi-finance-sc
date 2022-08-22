@@ -1,9 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/add_recurring_payment_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,8 @@ class AssignTransactionWidget extends StatefulWidget {
 }
 
 class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
+  SubscriptionsRecord? newRecurring;
+
   @override
   void initState() {
     super.initState();
@@ -232,19 +236,6 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                 ),
                                                                 onPressed:
                                                                     () async {
-                                                                  if (animationsMap[
-                                                                          'containerOnActionTriggerAnimation'] ==
-                                                                      null) {
-                                                                    return;
-                                                                  }
-                                                                  await (animationsMap['containerOnActionTriggerAnimation']!
-                                                                              .curvedAnimation
-                                                                              .parent
-                                                                          as AnimationController)
-                                                                      .forward(
-                                                                          from:
-                                                                              0.0);
-
                                                                   final transactionsUpdateData =
                                                                       createTransactionsRecordData(
                                                                     transactionCategory:
@@ -345,7 +336,7 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                               .fromSTEB(
                                                                   4, 0, 0, 0),
                                                       child: AutoSizeText(
-                                                        'New subscription',
+                                                        'New category',
                                                         textAlign:
                                                             TextAlign.center,
                                                         style:
@@ -500,19 +491,6 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                               ),
                                                               onPressed:
                                                                   () async {
-                                                                if (animationsMap[
-                                                                        'containerOnActionTriggerAnimation'] ==
-                                                                    null) {
-                                                                  return;
-                                                                }
-                                                                await (animationsMap['containerOnActionTriggerAnimation']!
-                                                                            .curvedAnimation
-                                                                            .parent
-                                                                        as AnimationController)
-                                                                    .forward(
-                                                                        from:
-                                                                            0.0);
-
                                                                 final transactionsUpdateData =
                                                                     createTransactionsRecordData(
                                                                   transactionCategory:
@@ -606,66 +584,107 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16, 0, 16, 0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(16),
-                                        shape: BoxShape.rectangle,
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
+                                    child: InkWell(
+                                      onTap: () async {
+                                        final subscriptionsCreateData =
+                                            createSubscriptionsRecordData(
+                                          notification: true,
+                                          icon: random_data.randomImageUrl(
+                                            0,
+                                            0,
+                                          ),
+                                        );
+                                        var subscriptionsRecordReference =
+                                            SubscriptionsRecord.collection
+                                                .doc();
+                                        await subscriptionsRecordReference
+                                            .set(subscriptionsCreateData);
+                                        newRecurring = SubscriptionsRecord
+                                            .getDocumentFromData(
+                                                subscriptionsCreateData,
+                                                subscriptionsRecordReference);
+                                        await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          context: context,
+                                          builder: (context) {
+                                            return Padding(
+                                              padding: MediaQuery.of(context)
+                                                  .viewInsets,
+                                              child: AddRecurringPaymentWidget(
+                                                recurringPayment: newRecurring,
+                                              ),
+                                            );
+                                          },
+                                        );
+
+                                        setState(() {});
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                          shape: BoxShape.rectangle,
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                          ),
                                         ),
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            12, 12, 12, 12),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 4, 0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(
-                                                    Icons.add_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                    size: 24,
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                4, 0, 0, 0),
-                                                    child: AutoSizeText(
-                                                      'New subscription',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style:
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12, 12, 12, 12),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 0, 4, 0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.add_rounded,
+                                                      color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1Family,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryColor,
-                                                                fontSize: 12,
-                                                              ),
+                                                              .primaryColor,
+                                                      size: 24,
                                                     ),
-                                                  ),
-                                                ],
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  4, 0, 0, 0),
+                                                      child: AutoSizeText(
+                                                        'New subscription',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1Family,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryColor,
+                                                                  fontSize: 12,
+                                                                ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
