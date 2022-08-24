@@ -3,7 +3,6 @@ import '../backend/backend.dart';
 import '../components/add_recurring_payment_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -59,10 +58,6 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
             onPressed: () async {
               final subscriptionsCreateData = createSubscriptionsRecordData(
                 notification: true,
-                icon: random_data.randomImageUrl(
-                  0,
-                  0,
-                ),
               );
               var subscriptionsRecordReference =
                   SubscriptionsRecord.collection.doc();
