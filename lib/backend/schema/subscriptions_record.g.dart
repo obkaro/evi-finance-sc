@@ -94,6 +94,20 @@ class _$SubscriptionsRecordSerializer
                   DocumentReference, const [const FullType.nullable(Object)])
             ])));
     }
+    value = object.notification;
+    if (value != null) {
+      result
+        ..add('notification')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.recurrence;
+    if (value != null) {
+      result
+        ..add('recurrence')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -166,6 +180,14 @@ class _$SubscriptionsRecordSerializer
                     DocumentReference, const [const FullType.nullable(Object)])
               ]))! as BuiltList<Object?>);
           break;
+        case 'notification':
+          result.notification = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'recurrence':
+          result.recurrence = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -201,6 +223,10 @@ class _$SubscriptionsRecord extends SubscriptionsRecord {
   @override
   final BuiltList<DocumentReference<Object?>>? transactions;
   @override
+  final bool? notification;
+  @override
+  final String? recurrence;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$SubscriptionsRecord(
@@ -218,6 +244,8 @@ class _$SubscriptionsRecord extends SubscriptionsRecord {
       required this.lastCharge,
       required this.expCharge,
       this.transactions,
+      this.notification,
+      this.recurrence,
       this.ffRef})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
@@ -249,6 +277,8 @@ class _$SubscriptionsRecord extends SubscriptionsRecord {
         lastCharge == other.lastCharge &&
         expCharge == other.expCharge &&
         transactions == other.transactions &&
+        notification == other.notification &&
+        recurrence == other.recurrence &&
         ffRef == other.ffRef;
   }
 
@@ -263,16 +293,20 @@ class _$SubscriptionsRecord extends SubscriptionsRecord {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, owner.hashCode),
-                                            name.hashCode),
-                                        icon.hashCode),
-                                    narrations.hashCode),
-                                lastChargeDate.hashCode),
-                            expChargeDate.hashCode),
-                        category.hashCode),
-                    lastCharge.hashCode),
-                expCharge.hashCode),
-            transactions.hashCode),
+                                        $jc(
+                                            $jc(
+                                                $jc($jc(0, owner.hashCode),
+                                                    name.hashCode),
+                                                icon.hashCode),
+                                            narrations.hashCode),
+                                        lastChargeDate.hashCode),
+                                    expChargeDate.hashCode),
+                                category.hashCode),
+                            lastCharge.hashCode),
+                        expCharge.hashCode),
+                    transactions.hashCode),
+                notification.hashCode),
+            recurrence.hashCode),
         ffRef.hashCode));
   }
 
@@ -289,6 +323,8 @@ class _$SubscriptionsRecord extends SubscriptionsRecord {
           ..add('lastCharge', lastCharge)
           ..add('expCharge', expCharge)
           ..add('transactions', transactions)
+          ..add('notification', notification)
+          ..add('recurrence', recurrence)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -348,6 +384,14 @@ class SubscriptionsRecordBuilder
   set transactions(ListBuilder<DocumentReference<Object?>>? transactions) =>
       _$this._transactions = transactions;
 
+  bool? _notification;
+  bool? get notification => _$this._notification;
+  set notification(bool? notification) => _$this._notification = notification;
+
+  String? _recurrence;
+  String? get recurrence => _$this._recurrence;
+  set recurrence(String? recurrence) => _$this._recurrence = recurrence;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -369,6 +413,8 @@ class SubscriptionsRecordBuilder
       _lastCharge = $v.lastCharge.toBuilder();
       _expCharge = $v.expCharge.toBuilder();
       _transactions = $v.transactions?.toBuilder();
+      _notification = $v.notification;
+      _recurrence = $v.recurrence;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -404,6 +450,8 @@ class SubscriptionsRecordBuilder
               lastCharge: lastCharge.build(),
               expCharge: expCharge.build(),
               transactions: _transactions?.build(),
+              notification: notification,
+              recurrence: recurrence,
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;
