@@ -44,59 +44,69 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
               iconTheme: IconThemeData(
                   color: FlutterFlowTheme.of(context).primaryText),
               automaticallyImplyLeading: false,
-              flexibleSpace: Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(32, 0, 0, 0),
-                            child: Icon(
-                              Icons.payment_rounded,
-                              color: Colors.white,
-                              size: 24,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                            child: Text(
-                              'Recurring Payments',
-                              style:
-                                  FlutterFlowTheme.of(context).title3.override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .title3Family,
-                                        color: Colors.white,
-                                      ),
-                            ),
-                          ),
-                        ],
-                      ),
+              flexibleSpace: Material(
+                color: Colors.transparent,
+                elevation: 0,
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primaryColor,
+                    border: Border.all(
+                      color: Color(0x00F6F6F6),
+                      width: 0,
                     ),
-                    Container(
-                      width: double.infinity,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(0),
-                          bottomRight: Radius.circular(0),
-                          topLeft: Radius.circular(32),
-                          topRight: Radius.circular(32),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(32, 0, 0, 0),
+                              child: Icon(
+                                Icons.payment_rounded,
+                                color: Colors.white,
+                                size: 24,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                              child: Text(
+                                'Recurring Payments',
+                                style: FlutterFlowTheme.of(context)
+                                    .title3
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .title3Family,
+                                      color: Colors.white,
+                                    ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
+                      Container(
+                        width: double.infinity,
+                        height: 32,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(0),
+                            bottomRight: Radius.circular(0),
+                            topLeft: Radius.circular(32),
+                            topRight: Radius.circular(32),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               actions: [],
@@ -180,6 +190,11 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                 color: FlutterFlowTheme.of(context).shadowGray,
                               )
                             ],
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              width: 0,
+                            ),
                           ),
                           child: Padding(
                             padding:
@@ -409,12 +424,15 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                                               ),
                                                                             ),
                                                                             AutoSizeText(
-                                                                              formatNumber(
-                                                                                subscriptionsItem.expCharge.amount!,
-                                                                                formatType: FormatType.custom,
-                                                                                currency: '₦',
-                                                                                format: '###,###,###.0#',
-                                                                                locale: '',
+                                                                              valueOrDefault<String>(
+                                                                                formatNumber(
+                                                                                  subscriptionsItem.lastCharge.amount,
+                                                                                  formatType: FormatType.custom,
+                                                                                  currency: '₦',
+                                                                                  format: '###,###,###.0#',
+                                                                                  locale: '',
+                                                                                ),
+                                                                                '-',
                                                                               ).maybeHandleOverflow(
                                                                                 maxChars: 15,
                                                                                 replacement: '…',

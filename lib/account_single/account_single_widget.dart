@@ -99,8 +99,12 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                   iconTheme: IconThemeData(
                       color: FlutterFlowTheme.of(context).primaryText),
                   automaticallyImplyLeading: true,
+                  title: Text(
+                    'Account Details',
+                    style: FlutterFlowTheme.of(context).title3,
+                  ),
                   actions: [],
-                  centerTitle: false,
+                  centerTitle: true,
                   elevation: 0,
                 ),
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

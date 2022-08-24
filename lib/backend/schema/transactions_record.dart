@@ -37,6 +37,10 @@ abstract class TransactionsRecord
 
   DocumentReference? get transactionBudget;
 
+  bool? get isRecurring;
+
+  DocumentReference? get recurringRef;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -49,7 +53,8 @@ abstract class TransactionsRecord
     ..transactionType = ''
     ..transactionNarration = ''
     ..transactionID = ''
-    ..notes = '';
+    ..notes = ''
+    ..isRecurring = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('transactions');
@@ -87,6 +92,8 @@ Map<String, dynamic> createTransactionsRecordData({
   DocumentReference? transactionCategory,
   String? notes,
   DocumentReference? transactionBudget,
+  bool? isRecurring,
+  DocumentReference? recurringRef,
 }) {
   final firestoreData = serializers.toFirestore(
     TransactionsRecord.serializer,
@@ -104,7 +111,9 @@ Map<String, dynamic> createTransactionsRecordData({
         ..transactionID = transactionID
         ..transactionCategory = transactionCategory
         ..notes = notes
-        ..transactionBudget = transactionBudget,
+        ..transactionBudget = transactionBudget
+        ..isRecurring = isRecurring
+        ..recurringRef = recurringRef,
     ),
   );
 
