@@ -127,7 +127,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                           Form(
                                             key: formKey2,
                                             autovalidateMode:
-                                                AutovalidateMode.always,
+                                                AutovalidateMode.disabled,
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [

@@ -130,6 +130,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'ActiveBudget': ActiveBudgetWidget(),
       'Accounts': AccountsWidget(),
       'Settings': SettingsWidget(),
+      'RecurringPayments': RecurringPaymentsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -190,6 +191,14 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 32,
             ),
             label: 'Profile',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.compare_arrows_rounded,
+              size: 24,
+            ),
+            label: 'Home',
             tooltip: '',
           )
         ],
