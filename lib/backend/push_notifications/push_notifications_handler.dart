@@ -144,6 +144,9 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'CreateRecurring': (data) async => CreateRecurringWidget(
         subscriptionRecord: getParameter(data, 'subscriptionRecord'),
       ),
+  'CreateRecurringCopy': (data) async => CreateRecurringCopyWidget(
+        subscriptionRecord: getParameter(data, 'subscriptionRecord'),
+      ),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>
