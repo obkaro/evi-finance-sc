@@ -603,6 +603,8 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                       recurringRef:
                                                                           inheritedSubsItem
                                                                               .reference,
+                                                                      isRecurring:
+                                                                          true,
                                                                     );
                                                                     await widget
                                                                         .transaction!
