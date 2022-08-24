@@ -37,23 +37,73 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
         color: FlutterFlowTheme.of(context).primaryColor,
         child: Scaffold(
           key: scaffoldKey,
-          appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-            iconTheme:
-                IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
-            automaticallyImplyLeading: false,
-            title: Text(
-              'Subscriptions',
-              style: FlutterFlowTheme.of(context).title3.override(
-                    fontFamily: FlutterFlowTheme.of(context).title3Family,
-                    color: Colors.white,
-                  ),
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(125),
+            child: AppBar(
+              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+              iconTheme: IconThemeData(
+                  color: FlutterFlowTheme.of(context).primaryText),
+              automaticallyImplyLeading: false,
+              flexibleSpace: Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).primaryColor,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(32, 0, 0, 0),
+                            child: Icon(
+                              Icons.payment_rounded,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                            child: Text(
+                              'Recurring Payments',
+                              style:
+                                  FlutterFlowTheme.of(context).title3.override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .title3Family,
+                                        color: Colors.white,
+                                      ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(0),
+                          bottomRight: Radius.circular(0),
+                          topLeft: Radius.circular(32),
+                          topRight: Radius.circular(32),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [],
+              elevation: 0,
             ),
-            actions: [],
-            centerTitle: true,
-            elevation: 0,
           ),
-          backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
               final subscriptionsCreateData = createSubscriptionsRecordData(
@@ -130,16 +180,10 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                 color: FlutterFlowTheme.of(context).shadowGray,
                               )
                             ],
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(0),
-                              bottomRight: Radius.circular(0),
-                              topLeft: Radius.circular(32),
-                              topRight: Radius.circular(32),
-                            ),
                           ),
                           child: Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                                EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
                             child: DefaultTabController(
                               length: 2,
                               initialIndex: 0,
@@ -157,8 +201,8 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                     labelStyle:
                                         FlutterFlowTheme.of(context).title3,
                                     indicatorColor: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    indicatorWeight: 3,
+                                        .primaryText,
+                                    indicatorWeight: 1,
                                     tabs: [
                                       Row(
                                         children: [
@@ -323,7 +367,7 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                                                 ),
                                                                               ),
                                                                               Text(
-                                                                                'Next pay on: ${subscriptionsItem.expChargeDate?.toString()}',
+                                                                                'Next pay on: ${dateTimeFormat('MMMEd', subscriptionsItem.expChargeDate)}',
                                                                                 textAlign: TextAlign.start,
                                                                                 style: FlutterFlowTheme.of(context).bodyText2,
                                                                               ),

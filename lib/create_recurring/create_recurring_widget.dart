@@ -1,12 +1,15 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../backend/firebase_storage/storage.dart';
 import '../components/dialog_box_widget.dart';
 import '../flutter_flow/flutter_flow_calendar.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/upload_media.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -27,10 +30,11 @@ class CreateRecurringWidget extends StatefulWidget {
 
 class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
   DateTimeRange? calendarSelectedDay;
-  String? categoryValue;
+  String uploadedFileUrl = '';
+  TextEditingController? nameController;
   String? currencyValue;
   TextEditingController? amountController;
-  TextEditingController? nameController;
+  String? categoryValue;
   String? durationValue;
   bool? switchListTileValue;
   final formKey = GlobalKey<FormState>();
@@ -116,13 +120,102 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                       child: Container(
                                         width: 120,
                                         height: 120,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Image.network(
-                                          createRecurringSubscriptionsRecord
-                                              .icon!,
+                                        child: Stack(
+                                          children: [
+                                            Container(
+                                              width: 120,
+                                              height: 120,
+                                              clipBehavior: Clip.antiAlias,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Image.network(
+                                                valueOrDefault<String>(
+                                                  createRecurringSubscriptionsRecord
+                                                      .icon,
+                                                  'https://firebasestorage.googleapis.com/v0/b/evi-finance-dev.appspot.com/o/cms_uploads%2FconstInstitutionLogos%2F1659618717227000%2FPolaris%20Bank%20Logo.png?alt=media&token=403cd5d1-52ac-44a2-87c5-e10ef5b3cdf3',
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: Color(0x26000000),
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: FlutterFlowIconButton(
+                                                borderColor: Colors.transparent,
+                                                borderRadius: 30,
+                                                borderWidth: 1,
+                                                buttonSize: 60,
+                                                icon: Icon(
+                                                  Icons.photo_rounded,
+                                                  color: Colors.white,
+                                                  size: 48,
+                                                ),
+                                                onPressed: () async {
+                                                  final selectedMedia =
+                                                      await selectMedia(
+                                                    maxWidth: 720.00,
+                                                    imageQuality: 49,
+                                                    mediaSource: MediaSource
+                                                        .photoGallery,
+                                                    multiImage: false,
+                                                  );
+                                                  if (selectedMedia != null &&
+                                                      selectedMedia.every((m) =>
+                                                          validateFileFormat(
+                                                              m.storagePath,
+                                                              context))) {
+                                                    showUploadMessage(
+                                                      context,
+                                                      'Uploading file...',
+                                                      showLoading: true,
+                                                    );
+                                                    final downloadUrls = (await Future
+                                                            .wait(selectedMedia
+                                                                .map((m) async =>
+                                                                    await uploadData(
+                                                                        m.storagePath,
+                                                                        m.bytes))))
+                                                        .where((u) => u != null)
+                                                        .map((u) => u!)
+                                                        .toList();
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .hideCurrentSnackBar();
+                                                    if (downloadUrls.length ==
+                                                        selectedMedia.length) {
+                                                      setState(() =>
+                                                          uploadedFileUrl =
+                                                              downloadUrls
+                                                                  .first);
+                                                      showUploadMessage(
+                                                        context,
+                                                        'Success!',
+                                                      );
+                                                    } else {
+                                                      showUploadMessage(
+                                                        context,
+                                                        'Failed to upload media',
+                                                      );
+                                                      return;
+                                                    }
+                                                  }
+
+                                                  final subscriptionsUpdateData =
+                                                      createSubscriptionsRecordData(
+                                                    icon: uploadedFileUrl,
+                                                  );
+                                                  await createRecurringSubscriptionsRecord
+                                                      .reference
+                                                      .update(
+                                                          subscriptionsUpdateData);
+                                                },
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -130,9 +223,11 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                       child: TextFormField(
                                         controller: nameController ??=
                                             TextEditingController(
-                                          text:
-                                              createRecurringSubscriptionsRecord
-                                                  .name,
+                                          text: valueOrDefault<String>(
+                                            createRecurringSubscriptionsRecord
+                                                .name,
+                                            'Title',
+                                          ),
                                         ),
                                         obscureText: false,
                                         decoration: InputDecoration(
