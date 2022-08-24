@@ -45,7 +45,10 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
             automaticallyImplyLeading: false,
             title: Text(
               'Subscriptions',
-              style: FlutterFlowTheme.of(context).title3,
+              style: FlutterFlowTheme.of(context).title3.override(
+                    fontFamily: FlutterFlowTheme.of(context).title3Family,
+                    color: Colors.white,
+                  ),
             ),
             actions: [],
             centerTitle: true,
@@ -124,8 +127,8 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                           width: double.infinity,
                           height: 100,
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                             boxShadow: [
                               BoxShadow(
                                 blurRadius: 14,

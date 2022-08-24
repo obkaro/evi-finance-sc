@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/assign_transaction_widget.dart';
 import '../components/set_trans_category_widget.dart';
 import '../components/text_transaction_type_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -990,7 +991,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                     Expanded(
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
-                                                          // Action_CategorizeTrans
                                                           await showModalBottomSheet(
                                                             isScrollControlled:
                                                                 true,
@@ -1004,13 +1004,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                         context)
                                                                     .viewInsets,
                                                                 child:
-                                                                    SetTransCategoryWidget(
+                                                                    AssignTransactionWidget(
                                                                   transaction:
                                                                       widget
                                                                           .transaction,
-                                                                  recievedBudget:
-                                                                      currentUserDocument!
-                                                                          .activeBudget,
                                                                 ),
                                                               );
                                                             },
