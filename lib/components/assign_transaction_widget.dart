@@ -1,11 +1,12 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/add_recurring_payment_widget.dart';
+import '../components/create_custom_category_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -42,7 +43,7 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
         children: [
           Container(
             width: double.infinity,
-            height: 4000,
+            height: 480,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).secondaryBackground,
             ),
@@ -97,268 +98,288 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                   snapshot.data!;
                               return Container(
                                 width: 100,
-                                height: 100,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
                                 ),
                                 child: Column(
-                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 16),
-                                      child: Builder(
-                                        builder: (context) {
-                                          final inheritedCategories =
-                                              containerCategoriesRecordList
-                                                  .toList();
-                                          return ListView.builder(
-                                            padding: EdgeInsets.zero,
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount:
-                                                inheritedCategories.length,
-                                            itemBuilder: (context,
-                                                inheritedCategoriesIndex) {
-                                              final inheritedCategoriesItem =
-                                                  inheritedCategories[
-                                                      inheritedCategoriesIndex];
-                                              return Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 10, 16, 10),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0,
-                                                                        0,
-                                                                        0,
-                                                                        8),
-                                                            child: Text(
-                                                              inheritedCategoriesItem
-                                                                  .categoryName!,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1,
-                                                            ),
-                                                          ),
-                                                          StreamBuilder<
-                                                              List<
-                                                                  TransactionsRecord>>(
-                                                            stream:
-                                                                queryTransactionsRecord(
-                                                              queryBuilder: (transactionsRecord) =>
-                                                                  transactionsRecord.where(
-                                                                      'transactionCategory',
-                                                                      isEqualTo:
-                                                                          inheritedCategoriesItem
-                                                                              .reference),
-                                                            ),
-                                                            builder: (context,
-                                                                snapshot) {
-                                                              // Customize what your widget looks like when it's loading.
-                                                              if (!snapshot
-                                                                  .hasData) {
-                                                                return Center(
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: 50,
-                                                                    height: 50,
-                                                                    child:
-                                                                        SpinKitRing(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryColor,
-                                                                      size: 50,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              List<TransactionsRecord>
-                                                                  textTransactionsRecordList =
-                                                                  snapshot
-                                                                      .data!;
-                                                              return Text(
-                                                                functions.subtractCurrencyOfCopy(
-                                                                    inheritedCategoriesItem
-                                                                        .categoryAmount,
-                                                                    functions.sumTransactionAmounts(
-                                                                        textTransactionsRecordList
-                                                                            .toList())),
+                                    Container(
+                                      width: double.infinity,
+                                      height: 320,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 16),
+                                        child: Builder(
+                                          builder: (context) {
+                                            final inheritedCategories =
+                                                containerCategoriesRecordList
+                                                    .toList();
+                                            return ListView.builder(
+                                              padding: EdgeInsets.zero,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount:
+                                                  inheritedCategories.length,
+                                              itemBuilder: (context,
+                                                  inheritedCategoriesIndex) {
+                                                final inheritedCategoriesItem =
+                                                    inheritedCategories[
+                                                        inheritedCategoriesIndex];
+                                                return Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(20, 10, 20, 10),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Expanded(
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          8),
+                                                              child: Text(
+                                                                inheritedCategoriesItem
+                                                                    .categoryName!,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText1,
-                                                              );
-                                                            },
+                                                              ),
+                                                            ),
+                                                            StreamBuilder<
+                                                                List<
+                                                                    TransactionsRecord>>(
+                                                              stream:
+                                                                  queryTransactionsRecord(
+                                                                queryBuilder: (transactionsRecord) => transactionsRecord.where(
+                                                                    'transactionCategory',
+                                                                    isEqualTo:
+                                                                        inheritedCategoriesItem
+                                                                            .reference),
+                                                              ),
+                                                              builder: (context,
+                                                                  snapshot) {
+                                                                // Customize what your widget looks like when it's loading.
+                                                                if (!snapshot
+                                                                    .hasData) {
+                                                                  return Center(
+                                                                    child:
+                                                                        SizedBox(
+                                                                      width: 50,
+                                                                      height:
+                                                                          50,
+                                                                      child:
+                                                                          SpinKitRing(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryColor,
+                                                                        size:
+                                                                            50,
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                }
+                                                                List<TransactionsRecord>
+                                                                    textTransactionsRecordList =
+                                                                    snapshot
+                                                                        .data!;
+                                                                return Text(
+                                                                  functions.subtractCurrencyOfCopy(
+                                                                      inheritedCategoriesItem
+                                                                          .categoryAmount,
+                                                                      functions.sumTransactionAmounts(
+                                                                          textTransactionsRecordList
+                                                                              .toList())),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1,
+                                                                );
+                                                              },
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Stack(
+                                                            children: [
+                                                              if (widget
+                                                                      .transaction!
+                                                                      .transactionCategory !=
+                                                                  inheritedCategoriesItem
+                                                                      .reference)
+                                                                FlutterFlowIconButton(
+                                                                  borderColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  borderRadius:
+                                                                      30,
+                                                                  borderWidth:
+                                                                      1,
+                                                                  buttonSize:
+                                                                      60,
+                                                                  icon: Icon(
+                                                                    Icons
+                                                                        .radio_button_off_rounded,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
+                                                                    size: 30,
+                                                                  ),
+                                                                  onPressed:
+                                                                      () async {
+                                                                    final transactionsUpdateData =
+                                                                        createTransactionsRecordData(
+                                                                      transactionCategory:
+                                                                          inheritedCategoriesItem
+                                                                              .reference,
+                                                                      transactionBudget:
+                                                                          inheritedCategoriesItem
+                                                                              .categoryBudget,
+                                                                    );
+                                                                    await widget
+                                                                        .transaction!
+                                                                        .reference
+                                                                        .update(
+                                                                            transactionsUpdateData);
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  },
+                                                                ),
+                                                              if (widget
+                                                                      .transaction!
+                                                                      .transactionCategory ==
+                                                                  inheritedCategoriesItem
+                                                                      .reference)
+                                                                FlutterFlowIconButton(
+                                                                  borderColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  borderRadius:
+                                                                      30,
+                                                                  borderWidth:
+                                                                      1,
+                                                                  buttonSize:
+                                                                      60,
+                                                                  icon: Icon(
+                                                                    Icons
+                                                                        .radio_button_checked_rounded,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryColor,
+                                                                    size: 30,
+                                                                  ),
+                                                                  onPressed:
+                                                                      () {
+                                                                    print(
+                                                                        'IconButton pressed ...');
+                                                                  },
+                                                                ),
+                                                            ],
                                                           ),
                                                         ],
                                                       ),
-                                                    ),
-                                                    Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Stack(
-                                                          children: [
-                                                            if (widget
-                                                                    .transaction!
-                                                                    .transactionCategory !=
-                                                                inheritedCategoriesItem
-                                                                    .reference)
-                                                              FlutterFlowIconButton(
-                                                                borderColor: Colors
-                                                                    .transparent,
-                                                                borderRadius:
-                                                                    30,
-                                                                borderWidth: 1,
-                                                                buttonSize: 60,
-                                                                icon: Icon(
-                                                                  Icons
-                                                                      .radio_button_off_rounded,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryText,
-                                                                  size: 30,
-                                                                ),
-                                                                onPressed:
-                                                                    () async {
-                                                                  final transactionsUpdateData =
-                                                                      createTransactionsRecordData(
-                                                                    transactionCategory:
-                                                                        inheritedCategoriesItem
-                                                                            .reference,
-                                                                    transactionBudget:
-                                                                        inheritedCategoriesItem
-                                                                            .categoryBudget,
-                                                                  );
-                                                                  await widget
-                                                                      .transaction!
-                                                                      .reference
-                                                                      .update(
-                                                                          transactionsUpdateData);
-                                                                  Navigator.pop(
-                                                                      context);
-                                                                },
-                                                              ),
-                                                            if (widget
-                                                                    .transaction!
-                                                                    .transactionCategory ==
-                                                                inheritedCategoriesItem
-                                                                    .reference)
-                                                              FlutterFlowIconButton(
-                                                                borderColor: Colors
-                                                                    .transparent,
-                                                                borderRadius:
-                                                                    30,
-                                                                borderWidth: 1,
-                                                                buttonSize: 60,
-                                                                icon: Icon(
-                                                                  Icons
-                                                                      .radio_button_checked_rounded,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryColor,
-                                                                  size: 30,
-                                                                ),
-                                                                onPressed: () {
-                                                                  print(
-                                                                      'IconButton pressed ...');
-                                                                },
-                                                              ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
                                       ),
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 0, 16, 16),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                          shape: BoxShape.rectangle,
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  12, 12, 12, 12),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 4, 0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.add_rounded,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      size: 24,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  4, 0, 0, 0),
-                                                      child: AutoSizeText(
-                                                        'New category',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1Family,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryColor,
-                                                                  fontSize: 12,
-                                                                ),
-                                                      ),
-                                                    ),
-                                                  ],
+                                          20, 16, 20, 0),
+                                      child: StreamBuilder<BudgetsRecord>(
+                                        stream: BudgetsRecord.getDocument(
+                                            currentUserDocument!.activeBudget!),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50,
+                                                height: 50,
+                                                child: SpinKitRing(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  size: 50,
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
+                                            );
+                                          }
+                                          final buttonBudgetsRecord =
+                                              snapshot.data!;
+                                          return FFButtonWidget(
+                                            onPressed: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets,
+                                                    child:
+                                                        CreateCustomCategoryWidget(
+                                                      budget:
+                                                          buttonBudgetsRecord,
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            text: 'Add Category',
+                                            icon: Icon(
+                                              Icons.add_rounded,
+                                              size: 15,
+                                            ),
+                                            options: FFButtonOptions(
+                                              width: double.infinity,
+                                              height: 60,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .subtitle2Family,
+                                                        color: Colors.white,
+                                                      ),
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
                                   ],
@@ -393,7 +414,6 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                 snapshot.data!;
                             return Container(
                               width: 100,
-                              height: 100,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -401,190 +421,204 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 16),
-                                    child: Builder(
-                                      builder: (context) {
-                                        final inheritedSubs =
-                                            containerSubscriptionsRecordList
-                                                .toList();
-                                        return ListView.builder(
-                                          padding: EdgeInsets.zero,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.vertical,
-                                          itemCount: inheritedSubs.length,
-                                          itemBuilder:
-                                              (context, inheritedSubsIndex) {
-                                            final inheritedSubsItem =
-                                                inheritedSubs[
-                                                    inheritedSubsIndex];
-                                            return Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(16, 8, 16, 8),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 0, 12, 0),
-                                                    child: Container(
-                                                      width: 45,
-                                                      height: 45,
-                                                      clipBehavior:
-                                                          Clip.antiAlias,
-                                                      decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                      child: Image.network(
-                                                        inheritedSubsItem.icon!,
+                                  Container(
+                                    width: double.infinity,
+                                    height: 320,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 0, 16),
+                                      child: Builder(
+                                        builder: (context) {
+                                          final inheritedSubs =
+                                              containerSubscriptionsRecordList
+                                                  .toList();
+                                          return ListView.builder(
+                                            padding: EdgeInsets.zero,
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.vertical,
+                                            itemCount: inheritedSubs.length,
+                                            itemBuilder:
+                                                (context, inheritedSubsIndex) {
+                                              final inheritedSubsItem =
+                                                  inheritedSubs[
+                                                      inheritedSubsIndex];
+                                              return Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(20, 8, 20, 8),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 0, 12, 0),
+                                                      child: Container(
+                                                        width: 45,
+                                                        height: 45,
+                                                        clipBehavior:
+                                                            Clip.antiAlias,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                        child: Image.network(
+                                                          inheritedSubsItem
+                                                              .icon!,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Column(
+                                                    Expanded(
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            inheritedSubsItem
+                                                                .name!,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText1,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Column(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
                                                       children: [
-                                                        Text(
-                                                          inheritedSubsItem
-                                                              .name!,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText1,
+                                                        Stack(
+                                                          children: [
+                                                            if (inheritedSubsItem
+                                                                    .transactions!
+                                                                    .toList()
+                                                                    .contains(widget
+                                                                        .transaction!
+                                                                        .reference) ==
+                                                                false)
+                                                              FlutterFlowIconButton(
+                                                                borderColor: Colors
+                                                                    .transparent,
+                                                                borderRadius:
+                                                                    30,
+                                                                borderWidth: 1,
+                                                                buttonSize: 60,
+                                                                icon: Icon(
+                                                                  Icons
+                                                                      .radio_button_off_rounded,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                  size: 30,
+                                                                ),
+                                                                onPressed:
+                                                                    () async {
+                                                                  final transactionsUpdateData =
+                                                                      createTransactionsRecordData(
+                                                                    transactionCategory:
+                                                                        inheritedSubsItem
+                                                                            .category,
+                                                                    transactionBudget:
+                                                                        currentUserDocument!
+                                                                            .activeBudget,
+                                                                  );
+                                                                  await widget
+                                                                      .transaction!
+                                                                      .reference
+                                                                      .update(
+                                                                          transactionsUpdateData);
+
+                                                                  final subscriptionsUpdateData =
+                                                                      {
+                                                                    ...createSubscriptionsRecordData(
+                                                                      lastChargeDate: widget
+                                                                          .transaction!
+                                                                          .trasactionDate,
+                                                                      lastCharge:
+                                                                          createMoneyStruct(
+                                                                        amount: widget
+                                                                            .transaction!
+                                                                            .transactionAmount,
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                      ),
+                                                                    ),
+                                                                    'transactions':
+                                                                        FieldValue
+                                                                            .arrayUnion([
+                                                                      widget
+                                                                          .transaction!
+                                                                          .reference
+                                                                    ]),
+                                                                    'narrations':
+                                                                        FieldValue
+                                                                            .arrayUnion([
+                                                                      widget
+                                                                          .transaction!
+                                                                          .transactionNarration
+                                                                    ]),
+                                                                  };
+                                                                  await inheritedSubsItem
+                                                                      .reference
+                                                                      .update(
+                                                                          subscriptionsUpdateData);
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                              ),
+                                                            if (inheritedSubsItem
+                                                                .transactions!
+                                                                .toList()
+                                                                .contains(widget
+                                                                    .transaction!
+                                                                    .reference))
+                                                              FlutterFlowIconButton(
+                                                                borderColor: Colors
+                                                                    .transparent,
+                                                                borderRadius:
+                                                                    30,
+                                                                borderWidth: 1,
+                                                                buttonSize: 60,
+                                                                icon: Icon(
+                                                                  Icons
+                                                                      .radio_button_checked_rounded,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryColor,
+                                                                  size: 30,
+                                                                ),
+                                                                onPressed: () {
+                                                                  print(
+                                                                      'IconButton pressed ...');
+                                                                },
+                                                              ),
+                                                          ],
                                                         ),
                                                       ],
                                                     ),
-                                                  ),
-                                                  Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Stack(
-                                                        children: [
-                                                          if (inheritedSubsItem
-                                                                  .transactions!
-                                                                  .toList()
-                                                                  .contains(widget
-                                                                      .transaction!
-                                                                      .reference) ==
-                                                              false)
-                                                            FlutterFlowIconButton(
-                                                              borderColor: Colors
-                                                                  .transparent,
-                                                              borderRadius: 30,
-                                                              borderWidth: 1,
-                                                              buttonSize: 60,
-                                                              icon: Icon(
-                                                                Icons
-                                                                    .radio_button_off_rounded,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                                size: 30,
-                                                              ),
-                                                              onPressed:
-                                                                  () async {
-                                                                final transactionsUpdateData =
-                                                                    createTransactionsRecordData(
-                                                                  transactionCategory:
-                                                                      inheritedSubsItem
-                                                                          .category,
-                                                                  transactionBudget:
-                                                                      currentUserDocument!
-                                                                          .activeBudget,
-                                                                );
-                                                                await widget
-                                                                    .transaction!
-                                                                    .reference
-                                                                    .update(
-                                                                        transactionsUpdateData);
-
-                                                                final subscriptionsUpdateData =
-                                                                    {
-                                                                  ...createSubscriptionsRecordData(
-                                                                    lastChargeDate: widget
-                                                                        .transaction!
-                                                                        .trasactionDate,
-                                                                    lastCharge:
-                                                                        createMoneyStruct(
-                                                                      amount: widget
-                                                                          .transaction!
-                                                                          .transactionAmount,
-                                                                      clearUnsetFields:
-                                                                          false,
-                                                                    ),
-                                                                  ),
-                                                                  'transactions':
-                                                                      FieldValue
-                                                                          .arrayUnion([
-                                                                    widget
-                                                                        .transaction!
-                                                                        .reference
-                                                                  ]),
-                                                                  'narrations':
-                                                                      FieldValue
-                                                                          .arrayUnion([
-                                                                    widget
-                                                                        .transaction!
-                                                                        .transactionNarration
-                                                                  ]),
-                                                                };
-                                                                await inheritedSubsItem
-                                                                    .reference
-                                                                    .update(
-                                                                        subscriptionsUpdateData);
-                                                                Navigator.pop(
-                                                                    context);
-                                                              },
-                                                            ),
-                                                          if (inheritedSubsItem
-                                                              .transactions!
-                                                              .toList()
-                                                              .contains(widget
-                                                                  .transaction!
-                                                                  .reference))
-                                                            FlutterFlowIconButton(
-                                                              borderColor: Colors
-                                                                  .transparent,
-                                                              borderRadius: 30,
-                                                              borderWidth: 1,
-                                                              buttonSize: 60,
-                                                              icon: Icon(
-                                                                Icons
-                                                                    .radio_button_checked_rounded,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryColor,
-                                                                size: 30,
-                                                              ),
-                                                              onPressed: () {
-                                                                print(
-                                                                    'IconButton pressed ...');
-                                                              },
-                                                            ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      },
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        16, 0, 16, 0),
-                                    child: InkWell(
-                                      onTap: () async {
+                                        20, 16, 20, 0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
                                         final subscriptionsCreateData =
                                             createSubscriptionsRecordData(
                                           notification: true,
@@ -615,72 +649,29 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
 
                                         setState(() {});
                                       },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                          shape: BoxShape.rectangle,
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                          ),
+                                      text: 'Add Payment',
+                                      icon: Icon(
+                                        Icons.add_rounded,
+                                        size: 15,
+                                      ),
+                                      options: FFButtonOptions(
+                                        width: double.infinity,
+                                        height: 60,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .subtitle2
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2Family,
+                                              color: Colors.white,
+                                            ),
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1,
                                         ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  12, 12, 12, 12),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 4, 0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.add_rounded,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      size: 24,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  4, 0, 0, 0),
-                                                      child: AutoSizeText(
-                                                        'New subscription',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1Family,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryColor,
-                                                                  fontSize: 12,
-                                                                ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                        borderRadius: BorderRadius.circular(16),
                                       ),
                                     ),
                                   ),
