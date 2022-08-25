@@ -1,11 +1,8 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/c_button_filled_copy_widget.dart';
 import '../create_recurring/create_recurring_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -56,6 +53,12 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
           height: 500,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).secondaryBackground,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(0),
+              bottomRight: Radius.circular(0),
+              topLeft: Radius.circular(32),
+              topRight: Radius.circular(32),
+            ),
           ),
           child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
@@ -94,7 +97,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                 padding: EdgeInsets.zero,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
+                                  crossAxisCount: 4,
                                   crossAxisSpacing: 10,
                                   mainAxisSpacing: 10,
                                   childAspectRatio: 1,
@@ -108,46 +111,17 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 10, 0),
                                     child: Container(
-                                      width: 80,
-                                      height: 80,
+                                      width: 55,
+                                      height: 55,
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         shape: BoxShape.circle,
                                       ),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          final subscriptionsUpdateData =
-                                              createSubscriptionsRecordData(
-                                            name: subsfromcontainerItem.name,
-                                            icon: subsfromcontainerItem.icon,
-                                          );
-                                          await widget
-                                              .recurringPayment!.reference
-                                              .update(subscriptionsUpdateData);
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CreateRecurringWidget(
-                                                subscriptionRecord: widget
-                                                    .recurringPayment!
-                                                    .reference,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        child: Container(
-                                          width: 80,
-                                          height: 80,
-                                          clipBehavior: Clip.antiAlias,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: CachedNetworkImage(
-                                            imageUrl:
-                                                subsfromcontainerItem.icon!,
-                                          ),
-                                        ),
+                                      child: Image.network(
+                                        subsfromcontainerItem.icon!,
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
                                   );
@@ -160,72 +134,25 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                  child: InkWell(
-                    onTap: () async {
-                      Navigator.pop(context);
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateRecurringWidget(
-                            subscriptionRecord:
-                                widget.recurringPayment!.reference,
-                          ),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        shape: BoxShape.rectangle,
-                        border: Border.all(
-                          color: FlutterFlowTheme.of(context).primaryColor,
+                InkWell(
+                  onTap: () async {
+                    Navigator.pop(context);
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CreateRecurringWidget(
+                          subscriptionRecord:
+                              widget.recurringPayment!.reference,
                         ),
                       ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 4, 0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.add_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    size: 24,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        4, 0, 0, 0),
-                                    child: AutoSizeText(
-                                      'Create custom',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            fontSize: 12,
-                                          ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    );
+                  },
+                  child: CButtonFilledCopyWidget(
+                    text: 'Custom',
+                    icon: Icon(
+                      Icons.add_rounded,
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      size: 16,
                     ),
                   ),
                 ),

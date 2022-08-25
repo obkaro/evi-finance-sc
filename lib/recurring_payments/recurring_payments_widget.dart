@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/add_recurring_payment_widget.dart';
+import '../edit_subsciption/edit_subsciption_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -240,94 +241,125 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                     return Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           20, 0, 20, 0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 8, 0, 8),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 16, 0),
-                                                  child: Container(
-                                                    width: 55,
-                                                    height: 55,
-                                                    clipBehavior:
-                                                        Clip.antiAlias,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                    child: Image.network(
-                                                      subsItem.icon!,
+                                      child: InkWell(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EditSubsciptionWidget(
+                                                subscriptionRecord:
+                                                    subsItem.reference,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 8, 0, 8),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 0, 16, 0),
+                                                    child: Container(
+                                                      width: 55,
+                                                      height: 55,
+                                                      clipBehavior:
+                                                          Clip.antiAlias,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      child: Image.network(
+                                                        subsItem.icon!,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                Expanded(
-                                                  child: Column(
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(0,
+                                                                      0, 0, 8),
+                                                          child: Text(
+                                                            subsItem.name!,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .subtitle1,
+                                                          ),
+                                                        ),
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Text(
+                                                              'Due: ',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .subtitle2,
+                                                            ),
+                                                            Text(
+                                                              dateTimeFormat(
+                                                                  'MMMEd',
+                                                                  subsItem
+                                                                      .expChargeDate!),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .subtitle2,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0, 0, 0, 8),
-                                                        child: Text(
-                                                          subsItem.name!,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .subtitle1,
-                                                        ),
-                                                      ),
                                                       Text(
-                                                        'Hello World',
+                                                        formatNumber(
+                                                          subsItem.expCharge
+                                                              .amount!,
+                                                          formatType:
+                                                              FormatType.custom,
+                                                          currency: '₦',
+                                                          format:
+                                                              '###,###,###.##',
+                                                          locale: '',
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .subtitle2,
+                                                                .subtitle1,
                                                       ),
                                                     ],
                                                   ),
-                                                ),
-                                                Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      formatNumber(
-                                                        subsItem
-                                                            .expCharge.amount!,
-                                                        formatType:
-                                                            FormatType.custom,
-                                                        currency: '₦',
-                                                        format:
-                                                            '###,###,###.##',
-                                                        locale: '',
-                                                      ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle1,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          Divider(
-                                            color: FlutterFlowTheme.of(context)
-                                                .fadedDivider,
-                                          ),
-                                        ],
+                                            Divider(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .fadedDivider,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     );
                                   },

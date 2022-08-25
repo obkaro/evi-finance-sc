@@ -15,8 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CreateRecurringCopyWidget extends StatefulWidget {
-  const CreateRecurringCopyWidget({
+class EditSubsciptionWidget extends StatefulWidget {
+  const EditSubsciptionWidget({
     Key? key,
     this.subscriptionRecord,
   }) : super(key: key);
@@ -24,11 +24,10 @@ class CreateRecurringCopyWidget extends StatefulWidget {
   final DocumentReference? subscriptionRecord;
 
   @override
-  _CreateRecurringCopyWidgetState createState() =>
-      _CreateRecurringCopyWidgetState();
+  _EditSubsciptionWidgetState createState() => _EditSubsciptionWidgetState();
 }
 
-class _CreateRecurringCopyWidgetState extends State<CreateRecurringCopyWidget> {
+class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
   DateTimeRange? calendarSelectedDay;
   String uploadedFileUrl = '';
   TextEditingController? nameController;
@@ -45,7 +44,7 @@ class _CreateRecurringCopyWidgetState extends State<CreateRecurringCopyWidget> {
       end: DateTime.now().endOfDay,
     );
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'CreateRecurringCopy'});
+        parameters: {'screen_name': 'editSubsciption'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -67,9 +66,9 @@ class _CreateRecurringCopyWidgetState extends State<CreateRecurringCopyWidget> {
             ),
           );
         }
-        final createRecurringCopySubscriptionsRecord = snapshot.data!;
+        final editSubsciptionSubscriptionsRecord = snapshot.data!;
         return Title(
-            title: 'CreateRecurringCopy',
+            title: 'editSubsciption',
             color: FlutterFlowTheme.of(context).primaryColor,
             child: Scaffold(
               key: scaffoldKey,
@@ -124,7 +123,7 @@ class _CreateRecurringCopyWidgetState extends State<CreateRecurringCopyWidget> {
                                             ),
                                             child: Image.network(
                                               valueOrDefault<String>(
-                                                createRecurringCopySubscriptionsRecord
+                                                editSubsciptionSubscriptionsRecord
                                                     .icon,
                                                 'https://firebasestorage.googleapis.com/v0/b/evi-finance-dev.appspot.com/o/cms_uploads%2FconstInstitutionLogos%2F1659618717227000%2FPolaris%20Bank%20Logo.png?alt=media&token=403cd5d1-52ac-44a2-87c5-e10ef5b3cdf3',
                                               ),
@@ -199,7 +198,7 @@ class _CreateRecurringCopyWidgetState extends State<CreateRecurringCopyWidget> {
                                                     createSubscriptionsRecordData(
                                                   icon: uploadedFileUrl,
                                                 );
-                                                await createRecurringCopySubscriptionsRecord
+                                                await editSubsciptionSubscriptionsRecord
                                                     .reference
                                                     .update(
                                                         subscriptionsUpdateData);
@@ -215,7 +214,7 @@ class _CreateRecurringCopyWidgetState extends State<CreateRecurringCopyWidget> {
                                       controller: nameController ??=
                                           TextEditingController(
                                         text: valueOrDefault<String>(
-                                          createRecurringCopySubscriptionsRecord
+                                          editSubsciptionSubscriptionsRecord
                                               .name,
                                           'Title',
                                         ),
@@ -278,7 +277,7 @@ class _CreateRecurringCopyWidgetState extends State<CreateRecurringCopyWidget> {
                                               width: double.infinity,
                                               height: 55,
                                               amount:
-                                                  createRecurringCopySubscriptionsRecord
+                                                  editSubsciptionSubscriptionsRecord
                                                       .expCharge.amount,
                                               hintText: 'Enter amount',
                                             ),
@@ -422,7 +421,7 @@ class _CreateRecurringCopyWidgetState extends State<CreateRecurringCopyWidget> {
                                       weekFormat: false,
                                       weekStartsMonday: false,
                                       initialDate:
-                                          createRecurringCopySubscriptionsRecord
+                                          editSubsciptionSubscriptionsRecord
                                               .expChargeDate,
                                       rowHeight: 40,
                                       onChange: (DateTimeRange?
@@ -434,7 +433,7 @@ class _CreateRecurringCopyWidgetState extends State<CreateRecurringCopyWidget> {
                                           expChargeDate:
                                               calendarSelectedDay?.start,
                                         );
-                                        await createRecurringCopySubscriptionsRecord
+                                        await editSubsciptionSubscriptionsRecord
                                             .reference
                                             .update(subscriptionsUpdateData);
                                         setState(() {});
@@ -505,7 +504,7 @@ class _CreateRecurringCopyWidgetState extends State<CreateRecurringCopyWidget> {
                                       initiallySelected: durationValue != null
                                           ? [durationValue!]
                                           : [
-                                              createRecurringCopySubscriptionsRecord
+                                              editSubsciptionSubscriptionsRecord
                                                   .recurrence!
                                             ],
                                       options: [
@@ -574,12 +573,12 @@ class _CreateRecurringCopyWidgetState extends State<CreateRecurringCopyWidget> {
                                       borderRadius: BorderRadius.circular(12),
                                       child: SwitchListTile(
                                         value: switchListTileValue ??=
-                                            createRecurringCopySubscriptionsRecord
+                                            editSubsciptionSubscriptionsRecord
                                                 .notification!,
                                         onChanged: (newValue) => setState(() =>
                                             switchListTileValue = newValue),
                                         title: Text(
-                                          'Set reminder',
+                                          'Remind me',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1,
                                         ),
@@ -657,7 +656,7 @@ class _CreateRecurringCopyWidgetState extends State<CreateRecurringCopyWidget> {
                                           notification: switchListTileValue,
                                           recurrence: durationValue,
                                         );
-                                        await createRecurringCopySubscriptionsRecord
+                                        await editSubsciptionSubscriptionsRecord
                                             .reference
                                             .update(subscriptionsUpdateData);
                                         Navigator.pop(context);

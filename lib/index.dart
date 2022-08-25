@@ -32,5 +32,5 @@ export 'transaction_single/transaction_single_widget.dart'
     show TransactionSingleWidget;
 export 'create_recurring/create_recurring_widget.dart'
     show CreateRecurringWidget;
-export 'create_recurring_copy/create_recurring_copy_widget.dart'
-    show CreateRecurringCopyWidget;
+export 'edit_subsciption/edit_subsciption_widget.dart'
+    show EditSubsciptionWidget;
