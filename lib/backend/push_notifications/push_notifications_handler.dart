@@ -144,7 +144,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'CreateRecurring': (data) async => CreateRecurringWidget(
         subscriptionRecord: getParameter(data, 'subscriptionRecord'),
       ),
-  'CreateRecurringCopy': (data) async => CreateRecurringCopyWidget(
+  'editSubsciption': (data) async => EditSubsciptionWidget(
         subscriptionRecord: getParameter(data, 'subscriptionRecord'),
       ),
 };

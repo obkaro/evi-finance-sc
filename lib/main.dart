@@ -166,7 +166,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.pie_chart_rounded,
               size: 32,
             ),
-            label: 'Home',
+            label: 'Active Budget',
             tooltip: '',
           ),
           BottomNavigationBarItem(
