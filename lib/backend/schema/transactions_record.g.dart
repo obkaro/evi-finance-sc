@@ -115,6 +115,21 @@ class _$TransactionsRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
+    value = object.isRecurring;
+    if (value != null) {
+      result
+        ..add('isRecurring')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.recurringRef;
+    if (value != null) {
+      result
+        ..add('recurringRef')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -198,6 +213,16 @@ class _$TransactionsRecordSerializer
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
+        case 'isRecurring':
+          result.isRecurring = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'recurringRef':
+          result.recurringRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -239,6 +264,10 @@ class _$TransactionsRecord extends TransactionsRecord {
   @override
   final DocumentReference<Object?>? transactionBudget;
   @override
+  final bool? isRecurring;
+  @override
+  final DocumentReference<Object?>? recurringRef;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$TransactionsRecord(
@@ -259,6 +288,8 @@ class _$TransactionsRecord extends TransactionsRecord {
       this.transactionCategory,
       this.notes,
       this.transactionBudget,
+      this.isRecurring,
+      this.recurringRef,
       this.ffRef})
       : super._();
 
@@ -288,6 +319,8 @@ class _$TransactionsRecord extends TransactionsRecord {
         transactionCategory == other.transactionCategory &&
         notes == other.notes &&
         transactionBudget == other.transactionBudget &&
+        isRecurring == other.isRecurring &&
+        recurringRef == other.recurringRef &&
         ffRef == other.ffRef;
   }
 
@@ -307,21 +340,28 @@ class _$TransactionsRecord extends TransactionsRecord {
                                                 $jc(
                                                     $jc(
                                                         $jc(
-                                                            0,
-                                                            trasactionDate
+                                                            $jc(
+                                                                $jc(
+                                                                    0,
+                                                                    trasactionDate
+                                                                        .hashCode),
+                                                                account
+                                                                    .hashCode),
+                                                            monoCategory
                                                                 .hashCode),
-                                                        account.hashCode),
-                                                    monoCategory.hashCode),
-                                                transactionOwner.hashCode),
-                                            balanceAfter.hashCode),
-                                        transactionMonoID.hashCode),
-                                    transactionAmount.hashCode),
-                                transactionType.hashCode),
-                            transactionNarration.hashCode),
-                        transactionID.hashCode),
-                    transactionCategory.hashCode),
-                notes.hashCode),
-            transactionBudget.hashCode),
+                                                        transactionOwner
+                                                            .hashCode),
+                                                    balanceAfter.hashCode),
+                                                transactionMonoID.hashCode),
+                                            transactionAmount.hashCode),
+                                        transactionType.hashCode),
+                                    transactionNarration.hashCode),
+                                transactionID.hashCode),
+                            transactionCategory.hashCode),
+                        notes.hashCode),
+                    transactionBudget.hashCode),
+                isRecurring.hashCode),
+            recurringRef.hashCode),
         ffRef.hashCode));
   }
 
@@ -341,6 +381,8 @@ class _$TransactionsRecord extends TransactionsRecord {
           ..add('transactionCategory', transactionCategory)
           ..add('notes', notes)
           ..add('transactionBudget', transactionBudget)
+          ..add('isRecurring', isRecurring)
+          ..add('recurringRef', recurringRef)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -413,6 +455,15 @@ class TransactionsRecordBuilder
   set transactionBudget(DocumentReference<Object?>? transactionBudget) =>
       _$this._transactionBudget = transactionBudget;
 
+  bool? _isRecurring;
+  bool? get isRecurring => _$this._isRecurring;
+  set isRecurring(bool? isRecurring) => _$this._isRecurring = isRecurring;
+
+  DocumentReference<Object?>? _recurringRef;
+  DocumentReference<Object?>? get recurringRef => _$this._recurringRef;
+  set recurringRef(DocumentReference<Object?>? recurringRef) =>
+      _$this._recurringRef = recurringRef;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -437,6 +488,8 @@ class TransactionsRecordBuilder
       _transactionCategory = $v.transactionCategory;
       _notes = $v.notes;
       _transactionBudget = $v.transactionBudget;
+      _isRecurring = $v.isRecurring;
+      _recurringRef = $v.recurringRef;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -473,6 +526,8 @@ class TransactionsRecordBuilder
             transactionCategory: transactionCategory,
             notes: notes,
             transactionBudget: transactionBudget,
+            isRecurring: isRecurring,
+            recurringRef: recurringRef,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

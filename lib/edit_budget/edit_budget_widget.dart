@@ -53,6 +53,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
           key: scaffoldKey,
           appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            iconTheme:
+                IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
             automaticallyImplyLeading: true,
             title: Text(
               'Budget Setup',

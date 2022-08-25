@@ -135,12 +135,16 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
       ),
-  'RecurringPayments': (data) async => RecurringPaymentsWidget(),
+  'RecurringPayments': (data) async =>
+      NavBarPage(initialPage: 'RecurringPayments'),
   'TransactionSingle': (data) async => TransactionSingleWidget(
         transaction: await getDocumentParameter(
             data, 'transaction', TransactionsRecord.serializer),
       ),
   'CreateRecurring': (data) async => CreateRecurringWidget(
+        subscriptionRecord: getParameter(data, 'subscriptionRecord'),
+      ),
+  'CreateRecurringCopy': (data) async => CreateRecurringCopyWidget(
         subscriptionRecord: getParameter(data, 'subscriptionRecord'),
       ),
 };

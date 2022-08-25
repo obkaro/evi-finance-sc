@@ -1,0 +1,702 @@
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
+import '../backend/firebase_storage/storage.dart';
+import '../flutter_flow/flutter_flow_calendar.dart';
+import '../flutter_flow/flutter_flow_choice_chips.dart';
+import '../flutter_flow/flutter_flow_drop_down.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
+import '../flutter_flow/flutter_flow_theme.dart';
+import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/upload_media.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class CreateRecurringCopyWidget extends StatefulWidget {
+  const CreateRecurringCopyWidget({
+    Key? key,
+    this.subscriptionRecord,
+  }) : super(key: key);
+
+  final DocumentReference? subscriptionRecord;
+
+  @override
+  _CreateRecurringCopyWidgetState createState() =>
+      _CreateRecurringCopyWidgetState();
+}
+
+class _CreateRecurringCopyWidgetState extends State<CreateRecurringCopyWidget> {
+  DateTimeRange? calendarSelectedDay;
+  String uploadedFileUrl = '';
+  TextEditingController? nameController;
+  String? categoryValue;
+  String? durationValue;
+  bool? switchListTileValue;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    calendarSelectedDay = DateTimeRange(
+      start: DateTime.now().startOfDay,
+      end: DateTime.now().endOfDay,
+    );
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'CreateRecurringCopy'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<SubscriptionsRecord>(
+      stream: SubscriptionsRecord.getDocument(widget.subscriptionRecord!),
+      builder: (context, snapshot) {
+        // Customize what your widget looks like when it's loading.
+        if (!snapshot.hasData) {
+          return Center(
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: SpinKitRing(
+                color: FlutterFlowTheme.of(context).primaryColor,
+                size: 50,
+              ),
+            ),
+          );
+        }
+        final createRecurringCopySubscriptionsRecord = snapshot.data!;
+        return Title(
+            title: 'CreateRecurringCopy',
+            color: FlutterFlowTheme.of(context).primaryColor,
+            child: Scaffold(
+              key: scaffoldKey,
+              appBar: AppBar(
+                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+                iconTheme: IconThemeData(
+                    color: FlutterFlowTheme.of(context).primaryText),
+                automaticallyImplyLeading: true,
+                title: Text(
+                  'Edit Subscription',
+                  style: FlutterFlowTheme.of(context).title2.override(
+                        fontFamily: FlutterFlowTheme.of(context).title2Family,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        fontSize: 22,
+                      ),
+                ),
+                actions: [],
+                centerTitle: true,
+                elevation: 0,
+              ),
+              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+              body: SafeArea(
+                child: GestureDetector(
+                  onTap: () => FocusScope.of(context).unfocus(),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 16, 0),
+                                    child: Container(
+                                      width: 120,
+                                      height: 120,
+                                      child: Stack(
+                                        children: [
+                                          Container(
+                                            width: 120,
+                                            height: 120,
+                                            clipBehavior: Clip.antiAlias,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Image.network(
+                                              valueOrDefault<String>(
+                                                createRecurringCopySubscriptionsRecord
+                                                    .icon,
+                                                'https://firebasestorage.googleapis.com/v0/b/evi-finance-dev.appspot.com/o/cms_uploads%2FconstInstitutionLogos%2F1659618717227000%2FPolaris%20Bank%20Logo.png?alt=media&token=403cd5d1-52ac-44a2-87c5-e10ef5b3cdf3',
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            decoration: BoxDecoration(
+                                              color: Color(0x26000000),
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: FlutterFlowIconButton(
+                                              borderColor: Colors.transparent,
+                                              borderRadius: 30,
+                                              borderWidth: 1,
+                                              buttonSize: 60,
+                                              icon: Icon(
+                                                Icons.photo_rounded,
+                                                color: Colors.white,
+                                                size: 48,
+                                              ),
+                                              onPressed: () async {
+                                                final selectedMedia =
+                                                    await selectMedia(
+                                                  maxWidth: 720.00,
+                                                  imageQuality: 49,
+                                                  mediaSource:
+                                                      MediaSource.photoGallery,
+                                                  multiImage: false,
+                                                );
+                                                if (selectedMedia != null &&
+                                                    selectedMedia.every((m) =>
+                                                        validateFileFormat(
+                                                            m.storagePath,
+                                                            context))) {
+                                                  showUploadMessage(
+                                                    context,
+                                                    'Uploading file...',
+                                                    showLoading: true,
+                                                  );
+                                                  final downloadUrls = (await Future
+                                                          .wait(selectedMedia
+                                                              .map((m) async =>
+                                                                  await uploadData(
+                                                                      m.storagePath,
+                                                                      m.bytes))))
+                                                      .where((u) => u != null)
+                                                      .map((u) => u!)
+                                                      .toList();
+                                                  ScaffoldMessenger.of(context)
+                                                      .hideCurrentSnackBar();
+                                                  if (downloadUrls.length ==
+                                                      selectedMedia.length) {
+                                                    setState(() =>
+                                                        uploadedFileUrl =
+                                                            downloadUrls.first);
+                                                    showUploadMessage(
+                                                      context,
+                                                      'Success!',
+                                                    );
+                                                  } else {
+                                                    showUploadMessage(
+                                                      context,
+                                                      'Failed to upload media',
+                                                    );
+                                                    return;
+                                                  }
+                                                }
+
+                                                final subscriptionsUpdateData =
+                                                    createSubscriptionsRecordData(
+                                                  icon: uploadedFileUrl,
+                                                );
+                                                await createRecurringCopySubscriptionsRecord
+                                                    .reference
+                                                    .update(
+                                                        subscriptionsUpdateData);
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: TextFormField(
+                                      controller: nameController ??=
+                                          TextEditingController(
+                                        text: valueOrDefault<String>(
+                                          createRecurringCopySubscriptionsRecord
+                                              .name,
+                                          'Title',
+                                        ),
+                                      ),
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        hintText: 'Name',
+                                        hintStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                            ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                        filled: true,
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
+                                      keyboardType: TextInputType.name,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Container(
+                                            width: double.infinity,
+                                            height: 55,
+                                            child: custom_widgets
+                                                .CurrencyTextField(
+                                              width: double.infinity,
+                                              height: 55,
+                                              amount:
+                                                  createRecurringCopySubscriptionsRecord
+                                                      .expCharge.amount,
+                                              hintText: 'Enter amount',
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          AuthUserStreamWidget(
+                                            child: StreamBuilder<
+                                                List<CategoriesRecord>>(
+                                              stream: queryCategoriesRecord(
+                                                parent: currentUserDocument!
+                                                    .activeBudget,
+                                              ),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50,
+                                                      height: 50,
+                                                      child: SpinKitRing(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        size: 50,
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                                List<CategoriesRecord>
+                                                    categoryCategoriesRecordList =
+                                                    snapshot.data!;
+                                                return FlutterFlowDropDown(
+                                                  initialOption:
+                                                      categoryValue ??= 'NGN',
+                                                  options:
+                                                      categoryCategoriesRecordList
+                                                          .map((e) =>
+                                                              e.categoryName!)
+                                                          .toList()
+                                                          .toList(),
+                                                  onChanged: (val) => setState(
+                                                      () =>
+                                                          categoryValue = val),
+                                                  width: double.infinity,
+                                                  height: 55,
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1Family,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                      ),
+                                                  hintText:
+                                                      'Assign to a category...',
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryBackground,
+                                                  elevation: 2,
+                                                  borderColor:
+                                                      Colors.transparent,
+                                                  borderWidth: 0,
+                                                  borderRadius: 12,
+                                                  margin: EdgeInsetsDirectional
+                                                      .fromSTEB(12, 4, 12, 4),
+                                                  hidesUnderline: true,
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(4, 16, 4, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 4, 0),
+                                      child: Text(
+                                        'Expected charge date',
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle1,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.help_outline_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 16,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                                child: Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(32),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16, 10, 16, 16),
+                                    child: FlutterFlowCalendar(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      iconColor: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      weekFormat: false,
+                                      weekStartsMonday: false,
+                                      initialDate:
+                                          createRecurringCopySubscriptionsRecord
+                                              .expChargeDate,
+                                      rowHeight: 40,
+                                      onChange: (DateTimeRange?
+                                          newSelectedDate) async {
+                                        calendarSelectedDay = newSelectedDate;
+
+                                        final subscriptionsUpdateData =
+                                            createSubscriptionsRecordData(
+                                          expChargeDate:
+                                              calendarSelectedDay?.start,
+                                        );
+                                        await createRecurringCopySubscriptionsRecord
+                                            .reference
+                                            .update(subscriptionsUpdateData);
+                                        setState(() {});
+                                      },
+                                      titleStyle: FlutterFlowTheme.of(context)
+                                          .subtitle2
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2Family,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                      dayOfWeekStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .bodyText2
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText2Family,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                      dateStyle: FlutterFlowTheme.of(context)
+                                          .bodyText2
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText2Family,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                      selectedDateStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1Family,
+                                                color: Colors.white,
+                                              ),
+                                      inactiveDateStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .bodyText2
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText2Family,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryColor,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FlutterFlowChoiceChips(
+                                      initiallySelected: durationValue != null
+                                          ? [durationValue!]
+                                          : [
+                                              createRecurringCopySubscriptionsRecord
+                                                  .recurrence!
+                                            ],
+                                      options: [
+                                        ChipData('Weekly'),
+                                        ChipData('Monthly'),
+                                        ChipData('Quarterly'),
+                                        ChipData('Yearly')
+                                      ],
+                                      onChanged: (val) => setState(
+                                          () => durationValue = val?.first),
+                                      selectedChipStyle: ChipStyle(
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family,
+                                              color: Colors.white,
+                                            ),
+                                        iconColor: Color(0x00000000),
+                                        iconSize: 18,
+                                        elevation: 0,
+                                      ),
+                                      unselectedChipStyle: ChipStyle(
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .darkPrimary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                        iconColor: Color(0x00000000),
+                                        iconSize: 18,
+                                        elevation: 0,
+                                      ),
+                                      chipSpacing: 8,
+                                      multiselect: false,
+                                      initialized: durationValue != null,
+                                      alignment: WrapAlignment.start,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                                child: Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        8, 8, 8, 8),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: SwitchListTile(
+                                        value: switchListTileValue ??=
+                                            createRecurringCopySubscriptionsRecord
+                                                .notification!,
+                                        onChanged: (newValue) => setState(() =>
+                                            switchListTileValue = newValue),
+                                        title: Text(
+                                          'Set reminder',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
+                                        ),
+                                        activeColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                        dense: false,
+                                        controlAffinity:
+                                            ListTileControlAffinity.leading,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                              child: AuthUserStreamWidget(
+                                child: StreamBuilder<List<CategoriesRecord>>(
+                                  stream: queryCategoriesRecord(
+                                    parent: currentUserDocument!.activeBudget,
+                                    queryBuilder: (categoriesRecord) =>
+                                        categoriesRecord.where('category_name',
+                                            isEqualTo: categoryValue),
+                                    singleRecord: true,
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: SpinKitRing(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            size: 50,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<CategoriesRecord>
+                                        buttonCategoriesRecordList =
+                                        snapshot.data!;
+                                    // Return an empty Container when the document does not exist.
+                                    if (snapshot.data!.isEmpty) {
+                                      return Container();
+                                    }
+                                    final buttonCategoriesRecord =
+                                        buttonCategoriesRecordList.isNotEmpty
+                                            ? buttonCategoriesRecordList.first
+                                            : null;
+                                    return FFButtonWidget(
+                                      onPressed: () async {
+                                        final subscriptionsUpdateData =
+                                            createSubscriptionsRecordData(
+                                          owner: currentUserReference,
+                                          name: nameController?.text ?? '',
+                                          expChargeDate:
+                                              calendarSelectedDay?.start,
+                                          category:
+                                              buttonCategoriesRecord!.reference,
+                                          expCharge: createMoneyStruct(
+                                            amount:
+                                                FFAppState().currencyTextField,
+                                            clearUnsetFields: false,
+                                          ),
+                                          notification: switchListTileValue,
+                                          recurrence: durationValue,
+                                        );
+                                        await createRecurringCopySubscriptionsRecord
+                                            .reference
+                                            .update(subscriptionsUpdateData);
+                                        Navigator.pop(context);
+                                      },
+                                      text: 'Save Details',
+                                      options: FFButtonOptions(
+                                        width: double.infinity,
+                                        height: 60,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .subtitle2
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2Family,
+                                              color: Colors.white,
+                                            ),
+                                        elevation: 2,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ));
+      },
+    );
+  }
+}

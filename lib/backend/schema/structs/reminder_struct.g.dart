@@ -32,6 +32,13 @@ class _$ReminderStructSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
+    value = object.nextDate;
+    if (value != null) {
+      result
+        ..add('nextDate')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
     return result;
   }
 
@@ -51,6 +58,10 @@ class _$ReminderStructSerializer
           result.lastDate = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
+        case 'nextDate':
+          result.nextDate = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime?;
+          break;
         case 'firestoreUtilData':
           result.firestoreUtilData = serializers.deserialize(value,
                   specifiedType: const FullType(FirestoreUtilData))!
@@ -67,12 +78,15 @@ class _$ReminderStruct extends ReminderStruct {
   @override
   final DateTime? lastDate;
   @override
+  final DateTime? nextDate;
+  @override
   final FirestoreUtilData firestoreUtilData;
 
   factory _$ReminderStruct([void Function(ReminderStructBuilder)? updates]) =>
       (new ReminderStructBuilder()..update(updates))._build();
 
-  _$ReminderStruct._({this.lastDate, required this.firestoreUtilData})
+  _$ReminderStruct._(
+      {this.lastDate, this.nextDate, required this.firestoreUtilData})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         firestoreUtilData, r'ReminderStruct', 'firestoreUtilData');
@@ -91,18 +105,21 @@ class _$ReminderStruct extends ReminderStruct {
     if (identical(other, this)) return true;
     return other is ReminderStruct &&
         lastDate == other.lastDate &&
+        nextDate == other.nextDate &&
         firestoreUtilData == other.firestoreUtilData;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, lastDate.hashCode), firestoreUtilData.hashCode));
+    return $jf($jc($jc($jc(0, lastDate.hashCode), nextDate.hashCode),
+        firestoreUtilData.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'ReminderStruct')
           ..add('lastDate', lastDate)
+          ..add('nextDate', nextDate)
           ..add('firestoreUtilData', firestoreUtilData))
         .toString();
   }
@@ -115,6 +132,10 @@ class ReminderStructBuilder
   DateTime? _lastDate;
   DateTime? get lastDate => _$this._lastDate;
   set lastDate(DateTime? lastDate) => _$this._lastDate = lastDate;
+
+  DateTime? _nextDate;
+  DateTime? get nextDate => _$this._nextDate;
+  set nextDate(DateTime? nextDate) => _$this._nextDate = nextDate;
 
   FirestoreUtilData? _firestoreUtilData;
   FirestoreUtilData? get firestoreUtilData => _$this._firestoreUtilData;
@@ -129,6 +150,7 @@ class ReminderStructBuilder
     final $v = _$v;
     if ($v != null) {
       _lastDate = $v.lastDate;
+      _nextDate = $v.nextDate;
       _firestoreUtilData = $v.firestoreUtilData;
       _$v = null;
     }
@@ -153,6 +175,7 @@ class ReminderStructBuilder
     final _$result = _$v ??
         new _$ReminderStruct._(
             lastDate: lastDate,
+            nextDate: nextDate,
             firestoreUtilData: BuiltValueNullFieldError.checkNotNull(
                 firestoreUtilData, r'ReminderStruct', 'firestoreUtilData'));
     replace(_$result);

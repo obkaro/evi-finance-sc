@@ -126,8 +126,9 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'Dashboard': DashboardWidget(),
+      'RecurringPayments': RecurringPaymentsWidget(),
       'ActiveBudget': ActiveBudgetWidget(),
+      'Dashboard': DashboardWidget(),
       'Accounts': AccountsWidget(),
       'Settings': SettingsWidget(),
     };
@@ -146,14 +147,14 @@ class _NavBarPageState extends State<NavBarPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_rounded,
+              Icons.payment_rounded,
               size: 24,
             ),
             activeIcon: Icon(
-              Icons.home_rounded,
+              Icons.payment_rounded,
               size: 32,
             ),
-            label: 'Dashboard',
+            label: 'Recurring Payments',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -166,6 +167,18 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 32,
             ),
             label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_rounded,
+              size: 24,
+            ),
+            activeIcon: Icon(
+              Icons.home_rounded,
+              size: 32,
+            ),
+            label: 'Dashboard',
             tooltip: '',
           ),
           BottomNavigationBarItem(

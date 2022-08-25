@@ -1,6 +1,5 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/create_custom_subscription_widget.dart';
 import '../create_recurring/create_recurring_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -166,19 +165,14 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                   child: InkWell(
                     onTap: () async {
                       Navigator.pop(context);
-                      // Action_BSCreateCustomCategory
-                      await showModalBottomSheet(
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (context) {
-                          return Padding(
-                            padding: MediaQuery.of(context).viewInsets,
-                            child: CreateCustomSubscriptionWidget(
-                              customSubscription: widget.recurringPayment,
-                            ),
-                          );
-                        },
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CreateRecurringWidget(
+                            subscriptionRecord:
+                                widget.recurringPayment!.reference,
+                          ),
+                        ),
                       );
                     },
                     child: Container(
