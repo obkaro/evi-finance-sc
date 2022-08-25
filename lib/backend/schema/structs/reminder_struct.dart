@@ -13,6 +13,8 @@ abstract class ReminderStruct
 
   DateTime? get lastDate;
 
+  DateTime? get nextDate;
+
   /// Utility class for Firestore updates
   FirestoreUtilData get firestoreUtilData;
 
@@ -26,6 +28,7 @@ abstract class ReminderStruct
 
 ReminderStruct createReminderStruct({
   DateTime? lastDate,
+  DateTime? nextDate,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -34,6 +37,7 @@ ReminderStruct createReminderStruct({
     ReminderStruct(
       (r) => r
         ..lastDate = lastDate
+        ..nextDate = nextDate
         ..firestoreUtilData = FirestoreUtilData(
           clearUnsetFields: clearUnsetFields,
           create: create,
