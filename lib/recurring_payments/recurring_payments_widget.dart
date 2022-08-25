@@ -38,7 +38,7 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(100),
             child: AppBar(
-              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+              backgroundColor: FlutterFlowTheme.of(context).primaryColor,
               iconTheme: IconThemeData(
                   color: FlutterFlowTheme.of(context).primaryText),
               automaticallyImplyLeading: false,
@@ -51,7 +51,7 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryColor,
                     border: Border.all(
-                      color: Color(0x00F6F6F6),
+                      color: Colors.transparent,
                       width: 0,
                     ),
                   ),
@@ -150,6 +150,7 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryColor,
                           border: Border.all(
+                            color: Colors.transparent,
                             width: 0,
                           ),
                         ),
@@ -169,7 +170,7 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                             height: 100,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(0),
                                 bottomRight: Radius.circular(0),
@@ -177,6 +178,8 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                 topRight: Radius.circular(32),
                               ),
                               border: Border.all(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
                                 width: 0,
                               ),
                             ),
@@ -217,15 +220,10 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                             width: double.infinity,
                             height: 100,
                             decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 14,
-                                  color:
-                                      FlutterFlowTheme.of(context).shadowGray,
-                                )
-                              ],
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                               border: Border.all(
+                                color: Colors.transparent,
                                 width: 0,
                               ),
                             ),
