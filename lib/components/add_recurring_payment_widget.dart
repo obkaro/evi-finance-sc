@@ -119,9 +119,12 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                       ),
                                       child: Image.network(
                                         subsfromcontainerItem.icon!,
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        fit: BoxFit.cover,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                1,
+                                        fit: BoxFit.contain,
                                       ),
                                     ),
                                   );
