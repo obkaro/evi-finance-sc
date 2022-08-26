@@ -162,15 +162,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                                 BorderRadius.circular(8),
                                             child: Image.network(
                                               subsfromcontainerItem.icon!,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.8,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.8,
-                                              fit: BoxFit.cover,
+                                              fit: BoxFit.scaleDown,
                                             ),
                                           ),
                                         ),
