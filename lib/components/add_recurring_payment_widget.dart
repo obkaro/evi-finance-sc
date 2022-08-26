@@ -119,18 +119,22 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                       ),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            8, 8, 8, 8),
-                                        child: Image.network(
-                                          subsfromcontainerItem.icon!,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.8,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.8,
-                                          fit: BoxFit.scaleDown,
+                                            12, 12, 12, 12),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          child: Image.network(
+                                            subsfromcontainerItem.icon!,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.8,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.8,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
                                     ),
