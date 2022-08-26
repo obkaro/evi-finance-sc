@@ -357,7 +357,7 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                 },
                                               );
                                             },
-                                            text: 'Add New Category',
+                                            text: 'New Category',
                                             icon: Icon(
                                               Icons.add_rounded,
                                               size: 15,
@@ -531,8 +531,8 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                     () async {
                                                                   if (widget
                                                                           .transaction!
-                                                                          .isRecurring ==
-                                                                      true) {
+                                                                          .recurringRef !=
+                                                                      null) {
                                                                     await actions
                                                                         .normalizeTransSub(
                                                                       widget
@@ -603,8 +603,6 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                       recurringRef:
                                                                           inheritedSubsItem
                                                                               .reference,
-                                                                      isRecurring:
-                                                                          true,
                                                                     );
                                                                     await widget
                                                                         .transaction!
@@ -726,7 +724,7 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
 
                                         setState(() {});
                                       },
-                                      text: 'Add New Payment',
+                                      text: 'New Subscription',
                                       icon: Icon(
                                         Icons.add_rounded,
                                         size: 15,

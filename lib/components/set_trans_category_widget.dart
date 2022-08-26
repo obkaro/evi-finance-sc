@@ -186,7 +186,6 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                   await widget.transaction!.reference
                                       .update(transactionsUpdateData);
                                   Navigator.pop(context);
-                                  Navigator.pop(context);
                                 },
                                 child: Container(
                                   width: double.infinity,

@@ -10,8 +10,8 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,8 +32,6 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
   DateTimeRange? calendarSelectedDay;
   String uploadedFileUrl = '';
   TextEditingController? nameController;
-  String? currencyValue;
-  TextEditingController? amountController;
   String? categoryValue;
   String? durationValue;
   bool? switchListTileValue;
@@ -43,7 +41,6 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
   @override
   void initState() {
     super.initState();
-    amountController = TextEditingController();
     calendarSelectedDay = DateTimeRange(
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
@@ -135,9 +132,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                             width: double.infinity,
                                             height: double.infinity,
                                             decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
+                                              color: Colors.white,
                                               shape: BoxShape.circle,
                                               border: Border.all(
                                                 color: Colors.transparent,
@@ -152,20 +147,24 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                       createRecurringSubscriptionsRecord
                                                               .icon !=
                                                           '',
-                                              child: Container(
-                                                width: 120,
-                                                height: 120,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Image.network(
-                                                  valueOrDefault<String>(
-                                                    createRecurringSubscriptionsRecord
-                                                        .icon,
-                                                    'https://firebasestorage.googleapis.com/v0/b/evi-finance-dev.appspot.com/o/cms_uploads%2FconstRecurringPayments%2F1661483422451000%2Fcredit-card-icon-png-4401.png?alt=media&token=dcd086de-12fa-4424-8aba-bcba60e6ddae',
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(12, 12, 12, 12),
+                                                child: Container(
+                                                  width: 120,
+                                                  height: 120,
+                                                  clipBehavior: Clip.antiAlias,
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
                                                   ),
-                                                  fit: BoxFit.scaleDown,
+                                                  child: Image.network(
+                                                    valueOrDefault<String>(
+                                                      createRecurringSubscriptionsRecord
+                                                          .icon,
+                                                      'https://firebasestorage.googleapis.com/v0/b/evi-finance-dev.appspot.com/o/cms_uploads%2FconstRecurringPayments%2F1661483422451000%2Fcredit-card-icon-png-4401.png?alt=media&token=dcd086de-12fa-4424-8aba-bcba60e6ddae',
+                                                    ),
+                                                    fit: BoxFit.scaleDown,
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -253,6 +252,8 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                     ),
                                     obscureText: false,
                                     decoration: InputDecoration(
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .bodyText1,
                                       hintText: 'Name',
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodyText1
@@ -305,109 +306,21 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 8, 0),
-                                      child: TextFormField(
-                                        controller: amountController,
-                                        onChanged: (_) => EasyDebounce.debounce(
-                                          'amountController',
-                                          Duration(milliseconds: 2000),
-                                          () => setState(() {}),
-                                        ),
-                                        obscureText: false,
-                                        decoration: InputDecoration(
-                                          hintText: 'Amount',
-                                          hintStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1Family,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                              ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(12),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Container(
+                                          width: double.infinity,
+                                          height: 55,
+                                          child:
+                                              custom_widgets.CurrencyTextField(
+                                            width: double.infinity,
+                                            height: 55,
+                                            labelText: 'Enter amount',
                                           ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                          filled: true,
-                                          fillColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondaryBackground,
-                                          suffixIcon: amountController!
-                                                  .text.isNotEmpty
-                                              ? InkWell(
-                                                  onTap: () async {
-                                                    amountController?.clear();
-                                                    setState(() {});
-                                                  },
-                                                  child: Icon(
-                                                    Icons.clear,
-                                                    color: Color(0xFF757575),
-                                                    size: 22,
-                                                  ),
-                                                )
-                                              : null,
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1,
-                                        keyboardType: const TextInputType
-                                                .numberWithOptions(
-                                            signed: true, decimal: true),
-                                        validator: (val) {
-                                          if (val == null || val.isEmpty) {
-                                            return 'Field is required';
-                                          }
-                                          if (val.length < 1) {
-                                            return 'Requires at least 1 characters.';
-                                          }
-
-                                          return null;
-                                        },
-                                      ),
+                                      ],
                                     ),
-                                  ),
-                                  FlutterFlowDropDown(
-                                    initialOption: currencyValue ??= 'NGN',
-                                    options: ['NGN', 'USD'],
-                                    onChanged: (val) =>
-                                        setState(() => currencyValue = val),
-                                    width: 100,
-                                    height: 55,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1Family,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                        ),
-                                    hintText: 'Please select...',
-                                    fillColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    elevation: 2,
-                                    borderColor: Colors.transparent,
-                                    borderWidth: 0,
-                                    borderRadius: 12,
-                                    margin: EdgeInsetsDirectional.fromSTEB(
-                                        12, 4, 12, 4),
-                                    hidesUnderline: true,
                                   ),
                                 ],
                               ),
@@ -548,29 +461,6 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                         return;
                                       }
 
-                                      if (currencyValue == null) {
-                                        await showModalBottomSheet(
-                                          isScrollControlled: true,
-                                          backgroundColor: Colors.transparent,
-                                          context: context,
-                                          builder: (context) {
-                                            return Padding(
-                                              padding: MediaQuery.of(context)
-                                                  .viewInsets,
-                                              child: DialogBoxWidget(
-                                                heading:
-                                                    'Currency selection required',
-                                                body:
-                                                    'Please select a valid currency from the dropdown.',
-                                                buttonYes: 'Okay',
-                                                buttonNo: 'n',
-                                                information: true,
-                                              ),
-                                            );
-                                          },
-                                        );
-                                        return;
-                                      }
                                       if (categoryValue == null) {
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
@@ -807,9 +697,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                       category:
                                           buttonCategoriesRecord!.reference,
                                       expCharge: createMoneyStruct(
-                                        currency: currencyValue,
-                                        amount:
-                                            int.parse(amountController!.text),
+                                        amount: FFAppState().currencyTextField,
                                         clearUnsetFields: false,
                                       ),
                                       notification: switchListTileValue,
