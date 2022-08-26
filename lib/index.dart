@@ -26,10 +26,10 @@ export 'welcome_to_evi/welcome_to_evi_widget.dart' show WelcomeToEviWidget;
 export 'first_budget/first_budget_widget.dart' show FirstBudgetWidget;
 export 'budget_single_copy/budget_single_copy_widget.dart'
     show BudgetSingleCopyWidget;
-export 'recurring_payments/recurring_payments_widget.dart'
-    show RecurringPaymentsWidget;
 export 'transaction_single/transaction_single_widget.dart'
     show TransactionSingleWidget;
+export 'recurring_payments/recurring_payments_widget.dart'
+    show RecurringPaymentsWidget;
 export 'create_recurring/create_recurring_widget.dart'
     show CreateRecurringWidget;
 export 'edit_subsciption/edit_subsciption_widget.dart'

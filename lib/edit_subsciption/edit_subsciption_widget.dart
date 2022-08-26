@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
+import '../components/tooltip_widget.dart';
 import '../flutter_flow/flutter_flow_calendar.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
@@ -414,7 +415,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(4, 16, 4, 0),
+                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -422,16 +423,35 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 4, 0),
                                   child: Text(
-                                    'Expected charge date',
+                                    'Edit expected charge date',
                                     style:
-                                        FlutterFlowTheme.of(context).subtitle1,
+                                        FlutterFlowTheme.of(context).bodyText1,
                                   ),
                                 ),
-                                Icon(
-                                  Icons.help_outline_rounded,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  size: 16,
+                                InkWell(
+                                  onTap: () async {
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      context: context,
+                                      builder: (context) {
+                                        return Padding(
+                                          padding:
+                                              MediaQuery.of(context).viewInsets,
+                                          child: TooltipWidget(
+                                            tip:
+                                                'The actual charge date may change the next time you assign a transaction to this subscription depending on when the service triggered the payment and when your bank cleared the transaction.',
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Icon(
+                                    Icons.help_outline_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    size: 16,
+                                  ),
                                 ),
                               ],
                             ),
