@@ -229,7 +229,7 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                 final subsItem = subs[subsIndex];
                                 return Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 0, 20, 0),
+                                      24, 0, 24, 0),
                                   child: InkWell(
                                     onTap: () async {
                                       await Navigator.push(
@@ -296,7 +296,7 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                           'Due: ',
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .subtitle2,
+                                                              .bodyText2,
                                                         ),
                                                         Text(
                                                           dateTimeFormat(
@@ -305,7 +305,7 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                                   .expChargeDate!),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .subtitle2,
+                                                              .bodyText2,
                                                         ),
                                                       ],
                                                     ),
