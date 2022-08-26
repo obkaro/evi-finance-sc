@@ -81,11 +81,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
             automaticallyImplyLeading: true,
             title: Text(
               'Add Recurring Payment',
-              style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: FlutterFlowTheme.of(context).title2Family,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    fontSize: 22,
-                  ),
+              style: FlutterFlowTheme.of(context).title3,
             ),
             actions: [],
             centerTitle: true,
@@ -454,8 +450,6 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                   categoryCategoriesRecordList =
                                                   snapshot.data!;
                                               return FlutterFlowDropDown(
-                                                initialOption: categoryValue ??=
-                                                    'NGN',
                                                 options:
                                                     categoryCategoriesRecordList
                                                         .map((e) =>

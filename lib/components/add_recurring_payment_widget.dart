@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/c_button_filled_copy_widget.dart';
+import '../create_recurring/create_recurring_widget.dart';
 import '../edit_subsciption/edit_subsciption_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -137,7 +138,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                EditSubsciptionWidget(
+                                                CreateRecurringWidget(
                                               subscriptionRecord:
                                                   newSub!.reference,
                                             ),

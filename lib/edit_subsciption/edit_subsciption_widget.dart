@@ -76,11 +76,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
             automaticallyImplyLeading: true,
             title: Text(
               'Edit Subscription',
-              style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: FlutterFlowTheme.of(context).title2Family,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    fontSize: 22,
-                  ),
+              style: FlutterFlowTheme.of(context).title3,
             ),
             actions: [],
             centerTitle: true,
