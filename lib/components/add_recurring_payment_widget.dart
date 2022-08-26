@@ -1,8 +1,10 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/c_button_filled_copy_widget.dart';
-import '../create_recurring/create_recurring_widget.dart';
+import '../edit_subsciption/edit_subsciption_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,6 +23,9 @@ class AddRecurringPaymentWidget extends StatefulWidget {
 }
 
 class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
+  SubscriptionsRecord? newSub2;
+  SubscriptionsRecord? newSub;
+
   @override
   void initState() {
     super.initState();
@@ -110,27 +115,64 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                   return Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 10, 0),
-                                    child: Container(
-                                      width: 120,
-                                      height: 120,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            8, 8, 8, 8),
-                                        child: Image.network(
-                                          subsfromcontainerItem.icon!,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.8,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.8,
-                                          fit: BoxFit.scaleDown,
+                                    child: InkWell(
+                                      onTap: () async {
+                                        Navigator.pop(context);
+
+                                        final subscriptionsCreateData =
+                                            createSubscriptionsRecordData(
+                                          name: subsfromcontainerItem.name,
+                                          icon: subsfromcontainerItem.icon,
+                                        );
+                                        var subscriptionsRecordReference =
+                                            SubscriptionsRecord.collection
+                                                .doc();
+                                        await subscriptionsRecordReference
+                                            .set(subscriptionsCreateData);
+                                        newSub = SubscriptionsRecord
+                                            .getDocumentFromData(
+                                                subscriptionsCreateData,
+                                                subscriptionsRecordReference);
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                EditSubsciptionWidget(
+                                              subscriptionRecord:
+                                                  newSub!.reference,
+                                            ),
+                                          ),
+                                        );
+
+                                        setState(() {});
+                                      },
+                                      child: Container(
+                                        width: 120,
+                                        height: 120,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12, 12, 12, 12),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            child: Image.network(
+                                              subsfromcontainerItem.icon!,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.8,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.8,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -147,15 +189,25 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                 InkWell(
                   onTap: () async {
                     Navigator.pop(context);
+
+                    final subscriptionsCreateData =
+                        createSubscriptionsRecordData();
+                    var subscriptionsRecordReference =
+                        SubscriptionsRecord.collection.doc();
+                    await subscriptionsRecordReference
+                        .set(subscriptionsCreateData);
+                    newSub2 = SubscriptionsRecord.getDocumentFromData(
+                        subscriptionsCreateData, subscriptionsRecordReference);
                     await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CreateRecurringWidget(
-                          subscriptionRecord:
-                              widget.recurringPayment!.reference,
+                        builder: (context) => EditSubsciptionWidget(
+                          subscriptionRecord: newSub2!.reference,
                         ),
                       ),
                     );
+
+                    setState(() {});
                   },
                   child: CButtonFilledCopyWidget(
                     text: 'Custom',
