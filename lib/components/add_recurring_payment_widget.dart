@@ -124,7 +124,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                         height:
                                             MediaQuery.of(context).size.height *
                                                 1,
-                                        fit: BoxFit.contain,
+                                        fit: BoxFit.scaleDown,
                                       ),
                                     ),
                                   );
