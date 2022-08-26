@@ -111,20 +111,27 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 10, 0),
                                     child: Container(
-                                      width: 55,
-                                      height: 55,
+                                      width: 120,
+                                      height: 120,
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         shape: BoxShape.circle,
                                       ),
-                                      child: Image.network(
-                                        subsfromcontainerItem.icon!,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                1,
-                                        fit: BoxFit.scaleDown,
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            8, 8, 8, 8),
+                                        child: Image.network(
+                                          subsfromcontainerItem.icon!,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.8,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.8,
+                                          fit: BoxFit.scaleDown,
+                                        ),
                                       ),
                                     ),
                                   );
