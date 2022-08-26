@@ -35,6 +35,7 @@ class _CButtonFilledCopyWidgetState extends State<CButtonFilledCopyWidget> {
         print('Button pressed ...');
       },
       text: widget.text!,
+      icon: widget.icon,
       options: FFButtonOptions(
         width: double.infinity,
         height: 48,
