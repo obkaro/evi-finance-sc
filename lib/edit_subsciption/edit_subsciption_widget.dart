@@ -131,25 +131,29 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                           width: double.infinity,
                                           height: double.infinity,
                                           decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
+                                            color: Colors.white,
                                             shape: BoxShape.circle,
                                             border: Border.all(
                                               color: Colors.transparent,
                                               width: 0,
                                             ),
                                           ),
-                                          child: Container(
-                                            width: 120,
-                                            height: 120,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Image.network(
-                                              editSubsciptionSubscriptionsRecord
-                                                  .icon!,
-                                              fit: BoxFit.scaleDown,
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    12, 12, 12, 12),
+                                            child: Container(
+                                              width: 120,
+                                              height: 120,
+                                              clipBehavior: Clip.antiAlias,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Image.network(
+                                                editSubsciptionSubscriptionsRecord
+                                                    .icon!,
+                                                fit: BoxFit.scaleDown,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -304,50 +308,76 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Expanded(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      AuthUserStreamWidget(
-                                        child: StreamBuilder<
-                                            List<CategoriesRecord>>(
-                                          stream: queryCategoriesRecord(
-                                            parent: currentUserDocument!
-                                                .activeBudget,
-                                          ),
-                                          builder: (context, snapshot) {
-                                            // Customize what your widget looks like when it's loading.
-                                            if (!snapshot.hasData) {
-                                              return Center(
-                                                child: SizedBox(
-                                                  width: 50,
-                                                  height: 50,
-                                                  child: SpinKitRing(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                    size: 50,
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                            List<CategoriesRecord>
-                                                categoryCategoriesRecordList =
-                                                snapshot.data!;
-                                            return FlutterFlowDropDown(
-                                              initialOption: categoryValue ??=
-                                                  'NGN',
-                                              options:
-                                                  categoryCategoriesRecordList
-                                                      .map((e) =>
-                                                          e.categoryName!)
-                                                      .toList()
-                                                      .toList(),
-                                              onChanged: (val) => setState(
-                                                  () => categoryValue = val),
-                                              width: double.infinity,
-                                              height: 55,
-                                              textStyle:
+                                  child: StreamBuilder<CategoriesRecord>(
+                                    stream: CategoriesRecord.getDocument(
+                                        editSubsciptionSubscriptionsRecord
+                                            .category!),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: SpinKitRing(
+                                              color:
                                                   FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 50,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      final columnCategoriesRecord =
+                                          snapshot.data!;
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          AuthUserStreamWidget(
+                                            child: StreamBuilder<
+                                                List<CategoriesRecord>>(
+                                              stream: queryCategoriesRecord(
+                                                parent: currentUserDocument!
+                                                    .activeBudget,
+                                              ),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50,
+                                                      height: 50,
+                                                      child: SpinKitRing(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        size: 50,
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                                List<CategoriesRecord>
+                                                    categoryCategoriesRecordList =
+                                                    snapshot.data!;
+                                                return FlutterFlowDropDown(
+                                                  initialOption:
+                                                      categoryValue ??=
+                                                          columnCategoriesRecord
+                                                              .categoryName,
+                                                  options:
+                                                      categoryCategoriesRecordList
+                                                          .map((e) =>
+                                                              e.categoryName!)
+                                                          .toList()
+                                                          .toList(),
+                                                  onChanged: (val) => setState(
+                                                      () =>
+                                                          categoryValue = val),
+                                                  width: double.infinity,
+                                                  height: 55,
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
@@ -359,23 +389,27 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                                     context)
                                                                 .primaryText,
                                                       ),
-                                              hintText:
-                                                  'Assign to a category...',
-                                              fillColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              elevation: 2,
-                                              borderColor: Colors.transparent,
-                                              borderWidth: 0,
-                                              borderRadius: 12,
-                                              margin: EdgeInsetsDirectional
-                                                  .fromSTEB(12, 4, 12, 4),
-                                              hidesUnderline: true,
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ],
+                                                  hintText:
+                                                      'Assign to a category...',
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryBackground,
+                                                  elevation: 2,
+                                                  borderColor:
+                                                      Colors.transparent,
+                                                  borderWidth: 0,
+                                                  borderRadius: 12,
+                                                  margin: EdgeInsetsDirectional
+                                                      .fromSTEB(12, 4, 12, 4),
+                                                  hidesUnderline: true,
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
                                   ),
                                 ),
                               ],
@@ -636,7 +670,6 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                   onPressed: () async {
                                     final subscriptionsUpdateData =
                                         createSubscriptionsRecordData(
-                                      owner: currentUserReference,
                                       name: nameController?.text ?? '',
                                       expChargeDate: calendarSelectedDay?.start,
                                       category:
