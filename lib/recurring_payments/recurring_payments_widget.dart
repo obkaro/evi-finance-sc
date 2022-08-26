@@ -92,6 +92,7 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
           elevation: 0,
         ),
       ),
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final subscriptionsCreateData = createSubscriptionsRecordData(
@@ -211,8 +212,6 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                         width: double.infinity,
                         height: 100,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
                           border: Border.all(
                             color: Colors.transparent,
                             width: 0,

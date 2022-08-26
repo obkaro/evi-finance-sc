@@ -117,97 +117,130 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                     width: 120,
                                     height: 120,
                                     child: Stack(
+                                      alignment: AlignmentDirectional(0, 0),
                                       children: [
-                                        Container(
-                                          width: 120,
-                                          height: 120,
-                                          clipBehavior: Clip.antiAlias,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Image.network(
-                                            valueOrDefault<String>(
-                                              createRecurringSubscriptionsRecord
-                                                  .icon,
-                                              'https://firebasestorage.googleapis.com/v0/b/evi-finance-dev.appspot.com/o/cms_uploads%2FconstInstitutionLogos%2F1659618717227000%2FPolaris%20Bank%20Logo.png?alt=media&token=403cd5d1-52ac-44a2-87c5-e10ef5b3cdf3',
-                                            ),
-                                          ),
-                                        ),
                                         Container(
                                           width: double.infinity,
                                           height: double.infinity,
                                           decoration: BoxDecoration(
-                                            color: Color(0x26000000),
+                                            color: Colors.white,
                                             shape: BoxShape.circle,
-                                          ),
-                                          child: FlutterFlowIconButton(
-                                            borderColor: Colors.transparent,
-                                            borderRadius: 30,
-                                            borderWidth: 1,
-                                            buttonSize: 60,
-                                            icon: Icon(
-                                              Icons.photo_rounded,
-                                              color: Colors.white,
-                                              size: 48,
+                                            border: Border.all(
+                                              color: Colors.transparent,
+                                              width: 0,
                                             ),
-                                            onPressed: () async {
-                                              final selectedMedia =
-                                                  await selectMedia(
-                                                maxWidth: 720.00,
-                                                imageQuality: 49,
-                                                mediaSource:
-                                                    MediaSource.photoGallery,
-                                                multiImage: false,
+                                          ),
+                                        ),
+                                        Material(
+                                          color: Colors.transparent,
+                                          elevation: 0,
+                                          shape: const CircleBorder(),
+                                          child: Container(
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                color: Colors.transparent,
+                                                width: 0,
+                                              ),
+                                            ),
+                                            child: Visibility(
+                                              visible:
+                                                  createRecurringSubscriptionsRecord
+                                                              .icon !=
+                                                          null &&
+                                                      createRecurringSubscriptionsRecord
+                                                              .icon !=
+                                                          '',
+                                              child: Container(
+                                                width: 120,
+                                                height: 120,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Image.network(
+                                                  valueOrDefault<String>(
+                                                    createRecurringSubscriptionsRecord
+                                                        .icon,
+                                                    'https://firebasestorage.googleapis.com/v0/b/evi-finance-dev.appspot.com/o/cms_uploads%2FconstRecurringPayments%2F1661483422451000%2Fcredit-card-icon-png-4401.png?alt=media&token=dcd086de-12fa-4424-8aba-bcba60e6ddae',
+                                                  ),
+                                                  fit: BoxFit.scaleDown,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        FlutterFlowIconButton(
+                                          borderColor: Colors.transparent,
+                                          borderRadius: 30,
+                                          borderWidth: 1,
+                                          buttonSize: 60,
+                                          icon: Icon(
+                                            Icons.edit_rounded,
+                                            color: Colors.white,
+                                            size: 32,
+                                          ),
+                                          onPressed: () async {
+                                            final selectedMedia =
+                                                await selectMedia(
+                                              maxWidth: 720.00,
+                                              imageQuality: 49,
+                                              mediaSource:
+                                                  MediaSource.photoGallery,
+                                              multiImage: false,
+                                            );
+                                            if (selectedMedia != null &&
+                                                selectedMedia.every((m) =>
+                                                    validateFileFormat(
+                                                        m.storagePath,
+                                                        context))) {
+                                              showUploadMessage(
+                                                context,
+                                                'Uploading file...',
+                                                showLoading: true,
                                               );
-                                              if (selectedMedia != null &&
-                                                  selectedMedia.every((m) =>
-                                                      validateFileFormat(
-                                                          m.storagePath,
-                                                          context))) {
+                                              final downloadUrls = (await Future
+                                                      .wait(selectedMedia.map(
+                                                          (m) async =>
+                                                              await uploadData(
+                                                                  m.storagePath,
+                                                                  m.bytes))))
+                                                  .where((u) => u != null)
+                                                  .map((u) => u!)
+                                                  .toList();
+                                              ScaffoldMessenger.of(context)
+                                                  .hideCurrentSnackBar();
+                                              if (downloadUrls.length ==
+                                                  selectedMedia.length) {
+                                                setState(() => uploadedFileUrl =
+                                                    downloadUrls.first);
                                                 showUploadMessage(
                                                   context,
-                                                  'Uploading file...',
-                                                  showLoading: true,
+                                                  'Success!',
                                                 );
-                                                final downloadUrls = (await Future
-                                                        .wait(selectedMedia.map(
-                                                            (m) async =>
-                                                                await uploadData(
-                                                                    m.storagePath,
-                                                                    m.bytes))))
-                                                    .where((u) => u != null)
-                                                    .map((u) => u!)
-                                                    .toList();
-                                                ScaffoldMessenger.of(context)
-                                                    .hideCurrentSnackBar();
-                                                if (downloadUrls.length ==
-                                                    selectedMedia.length) {
-                                                  setState(() =>
-                                                      uploadedFileUrl =
-                                                          downloadUrls.first);
-                                                  showUploadMessage(
-                                                    context,
-                                                    'Success!',
-                                                  );
-                                                } else {
-                                                  showUploadMessage(
-                                                    context,
-                                                    'Failed to upload media',
-                                                  );
-                                                  return;
-                                                }
+                                              } else {
+                                                showUploadMessage(
+                                                  context,
+                                                  'Failed to upload media',
+                                                );
+                                                return;
                                               }
+                                            }
 
-                                              final subscriptionsUpdateData =
-                                                  createSubscriptionsRecordData(
-                                                icon: uploadedFileUrl,
-                                              );
-                                              await createRecurringSubscriptionsRecord
-                                                  .reference
-                                                  .update(
-                                                      subscriptionsUpdateData);
-                                            },
-                                          ),
+                                            final subscriptionsUpdateData =
+                                                createSubscriptionsRecordData(
+                                              icon: uploadedFileUrl,
+                                            );
+                                            await createRecurringSubscriptionsRecord
+                                                .reference
+                                                .update(
+                                                    subscriptionsUpdateData);
+                                          },
                                         ),
                                       ],
                                     ),
@@ -469,7 +502,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(4, 16, 4, 0),
+                                  EdgeInsetsDirectional.fromSTEB(8, 16, 8, 0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -479,7 +512,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                     child: Text(
                                       'Expected charge date',
                                       style: FlutterFlowTheme.of(context)
-                                          .subtitle1,
+                                          .bodyText1,
                                     ),
                                   ),
                                   Icon(
@@ -493,7 +526,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                                  EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                               child: Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
