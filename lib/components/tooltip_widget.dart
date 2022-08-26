@@ -26,47 +26,58 @@ class _TooltipWidgetState extends State<TooltipWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentDirectional(1, -1),
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Container(
           width: double.infinity,
-          decoration: BoxDecoration(
-            color: FlutterFlowTheme.of(context).primaryBackground,
-            borderRadius: BorderRadius.circular(32),
-          ),
-          child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: Text(
-                    widget.tip!,
-                    style: FlutterFlowTheme.of(context).bodyText2.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyText2Family,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          fontWeight: FontWeight.normal,
-                        ),
+          decoration: BoxDecoration(),
+        ),
+        Stack(
+          alignment: AlignmentDirectional(1, -1),
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  borderRadius: BorderRadius.circular(32),
+                ),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        widget.tip!,
+                        style: FlutterFlowTheme.of(context).bodyText2.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyText2Family,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              fontWeight: FontWeight.normal,
+                            ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
-        Align(
-          alignment: AlignmentDirectional(1, -0.95),
-          child: InkWell(
-            onTap: () async {
-              Navigator.pop(context);
-            },
-            child: Icon(
-              Icons.cancel_rounded,
-              color: FlutterFlowTheme.of(context).secondaryText,
-              size: 24,
+            Align(
+              alignment: AlignmentDirectional(1, -0.95),
+              child: InkWell(
+                onTap: () async {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.cancel_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 24,
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ],
     );

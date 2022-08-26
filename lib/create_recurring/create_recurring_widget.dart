@@ -1,7 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
-import '../components/dialog_box_widget.dart';
+import '../components/tooltip_widget.dart';
 import '../flutter_flow/flutter_flow_calendar.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
@@ -11,6 +11,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -409,7 +410,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 16, 8, 0),
+                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -417,16 +418,35 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 4, 0),
                                     child: Text(
-                                      'Expected charge date',
+                                      'Next charge date (expected)',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1,
                                     ),
                                   ),
-                                  Icon(
-                                    Icons.help_outline_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 16,
+                                  InkWell(
+                                    onTap: () async {
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        context: context,
+                                        builder: (context) {
+                                          return Padding(
+                                            padding: MediaQuery.of(context)
+                                                .viewInsets,
+                                            child: TooltipWidget(
+                                              tip:
+                                                  'The actual charge date may differ depending on when the service triggers the payment and when your bank clears the transaction. We will update this automatically when you assign a transaction to this subscription.',
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Icon(
+                                      Icons.help_outline_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 16,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -451,39 +471,12 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                         .primaryText,
                                     weekFormat: false,
                                     weekStartsMonday: false,
-                                    initialDate: getCurrentTimestamp,
+                                    initialDate: functions.addDaysToDate(
+                                        getCurrentTimestamp, 30),
                                     rowHeight: 40,
                                     onChange:
                                         (DateTimeRange? newSelectedDate) async {
                                       calendarSelectedDay = newSelectedDate;
-                                      if (formKey.currentState == null ||
-                                          !formKey.currentState!.validate()) {
-                                        return;
-                                      }
-
-                                      if (categoryValue == null) {
-                                        await showModalBottomSheet(
-                                          isScrollControlled: true,
-                                          backgroundColor: Colors.transparent,
-                                          context: context,
-                                          builder: (context) {
-                                            return Padding(
-                                              padding: MediaQuery.of(context)
-                                                  .viewInsets,
-                                              child: DialogBoxWidget(
-                                                heading:
-                                                    'Category selection required',
-                                                body:
-                                                    'Please select a category from the dropdown.',
-                                                buttonYes: 'Okay',
-                                                buttonNo: 'n',
-                                                information: true,
-                                              ),
-                                            );
-                                          },
-                                        );
-                                        return;
-                                      }
 
                                       final subscriptionsUpdateData =
                                           createSubscriptionsRecordData(
@@ -558,13 +551,16 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                   FlutterFlowChoiceChips(
                                     initiallySelected: durationValue != null
                                         ? [durationValue!]
-                                        : ['Weekly'],
-                                    options: [
-                                      ChipData('Weekly'),
-                                      ChipData('Monthly'),
-                                      ChipData('Quarterly'),
-                                      ChipData('Yearly')
-                                    ],
+                                        : ['Monthly'],
+                                    options: FFAppState()
+                                        .durations
+                                        .map((e) => getJsonField(
+                                              e,
+                                              r'''$''',
+                                            ))
+                                        .toList()
+                                        .map((label) => ChipData(label))
+                                        .toList(),
                                     onChanged: (val) => setState(
                                         () => durationValue = val?.first),
                                     selectedChipStyle: ChipStyle(
