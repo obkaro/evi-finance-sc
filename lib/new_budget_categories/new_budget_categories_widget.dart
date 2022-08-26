@@ -395,14 +395,18 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                             List<ConstBudgetCategoriesRecord>>(
                                           stream:
                                               queryConstBudgetCategoriesRecord(
-                                            queryBuilder: (constBudgetCategoriesRecord) =>
-                                                constBudgetCategoriesRecord.where(
-                                                    'categoryName',
-                                                    whereNotIn:
-                                                        newBudgetCategoriesCategoriesRecordList
-                                                            .map((e) =>
-                                                                e.categoryName!)
-                                                            .toList()),
+                                            queryBuilder:
+                                                (constBudgetCategoriesRecord) =>
+                                                    constBudgetCategoriesRecord
+                                                        .where('categoryName',
+                                                            whereNotIn:
+                                                                newBudgetCategoriesCategoriesRecordList
+                                                                    .map((e) => e
+                                                                        .categoryName!)
+                                                                    .toList())
+                                                        .orderBy(
+                                                            'categoryWeight',
+                                                            descending: true),
                                           ),
                                           builder: (context, snapshot) {
                                             // Customize what your widget looks like when it's loading.

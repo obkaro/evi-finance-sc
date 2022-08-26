@@ -34,3 +34,5 @@ export 'create_recurring/create_recurring_widget.dart'
     show CreateRecurringWidget;
 export 'edit_subsciption/edit_subsciption_widget.dart'
     show EditSubsciptionWidget;
+export 'subscription_details/subscription_details_widget.dart'
+    show SubscriptionDetailsWidget;

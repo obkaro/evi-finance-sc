@@ -73,7 +73,7 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
         obscureText: false,
         decoration: InputDecoration(
           //labelText: widget.labelText,
-          hintText: "₦50",
+          hintText: widget.hintText,
           hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
                 fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                 color: FlutterFlowTheme.of(context).secondaryText,

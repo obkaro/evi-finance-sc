@@ -207,7 +207,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                     icon: Icon(
                       Icons.add_rounded,
                       color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 16,
+                      size: 20,
                     ),
                   ),
                 ),
