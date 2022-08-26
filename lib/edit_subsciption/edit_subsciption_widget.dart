@@ -215,7 +215,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                               createSubscriptionsRecordData(
                                             icon: uploadedFileUrl,
                                           );
-                                          await createRecurringSubscriptionsRecord
+                                          await editSubsciptionSubscriptionsRecord
                                               .reference
                                               .update(subscriptionsUpdateData);
                                         },
