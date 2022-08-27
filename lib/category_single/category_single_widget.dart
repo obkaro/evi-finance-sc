@@ -107,7 +107,6 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                       // Action_UnlinkAllTransCategories
                       await actions.unlinkAllTransCategories(
                         iconButtonTransactionsRecordList.toList(),
-                        widget.category,
                       );
                     },
                   );
