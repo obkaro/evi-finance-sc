@@ -73,7 +73,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                 widget.subscription!.icon!,
                                 width: double.infinity,
                                 height: double.infinity,
-                                fit: BoxFit.cover,
+                                fit: BoxFit.scaleDown,
                               ),
                             ),
                           ),
@@ -103,7 +103,8 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                 style: FlutterFlowTheme.of(context).bodyText2,
                               ),
                               Text(
-                                widget.subscription!.expChargeDate!.toString(),
+                                dateTimeFormat('MMMMEEEEd',
+                                    widget.subscription!.expChargeDate!),
                                 style: FlutterFlowTheme.of(context).bodyText2,
                               ),
                             ],
@@ -198,7 +199,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                       ),
                                   elevation: 0,
                                   borderSide: BorderSide(
-                                    width: 1,
+                                    width: 0,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -225,7 +226,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(32, 8, 32, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(32, 16, 32, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
