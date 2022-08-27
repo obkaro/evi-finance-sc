@@ -119,7 +119,6 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                           width: double.infinity,
                                           height: double.infinity,
                                           decoration: BoxDecoration(
-                                            color: Colors.white,
                                             shape: BoxShape.circle,
                                             border: Border.all(
                                               color: Colors.transparent,
@@ -135,7 +134,6 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                             width: double.infinity,
                                             height: double.infinity,
                                             decoration: BoxDecoration(
-                                              color: Colors.white,
                                               shape: BoxShape.circle,
                                               border: Border.all(
                                                 color: Colors.transparent,
@@ -171,72 +169,82 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                             ),
                                           ),
                                         ),
-                                        FlutterFlowIconButton(
-                                          borderColor: Colors.transparent,
-                                          borderRadius: 30,
-                                          borderWidth: 1,
-                                          buttonSize: 60,
-                                          icon: Icon(
-                                            Icons.edit_rounded,
-                                            color: Colors.white,
-                                            size: 32,
-                                          ),
-                                          onPressed: () async {
-                                            final selectedMedia =
-                                                await selectMedia(
-                                              maxWidth: 720.00,
-                                              imageQuality: 49,
-                                              mediaSource:
-                                                  MediaSource.photoGallery,
-                                              multiImage: false,
-                                            );
-                                            if (selectedMedia != null &&
-                                                selectedMedia.every((m) =>
-                                                    validateFileFormat(
-                                                        m.storagePath,
-                                                        context))) {
-                                              showUploadMessage(
-                                                context,
-                                                'Uploading file...',
-                                                showLoading: true,
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(1, -1),
+                                          child: FlutterFlowIconButton(
+                                            borderColor: Colors.transparent,
+                                            borderRadius: 30,
+                                            borderWidth: 1,
+                                            buttonSize: 44,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .darkPrimary,
+                                            icon: Icon(
+                                              Icons.edit_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              size: 16,
+                                            ),
+                                            onPressed: () async {
+                                              final selectedMedia =
+                                                  await selectMedia(
+                                                maxWidth: 720.00,
+                                                imageQuality: 49,
+                                                mediaSource:
+                                                    MediaSource.photoGallery,
+                                                multiImage: false,
                                               );
-                                              final downloadUrls = (await Future
-                                                      .wait(selectedMedia.map(
-                                                          (m) async =>
-                                                              await uploadData(
-                                                                  m.storagePath,
-                                                                  m.bytes))))
-                                                  .where((u) => u != null)
-                                                  .map((u) => u!)
-                                                  .toList();
-                                              ScaffoldMessenger.of(context)
-                                                  .hideCurrentSnackBar();
-                                              if (downloadUrls.length ==
-                                                  selectedMedia.length) {
-                                                setState(() => uploadedFileUrl =
-                                                    downloadUrls.first);
+                                              if (selectedMedia != null &&
+                                                  selectedMedia.every((m) =>
+                                                      validateFileFormat(
+                                                          m.storagePath,
+                                                          context))) {
                                                 showUploadMessage(
                                                   context,
-                                                  'Success!',
+                                                  'Uploading file...',
+                                                  showLoading: true,
                                                 );
-                                              } else {
-                                                showUploadMessage(
-                                                  context,
-                                                  'Failed to upload media',
-                                                );
-                                                return;
+                                                final downloadUrls = (await Future
+                                                        .wait(selectedMedia.map(
+                                                            (m) async =>
+                                                                await uploadData(
+                                                                    m.storagePath,
+                                                                    m.bytes))))
+                                                    .where((u) => u != null)
+                                                    .map((u) => u!)
+                                                    .toList();
+                                                ScaffoldMessenger.of(context)
+                                                    .hideCurrentSnackBar();
+                                                if (downloadUrls.length ==
+                                                    selectedMedia.length) {
+                                                  setState(() =>
+                                                      uploadedFileUrl =
+                                                          downloadUrls.first);
+                                                  showUploadMessage(
+                                                    context,
+                                                    'Success!',
+                                                  );
+                                                } else {
+                                                  showUploadMessage(
+                                                    context,
+                                                    'Failed to upload media',
+                                                  );
+                                                  return;
+                                                }
                                               }
-                                            }
 
-                                            final subscriptionsUpdateData =
-                                                createSubscriptionsRecordData(
-                                              icon: uploadedFileUrl,
-                                            );
-                                            await createRecurringSubscriptionsRecord
-                                                .reference
-                                                .update(
-                                                    subscriptionsUpdateData);
-                                          },
+                                              final subscriptionsUpdateData =
+                                                  createSubscriptionsRecordData(
+                                                icon: uploadedFileUrl,
+                                              );
+                                              await createRecurringSubscriptionsRecord
+                                                  .reference
+                                                  .update(
+                                                      subscriptionsUpdateData);
+                                            },
+                                          ),
                                         ),
                                       ],
                                     ),

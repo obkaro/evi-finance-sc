@@ -563,44 +563,91 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                         .reference
                                                                         .update(
                                                                             transactionsUpdateData);
-
-                                                                    final subscriptionsUpdateData =
-                                                                        {
-                                                                      ...createSubscriptionsRecordData(
-                                                                        lastChargeDate: widget
-                                                                            .transaction!
-                                                                            .trasactionDate,
-                                                                        lastCharge:
-                                                                            createMoneyStruct(
-                                                                          amount: widget
+                                                                    if (inheritedSubsItem
+                                                                            .lastCharge !=
+                                                                        null) {
+                                                                      if (widget
                                                                               .transaction!
-                                                                              .transactionAmount,
-                                                                          clearUnsetFields:
-                                                                              false,
-                                                                        ),
-                                                                        expChargeDate: functions.addDaysToDate(
-                                                                            widget.transaction!.trasactionDate,
-                                                                            functions.setNewExpectedSubDate(inheritedSubsItem)),
-                                                                      ),
-                                                                      'transactions':
-                                                                          FieldValue
-                                                                              .arrayUnion([
-                                                                        widget
-                                                                            .transaction!
+                                                                              .trasactionDate! >
+                                                                          inheritedSubsItem
+                                                                              .lastChargeDate!) {
+                                                                        final subscriptionsUpdateData =
+                                                                            {
+                                                                          ...createSubscriptionsRecordData(
+                                                                            lastChargeDate:
+                                                                                widget.transaction!.trasactionDate,
+                                                                            lastCharge:
+                                                                                createMoneyStruct(
+                                                                              amount: widget.transaction!.transactionAmount,
+                                                                              clearUnsetFields: false,
+                                                                            ),
+                                                                            expChargeDate:
+                                                                                functions.addDaysToDate(widget.transaction!.trasactionDate, functions.setNewExpectedSubDate(inheritedSubsItem)),
+                                                                          ),
+                                                                          'transactions':
+                                                                              FieldValue.arrayUnion([
+                                                                            widget.transaction!.reference
+                                                                          ]),
+                                                                          'narrations':
+                                                                              FieldValue.arrayUnion([
+                                                                            widget.transaction!.transactionNarration
+                                                                          ]),
+                                                                        };
+                                                                        await inheritedSubsItem
                                                                             .reference
-                                                                      ]),
-                                                                      'narrations':
-                                                                          FieldValue
-                                                                              .arrayUnion([
-                                                                        widget
-                                                                            .transaction!
-                                                                            .transactionNarration
-                                                                      ]),
-                                                                    };
-                                                                    await inheritedSubsItem
-                                                                        .reference
-                                                                        .update(
-                                                                            subscriptionsUpdateData);
+                                                                            .update(subscriptionsUpdateData);
+                                                                      } else {
+                                                                        final subscriptionsUpdateData =
+                                                                            {
+                                                                          'transactions':
+                                                                              FieldValue.arrayUnion([
+                                                                            widget.transaction!.reference
+                                                                          ]),
+                                                                          'narrations':
+                                                                              FieldValue.arrayUnion([
+                                                                            widget.transaction!.transactionNarration
+                                                                          ]),
+                                                                        };
+                                                                        await inheritedSubsItem
+                                                                            .reference
+                                                                            .update(subscriptionsUpdateData);
+                                                                      }
+                                                                    } else {
+                                                                      final subscriptionsUpdateData =
+                                                                          {
+                                                                        ...createSubscriptionsRecordData(
+                                                                          lastChargeDate: widget
+                                                                              .transaction!
+                                                                              .trasactionDate,
+                                                                          lastCharge:
+                                                                              createMoneyStruct(
+                                                                            amount:
+                                                                                widget.transaction!.transactionAmount,
+                                                                            clearUnsetFields:
+                                                                                false,
+                                                                          ),
+                                                                          expChargeDate: functions.addDaysToDate(
+                                                                              widget.transaction!.trasactionDate,
+                                                                              functions.setNewExpectedSubDate(inheritedSubsItem)),
+                                                                        ),
+                                                                        'transactions':
+                                                                            FieldValue.arrayUnion([
+                                                                          widget
+                                                                              .transaction!
+                                                                              .reference
+                                                                        ]),
+                                                                        'narrations':
+                                                                            FieldValue.arrayUnion([
+                                                                          widget
+                                                                              .transaction!
+                                                                              .transactionNarration
+                                                                        ]),
+                                                                      };
+                                                                      await inheritedSubsItem
+                                                                          .reference
+                                                                          .update(
+                                                                              subscriptionsUpdateData);
+                                                                    }
                                                                   } else {
                                                                     final transactionsUpdateData =
                                                                         createTransactionsRecordData(
@@ -619,44 +666,91 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                         .reference
                                                                         .update(
                                                                             transactionsUpdateData);
-
-                                                                    final subscriptionsUpdateData =
-                                                                        {
-                                                                      ...createSubscriptionsRecordData(
-                                                                        lastChargeDate: widget
-                                                                            .transaction!
-                                                                            .trasactionDate,
-                                                                        lastCharge:
-                                                                            createMoneyStruct(
-                                                                          amount: widget
+                                                                    if (inheritedSubsItem
+                                                                            .lastCharge !=
+                                                                        null) {
+                                                                      if (widget
                                                                               .transaction!
-                                                                              .transactionAmount,
-                                                                          clearUnsetFields:
-                                                                              false,
-                                                                        ),
-                                                                        expChargeDate: functions.addDaysToDate(
-                                                                            widget.transaction!.trasactionDate,
-                                                                            functions.setNewExpectedSubDate(inheritedSubsItem)),
-                                                                      ),
-                                                                      'transactions':
-                                                                          FieldValue
-                                                                              .arrayUnion([
-                                                                        widget
-                                                                            .transaction!
+                                                                              .trasactionDate! >
+                                                                          inheritedSubsItem
+                                                                              .lastChargeDate!) {
+                                                                        final subscriptionsUpdateData =
+                                                                            {
+                                                                          ...createSubscriptionsRecordData(
+                                                                            lastChargeDate:
+                                                                                widget.transaction!.trasactionDate,
+                                                                            lastCharge:
+                                                                                createMoneyStruct(
+                                                                              amount: widget.transaction!.transactionAmount,
+                                                                              clearUnsetFields: false,
+                                                                            ),
+                                                                            expChargeDate:
+                                                                                functions.addDaysToDate(widget.transaction!.trasactionDate, functions.setNewExpectedSubDate(inheritedSubsItem)),
+                                                                          ),
+                                                                          'transactions':
+                                                                              FieldValue.arrayUnion([
+                                                                            widget.transaction!.reference
+                                                                          ]),
+                                                                          'narrations':
+                                                                              FieldValue.arrayUnion([
+                                                                            widget.transaction!.transactionNarration
+                                                                          ]),
+                                                                        };
+                                                                        await inheritedSubsItem
                                                                             .reference
-                                                                      ]),
-                                                                      'narrations':
-                                                                          FieldValue
-                                                                              .arrayUnion([
-                                                                        widget
-                                                                            .transaction!
-                                                                            .transactionNarration
-                                                                      ]),
-                                                                    };
-                                                                    await inheritedSubsItem
-                                                                        .reference
-                                                                        .update(
-                                                                            subscriptionsUpdateData);
+                                                                            .update(subscriptionsUpdateData);
+                                                                      } else {
+                                                                        final subscriptionsUpdateData =
+                                                                            {
+                                                                          'transactions':
+                                                                              FieldValue.arrayUnion([
+                                                                            widget.transaction!.reference
+                                                                          ]),
+                                                                          'narrations':
+                                                                              FieldValue.arrayUnion([
+                                                                            widget.transaction!.transactionNarration
+                                                                          ]),
+                                                                        };
+                                                                        await inheritedSubsItem
+                                                                            .reference
+                                                                            .update(subscriptionsUpdateData);
+                                                                      }
+                                                                    } else {
+                                                                      final subscriptionsUpdateData =
+                                                                          {
+                                                                        ...createSubscriptionsRecordData(
+                                                                          lastChargeDate: widget
+                                                                              .transaction!
+                                                                              .trasactionDate,
+                                                                          lastCharge:
+                                                                              createMoneyStruct(
+                                                                            amount:
+                                                                                widget.transaction!.transactionAmount,
+                                                                            clearUnsetFields:
+                                                                                false,
+                                                                          ),
+                                                                          expChargeDate: functions.addDaysToDate(
+                                                                              widget.transaction!.trasactionDate,
+                                                                              functions.setNewExpectedSubDate(inheritedSubsItem)),
+                                                                        ),
+                                                                        'transactions':
+                                                                            FieldValue.arrayUnion([
+                                                                          widget
+                                                                              .transaction!
+                                                                              .reference
+                                                                        ]),
+                                                                        'narrations':
+                                                                            FieldValue.arrayUnion([
+                                                                          widget
+                                                                              .transaction!
+                                                                              .transactionNarration
+                                                                        ]),
+                                                                      };
+                                                                      await inheritedSubsItem
+                                                                          .reference
+                                                                          .update(
+                                                                              subscriptionsUpdateData);
+                                                                    }
                                                                   }
 
                                                                   Navigator.pop(

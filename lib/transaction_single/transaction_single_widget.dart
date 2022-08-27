@@ -374,7 +374,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                     ),
                                                                   ),
                                                                   Container(
-                                                                    height: 50,
+                                                                    height: 48,
                                                                     decoration:
                                                                         BoxDecoration(
                                                                       color: FlutterFlowTheme.of(
@@ -525,7 +525,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                   ),
                                                                 ),
                                                                 Container(
-                                                                  height: 50,
+                                                                  height: 48,
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     color: FlutterFlowTheme.of(
