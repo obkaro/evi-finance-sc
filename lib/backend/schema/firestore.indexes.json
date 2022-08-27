@@ -83,6 +83,20 @@
       ]
     },
     {
+      "collectionGroup": "constBudgetCategories",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "categoryName",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "categoryWeight",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "transactions",
       "queryScope": "COLLECTION",
       "fields": [
