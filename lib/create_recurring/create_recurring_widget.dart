@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
+import '../components/dialog_box_widget.dart';
 import '../components/tooltip_widget.dart';
 import '../flutter_flow/flutter_flow_calendar.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
@@ -12,6 +13,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -78,7 +80,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                 IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
             automaticallyImplyLeading: true,
             title: Text(
-              'Add Recurring Payment',
+              'New Subscription',
               style: FlutterFlowTheme.of(context).title3,
             ),
             actions: [],
@@ -143,18 +145,27 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(20, 20, 20, 20),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                                child: Image.network(
-                                                  valueOrDefault<String>(
-                                                    createRecurringSubscriptionsRecord
-                                                        .icon,
-                                                    'https://firebasestorage.googleapis.com/v0/b/evi-finance-dev.appspot.com/o/cms_uploads%2FconstRecurringPayments%2F1661483422451000%2Fcredit-card-icon-png-4401.png?alt=media&token=dcd086de-12fa-4424-8aba-bcba60e6ddae',
+                                              child: Hero(
+                                                tag: valueOrDefault<String>(
+                                                  createRecurringSubscriptionsRecord
+                                                      .icon,
+                                                  'https://firebasestorage.googleapis.com/v0/b/evi-finance-dev.appspot.com/o/cms_uploads%2FconstRecurringPayments%2F1661483422451000%2Fcredit-card-icon-png-4401.png?alt=media&token=dcd086de-12fa-4424-8aba-bcba60e6ddae',
+                                                ),
+                                                transitionOnUserGestures: true,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl:
+                                                        valueOrDefault<String>(
+                                                      createRecurringSubscriptionsRecord
+                                                          .icon,
+                                                      'https://firebasestorage.googleapis.com/v0/b/evi-finance-dev.appspot.com/o/cms_uploads%2FconstRecurringPayments%2F1661483422451000%2Fcredit-card-icon-png-4401.png?alt=media&token=dcd086de-12fa-4424-8aba-bcba60e6ddae',
+                                                    ),
+                                                    width: 100,
+                                                    height: 100,
+                                                    fit: BoxFit.scaleDown,
                                                   ),
-                                                  width: 100,
-                                                  height: 100,
-                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
                                             ),
@@ -674,6 +685,35 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                         : null;
                                 return FFButtonWidget(
                                   onPressed: () async {
+                                    if (formKey.currentState == null ||
+                                        !formKey.currentState!.validate()) {
+                                      return;
+                                    }
+
+                                    if (categoryValue == null) {
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        context: context,
+                                        builder: (context) {
+                                          return Padding(
+                                            padding: MediaQuery.of(context)
+                                                .viewInsets,
+                                            child: DialogBoxWidget(
+                                              heading:
+                                                  'Category selection required',
+                                              body:
+                                                  'Please select a category from the dropdown.',
+                                              buttonYes: 'Okay',
+                                              buttonNo: 'n',
+                                              information: true,
+                                            ),
+                                          );
+                                        },
+                                      );
+                                      return;
+                                    }
+
                                     final subscriptionsUpdateData =
                                         createSubscriptionsRecordData(
                                       owner: currentUserReference,

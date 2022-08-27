@@ -12,6 +12,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import '../main.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -140,15 +141,22 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     20, 20, 20, 20),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              child: Image.network(
-                                                editSubsciptionSubscriptionsRecord
-                                                    .icon!,
-                                                width: 100,
-                                                height: 100,
-                                                fit: BoxFit.cover,
+                                            child: Hero(
+                                              tag:
+                                                  editSubsciptionSubscriptionsRecord
+                                                      .icon!,
+                                              transitionOnUserGestures: true,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      editSubsciptionSubscriptionsRecord
+                                                          .icon!,
+                                                  width: 100,
+                                                  height: 100,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
                                           ),

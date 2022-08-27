@@ -8,6 +8,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -465,19 +466,25 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0, 0, 12, 0),
-                                                      child: Container(
-                                                        width: 45,
-                                                        height: 45,
-                                                        clipBehavior:
-                                                            Clip.antiAlias,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        child: Image.network(
-                                                          inheritedSubsItem
-                                                              .icon!,
+                                                      child: Hero(
+                                                        tag: inheritedSubsItem
+                                                            .icon!,
+                                                        transitionOnUserGestures:
+                                                            true,
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                          child:
+                                                              CachedNetworkImage(
+                                                            imageUrl:
+                                                                inheritedSubsItem
+                                                                    .icon!,
+                                                            width: 48,
+                                                            height: 48,
+                                                            fit: BoxFit
+                                                                .scaleDown,
+                                                          ),
                                                         ),
                                                       ),
                                                     ),

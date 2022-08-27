@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -84,13 +85,19 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           12, 12, 12, 12),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: Image.network(
-                                          widget.subscription!.icon!,
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                          fit: BoxFit.scaleDown,
+                                      child: Hero(
+                                        tag: widget.subscription!.icon!,
+                                        transitionOnUserGestures: true,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          child: CachedNetworkImage(
+                                            imageUrl:
+                                                widget.subscription!.icon!,
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            fit: BoxFit.scaleDown,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -346,6 +353,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
+                                              showLoadingIndicator: false,
                                             );
                                           },
                                         ),
@@ -468,6 +476,23 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .bodyText1,
+                                                    ),
+                                                    Text(
+                                                      functions.formatTransCurrency(
+                                                          transfromcontainerItem
+                                                              .transactionAmount),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                              ),
                                                     ),
                                                     Text(
                                                       functions.formatTransCurrency(
