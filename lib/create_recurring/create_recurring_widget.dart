@@ -556,7 +556,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                         .durations
                                         .map((e) => getJsonField(
                                               e,
-                                              r'''$''',
+                                              r'''$.name''',
                                             ))
                                         .toList()
                                         .map((label) => ChipData(label))

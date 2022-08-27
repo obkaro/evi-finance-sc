@@ -571,6 +571,9 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                           clearUnsetFields:
                                                                               false,
                                                                         ),
+                                                                        expChargeDate: functions.addDaysToDate(
+                                                                            widget.transaction!.trasactionDate,
+                                                                            functions.setNewExpectedSubDate(inheritedSubsItem)),
                                                                       ),
                                                                       'transactions':
                                                                           FieldValue
@@ -624,6 +627,9 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                           clearUnsetFields:
                                                                               false,
                                                                         ),
+                                                                        expChargeDate: functions.addDaysToDate(
+                                                                            widget.transaction!.trasactionDate,
+                                                                            functions.setNewExpectedSubDate(inheritedSubsItem)),
                                                                       ),
                                                                       'transactions':
                                                                           FieldValue

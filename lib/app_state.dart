@@ -30,8 +30,10 @@ class FFAppState {
   bool dialogBoxReturn = false;
 
   List<dynamic> durations = [
-    jsonDecode('{\"weekly\":7,\"Monthly\":30}'),
-    jsonDecode('{\"weekly\":7,\"Monthly\":30}')
+    jsonDecode('{\"name\":\"Weekly\",\"duration\":7}'),
+    jsonDecode('{\"name\":\"Monthly\",\"duration\":30}'),
+    jsonDecode('{\"name\":\"Quarterly\",\"duration\":90}'),
+    jsonDecode('{\"name\":\"Yearly\",\"duration\":365}')
   ];
 }
 
