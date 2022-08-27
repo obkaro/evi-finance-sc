@@ -1243,6 +1243,12 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                             'transactionCategory':
                                                                 FieldValue
                                                                     .delete(),
+                                                            'recurringRef':
+                                                                FieldValue
+                                                                    .delete(),
+                                                            'transactionBudget':
+                                                                FieldValue
+                                                                    .delete(),
                                                           };
                                                           await widget
                                                               .transaction!
