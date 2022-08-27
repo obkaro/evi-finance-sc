@@ -310,7 +310,7 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color grayIcon = Color(0xFF95A1AC);
   late Color gray200 = Color(0xFFDBE2E7);
   late Color gray600 = Color(0xFF262D34);
-  late Color fadedDivider = Color(0xFF1F1F1F);
+  late Color fadedDivider = Color(0xFF2B2B2B);
   late Color darkPrimary = Color(0xFF370D1B);
   late Color textColor = Color(0xFF1E2429);
   late Color shadowGray = Color(0x0A000000);

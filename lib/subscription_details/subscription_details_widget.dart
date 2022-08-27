@@ -206,7 +206,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                     Expanded(
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 16, 0),
+                                            0, 0, 8, 0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
                                             await Navigator.push(
@@ -348,13 +348,13 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                             color: Colors.transparent,
                                             textStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .subtitle2
+                                                    .bodyText2
                                                     .override(
                                                       fontFamily:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .subtitle2Family,
-                                                      color: Color(0xFFC41212),
+                                                              .bodyText2Family,
+                                                      color: Color(0xFFCE1515),
                                                     ),
                                             elevation: 0,
                                             borderSide: BorderSide(
