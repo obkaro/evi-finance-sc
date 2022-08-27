@@ -814,7 +814,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                         .unlinkAllTransCategories(
                                                                       iconButtonTransactionsRecordList
                                                                           .toList(),
-                                                                      existingCategoriesItem,
                                                                     );
                                                                     // Action_DeleteCategory
                                                                     await existingCategoriesItem

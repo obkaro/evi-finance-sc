@@ -404,6 +404,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                                     .map((e) => e
                                                                         .categoryName!)
                                                                     .toList())
+                                                        .orderBy('categoryName')
                                                         .orderBy(
                                                             'categoryWeight',
                                                             descending: true),
@@ -864,8 +865,8 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(0, 0, 0, 16),
-                                                child: FFButtonWidget(
-                                                  onPressed: () async {
+                                                child: InkWell(
+                                                  onTap: () async {
                                                     await Navigator
                                                         .pushAndRemoveUntil(
                                                       context,
@@ -876,35 +877,11 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                       (r) => false,
                                                     );
                                                   },
-                                                  text: 'Save',
-                                                  options: FFButtonOptions(
-                                                    width: double.infinity,
-                                                    height: 60,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .subtitle1
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .subtitle1Family,
-                                                          color: Colors.white,
-                                                        ),
-                                                    elevation: 2,
-                                                    borderSide: BorderSide(
-                                                      color: Colors.transparent,
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            16),
+                                                  child: CButtonFilledWidget(
+                                                    text: 'Save',
                                                   ),
                                                 ),
                                               ),
-                                              CButtonFilledWidget(),
                                               FFButtonWidget(
                                                 onPressed: () async {
                                                   var confirmDialogResponse =

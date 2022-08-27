@@ -6,7 +6,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CButtonFilledWidget extends StatefulWidget {
-  const CButtonFilledWidget({Key? key}) : super(key: key);
+  const CButtonFilledWidget({
+    Key? key,
+    this.text,
+  }) : super(key: key);
+
+  final String? text;
 
   @override
   _CButtonFilledWidgetState createState() => _CButtonFilledWidgetState();
@@ -26,7 +31,7 @@ class _CButtonFilledWidgetState extends State<CButtonFilledWidget> {
       onPressed: () {
         print('Button pressed ...');
       },
-      text: 'Save',
+      text: widget.text!,
       options: FFButtonOptions(
         width: double.infinity,
         height: 60,
