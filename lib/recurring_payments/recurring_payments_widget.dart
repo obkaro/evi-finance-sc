@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../subscription_details/subscription_details_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -269,16 +270,24 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     8, 8, 8, 8),
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          child: Image.network(
-                                                            subsItem.icon!,
-                                                            width: 48,
-                                                            height: 48,
-                                                            fit: BoxFit
-                                                                .scaleDown,
+                                                        child: Hero(
+                                                          tag: subsItem.icon!,
+                                                          transitionOnUserGestures:
+                                                              true,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8),
+                                                            child:
+                                                                CachedNetworkImage(
+                                                              imageUrl: subsItem
+                                                                  .icon!,
+                                                              width: 48,
+                                                              height: 48,
+                                                              fit: BoxFit
+                                                                  .scaleDown,
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
