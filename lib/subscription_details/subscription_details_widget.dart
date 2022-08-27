@@ -92,8 +92,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                       width: 72,
                                       height: 72,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
+                                        color: Colors.white,
                                         shape: BoxShape.circle,
                                       ),
                                       child: Padding(
@@ -463,7 +462,11 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                   listViewTransactionsRecordList =
                                   snapshot.data!;
                               if (listViewTransactionsRecordList.isEmpty) {
-                                return EmptyListWidget();
+                                return Center(
+                                  child: EmptyListWidget(
+                                    listtype: 'subscription history',
+                                  ),
+                                );
                               }
                               return RefreshIndicator(
                                 onRefresh: () async {
