@@ -75,13 +75,13 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                         borderRadius: BorderRadius.circular(32),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                         child: Column(
-                          mainAxisSize: MainAxisSize.max,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -188,203 +188,188 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(24, 12, 24, 0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 16, 0),
-                                    child: Container(
-                                      width: 80,
-                                      height: 32,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                      ),
-                                    ),
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          FFButtonWidget(
-                                            onPressed: () async {
-                                              await Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      EditSubsciptionWidget(
-                                                    subscriptionRecord: widget
-                                                        .subscription!
-                                                        .reference,
-                                                  ),
+                            Divider(
+                              color: FlutterFlowTheme.of(context).fadedDivider,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 16, 0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditSubsciptionWidget(
+                                                  subscriptionRecord: widget
+                                                      .subscription!.reference,
                                                 ),
-                                              );
-                                            },
-                                            text: 'Edit',
-                                            icon: Icon(
-                                              Icons.edit_rounded,
-                                              size: 8,
-                                            ),
-                                            options: FFButtonOptions(
-                                              height: 24,
-                                              color: Colors.transparent,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText2Family,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                              elevation: 0,
-                                              borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                                width: 1,
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
+                                            );
+                                          },
+                                          text: 'Edit',
+                                          icon: Icon(
+                                            Icons.edit_rounded,
+                                            size: 16,
                                           ),
-                                          FutureBuilder<
-                                              List<TransactionsRecord>>(
-                                            future: queryTransactionsRecordOnce(
-                                              queryBuilder:
-                                                  (transactionsRecord) =>
-                                                      transactionsRecord.where(
-                                                          'recurringRef',
-                                                          isEqualTo: widget
-                                                              .subscription!
-                                                              .reference),
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child: SpinKitRing(
+                                          options: FFButtonOptions(
+                                            width: double.infinity,
+                                            height: 48,
+                                            color: Colors.transparent,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText2
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText2Family,
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primaryColor,
-                                                      size: 50,
+                                                              .secondaryText,
                                                     ),
-                                                  ),
-                                                );
-                                              }
-                                              List<TransactionsRecord>
-                                                  buttonTransactionsRecordList =
-                                                  snapshot.data!;
-                                              return FFButtonWidget(
-                                                onPressed: () async {
-                                                  var confirmDialogResponse =
-                                                      await showDialog<bool>(
-                                                            context: context,
-                                                            builder:
-                                                                (alertDialogContext) {
-                                                              return AlertDialog(
-                                                                title: Text(
-                                                                    'Are you sure?'),
-                                                                content: Text(
-                                                                    'Deleted subscriptions cannot be restored. '),
-                                                                actions: [
-                                                                  TextButton(
-                                                                    onPressed: () =>
-                                                                        Navigator.pop(
-                                                                            alertDialogContext,
-                                                                            false),
-                                                                    child: Text(
-                                                                        'Cancel'),
-                                                                  ),
-                                                                  TextButton(
-                                                                    onPressed: () =>
-                                                                        Navigator.pop(
-                                                                            alertDialogContext,
-                                                                            true),
-                                                                    child: Text(
-                                                                        'Yes, delete'),
-                                                                  ),
-                                                                ],
-                                                              );
-                                                            },
-                                                          ) ??
-                                                          false;
-                                                  if (confirmDialogResponse) {
-                                                    await actions
-                                                        .unlinkAllTransCategories(
-                                                      buttonTransactionsRecordList
-                                                          .toList(),
-                                                    );
-                                                    await widget
-                                                        .subscription!.reference
-                                                        .delete();
-                                                  } else {
-                                                    return;
-                                                  }
-
-                                                  await Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          NavBarPage(
-                                                              initialPage:
-                                                                  'RecurringPayments'),
-                                                    ),
-                                                  );
-                                                },
-                                                text: 'Delete',
-                                                icon: Icon(
-                                                  Icons.delete_rounded,
-                                                  size: 8,
-                                                ),
-                                                options: FFButtonOptions(
-                                                  height: 24,
-                                                  color: Colors.transparent,
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText2Family,
-                                                        color:
-                                                            Color(0xFFCA1313),
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                                  elevation: 0,
-                                                  borderSide: BorderSide(
-                                                    color: Colors.transparent,
-                                                    width: 0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                ),
-                                                showLoadingIndicator: false,
-                                              );
-                                            },
+                                            elevation: 0,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(16),
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                    ],
-                                  ),
-                                ],
+                                    ),
+                                    FutureBuilder<List<TransactionsRecord>>(
+                                      future: queryTransactionsRecordOnce(
+                                        queryBuilder: (transactionsRecord) =>
+                                            transactionsRecord.where(
+                                                'recurringRef',
+                                                isEqualTo: widget
+                                                    .subscription!.reference),
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50,
+                                              height: 50,
+                                              child: SpinKitRing(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                size: 50,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<TransactionsRecord>
+                                            buttonTransactionsRecordList =
+                                            snapshot.data!;
+                                        return FFButtonWidget(
+                                          onPressed: () async {
+                                            var confirmDialogResponse =
+                                                await showDialog<bool>(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text(
+                                                              'Are you sure?'),
+                                                          content: Text(
+                                                              'Deleted subscriptions cannot be restored. '),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext,
+                                                                      false),
+                                                              child: Text(
+                                                                  'Cancel'),
+                                                            ),
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext,
+                                                                      true),
+                                                              child: Text(
+                                                                  'Yes, delete'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    ) ??
+                                                    false;
+                                            if (confirmDialogResponse) {
+                                              await actions
+                                                  .unlinkAllTransCategories(
+                                                buttonTransactionsRecordList
+                                                    .toList(),
+                                              );
+                                              await widget
+                                                  .subscription!.reference
+                                                  .delete();
+                                            } else {
+                                              return;
+                                            }
+
+                                            await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => NavBarPage(
+                                                    initialPage:
+                                                        'RecurringPayments'),
+                                              ),
+                                            );
+                                          },
+                                          text: 'Delete',
+                                          icon: Icon(
+                                            Icons.delete_rounded,
+                                            size: 16,
+                                          ),
+                                          options: FFButtonOptions(
+                                            height: 48,
+                                            color: Colors.transparent,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2Family,
+                                                      color: Color(0xFFC41212),
+                                                    ),
+                                            elevation: 0,
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          showLoadingIndicator: false,
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],

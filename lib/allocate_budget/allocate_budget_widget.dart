@@ -400,7 +400,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                           .categoryName!)
                                                                       .toList())
                                                           .orderBy(
-                                                              'categoryName')
+                                                              'categoryName',
+                                                              descending: true)
                                                           .orderBy(
                                                               'categoryWeight',
                                                               descending: true),
