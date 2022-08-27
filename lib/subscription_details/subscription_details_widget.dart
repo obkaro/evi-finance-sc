@@ -37,7 +37,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(180),
+        preferredSize: Size.fromHeight(200),
         child: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           iconTheme:
@@ -50,7 +50,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 16),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -95,17 +95,40 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                               ],
                             ),
                           ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  'Renews ',
+                                  style: FlutterFlowTheme.of(context).bodyText2,
+                                ),
+                                Text(
+                                  widget.subscription!.recurrence!,
+                                  style: FlutterFlowTheme.of(context).bodyText2,
+                                ),
+                              ],
+                            ),
+                          ),
                           Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Text(
-                                'Due on: ',
+                                'Next due on: ',
                                 style: FlutterFlowTheme.of(context).bodyText2,
                               ),
                               Text(
                                 dateTimeFormat('MMMMEEEEd',
                                     widget.subscription!.expChargeDate!),
-                                style: FlutterFlowTheme.of(context).bodyText2,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText2
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyText2Family,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                    ),
                               ),
                             ],
                           ),
@@ -199,6 +222,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                       ),
                                   elevation: 0,
                                   borderSide: BorderSide(
+                                    color: Colors.transparent,
                                     width: 0,
                                   ),
                                   borderRadius: BorderRadius.circular(8),

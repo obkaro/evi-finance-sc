@@ -269,24 +269,16 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     8, 8, 8, 8),
-                                                        child: Hero(
-                                                          tag: subsItem.icon!,
-                                                          transitionOnUserGestures:
-                                                              true,
-                                                          child: Container(
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                          child: Image.network(
+                                                            subsItem.icon!,
                                                             width: 48,
                                                             height: 48,
-                                                            clipBehavior:
-                                                                Clip.antiAlias,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                            ),
-                                                            child:
-                                                                Image.network(
-                                                              subsItem.icon!,
-                                                            ),
+                                                            fit: BoxFit
+                                                                .scaleDown,
                                                           ),
                                                         ),
                                                       ),
@@ -329,7 +321,15 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                                       .expChargeDate!),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodyText2,
+                                                                  .bodyText2
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyText2Family,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryColor,
+                                                                  ),
                                                             ),
                                                           ],
                                                         ),

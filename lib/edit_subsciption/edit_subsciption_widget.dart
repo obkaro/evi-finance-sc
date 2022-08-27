@@ -139,18 +139,16 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    12, 12, 12, 12),
-                                            child: Container(
-                                              width: 120,
-                                              height: 120,
-                                              clipBehavior: Clip.antiAlias,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                              ),
+                                                    20, 20, 20, 20),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
                                               child: Image.network(
                                                 editSubsciptionSubscriptionsRecord
                                                     .icon!,
-                                                fit: BoxFit.scaleDown,
+                                                width: 100,
+                                                height: 100,
+                                                fit: BoxFit.cover,
                                               ),
                                             ),
                                           ),

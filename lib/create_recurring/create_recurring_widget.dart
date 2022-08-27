@@ -140,32 +140,21 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                 width: 0,
                                               ),
                                             ),
-                                            child: Visibility(
-                                              visible:
-                                                  createRecurringSubscriptionsRecord
-                                                              .icon !=
-                                                          null &&
-                                                      createRecurringSubscriptionsRecord
-                                                              .icon !=
-                                                          '',
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(12, 12, 12, 12),
-                                                child: Container(
-                                                  width: 120,
-                                                  height: 120,
-                                                  clipBehavior: Clip.antiAlias,
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(20, 20, 20, 20),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                                child: Image.network(
+                                                  valueOrDefault<String>(
+                                                    createRecurringSubscriptionsRecord
+                                                        .icon,
+                                                    'https://firebasestorage.googleapis.com/v0/b/evi-finance-dev.appspot.com/o/cms_uploads%2FconstRecurringPayments%2F1661483422451000%2Fcredit-card-icon-png-4401.png?alt=media&token=dcd086de-12fa-4424-8aba-bcba60e6ddae',
                                                   ),
-                                                  child: Image.network(
-                                                    valueOrDefault<String>(
-                                                      createRecurringSubscriptionsRecord
-                                                          .icon,
-                                                      'https://firebasestorage.googleapis.com/v0/b/evi-finance-dev.appspot.com/o/cms_uploads%2FconstRecurringPayments%2F1661483422451000%2Fcredit-card-icon-png-4401.png?alt=media&token=dcd086de-12fa-4424-8aba-bcba60e6ddae',
-                                                    ),
-                                                    fit: BoxFit.scaleDown,
-                                                  ),
+                                                  width: 100,
+                                                  height: 100,
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
                                             ),
