@@ -564,7 +564,8 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                         .update(
                                                                             transactionsUpdateData);
                                                                     if (inheritedSubsItem
-                                                                            .lastCharge !=
+                                                                            .lastCharge
+                                                                            .amount !=
                                                                         null) {
                                                                       if (widget
                                                                               .transaction!
@@ -667,7 +668,8 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                         .update(
                                                                             transactionsUpdateData);
                                                                     if (inheritedSubsItem
-                                                                            .lastCharge !=
+                                                                            .lastCharge
+                                                                            .amount !=
                                                                         null) {
                                                                       if (widget
                                                                               .transaction!
