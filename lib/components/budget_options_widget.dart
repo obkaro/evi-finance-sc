@@ -24,6 +24,13 @@ class BudgetOptionsWidget extends StatefulWidget {
 
 class _BudgetOptionsWidgetState extends State<BudgetOptionsWidget> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,

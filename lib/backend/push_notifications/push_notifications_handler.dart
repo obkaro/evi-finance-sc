@@ -90,16 +90,12 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
       ),
   'EmailAuth': (data) async => EmailAuthWidget(),
   'ForgotPassword': (data) async => ForgotPasswordWidget(),
-  'ConnectFirstAccount': (data) async => ConnectFirstAccountWidget(),
-  'TransactionSingle': (data) async => TransactionSingleWidget(
-        transaction: await getDocumentParameter(
-            data, 'transaction', TransactionsRecord.serializer),
-      ),
   'ActiveBudget': (data) async => hasMatchingParameters(data, {'command'})
       ? ActiveBudgetWidget(
           command: getParameter(data, 'command'),
         )
       : NavBarPage(initialPage: 'ActiveBudget'),
+  'ConnectFirstAccount': (data) async => ConnectFirstAccountWidget(),
   'BudgetSingle': (data) async => BudgetSingleWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
@@ -139,9 +135,21 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
       ),
-  'TransactionSingleCopy': (data) async => TransactionSingleCopyWidget(
+  'TransactionSingle': (data) async => TransactionSingleWidget(
         transaction: await getDocumentParameter(
             data, 'transaction', TransactionsRecord.serializer),
+      ),
+  'RecurringPayments': (data) async =>
+      NavBarPage(initialPage: 'RecurringPayments'),
+  'CreateRecurring': (data) async => CreateRecurringWidget(
+        subscriptionRecord: getParameter(data, 'subscriptionRecord'),
+      ),
+  'editSubsciption': (data) async => EditSubsciptionWidget(
+        subscriptionRecord: getParameter(data, 'subscriptionRecord'),
+      ),
+  'subscriptionDetails': (data) async => SubscriptionDetailsWidget(
+        subscription: await getDocumentParameter(
+            data, 'subscription', SubscriptionsRecord.serializer),
       ),
 };
 

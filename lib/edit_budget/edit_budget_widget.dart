@@ -41,6 +41,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
       end: DateTime.now().endOfDay,
     );
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'EditBudget'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -49,6 +50,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
       key: scaffoldKey,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        iconTheme:
+            IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
         automaticallyImplyLeading: true,
         title: Text(
           'Budget Setup',

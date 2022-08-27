@@ -27,8 +27,13 @@ class _CreateFirstBudgetQCopyWidgetState
   ApiCallResponse? accountResponse;
   ApiCallResponse? dataSyncResponse;
   ApiCallResponse? reauthCode;
-  ApiCallResponse? transactionJsonResponse;
-  ApiCallResponse? transactionJsonRespons;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -195,16 +200,6 @@ class _CreateFirstBudgetQCopyWidgetState
                                       await GetAccountInfoCall.call(
                                     authID: widget.account!.authID,
                                   );
-                                  transactionJsonResponse =
-                                      await GetTransactionsCall.call(
-                                    authID: widget.account!.authID,
-                                  );
-                                  // Action_writeTransactions
-                                  await actions.writeTransactions(
-                                    (transactionJsonResponse?.jsonBody ?? ''),
-                                    widget.account,
-                                    containerTransactionsRecordList.toList(),
-                                  );
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
@@ -230,16 +225,6 @@ class _CreateFirstBudgetQCopyWidgetState
                                     accountRespons =
                                         await GetAccountInfoCall.call(
                                       authID: widget.account!.authID,
-                                    );
-                                    transactionJsonRespons =
-                                        await GetTransactionsCall.call(
-                                      authID: widget.account!.authID,
-                                    );
-                                    // Action_writeTransactions
-                                    await actions.writeTransactions(
-                                      (transactionJsonRespons?.jsonBody ?? ''),
-                                      widget.account,
-                                      containerTransactionsRecordList.toList(),
                                     );
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(

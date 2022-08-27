@@ -25,6 +25,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Accounts'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -291,7 +292,10 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                       }
                                                       final imageConstInstitutionLogosRecord =
                                                           imageConstInstitutionLogosRecordList
-                                                              .first;
+                                                                  .isNotEmpty
+                                                              ? imageConstInstitutionLogosRecordList
+                                                                  .first
+                                                              : null;
                                                       return ClipRRect(
                                                         borderRadius:
                                                             BorderRadius
@@ -299,7 +303,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                         child:
                                                             CachedNetworkImage(
                                                           imageUrl:
-                                                              imageConstInstitutionLogosRecord
+                                                              imageConstInstitutionLogosRecord!
                                                                   .institutionLogo!,
                                                           width: 45,
                                                           height: 45,

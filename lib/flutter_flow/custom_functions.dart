@@ -86,6 +86,26 @@ double calcCategoryPercent(
   return percent;
 }
 
+double calcCategoryPercentCircle(
+  CategoriesRecord? category,
+  List<TransactionsRecord>? transactions,
+) {
+  // Add your function code here!
+  int totalTransactions = 0;
+
+  for (var i = 0; i < transactions!.length; i++) {
+    totalTransactions += transactions[i].transactionAmount as int;
+  }
+
+  double percent = (totalTransactions / (category!.categoryAmount as int));
+
+  if (totalTransactions >= (category.categoryAmount as int)) {
+    percent = 0;
+  }
+
+  return percent;
+}
+
 int subInt(
   int? value1,
   int? value2,
@@ -361,4 +381,27 @@ String transactionTypeColor(String transactionType) {
     color = "0xFFFF0003";
   }
   return color;
+}
+
+int setNewExpectedSubDate(SubscriptionsRecord? subscription) {
+  // Add your function code here!
+
+  int days = 0;
+
+  switch (subscription!.recurrence) {
+    case "Weekly":
+      days = 7;
+      break;
+    case "Monthly":
+      days = 30;
+      break;
+    case "Quaterly":
+      days = 90;
+      break;
+    case "Yearly":
+      days = 365;
+      break;
+  }
+
+  return days;
 }

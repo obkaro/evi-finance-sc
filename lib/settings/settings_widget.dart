@@ -30,6 +30,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
     });
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Settings'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

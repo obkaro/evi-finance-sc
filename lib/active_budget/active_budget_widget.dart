@@ -40,6 +40,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ActiveBudget'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

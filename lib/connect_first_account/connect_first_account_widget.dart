@@ -50,6 +50,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ConnectFirstAccount'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -10,3 +10,4 @@ export 'select_date_range_existing.dart' show selectDateRangeExisting;
 export 'update_category.dart' show updateCategory;
 export 'launch_store.dart' show launchStore;
 export 'get_version_number.dart' show getVersionNumber;
+export 'normalize_trans_sub.dart' show normalizeTransSub;

@@ -2,7 +2,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../transaction_single_copy/transaction_single_copy_widget.dart';
+import '../transaction_single/transaction_single_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
@@ -32,6 +32,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'CategorySingle'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -134,7 +135,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
                             child: CircularPercentIndicator(
-                              percent: functions.calcCategoryPercent(
+                              percent: functions.calcCategoryPercentCircle(
                                   widget.category,
                                   categorySingleTransactionsRecordList
                                       .toList()),
@@ -318,7 +319,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
-                                                            TransactionSingleCopyWidget(
+                                                            TransactionSingleWidget(
                                                           transaction:
                                                               columnTransactionsRecord,
                                                         ),
@@ -403,7 +404,10 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                 }
                                                                 final imageConstInstitutionLogosRecord =
                                                                     imageConstInstitutionLogosRecordList
-                                                                        .first;
+                                                                            .isNotEmpty
+                                                                        ? imageConstInstitutionLogosRecordList
+                                                                            .first
+                                                                        : null;
                                                                 return ClipRRect(
                                                                   borderRadius:
                                                                       BorderRadius
@@ -412,7 +416,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                   child:
                                                                       CachedNetworkImage(
                                                                     imageUrl:
-                                                                        imageConstInstitutionLogosRecord
+                                                                        imageConstInstitutionLogosRecord!
                                                                             .institutionLogo!,
                                                                     width: 40,
                                                                     height: 40,

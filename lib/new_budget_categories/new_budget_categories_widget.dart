@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/allocate_first_budget_widget.dart';
+import '../components/c_button_filled_widget.dart';
 import '../components/create_const_category_widget.dart';
 import '../components/create_custom_category_widget.dart';
 import '../components/edit_budget_amount_widget.dart';
@@ -55,6 +56,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'NewBudgetCategories'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -393,14 +395,18 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                             List<ConstBudgetCategoriesRecord>>(
                                           stream:
                                               queryConstBudgetCategoriesRecord(
-                                            queryBuilder: (constBudgetCategoriesRecord) =>
-                                                constBudgetCategoriesRecord.where(
-                                                    'categoryName',
-                                                    whereNotIn:
-                                                        newBudgetCategoriesCategoriesRecordList
-                                                            .map((e) =>
-                                                                e.categoryName!)
-                                                            .toList()),
+                                            queryBuilder:
+                                                (constBudgetCategoriesRecord) =>
+                                                    constBudgetCategoriesRecord
+                                                        .where('categoryName',
+                                                            whereNotIn:
+                                                                newBudgetCategoriesCategoriesRecordList
+                                                                    .map((e) => e
+                                                                        .categoryName!)
+                                                                    .toList())
+                                                        .orderBy(
+                                                            'categoryWeight',
+                                                            descending: true),
                                           ),
                                           builder: (context, snapshot) {
                                             // Customize what your widget looks like when it's loading.
@@ -898,6 +904,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                   ),
                                                 ),
                                               ),
+                                              CButtonFilledWidget(),
                                               FFButtonWidget(
                                                 onPressed: () async {
                                                   var confirmDialogResponse =

@@ -34,8 +34,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
   ApiCallResponse? accountResponse;
   ApiCallResponse? dataSyncResponse;
   ApiCallResponse? reauthCode;
-  ApiCallResponse? transactionJsonResponse;
-  ApiCallResponse? transactionJsonRespons;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -64,6 +62,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AccountSingle'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -96,8 +95,12 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
               iconTheme: IconThemeData(
                   color: FlutterFlowTheme.of(context).primaryText),
               automaticallyImplyLeading: true,
+              title: Text(
+                'Account Details',
+                style: FlutterFlowTheme.of(context).title3,
+              ),
               actions: [],
-              centerTitle: false,
+              centerTitle: true,
               elevation: 0,
             ),
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -207,14 +210,17 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                   }
                                                   final imageConstInstitutionLogosRecord =
                                                       imageConstInstitutionLogosRecordList
-                                                          .first;
+                                                              .isNotEmpty
+                                                          ? imageConstInstitutionLogosRecordList
+                                                              .first
+                                                          : null;
                                                   return ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             12),
                                                     child: CachedNetworkImage(
                                                       imageUrl:
-                                                          imageConstInstitutionLogosRecord
+                                                          imageConstInstitutionLogosRecord!
                                                               .institutionLogo!,
                                                       width: 100,
                                                       height: 100,
@@ -662,26 +668,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                 );
                                                                 _shouldSetState =
                                                                     true;
-                                                                transactionJsonResponse =
-                                                                    await GetTransactionsCall
-                                                                        .call(
-                                                                  authID: widget
-                                                                      .account!
-                                                                      .authID,
-                                                                );
-                                                                _shouldSetState =
-                                                                    true;
-                                                                // Action_writeTransactions
-                                                                await actions
-                                                                    .writeTransactions(
-                                                                  (transactionJsonResponse
-                                                                          ?.jsonBody ??
-                                                                      ''),
-                                                                  widget
-                                                                      .account,
-                                                                  buttonTransactionsRecordList
-                                                                      .toList(),
-                                                                );
 
                                                                 final accountsUpdateData =
                                                                     createAccountsRecordData(
@@ -772,26 +758,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                       .reference
                                                                       .update(
                                                                           accountsUpdateData);
-                                                                  transactionJsonRespons =
-                                                                      await GetTransactionsCall
-                                                                          .call(
-                                                                    authID: widget
-                                                                        .account!
-                                                                        .authID,
-                                                                  );
-                                                                  _shouldSetState =
-                                                                      true;
-                                                                  // Action_writeTransactions
-                                                                  await actions
-                                                                      .writeTransactions(
-                                                                    (transactionJsonRespons
-                                                                            ?.jsonBody ??
-                                                                        ''),
-                                                                    widget
-                                                                        .account,
-                                                                    buttonTransactionsRecordList
-                                                                        .toList(),
-                                                                  );
                                                                   ScaffoldMessenger.of(
                                                                           context)
                                                                       .showSnackBar(

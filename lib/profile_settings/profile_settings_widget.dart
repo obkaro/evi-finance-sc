@@ -32,6 +32,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
         text: valueOrDefault(currentUserDocument?.username, ''));
     textController2 = TextEditingController(text: currentUserEmail);
     textController3 = TextEditingController(text: currentPhoneNumber);
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

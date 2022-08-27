@@ -29,6 +29,7 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'BudgetSingle'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -348,7 +349,9 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                   return Container();
                                 }
                                 final containerCategoriesRecord =
-                                    containerCategoriesRecordList.first;
+                                    containerCategoriesRecordList.isNotEmpty
+                                        ? containerCategoriesRecordList.first
+                                        : null;
                                 return Container(
                                   width: MediaQuery.of(context).size.width,
                                   height: 60,

@@ -3,7 +3,6 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../transaction_single/transaction_single_widget.dart';
-import '../transaction_single_copy/transaction_single_copy_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -26,6 +25,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'Transactions'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -172,7 +172,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          TransactionSingleCopyWidget(
+                                                          TransactionSingleWidget(
                                                         transaction:
                                                             columnTransactionsRecord,
                                                       ),
@@ -282,15 +282,16 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                             .isEmpty) {
                                                                           return Container();
                                                                         }
-                                                                        final imageConstInstitutionLogosRecord =
-                                                                            imageConstInstitutionLogosRecordList.first;
+                                                                        final imageConstInstitutionLogosRecord = imageConstInstitutionLogosRecordList.isNotEmpty
+                                                                            ? imageConstInstitutionLogosRecordList.first
+                                                                            : null;
                                                                         return ClipRRect(
                                                                           borderRadius:
                                                                               BorderRadius.circular(12),
                                                                           child:
                                                                               CachedNetworkImage(
                                                                             imageUrl:
-                                                                                imageConstInstitutionLogosRecord.institutionLogo!,
+                                                                                imageConstInstitutionLogosRecord!.institutionLogo!,
                                                                             width:
                                                                                 40,
                                                                             height:
@@ -605,14 +606,15 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                             .isEmpty) {
                                                                           return Container();
                                                                         }
-                                                                        final imageConstInstitutionLogosRecord =
-                                                                            imageConstInstitutionLogosRecordList.first;
+                                                                        final imageConstInstitutionLogosRecord = imageConstInstitutionLogosRecordList.isNotEmpty
+                                                                            ? imageConstInstitutionLogosRecordList.first
+                                                                            : null;
                                                                         return ClipRRect(
                                                                           borderRadius:
                                                                               BorderRadius.circular(12),
                                                                           child:
                                                                               Image.network(
-                                                                            imageConstInstitutionLogosRecord.institutionLogo!,
+                                                                            imageConstInstitutionLogosRecord!.institutionLogo!,
                                                                             width:
                                                                                 40,
                                                                             height:

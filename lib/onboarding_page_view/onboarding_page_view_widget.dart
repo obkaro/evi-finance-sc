@@ -26,6 +26,7 @@ class _OnboardingPageViewWidgetState extends State<OnboardingPageViewWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'OnboardingPageView'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -239,7 +240,7 @@ class _OnboardingPageViewWidgetState extends State<OnboardingPageViewWidget> {
                     text: 'Let\'s Go!',
                     options: FFButtonOptions(
                       width: double.infinity,
-                      height: 50,
+                      height: 60,
                       color: FlutterFlowTheme.of(context).primaryColor,
                       textStyle: FlutterFlowTheme.of(context)
                           .subtitle2

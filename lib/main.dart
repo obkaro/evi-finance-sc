@@ -1,7 +1,7 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 import 'backend/push_notifications/push_notifications_util.dart';
@@ -60,7 +60,8 @@ class _MyAppState extends State<MyApp> {
     super.dispose();
   }
 
-  void setLocale(Locale value) => setState(() => _locale = value);
+  void setLocale(String language) =>
+      setState(() => _locale = createLocale(language));
   void setThemeMode(ThemeMode mode) => setState(() {
         _themeMode = mode;
         FlutterFlowTheme.saveThemeMode(mode);
@@ -78,7 +79,7 @@ class _MyAppState extends State<MyApp> {
       ],
       locale: _locale,
       supportedLocales: const [
-        Locale('en', ''),
+        Locale('en'),
       ],
       theme: ThemeData(brightness: Brightness.light),
       darkTheme: ThemeData(brightness: Brightness.dark),
@@ -125,8 +126,9 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'Dashboard': DashboardWidget(),
+      'RecurringPayments': RecurringPaymentsWidget(),
       'ActiveBudget': ActiveBudgetWidget(),
+      'Dashboard': DashboardWidget(),
       'Accounts': AccountsWidget(),
       'Settings': SettingsWidget(),
     };
@@ -145,14 +147,14 @@ class _NavBarPageState extends State<NavBarPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_rounded,
+              Icons.payment_rounded,
               size: 24,
             ),
             activeIcon: Icon(
-              Icons.home_rounded,
+              Icons.payment_rounded,
               size: 32,
             ),
-            label: 'Dashboard',
+            label: 'Recurring Payments',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -164,7 +166,19 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.pie_chart_rounded,
               size: 32,
             ),
-            label: 'Home',
+            label: 'Active Budget',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_rounded,
+              size: 24,
+            ),
+            activeIcon: Icon(
+              Icons.home_rounded,
+              size: 32,
+            ),
+            label: 'Dashboard',
             tooltip: '',
           ),
           BottomNavigationBarItem(

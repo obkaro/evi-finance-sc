@@ -30,6 +30,7 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'BudgetSingleCopy'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -95,7 +96,7 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -107,12 +108,11 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                 child: StreamBuilder<List<TransactionsRecord>>(
                                   stream: queryTransactionsRecord(
                                     queryBuilder: (transactionsRecord) =>
-                                        transactionsRecord.where(
+                                        transactionsRecord.whereIn(
                                             'transactionCategory',
-                                            whereIn:
-                                                budgetSingleCopyCategoriesRecordList
-                                                    .map((e) => e.reference)
-                                                    .toList()),
+                                            budgetSingleCopyCategoriesRecordList
+                                                .map((e) => e.reference)
+                                                .toList()),
                                   ),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
@@ -171,8 +171,12 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                                   ),
                                                 )
                                               ],
-                                              backgroundColor:
-                                                  Color(0x00FFFFFF),
+                                              chartStylingInfo:
+                                                  ChartStylingInfo(
+                                                backgroundColor:
+                                                    Color(0x00FFFFFF),
+                                                showBorder: false,
+                                              ),
                                               axisBounds: AxisBounds(),
                                               xAxisLabelInfo: AxisLabelInfo(
                                                 showLabels: true,
@@ -321,7 +325,9 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                   return Container();
                                 }
                                 final containerCategoriesRecord =
-                                    containerCategoriesRecordList.first;
+                                    containerCategoriesRecordList.isNotEmpty
+                                        ? containerCategoriesRecordList.first
+                                        : null;
                                 return Container(
                                   width: MediaQuery.of(context).size.width,
                                   height: 60,

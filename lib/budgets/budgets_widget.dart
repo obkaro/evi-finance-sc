@@ -29,6 +29,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Budgets'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -80,7 +81,9 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                 return Container();
               }
               final floatingActionButtonCategoriesRecord =
-                  floatingActionButtonCategoriesRecordList.first;
+                  floatingActionButtonCategoriesRecordList.isNotEmpty
+                      ? floatingActionButtonCategoriesRecordList.first
+                      : null;
               return FloatingActionButton(
                 onPressed: () async {
                   final budgetsCreateData = createBudgetsRecordData(

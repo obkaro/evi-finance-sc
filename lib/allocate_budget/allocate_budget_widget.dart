@@ -39,6 +39,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AllocateBudget'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -391,13 +392,16 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                 stream:
                                                     queryConstBudgetCategoriesRecord(
                                                   queryBuilder: (constBudgetCategoriesRecord) =>
-                                                      constBudgetCategoriesRecord.where(
-                                                          'categoryName',
-                                                          whereNotIn:
-                                                              allocateBudgetCategoriesRecordList
-                                                                  .map((e) => e
-                                                                      .categoryName!)
-                                                                  .toList()),
+                                                      constBudgetCategoriesRecord
+                                                          .where('categoryName',
+                                                              whereNotIn:
+                                                                  allocateBudgetCategoriesRecordList
+                                                                      .map((e) => e
+                                                                          .categoryName!)
+                                                                      .toList())
+                                                          .orderBy(
+                                                              'categoryWeight',
+                                                              descending: true),
                                                 ),
                                                 builder: (context, snapshot) {
                                                   // Customize what your widget looks like when it's loading.

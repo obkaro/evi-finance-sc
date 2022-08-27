@@ -14,8 +14,9 @@ Future unlinkAllTransCategories(
   // Add your function code here!
   for (var i = 0; i < transactions.length; i++) {
     final transactionUpdateData = {
-      'isCategorized': false,
       'transactionCategory': FieldValue.delete(),
+      'transactionBudget': FieldValue.delete(),
+      'recurringRef': FieldValue.delete(),
     };
 
     await transactions[i].reference.update(transactionUpdateData);

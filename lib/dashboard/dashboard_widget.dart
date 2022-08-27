@@ -6,7 +6,7 @@ import '../components/empty_linked_accounts_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../main.dart';
-import '../transaction_single_copy/transaction_single_copy_widget.dart';
+import '../transaction_single/transaction_single_widget.dart';
 import '../transactions/transactions_widget.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -31,6 +31,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -56,11 +57,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
           );
         }
         List<VersionsRecord> dashboardVersionsRecordList = snapshot.data!;
-        // Return an empty Container when the document does not exist.
-        if (snapshot.data!.isEmpty) {
-          return Container();
-        }
-        final dashboardVersionsRecord = dashboardVersionsRecordList.first;
+        final dashboardVersionsRecord = dashboardVersionsRecordList.isNotEmpty
+            ? dashboardVersionsRecordList.first
+            : null;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -368,7 +367,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                       }
                                                       final imageConstInstitutionLogosRecord =
                                                           imageConstInstitutionLogosRecordList
-                                                              .first;
+                                                                  .isNotEmpty
+                                                              ? imageConstInstitutionLogosRecordList
+                                                                  .first
+                                                              : null;
                                                       return ClipRRect(
                                                         borderRadius:
                                                             BorderRadius
@@ -376,7 +378,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                         child:
                                                             CachedNetworkImage(
                                                           imageUrl:
-                                                              imageConstInstitutionLogosRecord
+                                                              imageConstInstitutionLogosRecord!
                                                                   .institutionLogo!,
                                                           width: 40,
                                                           height: 40,
@@ -826,7 +828,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          TransactionSingleCopyWidget(
+                                                          TransactionSingleWidget(
                                                         transaction:
                                                             columnTransactionsRecord,
                                                       ),
@@ -910,7 +912,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                               }
                                                               final imageConstInstitutionLogosRecord =
                                                                   imageConstInstitutionLogosRecordList
-                                                                      .first;
+                                                                          .isNotEmpty
+                                                                      ? imageConstInstitutionLogosRecordList
+                                                                          .first
+                                                                      : null;
                                                               return ClipRRect(
                                                                 borderRadius:
                                                                     BorderRadius
@@ -919,7 +924,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                 child:
                                                                     CachedNetworkImage(
                                                                   imageUrl:
-                                                                      imageConstInstitutionLogosRecord
+                                                                      imageConstInstitutionLogosRecord!
                                                                           .institutionLogo!,
                                                                   width: 40,
                                                                   height: 40,
