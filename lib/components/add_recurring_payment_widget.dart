@@ -3,12 +3,15 @@ import '../backend/backend.dart';
 import '../components/c_button_filled_copy_widget.dart';
 import '../create_recurring/create_recurring_widget.dart';
 import '../edit_subsciption/edit_subsciption_widget.dart';
+import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class AddRecurringPaymentWidget extends StatefulWidget {
   const AddRecurringPaymentWidget({
@@ -151,19 +154,47 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                         width: 120,
                                         height: 120,
                                         decoration: BoxDecoration(
-                                          color: Colors.white,
                                           shape: BoxShape.circle,
                                         ),
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  12, 12, 12, 12),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            child: Image.network(
-                                              subsfromcontainerItem.icon!,
-                                              fit: BoxFit.scaleDown,
+                                                  8, 8, 8, 8),
+                                          child: InkWell(
+                                            onTap: () async {
+                                              await Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                  type: PageTransitionType.fade,
+                                                  child:
+                                                      FlutterFlowExpandedImageView(
+                                                    image: CachedNetworkImage(
+                                                      imageUrl:
+                                                          subsfromcontainerItem
+                                                              .icon!,
+                                                      fit: BoxFit.contain,
+                                                    ),
+                                                    allowRotation: false,
+                                                    tag: subsfromcontainerItem
+                                                        .icon!,
+                                                    useHeroAnimation: true,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: Hero(
+                                              tag: subsfromcontainerItem.icon!,
+                                              transitionOnUserGestures: true,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      subsfromcontainerItem
+                                                          .icon!,
+                                                  fit: BoxFit.scaleDown,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
