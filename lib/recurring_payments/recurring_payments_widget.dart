@@ -283,8 +283,8 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                                 CachedNetworkImage(
                                                               imageUrl: subsItem
                                                                   .icon!,
-                                                              width: 48,
-                                                              height: 48,
+                                                              width: 44,
+                                                              height: 44,
                                                               fit: BoxFit
                                                                   .scaleDown,
                                                             ),
