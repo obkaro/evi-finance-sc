@@ -385,15 +385,23 @@ String transactionTypeColor(String transactionType) {
 
 int setNewExpectedSubDate(SubscriptionsRecord? subscription) {
   // Add your function code here!
-  List<dynamic> durations = FFAppState().durations;
 
   int days = 0;
 
-  for (int i = 0; i < durations.length; i++) {
-    Map<String, dynamic> duration = jsonDecode(durations[i]);
-    if (duration.name == subscription.recurrence) {
-      days = duration.duration;
-    }
+  switch (subscription!.recurrence) {
+    case "Weekly":
+      days = 7;
+      break;
+    case "Monthly":
+      days = 30;
+      break;
+    case "Quaterly":
+      days = 90;
+      break;
+    case "Yearly":
+      days = 365;
+      break;
   }
+
   return days;
 }
