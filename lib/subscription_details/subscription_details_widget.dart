@@ -37,7 +37,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(200),
+        preferredSize: Size.fromHeight(240),
         child: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           iconTheme:
@@ -50,189 +50,228 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 16),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 16, 0),
-                        child: Container(
-                          width: 80,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 48, 20, 20),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.network(
-                                widget.subscription!.icon!,
-                                width: double.infinity,
-                                height: double.infinity,
-                                fit: BoxFit.scaleDown,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Text(
-                                  widget.subscription!.name!,
-                                  style: FlutterFlowTheme.of(context).subtitle1,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  'Renews ',
-                                  style: FlutterFlowTheme.of(context).bodyText2,
-                                ),
-                                Text(
-                                  widget.subscription!.recurrence!,
-                                  style: FlutterFlowTheme.of(context).bodyText2,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Next due on: ',
-                                style: FlutterFlowTheme.of(context).bodyText2,
-                              ),
-                              Text(
-                                dateTimeFormat('MMMMEEEEd',
-                                    widget.subscription!.expChargeDate!),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText2
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText2Family,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 16, 0),
+                                  child: Container(
+                                    width: 80,
+                                    height: 80,
+                                    decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
+                                          .secondaryBackground,
+                                      shape: BoxShape.circle,
                                     ),
-                              ),
-                            ],
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12, 12, 12, 12),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: Image.network(
+                                          widget.subscription!.icon!,
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          fit: BoxFit.scaleDown,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 0, 8),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            widget.subscription!.name!,
+                                            style: FlutterFlowTheme.of(context)
+                                                .subtitle1,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 0, 4),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            'Renews ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2,
+                                          ),
+                                          Text(
+                                            widget.subscription!.recurrence!,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          'Next due on: ',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText2,
+                                        ),
+                                        Text(
+                                          dateTimeFormat(
+                                              'MMMMEEEEd',
+                                              widget.subscription!
+                                                  .expChargeDate!),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText2
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText2Family,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 16, 0),
+                                  child: Container(
+                                    width: 80,
+                                    height: 32,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.rectangle,
+                                    ),
+                                  ),
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        FFButtonWidget(
+                                          onPressed: () async {
+                                            await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditSubsciptionWidget(
+                                                  subscriptionRecord: widget
+                                                      .subscription!.reference,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          text: 'Edit',
+                                          icon: Icon(
+                                            Icons.edit_rounded,
+                                            size: 8,
+                                          ),
+                                          options: FFButtonOptions(
+                                            height: 24,
+                                            color: Colors.transparent,
+                                            textStyle: FlutterFlowTheme.of(
+                                                    context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyText2Family,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                            elevation: 0,
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                        FFButtonWidget(
+                                          onPressed: () {
+                                            print('Button pressed ...');
+                                          },
+                                          text: 'Delete',
+                                          icon: Icon(
+                                            Icons.delete_rounded,
+                                            size: 8,
+                                          ),
+                                          options: FFButtonOptions(
+                                            height: 24,
+                                            color: Colors.transparent,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText2
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText2Family,
+                                                      color: Color(0xFFCA1313),
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                            elevation: 0,
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 16, 0),
-                        child: Container(
-                          width: 80,
-                          height: 32,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                          ),
-                        ),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              FFButtonWidget(
-                                onPressed: () async {
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          EditSubsciptionWidget(
-                                        subscriptionRecord:
-                                            widget.subscription!.reference,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                text: 'Edit',
-                                icon: Icon(
-                                  Icons.edit_rounded,
-                                  size: 8,
-                                ),
-                                options: FFButtonOptions(
-                                  height: 24,
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText2Family,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                  elevation: 0,
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                              FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
-                                },
-                                text: 'Delete',
-                                icon: Icon(
-                                  Icons.delete_rounded,
-                                  size: 8,
-                                ),
-                                options: FFButtonOptions(
-                                  height: 24,
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText2Family,
-                                        color: Color(0xFFCA1313),
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                  elevation: 0,
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ],
