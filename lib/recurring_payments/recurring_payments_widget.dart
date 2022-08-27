@@ -263,7 +263,6 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                                 0, 0, 16, 0),
                                                     child: Container(
                                                       decoration: BoxDecoration(
-                                                        color: Colors.white,
                                                         shape: BoxShape.circle,
                                                       ),
                                                       child: Padding(

@@ -144,10 +144,25 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'How much do you plan to spend within your budget period?',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText2,
+                                  Expanded(
+                                    child: Wrap(
+                                      spacing: 0,
+                                      runSpacing: 0,
+                                      alignment: WrapAlignment.start,
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.start,
+                                      direction: Axis.horizontal,
+                                      runAlignment: WrapAlignment.start,
+                                      verticalDirection: VerticalDirection.down,
+                                      clipBehavior: Clip.none,
+                                      children: [
+                                        Text(
+                                          'How much do you plan to spend within your budget period?',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText2,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),

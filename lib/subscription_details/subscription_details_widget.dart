@@ -92,7 +92,6 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                       width: 72,
                                       height: 72,
                                       decoration: BoxDecoration(
-                                        color: Colors.white,
                                         shape: BoxShape.circle,
                                       ),
                                       child: Padding(
