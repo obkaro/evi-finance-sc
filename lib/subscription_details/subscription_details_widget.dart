@@ -448,7 +448,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                               if (listViewTransactionsRecordList.isEmpty) {
                                 return Center(
                                   child: EmptyListWidget(
-                                    listtype: 'subscription history',
+                                    text: 'No payments here yet...',
                                   ),
                                 );
                               }

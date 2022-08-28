@@ -7,10 +7,10 @@ import 'package:google_fonts/google_fonts.dart';
 class EmptyListWidget extends StatefulWidget {
   const EmptyListWidget({
     Key? key,
-    this.listtype,
+    this.text,
   }) : super(key: key);
 
-  final String? listtype;
+  final String? text;
 
   @override
   _EmptyListWidgetState createState() => _EmptyListWidgetState();
@@ -29,9 +29,7 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-      ),
+      decoration: BoxDecoration(),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -54,7 +52,7 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'No ${widget.listtype} yet...',
+                  widget.text!,
                   style: FlutterFlowTheme.of(context).subtitle2,
                 ),
               ],
