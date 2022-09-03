@@ -169,22 +169,15 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                   textAccountsRecordList
                                                       .toList())),
                                           style: FlutterFlowTheme.of(context)
-                                              .title1
-                                              .override(
-                                                fontFamily: 'Fira Sans',
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                              .title1,
                                         );
                                       },
                                     ),
                                   ),
                                   Text(
                                     'Total Balance',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Fira Sans',
-                                        ),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
                                   ),
                                 ],
                               ),
