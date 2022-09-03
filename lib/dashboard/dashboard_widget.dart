@@ -169,7 +169,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                   textAccountsRecordList
                                                       .toList())),
                                           style: FlutterFlowTheme.of(context)
-                                              .title1,
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Nunito',
+                                              ),
                                         );
                                       },
                                     ),
