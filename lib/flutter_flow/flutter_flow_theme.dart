@@ -132,51 +132,51 @@ class MobileTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Spline Sans';
+  String get title1Family => 'Fira Sans';
   TextStyle get title1 => GoogleFonts.getFont(
-        'Spline Sans',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 24,
       );
-  String get title2Family => 'Spline Sans';
+  String get title2Family => 'Fira Sans';
   TextStyle get title2 => GoogleFonts.getFont(
-        'Spline Sans',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get title3Family => 'Spline Sans';
+  String get title3Family => 'Fira Sans';
   TextStyle get title3 => GoogleFonts.getFont(
-        'Spline Sans',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get subtitle1Family => 'Source Sans Pro';
+  String get subtitle1Family => 'Fira Sans';
   TextStyle get subtitle1 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 18,
       );
-  String get subtitle2Family => 'Source Sans Pro';
+  String get subtitle2Family => 'Fira Sans';
   TextStyle get subtitle2 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.bold,
         fontSize: 16,
       );
-  String get bodyText1Family => 'Source Sans Pro';
+  String get bodyText1Family => 'Fira Sans';
   TextStyle get bodyText1 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16,
       );
-  String get bodyText2Family => 'Source Sans Pro';
+  String get bodyText2Family => 'Fira Sans';
   TextStyle get bodyText2 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 14,
@@ -188,51 +188,51 @@ class TabletTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Source Sans Pro';
+  String get title1Family => 'Fira Sans';
   TextStyle get title1 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 24,
       );
-  String get title2Family => 'Source Sans Pro';
+  String get title2Family => 'Fira Sans';
   TextStyle get title2 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get title3Family => 'Source Sans Pro';
+  String get title3Family => 'Fira Sans';
   TextStyle get title3 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get subtitle1Family => 'Source Sans Pro';
+  String get subtitle1Family => 'Fira Sans';
   TextStyle get subtitle1 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 18,
       );
-  String get subtitle2Family => 'Source Sans Pro';
+  String get subtitle2Family => 'Fira Sans';
   TextStyle get subtitle2 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.bold,
         fontSize: 16,
       );
-  String get bodyText1Family => 'Source Sans Pro';
+  String get bodyText1Family => 'Fira Sans';
   TextStyle get bodyText1 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 14,
       );
-  String get bodyText2Family => 'Source Sans Pro';
+  String get bodyText2Family => 'Fira Sans';
   TextStyle get bodyText2 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 12,
@@ -244,51 +244,51 @@ class DesktopTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Source Sans Pro';
+  String get title1Family => 'Fira Sans';
   TextStyle get title1 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 24,
       );
-  String get title2Family => 'Source Sans Pro';
+  String get title2Family => 'Fira Sans';
   TextStyle get title2 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get title3Family => 'Source Sans Pro';
+  String get title3Family => 'Fira Sans';
   TextStyle get title3 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get subtitle1Family => 'Source Sans Pro';
+  String get subtitle1Family => 'Fira Sans';
   TextStyle get subtitle1 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 18,
       );
-  String get subtitle2Family => 'Source Sans Pro';
+  String get subtitle2Family => 'Fira Sans';
   TextStyle get subtitle2 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.bold,
         fontSize: 16,
       );
-  String get bodyText1Family => 'Source Sans Pro';
+  String get bodyText1Family => 'Fira Sans';
   TextStyle get bodyText1 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 14,
       );
-  String get bodyText2Family => 'Source Sans Pro';
+  String get bodyText2Family => 'Fira Sans';
   TextStyle get bodyText2 => GoogleFonts.getFont(
-        'Source Sans Pro',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 12,
