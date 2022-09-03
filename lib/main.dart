@@ -105,9 +105,10 @@ class _MyAppState extends State<MyApp> {
 }
 
 class NavBarPage extends StatefulWidget {
-  NavBarPage({Key? key, this.initialPage}) : super(key: key);
+  NavBarPage({Key? key, this.initialPage, this.page}) : super(key: key);
 
   final String? initialPage;
+  final Widget? page;
 
   @override
   _NavBarPageState createState() => _NavBarPageState();
@@ -115,12 +116,14 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPage = 'Dashboard';
+  String _currentPageName = 'Dashboard';
+  late Widget? _currentPage;
 
   @override
   void initState() {
     super.initState();
-    _currentPage = widget.initialPage ?? _currentPage;
+    _currentPageName = widget.initialPage ?? _currentPageName;
+    _currentPage = widget.page;
   }
 
   @override
@@ -132,12 +135,15 @@ class _NavBarPageState extends State<NavBarPage> {
       'Accounts': AccountsWidget(),
       'Settings': SettingsWidget(),
     };
-    final currentIndex = tabs.keys.toList().indexOf(_currentPage);
+    final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
-      body: tabs[_currentPage],
+      body: _currentPage ?? tabs[_currentPageName],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
-        onTap: (i) => setState(() => _currentPage = tabs.keys.toList()[i]),
+        onTap: (i) => setState(() {
+          _currentPage = null;
+          _currentPageName = tabs.keys.toList()[i];
+        }),
         backgroundColor: Colors.black,
         selectedItemColor: FlutterFlowTheme.of(context).primaryColor,
         unselectedItemColor: Color(0xFF5D5B5B),

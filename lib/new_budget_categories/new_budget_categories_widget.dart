@@ -398,12 +398,12 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                             queryBuilder:
                                                 (constBudgetCategoriesRecord) =>
                                                     constBudgetCategoriesRecord
-                                                        .where('categoryName',
-                                                            whereNotIn:
-                                                                newBudgetCategoriesCategoriesRecordList
-                                                                    .map((e) => e
-                                                                        .categoryName!)
-                                                                    .toList())
+                                                        .whereNotIn(
+                                                            'categoryName',
+                                                            newBudgetCategoriesCategoriesRecordList
+                                                                .map((e) => e
+                                                                    .categoryName!)
+                                                                .toList())
                                                         .orderBy('categoryName')
                                                         .orderBy(
                                                             'categoryWeight',

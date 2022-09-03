@@ -393,12 +393,12 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                     queryConstBudgetCategoriesRecord(
                                                   queryBuilder: (constBudgetCategoriesRecord) =>
                                                       constBudgetCategoriesRecord
-                                                          .where('categoryName',
-                                                              whereNotIn:
-                                                                  allocateBudgetCategoriesRecordList
-                                                                      .map((e) => e
-                                                                          .categoryName!)
-                                                                      .toList())
+                                                          .whereNotIn(
+                                                              'categoryName',
+                                                              allocateBudgetCategoriesRecordList
+                                                                  .map((e) => e
+                                                                      .categoryName!)
+                                                                  .toList())
                                                           .orderBy(
                                                               'categoryName',
                                                               descending: true)
