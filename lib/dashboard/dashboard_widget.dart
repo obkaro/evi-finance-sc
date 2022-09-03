@@ -171,7 +171,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .title1
                                               .override(
-                                                fontFamily: 'IBM Plex Sans',
+                                                fontFamily: 'Space Grotesk',
                                                 fontWeight: FontWeight.bold,
                                               ),
                                         );
