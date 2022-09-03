@@ -172,6 +172,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                               .title1
                                               .override(
                                                 fontFamily: 'Nunito',
+                                                fontWeight: FontWeight.w900,
                                               ),
                                         );
                                       },
@@ -179,8 +180,11 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                   ),
                                   Text(
                                     'Total Balance',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Nunito',
+                                        ),
                                   ),
                                 ],
                               ),
