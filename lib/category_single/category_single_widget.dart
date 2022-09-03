@@ -104,9 +104,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                       size: 24,
                     ),
                     onPressed: () async {
-                      // Action_UnlinkAllTransCategories
                       await actions.unlinkAllTransCategories(
-                        iconButtonTransactionsRecordList.toList(),
+                        categorySingleTransactionsRecordList.toList(),
                       );
                     },
                   );
