@@ -240,8 +240,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                           imageUrl:
                                                               imageConstInstitutionLogosRecord!
                                                                   .institutionLogo!,
-                                                          width: 45,
-                                                          height: 45,
+                                                          width: 48,
+                                                          height: 48,
                                                           fit: BoxFit.cover,
                                                         ),
                                                       );
@@ -1497,8 +1497,12 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                         child:
                                                                             FFButtonWidget(
                                                                           onPressed:
-                                                                              () {
-                                                                            print('Button pressed ...');
+                                                                              () async {
+                                                                            final transactionsUpdateData =
+                                                                                createTransactionsRecordData(
+                                                                              incomeCategory: columnTransactionsRecord.incomeCategory,
+                                                                            );
+                                                                            await columnTransactionsRecord.reference.update(transactionsUpdateData);
                                                                           },
                                                                           text:
                                                                               rowIncomeCategoriesRecord.categoryName!,
@@ -1568,7 +1572,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                               ),
                                                               options:
                                                                   FFButtonOptions(
-                                                                height: 40,
+                                                                height: 48,
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryColor,
