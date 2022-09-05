@@ -53,7 +53,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(96),
+            preferredSize: Size.fromHeight(132),
             child: AppBar(
               backgroundColor: Color(0x00FF0054),
               automaticallyImplyLeading: false,
@@ -67,12 +67,6 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                       height: 100,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).primaryColor,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(32),
-                          bottomRight: Radius.circular(32),
-                          topLeft: Radius.circular(0),
-                          topRight: Radius.circular(0),
-                        ),
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
@@ -80,40 +74,59 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                         children: [
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Icon(
-                                      Icons.account_balance_rounded,
-                                      color: Colors.white,
-                                      size: 32,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 20, 24, 20),
-                                      child: Text(
-                                        'Accounts',
-                                        style: FlutterFlowTheme.of(context)
-                                            .title3
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .title3Family,
-                                              color: Color(0xFFF9F9F9),
-                                            ),
-                                      ),
-                                    ),
-                                  ],
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      32, 0, 0, 0),
+                                  child: Icon(
+                                    Icons.account_balance_rounded,
+                                    color: Colors.white,
+                                    size: 24,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 0, 0, 0),
+                                  child: Text(
+                                    'Accounts',
+                                    style: FlutterFlowTheme.of(context)
+                                        .title3
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .title3Family,
+                                          color: Color(0xFFF9F9F9),
+                                        ),
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                    ),
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(0),
+                          bottomRight: Radius.circular(0),
+                          topLeft: Radius.circular(32),
+                          topRight: Radius.circular(32),
+                        ),
                       ),
                     ),
                   ),
@@ -123,7 +136,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
               elevation: 0,
             ),
           ),
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
               // Action_LinkNewAcct
@@ -143,7 +156,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 16, 16),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -157,7 +170,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 20),
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                         child: StreamBuilder<List<AccountsRecord>>(
                           stream: queryAccountsRecord(
                             queryBuilder: (accountsRecord) =>
@@ -191,7 +204,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                     listViewAccountsRecordList[listViewIndex];
                                 return Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 10),
+                                      20, 0, 20, 10),
                                   child: InkWell(
                                     onTap: () async {
                                       // Action_NavToAcctSingle
@@ -407,7 +420,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                             ),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  16, 16, 16, 16),
+                                  20, 16, 20, 16),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
