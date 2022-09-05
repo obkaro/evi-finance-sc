@@ -135,7 +135,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
