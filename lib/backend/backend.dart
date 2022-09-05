@@ -14,6 +14,8 @@ import 'schema/categories_record.dart';
 import 'schema/versions_record.dart';
 import 'schema/subscriptions_record.dart';
 import 'schema/const_recurring_payments_record.dart';
+import 'schema/income_categories_record.dart';
+import 'schema/const_income_categories_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -31,6 +33,8 @@ export 'schema/categories_record.dart';
 export 'schema/versions_record.dart';
 export 'schema/subscriptions_record.dart';
 export 'schema/const_recurring_payments_record.dart';
+export 'schema/income_categories_record.dart';
+export 'schema/const_income_categories_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord({
@@ -453,6 +457,95 @@ Future<FFFirestorePage<ConstRecurringPaymentsRecord>>
         queryCollectionPage(
           ConstRecurringPaymentsRecord.collection,
           ConstRecurringPaymentsRecord.serializer,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        );
+
+/// Functions to query IncomeCategoriesRecords (as a Stream and as a Future).
+Stream<List<IncomeCategoriesRecord>> queryIncomeCategoriesRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      IncomeCategoriesRecord.collection(parent),
+      IncomeCategoriesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<IncomeCategoriesRecord>> queryIncomeCategoriesRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      IncomeCategoriesRecord.collection(parent),
+      IncomeCategoriesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<IncomeCategoriesRecord>>
+    queryIncomeCategoriesRecordPage({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+        queryCollectionPage(
+          IncomeCategoriesRecord.collection(parent),
+          IncomeCategoriesRecord.serializer,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        );
+
+/// Functions to query ConstIncomeCategoriesRecords (as a Stream and as a Future).
+Stream<List<ConstIncomeCategoriesRecord>> queryConstIncomeCategoriesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ConstIncomeCategoriesRecord.collection,
+      ConstIncomeCategoriesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ConstIncomeCategoriesRecord>> queryConstIncomeCategoriesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ConstIncomeCategoriesRecord.collection,
+      ConstIncomeCategoriesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<ConstIncomeCategoriesRecord>>
+    queryConstIncomeCategoriesRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+        queryCollectionPage(
+          ConstIncomeCategoriesRecord.collection,
+          ConstIncomeCategoriesRecord.serializer,
           queryBuilder: queryBuilder,
           nextPageMarker: nextPageMarker,
           pageSize: pageSize,

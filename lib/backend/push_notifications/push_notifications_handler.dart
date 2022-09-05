@@ -151,6 +151,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         subscription: await getDocumentParameter(
             data, 'subscription', SubscriptionsRecord.serializer),
       ),
+  'EditIncomeSources': (data) async => EditIncomeSourcesWidget(),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

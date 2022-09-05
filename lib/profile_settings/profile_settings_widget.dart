@@ -1,5 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/c_button_filled_copy_widget.dart';
+import '../edit_income_sources/edit_income_sources_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -177,6 +179,27 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               ),
                               style: FlutterFlowTheme.of(context).bodyText1,
                               keyboardType: TextInputType.phone,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                          child: InkWell(
+                            onTap: () async {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      EditIncomeSourcesWidget(),
+                                ),
+                              );
+                            },
+                            child: CButtonFilledCopyWidget(
+                              text: 'Edit Income Sources',
+                              icon: Icon(
+                                Icons.edit_rounded,
+                                size: 16,
+                              ),
                             ),
                           ),
                         ),
