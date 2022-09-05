@@ -178,8 +178,8 @@ class MobileTypography extends Typography {
   TextStyle get bodyText2 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.secondaryText,
-        fontWeight: FontWeight.w300,
-        fontSize: 14,
+        fontWeight: FontWeight.normal,
+        fontSize: 12,
       );
 }
 
