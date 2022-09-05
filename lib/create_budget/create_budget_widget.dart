@@ -114,13 +114,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                   setState(() => dropDownValue = val),
                               width: double.infinity,
                               height: 55,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyText1Family,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                              textStyle: FlutterFlowTheme.of(context).bodyText1,
                               hintText: 'Please select...',
                               fillColor: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
@@ -298,8 +292,10 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .bodyText2Family,
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
                                                     ),
                                             selectedDateStyle:
                                                 FlutterFlowTheme.of(context)

@@ -150,35 +150,35 @@ class MobileTypography extends Typography {
   TextStyle get title3 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w600,
         fontSize: 20,
       );
   String get subtitle1Family => 'Fira Sans';
   TextStyle get subtitle1 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
         fontSize: 18,
       );
   String get subtitle2Family => 'Fira Sans';
   TextStyle get subtitle2 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.secondaryText,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
         fontSize: 16,
       );
   String get bodyText1Family => 'Fira Sans';
   TextStyle get bodyText1 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.normal,
         fontSize: 16,
       );
   String get bodyText2Family => 'Fira Sans';
   TextStyle get bodyText2 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.secondaryText,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w300,
         fontSize: 14,
       );
 }
