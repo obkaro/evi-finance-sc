@@ -1516,6 +1516,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                                   fontFamily: FlutterFlowTheme.of(context).bodyText2Family,
                                                                                   color: FlutterFlowTheme.of(context).primaryColor,
                                                                                 ),
+                                                                            elevation:
+                                                                                0,
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).primaryColor,
@@ -1586,9 +1588,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                       color: Colors
                                                                           .white,
                                                                     ),
+                                                                elevation: 0,
                                                                 borderSide:
                                                                     BorderSide(
-                                                                  width: 1,
+                                                                  width: 0,
                                                                 ),
                                                                 borderRadius:
                                                                     BorderRadius
