@@ -99,7 +99,6 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
                                             .bodyText2Family,
-                                        fontWeight: FontWeight.w500,
                                         fontStyle: FontStyle.italic,
                                       ),
                                 ),
@@ -134,15 +133,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                                   'Evi will not have the ability to credit, debit or perform any transactions on your accounts.',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1Family,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
+                                                      .bodyText1,
                                                 ),
                                               ],
                                             ),
@@ -174,15 +165,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                                   'All data retrieved from your account is secured and encrypted. We take your data protection seriously and will not share this data with any other users.',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1Family,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
+                                                      .bodyText1,
                                                 ),
                                               ],
                                             ),
@@ -214,15 +197,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                                   'You can disconnect your accounts and delete your data from Evi at any time.',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1Family,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
+                                                      .bodyText1,
                                                 ),
                                               ],
                                             ),

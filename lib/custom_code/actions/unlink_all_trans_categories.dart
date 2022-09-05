@@ -16,6 +16,7 @@ Future unlinkAllTransCategories(
       'transactionCategory': FieldValue.delete(),
       'transactionBudget': FieldValue.delete(),
       'recurringRef': FieldValue.delete(),
+      'incomeCategory': FieldValue.delete(),
     };
 
     await transactions[i].reference.update(transactionUpdateData);

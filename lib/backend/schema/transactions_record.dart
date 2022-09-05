@@ -37,6 +37,8 @@ abstract class TransactionsRecord
 
   DocumentReference? get recurringRef;
 
+  DocumentReference? get incomeCategory;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -86,6 +88,7 @@ Map<String, dynamic> createTransactionsRecordData({
   DocumentReference? transactionCategory,
   DocumentReference? transactionBudget,
   DocumentReference? recurringRef,
+  DocumentReference? incomeCategory,
 }) {
   final firestoreData = serializers.toFirestore(
     TransactionsRecord.serializer,
@@ -103,7 +106,8 @@ Map<String, dynamic> createTransactionsRecordData({
         ..transactionID = transactionID
         ..transactionCategory = transactionCategory
         ..transactionBudget = transactionBudget
-        ..recurringRef = recurringRef,
+        ..recurringRef = recurringRef
+        ..incomeCategory = incomeCategory,
     ),
   );
 
