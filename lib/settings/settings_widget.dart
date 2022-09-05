@@ -38,7 +38,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(96),
+        preferredSize: Size.fromHeight(132),
         child: AppBar(
           backgroundColor: Color(0x00FF0054),
           automaticallyImplyLeading: false,
@@ -49,55 +49,66 @@ class _SettingsWidgetState extends State<SettingsWidget> {
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  height: 100,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryColor,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(32),
-                      bottomRight: Radius.circular(32),
-                      topLeft: Radius.circular(0),
-                      topRight: Radius.circular(0),
-                    ),
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Icon(
-                                  Icons.settings_rounded,
-                                  color: Colors.white,
-                                  size: 32,
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 20, 24, 20),
-                                  child: Text(
-                                    'Settings',
-                                    style: FlutterFlowTheme.of(context)
-                                        .title3
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .title3Family,
-                                          color: Color(0xFFF9F9F9),
-                                        ),
-                                  ),
-                                ),
-                              ],
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(32, 0, 0, 0),
+                              child: Icon(
+                                Icons.settings_rounded,
+                                color: Colors.white,
+                                size: 24,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                              child: Text(
+                                'Settings',
+                                style: FlutterFlowTheme.of(context)
+                                    .title3
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .title3Family,
+                                      color: Color(0xFFF9F9F9),
+                                    ),
+                              ),
                             ),
                           ],
                         ),
                       ),
                     ],
+                  ),
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                height: 32,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).primaryColor,
+                ),
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(0),
+                      bottomRight: Radius.circular(0),
+                      topLeft: Radius.circular(32),
+                      topRight: Radius.circular(32),
+                    ),
                   ),
                 ),
               ),
@@ -107,7 +118,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
           elevation: 0,
         ),
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -124,7 +135,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
