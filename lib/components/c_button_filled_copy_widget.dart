@@ -40,8 +40,8 @@ class _CButtonFilledCopyWidgetState extends State<CButtonFilledCopyWidget> {
         width: double.infinity,
         height: 48,
         color: Color(0x00FF0054),
-        textStyle: FlutterFlowTheme.of(context).bodyText2.override(
-              fontFamily: FlutterFlowTheme.of(context).bodyText2Family,
+        textStyle: FlutterFlowTheme.of(context).bodyText1.override(
+              fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
               color: FlutterFlowTheme.of(context).primaryColor,
             ),
         elevation: 0,
