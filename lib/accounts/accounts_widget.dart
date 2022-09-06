@@ -156,7 +156,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 16, 16),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
