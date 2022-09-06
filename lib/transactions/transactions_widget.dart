@@ -367,6 +367,36 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                     },
                                                                                   ),
                                                                                 ),
+                                                                              if (columnTransactionsRecord.incomeCategory != null)
+                                                                                Padding(
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                                                                  child: StreamBuilder<IncomeCategoriesRecord>(
+                                                                                    stream: IncomeCategoriesRecord.getDocument(columnTransactionsRecord.incomeCategory!),
+                                                                                    builder: (context, snapshot) {
+                                                                                      // Customize what your widget looks like when it's loading.
+                                                                                      if (!snapshot.hasData) {
+                                                                                        return Center(
+                                                                                          child: SizedBox(
+                                                                                            width: 50,
+                                                                                            height: 50,
+                                                                                            child: SpinKitRing(
+                                                                                              color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                              size: 50,
+                                                                                            ),
+                                                                                          ),
+                                                                                        );
+                                                                                      }
+                                                                                      final textIncomeCategoriesRecord = snapshot.data!;
+                                                                                      return AutoSizeText(
+                                                                                        textIncomeCategoriesRecord.categoryName!.maybeHandleOverflow(
+                                                                                          maxChars: 25,
+                                                                                          replacement: '…',
+                                                                                        ),
+                                                                                        style: FlutterFlowTheme.of(context).subtitle1,
+                                                                                      );
+                                                                                    },
+                                                                                  ),
+                                                                                ),
                                                                               if (columnTransactionsRecord.transactionCategory == null)
                                                                                 Padding(
                                                                                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
@@ -682,6 +712,36 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                       final textCategoriesRecord = snapshot.data!;
                                                                                       return AutoSizeText(
                                                                                         textCategoriesRecord.categoryName!.maybeHandleOverflow(
+                                                                                          maxChars: 25,
+                                                                                          replacement: '…',
+                                                                                        ),
+                                                                                        style: FlutterFlowTheme.of(context).subtitle1,
+                                                                                      );
+                                                                                    },
+                                                                                  ),
+                                                                                ),
+                                                                              if (columnTransactionsRecord.incomeCategory != null)
+                                                                                Padding(
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                                                                  child: StreamBuilder<IncomeCategoriesRecord>(
+                                                                                    stream: IncomeCategoriesRecord.getDocument(columnTransactionsRecord.incomeCategory!),
+                                                                                    builder: (context, snapshot) {
+                                                                                      // Customize what your widget looks like when it's loading.
+                                                                                      if (!snapshot.hasData) {
+                                                                                        return Center(
+                                                                                          child: SizedBox(
+                                                                                            width: 50,
+                                                                                            height: 50,
+                                                                                            child: SpinKitRing(
+                                                                                              color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                              size: 50,
+                                                                                            ),
+                                                                                          ),
+                                                                                        );
+                                                                                      }
+                                                                                      final textIncomeCategoriesRecord = snapshot.data!;
+                                                                                      return AutoSizeText(
+                                                                                        textIncomeCategoriesRecord.categoryName!.maybeHandleOverflow(
                                                                                           maxChars: 25,
                                                                                           replacement: '…',
                                                                                         ),

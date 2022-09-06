@@ -136,7 +136,7 @@ class MobileTypography extends Typography {
   TextStyle get title1 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w800,
         fontSize: 24,
       );
   String get title2Family => 'Fira Sans';
@@ -171,7 +171,7 @@ class MobileTypography extends Typography {
   TextStyle get bodyText1 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w500,
         fontSize: 14,
       );
   String get bodyText2Family => 'Fira Sans';
