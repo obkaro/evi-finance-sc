@@ -1500,7 +1500,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                               () async {
                                                                             final transactionsUpdateData =
                                                                                 createTransactionsRecordData(
-                                                                              incomeCategory: columnTransactionsRecord.incomeCategory,
+                                                                              incomeCategory: rowIncomeCategoriesRecord.reference,
                                                                             );
                                                                             await columnTransactionsRecord.reference.update(transactionsUpdateData);
                                                                           },
