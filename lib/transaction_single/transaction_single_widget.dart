@@ -1591,6 +1591,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                 elevation: 0,
                                                                 borderSide:
                                                                     BorderSide(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryColor,
                                                                   width: 0,
                                                                 ),
                                                                 borderRadius:
