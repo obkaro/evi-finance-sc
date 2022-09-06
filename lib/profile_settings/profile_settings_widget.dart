@@ -184,27 +184,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                          child: InkWell(
-                            onTap: () async {
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      EditIncomeSourcesWidget(),
-                                ),
-                              );
-                            },
-                            child: CButtonFilledCopyWidget(
-                              text: 'Edit Income Sources',
-                              icon: Icon(
-                                Icons.edit_rounded,
-                                size: 16,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: FFButtonWidget(
                             onPressed: () async {
                               if (formKey.currentState == null ||
@@ -243,6 +222,26 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                child: InkWell(
+                  onTap: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditIncomeSourcesWidget(),
+                      ),
+                    );
+                  },
+                  child: CButtonFilledCopyWidget(
+                    text: 'Edit Income Sources',
+                    icon: Icon(
+                      Icons.edit_rounded,
+                      size: 16,
                     ),
                   ),
                 ),
