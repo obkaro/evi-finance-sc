@@ -213,8 +213,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               final usersUpdateData = createUsersRecordData(
                                 email: textController2!.text,
                                 phoneNumber: textController3!.text,
-                                username: valueOrDefault(
-                                    currentUserDocument?.username, ''),
+                                username: textController1!.text,
                               );
                               await currentUserReference!
                                   .update(usersUpdateData);
