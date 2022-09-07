@@ -33,8 +33,8 @@ class _CButtonFilledCopyWidgetState extends State<CButtonFilledCopyWidget> {
   @override
   Widget build(BuildContext context) {
     return FFButtonWidget(
-      onPressed: () {
-        print('Button pressed ...');
+      onPressed: () async {
+        await widget.action?.call();
       },
       text: widget.text!,
       icon: widget.icon,
