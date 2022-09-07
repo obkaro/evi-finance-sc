@@ -203,6 +203,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                         color: FlutterFlowTheme.of(context).primaryColor,
                         size: 20,
                       ),
+                      action: () async {},
                     ),
                   ),
                 ),

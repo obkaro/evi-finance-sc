@@ -1041,26 +1041,27 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                         ),
                                                                       ),
                                                                     if (columnTransactionsRecord
-                                                                            .transactionCategory ==
+                                                                            .incomeCategory ==
                                                                         null)
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            0,
-                                                                            0,
-                                                                            0,
-                                                                            8),
-                                                                        child:
-                                                                            AutoSizeText(
-                                                                          '-',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText1
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
-                                                                                color: Color(0xFFD40F0F),
-                                                                                fontWeight: FontWeight.bold,
-                                                                                fontStyle: FontStyle.italic,
+                                                                      Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.min,
+                                                                        children: [
+                                                                          if (columnTransactionsRecord.transactionCategory ==
+                                                                              null)
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                                                              child: AutoSizeText(
+                                                                                '-',
+                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                                      color: Color(0xFFD40F0F),
+                                                                                      fontWeight: FontWeight.bold,
+                                                                                      fontStyle: FontStyle.italic,
+                                                                                    ),
                                                                               ),
-                                                                        ),
+                                                                            ),
+                                                                        ],
                                                                       ),
                                                                     Text(
                                                                       '${dateTimeFormat('jm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
