@@ -184,8 +184,13 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                          child: InkWell(
-                            onTap: () async {
+                          child: CButtonFilledCopyWidget(
+                            text: 'Edit Income Sources',
+                            icon: Icon(
+                              Icons.edit_rounded,
+                              size: 16,
+                            ),
+                            action: () async {
                               await Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -194,22 +199,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                 ),
                               );
                             },
-                            child: CButtonFilledCopyWidget(
-                              text: 'Edit Income Sources',
-                              icon: Icon(
-                                Icons.edit_rounded,
-                                size: 16,
-                              ),
-                              action: () async {
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        EditIncomeSourcesWidget(),
-                                  ),
-                                );
-                              },
-                            ),
                           ),
                         ),
                         Padding(
