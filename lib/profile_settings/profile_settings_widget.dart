@@ -74,78 +74,78 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 24),
-                          child: AuthUserStreamWidget(
-                            child: TextFormField(
-                              controller: textController1,
-                              onChanged: (_) => EasyDebounce.debounce(
-                                'textController1',
-                                Duration(milliseconds: 2000),
-                                () => setState(() {}),
-                              ),
-                              autofocus: true,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                hintText: 'New username here',
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                filled: true,
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                              ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
-                              keyboardType: TextInputType.name,
+                        AuthUserStreamWidget(
+                          child: TextFormField(
+                            controller: textController1,
+                            onChanged: (_) => EasyDebounce.debounce(
+                              'textController1',
+                              Duration(milliseconds: 2000),
+                              () => setState(() {}),
                             ),
+                            autofocus: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              hintText: 'New username here',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            style: FlutterFlowTheme.of(context).bodyText1,
+                            keyboardType: TextInputType.name,
                           ),
                         ),
-                        TextFormField(
-                          controller: textController2,
-                          onChanged: (_) => EasyDebounce.debounce(
-                            'textController2',
-                            Duration(milliseconds: 2000),
-                            () => setState(() {}),
-                          ),
-                          autofocus: true,
-                          readOnly: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            hintText: 'Email address here',
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(12),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                          child: TextFormField(
+                            controller: textController2,
+                            onChanged: (_) => EasyDebounce.debounce(
+                              'textController2',
+                              Duration(milliseconds: 2000),
+                              () => setState(() {}),
                             ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1,
+                            autofocus: true,
+                            readOnly: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              hintText: 'Email address here',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              borderRadius: BorderRadius.circular(12),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                             ),
-                            filled: true,
-                            fillColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            style: FlutterFlowTheme.of(context).bodyText1,
+                            keyboardType: TextInputType.emailAddress,
                           ),
-                          style: FlutterFlowTheme.of(context).bodyText1,
-                          keyboardType: TextInputType.emailAddress,
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: AuthUserStreamWidget(
                             child: TextFormField(
                               controller: textController3,
@@ -184,6 +184,36 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                          child: InkWell(
+                            onTap: () async {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      EditIncomeSourcesWidget(),
+                                ),
+                              );
+                            },
+                            child: CButtonFilledCopyWidget(
+                              text: 'Edit Income Sources',
+                              icon: Icon(
+                                Icons.edit_rounded,
+                                size: 16,
+                              ),
+                              action: () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        EditIncomeSourcesWidget(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: FFButtonWidget(
                             onPressed: () async {
                               if (formKey.currentState == null ||
@@ -192,9 +222,10 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               }
 
                               final usersUpdateData = createUsersRecordData(
-                                displayName: textController1!.text,
                                 email: textController2!.text,
                                 phoneNumber: textController3!.text,
+                                username: valueOrDefault(
+                                    currentUserDocument?.username, ''),
                               );
                               await currentUserReference!
                                   .update(usersUpdateData);
@@ -222,26 +253,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                           ),
                         ),
                       ],
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                child: InkWell(
-                  onTap: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditIncomeSourcesWidget(),
-                      ),
-                    );
-                  },
-                  child: CButtonFilledCopyWidget(
-                    text: 'Edit Income Sources',
-                    icon: Icon(
-                      Icons.edit_rounded,
-                      size: 16,
                     ),
                   ),
                 ),

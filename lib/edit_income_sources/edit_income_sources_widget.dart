@@ -508,6 +508,7 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                         Icons.add_rounded,
                                         size: 16,
                                       ),
+                                      action: () async {},
                                     ),
                                   ),
                                 ),

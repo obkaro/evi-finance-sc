@@ -10,10 +10,12 @@ class CButtonFilledCopyWidget extends StatefulWidget {
     Key? key,
     this.text,
     this.icon,
+    this.action,
   }) : super(key: key);
 
   final String? text;
   final Widget? icon;
+  final Future<dynamic> Function()? action;
 
   @override
   _CButtonFilledCopyWidgetState createState() =>

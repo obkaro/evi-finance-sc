@@ -1512,8 +1512,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                                 48,
                                                                             color:
                                                                                 FlutterFlowTheme.of(context).secondaryBackground,
-                                                                            textStyle: FlutterFlowTheme.of(context).bodyText2.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyText2Family,
+                                                                            textStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                                   color: FlutterFlowTheme.of(context).primaryColor,
                                                                                 ),
                                                                             elevation:
@@ -1580,11 +1580,11 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                     .primaryColor,
                                                                 textStyle: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyText2
+                                                                    .bodyText1
                                                                     .override(
                                                                       fontFamily:
                                                                           FlutterFlowTheme.of(context)
-                                                                              .bodyText2Family,
+                                                                              .bodyText1Family,
                                                                       color: Colors
                                                                           .white,
                                                                     ),

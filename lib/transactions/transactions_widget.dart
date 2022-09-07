@@ -750,7 +750,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                     },
                                                                                   ),
                                                                                 ),
-                                                                              if (columnTransactionsRecord.transactionCategory == null)
+                                                                              if (columnTransactionsRecord.incomeCategory == null)
                                                                                 Padding(
                                                                                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                                                                   child: AutoSizeText(
