@@ -12,7 +12,7 @@ const axios = require('axios');
 
 exports.accountupdate = functions.https.onRequest(async (req, res) => {
 
-  functions.logger.log("REQUEST BODY", req.body);
+  //functions.logger.log("REQUEST BODY", req.body);
 
   let payload = req.body;
 
@@ -40,7 +40,7 @@ exports.accountupdate = functions.https.onRequest(async (req, res) => {
       reauthRequired: false
     };
 
-    functions.logger.log("Update Object", update);
+    //functions.logger.log("Update Object", update);
 
     if (!account.empty) {
       const snapshot = account.docs[0];
@@ -55,17 +55,41 @@ exports.accountupdate = functions.https.onRequest(async (req, res) => {
         .request(options)
         .then(async function (response) {
 
-          response.data.forEach(element => {
+          //functions.logger.log("RESPONSE", response.data);
+
+          const transactions = response.data.data;
+
+          //for (let element in transactions) {
+
+          response.data.data.forEach(async element => {
+
+            //functions.logger.log("ELEMENT", element);
 
             const id = element.amount + element.narration + element.date + element.balance;
-            const parsedDate = Date.parse(element.date);
+            const parsedDate = new Date(Date.parse(element.date));
 
-            const writetransactions = await admin.firestore().collection('transactions').doc(id).set(
+            functions.logger.log(id);
+
+            const hash = function (str, seed = 0) {
+              let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+              for (let i = 0, ch; i < str.length; i++) {
+                ch = str.charCodeAt(i);
+                h1 = Math.imul(h1 ^ ch, 2654435761);
+                h2 = Math.imul(h2 ^ ch, 1597334677);
+              }
+              h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+              h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+              return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+            };
+
+            functions.logger.log(hash(id));
+
+            const writetransactions = await admin.firestore().collection('transactions').doc(hash(id).toString()).set(
               {
                 account: account.docs[0].ref.path,
                 trasactionDate: admin.firestore.Timestamp.fromDate(parsedDate),
                 //monoCategory: transaction.data[i].,
-                transactionOwner: account.docs[0].accountOwner.path,
+                transactionOwner: account.docs[0].data().accountOwner.path,
                 balanceAfter: element.balance,
                 transactionAmount: element.amount,
                 transactionMonoID: element._id,
@@ -75,7 +99,7 @@ exports.accountupdate = functions.https.onRequest(async (req, res) => {
               }, { merge: true }
             )
           });
-          functions.logger.log(response.data);
+          //functions.logger.log(response.data);
         })
         .catch(function (error) {
           console.error(error);
@@ -84,12 +108,81 @@ exports.accountupdate = functions.https.onRequest(async (req, res) => {
       functions.logger.log("ACCOUNT NOT FOUND", account);
     }
 
-    functions.logger.log("ACCOUNT EXISTING DATA", account);
+    //functions.logger.log("ACCOUNT EXISTING DATA", account);
 
-    res.status(200).send();
-  }
+    res.status(200).send('SUCCESS');
+  } else res.status(200).send('INVALID REQUEST');
 
 })
+
+//DATASYNC WEBHOOK
+exports.datasyncHook = functions.https.onRequest(async (req, res) => {
+
+  const payload = req.body;
+
+  if (payload.event == 'mono.events.reauthorisation_required') {
+    const account = await admin.firestore().collection('accounts').where('authID', '==', payload.data.account._id).get();
+
+    const currentdate = new Date();
+
+    const update = {
+      failedSync: currentdate,
+      reauthRequired: true
+    };
+
+    //functions.logger.log("Update Object", update);
+
+    if (!account.empty) {
+      const snapshot = account.docs[0];
+      await snapshot.ref.update(update);
+    }
+  };
+})
+
+//PERIODIC DATA SYNC
+exports.datasync = functions.https.onRequest(async (req, res) => {
+
+  const payload = req.body;
+
+  const accounts = await admin.firestore().collection('accounts').get();
+
+  accounts.docs.forEach(async (account) => {
+    const options = {
+      method: 'POST',
+      url: 'https://api.withmono.com/accounts/' + account.data().authID + '/sync?allow_incomplete_statement=false',
+      headers: { Accept: 'application/json', 'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid' }
+    };
+    axios
+      .request(options)
+      .then(async function (response) {
+
+        // if(response.data.event === "mono.events.account_synced") {
+
+        //     const options = {
+        //       method: 'GET',
+        //       url: 'https://api.withmono.com/accounts/' + req.body.data.account._id + '/transactions',
+        //       headers: { Accept: 'application/json', 'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid' }
+        //     };
+        //     axios
+        //       .request(options)
+        //       .then(async function (response) {});
+        // }
+
+        functions.logger.log(account.data().authID, response.data);
+
+        if (response.data.event === "mono.events.reauthorisation_required") {
+          //Set requth required to true and notify user
+        }
+
+        if (response.data.event === "mono.events.sync_failed") { }
+        //Set failed sync date
+      }).catch(function (error) {
+        console.error(error);
+      });
+      res.status(200).send();
+  });
+})
+
 
 
 exports.needsreauth = functions.runWith({ timeoutSeconds: 300 }).https.onRequest(async (req, res) => {
@@ -223,35 +316,7 @@ exports.renewbudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (co
   return null;
 })
 
-
-exports.testNotifications = functions.https.onRequest(async (req, res) => {
-
-  // const notification = req.body;
-  // //const user_refs = ""
-  // const timestamp = admin.firestore.Timestamp.now();
-
-  // const newNotification = await admin.firestore().collection('ff_push_notifications').add(
-  //   {
-  //     initial_page_name: req.body.initial_page_name,
-  //     notification_sound: req.body.notification_sound,
-  //     notification_text: req.body.notification_text,
-  //     notification_title: req.body.notification_title,
-  //     parameter_data: req.body.parameter_data,
-  //     user_refs: req.body.user_refs,
-  //     timestamp: timestamp
-  //   }
-  // );
-
-  // functions.logger.log("NOTIFICATION:", newNotification.data());
-
-  // res.status(200).send(newNotification.data());
-
-  //const action = admin.firestore().collection('transactions').
-
-})
-
-exports.budgetCreated = functions.firestore.document('budgets/{budgetID}').onCreate((snap, context) => {
-  const createdBudget = snap.data();
+//SCHEDULE NOTIFICAITON TO CHECK TRANSACTIONS
 
 
-});
+exports.subscription = functions.https.onRequest(async (req, res) => {})
