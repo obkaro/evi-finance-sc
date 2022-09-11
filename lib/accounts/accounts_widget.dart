@@ -1,10 +1,10 @@
 import '../account_single/account_single_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/m_appbar_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../custom_code/actions/index.dart' as actions;
-import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -57,90 +57,35 @@ class _AccountsWidgetState extends State<AccountsWidget> {
             child: AppBar(
               backgroundColor: Color(0x00FF0054),
               automaticallyImplyLeading: false,
-              flexibleSpace: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      32, 0, 0, 0),
-                                  child: Icon(
-                                    Icons.account_balance_rounded,
-                                    color: Colors.white,
-                                    size: 24,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      8, 0, 0, 0),
-                                  child: Text(
-                                    'Accounts',
-                                    style: FlutterFlowTheme.of(context)
-                                        .title3
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .title3Family,
-                                          color: Color(0xFFF9F9F9),
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .title3Family),
-                                        ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+              flexibleSpace: MAppbarWidget(
+                titleText: 'Accounts',
+                icon: Icon(
+                  Icons.account_balance_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryPrimary,
+                  size: 32,
+                ),
+                bgColor: FlutterFlowTheme.of(context).secondaryColor,
+                fgColor: FlutterFlowTheme.of(context).primaryBackground,
+                textColor: FlutterFlowTheme.of(context).secondaryPrimary,
+                actionIcon: Icon(
+                  Icons.account_balance_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryColor,
+                  size: 0,
+                ),
+                iconAction: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AccountsWidget(),
                     ),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                    ),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(0),
-                          bottomRight: Radius.circular(0),
-                          topLeft: Radius.circular(32),
-                          topRight: Radius.circular(32),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                  );
+                },
               ),
               actions: [],
               elevation: 0,
             ),
           ),
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
               // Action_LinkNewAcct
@@ -165,14 +110,6 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Container(
-                        width: 0,
-                        height: 0,
-                        child: custom_widgets.BackButtonControl(
-                          width: 0,
-                          height: 0,
-                        ),
-                      ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                         child: StreamBuilder<List<AccountsRecord>>(
@@ -225,15 +162,6 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                     child: Container(
                                       width: 100,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 14,
-                                            color: FlutterFlowTheme.of(context)
-                                                .shadowGray,
-                                          )
-                                        ],
                                         borderRadius: BorderRadius.circular(16),
                                       ),
                                       child: Padding(
@@ -418,8 +346,6 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                             width: double.infinity,
                             height: 100,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: Padding(

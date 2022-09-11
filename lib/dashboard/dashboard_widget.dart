@@ -63,7 +63,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
             : null;
         return Scaffold(
           key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
@@ -80,154 +80,201 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                         height: 0,
                       ),
                     ),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(32, 32, 32, 32),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Image.asset(
-                                    'assets/images/Group_22.png',
-                                    width: 24,
-                                    height: 24,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Expanded(
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Welcome back, ',
-                                          style: FlutterFlowTheme.of(context)
-                                              .subtitle2
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle2Family,
-                                                fontStyle: FontStyle.italic,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .subtitle2Family),
-                                              ),
-                                        ),
-                                        AuthUserStreamWidget(
-                                          child: Text(
-                                            valueOrDefault(
-                                                currentUserDocument?.username,
-                                                ''),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).secondaryColor,
+                          borderRadius: BorderRadius.circular(32),
+                        ),
+                        child: Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(24, 24, 24, 24),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/Group_22.png',
+                                      width: 24,
+                                      height: 24,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    Expanded(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Welcome back, ',
                                             style: FlutterFlowTheme.of(context)
-                                                .subtitle1
+                                                .subtitle2
                                                 .override(
                                                   fontFamily:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .subtitle1Family,
+                                                          .subtitle2Family,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondarySecondary,
                                                   fontStyle: FontStyle.italic,
                                                   useGoogleFonts: GoogleFonts
                                                           .asMap()
                                                       .containsKey(
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .subtitle1Family),
+                                                              .subtitle2Family),
+                                                ),
+                                          ),
+                                          AuthUserStreamWidget(
+                                            child: Text(
+                                              valueOrDefault(
+                                                  currentUserDocument?.username,
+                                                  ''),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .subtitle1
+                                                  .override(
+                                                    fontFamily:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .subtitle1Family,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryPrimary,
+                                                    fontStyle: FontStyle.italic,
+                                                    useGoogleFonts: GoogleFonts
+                                                            .asMap()
+                                                        .containsKey(
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .subtitle1Family),
+                                                  ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.notifications_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondarySecondary,
+                                      size: 24,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 20, 20, 20),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 0, 8),
+                                          child: Text(
+                                            'Your Total Balance',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyText1Family,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondarySecondary,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1Family),
                                                 ),
                                           ),
                                         ),
+                                        StreamBuilder<List<AccountsRecord>>(
+                                          stream: queryAccountsRecord(
+                                            queryBuilder: (accountsRecord) =>
+                                                accountsRecord.where(
+                                                    'accountOwner',
+                                                    isEqualTo:
+                                                        currentUserReference),
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50,
+                                                  height: 50,
+                                                  child: SpinKitRing(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryColor,
+                                                    size: 50,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<AccountsRecord>
+                                                textAccountsRecordList =
+                                                snapshot.data!;
+                                            return Text(
+                                              functions.formatTransCurrency(
+                                                  functions.sumAccountBalances(
+                                                      textAccountsRecordList
+                                                          .toList())),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .title1
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .title1Family,
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryPrimary,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .title1Family),
+                                                      ),
+                                            );
+                                          },
+                                        ),
                                       ],
                                     ),
-                                  ),
-                                  Icon(
-                                    Icons.notifications_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 24,
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  20, 20, 20, 20),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 8),
-                                        child: Text(
-                                          'Your Total Balance',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      StreamBuilder<List<AccountsRecord>>(
-                                        stream: queryAccountsRecord(
-                                          queryBuilder: (accountsRecord) =>
-                                              accountsRecord.where(
-                                                  'accountOwner',
-                                                  isEqualTo:
-                                                      currentUserReference),
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50,
-                                                height: 50,
-                                                child: SpinKitRing(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryColor,
-                                                  size: 50,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          List<AccountsRecord>
-                                              textAccountsRecordList =
-                                              snapshot.data!;
-                                          return Text(
-                                            functions.formatTransCurrency(
-                                                functions.sumAccountBalances(
-                                                    textAccountsRecordList
-                                                        .toList())),
-                                            style: FlutterFlowTheme.of(context)
-                                                .title3,
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(0),
                           bottomRight: Radius.circular(0),
@@ -240,17 +287,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                         children: [
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                            child: Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(32, 32, 32, 0),
+                                EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -285,7 +322,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
                             child: StreamBuilder<List<AccountsRecord>>(
                               stream: queryAccountsRecord(
                                 queryBuilder: (accountsRecord) =>
@@ -325,7 +362,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                           rowAccountsRecordList[rowIndex];
                                       return Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            10, 8, 0, 16),
+                                            0, 8, 12, 16),
                                         child: InkWell(
                                           onTap: () async {
                                             await Navigator.push(
@@ -341,8 +378,11 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                           child: Container(
                                             width: 132,
                                             decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
                                               borderRadius:
-                                                  BorderRadius.circular(16),
+                                                  BorderRadius.circular(32),
                                             ),
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
@@ -562,7 +602,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                     return Container(
                                       width: double.infinity,
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(16),
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius: BorderRadius.circular(32),
                                       ),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(

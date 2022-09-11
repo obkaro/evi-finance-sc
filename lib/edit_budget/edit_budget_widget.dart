@@ -18,11 +18,9 @@ class EditBudgetWidget extends StatefulWidget {
   const EditBudgetWidget({
     Key? key,
     this.budget,
-    this.categoriesSum,
   }) : super(key: key);
 
   final BudgetsRecord? budget;
-  final int? categoriesSum;
 
   @override
   _EditBudgetWidgetState createState() => _EditBudgetWidgetState();
@@ -94,21 +92,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'What type of budget would you like?',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText2,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                               child: FlutterFlowDropDown(
                                 initialOption: dropDownValue ??=
@@ -143,36 +126,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Wrap(
-                                      spacing: 0,
-                                      runSpacing: 0,
-                                      alignment: WrapAlignment.start,
-                                      crossAxisAlignment:
-                                          WrapCrossAlignment.start,
-                                      direction: Axis.horizontal,
-                                      runAlignment: WrapAlignment.start,
-                                      verticalDirection: VerticalDirection.down,
-                                      clipBehavior: Clip.none,
-                                      children: [
-                                        Text(
-                                          'How much do you plan to spend within your budget period?',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText2,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                               child: custom_widgets.CurrencyTextField(
                                 width: MediaQuery.of(context).size.width,
@@ -195,16 +148,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  4, 4, 4, 4),
-                                          child: Text(
-                                            'When does this budget start?',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText2,
-                                          ),
-                                        ),
                                         Container(
                                           width: double.infinity,
                                           decoration: BoxDecoration(
@@ -237,17 +180,10 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                     'Monthly Budget') {
                                                   final budgetsUpdateData =
                                                       createBudgetsRecordData(
-                                                    budgetAmount: FFAppState()
-                                                        .currencyTextField,
                                                     budgetStart:
                                                         calendarSelectedDay
                                                             ?.start,
                                                     isRecurring: true,
-                                                    unallocatedAmount:
-                                                        functions.subInt(
-                                                            FFAppState()
-                                                                .currencyTextField,
-                                                            20000),
                                                     budgetDuration: 'Monthly',
                                                     status: 'active',
                                                     duration: 30,
@@ -256,8 +192,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                             calendarSelectedDay
                                                                 ?.start,
                                                             30),
-                                                    budgetOwner:
-                                                        currentUserReference,
                                                   );
                                                   await widget.budget!.reference
                                                       .update(
@@ -265,17 +199,10 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                 } else {
                                                   final budgetsUpdateData =
                                                       createBudgetsRecordData(
-                                                    budgetAmount: FFAppState()
-                                                        .currencyTextField,
                                                     budgetStart:
                                                         calendarSelectedDay
                                                             ?.start,
                                                     isRecurring: true,
-                                                    unallocatedAmount:
-                                                        functions.subInt(
-                                                            FFAppState()
-                                                                .currencyTextField,
-                                                            20000),
                                                     budgetDuration: 'Weekly',
                                                     status: 'active',
                                                     duration: 7,
@@ -284,8 +211,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                             calendarSelectedDay
                                                                 ?.start,
                                                             7),
-                                                    budgetOwner:
-                                                        currentUserReference,
                                                   );
                                                   await widget.budget!.reference
                                                       .update(
@@ -376,7 +301,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryColor,
+                                                                .fadedDivider,
                                                         fontWeight:
                                                             FontWeight.w300,
                                                         useGoogleFonts: GoogleFonts
@@ -460,82 +385,116 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            if (FFAppState().currencyTextField >=
-                                widget.categoriesSum!) {
-                              // Action_CreateBudgetStep1
-
-                              final budgetsUpdateData = createBudgetsRecordData(
-                                budgetAmount: FFAppState().currencyTextField,
-                                budgetDuration: dropDownValue,
-                                unallocatedAmount: functions.subInt(
-                                    FFAppState().currencyTextField,
-                                    widget.categoriesSum),
-                              );
-                              await widget.budget!.reference
-                                  .update(budgetsUpdateData);
-                              Navigator.pop(context);
-                            } else {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('Invalid entry'),
-                                    content: Text(
-                                        'Budget amount should be greater than the sum of existing categories within it.'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('Okay'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                              await showModalBottomSheet(
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
-                                context: context,
-                                builder: (context) {
-                                  return Padding(
-                                    padding: MediaQuery.of(context).viewInsets,
-                                    child: DialogBoxWidget(
-                                      heading: 'Invalid entry',
-                                      body:
-                                          'Budget amount should be greater than the sum of existing categories within it.',
-                                      buttonYes: 'Got it',
-                                      buttonNo: 'c',
-                                      information: true,
-                                    ),
-                                  );
-                                },
+                        child: StreamBuilder<List<CategoriesRecord>>(
+                          stream: queryCategoriesRecord(
+                            parent: columnBudgetsRecord.reference,
+                            queryBuilder: (categoriesRecord) =>
+                                categoriesRecord.where('category_name',
+                                    isNotEqualTo: 'Unallocated'),
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: SpinKitRing(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    size: 50,
+                                  ),
+                                ),
                               );
                             }
-                          },
-                          text: 'Save',
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 60,
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .subtitle2
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .subtitle2Family,
-                                  color: Colors.white,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .subtitle2Family),
+                            List<CategoriesRecord> buttonCategoriesRecordList =
+                                snapshot.data!;
+                            return FFButtonWidget(
+                              onPressed: () async {
+                                if (FFAppState().currencyTextField >=
+                                    functions.sumCategoryAmounts(
+                                        buttonCategoriesRecordList.toList())) {
+                                  // Action_CreateBudgetStep1
+
+                                  final budgetsUpdateData =
+                                      createBudgetsRecordData(
+                                    budgetAmount:
+                                        FFAppState().currencyTextField,
+                                    budgetDuration: dropDownValue,
+                                    unallocatedAmount: functions.subInt(
+                                        FFAppState().currencyTextField,
+                                        functions.sumCategoryAmounts(
+                                            buttonCategoriesRecordList
+                                                .toList())),
+                                  );
+                                  await widget.budget!.reference
+                                      .update(budgetsUpdateData);
+                                  Navigator.pop(context);
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('Invalid entry'),
+                                        content: Text(
+                                            'Budget amount should be greater than the sum of existing categories within it.'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Okay'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (context) {
+                                      return Padding(
+                                        padding:
+                                            MediaQuery.of(context).viewInsets,
+                                        child: DialogBoxWidget(
+                                          heading: 'Invalid entry',
+                                          body:
+                                              'Budget amount should be greater than the sum of existing categories within it.',
+                                          buttonYes: 'Got it',
+                                          buttonNo: 'c',
+                                          information: true,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                }
+                              },
+                              text: 'Save',
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: 60,
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .subtitle2Family,
+                                      color: Colors.white,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2Family),
+                                    ),
+                                elevation: 2,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
                                 ),
-                            elevation: 2,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ],

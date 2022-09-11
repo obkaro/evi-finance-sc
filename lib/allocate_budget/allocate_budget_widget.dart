@@ -123,14 +123,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 14,
-                                          color: FlutterFlowTheme.of(context)
-                                              .shadowGray,
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(16),
+                                      borderRadius: BorderRadius.circular(32),
                                     ),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -578,16 +571,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                         decoration: BoxDecoration(
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryBackground,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 14,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .shadowGray,
-                                            )
-                                          ],
                                           borderRadius:
-                                              BorderRadius.circular(16),
+                                              BorderRadius.circular(32),
                                         ),
                                         child: Builder(
                                           builder: (context) {

@@ -107,7 +107,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'EditBudget': (data) async => EditBudgetWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
-        categoriesSum: getParameter(data, 'categoriesSum'),
       ),
   'Budgets': (data) async => BudgetsWidget(),
   'CategorySingle': (data) async => CategorySingleWidget(

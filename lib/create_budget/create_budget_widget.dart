@@ -92,14 +92,18 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(
-                                  'What type of budget would you like?',
-                                  style: FlutterFlowTheme.of(context).bodyText2,
+                                Expanded(
+                                  child: Text(
+                                    'How long is this budget to last?',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
                                 ),
                               ],
                             ),
@@ -128,14 +132,21 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(
-                                  'How much do you plan to spend within your budget period?',
-                                  style: FlutterFlowTheme.of(context).bodyText2,
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16, 0, 16, 0),
+                                    child: Text(
+                                      'How much do you plan to spend within your budget period?',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -166,11 +177,23 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            4, 4, 4, 4),
-                                        child: Text(
-                                          'When does this budget start?',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText2,
+                                            16, 0, 16, 0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 0, 0, 8),
+                                                child: Text(
+                                                  'When does this budget start?',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       Container(
@@ -342,7 +365,8 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .secondaryColor,
+                                                              .fadedDivider,
+                                                      fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.w300,
                                                       useGoogleFonts: GoogleFonts
