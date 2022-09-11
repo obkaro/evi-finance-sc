@@ -12,7 +12,7 @@ const axios = require('axios');
 
 exports.accountupdate = functions.https.onRequest(async (req, res) => {
 
-  //functions.logger.log("REQUEST BODY", req.body);
+  functions.logger.log("REQUEST BODY", req.body);
 
   let payload = req.body;
 
@@ -68,7 +68,7 @@ exports.accountupdate = functions.https.onRequest(async (req, res) => {
             const id = element.amount + element.narration + element.date + element.balance;
             const parsedDate = new Date(Date.parse(element.date));
 
-            functions.logger.log(id);
+            //functions.logger.log(id);
 
             const hash = function (str, seed = 0) {
               let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
@@ -86,10 +86,10 @@ exports.accountupdate = functions.https.onRequest(async (req, res) => {
 
             const writetransactions = await admin.firestore().collection('transactions').doc(hash(id).toString()).set(
               {
-                account: account.docs[0].ref.path,
+                account: account.docs[0].ref,
                 trasactionDate: admin.firestore.Timestamp.fromDate(parsedDate),
                 //monoCategory: transaction.data[i].,
-                transactionOwner: account.docs[0].data().accountOwner.path,
+                transactionOwner: account.docs[0].data().accountOwner,
                 balanceAfter: element.balance,
                 transactionAmount: element.amount,
                 transactionMonoID: element._id,
@@ -116,28 +116,28 @@ exports.accountupdate = functions.https.onRequest(async (req, res) => {
 })
 
 //DATASYNC WEBHOOK
-exports.datasyncHook = functions.https.onRequest(async (req, res) => {
+// exports.datasyncHook = functions.https.onRequest(async (req, res) => {
 
-  const payload = req.body;
+//   const payload = req.body;
 
-  if (payload.event == 'mono.events.reauthorisation_required') {
-    const account = await admin.firestore().collection('accounts').where('authID', '==', payload.data.account._id).get();
+//   if (payload.event == 'mono.events.reauthorisation_required') {
+//     const account = await admin.firestore().collection('accounts').where('authID', '==', payload.data.account._id).get();
 
-    const currentdate = new Date();
+//     const currentdate = new Date();
 
-    const update = {
-      failedSync: currentdate,
-      reauthRequired: true
-    };
+//     const update = {
+//       failedSync: currentdate,
+//       reauthRequired: true
+//     };
 
-    //functions.logger.log("Update Object", update);
+//     //functions.logger.log("Update Object", update);
 
-    if (!account.empty) {
-      const snapshot = account.docs[0];
-      await snapshot.ref.update(update);
-    }
-  };
-})
+//     if (!account.empty) {
+//       const snapshot = account.docs[0];
+//       await snapshot.ref.update(update);
+//     }
+//   };
+// })
 
 //PERIODIC DATA SYNC
 exports.datasync = functions.https.onRequest(async (req, res) => {
@@ -170,16 +170,16 @@ exports.datasync = functions.https.onRequest(async (req, res) => {
 
         functions.logger.log(account.data().authID, response.data);
 
-        if (response.data.event === "mono.events.reauthorisation_required") {
-          //Set requth required to true and notify user
-        }
+        // if (response.data.event === "mono.events.reauthorisation_required") {
+        //   //Set requth required to true and notify user
+        // }
 
-        if (response.data.event === "mono.events.sync_failed") { }
+        // if (response.data.event === "mono.events.sync_failed") { }
         //Set failed sync date
       }).catch(function (error) {
         console.error(error);
       });
-      res.status(200).send();
+    res.status(200).send();
   });
 })
 
@@ -196,7 +196,12 @@ exports.needsreauth = functions.runWith({ timeoutSeconds: 300 }).https.onRequest
 
     functions.logger.log("ACCOUNT EXISTING DATA", account.docs[0].data());
 
-    const update = { reauthRequired: true };
+    const currentdate = new Date();
+
+    const update = {
+      reauthRequired: true,
+      failedSync: currentdate
+    };
 
     if (!account.empty) {
       const snapshot = account.docs[0];
@@ -211,7 +216,7 @@ exports.needsreauth = functions.runWith({ timeoutSeconds: 300 }).https.onRequest
         notification_sound: 'default',
         notification_text: 'Hi ' + user.data().username + ', your authentication is required to update one of your accounts. Kindly ignore this message if you have provided authentication in the last few minutes.',
         notification_title: 'Evi',
-        timestamp: time,
+        timestamp: currentdate,
         user_refs: snapshot.data().accountOwner.path.toString()
       });
 
@@ -319,4 +324,36 @@ exports.renewbudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (co
 //SCHEDULE NOTIFICAITON TO CHECK TRANSACTIONS
 
 
-exports.subscription = functions.https.onRequest(async (req, res) => {})
+exports.subscriptionReminder = functions.firestore.document('subscriptions/{Id}')
+  .onWrite(async (change, context) => {
+
+    functions.logger.log(change.after.data());
+    const doc = change.after.exists ? change.after.data() : null;
+
+    if (doc == null) { return null; }
+    functions.logger.log(doc.expChargeDate);
+    const daysBefore = 1;
+    const parsedDate = doc.expChargeDate.toDate();
+    //functions.logger.log(parsedDate.toString());
+    //functions.logger.log(parsedDate.getTime());
+    //functions.logger.log(Date.parse(parsedDate));
+    const reminderDate = new Date(parsedDate.getTime() - (daysBefore * 86400000));
+    functions.logger.log(reminderDate);
+    const ownerid = doc.owner.path.toString().substring(6);
+
+    const user = await admin.firestore().collection('users').doc(ownerid).get();
+
+    const time = admin.firestore.Timestamp.now();
+
+    const subscriptionNotif = await admin.firestore().collection('ff_push_notifications').add({
+      initial_page_name: 'subscriptionDetails',
+      notification_sound: 'default',
+      notification_text: `Hey ${user.data().username}, your ${doc.name} subscription is due tomorrow.`,
+      notification_title: 'Evi',
+      parameter_data: change.after.ref.path,
+      scheduled_time: admin.firestore.Timestamp.fromDate(reminderDate),
+      timestamp: time,
+      user_refs: user.ref.path.toString()
+    });
+    return null;
+  })
