@@ -4,9 +4,11 @@ import '../components/m_appbar_widget.dart';
 import '../components/m_grid_menu_item_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../main.dart';
 import '../recurring_payments/recurring_payments_widget.dart';
 import '../settings/settings_widget.dart';
 import '../transactions/transactions_widget.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,11 +44,24 @@ class _MenuWidgetState extends State<MenuWidget> {
             icon: Icon(
               Icons.featured_play_list_rounded,
               color: Colors.white,
-              size: 32,
+              size: 24,
             ),
-            bgColor: FlutterFlowTheme.of(context).primaryColor,
+            bgColor: FlutterFlowTheme.of(context).secondaryColor,
             fgColor: FlutterFlowTheme.of(context).primaryBackground,
-            textColor: Colors.white,
+            textColor: FlutterFlowTheme.of(context).secondaryPrimary,
+            actionIcon: Icon(
+              Icons.featured_play_list_rounded,
+              color: FlutterFlowTheme.of(context).secondaryColor,
+              size: 0,
+            ),
+            iconAction: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NavBarPage(initialPage: 'Menu'),
+                ),
+              );
+            },
           ),
           actions: [],
           elevation: 0,
@@ -59,13 +74,21 @@ class _MenuWidgetState extends State<MenuWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
+              Container(
+                width: 0,
+                height: 0,
+                child: custom_widgets.BackButtonControl(
+                  width: 0,
+                  height: 0,
+                ),
+              ),
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                   child: GridView(
                     padding: EdgeInsets.zero,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                      crossAxisCount: 3,
                       crossAxisSpacing: 16,
                       mainAxisSpacing: 16,
                       childAspectRatio: 1,
@@ -77,7 +100,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                         menuIcon: Icon(
                           Icons.credit_card_rounded,
                           color: FlutterFlowTheme.of(context).primaryText,
-                          size: 48,
+                          size: 36,
                         ),
                         fgColor: FlutterFlowTheme.of(context).primaryText,
                         bgColor: Colors.transparent,
@@ -95,7 +118,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                         menuIcon: Icon(
                           Icons.compare_arrows_rounded,
                           color: FlutterFlowTheme.of(context).primaryText,
-                          size: 48,
+                          size: 36,
                         ),
                         fgColor: FlutterFlowTheme.of(context).primaryText,
                         bgColor: Colors.transparent,
@@ -113,7 +136,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                         menuIcon: Icon(
                           Icons.account_balance_rounded,
                           color: FlutterFlowTheme.of(context).primaryText,
-                          size: 48,
+                          size: 36,
                         ),
                         fgColor: FlutterFlowTheme.of(context).primaryText,
                         bgColor: Colors.transparent,
@@ -131,7 +154,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                         menuIcon: Icon(
                           Icons.pie_chart_rounded,
                           color: FlutterFlowTheme.of(context).primaryText,
-                          size: 48,
+                          size: 36,
                         ),
                         fgColor: FlutterFlowTheme.of(context).primaryText,
                         bgColor: Colors.transparent,
@@ -149,7 +172,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                         menuIcon: Icon(
                           Icons.settings_rounded,
                           color: FlutterFlowTheme.of(context).primaryText,
-                          size: 48,
+                          size: 36,
                         ),
                         fgColor: FlutterFlowTheme.of(context).primaryText,
                         bgColor: Colors.transparent,

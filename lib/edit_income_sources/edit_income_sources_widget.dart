@@ -284,14 +284,7 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 14,
-                                          color: FlutterFlowTheme.of(context)
-                                              .shadowGray,
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(16),
+                                      borderRadius: BorderRadius.circular(32),
                                     ),
                                     child: Builder(
                                       builder: (context) {

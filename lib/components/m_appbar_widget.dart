@@ -12,6 +12,8 @@ class MAppbarWidget extends StatefulWidget {
     this.bgColor,
     this.fgColor,
     this.textColor,
+    this.iconAction,
+    this.actionIcon,
   }) : super(key: key);
 
   final String? titleText;
@@ -19,6 +21,8 @@ class MAppbarWidget extends StatefulWidget {
   final Color? bgColor;
   final Color? fgColor;
   final Color? textColor;
+  final Future<dynamic> Function()? iconAction;
+  final Widget? actionIcon;
 
   @override
   _MAppbarWidgetState createState() => _MAppbarWidgetState();
@@ -54,22 +58,40 @@ class _MAppbarWidgetState extends State<MAppbarWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(32, 0, 0, 0),
-                        child: widget.icon!,
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                        child: Text(
-                          widget.titleText!,
-                          style: FlutterFlowTheme.of(context).title3.override(
-                                fontFamily:
-                                    FlutterFlowTheme.of(context).title3Family,
-                                color: widget.textColor,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context).title3Family),
+                      Expanded(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(32, 0, 0, 0),
+                              child: widget.icon!,
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                              child: Text(
+                                widget.titleText!,
+                                style: FlutterFlowTheme.of(context).title1,
                               ),
+                            ),
+                          ],
                         ),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 32, 0),
+                            child: InkWell(
+                              onTap: () async {
+                                await widget.iconAction?.call();
+                              },
+                              child: widget.actionIcon!,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -90,7 +112,7 @@ class _MAppbarWidgetState extends State<MAppbarWidget> {
             decoration: BoxDecoration(
               color: widget.fgColor,
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(0),
+                bottomLeft: Radius.circular(3),
                 bottomRight: Radius.circular(0),
                 topLeft: Radius.circular(32),
                 topRight: Radius.circular(32),

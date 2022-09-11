@@ -313,14 +313,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 14,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .shadowGray,
-                                              )
-                                            ],
                                             borderRadius:
                                                 BorderRadius.circular(32),
                                           ),
@@ -535,9 +527,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                   height: 48,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             12),
@@ -546,7 +535,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                             .all(
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .fadedDivider,
+                                                                          .primaryBackground,
                                                                       width: 1,
                                                                     ),
                                                                   ),
@@ -1287,7 +1276,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                           height: 60,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .neutralGray,
+                                                              .fadedDivider,
                                                           textStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -1296,8 +1285,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                     fontFamily:
                                                                         FlutterFlowTheme.of(context)
                                                                             .subtitle2Family,
-                                                                    color: Colors
-                                                                        .white,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryText,
                                                                     useGoogleFonts: GoogleFonts
                                                                             .asMap()
                                                                         .containsKey(

@@ -54,7 +54,7 @@ class _MGridMenuItemWidgetState extends State<MGridMenuItemWidget> {
             ),
             Text(
               widget.menuText!,
-              style: FlutterFlowTheme.of(context).subtitle1,
+              style: FlutterFlowTheme.of(context).bodyText1,
             ),
           ],
         ),

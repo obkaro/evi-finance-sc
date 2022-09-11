@@ -47,8 +47,8 @@ abstract class FlutterFlowTheme {
   late Color secondaryText;
 
   late Color eviredTransparent;
-  late Color neutralGray;
-  late Color grayIcon;
+  late Color secondaryPrimary;
+  late Color secondarySecondary;
   late Color gray200;
   late Color gray600;
   late Color fadedDivider;
@@ -91,17 +91,17 @@ DeviceSize getDeviceSize(BuildContext context) {
 
 class LightModeTheme extends FlutterFlowTheme {
   late Color primaryColor = const Color(0xFFFF0054);
-  late Color secondaryColor = const Color(0xFF1B2124);
+  late Color secondaryColor = const Color(0xFF0A0A0A);
   late Color tertiaryColor = const Color(0xFF1B998B);
   late Color alternate = const Color(0xFFFAA916);
-  late Color primaryBackground = const Color(0xFFFFFFFF);
-  late Color secondaryBackground = const Color(0xFFEBEBEB);
+  late Color primaryBackground = const Color(0xFFF1F1F1);
+  late Color secondaryBackground = const Color(0xFFFFFFFF);
   late Color primaryText = const Color(0xFF101010);
   late Color secondaryText = const Color(0xFF595959);
 
   late Color eviredTransparent = Color(0x28FF0054);
-  late Color neutralGray = Color(0xFF747474);
-  late Color grayIcon = Color(0xFF95A1AC);
+  late Color secondaryPrimary = Color(0xFFECECEC);
+  late Color secondarySecondary = Color(0xFFCECECE);
   late Color gray200 = Color(0xFFDBE2E7);
   late Color gray600 = Color(0xFF262D34);
   late Color fadedDivider = Color(0xFFDDDDDD);
@@ -136,7 +136,7 @@ class MobileTypography extends Typography {
   TextStyle get title1 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.bold,
         fontSize: 24,
       );
   String get title2Family => 'Fira Sans';
@@ -297,17 +297,17 @@ class DesktopTypography extends Typography {
 
 class DarkModeTheme extends FlutterFlowTheme {
   late Color primaryColor = const Color(0xFFFF0054);
-  late Color secondaryColor = const Color(0xFF494949);
+  late Color secondaryColor = const Color(0xFF0A0A0A);
   late Color tertiaryColor = const Color(0xFF1B998B);
   late Color alternate = const Color(0xFFFAA916);
   late Color primaryBackground = const Color(0xFF1D1D1D);
-  late Color secondaryBackground = const Color(0xFF101010);
+  late Color secondaryBackground = const Color(0xFF161616);
   late Color primaryText = const Color(0xFFE0E0E0);
   late Color secondaryText = const Color(0xFFD2D2D2);
 
   late Color eviredTransparent = Color(0x2AFF0054);
-  late Color neutralGray = Color(0xFF747474);
-  late Color grayIcon = Color(0xFF95A1AC);
+  late Color secondaryPrimary = Color(0xFFECECEC);
+  late Color secondarySecondary = Color(0xFFCECECE);
   late Color gray200 = Color(0xFFDBE2E7);
   late Color gray600 = Color(0xFF262D34);
   late Color fadedDivider = Color(0xFF2B2B2B);

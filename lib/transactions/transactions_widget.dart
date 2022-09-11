@@ -60,12 +60,6 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                     height: 100,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 14,
-                          color: FlutterFlowTheme.of(context).shadowGray,
-                        )
-                      ],
                       borderRadius: BorderRadius.circular(32),
                     ),
                     child: Padding(

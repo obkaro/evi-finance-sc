@@ -1,10 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../category_single/category_single_widget.dart';
-import '../components/budget_options_widget.dart';
 import '../components/create_custom_category_widget.dart';
 import '../components/edit_category_widget.dart';
+import '../components/m_appbar_widget.dart';
 import '../create_budget/create_budget_widget.dart';
+import '../edit_budget/edit_budget_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -52,166 +53,59 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
         child: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
-          flexibleSpace: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(32, 0, 0, 0),
-                              child: Icon(
-                                Icons.pie_chart_rounded,
-                                color: Colors.white,
-                                size: 24,
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                              child: Text(
-                                'Active Budget',
-                                style: FlutterFlowTheme.of(context)
-                                    .title3
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .title3Family,
-                                      color: Color(0xFFF9F9F9),
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .title3Family),
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                height: 32,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                ),
-                child: Material(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(0),
-                      topLeft: Radius.circular(32),
-                      topRight: Radius.circular(32),
-                    ),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(0),
-                      topLeft: Radius.circular(32),
-                      topRight: Radius.circular(32),
-                    ),
-                    child: Container(
-                      width: double.infinity,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(0),
-                          bottomRight: Radius.circular(0),
-                          topLeft: Radius.circular(32),
-                          topRight: Radius.circular(32),
-                        ),
-                        border: Border.all(
-                          color: Colors.transparent,
-                        ),
+          flexibleSpace: AuthUserStreamWidget(
+            child: StreamBuilder<BudgetsRecord>(
+              stream:
+                  BudgetsRecord.getDocument(currentUserDocument!.activeBudget!),
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: SpinKitRing(
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        size: 50,
                       ),
                     ),
+                  );
+                }
+                final mAppbarBudgetsRecord = snapshot.data!;
+                return MAppbarWidget(
+                  titleText: 'Active Budget',
+                  icon: Icon(
+                    Icons.pie_chart_rounded,
+                    color: FlutterFlowTheme.of(context).secondaryPrimary,
+                    size: 32,
                   ),
-                ),
-              ),
-            ],
+                  bgColor: FlutterFlowTheme.of(context).secondaryColor,
+                  fgColor: FlutterFlowTheme.of(context).primaryBackground,
+                  textColor: FlutterFlowTheme.of(context).secondaryPrimary,
+                  actionIcon: Icon(
+                    Icons.edit_rounded,
+                    color: FlutterFlowTheme.of(context).secondaryPrimary,
+                    size: 24,
+                  ),
+                  iconAction: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditBudgetWidget(
+                          budget: mAppbarBudgetsRecord,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           ),
           actions: [],
           elevation: 0,
         ),
       ),
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      floatingActionButton: Visibility(
-        visible: currentUserDocument!.activeBudget != null,
-        child: AuthUserStreamWidget(
-          child: StreamBuilder<List<CategoriesRecord>>(
-            stream: queryCategoriesRecord(
-              parent: currentUserDocument!.activeBudget,
-              queryBuilder: (categoriesRecord) => categoriesRecord
-                  .where('category_name', isNotEqualTo: 'Unallocated'),
-            ),
-            builder: (context, snapshot) {
-              // Customize what your widget looks like when it's loading.
-              if (!snapshot.hasData) {
-                return Center(
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: SpinKitRing(
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 50,
-                    ),
-                  ),
-                );
-              }
-              List<CategoriesRecord> floatingActionButtonCategoriesRecordList =
-                  snapshot.data!;
-              return FloatingActionButton(
-                onPressed: () async {
-                  await showModalBottomSheet(
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    context: context,
-                    builder: (context) {
-                      return Padding(
-                        padding: MediaQuery.of(context).viewInsets,
-                        child: BudgetOptionsWidget(
-                          budget: currentUserDocument!.activeBudget,
-                          categoriesSum: functions.sumCategoryAmounts(
-                              floatingActionButtonCategoriesRecordList
-                                  .toList()),
-                        ),
-                      );
-                    },
-                  );
-                },
-                backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-                elevation: 8,
-                child: Icon(
-                  Icons.more_vert_rounded,
-                  color: Colors.white,
-                  size: 32,
-                ),
-              );
-            },
-          ),
-        ),
-      ),
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -620,9 +514,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                       .width,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryBackground,
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             16),
@@ -787,9 +678,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                   .width,
                                               height: 32,
                                               decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
                                                 borderRadius:
                                                     BorderRadius.circular(16),
                                               ),

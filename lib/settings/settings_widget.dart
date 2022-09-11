@@ -5,7 +5,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../land_page/land_page_widget.dart';
 import '../profile_settings/profile_settings_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
-import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -46,12 +45,24 @@ class _SettingsWidgetState extends State<SettingsWidget> {
             titleText: 'Settings',
             icon: Icon(
               Icons.settings_rounded,
-              color: Colors.white,
+              color: FlutterFlowTheme.of(context).secondaryPrimary,
               size: 32,
             ),
-            bgColor: FlutterFlowTheme.of(context).primaryColor,
+            bgColor: FlutterFlowTheme.of(context).secondaryColor,
             fgColor: FlutterFlowTheme.of(context).primaryBackground,
-            textColor: Colors.white,
+            textColor: FlutterFlowTheme.of(context).secondaryPrimary,
+            actionIcon: Icon(
+              Icons.settings_rounded,
+              size: 0,
+            ),
+            iconAction: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SettingsWidget(),
+                ),
+              );
+            },
           ),
           actions: [],
           elevation: 0,
@@ -65,14 +76,6 @@ class _SettingsWidgetState extends State<SettingsWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Container(
-                  width: 0,
-                  height: 0,
-                  child: custom_widgets.BackButtonControl(
-                    width: 0,
-                    height: 0,
-                  ),
-                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
                   child: Container(

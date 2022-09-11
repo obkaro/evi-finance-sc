@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/add_recurring_payment_widget.dart';
+import '../components/m_appbar_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../subscription_details/subscription_details_widget.dart';
@@ -34,68 +35,40 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100),
+        preferredSize: Size.fromHeight(132),
         child: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+          backgroundColor: Colors.transparent,
           iconTheme:
               IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
           automaticallyImplyLeading: false,
-          flexibleSpace: Material(
-            color: Colors.transparent,
-            elevation: 0,
-            child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).primaryColor,
-                border: Border.all(
-                  color: Colors.transparent,
-                  width: 0,
-                ),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(32, 0, 0, 0),
-                          child: Icon(
-                            Icons.payment_rounded,
-                            color: Colors.white,
-                            size: 24,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                          child: Text(
-                            'Recurring Payments',
-                            style: FlutterFlowTheme.of(context).title3.override(
-                                  fontFamily:
-                                      FlutterFlowTheme.of(context).title3Family,
-                                  color: Colors.white,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .title3Family),
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+          flexibleSpace: MAppbarWidget(
+            titleText: 'Subscriptions',
+            icon: Icon(
+              Icons.credit_card_rounded,
+              color: FlutterFlowTheme.of(context).secondaryPrimary,
+              size: 32,
             ),
+            bgColor: FlutterFlowTheme.of(context).secondaryColor,
+            fgColor: FlutterFlowTheme.of(context).primaryBackground,
+            textColor: FlutterFlowTheme.of(context).secondaryPrimary,
+            actionIcon: Icon(
+              Icons.credit_card_rounded,
+              size: 0,
+            ),
+            iconAction: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RecurringPaymentsWidget(),
+                ),
+              );
+            },
           ),
           actions: [],
           elevation: 0,
         ),
       ),
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await showModalBottomSheet(
@@ -124,56 +97,6 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Align(
-                alignment: AlignmentDirectional(0, -1),
-                child: Material(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  child: Container(
-                    width: double.infinity,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      border: Border.all(
-                        color: Colors.transparent,
-                        width: 0,
-                      ),
-                    ),
-                    child: Material(
-                      color: Colors.transparent,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(0),
-                          bottomRight: Radius.circular(0),
-                          topLeft: Radius.circular(32),
-                          topRight: Radius.circular(32),
-                        ),
-                      ),
-                      child: Container(
-                        width: double.infinity,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(0),
-                            bottomRight: Radius.circular(0),
-                            topLeft: Radius.circular(32),
-                            topRight: Radius.circular(32),
-                          ),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            width: 0,
-                          ),
-                        ),
-                        alignment: AlignmentDirectional(0, -1),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
               Expanded(
                 child: StreamBuilder<List<SubscriptionsRecord>>(
                   stream: querySubscriptionsRecord(
