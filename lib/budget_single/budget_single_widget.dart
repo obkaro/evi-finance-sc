@@ -173,6 +173,11 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryText,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .subtitle1Family),
                                                               ),
                                                     ),
                                                     startAngle: 0,
@@ -217,6 +222,11 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryText,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .subtitle1Family),
                                                               ),
                                                     ),
                                                     startAngle: 0,
@@ -265,6 +275,11 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                           context)
                                                                       .subtitle1Family,
                                                                   fontSize: 20,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .subtitle1Family),
                                                                 ),
                                                       ),
                                                     ],
@@ -300,6 +315,11 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                                           context)
                                                                       .subtitle1Family,
                                                                   fontSize: 20,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .subtitle1Family),
                                                                 ),
                                                       ),
                                                     ],
@@ -404,6 +424,12 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .secondaryText,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
                                                       ),
                                                 ),
                                                 Text(
@@ -422,6 +448,12 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .secondaryText,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
                                                       ),
                                                 ),
                                               ],
@@ -504,15 +536,12 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                   .size
                                                   .width,
                                               decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
                                                 borderRadius:
                                                     BorderRadius.circular(16),
                                               ),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 16, 16, 16),
+                                                    .fromSTEB(0, 16, 0, 16),
                                                 child: Container(
                                                   width: MediaQuery.of(context)
                                                       .size
@@ -570,40 +599,32 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                               MainAxisAlignment
                                                                   .center,
                                                           children: [
-                                                            Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                LinearPercentIndicator(
-                                                                  percent: functions.calcCategoryPercent(
+                                                            LinearPercentIndicator(
+                                                              percent: functions
+                                                                  .calcCategoryPercent(
                                                                       budgetCategoriesItem,
                                                                       containerTransactionsRecordList
                                                                           .toList()),
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      0.81,
-                                                                  lineHeight: 8,
-                                                                  animation:
-                                                                      true,
-                                                                  progressColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryColor,
-                                                                  backgroundColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .eviredTransparent,
-                                                                  barRadius: Radius
-                                                                      .circular(
-                                                                          12),
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .zero,
-                                                                ),
-                                                              ],
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.81,
+                                                              lineHeight: 8,
+                                                              animation: true,
+                                                              progressColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryColor,
+                                                              backgroundColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .eviredTransparent,
+                                                              barRadius: Radius
+                                                                  .circular(12),
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .zero,
                                                             ),
                                                           ],
                                                         ),

@@ -270,6 +270,12 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primaryText,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle2Family),
                                                     ),
                                             dayOfWeekStyle:
                                                 FlutterFlowTheme.of(context)
@@ -283,6 +289,12 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primaryText,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText2Family),
                                                     ),
                                             dateStyle:
                                                 FlutterFlowTheme.of(context)
@@ -296,6 +308,12 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primaryText,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText2Family),
                                                     ),
                                             selectedDateStyle:
                                                 FlutterFlowTheme.of(context)
@@ -306,6 +324,12 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                                   context)
                                                               .bodyText1Family,
                                                       color: Colors.white,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText1Family),
                                                     ),
                                             inactiveDateStyle:
                                                 FlutterFlowTheme.of(context)
@@ -321,6 +345,12 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                               .secondaryColor,
                                                       fontWeight:
                                                           FontWeight.w300,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText2Family),
                                                     ),
                                             locale: FFLocalizations.of(context)
                                                 .languageCode,
@@ -414,6 +444,10 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                     fontFamily: FlutterFlowTheme.of(context)
                                         .subtitle2Family,
                                     color: Colors.white,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .subtitle2Family),
                                   ),
                               elevation: 2,
                               borderSide: BorderSide(

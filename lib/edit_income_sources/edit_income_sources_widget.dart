@@ -23,6 +23,7 @@ class EditIncomeSourcesWidget extends StatefulWidget {
 
 class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
   TextEditingController? textController;
+
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -254,6 +255,7 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                                                               fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                               color: FlutterFlowTheme.of(context).primaryColor,
                                                                               fontSize: 12,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                             ),
                                                                       ),
                                                                     ),
@@ -391,6 +393,32 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                                                         .circular(
                                                                             16),
                                                               ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: Color(
+                                                                      0x00000000),
+                                                                  width: 1,
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            16),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: Color(
+                                                                      0x00000000),
+                                                                  width: 1,
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            16),
+                                                              ),
                                                               filled: true,
                                                               fillColor: FlutterFlowTheme
                                                                       .of(context)
@@ -487,8 +515,13 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       20, 20, 20, 0),
-                                  child: InkWell(
-                                    onTap: () async {
+                                  child: CButtonFilledCopyWidget(
+                                    text: 'New',
+                                    icon: Icon(
+                                      Icons.add_rounded,
+                                      size: 16,
+                                    ),
+                                    action: () async {
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
                                         backgroundColor: Colors.transparent,
@@ -502,14 +535,6 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                         },
                                       );
                                     },
-                                    child: CButtonFilledCopyWidget(
-                                      text: 'New',
-                                      icon: Icon(
-                                        Icons.add_rounded,
-                                        size: 16,
-                                      ),
-                                      action: () async {},
-                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -546,6 +571,11 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                                                     .bodyText2Family,
                                                                 color: Color(
                                                                     0xFFF9F9F9),
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyText2Family),
                                                               ),
                                                         ),
                                                         duration: Duration(
@@ -572,6 +602,12 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                                                       context)
                                                                   .subtitle1Family,
                                                           color: Colors.white,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1Family),
                                                         ),
                                                     elevation: 2,
                                                     borderSide: BorderSide(

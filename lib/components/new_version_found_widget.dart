@@ -102,6 +102,10 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .bodyText1Family,
                                           fontWeight: FontWeight.w500,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family),
                                         ),
                                   ),
                                 ),
@@ -160,6 +164,10 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .subtitle2Family,
                                       color: Colors.white,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2Family),
                                     ),
                                 elevation: 2,
                                 borderSide: BorderSide(

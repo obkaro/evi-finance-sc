@@ -100,6 +100,10 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .title3Family,
                                           color: Color(0xFFF9F9F9),
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .title3Family),
                                         ),
                                   ),
                                 ),

@@ -182,6 +182,12 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                                       context)
                                                                   .bodyText2Family,
                                                           fontSize: 14,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText2Family),
                                                         ),
                                                   ),
                                                 ),
@@ -208,6 +214,12 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryColor,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1Family),
                                                         ),
                                               ),
                                             ),
@@ -316,6 +328,12 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                                       context)
                                                                   .subtitle1Family,
                                                           fontSize: 22,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1Family),
                                                         ),
                                               ),
                                             ),
@@ -536,6 +554,7 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                                               fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                               color: FlutterFlowTheme.of(context).primaryColor,
                                                                               fontSize: 12,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                             ),
                                                                       ),
                                                                     ),
@@ -833,6 +852,11 @@ class _NewBudgetCategoriesWidgetState extends State<NewBudgetCategoriesWidget> {
                                                                           context)
                                                                       .primaryColor,
                                                                   fontSize: 12,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyText1Family),
                                                                 ),
                                                           ),
                                                         ),

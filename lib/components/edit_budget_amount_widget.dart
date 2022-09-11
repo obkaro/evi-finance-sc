@@ -123,6 +123,10 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .bodyText2Family,
                                       fontSize: 14,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText2Family),
                                     ),
                                 elevation: 0,
                                 borderSide: BorderSide(
@@ -181,6 +185,10 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .subtitle2Family,
                                       color: Colors.white,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2Family),
                                     ),
                                 elevation: 2,
                                 borderSide: BorderSide(

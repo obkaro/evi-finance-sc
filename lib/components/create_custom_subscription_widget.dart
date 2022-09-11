@@ -26,8 +26,9 @@ class CreateCustomSubscriptionWidget extends StatefulWidget {
 
 class _CreateCustomSubscriptionWidgetState
     extends State<CreateCustomSubscriptionWidget> {
-  String uploadedFileUrl = '';
   TextEditingController? textController;
+
+  String uploadedFileUrl = '';
 
   @override
   void initState() {
@@ -91,6 +92,20 @@ class _CreateCustomSubscriptionWidgetState
                         borderRadius: BorderRadius.circular(12),
                       ),
                       focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
                           width: 1,
@@ -203,6 +218,12 @@ class _CreateCustomSubscriptionWidgetState
                                                           context)
                                                       .primaryColor,
                                                   fontSize: 12,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1Family),
                                                 ),
                                           ),
                                         ),
@@ -313,12 +334,16 @@ class _CreateCustomSubscriptionWidgetState
                             width: double.infinity,
                             height: 60,
                             color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      color: Colors.white,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .subtitle2
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .subtitle2Family,
+                                  color: Colors.white,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .subtitle2Family),
+                                ),
                             elevation: 2,
                             borderSide: BorderSide(
                               color: Colors.transparent,

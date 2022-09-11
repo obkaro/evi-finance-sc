@@ -20,8 +20,11 @@ class ProfileSettingsWidget extends StatefulWidget {
 
 class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
   TextEditingController? textController1;
+
   TextEditingController? textController2;
+
   TextEditingController? textController3;
+
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -100,6 +103,20 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                 ),
                                 borderRadius: BorderRadius.circular(12),
                               ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                               filled: true,
                               fillColor: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
@@ -130,6 +147,20 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0x00000000),
                                   width: 1,
@@ -167,6 +198,20 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1,
@@ -230,6 +275,10 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                     fontFamily: FlutterFlowTheme.of(context)
                                         .subtitle2Family,
                                     color: Colors.white,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .subtitle2Family),
                                   ),
                               elevation: 2,
                               borderSide: BorderSide(

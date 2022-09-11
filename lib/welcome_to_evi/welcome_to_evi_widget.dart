@@ -20,8 +20,9 @@ class WelcomeToEviWidget extends StatefulWidget {
 
 class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
     with TickerProviderStateMixin {
-  String? dropDownValue1;
   TextEditingController? textController;
+
+  String? dropDownValue1;
   String? dropDownValue2;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -104,6 +105,10 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                             .subtitle2Family,
                                         fontSize: 14,
                                         fontWeight: FontWeight.normal,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2Family),
                                       ),
                                 ),
                               ],
@@ -158,6 +163,12 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryText,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText1Family),
                                                     ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
@@ -168,6 +179,23 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                                   BorderRadius.circular(12),
                                             ),
                                             focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color(0x00000000),
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color(0x00000000),
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color: Color(0x00000000),
                                                 width: 1,
@@ -187,6 +215,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                             if (val == null || val.isEmpty) {
                                               return 'Field is required';
                                             }
+
                                             if (val.length < 2) {
                                               return 'Requires at least 2 characters.';
                                             }
@@ -247,6 +276,12 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryText,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1Family),
                                                         ),
                                                 hintText: 'Please select...',
                                                 fillColor:
@@ -313,6 +348,12 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryText,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1Family),
                                                         ),
                                                 hintText: 'Please select...',
                                                 fillColor:
@@ -396,6 +437,10 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .subtitle2Family,
                                       color: Colors.white,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2Family),
                                     ),
                                 elevation: 2,
                                 borderSide: BorderSide(

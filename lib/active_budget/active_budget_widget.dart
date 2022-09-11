@@ -92,6 +92,10 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .title3Family,
                                       color: Color(0xFFF9F9F9),
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .title3Family),
                                     ),
                               ),
                             ),
@@ -373,6 +377,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                 style: FlutterFlowTheme.of(context).subtitle1.override(
                                                                                       fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                                       color: FlutterFlowTheme.of(context).primaryText,
+                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
                                                                                     ),
                                                                               ),
                                                                               startAngle: 0,
@@ -400,6 +405,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                 style: FlutterFlowTheme.of(context).subtitle1.override(
                                                                                       fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                                       color: FlutterFlowTheme.of(context).primaryText,
+                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
                                                                                     ),
                                                                               ),
                                                                               startAngle: 0,
@@ -458,6 +464,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                   style: FlutterFlowTheme.of(context).subtitle1.override(
                                                                                         fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                                         fontSize: 20,
+                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
                                                                                       ),
                                                                                 ),
                                                                               ],
@@ -477,6 +484,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                   style: FlutterFlowTheme.of(context).subtitle1.override(
                                                                                         fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                                         fontSize: 20,
+                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
                                                                                       ),
                                                                                 ),
                                                                               ],
@@ -615,14 +623,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .secondaryBackground,
-                                                                    boxShadow: [
-                                                                      BoxShadow(
-                                                                        blurRadius:
-                                                                            14,
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .shadowGray,
-                                                                      )
-                                                                    ],
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             16),
@@ -631,9 +631,9 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                       Padding(
                                                                     padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
+                                                                            0,
                                                                             16,
-                                                                            16,
-                                                                            16,
+                                                                            0,
                                                                             16),
                                                                     child:
                                                                         Container(
@@ -707,7 +707,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                         final progressBarCategoriesRecord = snapshot.data!;
                                                                                         return LinearPercentIndicator(
                                                                                           percent: functions.calcCategoryPercent(displayedCategoriesItem, containerTransactionsRecordList.toList()),
-                                                                                          width: MediaQuery.of(context).size.width * 0.81,
+                                                                                          width: MediaQuery.of(context).size.width * 0.88,
                                                                                           lineHeight: 8,
                                                                                           animation: true,
                                                                                           progressColor: FlutterFlowTheme.of(context).primaryColor,
@@ -790,14 +790,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryBackground,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    blurRadius: 14,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .shadowGray,
-                                                  )
-                                                ],
                                                 borderRadius:
                                                     BorderRadius.circular(16),
                                               ),
@@ -838,6 +830,11 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyText1Family),
                                                                 ),
                                                           ),
                                                           Text(
@@ -854,6 +851,11 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyText1Family),
                                                                 ),
                                                           ),
                                                         ],
@@ -917,6 +919,12 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                       FlutterFlowTheme.of(
                                                               context)
                                                           .bodyText1Family,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1Family),
                                                   lineHeight: 1.4,
                                                 ),
                                           ),
@@ -1020,6 +1028,10 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
                                             .bodyText1Family,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText1Family),
                                         lineHeight: 1.4,
                                       ),
                                 ),

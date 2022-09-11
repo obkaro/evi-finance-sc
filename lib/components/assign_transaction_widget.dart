@@ -28,8 +28,6 @@ class AssignTransactionWidget extends StatefulWidget {
 }
 
 class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
-  SubscriptionsRecord? newRecurring;
-
   @override
   void initState() {
     super.initState();
@@ -378,6 +376,12 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                     context)
                                                                 .subtitle2Family,
                                                         color: Colors.white,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle2Family),
                                                       ),
                                               borderSide: BorderSide(
                                                 color: Colors.transparent,
@@ -801,19 +805,6 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                         20, 16, 20, 0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        final subscriptionsCreateData =
-                                            createSubscriptionsRecordData(
-                                          notification: true,
-                                        );
-                                        var subscriptionsRecordReference =
-                                            SubscriptionsRecord.collection
-                                                .doc();
-                                        await subscriptionsRecordReference
-                                            .set(subscriptionsCreateData);
-                                        newRecurring = SubscriptionsRecord
-                                            .getDocumentFromData(
-                                                subscriptionsCreateData,
-                                                subscriptionsRecordReference);
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
                                           backgroundColor: Colors.transparent,
@@ -822,14 +813,11 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                             return Padding(
                                               padding: MediaQuery.of(context)
                                                   .viewInsets,
-                                              child: AddRecurringPaymentWidget(
-                                                recurringPayment: newRecurring,
-                                              ),
+                                              child:
+                                                  AddRecurringPaymentWidget(),
                                             );
                                           },
                                         );
-
-                                        setState(() {});
                                       },
                                       text: 'New Subscription',
                                       icon: Icon(
@@ -848,6 +836,12 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .subtitle2Family,
                                               color: Colors.white,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2Family),
                                             ),
                                         borderSide: BorderSide(
                                           color: Colors.transparent,

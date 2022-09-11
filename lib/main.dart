@@ -10,6 +10,7 @@ import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'index.dart';
 
 void main() async {
@@ -129,87 +130,55 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'RecurringPayments': RecurringPaymentsWidget(),
-      'ActiveBudget': ActiveBudgetWidget(),
       'Dashboard': DashboardWidget(),
-      'Accounts': AccountsWidget(),
-      'Settings': SettingsWidget(),
+      'ActiveBudget': ActiveBudgetWidget(),
+      'Menu': MenuWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
       body: _currentPage ?? tabs[_currentPageName],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (i) => setState(() {
+      bottomNavigationBar: GNav(
+        selectedIndex: currentIndex,
+        onTabChange: (i) => setState(() {
           _currentPage = null;
           _currentPageName = tabs.keys.toList()[i];
         }),
         backgroundColor: Colors.black,
-        selectedItemColor: FlutterFlowTheme.of(context).primaryColor,
-        unselectedItemColor: Color(0xFF5D5B5B),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.payment_rounded,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.payment_rounded,
-              size: 32,
-            ),
-            label: 'Recurring Payments',
-            tooltip: '',
+        color: Color(0xFF5D5B5B),
+        activeColor: FlutterFlowTheme.of(context).primaryColor,
+        tabBackgroundColor: Color(0x00000000),
+        tabActiveBorder: Border.all(
+          color: Colors.black,
+          width: 8,
+        ),
+        tabBorderRadius: 100,
+        tabMargin: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+        gap: 8,
+        mainAxisAlignment: MainAxisAlignment.center,
+        duration: Duration(milliseconds: 500),
+        haptic: false,
+        tabs: [
+          GButton(
+            icon: currentIndex == 0 ? Icons.home_rounded : Icons.home_rounded,
+            text: 'Dashboard',
+            iconSize: 24,
+            backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.pie_chart_rounded,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.pie_chart_rounded,
-              size: 32,
-            ),
-            label: 'Active Budget',
-            tooltip: '',
+          GButton(
+            icon: currentIndex == 1
+                ? Icons.pie_chart_rounded
+                : Icons.pie_chart_rounded,
+            text: 'Active Budget',
+            iconSize: 24,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_rounded,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.home_rounded,
-              size: 32,
-            ),
-            label: 'Dashboard',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.account_balance_rounded,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.account_balance_rounded,
-              size: 32,
-            ),
-            label: 'Accounts',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.settings_rounded,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.settings_rounded,
-              size: 32,
-            ),
-            label: 'Profile',
-            tooltip: '',
+          GButton(
+            icon: currentIndex == 2
+                ? Icons.featured_play_list_rounded
+                : Icons.featured_play_list_rounded,
+            text: 'Menu',
+            iconSize: 24,
+            backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
           )
         ],
       ),

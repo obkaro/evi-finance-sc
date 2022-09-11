@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../components/m_appbar_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../land_page/land_page_widget.dart';
@@ -40,85 +41,23 @@ class _SettingsWidgetState extends State<SettingsWidget> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(132),
         child: AppBar(
-          backgroundColor: Color(0x00FF0054),
           automaticallyImplyLeading: false,
-          flexibleSpace: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(32, 0, 0, 0),
-                              child: Icon(
-                                Icons.settings_rounded,
-                                color: Colors.white,
-                                size: 24,
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                              child: Text(
-                                'Settings',
-                                style: FlutterFlowTheme.of(context)
-                                    .title3
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .title3Family,
-                                      color: Color(0xFFF9F9F9),
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                height: 32,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                ),
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(0),
-                      topLeft: Radius.circular(32),
-                      topRight: Radius.circular(32),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          flexibleSpace: MAppbarWidget(
+            titleText: 'Settings',
+            icon: Icon(
+              Icons.settings_rounded,
+              color: Colors.white,
+              size: 32,
+            ),
+            bgColor: FlutterFlowTheme.of(context).primaryColor,
+            fgColor: FlutterFlowTheme.of(context).primaryBackground,
+            textColor: Colors.white,
           ),
           actions: [],
           elevation: 0,
         ),
       ),
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -139,13 +78,6 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 14,
-                          color: FlutterFlowTheme.of(context).shadowGray,
-                        )
-                      ],
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Column(
@@ -173,6 +105,10 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
                                         .subtitle1Family,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .subtitle1Family),
                                     lineHeight: 1.6,
                                   ),
                             ),
@@ -207,6 +143,10 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
                                         .subtitle1Family,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .subtitle1Family),
                                     lineHeight: 1.6,
                                   ),
                             ),
@@ -242,6 +182,10 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
                                         .subtitle1Family,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .subtitle1Family),
                                     lineHeight: 1.6,
                                   ),
                             ),
@@ -278,6 +222,10 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
                                         .subtitle1Family,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .subtitle1Family),
                                     lineHeight: 1.6,
                                   ),
                             ),
@@ -308,6 +256,10 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
                                         .subtitle1Family,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .subtitle1Family),
                                     lineHeight: 1.6,
                                   ),
                             ),
@@ -337,6 +289,10 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
                                         .subtitle1Family,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .subtitle1Family),
                                     lineHeight: 1.6,
                                   ),
                             ),
@@ -373,6 +329,10 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
                                         .subtitle1Family,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .subtitle1Family),
                                     lineHeight: 1.6,
                                   ),
                             ),

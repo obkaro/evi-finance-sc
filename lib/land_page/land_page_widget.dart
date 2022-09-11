@@ -96,6 +96,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                               color: Color(0xFF010101),
                                               fontSize: 48,
                                               fontWeight: FontWeight.bold,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .title1Family),
                                             ),
                                       ),
                                       Text(
@@ -112,6 +118,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                       .primaryColor,
                                               fontSize: 48,
                                               fontWeight: FontWeight.bold,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .title1Family),
                                             ),
                                       ),
                                       Text(
@@ -126,6 +138,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                               color: Color(0xFF010101),
                                               fontSize: 48,
                                               fontWeight: FontWeight.bold,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .title1Family),
                                             ),
                                       ),
                                       Padding(
@@ -143,6 +161,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                 color: Color(0xFF010101),
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w600,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .subtitle1Family),
                                                 lineHeight: 1.4,
                                               ),
                                         ),
@@ -209,6 +233,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                                   .subtitle2Family,
                                                           color:
                                                               Color(0xFF0C0C0C),
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle2Family),
                                                         ),
                                                 elevation: 2,
                                                 borderSide: BorderSide(
@@ -304,6 +334,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                                     context)
                                                                 .subtitle2Family,
                                                         color: Colors.white,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle2Family),
                                                       ),
                                               elevation: 2,
                                               borderSide: BorderSide(

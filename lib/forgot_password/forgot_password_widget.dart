@@ -16,6 +16,7 @@ class ForgotPasswordWidget extends StatefulWidget {
 
 class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
   TextEditingController? signInEmailController;
+
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -126,6 +127,23 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                             borderRadius:
                                                 BorderRadius.circular(12),
                                           ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
                                           filled: true,
                                           fillColor:
                                               FlutterFlowTheme.of(context)
@@ -196,6 +214,10 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .subtitle2Family,
                                           color: Colors.white,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2Family),
                                         ),
                                     elevation: 2,
                                     borderSide: BorderSide(
