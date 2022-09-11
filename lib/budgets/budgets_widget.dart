@@ -383,6 +383,12 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .bodyText1Family,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1Family),
                                                           lineHeight: 2,
                                                         ),
                                                   ),
@@ -396,6 +402,12 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .bodyText2Family,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText2Family),
                                                           lineHeight: 2,
                                                         ),
                                                   ),
@@ -444,12 +456,16 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                           Text(
                             'This is where your budgets live. \nSwipe left on a single budget for more options.',
                             textAlign: TextAlign.center,
-                            style:
-                                FlutterFlowTheme.of(context).bodyText2.override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText2Family,
-                                      lineHeight: 1.4,
-                                    ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyText2
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyText2Family,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyText2Family),
+                                  lineHeight: 1.4,
+                                ),
                           ),
                         ],
                       ),

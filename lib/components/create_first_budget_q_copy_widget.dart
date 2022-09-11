@@ -23,8 +23,6 @@ class CreateFirstBudgetQCopyWidget extends StatefulWidget {
 
 class _CreateFirstBudgetQCopyWidgetState
     extends State<CreateFirstBudgetQCopyWidget> {
-  ApiCallResponse? accountRespons;
-  ApiCallResponse? accountResponse;
   ApiCallResponse? dataSyncResponse;
   ApiCallResponse? reauthCode;
 
@@ -126,6 +124,10 @@ class _CreateFirstBudgetQCopyWidgetState
                                               FlutterFlowTheme.of(context)
                                                   .bodyText1Family,
                                           fontWeight: FontWeight.w500,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family),
                                         ),
                                   ),
                                 ),
@@ -196,10 +198,6 @@ class _CreateFirstBudgetQCopyWidgetState
                                       r'''$.token''',
                                     ).toString(),
                                   );
-                                  accountResponse =
-                                      await GetAccountInfoCall.call(
-                                    authID: widget.account!.authID,
-                                  );
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
@@ -213,6 +211,12 @@ class _CreateFirstBudgetQCopyWidgetState
                                               color: Color(0xFFD1D1D1),
                                               fontSize: 12,
                                               fontWeight: FontWeight.normal,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1Family),
                                             ),
                                       ),
                                       duration: Duration(milliseconds: 4000),
@@ -222,10 +226,6 @@ class _CreateFirstBudgetQCopyWidgetState
                                 } else {
                                   if (FFAppState().dataSyncCode ==
                                       'SYNC_SUCCESSFUL') {
-                                    accountRespons =
-                                        await GetAccountInfoCall.call(
-                                      authID: widget.account!.authID,
-                                    );
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
@@ -239,6 +239,12 @@ class _CreateFirstBudgetQCopyWidgetState
                                                 color: Color(0xFFC1C1C1),
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.normal,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1Family),
                                               ),
                                         ),
                                         duration: Duration(milliseconds: 4000),
@@ -259,6 +265,12 @@ class _CreateFirstBudgetQCopyWidgetState
                                                 color: Color(0xFFE7E7E7),
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.normal,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1Family),
                                               ),
                                         ),
                                         duration: Duration(milliseconds: 4000),
@@ -286,6 +298,10 @@ class _CreateFirstBudgetQCopyWidgetState
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .subtitle2Family,
                                       color: Colors.white,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2Family),
                                     ),
                                 elevation: 2,
                                 borderSide: BorderSide(

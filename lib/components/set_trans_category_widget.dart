@@ -237,6 +237,12 @@ class _SetTransCategoryWidgetState extends State<SetTransCategoryWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryText,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1Family),
                                                 ),
                                           ),
                                         ),

@@ -118,12 +118,12 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         createdBudget: await getDocumentParameter(
             data, 'createdBudget', BudgetsRecord.serializer),
       ),
-  'Accounts': (data) async => NavBarPage(initialPage: 'Accounts'),
+  'Accounts': (data) async => AccountsWidget(),
   'AccountSingle': (data) async => AccountSingleWidget(
         account: await getDocumentParameter(
             data, 'account', AccountsRecord.serializer),
       ),
-  'Settings': (data) async => NavBarPage(initialPage: 'Settings'),
+  'Settings': (data) async => SettingsWidget(),
   'ProfileSettings': (data) async => ProfileSettingsWidget(),
   'OnboardingPageView': (data) async => OnboardingPageViewWidget(),
   'WelcomeToEvi': (data) async => WelcomeToEviWidget(),
@@ -139,8 +139,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         transaction: await getDocumentParameter(
             data, 'transaction', TransactionsRecord.serializer),
       ),
-  'RecurringPayments': (data) async =>
-      NavBarPage(initialPage: 'RecurringPayments'),
+  'RecurringPayments': (data) async => RecurringPaymentsWidget(),
   'CreateRecurring': (data) async => CreateRecurringWidget(
         subscriptionRecord: getParameter(data, 'subscriptionRecord'),
       ),
@@ -152,6 +151,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
             data, 'subscription', SubscriptionsRecord.serializer),
       ),
   'EditIncomeSources': (data) async => EditIncomeSourcesWidget(),
+  'Menu': (data) async => NavBarPage(initialPage: 'Menu'),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

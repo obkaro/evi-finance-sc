@@ -100,6 +100,10 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                         fontFamily: FlutterFlowTheme.of(context)
                                             .bodyText2Family,
                                         fontStyle: FontStyle.italic,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText2Family),
                                       ),
                                 ),
                               ),
@@ -245,6 +249,10 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                         fontFamily: FlutterFlowTheme.of(context)
                                             .subtitle2Family,
                                         color: Colors.white,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2Family),
                                       ),
                                   elevation: 2,
                                   borderSide: BorderSide(

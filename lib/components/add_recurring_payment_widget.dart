@@ -12,12 +12,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddRecurringPaymentWidget extends StatefulWidget {
-  const AddRecurringPaymentWidget({
-    Key? key,
-    this.recurringPayment,
-  }) : super(key: key);
-
-  final SubscriptionsRecord? recurringPayment;
+  const AddRecurringPaymentWidget({Key? key}) : super(key: key);
 
   @override
   _AddRecurringPaymentWidgetState createState() =>

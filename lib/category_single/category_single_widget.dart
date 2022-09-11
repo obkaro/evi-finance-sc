@@ -154,6 +154,10 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                           .subtitle1Family,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle1Family),
                                     ),
                               ),
                               startAngle: 0,
@@ -513,6 +517,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                                   fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                                   color: Color(0xFFFF0003),
                                                                                   fontStyle: FontStyle.italic,
+                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                                 ),
                                                                           ),
                                                                         ),
@@ -562,6 +567,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                                                             .override(
                                                                               fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                               fontSize: 16,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
                                                                             ),
                                                                       ),
                                                                     ),

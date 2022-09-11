@@ -10,7 +10,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
-import '../main.dart';
+import '../recurring_payments/recurring_payments_widget.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,10 +31,11 @@ class EditSubsciptionWidget extends StatefulWidget {
 }
 
 class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
-  DateTimeRange? calendarSelectedDay;
-  String uploadedFileUrl = '';
   TextEditingController? nameController;
+
+  String uploadedFileUrl = '';
   String? categoryValue;
+  DateTimeRange? calendarSelectedDay;
   String? durationValue;
   bool? switchListTileValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -258,6 +259,10 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                   .bodyText1Family,
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryText,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family),
                                         ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -267,6 +272,20 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                     focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Color(0x00000000),
                                         width: 1,
@@ -398,6 +417,12 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primaryText,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
                                                       ),
                                                   hintText:
                                                       'Assign to a category...',
@@ -511,6 +536,10 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                             .subtitle2Family,
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2Family),
                                       ),
                                   dayOfWeekStyle: FlutterFlowTheme.of(context)
                                       .bodyText2
@@ -519,6 +548,10 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                             .bodyText2Family,
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText2Family),
                                       ),
                                   dateStyle: FlutterFlowTheme.of(context)
                                       .bodyText2
@@ -526,6 +559,10 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                         fontFamily: FlutterFlowTheme.of(context)
                                             .bodyText2Family,
                                         fontWeight: FontWeight.normal,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText2Family),
                                       ),
                                   selectedDateStyle:
                                       FlutterFlowTheme.of(context)
@@ -535,6 +572,10 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .bodyText1Family,
                                             color: Colors.white,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1Family),
                                           ),
                                   inactiveDateStyle:
                                       FlutterFlowTheme.of(context)
@@ -546,6 +587,10 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryColor,
                                             fontWeight: FontWeight.w300,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText2Family),
                                           ),
                                   locale:
                                       FFLocalizations.of(context).languageCode,
@@ -585,6 +630,10 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .bodyText1Family,
                                           color: Colors.white,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family),
                                         ),
                                     iconColor: Color(0x00000000),
                                     iconSize: 18,
@@ -604,6 +653,10 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                               .primaryColor,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family),
                                         ),
                                     iconColor: Color(0x00000000),
                                     iconSize: 18,
@@ -718,8 +771,8 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                     await Navigator.pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => NavBarPage(
-                                            initialPage: 'RecurringPayments'),
+                                        builder: (context) =>
+                                            RecurringPaymentsWidget(),
                                       ),
                                       (r) => false,
                                     );
@@ -737,6 +790,10 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .subtitle2Family,
                                           color: Colors.white,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2Family),
                                         ),
                                     elevation: 2,
                                     borderSide: BorderSide(

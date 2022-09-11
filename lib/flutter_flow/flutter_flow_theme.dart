@@ -94,8 +94,8 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color secondaryColor = const Color(0xFF1B2124);
   late Color tertiaryColor = const Color(0xFF1B998B);
   late Color alternate = const Color(0xFFFAA916);
-  late Color primaryBackground = const Color(0xFFF6F6F6);
-  late Color secondaryBackground = const Color(0xFFFFFFFF);
+  late Color primaryBackground = const Color(0xFFFFFFFF);
+  late Color secondaryBackground = const Color(0xFFEBEBEB);
   late Color primaryText = const Color(0xFF101010);
   late Color secondaryText = const Color(0xFF595959);
 
@@ -300,8 +300,8 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color secondaryColor = const Color(0xFF494949);
   late Color tertiaryColor = const Color(0xFF1B998B);
   late Color alternate = const Color(0xFFFAA916);
-  late Color primaryBackground = const Color(0xFF101010);
-  late Color secondaryBackground = const Color(0xFF1D1D1D);
+  late Color primaryBackground = const Color(0xFF1D1D1D);
+  late Color secondaryBackground = const Color(0xFF101010);
   late Color primaryText = const Color(0xFFE0E0E0);
   late Color secondaryText = const Color(0xFFD2D2D2);
 

@@ -4,7 +4,7 @@ import '../edit_subsciption/edit_subsciption_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../main.dart';
+import '../recurring_payments/recurring_payments_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
@@ -179,6 +179,12 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryColor,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText2Family),
                                                 ),
                                           ),
                                         ],
@@ -241,6 +247,12 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondaryText,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText2Family),
                                                     ),
                                             elevation: 0,
                                             borderSide: BorderSide(
@@ -332,9 +344,8 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) => NavBarPage(
-                                                    initialPage:
-                                                        'RecurringPayments'),
+                                                builder: (context) =>
+                                                    RecurringPaymentsWidget(),
                                               ),
                                             );
                                           },
@@ -355,6 +366,12 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                                                   context)
                                                               .bodyText2Family,
                                                       color: Color(0xFFCE1515),
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText2Family),
                                                     ),
                                             elevation: 0,
                                             borderSide: BorderSide(
@@ -515,6 +532,11 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryColor,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyText1Family),
                                                                 ),
                                                       ),
                                                     ],

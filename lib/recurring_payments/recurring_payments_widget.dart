@@ -6,7 +6,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../subscription_details/subscription_details_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,7 +19,6 @@ class RecurringPaymentsWidget extends StatefulWidget {
 }
 
 class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
-  SubscriptionsRecord? newRecurring;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -80,6 +78,9 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                   fontFamily:
                                       FlutterFlowTheme.of(context).title3Family,
                                   color: Colors.white,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .title3Family),
                                 ),
                           ),
                         ),
@@ -97,14 +98,6 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final subscriptionsCreateData = createSubscriptionsRecordData(
-            notification: true,
-          );
-          var subscriptionsRecordReference =
-              SubscriptionsRecord.collection.doc();
-          await subscriptionsRecordReference.set(subscriptionsCreateData);
-          newRecurring = SubscriptionsRecord.getDocumentFromData(
-              subscriptionsCreateData, subscriptionsRecordReference);
           await showModalBottomSheet(
             isScrollControlled: true,
             backgroundColor: Colors.transparent,
@@ -112,14 +105,10 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
             builder: (context) {
               return Padding(
                 padding: MediaQuery.of(context).viewInsets,
-                child: AddRecurringPaymentWidget(
-                  recurringPayment: newRecurring,
-                ),
+                child: AddRecurringPaymentWidget(),
               );
             },
           );
-
-          setState(() {});
         },
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         elevation: 3,
@@ -338,6 +327,10 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .primaryColor,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).bodyText2Family),
                                                                   ),
                                                             ),
                                                           ],

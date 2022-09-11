@@ -117,6 +117,10 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                     fontFamily: FlutterFlowTheme.of(context)
                                         .bodyText1Family,
                                     fontWeight: FontWeight.w600,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyText1Family),
                                   ),
                               hintText: 'Please select...',
                               fillColor: FlutterFlowTheme.of(context)
@@ -288,6 +292,12 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primaryText,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle2Family),
                                                     ),
                                             dayOfWeekStyle:
                                                 FlutterFlowTheme.of(context)
@@ -301,6 +311,12 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primaryText,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText2Family),
                                                     ),
                                             dateStyle:
                                                 FlutterFlowTheme.of(context)
@@ -312,6 +328,12 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                                               .bodyText2Family,
                                                       fontWeight:
                                                           FontWeight.normal,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText2Family),
                                                     ),
                                             selectedDateStyle:
                                                 FlutterFlowTheme.of(context)
@@ -322,6 +344,12 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                                                   context)
                                                               .bodyText1Family,
                                                       color: Colors.white,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText1Family),
                                                     ),
                                             inactiveDateStyle:
                                                 FlutterFlowTheme.of(context)
@@ -337,6 +365,12 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                                               .secondaryColor,
                                                       fontWeight:
                                                           FontWeight.w300,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText2Family),
                                                     ),
                                             locale: FFLocalizations.of(context)
                                                 .languageCode,
@@ -421,12 +455,16 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                             width: double.infinity,
                             height: 60,
                             color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      color: Colors.white,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .subtitle2
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .subtitle2Family,
+                                  color: Colors.white,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .subtitle2Family),
+                                ),
                             elevation: 2,
                             borderSide: BorderSide(
                               color: Colors.transparent,

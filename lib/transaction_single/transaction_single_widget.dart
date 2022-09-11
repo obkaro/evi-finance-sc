@@ -279,6 +279,11 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                         context)
                                                                     .subtitle1Family,
                                                                 fontSize: 20,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .subtitle1Family),
                                                               ),
                                                     ),
                                                   ),
@@ -410,6 +415,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                               style: FlutterFlowTheme.of(context).subtitle1.override(
                                                                                     fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                                     color: FlutterFlowTheme.of(context).primaryText,
+                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
                                                                                   ),
                                                                             ),
                                                                           ],
@@ -678,6 +684,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                                 FlutterFlowTheme.of(context).subtitle1Family,
                                                                             color:
                                                                                 FlutterFlowTheme.of(context).primaryText,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
                                                                           ),
                                                                     ),
                                                                   ],
@@ -764,6 +772,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                             .override(
                                                                               fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                               color: FlutterFlowTheme.of(context).primaryText,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
                                                                             ),
                                                                       ),
                                                                     ],
@@ -800,6 +809,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                                 FlutterFlowTheme.of(context).subtitle1Family,
                                                                             color:
                                                                                 FlutterFlowTheme.of(context).primaryText,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
                                                                           ),
                                                                     ),
                                                                   ],
@@ -886,6 +897,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                             .override(
                                                                               fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                               color: FlutterFlowTheme.of(context).primaryText,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
                                                                             ),
                                                                       ),
                                                                     ],
@@ -1203,6 +1215,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                             .subtitle2Family,
                                                                     color: Colors
                                                                         .white,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).subtitle2Family),
                                                                   ),
                                                           elevation: 2,
                                                           borderSide:
@@ -1282,6 +1298,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                             .subtitle2Family,
                                                                     color: Colors
                                                                         .white,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).subtitle2Family),
                                                                   ),
                                                           borderSide:
                                                               BorderSide(
@@ -1515,6 +1535,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                             textStyle: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                                   color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                                 ),
                                                                             elevation:
                                                                                 0,
@@ -1587,6 +1608,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                               .bodyText1Family,
                                                                       color: Colors
                                                                           .white,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).bodyText1Family),
                                                                     ),
                                                                 elevation: 0,
                                                                 borderSide:

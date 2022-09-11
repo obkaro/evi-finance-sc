@@ -188,6 +188,12 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryColor,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1Family),
                                                         ),
                                                   ),
                                                 ),
@@ -303,6 +309,12 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                       context)
                                                                   .subtitle1Family,
                                                           fontSize: 22,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1Family),
                                                         ),
                                                   ),
                                                 ),
@@ -536,6 +548,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                                     fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                                     color: FlutterFlowTheme.of(context).primaryColor,
                                                                                     fontSize: 12,
+                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                                   ),
                                                                             ),
                                                                           ),
@@ -938,6 +951,10 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                           .primaryColor,
                                                                       fontSize:
                                                                           12,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).bodyText1Family),
                                                                     ),
                                                               ),
                                                             ),
@@ -989,6 +1006,10 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                             .bodyText2Family,
                                                                     color: Color(
                                                                         0xFFF9F9F9),
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).bodyText2Family),
                                                                   ),
                                                             ),
                                                             duration: Duration(
@@ -1026,6 +1047,11 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                       .subtitle1Family,
                                                                   color: Colors
                                                                       .white,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .subtitle1Family),
                                                                 ),
                                                         elevation: 2,
                                                         borderSide: BorderSide(

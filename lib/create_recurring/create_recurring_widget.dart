@@ -32,10 +32,11 @@ class CreateRecurringWidget extends StatefulWidget {
 }
 
 class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
-  DateTimeRange? calendarSelectedDay;
-  String uploadedFileUrl = '';
   TextEditingController? nameController;
+
+  String uploadedFileUrl = '';
   String? categoryValue;
+  DateTimeRange? calendarSelectedDay;
   String? durationValue;
   bool? switchListTileValue;
   final formKey = GlobalKey<FormState>();
@@ -272,6 +273,10 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                     .bodyText1Family,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1Family),
                                           ),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -281,6 +286,20 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
@@ -298,6 +317,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                       if (val == null || val.isEmpty) {
                                         return 'Field is required';
                                       }
+
                                       if (val.length < 1) {
                                         return 'Requires at least 1 characters.';
                                       }
@@ -393,6 +413,12 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryText,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1Family),
                                                         ),
                                                 hintText:
                                                     'Assign to a category...',
@@ -504,6 +530,10 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                   .subtitle2Family,
                                           color: FlutterFlowTheme.of(context)
                                               .primaryText,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2Family),
                                         ),
                                     dayOfWeekStyle: FlutterFlowTheme.of(context)
                                         .bodyText2
@@ -513,6 +543,10 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                   .bodyText2Family,
                                           color: FlutterFlowTheme.of(context)
                                               .primaryText,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2Family),
                                         ),
                                     dateStyle: FlutterFlowTheme.of(context)
                                         .bodyText2
@@ -521,28 +555,39 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .bodyText2Family,
                                           fontWeight: FontWeight.normal,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2Family),
                                         ),
-                                    selectedDateStyle:
-                                        FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
+                                    selectedDateStyle: FlutterFlowTheme.of(
+                                            context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText1Family,
+                                          color: Colors.white,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText1Family,
-                                              color: Colors.white,
-                                            ),
-                                    inactiveDateStyle:
-                                        FlutterFlowTheme.of(context)
-                                            .bodyText2
-                                            .override(
-                                              fontFamily:
+                                                      .bodyText1Family),
+                                        ),
+                                    inactiveDateStyle: FlutterFlowTheme.of(
+                                            context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText2Family,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryColor,
+                                          fontWeight: FontWeight.w300,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText2Family,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryColor,
-                                              fontWeight: FontWeight.w300,
-                                            ),
+                                                      .bodyText2Family),
+                                        ),
                                     locale: FFLocalizations.of(context)
                                         .languageCode,
                                   ),
@@ -582,6 +627,10 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .bodyText1Family,
                                             color: Colors.white,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1Family),
                                           ),
                                       iconColor: Color(0x00000000),
                                       iconSize: 18,
@@ -599,6 +648,10 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                     .bodyText1Family,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1Family),
                                           ),
                                       iconColor: Color(0x00000000),
                                       iconSize: 18,
@@ -754,6 +807,10 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .subtitle2Family,
                                           color: Colors.white,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2Family),
                                         ),
                                     elevation: 2,
                                     borderSide: BorderSide(

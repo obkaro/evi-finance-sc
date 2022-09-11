@@ -124,6 +124,10 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .bodyText1Family,
                                       fontWeight: FontWeight.w600,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText1Family),
                                     ),
                                 hintText: 'Please select...',
                                 fillColor: FlutterFlowTheme.of(context)
@@ -302,6 +306,12 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primaryText,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle2Family),
                                                       ),
                                               dayOfWeekStyle:
                                                   FlutterFlowTheme.of(context)
@@ -315,6 +325,12 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primaryText,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText2Family),
                                                       ),
                                               dateStyle:
                                                   FlutterFlowTheme.of(context)
@@ -326,6 +342,12 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                                 .bodyText2Family,
                                                         fontWeight:
                                                             FontWeight.normal,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText2Family),
                                                       ),
                                               selectedDateStyle:
                                                   FlutterFlowTheme.of(context)
@@ -336,6 +358,12 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                                     context)
                                                                 .bodyText1Family,
                                                         color: Colors.white,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
                                                       ),
                                               inactiveDateStyle:
                                                   FlutterFlowTheme.of(context)
@@ -351,6 +379,12 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                                 .secondaryColor,
                                                         fontWeight:
                                                             FontWeight.w300,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText2Family),
                                                       ),
                                               locale:
                                                   FFLocalizations.of(context)
@@ -411,6 +445,9 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                       .bodyText1Family,
                                   color:
                                       FlutterFlowTheme.of(context).primaryColor,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyText1Family),
                                 ),
                             elevation: 0,
                             borderSide: BorderSide(
@@ -482,12 +519,16 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                             width: double.infinity,
                             height: 60,
                             color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      color: Colors.white,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .subtitle2
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .subtitle2Family,
+                                  color: Colors.white,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .subtitle2Family),
+                                ),
                             elevation: 2,
                             borderSide: BorderSide(
                               color: Colors.transparent,

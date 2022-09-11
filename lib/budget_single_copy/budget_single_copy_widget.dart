@@ -194,6 +194,12 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                                           fontSize: 8,
                                                           fontWeight:
                                                               FontWeight.w500,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText2Family),
                                                         ),
                                                 labelInterval: 10,
                                               ),
@@ -241,6 +247,11 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                                                           context)
                                                                       .subtitle1Family,
                                                                   fontSize: 20,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .subtitle1Family),
                                                                 ),
                                                       ),
                                                     ],
@@ -276,6 +287,11 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                                                           context)
                                                                       .subtitle1Family,
                                                                   fontSize: 20,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .subtitle1Family),
                                                                 ),
                                                       ),
                                                     ],
@@ -534,6 +550,10 @@ class _BudgetSingleCopyWidgetState extends State<BudgetSingleCopyWidget> {
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .primaryText,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).subtitle2Family),
                                                                   ),
                                                             ),
                                                           ),

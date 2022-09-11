@@ -406,6 +406,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                           fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                                           color: Color(0xFFD40F0F),
                                                                                           fontStyle: FontStyle.italic,
+                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                                         ),
                                                                                   ),
                                                                                 ),
@@ -442,6 +443,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                 style: FlutterFlowTheme.of(context).subtitle1.override(
                                                                                       fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                                       fontSize: 16,
+                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
                                                                                     ),
                                                                               ),
                                                                             ),
@@ -759,6 +761,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                           fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                                           color: Color(0xFFD40F0F),
                                                                                           fontStyle: FontStyle.italic,
+                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                                         ),
                                                                                   ),
                                                                                 ),
@@ -795,6 +798,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                                                 style: FlutterFlowTheme.of(context).subtitle1.override(
                                                                                       fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                                       fontSize: 16,
+                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
                                                                                     ),
                                                                               ),
                                                                             ),

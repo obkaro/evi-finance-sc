@@ -65,6 +65,10 @@ class _TooltipWidgetState extends State<TooltipWidget> {
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
                                     fontWeight: FontWeight.normal,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyText2Family),
                                   ),
                             ),
                           ],

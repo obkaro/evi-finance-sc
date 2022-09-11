@@ -248,6 +248,8 @@ class _OnboardingPageViewWidgetState extends State<OnboardingPageViewWidget> {
                             fontFamily:
                                 FlutterFlowTheme.of(context).subtitle2Family,
                             color: Colors.white,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).subtitle2Family),
                           ),
                       elevation: 2,
                       borderSide: BorderSide(

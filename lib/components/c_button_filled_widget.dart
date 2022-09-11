@@ -39,6 +39,8 @@ class _CButtonFilledWidgetState extends State<CButtonFilledWidget> {
         textStyle: FlutterFlowTheme.of(context).subtitle1.override(
               fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
               color: Colors.white,
+              useGoogleFonts: GoogleFonts.asMap()
+                  .containsKey(FlutterFlowTheme.of(context).subtitle1Family),
             ),
         elevation: 2,
         borderSide: BorderSide(

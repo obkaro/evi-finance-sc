@@ -19,13 +19,21 @@ class EmailAuthWidget extends StatefulWidget {
 
 class _EmailAuthWidgetState extends State<EmailAuthWidget> {
   TextEditingController? confirmPasswordController;
+
   late bool confirmPasswordVisibility;
+
   TextEditingController? newPasswordController;
+
   late bool newPasswordVisibility;
+
   TextEditingController? signUpEmailController;
+
   TextEditingController? signInEmailController;
+
   TextEditingController? signInPasswordController;
+
   late bool signInPasswordVisibility;
+
   final formKey1 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -169,6 +177,30 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                               BorderRadius
                                                                   .circular(12),
                                                         ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                        ),
                                                         filled: true,
                                                         fillColor: FlutterFlowTheme
                                                                 .of(context)
@@ -232,6 +264,30 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                                   .circular(12),
                                                         ),
                                                         focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                        ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                        ),
+                                                        focusedErrorBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
                                                               BorderSide(
@@ -334,6 +390,12 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                                         context)
                                                                     .subtitle2Family,
                                                             color: Colors.white,
+                                                            useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                .containsKey(
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .subtitle2Family),
                                                           ),
                                                   elevation: 2,
                                                   borderSide: BorderSide(
@@ -447,6 +509,30 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                               BorderRadius
                                                                   .circular(12),
                                                         ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                        ),
                                                         filled: true,
                                                         fillColor: FlutterFlowTheme
                                                                 .of(context)
@@ -521,6 +607,30 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                               BorderRadius
                                                                   .circular(12),
                                                         ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                        ),
                                                         filled: true,
                                                         fillColor: FlutterFlowTheme
                                                                 .of(context)
@@ -554,6 +664,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                             val.isEmpty) {
                                                           return 'Field is required';
                                                         }
+
                                                         if (val.length < 6) {
                                                           return 'Requires at least 6 characters.';
                                                         }
@@ -599,6 +710,30 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                                   .circular(12),
                                                         ),
                                                         focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                        ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                        ),
+                                                        focusedErrorBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
                                                               BorderSide(
@@ -720,6 +855,12 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                                         context)
                                                                     .subtitle2Family,
                                                             color: Colors.white,
+                                                            useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                .containsKey(
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .subtitle2Family),
                                                           ),
                                                   elevation: 2,
                                                   borderSide: BorderSide(

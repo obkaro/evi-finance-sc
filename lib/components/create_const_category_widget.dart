@@ -93,6 +93,10 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                                           .bodyText1Family,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText1Family),
                                     ),
                               ),
                             ],
@@ -131,12 +135,16 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                             height: 30,
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
-                            textStyle:
-                                FlutterFlowTheme.of(context).bodyText2.override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText2Family,
-                                      fontSize: 14,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .bodyText2
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyText2Family,
+                                  fontSize: 14,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyText2Family),
+                                ),
                             elevation: 0,
                             borderSide: BorderSide(
                               color: Colors.transparent,
@@ -205,12 +213,16 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                             width: double.infinity,
                             height: 60,
                             color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      color: Colors.white,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .subtitle2
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .subtitle2Family,
+                                  color: Colors.white,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .subtitle2Family),
+                                ),
                             elevation: 2,
                             borderSide: BorderSide(
                               color: Colors.transparent,
