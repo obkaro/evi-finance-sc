@@ -1,5 +1,6 @@
 import '../account_single/account_single_widget.dart';
 import '../accounts/accounts_widget.dart';
+import '../assign_transactions/assign_transactions_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../budgets/budgets_widget.dart';
@@ -163,11 +164,22 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                         ],
                                       ),
                                     ),
-                                    Icon(
-                                      Icons.notifications_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondarySecondary,
-                                      size: 24,
+                                    InkWell(
+                                      onTap: () async {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                AssignTransactionsWidget(),
+                                          ),
+                                        );
+                                      },
+                                      child: Icon(
+                                        Icons.notifications_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondarySecondary,
+                                        size: 24,
+                                      ),
                                     ),
                                   ],
                                 ),
