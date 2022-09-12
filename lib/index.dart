@@ -39,3 +39,5 @@ export 'subscription_details/subscription_details_widget.dart'
 export 'edit_income_sources/edit_income_sources_widget.dart'
     show EditIncomeSourcesWidget;
 export 'menu/menu_widget.dart' show MenuWidget;
+export 'assign_transactions/assign_transactions_widget.dart'
+    show AssignTransactionsWidget;
