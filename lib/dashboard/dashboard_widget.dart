@@ -385,7 +385,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             ),
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(36, 24, 36, 24),
+                                                  .fromSTEB(32, 20, 32, 20),
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
@@ -655,7 +655,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                 decoration: BoxDecoration(),
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(24, 24, 24, 24),
+                                                      .fromSTEB(20, 20, 20, 20),
                                                   child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -890,7 +890,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             children: [
                                               Padding(
                                                 padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 8, 16, 8),
+                                                    .fromSTEB(20, 10, 20, 10),
                                                 child: FutureBuilder<
                                                     AccountsRecord>(
                                                   future: AccountsRecord
