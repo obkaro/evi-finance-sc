@@ -385,7 +385,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             ),
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(16, 16, 16, 16),
+                                                  .fromSTEB(32, 32, 32, 32),
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
