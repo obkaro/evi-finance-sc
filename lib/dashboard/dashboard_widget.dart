@@ -376,7 +376,6 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             );
                                           },
                                           child: Container(
-                                            width: 132,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -386,7 +385,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             ),
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(10, 10, 10, 10),
+                                                  .fromSTEB(16, 16, 16, 16),
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
@@ -850,8 +849,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 8, 20, 20),
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 8, 0, 20),
                                 child: StreamBuilder<List<TransactionsRecord>>(
                                   stream: queryTransactionsRecord(
                                     queryBuilder: (transactionsRecord) =>
