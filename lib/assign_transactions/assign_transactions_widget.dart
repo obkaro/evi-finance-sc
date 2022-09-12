@@ -94,7 +94,9 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                           topCardWidthFraction: 0.9,
                           middleCardWidthFraction: 0.85,
                           botttomCardWidthFraction: 0.8,
-                          onSwipeFn: (index) {},
+                          onSwipeFn: (index) async {
+                            swipeableStackController.triggerSwipeUp();
+                          },
                           onLeftSwipe: (index) {},
                           onRightSwipe: (index) {},
                           onUpSwipe: (index) {},
@@ -701,7 +703,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                   transactionBudget: listViewCategoriesRecord.categoryBudget,
                                                                                 );
                                                                                 await transactionFromPageItem.reference.update(transactionsUpdateData);
-                                                                                Navigator.pop(context);
+                                                                                swipeableStackController.triggerSwipeUp();
                                                                               },
                                                                             ),
                                                                           if (transactionFromPageItem.transactionCategory ==
