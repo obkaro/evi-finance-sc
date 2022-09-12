@@ -385,7 +385,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             ),
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(36, 24, 36, 32),
+                                                  .fromSTEB(36, 24, 36, 24),
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
@@ -769,17 +769,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                               ],
                                                                             ),
                                                                           ),
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                0,
-                                                                                0,
-                                                                                0,
-                                                                                8),
-                                                                            child:
-                                                                                Text(
-                                                                              '${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetEnd)}',
-                                                                              style: FlutterFlowTheme.of(context).subtitle2,
-                                                                            ),
+                                                                          Text(
+                                                                            '${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetEnd)}',
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).subtitle2,
                                                                           ),
                                                                         ],
                                                                       ),
@@ -846,7 +839,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                             child: Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                borderRadius: BorderRadius.circular(32),
                               ),
                               child: Padding(
                                 padding:
@@ -895,7 +890,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             children: [
                                               Padding(
                                                 padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 8, 0, 8),
+                                                    .fromSTEB(16, 8, 16, 8),
                                                 child: FutureBuilder<
                                                     AccountsRecord>(
                                                   future: AccountsRecord
@@ -1095,7 +1090,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                                       maxChars: 25,
                                                                                       replacement: '…',
                                                                                     ),
-                                                                                    style: FlutterFlowTheme.of(context).subtitle1,
+                                                                                    style: FlutterFlowTheme.of(context).bodyText1,
                                                                                   );
                                                                                 },
                                                                               ),
@@ -1126,7 +1121,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                                       maxChars: 25,
                                                                                       replacement: '…',
                                                                                     ),
-                                                                                    style: FlutterFlowTheme.of(context).subtitle1,
+                                                                                    style: FlutterFlowTheme.of(context).bodyText1,
                                                                                   );
                                                                                 },
                                                                               ),
