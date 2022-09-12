@@ -385,7 +385,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             ),
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(36, 24, 36, 32),
+                                                  .fromSTEB(36, 24, 36, 24),
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
@@ -769,17 +769,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                               ],
                                                                             ),
                                                                           ),
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                0,
-                                                                                0,
-                                                                                0,
-                                                                                8),
-                                                                            child:
-                                                                                Text(
-                                                                              '${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetEnd)}',
-                                                                              style: FlutterFlowTheme.of(context).subtitle2,
-                                                                            ),
+                                                                          Text(
+                                                                            '${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetEnd)}',
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).subtitle2,
                                                                           ),
                                                                         ],
                                                                       ),
