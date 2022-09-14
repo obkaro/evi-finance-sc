@@ -45,8 +45,6 @@ abstract class AccountsRecord
 
   DateTime? get lastSync;
 
-  String? get logo;
-
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -65,8 +63,7 @@ abstract class AccountsRecord
     ..accountNumber = ''
     ..bvn = ''
     ..accountLogo = ''
-    ..reauthRequired = false
-    ..logo = '';
+    ..reauthRequired = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('accounts');
@@ -107,7 +104,6 @@ Map<String, dynamic> createAccountsRecordData({
   String? accountLogo,
   bool? reauthRequired,
   DateTime? lastSync,
-  String? logo,
 }) {
   final firestoreData = serializers.toFirestore(
     AccountsRecord.serializer,
@@ -129,8 +125,7 @@ Map<String, dynamic> createAccountsRecordData({
         ..dateLinked = dateLinked
         ..accountLogo = accountLogo
         ..reauthRequired = reauthRequired
-        ..lastSync = lastSync
-        ..logo = logo,
+        ..lastSync = lastSync,
     ),
   );
 
