@@ -88,7 +88,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         createdBudget: await getDocumentParameter(
             data, 'createdBudget', BudgetsRecord.serializer),
       ),
-  'EmailAuth': (data) async => EmailAuthWidget(),
   'ForgotPassword': (data) async => ForgotPasswordWidget(),
   'ActiveBudget': (data) async => hasMatchingParameters(data, {'command'})
       ? ActiveBudgetWidget(
@@ -152,6 +151,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'EditIncomeSources': (data) async => EditIncomeSourcesWidget(),
   'Menu': (data) async => NavBarPage(initialPage: 'Menu'),
   'assignTransactions': (data) async => AssignTransactionsWidget(),
+  'EmailAuth': (data) async => EmailAuthWidget(),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

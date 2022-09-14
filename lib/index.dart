@@ -3,7 +3,6 @@ export 'land_page/land_page_widget.dart' show LandPageWidget;
 export 'transactions/transactions_widget.dart' show TransactionsWidget;
 export 'new_budget_categories/new_budget_categories_widget.dart'
     show NewBudgetCategoriesWidget;
-export 'email_auth/email_auth_widget.dart' show EmailAuthWidget;
 export 'forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
 export 'dashboard/dashboard_widget.dart' show DashboardWidget;
 export 'active_budget/active_budget_widget.dart' show ActiveBudgetWidget;
@@ -41,3 +40,4 @@ export 'edit_income_sources/edit_income_sources_widget.dart'
 export 'menu/menu_widget.dart' show MenuWidget;
 export 'assign_transactions/assign_transactions_widget.dart'
     show AssignTransactionsWidget;
+export 'email_auth/email_auth_widget.dart' show EmailAuthWidget;

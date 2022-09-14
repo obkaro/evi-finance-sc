@@ -397,7 +397,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             ),
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(32, 20, 32, 20),
+                                                  .fromSTEB(24, 20, 24, 20),
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
@@ -435,69 +435,18 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                     0, 0),
                                                           ),
                                                         ),
-                                                        FutureBuilder<
-                                                            List<
-                                                                ConstInstitutionLogosRecord>>(
-                                                          future:
-                                                              queryConstInstitutionLogosRecordOnce(
-                                                            queryBuilder: (constInstitutionLogosRecord) =>
-                                                                constInstitutionLogosRecord.where(
-                                                                    'institutionCode',
-                                                                    isEqualTo:
-                                                                        rowAccountsRecord
-                                                                            .bankCode),
-                                                            singleRecord: true,
+                                                        ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                          child:
+                                                              CachedNetworkImage(
+                                                            imageUrl:
+                                                                'https://picsum.photos/seed/89/600',
+                                                            width: 40,
+                                                            height: 40,
+                                                            fit: BoxFit.cover,
                                                           ),
-                                                          builder: (context,
-                                                              snapshot) {
-                                                            // Customize what your widget looks like when it's loading.
-                                                            if (!snapshot
-                                                                .hasData) {
-                                                              return Center(
-                                                                child: SizedBox(
-                                                                  width: 50,
-                                                                  height: 50,
-                                                                  child:
-                                                                      SpinKitRing(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryColor,
-                                                                    size: 50,
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            }
-                                                            List<ConstInstitutionLogosRecord>
-                                                                imageConstInstitutionLogosRecordList =
-                                                                snapshot.data!;
-                                                            // Return an empty Container when the document does not exist.
-                                                            if (snapshot.data!
-                                                                .isEmpty) {
-                                                              return Container();
-                                                            }
-                                                            final imageConstInstitutionLogosRecord =
-                                                                imageConstInstitutionLogosRecordList
-                                                                        .isNotEmpty
-                                                                    ? imageConstInstitutionLogosRecordList
-                                                                        .first
-                                                                    : null;
-                                                            return ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          12),
-                                                              child:
-                                                                  CachedNetworkImage(
-                                                                imageUrl:
-                                                                    imageConstInstitutionLogosRecord!
-                                                                        .institutionLogo!,
-                                                                width: 40,
-                                                                height: 40,
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
-                                                            );
-                                                          },
                                                         ),
                                                         if (rowAccountsRecord
                                                                 .reauthRequired ==
@@ -749,7 +698,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                         mainAxisSize:
                                                                             MainAxisSize.max,
                                                                         mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceAround,
+                                                                            MainAxisAlignment.center,
                                                                         crossAxisAlignment:
                                                                             CrossAxisAlignment.start,
                                                                         children: [
@@ -902,7 +851,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             children: [
                                               Padding(
                                                 padding: EdgeInsetsDirectional
-                                                    .fromSTEB(20, 10, 20, 10),
+                                                    .fromSTEB(20, 16, 20, 16),
                                                 child: FutureBuilder<
                                                     AccountsRecord>(
                                                   future: AccountsRecord

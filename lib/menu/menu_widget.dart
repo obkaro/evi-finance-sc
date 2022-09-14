@@ -2,6 +2,7 @@ import '../accounts/accounts_widget.dart';
 import '../budgets/budgets_widget.dart';
 import '../components/m_appbar_widget.dart';
 import '../components/m_grid_menu_item_widget.dart';
+import '../edit_income_sources/edit_income_sources_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../main.dart';
@@ -50,9 +51,9 @@ class _MenuWidgetState extends State<MenuWidget> {
             fgColor: FlutterFlowTheme.of(context).primaryBackground,
             textColor: FlutterFlowTheme.of(context).secondaryPrimary,
             actionIcon: Icon(
-              Icons.featured_play_list_rounded,
-              color: FlutterFlowTheme.of(context).secondaryColor,
-              size: 0,
+              Icons.settings_rounded,
+              color: FlutterFlowTheme.of(context).secondaryPrimary,
+              size: 24,
             ),
             iconAction: () async {
               await Navigator.push(
@@ -163,6 +164,24 @@ class _MenuWidgetState extends State<MenuWidget> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => BudgetsWidget(),
+                            ),
+                          );
+                        },
+                      ),
+                      MGridMenuItemWidget(
+                        menuText: 'Income',
+                        menuIcon: Icon(
+                          Icons.attach_money_rounded,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 36,
+                        ),
+                        fgColor: FlutterFlowTheme.of(context).primaryText,
+                        bgColor: Colors.transparent,
+                        action: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditIncomeSourcesWidget(),
                             ),
                           );
                         },
