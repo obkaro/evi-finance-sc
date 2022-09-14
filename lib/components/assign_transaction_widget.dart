@@ -208,9 +208,8 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                   functions.subtractCurrencyOfCopy(
                                                                       inheritedCategoriesItem
                                                                           .categoryAmount,
-                                                                      functions.sumTransactionAmounts(
-                                                                          textTransactionsRecordList
-                                                                              .toList())),
+                                                                      inheritedCategoriesItem
+                                                                          .spentAmount),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText1,
@@ -259,6 +258,13 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                       transactionBudget:
                                                                           inheritedCategoriesItem
                                                                               .categoryBudget,
+                                                                      categoryDetails:
+                                                                          createCategoryDetailsStruct(
+                                                                        name: inheritedCategoriesItem
+                                                                            .categoryName,
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                      ),
                                                                     );
                                                                     await widget
                                                                         .transaction!
@@ -561,6 +567,21 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                       recurringRef:
                                                                           inheritedSubsItem
                                                                               .reference,
+                                                                      categoryDetails:
+                                                                          createCategoryDetailsStruct(
+                                                                        name: inheritedSubsItem
+                                                                            .categoryDetails
+                                                                            .name,
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                      ),
+                                                                      subscriptionDetails:
+                                                                          createSubscriptionDetailsStruct(
+                                                                        name: inheritedSubsItem
+                                                                            .name,
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                      ),
                                                                     );
                                                                     await widget
                                                                         .transaction!
@@ -664,6 +685,21 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                       recurringRef:
                                                                           inheritedSubsItem
                                                                               .reference,
+                                                                      categoryDetails:
+                                                                          createCategoryDetailsStruct(
+                                                                        name: inheritedSubsItem
+                                                                            .categoryDetails
+                                                                            .name,
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                      ),
+                                                                      subscriptionDetails:
+                                                                          createSubscriptionDetailsStruct(
+                                                                        name: inheritedSubsItem
+                                                                            .name,
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                      ),
                                                                     );
                                                                     await widget
                                                                         .transaction!

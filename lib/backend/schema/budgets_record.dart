@@ -34,6 +34,8 @@ abstract class BudgetsRecord
 
   int? get duration;
 
+  int? get budgetSpent;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -45,7 +47,8 @@ abstract class BudgetsRecord
     ..budgetDuration = ''
     ..unallocatedAmount = 0
     ..status = ''
-    ..duration = 0;
+    ..duration = 0
+    ..budgetSpent = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('budgets');
@@ -81,6 +84,7 @@ Map<String, dynamic> createBudgetsRecordData({
   int? unallocatedAmount,
   String? status,
   int? duration,
+  int? budgetSpent,
 }) {
   final firestoreData = serializers.toFirestore(
     BudgetsRecord.serializer,
@@ -97,7 +101,8 @@ Map<String, dynamic> createBudgetsRecordData({
         ..budgetDuration = budgetDuration
         ..unallocatedAmount = unallocatedAmount
         ..status = status
-        ..duration = duration,
+        ..duration = duration
+        ..budgetSpent = budgetSpent,
     ),
   );
 
