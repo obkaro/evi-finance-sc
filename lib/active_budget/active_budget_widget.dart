@@ -53,53 +53,29 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
         child: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
-          flexibleSpace: AuthUserStreamWidget(
-            child: StreamBuilder<BudgetsRecord>(
-              stream:
-                  BudgetsRecord.getDocument(currentUserDocument!.activeBudget!),
-              builder: (context, snapshot) {
-                // Customize what your widget looks like when it's loading.
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: SizedBox(
-                      width: 50,
-                      height: 50,
-                      child: SpinKitRing(
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                        size: 50,
-                      ),
-                    ),
-                  );
-                }
-                final mAppbarBudgetsRecord = snapshot.data!;
-                return MAppbarWidget(
-                  titleText: 'Active Budget',
-                  icon: Icon(
-                    Icons.pie_chart_rounded,
-                    color: FlutterFlowTheme.of(context).secondaryPrimary,
-                    size: 32,
-                  ),
-                  bgColor: FlutterFlowTheme.of(context).secondaryColor,
-                  fgColor: FlutterFlowTheme.of(context).primaryBackground,
-                  textColor: FlutterFlowTheme.of(context).secondaryPrimary,
-                  actionIcon: Icon(
-                    Icons.edit_rounded,
-                    color: FlutterFlowTheme.of(context).secondaryPrimary,
-                    size: 24,
-                  ),
-                  iconAction: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditBudgetWidget(
-                          budget: mAppbarBudgetsRecord,
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
+          flexibleSpace: MAppbarWidget(
+            titleText: 'Active Budget',
+            icon: Icon(
+              Icons.pie_chart_rounded,
+              color: FlutterFlowTheme.of(context).secondaryPrimary,
+              size: 32,
             ),
+            bgColor: FlutterFlowTheme.of(context).secondaryColor,
+            fgColor: FlutterFlowTheme.of(context).primaryBackground,
+            textColor: FlutterFlowTheme.of(context).secondaryPrimary,
+            actionIcon: Icon(
+              Icons.edit_rounded,
+              color: FlutterFlowTheme.of(context).secondaryPrimary,
+              size: 24,
+            ),
+            iconAction: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditBudgetWidget(),
+                ),
+              );
+            },
           ),
           actions: [],
           elevation: 0,
@@ -532,12 +508,14 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               context)
                                                                           .size
                                                                           .width,
+                                                                      height:
+                                                                          100,
                                                                       decoration:
                                                                           BoxDecoration(),
                                                                       child:
                                                                           Column(
                                                                         mainAxisSize:
-                                                                            MainAxisSize.min,
+                                                                            MainAxisSize.max,
                                                                         mainAxisAlignment:
                                                                             MainAxisAlignment.spaceAround,
                                                                         crossAxisAlignment:
@@ -565,54 +543,54 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               ],
                                                                             ),
                                                                           ),
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                0,
-                                                                                0,
-                                                                                0,
-                                                                                8),
+                                                                          Expanded(
                                                                             child:
-                                                                                Row(
-                                                                              mainAxisSize: MainAxisSize.max,
-                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                              children: [
-                                                                                Expanded(
-                                                                                  child: Column(
-                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                    children: [
-                                                                                      StreamBuilder<CategoriesRecord>(
-                                                                                        stream: CategoriesRecord.getDocument(displayedCategoriesItem.reference),
-                                                                                        builder: (context, snapshot) {
-                                                                                          // Customize what your widget looks like when it's loading.
-                                                                                          if (!snapshot.hasData) {
-                                                                                            return Center(
-                                                                                              child: SizedBox(
-                                                                                                width: 50,
-                                                                                                height: 50,
-                                                                                                child: SpinKitRing(
-                                                                                                  color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                                  size: 50,
-                                                                                                ),
-                                                                                              ),
-                                                                                            );
-                                                                                          }
-                                                                                          final progressBarCategoriesRecord = snapshot.data!;
-                                                                                          return LinearPercentIndicator(
-                                                                                            percent: functions.calcCategoryPercent(displayedCategoriesItem, containerTransactionsRecordList.toList()),
-                                                                                            width: MediaQuery.of(context).size.width * 0.9,
-                                                                                            lineHeight: 8,
-                                                                                            animation: true,
-                                                                                            progressColor: FlutterFlowTheme.of(context).primaryColor,
-                                                                                            backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
-                                                                                            barRadius: Radius.circular(12),
-                                                                                            padding: EdgeInsets.zero,
-                                                                                          );
-                                                                                        },
-                                                                                      ),
-                                                                                    ],
+                                                                                Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                                                              child: Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                children: [
+                                                                                  Expanded(
+                                                                                    child: Column(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      children: [
+                                                                                        Expanded(
+                                                                                          child: StreamBuilder<CategoriesRecord>(
+                                                                                            stream: CategoriesRecord.getDocument(displayedCategoriesItem.reference),
+                                                                                            builder: (context, snapshot) {
+                                                                                              // Customize what your widget looks like when it's loading.
+                                                                                              if (!snapshot.hasData) {
+                                                                                                return Center(
+                                                                                                  child: SizedBox(
+                                                                                                    width: 50,
+                                                                                                    height: 50,
+                                                                                                    child: SpinKitRing(
+                                                                                                      color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                                      size: 50,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                );
+                                                                                              }
+                                                                                              final progressBarCategoriesRecord = snapshot.data!;
+                                                                                              return LinearPercentIndicator(
+                                                                                                percent: functions.calcCategoryPercent(displayedCategoriesItem, containerTransactionsRecordList.toList()),
+                                                                                                width: MediaQuery.of(context).size.width * 0.88,
+                                                                                                lineHeight: 8,
+                                                                                                animation: true,
+                                                                                                progressColor: FlutterFlowTheme.of(context).primaryColor,
+                                                                                                backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
+                                                                                                barRadius: Radius.circular(12),
+                                                                                                padding: EdgeInsets.zero,
+                                                                                              );
+                                                                                            },
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
                                                                                   ),
-                                                                                ),
-                                                                              ],
+                                                                                ],
+                                                                              ),
                                                                             ),
                                                                           ),
                                                                           Padding(
