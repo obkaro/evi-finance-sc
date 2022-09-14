@@ -194,8 +194,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                     percent: functions
                                                         .calcBudgetChart(
                                                             widget.budget,
-                                                            containerTransactionsRecordList
-                                                                .toList())!,
+                                                            widget.budget!
+                                                                .budgetSpent)!,
                                                     radius: 90,
                                                     lineWidth: 20,
                                                     animation: true,

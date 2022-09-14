@@ -287,7 +287,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                 20),
                                                                             child:
                                                                                 CircularPercentIndicator(
-                                                                              percent: functions.calcBudgetChart(columnBudgetsRecord, containerTransactionsRecordList.toList())!,
+                                                                              percent: functions.calcBudgetChart(columnBudgetsRecord, columnBudgetsRecord.budgetSpent)!,
                                                                               radius: 90,
                                                                               lineWidth: 20,
                                                                               animation: true,
@@ -354,7 +354,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                   style: FlutterFlowTheme.of(context).bodyText2,
                                                                                 ),
                                                                                 Text(
-                                                                                  functions.formatTransCurrency(functions.sumTransactionAmounts(containerTransactionsRecordList.toList())),
+                                                                                  functions.formatTransCurrency(columnBudgetsRecord.budgetSpent),
                                                                                   style: FlutterFlowTheme.of(context).subtitle1.override(
                                                                                         fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                                         fontSize: 20,
@@ -576,39 +576,41 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                               mainAxisSize: MainAxisSize.max,
                                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                                               children: [
-                                                                                Column(
-                                                                                  mainAxisSize: MainAxisSize.min,
-                                                                                  children: [
-                                                                                    StreamBuilder<CategoriesRecord>(
-                                                                                      stream: CategoriesRecord.getDocument(displayedCategoriesItem.reference),
-                                                                                      builder: (context, snapshot) {
-                                                                                        // Customize what your widget looks like when it's loading.
-                                                                                        if (!snapshot.hasData) {
-                                                                                          return Center(
-                                                                                            child: SizedBox(
-                                                                                              width: 50,
-                                                                                              height: 50,
-                                                                                              child: SpinKitRing(
-                                                                                                color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                                size: 50,
+                                                                                Expanded(
+                                                                                  child: Column(
+                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                    children: [
+                                                                                      StreamBuilder<CategoriesRecord>(
+                                                                                        stream: CategoriesRecord.getDocument(displayedCategoriesItem.reference),
+                                                                                        builder: (context, snapshot) {
+                                                                                          // Customize what your widget looks like when it's loading.
+                                                                                          if (!snapshot.hasData) {
+                                                                                            return Center(
+                                                                                              child: SizedBox(
+                                                                                                width: 50,
+                                                                                                height: 50,
+                                                                                                child: SpinKitRing(
+                                                                                                  color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                                  size: 50,
+                                                                                                ),
                                                                                               ),
-                                                                                            ),
+                                                                                            );
+                                                                                          }
+                                                                                          final progressBarCategoriesRecord = snapshot.data!;
+                                                                                          return LinearPercentIndicator(
+                                                                                            percent: functions.calcCategoryPercent(displayedCategoriesItem, containerTransactionsRecordList.toList()),
+                                                                                            width: MediaQuery.of(context).size.width * 0.9,
+                                                                                            lineHeight: 8,
+                                                                                            animation: true,
+                                                                                            progressColor: FlutterFlowTheme.of(context).primaryColor,
+                                                                                            backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
+                                                                                            barRadius: Radius.circular(12),
+                                                                                            padding: EdgeInsets.zero,
                                                                                           );
-                                                                                        }
-                                                                                        final progressBarCategoriesRecord = snapshot.data!;
-                                                                                        return LinearPercentIndicator(
-                                                                                          percent: functions.calcCategoryPercent(displayedCategoriesItem, containerTransactionsRecordList.toList()),
-                                                                                          width: MediaQuery.of(context).size.width * 0.88,
-                                                                                          lineHeight: 8,
-                                                                                          animation: true,
-                                                                                          progressColor: FlutterFlowTheme.of(context).primaryColor,
-                                                                                          backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
-                                                                                          barRadius: Radius.circular(12),
-                                                                                          padding: EdgeInsets.zero,
-                                                                                        );
-                                                                                      },
-                                                                                    ),
-                                                                                  ],
+                                                                                        },
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
                                                                                 ),
                                                                               ],
                                                                             ),

@@ -35,6 +35,8 @@ abstract class SubscriptionsRecord
 
   String? get recurrence;
 
+  CategoryDetailsStruct get categoryDetails;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -47,7 +49,8 @@ abstract class SubscriptionsRecord
     ..expCharge = MoneyStructBuilder()
     ..transactions = ListBuilder()
     ..notification = false
-    ..recurrence = '';
+    ..recurrence = ''
+    ..categoryDetails = CategoryDetailsStructBuilder();
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('subscriptions');
@@ -82,6 +85,7 @@ Map<String, dynamic> createSubscriptionsRecordData({
   MoneyStruct? expCharge,
   bool? notification,
   String? recurrence,
+  CategoryDetailsStruct? categoryDetails,
 }) {
   final firestoreData = serializers.toFirestore(
     SubscriptionsRecord.serializer,
@@ -98,7 +102,8 @@ Map<String, dynamic> createSubscriptionsRecordData({
         ..expCharge = MoneyStructBuilder()
         ..transactions = null
         ..notification = notification
-        ..recurrence = recurrence,
+        ..recurrence = recurrence
+        ..categoryDetails = CategoryDetailsStructBuilder(),
     ),
   );
 
@@ -107,6 +112,10 @@ Map<String, dynamic> createSubscriptionsRecordData({
 
   // Handle nested data for "expCharge" field.
   addMoneyStructData(firestoreData, expCharge, 'expCharge');
+
+  // Handle nested data for "categoryDetails" field.
+  addCategoryDetailsStructData(
+      firestoreData, categoryDetails, 'categoryDetails');
 
   return firestoreData;
 }

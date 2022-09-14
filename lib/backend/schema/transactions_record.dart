@@ -39,6 +39,12 @@ abstract class TransactionsRecord
 
   DocumentReference? get incomeCategory;
 
+  CategoryDetailsStruct get categoryDetails;
+
+  AccountDetailsStruct get accountDetails;
+
+  SubscriptionDetailsStruct get subscriptionDetails;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -50,7 +56,10 @@ abstract class TransactionsRecord
     ..transactionAmount = 0
     ..transactionType = ''
     ..transactionNarration = ''
-    ..transactionID = '';
+    ..transactionID = ''
+    ..categoryDetails = CategoryDetailsStructBuilder()
+    ..accountDetails = AccountDetailsStructBuilder()
+    ..subscriptionDetails = SubscriptionDetailsStructBuilder();
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('transactions');
@@ -89,6 +98,9 @@ Map<String, dynamic> createTransactionsRecordData({
   DocumentReference? transactionBudget,
   DocumentReference? recurringRef,
   DocumentReference? incomeCategory,
+  CategoryDetailsStruct? categoryDetails,
+  AccountDetailsStruct? accountDetails,
+  SubscriptionDetailsStruct? subscriptionDetails,
 }) {
   final firestoreData = serializers.toFirestore(
     TransactionsRecord.serializer,
@@ -107,9 +119,23 @@ Map<String, dynamic> createTransactionsRecordData({
         ..transactionCategory = transactionCategory
         ..transactionBudget = transactionBudget
         ..recurringRef = recurringRef
-        ..incomeCategory = incomeCategory,
+        ..incomeCategory = incomeCategory
+        ..categoryDetails = CategoryDetailsStructBuilder()
+        ..accountDetails = AccountDetailsStructBuilder()
+        ..subscriptionDetails = SubscriptionDetailsStructBuilder(),
     ),
   );
+
+  // Handle nested data for "categoryDetails" field.
+  addCategoryDetailsStructData(
+      firestoreData, categoryDetails, 'categoryDetails');
+
+  // Handle nested data for "accountDetails" field.
+  addAccountDetailsStructData(firestoreData, accountDetails, 'accountDetails');
+
+  // Handle nested data for "subscriptionDetails" field.
+  addSubscriptionDetailsStructData(
+      firestoreData, subscriptionDetails, 'subscriptionDetails');
 
   return firestoreData;
 }

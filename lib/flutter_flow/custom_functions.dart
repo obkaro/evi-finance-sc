@@ -47,19 +47,13 @@ String calcRemCatCurrency(
 
 double? calcBudgetChart(
   BudgetsRecord? budget,
-  List<TransactionsRecord> transactions,
+  int? transactionsSum,
 ) {
   // Add your function code here!
 
-  int totalCategoriesSpent = 0;
+  double budgPercent = (transactionsSum! / (budget!.budgetAmount as int));
 
-  for (var e = 0; e < transactions.length; e++) {
-    totalCategoriesSpent += transactions[e].transactionAmount as int;
-  }
-
-  double budgPercent = (totalCategoriesSpent / (budget!.budgetAmount as int));
-
-  if (totalCategoriesSpent >= (budget.budgetAmount as int)) {
+  if (transactionsSum >= (budget.budgetAmount as int)) {
     budgPercent = 0;
   }
 
