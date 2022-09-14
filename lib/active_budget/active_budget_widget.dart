@@ -488,130 +488,129 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                           context)
                                                                       .size
                                                                       .width,
+                                                                  height: 100,
                                                                   decoration:
                                                                       BoxDecoration(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryBackground,
                                                                     borderRadius:
                                                                         BorderRadius.circular(
-                                                                            16),
+                                                                            32),
                                                                   ),
                                                                   child:
                                                                       Padding(
                                                                     padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            0,
                                                                             16,
-                                                                            0,
-                                                                            16),
+                                                                            8,
+                                                                            16,
+                                                                            8),
                                                                     child:
-                                                                        Container(
-                                                                      width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width,
-                                                                      height:
-                                                                          100,
-                                                                      decoration:
-                                                                          BoxDecoration(),
-                                                                      child:
-                                                                          Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceAround,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.center,
-                                                                        children: [
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                2,
-                                                                                0,
-                                                                                2,
-                                                                                8),
-                                                                            child:
-                                                                                Row(
-                                                                              mainAxisSize: MainAxisSize.max,
-                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                              children: [
-                                                                                Text(
-                                                                                  displayedCategoriesItem.categoryName!,
-                                                                                  style: FlutterFlowTheme.of(context).subtitle1,
-                                                                                ),
-                                                                                Text(
-                                                                                  functions.formatBudgetCurrency(displayedCategoriesItem.categoryAmount),
-                                                                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                                                                ),
-                                                                              ],
-                                                                            ),
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              2,
+                                                                              0,
+                                                                              2,
+                                                                              8),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceBetween,
+                                                                            children: [
+                                                                              Text(
+                                                                                displayedCategoriesItem.categoryName!,
+                                                                                style: FlutterFlowTheme.of(context).subtitle1,
+                                                                              ),
+                                                                              Text(
+                                                                                functions.formatBudgetCurrency(displayedCategoriesItem.categoryAmount),
+                                                                                style: FlutterFlowTheme.of(context).bodyText1,
+                                                                              ),
+                                                                            ],
                                                                           ),
-                                                                          Expanded(
-                                                                            child:
-                                                                                Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                                                              child: Row(
+                                                                        ),
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0,
+                                                                              0,
+                                                                              0,
+                                                                              8),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.center,
+                                                                            children: [
+                                                                              Column(
                                                                                 mainAxisSize: MainAxisSize.max,
-                                                                                mainAxisAlignment: MainAxisAlignment.center,
                                                                                 children: [
-                                                                                  Expanded(
-                                                                                    child: Column(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      children: [
-                                                                                        Expanded(
-                                                                                          child: StreamBuilder<CategoriesRecord>(
-                                                                                            stream: CategoriesRecord.getDocument(displayedCategoriesItem.reference),
-                                                                                            builder: (context, snapshot) {
-                                                                                              // Customize what your widget looks like when it's loading.
-                                                                                              if (!snapshot.hasData) {
-                                                                                                return Center(
-                                                                                                  child: SizedBox(
-                                                                                                    width: 50,
-                                                                                                    height: 50,
-                                                                                                    child: SpinKitRing(
-                                                                                                      color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                                      size: 50,
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                );
-                                                                                              }
-                                                                                              final progressBarCategoriesRecord = snapshot.data!;
-                                                                                              return LinearPercentIndicator(
-                                                                                                percent: functions.calcCategoryPercent(displayedCategoriesItem, containerTransactionsRecordList.toList()),
-                                                                                                width: MediaQuery.of(context).size.width,
-                                                                                                lineHeight: 8,
-                                                                                                animation: true,
-                                                                                                progressColor: FlutterFlowTheme.of(context).primaryColor,
-                                                                                                backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
-                                                                                                barRadius: Radius.circular(12),
-                                                                                                padding: EdgeInsets.zero,
-                                                                                              );
-                                                                                            },
+                                                                                  StreamBuilder<CategoriesRecord>(
+                                                                                    stream: CategoriesRecord.getDocument(displayedCategoriesItem.reference),
+                                                                                    builder: (context, snapshot) {
+                                                                                      // Customize what your widget looks like when it's loading.
+                                                                                      if (!snapshot.hasData) {
+                                                                                        return Center(
+                                                                                          child: SizedBox(
+                                                                                            width: 50,
+                                                                                            height: 50,
+                                                                                            child: SpinKitRing(
+                                                                                              color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                              size: 50,
+                                                                                            ),
                                                                                           ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
+                                                                                        );
+                                                                                      }
+                                                                                      final progressBarCategoriesRecord = snapshot.data!;
+                                                                                      return LinearPercentIndicator(
+                                                                                        percent: functions.calcCategoryPercent(displayedCategoriesItem, containerTransactionsRecordList.toList()),
+                                                                                        width: MediaQuery.of(context).size.width * 0.81,
+                                                                                        lineHeight: 8,
+                                                                                        animation: true,
+                                                                                        progressColor: FlutterFlowTheme.of(context).primaryColor,
+                                                                                        backgroundColor: FlutterFlowTheme.of(context).eviredTransparent,
+                                                                                        barRadius: Radius.circular(12),
+                                                                                        padding: EdgeInsets.zero,
+                                                                                      );
+                                                                                    },
                                                                                   ),
                                                                                 ],
                                                                               ),
-                                                                            ),
+                                                                            ],
                                                                           ),
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                2,
-                                                                                0,
-                                                                                2,
-                                                                                0),
-                                                                            child:
-                                                                                Row(
-                                                                              mainAxisSize: MainAxisSize.max,
-                                                                              children: [
-                                                                                Text(
-                                                                                  functions.subtractCurrencyOf(displayedCategoriesItem.categoryAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList())),
-                                                                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                                                                ),
-                                                                              ],
-                                                                            ),
+                                                                        ),
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              2,
+                                                                              0,
+                                                                              2,
+                                                                              0),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              Text(
+                                                                                functions.subtractCurrencyOf(displayedCategoriesItem.categoryAmount, functions.sumTransactionAmounts(containerTransactionsRecordList.toList())),
+                                                                                style: FlutterFlowTheme.of(context).bodyText1,
+                                                                              ),
+                                                                            ],
                                                                           ),
-                                                                        ],
-                                                                      ),
+                                                                        ),
+                                                                      ],
                                                                     ),
                                                                   ),
                                                                 ),
