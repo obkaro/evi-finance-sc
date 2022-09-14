@@ -514,67 +514,231 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 8, 0, 0),
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: 300,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(0),
-                                            bottomRight: Radius.circular(0),
-                                            topLeft: Radius.circular(32),
-                                            topRight: Radius.circular(32),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 8, 0, 0),
+                                        child: Container(
+                                          width: double.infinity,
+                                          height: 300,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(0),
+                                              bottomRight: Radius.circular(0),
+                                              topLeft: Radius.circular(32),
+                                              topRight: Radius.circular(32),
+                                            ),
                                           ),
-                                        ),
-                                        child: DefaultTabController(
-                                          length: 2,
-                                          initialIndex: 0,
-                                          child: Column(
-                                            children: [
-                                              TabBar(
-                                                isScrollable: true,
-                                                labelColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                unselectedLabelColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                labelPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(16, 8, 16, 8),
-                                                labelStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle1,
-                                                indicatorColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                tabs: [
-                                                  Tab(
-                                                    text: 'Categories',
-                                                    iconMargin:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                8, 8, 8, 8),
-                                                  ),
-                                                  Tab(
-                                                    text: 'Subscriptions',
-                                                  ),
-                                                ],
-                                              ),
-                                              Expanded(
-                                                child: TabBarView(
-                                                  children: [
-                                                    AuthUserStreamWidget(
-                                                      child: StreamBuilder<
+                                          child: DefaultTabController(
+                                            length: 2,
+                                            initialIndex: 0,
+                                            child: Column(
+                                              children: [
+                                                TabBar(
+                                                  isScrollable: true,
+                                                  labelColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryText,
+                                                  unselectedLabelColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryText,
+                                                  labelPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                              16, 8, 16, 8),
+                                                  labelStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .subtitle1,
+                                                  indicatorColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryColor,
+                                                  tabs: [
+                                                    Tab(
+                                                      text: 'Categories',
+                                                      iconMargin:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  8, 8, 8, 8),
+                                                    ),
+                                                    Tab(
+                                                      text: 'Subscriptions',
+                                                    ),
+                                                  ],
+                                                ),
+                                                Expanded(
+                                                  child: TabBarView(
+                                                    children: [
+                                                      AuthUserStreamWidget(
+                                                        child: StreamBuilder<
+                                                            List<
+                                                                CategoriesRecord>>(
+                                                          stream:
+                                                              queryCategoriesRecord(
+                                                            parent:
+                                                                currentUserDocument!
+                                                                    .activeBudget,
+                                                          ),
+                                                          builder: (context,
+                                                              snapshot) {
+                                                            // Customize what your widget looks like when it's loading.
+                                                            if (!snapshot
+                                                                .hasData) {
+                                                              return Center(
+                                                                child: SizedBox(
+                                                                  width: 50,
+                                                                  height: 50,
+                                                                  child:
+                                                                      SpinKitRing(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryColor,
+                                                                    size: 50,
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            }
+                                                            List<CategoriesRecord>
+                                                                listViewCategoriesRecordList =
+                                                                snapshot.data!;
+                                                            return ListView
+                                                                .builder(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .zero,
+                                                              shrinkWrap: true,
+                                                              scrollDirection:
+                                                                  Axis.vertical,
+                                                              itemCount:
+                                                                  listViewCategoriesRecordList
+                                                                      .length,
+                                                              itemBuilder: (context,
+                                                                  listViewIndex) {
+                                                                final listViewCategoriesRecord =
+                                                                    listViewCategoriesRecordList[
+                                                                        listViewIndex];
+                                                                return Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          20,
+                                                                          10,
+                                                                          20,
+                                                                          10),
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.min,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                                                              child: Text(
+                                                                                listViewCategoriesRecord.categoryName!,
+                                                                                style: FlutterFlowTheme.of(context).subtitle1,
+                                                                              ),
+                                                                            ),
+                                                                            StreamBuilder<List<TransactionsRecord>>(
+                                                                              stream: queryTransactionsRecord(
+                                                                                queryBuilder: (transactionsRecord) => transactionsRecord.where('transactionCategory', isEqualTo: listViewCategoriesRecord.reference),
+                                                                              ),
+                                                                              builder: (context, snapshot) {
+                                                                                // Customize what your widget looks like when it's loading.
+                                                                                if (!snapshot.hasData) {
+                                                                                  return Center(
+                                                                                    child: SizedBox(
+                                                                                      width: 50,
+                                                                                      height: 50,
+                                                                                      child: SpinKitRing(
+                                                                                        color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                        size: 50,
+                                                                                      ),
+                                                                                    ),
+                                                                                  );
+                                                                                }
+                                                                                List<TransactionsRecord> textTransactionsRecordList = snapshot.data!;
+                                                                                return Text(
+                                                                                  functions.subtractCurrencyOfCopy(listViewCategoriesRecord.categoryAmount, functions.sumTransactionAmounts(textTransactionsRecordList.toList())),
+                                                                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                                                                );
+                                                                              },
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      Column(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Stack(
+                                                                            children: [
+                                                                              if (transactionFromPageItem.transactionCategory != listViewCategoriesRecord.reference)
+                                                                                FlutterFlowIconButton(
+                                                                                  borderColor: Colors.transparent,
+                                                                                  borderRadius: 30,
+                                                                                  borderWidth: 1,
+                                                                                  buttonSize: 60,
+                                                                                  icon: Icon(
+                                                                                    Icons.radio_button_off_rounded,
+                                                                                    color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                    size: 30,
+                                                                                  ),
+                                                                                  onPressed: () async {
+                                                                                    final transactionsUpdateData = createTransactionsRecordData(
+                                                                                      transactionCategory: listViewCategoriesRecord.reference,
+                                                                                      transactionBudget: listViewCategoriesRecord.categoryBudget,
+                                                                                    );
+                                                                                    await transactionFromPageItem.reference.update(transactionsUpdateData);
+                                                                                    swipeableStackController.triggerSwipeUp();
+                                                                                  },
+                                                                                ),
+                                                                              if (transactionFromPageItem.transactionCategory == listViewCategoriesRecord.reference)
+                                                                                FlutterFlowIconButton(
+                                                                                  borderColor: Colors.transparent,
+                                                                                  borderRadius: 30,
+                                                                                  borderWidth: 1,
+                                                                                  buttonSize: 60,
+                                                                                  icon: Icon(
+                                                                                    Icons.radio_button_checked_rounded,
+                                                                                    color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                    size: 30,
+                                                                                  ),
+                                                                                  onPressed: () {
+                                                                                    print('IconButton pressed ...');
+                                                                                  },
+                                                                                ),
+                                                                            ],
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+                                                      StreamBuilder<
                                                           List<
-                                                              CategoriesRecord>>(
+                                                              SubscriptionsRecord>>(
                                                         stream:
-                                                            queryCategoriesRecord(
-                                                          parent:
-                                                              currentUserDocument!
-                                                                  .activeBudget,
+                                                            querySubscriptionsRecord(
+                                                          queryBuilder: (subscriptionsRecord) =>
+                                                              subscriptionsRecord
+                                                                  .where(
+                                                                      'owner',
+                                                                      isEqualTo:
+                                                                          currentUserReference),
                                                         ),
                                                         builder: (context,
                                                             snapshot) {
@@ -595,430 +759,258 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                               ),
                                                             );
                                                           }
-                                                          List<CategoriesRecord>
-                                                              listViewCategoriesRecordList =
+                                                          List<SubscriptionsRecord>
+                                                              containerSubscriptionsRecordList =
                                                               snapshot.data!;
-                                                          return ListView
-                                                              .builder(
-                                                            padding:
-                                                                EdgeInsets.zero,
-                                                            shrinkWrap: true,
-                                                            scrollDirection:
-                                                                Axis.vertical,
-                                                            itemCount:
-                                                                listViewCategoriesRecordList
-                                                                    .length,
-                                                            itemBuilder: (context,
-                                                                listViewIndex) {
-                                                              final listViewCategoriesRecord =
-                                                                  listViewCategoriesRecordList[
-                                                                      listViewIndex];
-                                                              return Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            20,
-                                                                            10,
-                                                                            20,
-                                                                            10),
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Expanded(
+                                                          return Container(
+                                                            width: 100,
+                                                            height:
+                                                                double.infinity,
+                                                            decoration:
+                                                                BoxDecoration(),
+                                                            child: Builder(
+                                                              builder:
+                                                                  (context) {
+                                                                final inheritedSubs =
+                                                                    containerSubscriptionsRecordList
+                                                                        .toList();
+                                                                return ListView
+                                                                    .builder(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .zero,
+                                                                  shrinkWrap:
+                                                                      true,
+                                                                  scrollDirection:
+                                                                      Axis.vertical,
+                                                                  itemCount:
+                                                                      inheritedSubs
+                                                                          .length,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                          inheritedSubsIndex) {
+                                                                    final inheritedSubsItem =
+                                                                        inheritedSubs[
+                                                                            inheritedSubsIndex];
+                                                                    return Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              20,
+                                                                              8,
+                                                                              20,
+                                                                              8),
                                                                       child:
-                                                                          Column(
+                                                                          Row(
                                                                         mainAxisSize:
-                                                                            MainAxisSize.min,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
+                                                                            MainAxisSize.max,
                                                                         children: [
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 0,
                                                                                 0,
-                                                                                0,
-                                                                                8),
+                                                                                12,
+                                                                                0),
                                                                             child:
+                                                                                Hero(
+                                                                              tag: inheritedSubsItem.icon!,
+                                                                              transitionOnUserGestures: true,
+                                                                              child: ClipRRect(
+                                                                                borderRadius: BorderRadius.circular(12),
+                                                                                child: CachedNetworkImage(
+                                                                                  imageUrl: inheritedSubsItem.icon!,
+                                                                                  width: 48,
+                                                                                  height: 48,
+                                                                                  fit: BoxFit.scaleDown,
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                          Expanded(
+                                                                            child:
+                                                                                Column(
+                                                                              mainAxisSize: MainAxisSize.min,
+                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                              children: [
                                                                                 Text(
-                                                                              listViewCategoriesRecord.categoryName!,
-                                                                              style: FlutterFlowTheme.of(context).subtitle1,
-                                                                            ),
-                                                                          ),
-                                                                          StreamBuilder<
-                                                                              List<TransactionsRecord>>(
-                                                                            stream:
-                                                                                queryTransactionsRecord(
-                                                                              queryBuilder: (transactionsRecord) => transactionsRecord.where('transactionCategory', isEqualTo: listViewCategoriesRecord.reference),
-                                                                            ),
-                                                                            builder:
-                                                                                (context, snapshot) {
-                                                                              // Customize what your widget looks like when it's loading.
-                                                                              if (!snapshot.hasData) {
-                                                                                return Center(
-                                                                                  child: SizedBox(
-                                                                                    width: 50,
-                                                                                    height: 50,
-                                                                                    child: SpinKitRing(
-                                                                                      color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                      size: 50,
-                                                                                    ),
-                                                                                  ),
-                                                                                );
-                                                                              }
-                                                                              List<TransactionsRecord> textTransactionsRecordList = snapshot.data!;
-                                                                              return Text(
-                                                                                functions.subtractCurrencyOfCopy(listViewCategoriesRecord.categoryAmount, functions.sumTransactionAmounts(textTransactionsRecordList.toList())),
-                                                                                style: FlutterFlowTheme.of(context).bodyText1,
-                                                                              );
-                                                                            },
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                    Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      children: [
-                                                                        Stack(
-                                                                          children: [
-                                                                            if (transactionFromPageItem.transactionCategory !=
-                                                                                listViewCategoriesRecord.reference)
-                                                                              FlutterFlowIconButton(
-                                                                                borderColor: Colors.transparent,
-                                                                                borderRadius: 30,
-                                                                                borderWidth: 1,
-                                                                                buttonSize: 60,
-                                                                                icon: Icon(
-                                                                                  Icons.radio_button_off_rounded,
-                                                                                  color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                  size: 30,
+                                                                                  inheritedSubsItem.name!,
+                                                                                  style: FlutterFlowTheme.of(context).subtitle1,
                                                                                 ),
-                                                                                onPressed: () async {
-                                                                                  final transactionsUpdateData = createTransactionsRecordData(
-                                                                                    transactionCategory: listViewCategoriesRecord.reference,
-                                                                                    transactionBudget: listViewCategoriesRecord.categoryBudget,
-                                                                                  );
-                                                                                  await transactionFromPageItem.reference.update(transactionsUpdateData);
-                                                                                  swipeableStackController.triggerSwipeUp();
-                                                                                },
-                                                                              ),
-                                                                            if (transactionFromPageItem.transactionCategory ==
-                                                                                listViewCategoriesRecord.reference)
-                                                                              FlutterFlowIconButton(
-                                                                                borderColor: Colors.transparent,
-                                                                                borderRadius: 30,
-                                                                                borderWidth: 1,
-                                                                                buttonSize: 60,
-                                                                                icon: Icon(
-                                                                                  Icons.radio_button_checked_rounded,
-                                                                                  color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                  size: 30,
-                                                                                ),
-                                                                                onPressed: () {
-                                                                                  print('IconButton pressed ...');
-                                                                                },
-                                                                              ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              );
-                                                            },
-                                                          );
-                                                        },
-                                                      ),
-                                                    ),
-                                                    StreamBuilder<
-                                                        List<
-                                                            SubscriptionsRecord>>(
-                                                      stream:
-                                                          querySubscriptionsRecord(
-                                                        queryBuilder:
-                                                            (subscriptionsRecord) =>
-                                                                subscriptionsRecord
-                                                                    .where(
-                                                                        'owner',
-                                                                        isEqualTo:
-                                                                            currentUserReference),
-                                                      ),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        // Customize what your widget looks like when it's loading.
-                                                        if (!snapshot.hasData) {
-                                                          return Center(
-                                                            child: SizedBox(
-                                                              width: 50,
-                                                              height: 50,
-                                                              child:
-                                                                  SpinKitRing(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryColor,
-                                                                size: 50,
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }
-                                                        List<SubscriptionsRecord>
-                                                            containerSubscriptionsRecordList =
-                                                            snapshot.data!;
-                                                        return Container(
-                                                          width: 100,
-                                                          height:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(),
-                                                          child: Builder(
-                                                            builder: (context) {
-                                                              final inheritedSubs =
-                                                                  containerSubscriptionsRecordList
-                                                                      .toList();
-                                                              return ListView
-                                                                  .builder(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .zero,
-                                                                shrinkWrap:
-                                                                    true,
-                                                                scrollDirection:
-                                                                    Axis.vertical,
-                                                                itemCount:
-                                                                    inheritedSubs
-                                                                        .length,
-                                                                itemBuilder:
-                                                                    (context,
-                                                                        inheritedSubsIndex) {
-                                                                  final inheritedSubsItem =
-                                                                      inheritedSubs[
-                                                                          inheritedSubsIndex];
-                                                                  return Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            20,
-                                                                            8,
-                                                                            20,
-                                                                            8),
-                                                                    child: Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      children: [
-                                                                        Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              12,
-                                                                              0),
-                                                                          child:
-                                                                              Hero(
-                                                                            tag:
-                                                                                inheritedSubsItem.icon!,
-                                                                            transitionOnUserGestures:
-                                                                                true,
-                                                                            child:
-                                                                                ClipRRect(
-                                                                              borderRadius: BorderRadius.circular(12),
-                                                                              child: CachedNetworkImage(
-                                                                                imageUrl: inheritedSubsItem.icon!,
-                                                                                width: 48,
-                                                                                height: 48,
-                                                                                fit: BoxFit.scaleDown,
-                                                                              ),
+                                                                              ],
                                                                             ),
                                                                           ),
-                                                                        ),
-                                                                        Expanded(
-                                                                          child:
-                                                                              Column(
+                                                                          Column(
                                                                             mainAxisSize:
-                                                                                MainAxisSize.min,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.start,
+                                                                                MainAxisSize.max,
                                                                             children: [
-                                                                              Text(
-                                                                                inheritedSubsItem.name!,
-                                                                                style: FlutterFlowTheme.of(context).subtitle1,
+                                                                              Stack(
+                                                                                children: [
+                                                                                  if (inheritedSubsItem.transactions!.toList().contains(transactionFromPageItem.reference) == false)
+                                                                                    FlutterFlowIconButton(
+                                                                                      borderColor: Colors.transparent,
+                                                                                      borderRadius: 30,
+                                                                                      borderWidth: 1,
+                                                                                      buttonSize: 60,
+                                                                                      icon: Icon(
+                                                                                        Icons.radio_button_off_rounded,
+                                                                                        color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                        size: 30,
+                                                                                      ),
+                                                                                      onPressed: () async {
+                                                                                        if (transactionFromPageItem.recurringRef != null) {
+                                                                                          await actions.normalizeTransSub(
+                                                                                            transactionFromPageItem,
+                                                                                          );
+
+                                                                                          final transactionsUpdateData = createTransactionsRecordData(
+                                                                                            transactionCategory: inheritedSubsItem.category,
+                                                                                            transactionBudget: currentUserDocument!.activeBudget,
+                                                                                            recurringRef: inheritedSubsItem.reference,
+                                                                                          );
+                                                                                          await transactionFromPageItem.reference.update(transactionsUpdateData);
+                                                                                          if (inheritedSubsItem.lastChargeDate != null) {
+                                                                                            if (transactionFromPageItem.trasactionDate! > inheritedSubsItem.lastChargeDate!) {
+                                                                                              final subscriptionsUpdateData = {
+                                                                                                ...createSubscriptionsRecordData(
+                                                                                                  lastChargeDate: transactionFromPageItem.trasactionDate,
+                                                                                                  lastCharge: createMoneyStruct(
+                                                                                                    amount: transactionFromPageItem.transactionAmount,
+                                                                                                    clearUnsetFields: false,
+                                                                                                  ),
+                                                                                                  expChargeDate: functions.addDaysToDate(transactionFromPageItem.trasactionDate, functions.setNewExpectedSubDate(inheritedSubsItem)),
+                                                                                                ),
+                                                                                                'transactions': FieldValue.arrayUnion([
+                                                                                                  transactionFromPageItem.reference
+                                                                                                ]),
+                                                                                                'narrations': FieldValue.arrayUnion([
+                                                                                                  transactionFromPageItem.transactionNarration
+                                                                                                ]),
+                                                                                              };
+                                                                                              await inheritedSubsItem.reference.update(subscriptionsUpdateData);
+                                                                                            } else {
+                                                                                              final subscriptionsUpdateData = {
+                                                                                                'transactions': FieldValue.arrayUnion([
+                                                                                                  transactionFromPageItem.reference
+                                                                                                ]),
+                                                                                                'narrations': FieldValue.arrayUnion([
+                                                                                                  transactionFromPageItem.transactionNarration
+                                                                                                ]),
+                                                                                              };
+                                                                                              await inheritedSubsItem.reference.update(subscriptionsUpdateData);
+                                                                                            }
+                                                                                          } else {
+                                                                                            final subscriptionsUpdateData = {
+                                                                                              ...createSubscriptionsRecordData(
+                                                                                                lastChargeDate: transactionFromPageItem.trasactionDate,
+                                                                                                lastCharge: createMoneyStruct(
+                                                                                                  amount: transactionFromPageItem.transactionAmount,
+                                                                                                  clearUnsetFields: false,
+                                                                                                ),
+                                                                                                expChargeDate: functions.addDaysToDate(transactionFromPageItem.trasactionDate, functions.setNewExpectedSubDate(inheritedSubsItem)),
+                                                                                              ),
+                                                                                              'transactions': FieldValue.arrayUnion([
+                                                                                                transactionFromPageItem.reference
+                                                                                              ]),
+                                                                                              'narrations': FieldValue.arrayUnion([
+                                                                                                transactionFromPageItem.transactionNarration
+                                                                                              ]),
+                                                                                            };
+                                                                                            await inheritedSubsItem.reference.update(subscriptionsUpdateData);
+                                                                                          }
+                                                                                        } else {
+                                                                                          final transactionsUpdateData = createTransactionsRecordData(
+                                                                                            transactionCategory: inheritedSubsItem.category,
+                                                                                            transactionBudget: currentUserDocument!.activeBudget,
+                                                                                            recurringRef: inheritedSubsItem.reference,
+                                                                                          );
+                                                                                          await transactionFromPageItem.reference.update(transactionsUpdateData);
+                                                                                          if (inheritedSubsItem.lastChargeDate != null) {
+                                                                                            if (transactionFromPageItem.trasactionDate! > inheritedSubsItem.lastChargeDate!) {
+                                                                                              final subscriptionsUpdateData = {
+                                                                                                ...createSubscriptionsRecordData(
+                                                                                                  lastChargeDate: transactionFromPageItem.trasactionDate,
+                                                                                                  lastCharge: createMoneyStruct(
+                                                                                                    amount: transactionFromPageItem.transactionAmount,
+                                                                                                    clearUnsetFields: false,
+                                                                                                  ),
+                                                                                                  expChargeDate: functions.addDaysToDate(transactionFromPageItem.trasactionDate, functions.setNewExpectedSubDate(inheritedSubsItem)),
+                                                                                                ),
+                                                                                                'transactions': FieldValue.arrayUnion([
+                                                                                                  transactionFromPageItem.reference
+                                                                                                ]),
+                                                                                                'narrations': FieldValue.arrayUnion([
+                                                                                                  transactionFromPageItem.transactionNarration
+                                                                                                ]),
+                                                                                              };
+                                                                                              await inheritedSubsItem.reference.update(subscriptionsUpdateData);
+                                                                                            } else {
+                                                                                              final subscriptionsUpdateData = {
+                                                                                                'transactions': FieldValue.arrayUnion([
+                                                                                                  transactionFromPageItem.reference
+                                                                                                ]),
+                                                                                                'narrations': FieldValue.arrayUnion([
+                                                                                                  transactionFromPageItem.transactionNarration
+                                                                                                ]),
+                                                                                              };
+                                                                                              await inheritedSubsItem.reference.update(subscriptionsUpdateData);
+                                                                                            }
+                                                                                          } else {
+                                                                                            final subscriptionsUpdateData = {
+                                                                                              ...createSubscriptionsRecordData(
+                                                                                                lastChargeDate: transactionFromPageItem.trasactionDate,
+                                                                                                lastCharge: createMoneyStruct(
+                                                                                                  amount: transactionFromPageItem.transactionAmount,
+                                                                                                  clearUnsetFields: false,
+                                                                                                ),
+                                                                                                expChargeDate: functions.addDaysToDate(transactionFromPageItem.trasactionDate, functions.setNewExpectedSubDate(inheritedSubsItem)),
+                                                                                              ),
+                                                                                              'transactions': FieldValue.arrayUnion([
+                                                                                                transactionFromPageItem.reference
+                                                                                              ]),
+                                                                                              'narrations': FieldValue.arrayUnion([
+                                                                                                transactionFromPageItem.transactionNarration
+                                                                                              ]),
+                                                                                            };
+                                                                                            await inheritedSubsItem.reference.update(subscriptionsUpdateData);
+                                                                                          }
+                                                                                        }
+
+                                                                                        swipeableStackController.triggerSwipeUp();
+                                                                                      },
+                                                                                    ),
+                                                                                  if (inheritedSubsItem.transactions!.toList().contains(transactionFromPageItem.reference))
+                                                                                    FlutterFlowIconButton(
+                                                                                      borderColor: Colors.transparent,
+                                                                                      borderRadius: 30,
+                                                                                      borderWidth: 1,
+                                                                                      buttonSize: 60,
+                                                                                      icon: Icon(
+                                                                                        Icons.radio_button_checked_rounded,
+                                                                                        color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                        size: 30,
+                                                                                      ),
+                                                                                      onPressed: () {
+                                                                                        print('IconButton pressed ...');
+                                                                                      },
+                                                                                    ),
+                                                                                ],
                                                                               ),
                                                                             ],
                                                                           ),
-                                                                        ),
-                                                                        Column(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          children: [
-                                                                            Stack(
-                                                                              children: [
-                                                                                if (inheritedSubsItem.transactions!.toList().contains(transactionFromPageItem.reference) == false)
-                                                                                  FlutterFlowIconButton(
-                                                                                    borderColor: Colors.transparent,
-                                                                                    borderRadius: 30,
-                                                                                    borderWidth: 1,
-                                                                                    buttonSize: 60,
-                                                                                    icon: Icon(
-                                                                                      Icons.radio_button_off_rounded,
-                                                                                      color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                      size: 30,
-                                                                                    ),
-                                                                                    onPressed: () async {
-                                                                                      if (transactionFromPageItem.recurringRef != null) {
-                                                                                        await actions.normalizeTransSub(
-                                                                                          transactionFromPageItem,
-                                                                                        );
-
-                                                                                        final transactionsUpdateData = createTransactionsRecordData(
-                                                                                          transactionCategory: inheritedSubsItem.category,
-                                                                                          transactionBudget: currentUserDocument!.activeBudget,
-                                                                                          recurringRef: inheritedSubsItem.reference,
-                                                                                        );
-                                                                                        await transactionFromPageItem.reference.update(transactionsUpdateData);
-                                                                                        if (inheritedSubsItem.lastChargeDate != null) {
-                                                                                          if (transactionFromPageItem.trasactionDate! > inheritedSubsItem.lastChargeDate!) {
-                                                                                            final subscriptionsUpdateData = {
-                                                                                              ...createSubscriptionsRecordData(
-                                                                                                lastChargeDate: transactionFromPageItem.trasactionDate,
-                                                                                                lastCharge: createMoneyStruct(
-                                                                                                  amount: transactionFromPageItem.transactionAmount,
-                                                                                                  clearUnsetFields: false,
-                                                                                                ),
-                                                                                                expChargeDate: functions.addDaysToDate(transactionFromPageItem.trasactionDate, functions.setNewExpectedSubDate(inheritedSubsItem)),
-                                                                                              ),
-                                                                                              'transactions': FieldValue.arrayUnion([
-                                                                                                transactionFromPageItem.reference
-                                                                                              ]),
-                                                                                              'narrations': FieldValue.arrayUnion([
-                                                                                                transactionFromPageItem.transactionNarration
-                                                                                              ]),
-                                                                                            };
-                                                                                            await inheritedSubsItem.reference.update(subscriptionsUpdateData);
-                                                                                          } else {
-                                                                                            final subscriptionsUpdateData = {
-                                                                                              'transactions': FieldValue.arrayUnion([
-                                                                                                transactionFromPageItem.reference
-                                                                                              ]),
-                                                                                              'narrations': FieldValue.arrayUnion([
-                                                                                                transactionFromPageItem.transactionNarration
-                                                                                              ]),
-                                                                                            };
-                                                                                            await inheritedSubsItem.reference.update(subscriptionsUpdateData);
-                                                                                          }
-                                                                                        } else {
-                                                                                          final subscriptionsUpdateData = {
-                                                                                            ...createSubscriptionsRecordData(
-                                                                                              lastChargeDate: transactionFromPageItem.trasactionDate,
-                                                                                              lastCharge: createMoneyStruct(
-                                                                                                amount: transactionFromPageItem.transactionAmount,
-                                                                                                clearUnsetFields: false,
-                                                                                              ),
-                                                                                              expChargeDate: functions.addDaysToDate(transactionFromPageItem.trasactionDate, functions.setNewExpectedSubDate(inheritedSubsItem)),
-                                                                                            ),
-                                                                                            'transactions': FieldValue.arrayUnion([
-                                                                                              transactionFromPageItem.reference
-                                                                                            ]),
-                                                                                            'narrations': FieldValue.arrayUnion([
-                                                                                              transactionFromPageItem.transactionNarration
-                                                                                            ]),
-                                                                                          };
-                                                                                          await inheritedSubsItem.reference.update(subscriptionsUpdateData);
-                                                                                        }
-                                                                                      } else {
-                                                                                        final transactionsUpdateData = createTransactionsRecordData(
-                                                                                          transactionCategory: inheritedSubsItem.category,
-                                                                                          transactionBudget: currentUserDocument!.activeBudget,
-                                                                                          recurringRef: inheritedSubsItem.reference,
-                                                                                        );
-                                                                                        await transactionFromPageItem.reference.update(transactionsUpdateData);
-                                                                                        if (inheritedSubsItem.lastChargeDate != null) {
-                                                                                          if (transactionFromPageItem.trasactionDate! > inheritedSubsItem.lastChargeDate!) {
-                                                                                            final subscriptionsUpdateData = {
-                                                                                              ...createSubscriptionsRecordData(
-                                                                                                lastChargeDate: transactionFromPageItem.trasactionDate,
-                                                                                                lastCharge: createMoneyStruct(
-                                                                                                  amount: transactionFromPageItem.transactionAmount,
-                                                                                                  clearUnsetFields: false,
-                                                                                                ),
-                                                                                                expChargeDate: functions.addDaysToDate(transactionFromPageItem.trasactionDate, functions.setNewExpectedSubDate(inheritedSubsItem)),
-                                                                                              ),
-                                                                                              'transactions': FieldValue.arrayUnion([
-                                                                                                transactionFromPageItem.reference
-                                                                                              ]),
-                                                                                              'narrations': FieldValue.arrayUnion([
-                                                                                                transactionFromPageItem.transactionNarration
-                                                                                              ]),
-                                                                                            };
-                                                                                            await inheritedSubsItem.reference.update(subscriptionsUpdateData);
-                                                                                          } else {
-                                                                                            final subscriptionsUpdateData = {
-                                                                                              'transactions': FieldValue.arrayUnion([
-                                                                                                transactionFromPageItem.reference
-                                                                                              ]),
-                                                                                              'narrations': FieldValue.arrayUnion([
-                                                                                                transactionFromPageItem.transactionNarration
-                                                                                              ]),
-                                                                                            };
-                                                                                            await inheritedSubsItem.reference.update(subscriptionsUpdateData);
-                                                                                          }
-                                                                                        } else {
-                                                                                          final subscriptionsUpdateData = {
-                                                                                            ...createSubscriptionsRecordData(
-                                                                                              lastChargeDate: transactionFromPageItem.trasactionDate,
-                                                                                              lastCharge: createMoneyStruct(
-                                                                                                amount: transactionFromPageItem.transactionAmount,
-                                                                                                clearUnsetFields: false,
-                                                                                              ),
-                                                                                              expChargeDate: functions.addDaysToDate(transactionFromPageItem.trasactionDate, functions.setNewExpectedSubDate(inheritedSubsItem)),
-                                                                                            ),
-                                                                                            'transactions': FieldValue.arrayUnion([
-                                                                                              transactionFromPageItem.reference
-                                                                                            ]),
-                                                                                            'narrations': FieldValue.arrayUnion([
-                                                                                              transactionFromPageItem.transactionNarration
-                                                                                            ]),
-                                                                                          };
-                                                                                          await inheritedSubsItem.reference.update(subscriptionsUpdateData);
-                                                                                        }
-                                                                                      }
-
-                                                                                      swipeableStackController.triggerSwipeUp();
-                                                                                    },
-                                                                                  ),
-                                                                                if (inheritedSubsItem.transactions!.toList().contains(transactionFromPageItem.reference))
-                                                                                  FlutterFlowIconButton(
-                                                                                    borderColor: Colors.transparent,
-                                                                                    borderRadius: 30,
-                                                                                    borderWidth: 1,
-                                                                                    buttonSize: 60,
-                                                                                    icon: Icon(
-                                                                                      Icons.radio_button_checked_rounded,
-                                                                                      color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                      size: 30,
-                                                                                    ),
-                                                                                    onPressed: () {
-                                                                                      print('IconButton pressed ...');
-                                                                                    },
-                                                                                  ),
-                                                                              ],
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  );
-                                                                },
-                                                              );
-                                                            },
-                                                          ),
-                                                        );
-                                                      },
-                                                    ),
-                                                  ],
+                                                                        ],
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                );
+                                                              },
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
