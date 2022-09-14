@@ -575,7 +575,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                                               final progressBarCategoriesRecord = snapshot.data!;
                                                                                               return LinearPercentIndicator(
                                                                                                 percent: functions.calcCategoryPercent(displayedCategoriesItem, containerTransactionsRecordList.toList()),
-                                                                                                width: MediaQuery.of(context).size.width * 0.88,
+                                                                                                width: MediaQuery.of(context).size.width,
                                                                                                 lineHeight: 8,
                                                                                                 animation: true,
                                                                                                 progressColor: FlutterFlowTheme.of(context).primaryColor,
