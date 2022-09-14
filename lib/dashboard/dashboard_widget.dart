@@ -82,7 +82,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                      padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
@@ -300,7 +300,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                         children: [
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(32, 0, 32, 0),
+                                EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -335,7 +335,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                                EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                             child: StreamBuilder<List<AccountsRecord>>(
                               stream: queryAccountsRecord(
                                 queryBuilder: (accountsRecord) =>
@@ -500,7 +500,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           if (currentUserDocument!.activeBudget != null)
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(32, 0, 32, 8),
+                                  EdgeInsetsDirectional.fromSTEB(24, 0, 24, 8),
                               child: AuthUserStreamWidget(
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -539,7 +539,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           if (currentUserDocument!.activeBudget != null)
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                                  EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                               child: AuthUserStreamWidget(
                                 child: StreamBuilder<BudgetsRecord>(
                                   stream: BudgetsRecord.getDocument(
@@ -748,7 +748,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
+                                EdgeInsetsDirectional.fromSTEB(16, 0, 16, 10),
                             child: Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
