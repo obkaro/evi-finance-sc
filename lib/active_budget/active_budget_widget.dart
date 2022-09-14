@@ -158,7 +158,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  20, 16, 20, 0),
+                                                  16, 0, 16, 0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
