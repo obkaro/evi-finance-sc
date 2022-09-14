@@ -51,6 +51,10 @@ double? calcBudgetChart(
 ) {
   // Add your function code here!
 
+  if (transactionsSum == 0) {
+    transactionsSum = budget!.budgetAmount as int;
+  }
+
   double budgPercent = (transactionsSum! / (budget!.budgetAmount as int));
 
   if (transactionsSum >= (budget.budgetAmount as int)) {
