@@ -442,7 +442,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                           child:
                                                               CachedNetworkImage(
                                                             imageUrl:
-                                                                'https://picsum.photos/seed/89/600',
+                                                                rowAccountsRecord
+                                                                    .accountLogo!,
                                                             width: 40,
                                                             height: 40,
                                                             fit: BoxFit.cover,
