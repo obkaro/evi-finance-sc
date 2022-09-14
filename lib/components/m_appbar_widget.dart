@@ -72,7 +72,18 @@ class _MAppbarWidgetState extends State<MAppbarWidget> {
                                   EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
                               child: Text(
                                 widget.titleText!,
-                                style: FlutterFlowTheme.of(context).title1,
+                                style: FlutterFlowTheme.of(context)
+                                    .title1
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .title1Family,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryPrimary,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .title1Family),
+                                    ),
                               ),
                             ),
                           ],
