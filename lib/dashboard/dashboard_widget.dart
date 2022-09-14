@@ -605,8 +605,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                             percent: functions
                                                                 .calcBudgetChart(
                                                                     containerBudgetsRecord,
-                                                                    containerBudgetsRecord
-                                                                        .budgetSpent)!,
+                                                                    valueOrDefault<
+                                                                        int>(
+                                                                      containerBudgetsRecord
+                                                                          .budgetSpent,
+                                                                      0,
+                                                                    ))!,
                                                             radius: 32,
                                                             lineWidth: 12,
                                                             animation: true,
@@ -655,7 +659,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                         Text(
                                                                           functions.subtractCurrencyDecimal(
                                                                               containerBudgetsRecord.budgetAmount,
-                                                                              containerBudgetsRecord.budgetSpent),
+                                                                              valueOrDefault<int>(
+                                                                                containerBudgetsRecord.budgetSpent,
+                                                                                0,
+                                                                              )),
                                                                           style:
                                                                               FlutterFlowTheme.of(context).subtitle1,
                                                                         ),
