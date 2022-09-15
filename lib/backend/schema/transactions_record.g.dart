@@ -20,7 +20,17 @@ class _$TransactionsRecordSerializer
   Iterable<Object?> serialize(
       Serializers serializers, TransactionsRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[];
+    final result = <Object?>[
+      'categoryDetails',
+      serializers.serialize(object.categoryDetails,
+          specifiedType: const FullType(CategoryDetailsStruct)),
+      'accountDetails',
+      serializers.serialize(object.accountDetails,
+          specifiedType: const FullType(AccountDetailsStruct)),
+      'subscriptionDetails',
+      serializers.serialize(object.subscriptionDetails,
+          specifiedType: const FullType(SubscriptionDetailsStruct)),
+    ];
     Object? value;
     value = object.trasactionDate;
     if (value != null) {
@@ -215,6 +225,21 @@ class _$TransactionsRecordSerializer
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
+        case 'categoryDetails':
+          result.categoryDetails.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(CategoryDetailsStruct))!
+              as CategoryDetailsStruct);
+          break;
+        case 'accountDetails':
+          result.accountDetails.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(AccountDetailsStruct))!
+              as AccountDetailsStruct);
+          break;
+        case 'subscriptionDetails':
+          result.subscriptionDetails.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(SubscriptionDetailsStruct))!
+              as SubscriptionDetailsStruct);
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -258,6 +283,12 @@ class _$TransactionsRecord extends TransactionsRecord {
   @override
   final DocumentReference<Object?>? incomeCategory;
   @override
+  final CategoryDetailsStruct categoryDetails;
+  @override
+  final AccountDetailsStruct accountDetails;
+  @override
+  final SubscriptionDetailsStruct subscriptionDetails;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$TransactionsRecord(
@@ -279,8 +310,18 @@ class _$TransactionsRecord extends TransactionsRecord {
       this.transactionBudget,
       this.recurringRef,
       this.incomeCategory,
+      required this.categoryDetails,
+      required this.accountDetails,
+      required this.subscriptionDetails,
       this.ffRef})
-      : super._();
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        categoryDetails, r'TransactionsRecord', 'categoryDetails');
+    BuiltValueNullFieldError.checkNotNull(
+        accountDetails, r'TransactionsRecord', 'accountDetails');
+    BuiltValueNullFieldError.checkNotNull(
+        subscriptionDetails, r'TransactionsRecord', 'subscriptionDetails');
+  }
 
   @override
   TransactionsRecord rebuild(
@@ -309,6 +350,9 @@ class _$TransactionsRecord extends TransactionsRecord {
         transactionBudget == other.transactionBudget &&
         recurringRef == other.recurringRef &&
         incomeCategory == other.incomeCategory &&
+        categoryDetails == other.categoryDetails &&
+        accountDetails == other.accountDetails &&
+        subscriptionDetails == other.subscriptionDetails &&
         ffRef == other.ffRef;
   }
 
@@ -329,22 +373,33 @@ class _$TransactionsRecord extends TransactionsRecord {
                                                     $jc(
                                                         $jc(
                                                             $jc(
-                                                                0,
-                                                                trasactionDate
+                                                                $jc(
+                                                                    $jc(
+                                                                        $jc(
+                                                                            0,
+                                                                            trasactionDate
+                                                                                .hashCode),
+                                                                        account
+                                                                            .hashCode),
+                                                                    monoCategory
+                                                                        .hashCode),
+                                                                transactionOwner
                                                                     .hashCode),
-                                                            account.hashCode),
-                                                        monoCategory.hashCode),
-                                                    transactionOwner.hashCode),
-                                                balanceAfter.hashCode),
-                                            transactionMonoID.hashCode),
-                                        transactionAmount.hashCode),
-                                    transactionType.hashCode),
-                                transactionNarration.hashCode),
-                            transactionID.hashCode),
-                        transactionCategory.hashCode),
-                    transactionBudget.hashCode),
-                recurringRef.hashCode),
-            incomeCategory.hashCode),
+                                                            balanceAfter
+                                                                .hashCode),
+                                                        transactionMonoID
+                                                            .hashCode),
+                                                    transactionAmount.hashCode),
+                                                transactionType.hashCode),
+                                            transactionNarration.hashCode),
+                                        transactionID.hashCode),
+                                    transactionCategory.hashCode),
+                                transactionBudget.hashCode),
+                            recurringRef.hashCode),
+                        incomeCategory.hashCode),
+                    categoryDetails.hashCode),
+                accountDetails.hashCode),
+            subscriptionDetails.hashCode),
         ffRef.hashCode));
   }
 
@@ -365,6 +420,9 @@ class _$TransactionsRecord extends TransactionsRecord {
           ..add('transactionBudget', transactionBudget)
           ..add('recurringRef', recurringRef)
           ..add('incomeCategory', incomeCategory)
+          ..add('categoryDetails', categoryDetails)
+          ..add('accountDetails', accountDetails)
+          ..add('subscriptionDetails', subscriptionDetails)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -443,6 +501,25 @@ class TransactionsRecordBuilder
   set incomeCategory(DocumentReference<Object?>? incomeCategory) =>
       _$this._incomeCategory = incomeCategory;
 
+  CategoryDetailsStructBuilder? _categoryDetails;
+  CategoryDetailsStructBuilder get categoryDetails =>
+      _$this._categoryDetails ??= new CategoryDetailsStructBuilder();
+  set categoryDetails(CategoryDetailsStructBuilder? categoryDetails) =>
+      _$this._categoryDetails = categoryDetails;
+
+  AccountDetailsStructBuilder? _accountDetails;
+  AccountDetailsStructBuilder get accountDetails =>
+      _$this._accountDetails ??= new AccountDetailsStructBuilder();
+  set accountDetails(AccountDetailsStructBuilder? accountDetails) =>
+      _$this._accountDetails = accountDetails;
+
+  SubscriptionDetailsStructBuilder? _subscriptionDetails;
+  SubscriptionDetailsStructBuilder get subscriptionDetails =>
+      _$this._subscriptionDetails ??= new SubscriptionDetailsStructBuilder();
+  set subscriptionDetails(
+          SubscriptionDetailsStructBuilder? subscriptionDetails) =>
+      _$this._subscriptionDetails = subscriptionDetails;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -468,6 +545,9 @@ class TransactionsRecordBuilder
       _transactionBudget = $v.transactionBudget;
       _recurringRef = $v.recurringRef;
       _incomeCategory = $v.incomeCategory;
+      _categoryDetails = $v.categoryDetails.toBuilder();
+      _accountDetails = $v.accountDetails.toBuilder();
+      _subscriptionDetails = $v.subscriptionDetails.toBuilder();
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -489,23 +569,43 @@ class TransactionsRecordBuilder
   TransactionsRecord build() => _build();
 
   _$TransactionsRecord _build() {
-    final _$result = _$v ??
-        new _$TransactionsRecord._(
-            trasactionDate: trasactionDate,
-            account: account,
-            monoCategory: monoCategory,
-            transactionOwner: transactionOwner,
-            balanceAfter: balanceAfter,
-            transactionMonoID: transactionMonoID,
-            transactionAmount: transactionAmount,
-            transactionType: transactionType,
-            transactionNarration: transactionNarration,
-            transactionID: transactionID,
-            transactionCategory: transactionCategory,
-            transactionBudget: transactionBudget,
-            recurringRef: recurringRef,
-            incomeCategory: incomeCategory,
-            ffRef: ffRef);
+    _$TransactionsRecord _$result;
+    try {
+      _$result = _$v ??
+          new _$TransactionsRecord._(
+              trasactionDate: trasactionDate,
+              account: account,
+              monoCategory: monoCategory,
+              transactionOwner: transactionOwner,
+              balanceAfter: balanceAfter,
+              transactionMonoID: transactionMonoID,
+              transactionAmount: transactionAmount,
+              transactionType: transactionType,
+              transactionNarration: transactionNarration,
+              transactionID: transactionID,
+              transactionCategory: transactionCategory,
+              transactionBudget: transactionBudget,
+              recurringRef: recurringRef,
+              incomeCategory: incomeCategory,
+              categoryDetails: categoryDetails.build(),
+              accountDetails: accountDetails.build(),
+              subscriptionDetails: subscriptionDetails.build(),
+              ffRef: ffRef);
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'categoryDetails';
+        categoryDetails.build();
+        _$failedField = 'accountDetails';
+        accountDetails.build();
+        _$failedField = 'subscriptionDetails';
+        subscriptionDetails.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'TransactionsRecord', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

@@ -30,6 +30,9 @@ class _$SubscriptionsRecordSerializer
       'expCharge',
       serializers.serialize(object.expCharge,
           specifiedType: const FullType(MoneyStruct)),
+      'categoryDetails',
+      serializers.serialize(object.categoryDetails,
+          specifiedType: const FullType(CategoryDetailsStruct)),
     ];
     Object? value;
     value = object.owner;
@@ -188,6 +191,11 @@ class _$SubscriptionsRecordSerializer
           result.recurrence = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'categoryDetails':
+          result.categoryDetails.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(CategoryDetailsStruct))!
+              as CategoryDetailsStruct);
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -227,6 +235,8 @@ class _$SubscriptionsRecord extends SubscriptionsRecord {
   @override
   final String? recurrence;
   @override
+  final CategoryDetailsStruct categoryDetails;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$SubscriptionsRecord(
@@ -246,12 +256,15 @@ class _$SubscriptionsRecord extends SubscriptionsRecord {
       this.transactions,
       this.notification,
       this.recurrence,
+      required this.categoryDetails,
       this.ffRef})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         lastCharge, r'SubscriptionsRecord', 'lastCharge');
     BuiltValueNullFieldError.checkNotNull(
         expCharge, r'SubscriptionsRecord', 'expCharge');
+    BuiltValueNullFieldError.checkNotNull(
+        categoryDetails, r'SubscriptionsRecord', 'categoryDetails');
   }
 
   @override
@@ -279,6 +292,7 @@ class _$SubscriptionsRecord extends SubscriptionsRecord {
         transactions == other.transactions &&
         notification == other.notification &&
         recurrence == other.recurrence &&
+        categoryDetails == other.categoryDetails &&
         ffRef == other.ffRef;
   }
 
@@ -295,18 +309,20 @@ class _$SubscriptionsRecord extends SubscriptionsRecord {
                                     $jc(
                                         $jc(
                                             $jc(
-                                                $jc($jc(0, owner.hashCode),
-                                                    name.hashCode),
-                                                icon.hashCode),
-                                            narrations.hashCode),
-                                        lastChargeDate.hashCode),
-                                    expChargeDate.hashCode),
-                                category.hashCode),
-                            lastCharge.hashCode),
-                        expCharge.hashCode),
-                    transactions.hashCode),
-                notification.hashCode),
-            recurrence.hashCode),
+                                                $jc(
+                                                    $jc($jc(0, owner.hashCode),
+                                                        name.hashCode),
+                                                    icon.hashCode),
+                                                narrations.hashCode),
+                                            lastChargeDate.hashCode),
+                                        expChargeDate.hashCode),
+                                    category.hashCode),
+                                lastCharge.hashCode),
+                            expCharge.hashCode),
+                        transactions.hashCode),
+                    notification.hashCode),
+                recurrence.hashCode),
+            categoryDetails.hashCode),
         ffRef.hashCode));
   }
 
@@ -325,6 +341,7 @@ class _$SubscriptionsRecord extends SubscriptionsRecord {
           ..add('transactions', transactions)
           ..add('notification', notification)
           ..add('recurrence', recurrence)
+          ..add('categoryDetails', categoryDetails)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -392,6 +409,12 @@ class SubscriptionsRecordBuilder
   String? get recurrence => _$this._recurrence;
   set recurrence(String? recurrence) => _$this._recurrence = recurrence;
 
+  CategoryDetailsStructBuilder? _categoryDetails;
+  CategoryDetailsStructBuilder get categoryDetails =>
+      _$this._categoryDetails ??= new CategoryDetailsStructBuilder();
+  set categoryDetails(CategoryDetailsStructBuilder? categoryDetails) =>
+      _$this._categoryDetails = categoryDetails;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -415,6 +438,7 @@ class SubscriptionsRecordBuilder
       _transactions = $v.transactions?.toBuilder();
       _notification = $v.notification;
       _recurrence = $v.recurrence;
+      _categoryDetails = $v.categoryDetails.toBuilder();
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -452,6 +476,7 @@ class SubscriptionsRecordBuilder
               transactions: _transactions?.build(),
               notification: notification,
               recurrence: recurrence,
+              categoryDetails: categoryDetails.build(),
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;
@@ -465,6 +490,9 @@ class SubscriptionsRecordBuilder
         expCharge.build();
         _$failedField = 'transactions';
         _transactions?.build();
+
+        _$failedField = 'categoryDetails';
+        categoryDetails.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'SubscriptionsRecord', _$failedField, e.toString());
