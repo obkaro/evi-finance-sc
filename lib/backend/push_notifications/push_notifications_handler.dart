@@ -129,10 +129,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
       ),
-  'BudgetSingleCopy': (data) async => BudgetSingleCopyWidget(
-        budget: await getDocumentParameter(
-            data, 'budget', BudgetsRecord.serializer),
-      ),
   'TransactionSingle': (data) async => TransactionSingleWidget(
         transaction: await getDocumentParameter(
             data, 'transaction', TransactionsRecord.serializer),
