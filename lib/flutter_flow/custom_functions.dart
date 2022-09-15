@@ -70,7 +70,7 @@ double calcCategoryPercent(
 ) {
   // Add your function code here!
 
-  double percent = (category!.categoryAmount as int) / spentAmount!;
+  double percent = 1 - (spentAmount! / (category!.categoryAmount as int));
 
   if (spentAmount >= (category.categoryAmount as int)) {
     percent = 0;
