@@ -245,45 +245,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                'Spent',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText2,
-                                                              ),
-                                                              Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  functions.formatTransCurrency(
-                                                                      columnBudgetsRecord
-                                                                          .budgetSpent),
-                                                                  '0',
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .subtitle1Family,
-                                                                      fontSize:
-                                                                          20,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).subtitle1Family),
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
                                                           Expanded(
                                                             child: Column(
                                                               mainAxisSize:
@@ -294,10 +255,55 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                       .start,
                                                               children: [
                                                                 Text(
-                                                                  'Limit',
+                                                                  'Spent',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText2,
+                                                                ),
+                                                                Text(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    functions.formatTransCurrency(
+                                                                        columnBudgetsRecord
+                                                                            .budgetSpent),
+                                                                    '0',
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).subtitle1Family,
+                                                                        fontSize:
+                                                                            20,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
+                                                                      ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Limit',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText2,
+                                                                    ),
+                                                                  ],
                                                                 ),
                                                                 Text(
                                                                   valueOrDefault<
@@ -478,53 +484,62 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                 ],
                                                               ),
                                                             ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          0,
-                                                                          0,
-                                                                          8),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      LinearPercentIndicator(
-                                                                        percent:
-                                                                            valueOrDefault<double>(
-                                                                          functions.calcCategoryPercent(
-                                                                              listViewCategoriesRecord,
-                                                                              listViewCategoriesRecord.spentAmount),
-                                                                          1.0,
-                                                                        ),
-                                                                        width: MediaQuery.of(context).size.width *
-                                                                            0.81,
-                                                                        lineHeight:
-                                                                            8,
-                                                                        animation:
-                                                                            true,
-                                                                        progressColor:
-                                                                            FlutterFlowTheme.of(context).primaryColor,
-                                                                        backgroundColor:
-                                                                            FlutterFlowTheme.of(context).darkPrimary,
-                                                                        barRadius:
-                                                                            Radius.circular(12),
-                                                                        padding:
-                                                                            EdgeInsets.zero,
+                                                            Expanded(
+                                                              child: Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0,
+                                                                            0,
+                                                                            0,
+                                                                            8),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Expanded(
+                                                                            child:
+                                                                                Wrap(
+                                                                              spacing: 0,
+                                                                              runSpacing: 0,
+                                                                              alignment: WrapAlignment.start,
+                                                                              crossAxisAlignment: WrapCrossAlignment.start,
+                                                                              direction: Axis.horizontal,
+                                                                              runAlignment: WrapAlignment.start,
+                                                                              verticalDirection: VerticalDirection.down,
+                                                                              clipBehavior: Clip.none,
+                                                                              children: [
+                                                                                LinearPercentIndicator(
+                                                                                  percent: valueOrDefault<double>(
+                                                                                    functions.calcCategoryPercent(listViewCategoriesRecord, listViewCategoriesRecord.spentAmount),
+                                                                                    1.0,
+                                                                                  ),
+                                                                                  width: MediaQuery.of(context).size.width,
+                                                                                  lineHeight: 8,
+                                                                                  animation: true,
+                                                                                  progressColor: FlutterFlowTheme.of(context).primaryColor,
+                                                                                  backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+                                                                                  barRadius: Radius.circular(12),
+                                                                                  padding: EdgeInsets.zero,
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        ],
                                                                       ),
-                                                                    ],
-                                                                  ),
-                                                                ],
+                                                                    ),
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
                                                             Padding(
