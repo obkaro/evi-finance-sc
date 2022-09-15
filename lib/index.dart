@@ -23,8 +23,6 @@ export 'onboarding_page_view/onboarding_page_view_widget.dart'
     show OnboardingPageViewWidget;
 export 'welcome_to_evi/welcome_to_evi_widget.dart' show WelcomeToEviWidget;
 export 'first_budget/first_budget_widget.dart' show FirstBudgetWidget;
-export 'budget_single_copy/budget_single_copy_widget.dart'
-    show BudgetSingleCopyWidget;
 export 'transaction_single/transaction_single_widget.dart'
     show TransactionSingleWidget;
 export 'recurring_payments/recurring_payments_widget.dart'

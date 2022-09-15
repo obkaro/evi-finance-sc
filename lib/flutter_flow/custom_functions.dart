@@ -66,18 +66,13 @@ double? calcBudgetChart(
 
 double calcCategoryPercent(
   CategoriesRecord? category,
-  List<TransactionsRecord>? transactions,
+  int? spentAmount,
 ) {
   // Add your function code here!
-  int totalTransactions = 0;
 
-  for (var i = 0; i < transactions!.length; i++) {
-    totalTransactions += transactions[i].transactionAmount as int;
-  }
+  double percent = (category!.categoryAmount as int) / spentAmount!;
 
-  double percent = 1 - (totalTransactions / (category!.categoryAmount as int));
-
-  if (totalTransactions >= (category.categoryAmount as int)) {
+  if (spentAmount >= (category.categoryAmount as int)) {
     percent = 0;
   }
 

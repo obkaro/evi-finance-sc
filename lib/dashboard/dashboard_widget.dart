@@ -389,6 +389,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             );
                                           },
                                           child: Container(
+                                            width: 150,
+                                            height: 150,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)

@@ -49,7 +49,7 @@ class _MenuWidgetState extends State<MenuWidget> {
             ),
             bgColor: FlutterFlowTheme.of(context).secondaryColor,
             fgColor: FlutterFlowTheme.of(context).primaryBackground,
-            textColor: FlutterFlowTheme.of(context).secondaryBackground,
+            textColor: FlutterFlowTheme.of(context).secondaryPrimary,
             actionIcon: Icon(
               Icons.settings_rounded,
               color: FlutterFlowTheme.of(context).secondaryPrimary,

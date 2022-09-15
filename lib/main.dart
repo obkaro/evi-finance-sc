@@ -163,7 +163,7 @@ class _NavBarPageState extends State<NavBarPage> {
             icon: currentIndex == 0 ? Icons.home_rounded : Icons.home_rounded,
             text: 'Dashboard',
             iconSize: 24,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
           ),
           GButton(
             icon: currentIndex == 1
@@ -171,7 +171,7 @@ class _NavBarPageState extends State<NavBarPage> {
                 : Icons.pie_chart_rounded,
             text: 'Active Budget',
             iconSize: 24,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
           ),
           GButton(
             icon: currentIndex == 2
@@ -179,7 +179,7 @@ class _NavBarPageState extends State<NavBarPage> {
                 : Icons.featured_play_list_rounded,
             text: 'Menu',
             iconSize: 24,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
           )
         ],
       ),

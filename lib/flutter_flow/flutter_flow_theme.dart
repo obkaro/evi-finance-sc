@@ -49,7 +49,7 @@ abstract class FlutterFlowTheme {
   late Color eviredTransparent;
   late Color secondaryPrimary;
   late Color secondarySecondary;
-  late Color gray200;
+  late Color lightPrimary;
   late Color gray600;
   late Color fadedDivider;
   late Color darkPrimary;
@@ -102,10 +102,10 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color eviredTransparent = Color(0x28FF0054);
   late Color secondaryPrimary = Color(0xFFECECEC);
   late Color secondarySecondary = Color(0xFFCECECE);
-  late Color gray200 = Color(0xFFDBE2E7);
+  late Color lightPrimary = Color(0xFFFAFAFA);
   late Color gray600 = Color(0xFF262D34);
   late Color fadedDivider = Color(0xFFDDDDDD);
-  late Color darkPrimary = Color(0xFFF7CFDC);
+  late Color darkPrimary = Color(0xFFFFF2F5);
   late Color textColor = Color(0xFF1E2429);
   late Color shadowGray = Color(0x13000000);
 }
@@ -308,7 +308,7 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color eviredTransparent = Color(0x2AFF0054);
   late Color secondaryPrimary = Color(0xFFECECEC);
   late Color secondarySecondary = Color(0xFFCECECE);
-  late Color gray200 = Color(0xFFDBE2E7);
+  late Color lightPrimary = Color(0xFF191919);
   late Color gray600 = Color(0xFF262D34);
   late Color fadedDivider = Color(0xFF2B2B2B);
   late Color darkPrimary = Color(0xFF370D1B);

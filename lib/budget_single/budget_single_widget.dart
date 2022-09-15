@@ -603,8 +603,8 @@ class _BudgetSingleWidgetState extends State<BudgetSingleWidget> {
                                                               percent: functions
                                                                   .calcCategoryPercent(
                                                                       budgetCategoriesItem,
-                                                                      containerTransactionsRecordList
-                                                                          .toList()),
+                                                                      budgetCategoriesItem
+                                                                          .spentAmount),
                                                               width: MediaQuery.of(
                                                                           context)
                                                                       .size
