@@ -484,62 +484,56 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                 ],
                                                               ),
                                                             ),
-                                                            Expanded(
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            0,
-                                                                            0,
-                                                                            8),
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Expanded(
-                                                                      child:
-                                                                          Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children: [
-                                                                          Expanded(
-                                                                            child:
-                                                                                Wrap(
-                                                                              spacing: 0,
-                                                                              runSpacing: 0,
-                                                                              alignment: WrapAlignment.start,
-                                                                              crossAxisAlignment: WrapCrossAlignment.start,
-                                                                              direction: Axis.horizontal,
-                                                                              runAlignment: WrapAlignment.start,
-                                                                              verticalDirection: VerticalDirection.down,
-                                                                              clipBehavior: Clip.none,
-                                                                              children: [
-                                                                                LinearPercentIndicator(
-                                                                                  percent: valueOrDefault<double>(
-                                                                                    functions.calcCategoryPercent(listViewCategoriesRecord, listViewCategoriesRecord.spentAmount),
-                                                                                    1.0,
-                                                                                  ),
-                                                                                  width: MediaQuery.of(context).size.width,
-                                                                                  lineHeight: 8,
-                                                                                  animation: true,
-                                                                                  progressColor: FlutterFlowTheme.of(context).primaryColor,
-                                                                                  backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
-                                                                                  barRadius: Radius.circular(12),
-                                                                                  padding: EdgeInsets.zero,
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                          ),
-                                                                        ],
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          8),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Expanded(
+                                                                    child:
+                                                                        LinearPercentIndicator(
+                                                                      percent:
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                        functions.calcCategoryPercent(
+                                                                            listViewCategoriesRecord,
+                                                                            listViewCategoriesRecord.spentAmount),
+                                                                        1.0,
                                                                       ),
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.84,
+                                                                      lineHeight:
+                                                                          8,
+                                                                      animation:
+                                                                          true,
+                                                                      progressColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .primaryColor,
+                                                                      backgroundColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .darkPrimary,
+                                                                      barRadius:
+                                                                          Radius.circular(
+                                                                              12),
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
                                                                     ),
-                                                                  ],
-                                                                ),
+                                                                  ),
+                                                                ],
                                                               ),
                                                             ),
                                                             Padding(
