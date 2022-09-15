@@ -52,7 +52,7 @@ double? calcBudgetChart(
   // Add your function code here!
 
   if (transactionsSum == 0) {
-    transactionsSum = budget!.budgetAmount as int;
+    return 1;
   }
 
   double budgPercent = (transactionsSum! / (budget!.budgetAmount as int));
@@ -69,6 +69,9 @@ double calcCategoryPercent(
   int? spentAmount,
 ) {
   // Add your function code here!
+  if (spentAmount == 0) {
+    return 1;
+  }
 
   double percent = 1 - (spentAmount! / (category!.categoryAmount as int));
 
