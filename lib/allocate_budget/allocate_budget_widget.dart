@@ -121,7 +121,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 0, 20, 0),
+                                      16, 0, 16, 0),
                                   child: Container(
                                     width: double.infinity,
                                     decoration: BoxDecoration(
@@ -392,7 +392,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                         10)
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 20, 0, 0),
+                                            0, 16, 0, 0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
@@ -597,7 +597,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                       ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          20, 20, 20, 0),
+                                          16, 16, 16, 0),
                                       child: Container(
                                         width: double.infinity,
                                         decoration: BoxDecoration(
@@ -870,7 +870,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          20, 20, 20, 0),
+                                          16, 16, 16, 0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -989,7 +989,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          20, 20, 20, 20),
+                                          16, 16, 16, 16),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:

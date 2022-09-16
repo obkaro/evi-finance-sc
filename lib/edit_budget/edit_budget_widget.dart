@@ -90,7 +90,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -350,7 +350,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                        padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
                         child: FFButtonWidget(
                           onPressed: () async {
                             await Navigator.push(
@@ -389,7 +389,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                        padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
                         child: StreamBuilder<List<CategoriesRecord>>(
                           stream: queryCategoriesRecord(
                             parent: columnBudgetsRecord.reference,

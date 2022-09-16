@@ -92,7 +92,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                   Expanded(
                     flex: 5,
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -407,88 +407,83 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              // Action_CreateBud
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            // Action_CreateBud
 
-                              final budgetsUpdateData = createBudgetsRecordData(
-                                budgetOwner: currentUserReference,
-                                budgetAmount: FFAppState().currencyTextField,
-                                budgetDuration: dropDownValue,
-                                unallocatedAmount: functions.subInt(
-                                    FFAppState().currencyTextField, 50000),
-                                status: 'active',
-                              );
-                              await widget.budget!.reference
-                                  .update(budgetsUpdateData);
+                            final budgetsUpdateData = createBudgetsRecordData(
+                              budgetOwner: currentUserReference,
+                              budgetAmount: FFAppState().currencyTextField,
+                              budgetDuration: dropDownValue,
+                              unallocatedAmount: functions.subInt(
+                                  FFAppState().currencyTextField, 50000),
+                              status: 'active',
+                            );
+                            await widget.budget!.reference
+                                .update(budgetsUpdateData);
 
-                              final usersUpdateData = createUsersRecordData(
-                                activeBudget: widget.budget!.reference,
-                              );
-                              await currentUserReference!
-                                  .update(usersUpdateData);
+                            final usersUpdateData = createUsersRecordData(
+                              activeBudget: widget.budget!.reference,
+                            );
+                            await currentUserReference!.update(usersUpdateData);
 
-                              final categoriesCreateData =
-                                  createCategoriesRecordData(
-                                categoryName: 'Bank Charges',
-                                categoryId: random_data.randomString(
-                                  24,
-                                  24,
-                                  true,
-                                  true,
-                                  true,
-                                ),
-                                categoryBudget: widget.budget!.reference,
-                                categoryOwner: currentUserReference,
-                                categoryAmount: 50000,
-                              );
-                              await CategoriesRecord.createDoc(
-                                      widget.budget!.reference)
-                                  .set(categoriesCreateData);
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AllocateBudgetWidget(
-                                    createdBudget: widget.budget,
-                                  ),
-                                ),
-                              );
-                            },
-                            text: 'Continue',
-                            options: FFButtonOptions(
-                              width: double.infinity,
-                              height: 60,
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .subtitle2Family,
-                                    color: Colors.white,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .subtitle2Family),
-                                  ),
-                              elevation: 2,
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
+                            final categoriesCreateData =
+                                createCategoriesRecordData(
+                              categoryName: 'Bank Charges',
+                              categoryId: random_data.randomString(
+                                24,
+                                24,
+                                true,
+                                true,
+                                true,
                               ),
-                              borderRadius: BorderRadius.circular(16),
+                              categoryBudget: widget.budget!.reference,
+                              categoryOwner: currentUserReference,
+                              categoryAmount: 50000,
+                            );
+                            await CategoriesRecord.createDoc(
+                                    widget.budget!.reference)
+                                .set(categoriesCreateData);
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AllocateBudgetWidget(
+                                  createdBudget: widget.budget,
+                                ),
+                              ),
+                            );
+                          },
+                          text: 'Continue',
+                          options: FFButtonOptions(
+                            width: double.infinity,
+                            height: 60,
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .subtitle2
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .subtitle2Family,
+                                  color: Colors.white,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .subtitle2Family),
+                                ),
+                            elevation: 2,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
                             ),
+                            borderRadius: BorderRadius.circular(16),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               );

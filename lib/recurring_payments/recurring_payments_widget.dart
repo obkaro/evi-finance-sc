@@ -98,211 +98,224 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
-                child: StreamBuilder<List<SubscriptionsRecord>>(
-                  stream: querySubscriptionsRecord(
-                    queryBuilder: (subscriptionsRecord) => subscriptionsRecord
-                        .where('owner', isEqualTo: currentUserReference),
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: SpinKitRing(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            size: 50,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 1, 0, 0),
+                  child: StreamBuilder<List<SubscriptionsRecord>>(
+                    stream: querySubscriptionsRecord(
+                      queryBuilder: (subscriptionsRecord) => subscriptionsRecord
+                          .where('owner', isEqualTo: currentUserReference),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: SpinKitRing(
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              size: 50,
+                            ),
                           ),
-                        ),
-                      );
-                    }
-                    List<SubscriptionsRecord> containerSubscriptionsRecordList =
-                        snapshot.data!;
-                    return Material(
-                      color: Colors.transparent,
-                      elevation: 0,
-                      child: Container(
-                        width: double.infinity,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.transparent,
-                            width: 0,
+                        );
+                      }
+                      List<SubscriptionsRecord>
+                          containerSubscriptionsRecordList = snapshot.data!;
+                      return Material(
+                        color: Colors.transparent,
+                        elevation: 0,
+                        child: Container(
+                          width: double.infinity,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.transparent,
+                              width: 0,
+                            ),
                           ),
-                        ),
-                        child: Builder(
-                          builder: (context) {
-                            final subs =
-                                containerSubscriptionsRecordList.toList();
-                            return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              scrollDirection: Axis.vertical,
-                              itemCount: subs.length,
-                              itemBuilder: (context, subsIndex) {
-                                final subsItem = subs[subsIndex];
-                                return InkWell(
-                                  onTap: () async {
-                                    await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            SubscriptionDetailsWidget(
-                                          subscription: subsItem,
+                          child: Builder(
+                            builder: (context) {
+                              final subs =
+                                  containerSubscriptionsRecordList.toList();
+                              return ListView.builder(
+                                padding: EdgeInsets.zero,
+                                scrollDirection: Axis.vertical,
+                                itemCount: subs.length,
+                                itemBuilder: (context, subsIndex) {
+                                  final subsItem = subs[subsIndex];
+                                  return InkWell(
+                                    onTap: () async {
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              SubscriptionDetailsWidget(
+                                            subscription: subsItem,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            24, 0, 24, 0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 8, 0, 8),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 0, 16, 0),
-                                                    child: Container(
-                                                      decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    8, 8, 8, 8),
-                                                        child: Hero(
-                                                          tag: subsItem.icon!,
-                                                          transitionOnUserGestures:
-                                                              true,
-                                                          child: ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            child:
-                                                                CachedNetworkImage(
-                                                              imageUrl: subsItem
-                                                                  .icon!,
-                                                              width: 44,
-                                                              height: 44,
-                                                              fit: BoxFit
-                                                                  .scaleDown,
+                                      );
+                                    },
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  24, 0, 24, 0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 16, 0, 16),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 0, 16, 0),
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(8,
+                                                                      8, 8, 8),
+                                                          child: Hero(
+                                                            tag: subsItem.icon!,
+                                                            transitionOnUserGestures:
+                                                                true,
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                imageUrl:
+                                                                    subsItem
+                                                                        .icon!,
+                                                                width: 44,
+                                                                height: 44,
+                                                                fit: BoxFit
+                                                                    .scaleDown,
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      0, 0, 8),
-                                                          child: Text(
-                                                            subsItem.name!,
+                                                    Expanded(
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        0,
+                                                                        8),
+                                                            child: Text(
+                                                              subsItem.name!,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .subtitle1,
+                                                            ),
+                                                          ),
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Text(
+                                                                'Due: ',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText2,
+                                                              ),
+                                                              Text(
+                                                                dateTimeFormat(
+                                                                    'MMMEd',
+                                                                    subsItem
+                                                                        .expChargeDate!),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText2
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyText2Family,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryColor,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).bodyText2Family),
+                                                                    ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            functions
+                                                                .formatTransCurrency(
+                                                                    subsItem
+                                                                        .expCharge
+                                                                        .amount),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .subtitle1,
                                                           ),
-                                                        ),
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Text(
-                                                              'Due: ',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText2,
-                                                            ),
-                                                            Text(
-                                                              dateTimeFormat(
-                                                                  'MMMEd',
-                                                                  subsItem
-                                                                      .expChargeDate!),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText2
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyText2Family,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryColor,
-                                                                    useGoogleFonts: GoogleFonts
-                                                                            .asMap()
-                                                                        .containsKey(
-                                                                            FlutterFlowTheme.of(context).bodyText2Family),
-                                                                  ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          functions
-                                                              .formatTransCurrency(
-                                                                  subsItem
-                                                                      .expCharge
-                                                                      .amount),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .subtitle1,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            Divider(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .fadedDivider,
-                                            ),
-                                          ],
+                                              Divider(
+                                                height: 1,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .fadedDivider,
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            );
-                          },
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
