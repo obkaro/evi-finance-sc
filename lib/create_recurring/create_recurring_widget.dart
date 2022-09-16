@@ -507,7 +507,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                     weekStartsMonday: false,
                                     initialDate: functions.addDaysToDate(
                                         getCurrentTimestamp, 30),
-                                    rowHeight: 40,
+                                    rowHeight: 48,
                                     onChange:
                                         (DateTimeRange? newSelectedDate) async {
                                       calendarSelectedDay = newSelectedDate;
@@ -581,7 +581,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .bodyText2Family,
                                           color: FlutterFlowTheme.of(context)
-                                              .secondaryColor,
+                                              .fadedDivider,
                                           fontWeight: FontWeight.w300,
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
@@ -594,75 +594,88 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FlutterFlowChoiceChips(
-                                    initiallySelected: durationValue != null
-                                        ? [durationValue!]
-                                        : ['Monthly'],
-                                    options: FFAppState()
-                                        .durations
-                                        .map((e) => getJsonField(
-                                              e,
-                                              r'''$.name''',
-                                            ))
-                                        .toList()
-                                        .map((label) => ChipData(label))
-                                        .toList(),
-                                    onChanged: (val) => setState(
-                                        () => durationValue = val?.first),
-                                    selectedChipStyle: ChipStyle(
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
-                                            color: Colors.white,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
+                            Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(),
+                              child: Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: FlutterFlowChoiceChips(
+                                        initiallySelected: durationValue != null
+                                            ? [durationValue!]
+                                            : ['Monthly'],
+                                        options: FFAppState()
+                                            .durations
+                                            .map((e) => getJsonField(
+                                                  e,
+                                                  r'''$.name''',
+                                                ))
+                                            .toList()
+                                            .map((label) => ChipData(label))
+                                            .toList(),
+                                        onChanged: (val) => setState(
+                                            () => durationValue = val?.first),
+                                        selectedChipStyle: ChipStyle(
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryColor,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
-                                          ),
-                                      iconColor: Color(0x00000000),
-                                      iconSize: 18,
-                                      elevation: 0,
-                                    ),
-                                    unselectedChipStyle: ChipStyle(
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .darkPrimary,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
+                                                        .bodyText1Family,
+                                                color: Colors.white,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1Family),
+                                              ),
+                                          iconColor: Color(0x00000000),
+                                          iconSize: 18,
+                                          elevation: 0,
+                                        ),
+                                        unselectedChipStyle: ChipStyle(
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .darkPrimary,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .bodyText2
+                                              .override(
+                                                fontFamily:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
-                                          ),
-                                      iconColor: Color(0x00000000),
-                                      iconSize: 18,
-                                      elevation: 0,
+                                                        .bodyText2Family,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText2Family),
+                                              ),
+                                          iconColor: Color(0x00000000),
+                                          iconSize: 18,
+                                          elevation: 0,
+                                        ),
+                                        chipSpacing: 8,
+                                        multiselect: false,
+                                        initialized: durationValue != null,
+                                        alignment: WrapAlignment.start,
+                                      ),
                                     ),
-                                    chipSpacing: 8,
-                                    multiselect: false,
-                                    initialized: durationValue != null,
-                                    alignment: WrapAlignment.start,
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                             Padding(

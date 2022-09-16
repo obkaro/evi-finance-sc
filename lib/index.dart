@@ -1,8 +1,8 @@
 // Export pages
 export 'land_page/land_page_widget.dart' show LandPageWidget;
 export 'transactions/transactions_widget.dart' show TransactionsWidget;
-export 'new_budget_categories/new_budget_categories_widget.dart'
-    show NewBudgetCategoriesWidget;
+export 'allocate_budget_copy/allocate_budget_copy_widget.dart'
+    show AllocateBudgetCopyWidget;
 export 'forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
 export 'dashboard/dashboard_widget.dart' show DashboardWidget;
 export 'active_budget/active_budget_widget.dart' show ActiveBudgetWidget;

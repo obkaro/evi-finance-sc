@@ -938,7 +938,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             height: 60,
                                                             color: FlutterFlowTheme
                                                                     .of(context)
-                                                                .secondaryPrimary,
+                                                                .secondaryBackground,
                                                             textStyle:
                                                                 FlutterFlowTheme.of(
                                                                         context)
@@ -947,8 +947,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                       fontFamily:
                                                                           FlutterFlowTheme.of(context)
                                                                               .subtitle2Family,
-                                                                      color: Colors
-                                                                          .white,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryText,
                                                                       useGoogleFonts: GoogleFonts
                                                                               .asMap()
                                                                           .containsKey(

@@ -1,6 +1,7 @@
 import '../backend/backend.dart';
 import '../components/empty_list_widget.dart';
 import '../edit_subsciption/edit_subsciption_widget.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -292,9 +293,18 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                           );
                                         }
                                         List<TransactionsRecord>
-                                            buttonTransactionsRecordList =
+                                            iconButtonTransactionsRecordList =
                                             snapshot.data!;
-                                        return FFButtonWidget(
+                                        return FlutterFlowIconButton(
+                                          borderColor: Colors.transparent,
+                                          borderRadius: 30,
+                                          borderWidth: 1,
+                                          buttonSize: 60,
+                                          icon: Icon(
+                                            Icons.delete_rounded,
+                                            color: Color(0xFFCE1515),
+                                            size: 24,
+                                          ),
                                           onPressed: () async {
                                             var confirmDialogResponse =
                                                 await showDialog<bool>(
@@ -331,7 +341,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                             if (confirmDialogResponse) {
                                               await actions
                                                   .unlinkAllTransCategories(
-                                                buttonTransactionsRecordList
+                                                iconButtonTransactionsRecordList
                                                     .toList(),
                                               );
                                               await widget
@@ -349,39 +359,6 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                               ),
                                             );
                                           },
-                                          text: 'Delete',
-                                          icon: Icon(
-                                            Icons.delete_rounded,
-                                            size: 16,
-                                          ),
-                                          options: FFButtonOptions(
-                                            height: 48,
-                                            color: Colors.transparent,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText2
-                                                    .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText2Family,
-                                                      color: Color(0xFFCE1515),
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText2Family),
-                                                    ),
-                                            elevation: 0,
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          showLoadingIndicator: false,
                                         );
                                       },
                                     ),

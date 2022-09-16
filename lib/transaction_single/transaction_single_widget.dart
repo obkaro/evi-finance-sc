@@ -4,6 +4,7 @@ import '../components/assign_transaction_widget.dart';
 import '../components/new_income_source_widget.dart';
 import '../components/set_trans_category_widget.dart';
 import '../components/text_transaction_type_widget.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -319,13 +320,13 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    16, 10, 16, 10),
+                                                    20, 20, 20, 20),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 10, 0, 10),
+                                                      .fromSTEB(0, 0, 0, 10),
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -527,6 +528,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                   height: 48,
                                                                   decoration:
                                                                       BoxDecoration(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .lightPrimary,
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             12),
@@ -535,7 +539,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                             .all(
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .primaryBackground,
+                                                                          .fadedDivider,
                                                                       width: 1,
                                                                     ),
                                                                   ),
@@ -1031,7 +1035,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                         padding:
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(0, 10,
-                                                                    0, 10),
+                                                                    0, 0),
                                                         child: StreamBuilder<
                                                             SubscriptionsRecord>(
                                                           stream: SubscriptionsRecord
@@ -1092,41 +1096,34 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                     MainAxisSize
                                                                         .max,
                                                                 children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0,
                                                                             0,
-                                                                            0,
-                                                                            10),
-                                                                    child: Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      children: [
-                                                                        Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              4,
-                                                                              0),
-                                                                          child:
-                                                                              Icon(
-                                                                            Icons.credit_card_rounded,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primaryText,
-                                                                            size:
-                                                                                24,
-                                                                          ),
+                                                                            4,
+                                                                            0),
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .credit_card_rounded,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
+                                                                          size:
+                                                                              24,
                                                                         ),
-                                                                        Text(
-                                                                          columnSubscriptionsRecord
-                                                                              .name!,
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).subtitle1,
-                                                                        ),
-                                                                      ],
-                                                                    ),
+                                                                      ),
+                                                                      Text(
+                                                                        columnSubscriptionsRecord
+                                                                            .name!,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .subtitle1,
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ],
                                                               ),
@@ -1330,7 +1327,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                 ),
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(16, 16, 16, 16),
+                                                      .fromSTEB(20, 20, 20, 20),
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -1446,177 +1443,145 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                         mainAxisSize:
                                                             MainAxisSize.max,
                                                         children: [
-                                                          StreamBuilder<
-                                                              List<
-                                                                  IncomeCategoriesRecord>>(
-                                                            stream:
-                                                                queryIncomeCategoriesRecord(
-                                                              parent:
-                                                                  currentUserReference,
-                                                            ),
-                                                            builder: (context,
-                                                                snapshot) {
-                                                              // Customize what your widget looks like when it's loading.
-                                                              if (!snapshot
-                                                                  .hasData) {
-                                                                return Center(
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: 50,
-                                                                    height: 50,
-                                                                    child:
-                                                                        SpinKitRing(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryColor,
-                                                                      size: 50,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              List<IncomeCategoriesRecord>
-                                                                  rowIncomeCategoriesRecordList =
-                                                                  snapshot
-                                                                      .data!;
-                                                              return SingleChildScrollView(
-                                                                scrollDirection:
-                                                                    Axis.horizontal,
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: List.generate(
-                                                                      rowIncomeCategoriesRecordList
-                                                                          .length,
-                                                                      (rowIndex) {
-                                                                    final rowIncomeCategoriesRecord =
-                                                                        rowIncomeCategoriesRecordList[
-                                                                            rowIndex];
-                                                                    return Visibility(
-                                                                      visible: rowIncomeCategoriesRecord
-                                                                              .reference !=
-                                                                          columnTransactionsRecord
-                                                                              .incomeCategory,
+                                                          Expanded(
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          16,
+                                                                          0),
+                                                              child: StreamBuilder<
+                                                                  List<
+                                                                      IncomeCategoriesRecord>>(
+                                                                stream:
+                                                                    queryIncomeCategoriesRecord(
+                                                                  parent:
+                                                                      currentUserReference,
+                                                                ),
+                                                                builder: (context,
+                                                                    snapshot) {
+                                                                  // Customize what your widget looks like when it's loading.
+                                                                  if (!snapshot
+                                                                      .hasData) {
+                                                                    return Center(
                                                                       child:
-                                                                          Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            0,
-                                                                            0,
-                                                                            8,
-                                                                            0),
+                                                                          SizedBox(
+                                                                        width:
+                                                                            50,
+                                                                        height:
+                                                                            50,
                                                                         child:
-                                                                            FFButtonWidget(
-                                                                          onPressed:
-                                                                              () async {
-                                                                            final transactionsUpdateData =
-                                                                                createTransactionsRecordData(
-                                                                              incomeCategory: rowIncomeCategoriesRecord.reference,
-                                                                            );
-                                                                            await columnTransactionsRecord.reference.update(transactionsUpdateData);
-                                                                          },
-                                                                          text:
-                                                                              rowIncomeCategoriesRecord.categoryName!,
-                                                                          options:
-                                                                              FFButtonOptions(
-                                                                            height:
-                                                                                48,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryBackground,
-                                                                            textStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
-                                                                                  color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
-                                                                                ),
-                                                                            elevation:
-                                                                                0,
-                                                                            borderSide:
-                                                                                BorderSide(
-                                                                              color: FlutterFlowTheme.of(context).primaryColor,
-                                                                              width: 1,
-                                                                            ),
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(16),
-                                                                          ),
+                                                                            SpinKitRing(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryColor,
+                                                                          size:
+                                                                              50,
                                                                         ),
                                                                       ),
                                                                     );
-                                                                  }),
-                                                                ),
-                                                              );
-                                                            },
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0,
-                                                                        0,
-                                                                        8,
-                                                                        0),
-                                                            child:
-                                                                FFButtonWidget(
-                                                              onPressed:
-                                                                  () async {
-                                                                await showModalBottomSheet(
-                                                                  isScrollControlled:
-                                                                      true,
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return Padding(
-                                                                      padding: MediaQuery.of(
-                                                                              context)
-                                                                          .viewInsets,
-                                                                      child:
-                                                                          NewIncomeSourceWidget(),
-                                                                    );
-                                                                  },
-                                                                );
-                                                              },
-                                                              text: 'New',
-                                                              icon: Icon(
-                                                                Icons
-                                                                    .add_rounded,
-                                                                size: 16,
-                                                              ),
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                height: 48,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryColor,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyText1Family,
-                                                                      color: Colors
-                                                                          .white,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).bodyText1Family),
+                                                                  }
+                                                                  List<IncomeCategoriesRecord>
+                                                                      rowIncomeCategoriesRecordList =
+                                                                      snapshot
+                                                                          .data!;
+                                                                  return SingleChildScrollView(
+                                                                    scrollDirection:
+                                                                        Axis.horizontal,
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: List.generate(
+                                                                          rowIncomeCategoriesRecordList
+                                                                              .length,
+                                                                          (rowIndex) {
+                                                                        final rowIncomeCategoriesRecord =
+                                                                            rowIncomeCategoriesRecordList[rowIndex];
+                                                                        return Visibility(
+                                                                          visible:
+                                                                              rowIncomeCategoriesRecord.reference != columnTransactionsRecord.incomeCategory,
+                                                                          child:
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                0,
+                                                                                0,
+                                                                                8,
+                                                                                0),
+                                                                            child:
+                                                                                FFButtonWidget(
+                                                                              onPressed: () async {
+                                                                                final transactionsUpdateData = createTransactionsRecordData(
+                                                                                  incomeCategory: rowIncomeCategoriesRecord.reference,
+                                                                                );
+                                                                                await columnTransactionsRecord.reference.update(transactionsUpdateData);
+                                                                              },
+                                                                              text: rowIncomeCategoriesRecord.categoryName!,
+                                                                              options: FFButtonOptions(
+                                                                                height: 48,
+                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                textStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                                      color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
+                                                                                    ),
+                                                                                elevation: 0,
+                                                                                borderSide: BorderSide(
+                                                                                  color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                  width: 1,
+                                                                                ),
+                                                                                borderRadius: BorderRadius.circular(16),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        );
+                                                                      }),
                                                                     ),
-                                                                elevation: 0,
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryColor,
-                                                                  width: 0,
-                                                                ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            16),
+                                                                  );
+                                                                },
                                                               ),
                                                             ),
+                                                          ),
+                                                          FlutterFlowIconButton(
+                                                            borderColor: Colors
+                                                                .transparent,
+                                                            borderRadius: 30,
+                                                            borderWidth: 1,
+                                                            buttonSize: 48,
+                                                            fillColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                            icon: Icon(
+                                                              Icons.add,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryPrimary,
+                                                              size: 30,
+                                                            ),
+                                                            onPressed:
+                                                                () async {
+                                                              await showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return Padding(
+                                                                    padding: MediaQuery.of(
+                                                                            context)
+                                                                        .viewInsets,
+                                                                    child:
+                                                                        NewIncomeSourceWidget(),
+                                                                  );
+                                                                },
+                                                              );
+                                                            },
                                                           ),
                                                         ],
                                                       ),

@@ -143,12 +143,12 @@ class _NavBarPageState extends State<NavBarPage> {
           _currentPage = null;
           _currentPageName = tabs.keys.toList()[i];
         }),
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).lightPrimary,
         color: Color(0xFF5D5B5B),
         activeColor: FlutterFlowTheme.of(context).primaryText,
         tabBackgroundColor: Color(0x00000000),
         tabActiveBorder: Border.all(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
+          color: FlutterFlowTheme.of(context).lightPrimary,
           width: 8,
         ),
         tabBorderRadius: 100,
@@ -163,7 +163,7 @@ class _NavBarPageState extends State<NavBarPage> {
             icon: currentIndex == 0 ? Icons.home_rounded : Icons.home_rounded,
             text: 'Dashboard',
             iconSize: 24,
-            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           ),
           GButton(
             icon: currentIndex == 1
@@ -171,7 +171,7 @@ class _NavBarPageState extends State<NavBarPage> {
                 : Icons.pie_chart_rounded,
             text: 'Active Budget',
             iconSize: 24,
-            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           ),
           GButton(
             icon: currentIndex == 2
@@ -179,7 +179,7 @@ class _NavBarPageState extends State<NavBarPage> {
                 : Icons.featured_play_list_rounded,
             text: 'Menu',
             iconSize: 24,
-            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           )
         ],
       ),
