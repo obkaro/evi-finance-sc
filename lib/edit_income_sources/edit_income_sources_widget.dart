@@ -85,7 +85,7 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
               children: [
                 if (editIncomeSourcesIncomeCategoriesRecordList.length <= 10)
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -249,7 +249,7 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                   ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -451,7 +451,7 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                   child: CButtonFilledCopyWidget(
                     text: 'New',
                     icon: Icon(
@@ -474,7 +474,7 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                   child: InkWell(
                     onTap: () async {
                       Navigator.pop(context);

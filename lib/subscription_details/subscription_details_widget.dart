@@ -73,7 +73,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -378,21 +378,9 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                   ),
                 ],
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(32, 16, 32, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      'History',
-                      style: FlutterFlowTheme.of(context).subtitle1,
-                    ),
-                  ],
-                ),
-              ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 8, 20, 20),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                   child: Container(
                     width: double.infinity,
                     height: 100,

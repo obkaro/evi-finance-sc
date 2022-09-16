@@ -136,7 +136,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                   child: Material(
                     color: Colors.transparent,
                     elevation: 0,
@@ -147,12 +147,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 14,
-                            color: FlutterFlowTheme.of(context).shadowGray,
-                          )
-                        ],
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: StreamBuilder<List<BudgetsRecord>>(
@@ -444,7 +438,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 16),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                   child: Container(
                     width: double.infinity,
                     height: 100,

@@ -7,6 +7,7 @@ import '../actions/index.dart'; // Imports custom actions
 import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
+// Begin custom widget code
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../components/new_version_found_widget.dart';
@@ -31,8 +32,6 @@ class ForceUpdateWidget extends StatefulWidget {
 }
 
 class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
-  bool hasModalShown = FFAppState().hasUpdateModalShown;
-
   Future getVersion(VersionsRecord dashboardVersionsRecord) async {
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
@@ -65,9 +64,8 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
     // print(dashboardVersionsRecord.versionNumberString);
     // print(enforcedVersion);
 
-    if (forceUpdateCalc == true && FFAppState().hasUpdateModalShown == false) {
-      hasModalShown = true;
-      FFAppState().hasUpdateModalShown = true;
+    if (forceUpdateCalc == true) {
+      FFAppState().hasUpdatePromptShown = true;
       await showModalBottomSheet(
         isScrollControlled: true,
         isDismissible: false,
@@ -127,6 +125,9 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
           // );
         },
       );
+      // setState(() {
+      //   FFAppState().hasUpdatePromptShown = false;
+      // });
     }
   }
 
@@ -159,8 +160,9 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
             return Container();
           }
           final dashboardVersionsRecord = dashboardVersionsRecordList.first;
-
-          getVersion(dashboardVersionsRecord);
+          if (FFAppState().hasUpdatePromptShown == false) {
+            getVersion(dashboardVersionsRecord);
+          }
 
           return SizedBox(
             width: MediaQuery.of(context).size.width,
