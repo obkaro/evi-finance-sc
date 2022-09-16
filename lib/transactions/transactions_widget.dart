@@ -33,13 +33,18 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
         iconTheme:
-            IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
+            IconThemeData(color: FlutterFlowTheme.of(context).secondaryPrimary),
         automaticallyImplyLeading: true,
         title: Text(
           'All Transactions',
-          style: FlutterFlowTheme.of(context).title3,
+          style: FlutterFlowTheme.of(context).title3.override(
+                fontFamily: FlutterFlowTheme.of(context).title3Family,
+                color: FlutterFlowTheme.of(context).secondaryPrimary,
+                useGoogleFonts: GoogleFonts.asMap()
+                    .containsKey(FlutterFlowTheme.of(context).title3Family),
+              ),
         ),
         actions: [],
         centerTitle: true,
