@@ -169,8 +169,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                     child: Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
-                                                              .fromSTEB(32, 32,
-                                                                  32, 32),
+                                                              .fromSTEB(20, 20,
+                                                                  20, 20),
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
@@ -399,6 +399,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                     snapshot.data!;
                                                 return ListView.builder(
                                                   padding: EdgeInsets.zero,
+                                                  primary: false,
                                                   shrinkWrap: true,
                                                   scrollDirection:
                                                       Axis.vertical,

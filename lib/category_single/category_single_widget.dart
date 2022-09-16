@@ -62,13 +62,18 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            iconTheme:
-                IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
+            backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
+            iconTheme: IconThemeData(
+                color: FlutterFlowTheme.of(context).secondaryPrimary),
             automaticallyImplyLeading: true,
             title: Text(
               widget.category!.categoryName!,
-              style: FlutterFlowTheme.of(context).title3,
+              style: FlutterFlowTheme.of(context).title3.override(
+                    fontFamily: FlutterFlowTheme.of(context).title3Family,
+                    color: FlutterFlowTheme.of(context).secondaryPrimary,
+                    useGoogleFonts: GoogleFonts.asMap()
+                        .containsKey(FlutterFlowTheme.of(context).title3Family),
+                  ),
             ),
             actions: [
               StreamBuilder<List<TransactionsRecord>>(
@@ -251,21 +256,14 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                           ),
                         ),
                       ),
-                      Divider(
-                        color: FlutterFlowTheme.of(context).fadedDivider,
-                      ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                              child: Text(
-                                'Expenses',
-                                style: FlutterFlowTheme.of(context).bodyText2,
-                              ),
+                            Text(
+                              'Expenses',
+                              style: FlutterFlowTheme.of(context).bodyText2,
                             ),
                           ],
                         ),

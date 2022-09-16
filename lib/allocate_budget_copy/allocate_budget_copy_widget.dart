@@ -69,13 +69,18 @@ class _AllocateBudgetCopyWidgetState extends State<AllocateBudgetCopyWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            iconTheme:
-                IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
+            backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
+            iconTheme: IconThemeData(
+                color: FlutterFlowTheme.of(context).secondaryPrimary),
             automaticallyImplyLeading: true,
             title: Text(
               'Allocate your budget',
-              style: FlutterFlowTheme.of(context).title3,
+              style: FlutterFlowTheme.of(context).title3.override(
+                    fontFamily: FlutterFlowTheme.of(context).title3Family,
+                    color: FlutterFlowTheme.of(context).secondaryPrimary,
+                    useGoogleFonts: GoogleFonts.asMap()
+                        .containsKey(FlutterFlowTheme.of(context).title3Family),
+                  ),
             ),
             actions: [],
             centerTitle: true,

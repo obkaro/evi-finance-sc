@@ -1,7 +1,6 @@
 import '../account_single/account_single_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/m_appbar_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../custom_code/actions/index.dart' as actions;
@@ -52,38 +51,21 @@ class _AccountsWidgetState extends State<AccountsWidget> {
         List<AccountsRecord> accountsAccountsRecordList = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(132),
-            child: AppBar(
-              backgroundColor: Color(0x00FF0054),
-              automaticallyImplyLeading: false,
-              flexibleSpace: MAppbarWidget(
-                titleText: 'Accounts',
-                icon: Icon(
-                  Icons.account_balance_rounded,
-                  color: FlutterFlowTheme.of(context).secondaryPrimary,
-                  size: 32,
-                ),
-                bgColor: FlutterFlowTheme.of(context).secondaryColor,
-                fgColor: FlutterFlowTheme.of(context).primaryBackground,
-                textColor: FlutterFlowTheme.of(context).secondaryPrimary,
-                actionIcon: Icon(
-                  Icons.account_balance_rounded,
-                  color: FlutterFlowTheme.of(context).secondaryColor,
-                  size: 0,
-                ),
-                iconAction: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AccountsWidget(),
-                    ),
-                  );
-                },
-              ),
-              actions: [],
-              elevation: 0,
+          appBar: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
+            automaticallyImplyLeading: true,
+            title: Text(
+              'Accounts',
+              style: FlutterFlowTheme.of(context).title3.override(
+                    fontFamily: FlutterFlowTheme.of(context).title3Family,
+                    color: FlutterFlowTheme.of(context).secondaryPrimary,
+                    useGoogleFonts: GoogleFonts.asMap()
+                        .containsKey(FlutterFlowTheme.of(context).title3Family),
+                  ),
             ),
+            actions: [],
+            centerTitle: true,
+            elevation: 0,
           ),
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           floatingActionButton: FloatingActionButton(
