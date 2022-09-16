@@ -111,26 +111,6 @@ class _MAppbarWidgetState extends State<MAppbarWidget> {
             ),
           ),
         ),
-        Container(
-          width: double.infinity,
-          height: 32,
-          decoration: BoxDecoration(
-            color: widget.bgColor,
-          ),
-          child: Container(
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(
-              color: widget.fgColor,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(3),
-                bottomRight: Radius.circular(0),
-                topLeft: Radius.circular(32),
-                topRight: Radius.circular(32),
-              ),
-            ),
-          ),
-        ),
       ],
     );
   }
