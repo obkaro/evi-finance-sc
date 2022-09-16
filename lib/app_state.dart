@@ -35,6 +35,8 @@ class FFAppState {
     jsonDecode('{\"name\":\"Quarterly\",\"duration\":90}'),
     jsonDecode('{\"name\":\"Yearly\",\"duration\":365}')
   ];
+
+  bool hasUpdatePromptShown = false;
 }
 
 LatLng? _latLngFromString(String? val) {
