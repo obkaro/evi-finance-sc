@@ -663,17 +663,19 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                                 FlutterFlowTheme.of(context).subtitle1,
                                                                           ),
                                                                         ),
-                                                                        Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              4,
-                                                                              0,
-                                                                              0,
-                                                                              0),
+                                                                        Expanded(
                                                                           child:
-                                                                              Text(
-                                                                            '${functions.subtractCurrencyText(containerBudgetsRecord.budgetAmount, containerBudgetsRecord.budgetSpent)}',
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).subtitle2,
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                4,
+                                                                                0,
+                                                                                0,
+                                                                                0),
+                                                                            child:
+                                                                                Text(
+                                                                              '${functions.subtractCurrencyText(containerBudgetsRecord.budgetAmount, containerBudgetsRecord.budgetSpent)}',
+                                                                              style: FlutterFlowTheme.of(context).subtitle2,
+                                                                            ),
                                                                           ),
                                                                         ),
                                                                       ],
