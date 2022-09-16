@@ -200,25 +200,29 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Spent',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText2,
-                                          ),
-                                          Text(
-                                            functions.formatTransCurrency(
-                                                functions.sumTransactionAmounts(
-                                                    categorySingleTransactionsRecordList
-                                                        .toList())),
-                                            style: FlutterFlowTheme.of(context)
-                                                .subtitle1,
-                                          ),
-                                        ],
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Spent',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2,
+                                            ),
+                                            Text(
+                                              functions.formatTransCurrency(
+                                                  functions.sumTransactionAmounts(
+                                                      categorySingleTransactionsRecordList
+                                                          .toList())),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle1,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       Expanded(
                                         child: Column(
@@ -226,24 +230,33 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
                                           children: [
-                                            Row(
+                                            Column(
                                               mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Text(
+                                                      'Target',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText2,
+                                                    ),
+                                                  ],
+                                                ),
                                                 Text(
-                                                  'Target',
+                                                  functions.formatTransCurrency(
+                                                      widget.category!
+                                                          .categoryAmount),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText2,
+                                                      .subtitle1,
                                                 ),
                                               ],
-                                            ),
-                                            Text(
-                                              functions.formatTransCurrency(
-                                                  widget.category!
-                                                      .categoryAmount),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle1,
                                             ),
                                           ],
                                         ),

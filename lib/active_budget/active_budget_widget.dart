@@ -321,6 +321,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                       Column(
                                                                         mainAxisSize:
                                                                             MainAxisSize.max,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
                                                                         children: [
                                                                           Row(
                                                                             mainAxisSize:
