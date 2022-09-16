@@ -389,8 +389,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             );
                                           },
                                           child: Container(
-                                            width: 150,
-                                            height: 150,
+                                            width: 148,
+                                            height: 148,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -654,16 +654,16 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                           MainAxisSize
                                                                               .max,
                                                                       children: [
-                                                                        Expanded(
-                                                                          child:
-                                                                              Text(
-                                                                            functions.subtractCurrencyDecimal(containerBudgetsRecord.budgetAmount,
-                                                                                containerBudgetsRecord.budgetSpent),
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).subtitle1,
-                                                                          ),
+                                                                        Text(
+                                                                          functions.subtractCurrencyDecimal(
+                                                                              containerBudgetsRecord.budgetAmount,
+                                                                              containerBudgetsRecord.budgetSpent),
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).subtitle1,
                                                                         ),
                                                                         Expanded(
+                                                                          flex:
+                                                                              2,
                                                                           child:
                                                                               Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
@@ -754,8 +754,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                       .secondaryBackground,
                                   borderRadius: BorderRadius.circular(32),
                                 ),
-                                child: StreamBuilder<List<TransactionsRecord>>(
-                                  stream: queryTransactionsRecord(
+                                child: FutureBuilder<List<TransactionsRecord>>(
+                                  future: queryTransactionsRecordOnce(
                                     queryBuilder: (transactionsRecord) =>
                                         transactionsRecord
                                             .where('transactionOwner',
@@ -1052,6 +1052,14 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                    Container(
+                      width: 0,
+                      height: 0,
+                      child: custom_widgets.ForceUpdateWidget(
+                        width: 0,
+                        height: 0,
                       ),
                     ),
                   ],
