@@ -399,6 +399,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                     snapshot.data!;
                                                 return ListView.builder(
                                                   padding: EdgeInsets.zero,
+                                                  primary: false,
                                                   shrinkWrap: true,
                                                   scrollDirection:
                                                       Axis.vertical,
