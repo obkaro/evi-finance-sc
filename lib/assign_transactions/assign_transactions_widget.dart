@@ -62,6 +62,8 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
           key: scaffoldKey,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
+            iconTheme:
+                IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
             automaticallyImplyLeading: true,
             title: Text(
               'Assign Transactions',
@@ -667,7 +669,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                 }
                                                                                 List<TransactionsRecord> textTransactionsRecordList = snapshot.data!;
                                                                                 return Text(
-                                                                                  functions.subtractCurrencyOfCopy(listViewCategoriesRecord.categoryAmount, functions.sumTransactionAmounts(textTransactionsRecordList.toList())),
+                                                                                  functions.subtractCurrencyOfCopy(listViewCategoriesRecord.categoryAmount, listViewCategoriesRecord.spentAmount),
                                                                                   style: FlutterFlowTheme.of(context).bodyText1,
                                                                                 );
                                                                               },

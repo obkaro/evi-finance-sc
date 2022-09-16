@@ -1,3 +1,4 @@
+import '../allocate_budget/allocate_budget_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_calendar.dart';
@@ -5,7 +6,6 @@ import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../new_budget_categories/new_budget_categories_widget.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
@@ -89,7 +89,8 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 4),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -135,7 +136,8 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(16, 4, 16, 4),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -188,7 +190,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            4, 4, 4, 4),
+                                            16, 4, 16, 4),
                                         child: Text(
                                           'When does this budget start?',
                                           style: FlutterFlowTheme.of(context)
@@ -216,7 +218,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                             weekFormat: false,
                                             weekStartsMonday: false,
                                             initialDate: getCurrentTimestamp,
-                                            rowHeight: 40,
+                                            rowHeight: 48,
                                             onChange: (DateTimeRange?
                                                 newSelectedDate) async {
                                               calendarSelectedDay =
@@ -362,7 +364,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .secondaryColor,
+                                                              .fadedDivider,
                                                       fontWeight:
                                                           FontWeight.w300,
                                                       useGoogleFonts: GoogleFonts
@@ -444,7 +446,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => NewBudgetCategoriesWidget(
+                                builder: (context) => AllocateBudgetWidget(
                                   createdBudget: widget.budget,
                                 ),
                               ),

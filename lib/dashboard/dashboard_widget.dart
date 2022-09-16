@@ -654,12 +654,14 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                           MainAxisSize
                                                                               .max,
                                                                       children: [
-                                                                        Text(
-                                                                          functions.subtractCurrencyDecimal(
-                                                                              containerBudgetsRecord.budgetAmount,
-                                                                              containerBudgetsRecord.budgetSpent),
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).subtitle1,
+                                                                        Expanded(
+                                                                          child:
+                                                                              Text(
+                                                                            functions.subtractCurrencyDecimal(containerBudgetsRecord.budgetAmount,
+                                                                                containerBudgetsRecord.budgetSpent),
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).subtitle1,
+                                                                          ),
                                                                         ),
                                                                         Padding(
                                                                           padding: EdgeInsetsDirectional.fromSTEB(
@@ -670,11 +672,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                           child:
                                                                               Text(
                                                                             '${functions.subtractCurrencyText(containerBudgetsRecord.budgetAmount, containerBudgetsRecord.budgetSpent)}',
-                                                                            style: FlutterFlowTheme.of(context).subtitle1.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
-                                                                                ),
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).subtitle2,
                                                                           ),
                                                                         ),
                                                                       ],

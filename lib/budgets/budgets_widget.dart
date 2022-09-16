@@ -42,7 +42,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
             IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
         automaticallyImplyLeading: true,
         title: Text(
-          'Budget History',
+          'Budget Archives',
           style: FlutterFlowTheme.of(context).title3,
         ),
         actions: [],

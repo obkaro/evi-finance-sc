@@ -234,20 +234,48 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                   size: 24,
                                                 ),
                                                 onPressed: () async {
-                                                  // Action_BudgetAmountMinus
+                                                  if (functions.sumCategoryAmounts(
+                                                          allocateBudgetCategoriesRecordList
+                                                              .toList()) <
+                                                      columnBudgetsRecord
+                                                          .budgetAmount!) {
+                                                    // Action_BudgetAmountMinus
 
-                                                  final budgetsUpdateData = {
-                                                    'budgetAmount':
-                                                        FieldValue.increment(
-                                                            -100000),
-                                                    'unallocatedAmount':
-                                                        FieldValue.increment(
-                                                            -(100000)),
-                                                  };
-                                                  await columnBudgetsRecord
-                                                      .reference
-                                                      .update(
-                                                          budgetsUpdateData);
+                                                    final budgetsUpdateData = {
+                                                      'budgetAmount':
+                                                          FieldValue.increment(
+                                                              -100000),
+                                                      'unallocatedAmount':
+                                                          FieldValue.increment(
+                                                              -(100000)),
+                                                    };
+                                                    await columnBudgetsRecord
+                                                        .reference
+                                                        .update(
+                                                            budgetsUpdateData);
+                                                  } else {
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text(
+                                                              'Invalid Entry'),
+                                                          content: Text(
+                                                              'Budget amount needs to be greater than the total amount of already created categories. '),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext),
+                                                              child:
+                                                                  Text('Okay'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  }
                                                 },
                                               ),
                                               InkWell(

@@ -217,7 +217,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                             weekFormat: false,
                                             weekStartsMonday: false,
                                             initialDate: getCurrentTimestamp,
-                                            rowHeight: 40,
+                                            rowHeight: 48,
                                             onChange: (DateTimeRange?
                                                 newSelectedDate) async {
                                               calendarSelectedDay =

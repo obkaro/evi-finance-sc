@@ -92,7 +92,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
                               child: FlutterFlowDropDown(
                                 initialOption: dropDownValue ??=
                                     widget.budget!.budgetDuration,
@@ -171,7 +171,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                               weekStartsMonday: false,
                                               initialDate:
                                                   widget.budget!.budgetStart,
-                                              rowHeight: 40,
+                                              rowHeight: 48,
                                               onChange: (DateTimeRange?
                                                   newSelectedDate) async {
                                                 calendarSelectedDay =

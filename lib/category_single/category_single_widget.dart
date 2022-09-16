@@ -120,95 +120,142 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 10),
+                padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
-                            child: CircularPercentIndicator(
-                              percent: functions.calcCategoryPercentCircle(
-                                  widget.category,
-                                  categorySingleTransactionsRecordList
-                                      .toList()),
-                              radius: 90,
-                              lineWidth: 20,
-                              animation: true,
-                              progressColor:
-                                  FlutterFlowTheme.of(context).darkPrimary,
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).primaryColor,
-                              center: Text(
-                                '${functions.subtractCurrency(widget.category!.categoryAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList()))}',
-                                textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context)
-                                    .subtitle1
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle1Family,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle1Family),
-                                    ),
-                              ),
-                              startAngle: 0,
-                            ),
-                          ),
-                        ],
-                      ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(32),
+                          ),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                            child: Column(
                               mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Spent',
-                                  style: FlutterFlowTheme.of(context).bodyText2,
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 20, 0, 20),
+                                      child: CircularPercentIndicator(
+                                        percent:
+                                            functions.calcCategoryPercentCircle(
+                                                widget.category,
+                                                categorySingleTransactionsRecordList
+                                                    .toList()),
+                                        radius: 90,
+                                        lineWidth: 20,
+                                        animation: true,
+                                        progressColor:
+                                            FlutterFlowTheme.of(context)
+                                                .darkPrimary,
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                        center: Text(
+                                          '${functions.subtractCurrency(widget.category!.categoryAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList()))}',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .subtitle1
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle1Family,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .subtitle1Family),
+                                              ),
+                                        ),
+                                        startAngle: 0,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  functions.formatTransCurrency(
-                                      functions.sumTransactionAmounts(
-                                          categorySingleTransactionsRecordList
-                                              .toList())),
-                                  style: FlutterFlowTheme.of(context).subtitle1,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 16),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Spent',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2,
+                                          ),
+                                          Text(
+                                            functions.formatTransCurrency(
+                                                functions.sumTransactionAmounts(
+                                                    categorySingleTransactionsRecordList
+                                                        .toList())),
+                                            style: FlutterFlowTheme.of(context)
+                                                .subtitle1,
+                                          ),
+                                        ],
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Text(
+                                                  'Target',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText2,
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              functions.formatTransCurrency(
+                                                  widget.category!
+                                                      .categoryAmount),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle1,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
-                            Column(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Target',
-                                  style: FlutterFlowTheme.of(context).bodyText2,
-                                ),
-                                Text(
-                                  functions.formatTransCurrency(
-                                      widget.category!.categoryAmount),
-                                  style: FlutterFlowTheme.of(context).subtitle1,
-                                ),
-                              ],
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                      Divider(),
+                      Divider(
+                        color: FlutterFlowTheme.of(context).fadedDivider,
+                      ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
