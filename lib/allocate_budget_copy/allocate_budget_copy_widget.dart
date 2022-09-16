@@ -18,8 +18,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AllocateBudgetWidget extends StatefulWidget {
-  const AllocateBudgetWidget({
+class AllocateBudgetCopyWidget extends StatefulWidget {
+  const AllocateBudgetCopyWidget({
     Key? key,
     this.createdBudget,
   }) : super(key: key);
@@ -27,17 +27,18 @@ class AllocateBudgetWidget extends StatefulWidget {
   final BudgetsRecord? createdBudget;
 
   @override
-  _AllocateBudgetWidgetState createState() => _AllocateBudgetWidgetState();
+  _AllocateBudgetCopyWidgetState createState() =>
+      _AllocateBudgetCopyWidgetState();
 }
 
-class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
+class _AllocateBudgetCopyWidgetState extends State<AllocateBudgetCopyWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'AllocateBudget'});
+        parameters: {'screen_name': 'AllocateBudgetCopy'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -63,7 +64,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
             ),
           );
         }
-        List<CategoriesRecord> allocateBudgetCategoriesRecordList =
+        List<CategoriesRecord> allocateBudgetCopyCategoriesRecordList =
             snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
@@ -234,7 +235,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                 ),
                                                 onPressed: () async {
                                                   if (functions.sumCategoryAmounts(
-                                                          allocateBudgetCategoriesRecordList
+                                                          allocateBudgetCopyCategoriesRecordList
                                                               .toList()) <
                                                       columnBudgetsRecord
                                                           .budgetAmount!) {
@@ -297,7 +298,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                   .reference,
                                                           categoryTotal: functions
                                                               .sumCategoryAmounts(
-                                                                  allocateBudgetCategoriesRecordList
+                                                                  allocateBudgetCopyCategoriesRecordList
                                                                       .toList()),
                                                         ),
                                                       );
@@ -382,7 +383,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    if (allocateBudgetCategoriesRecordList
+                                    if (allocateBudgetCopyCategoriesRecordList
                                             .length <=
                                         10)
                                       Padding(
@@ -427,7 +428,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                       constBudgetCategoriesRecord
                                                           .whereNotIn(
                                                               'categoryName',
-                                                              allocateBudgetCategoriesRecordList
+                                                              allocateBudgetCopyCategoriesRecordList
                                                                   .map((e) => e
                                                                       .categoryName!)
                                                                   .toList())
@@ -604,7 +605,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                         child: Builder(
                                           builder: (context) {
                                             final existingCategories =
-                                                allocateBudgetCategoriesRecordList
+                                                allocateBudgetCopyCategoriesRecordList
                                                     .toList();
                                             return SingleChildScrollView(
                                               child: Column(

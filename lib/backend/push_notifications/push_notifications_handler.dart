@@ -84,7 +84,7 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
 final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'LandPage': (data) async => LandPageWidget(),
   'Transactions': (data) async => TransactionsWidget(),
-  'NewBudgetCategories': (data) async => NewBudgetCategoriesWidget(
+  'AllocateBudgetCopy': (data) async => AllocateBudgetCopyWidget(
         createdBudget: await getDocumentParameter(
             data, 'createdBudget', BudgetsRecord.serializer),
       ),

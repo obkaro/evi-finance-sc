@@ -1,4 +1,4 @@
-import '../allocate_budget/allocate_budget_widget.dart';
+import '../allocate_budget_copy/allocate_budget_copy_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_calendar.dart';
@@ -446,7 +446,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AllocateBudgetWidget(
+                                builder: (context) => AllocateBudgetCopyWidget(
                                   createdBudget: widget.budget,
                                 ),
                               ),

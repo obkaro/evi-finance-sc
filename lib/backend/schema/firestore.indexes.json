@@ -74,20 +74,6 @@
       "fields": [
         {
           "fieldPath": "categoryName",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "categoryWeight",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "constBudgetCategories",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "categoryName",
           "order": "DESCENDING"
         },
         {
