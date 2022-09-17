@@ -102,73 +102,90 @@ class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Stack(
-                                    children: [
-                                      if (widget.transactionDoc!
-                                              .transactionCategory !=
-                                          null)
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 8),
-                                          child: AutoSizeText(
-                                            widget.transactionDoc!
-                                                .categoryDetails.name!
-                                                .maybeHandleOverflow(
-                                              maxChars: 25,
-                                              replacement: '…',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1,
-                                          ),
-                                        ),
-                                      if (widget
-                                              .transactionDoc!.incomeCategory !=
-                                          null)
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 8),
-                                          child: AutoSizeText(
-                                            widget.transactionDoc!
-                                                .categoryDetails.name!
-                                                .maybeHandleOverflow(
-                                              maxChars: 25,
-                                              replacement: '…',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1,
-                                          ),
-                                        ),
-                                      if (widget.transactionDoc!
-                                              .categoryDetails ==
-                                          null)
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 8),
-                                          child: AutoSizeText(
-                                            '-',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyText1Family,
-                                                  color: Color(0xFFD40F0F),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontStyle: FontStyle.italic,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1Family),
+                                  Container(
+                                    width: double.infinity,
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              if (widget.transactionDoc!
+                                                      .categoryDetails ==
+                                                  null)
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 0, 8),
+                                                  child: AutoSizeText(
+                                                    '-',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText1Family,
+                                                          color:
+                                                              Color(0xFFD40F0F),
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontStyle:
+                                                              FontStyle.italic,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1Family),
+                                                        ),
+                                                  ),
                                                 ),
+                                              if (widget.transactionDoc!
+                                                      .incomeCategory !=
+                                                  null)
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 0, 8),
+                                                  child: AutoSizeText(
+                                                    widget.transactionDoc!
+                                                        .categoryDetails.name!
+                                                        .maybeHandleOverflow(
+                                                      maxChars: 25,
+                                                      replacement: '…',
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1,
+                                                  ),
+                                                ),
+                                              if (widget.transactionDoc!
+                                                      .transactionCategory !=
+                                                  null)
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 0, 8),
+                                                  child: AutoSizeText(
+                                                    widget.transactionDoc!
+                                                        .categoryDetails.name!
+                                                        .maybeHandleOverflow(
+                                                      maxChars: 25,
+                                                      replacement: '…',
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1,
+                                                  ),
+                                                ),
+                                            ],
                                           ),
                                         ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                   Text(
                                     '${dateTimeFormat('jm', widget.transactionDoc!.trasactionDate)} | ${dateTimeFormat('MMMEd', widget.transactionDoc!.trasactionDate)}',
