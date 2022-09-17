@@ -5,7 +5,6 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../budgets/budgets_widget.dart';
 import '../components/circular_indicator_small_widget.dart';
-import '../components/empty_linked_accounts_widget.dart';
 import '../components/empty_list_widget.dart';
 import '../components/transaction_list_item_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -368,11 +367,6 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                       List<AccountsRecord>
                                           rowAccountsRecordList =
                                           snapshot.data!;
-                                      if (rowAccountsRecordList.isEmpty) {
-                                        return Center(
-                                          child: EmptyLinkedAccountsWidget(),
-                                        );
-                                      }
                                       return Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: List.generate(
