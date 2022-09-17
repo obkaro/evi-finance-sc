@@ -87,7 +87,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                   actionIcon: Icon(
                     Icons.edit_rounded,
                     color: FlutterFlowTheme.of(context).secondaryPrimary,
-                    size: 24,
+                    size: 20,
                   ),
                   iconAction: () async {
                     await Navigator.push(
