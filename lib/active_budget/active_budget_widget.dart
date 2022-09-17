@@ -4,7 +4,6 @@ import '../category_single/category_single_widget.dart';
 import '../components/circular_indicator_big_widget.dart';
 import '../components/create_custom_category_widget.dart';
 import '../components/edit_category_widget.dart';
-import '../components/empty_list_widget.dart';
 import '../components/m_appbar_widget.dart';
 import '../components/progress_bar_widget.dart';
 import '../create_budget/create_budget_widget.dart';
@@ -377,13 +376,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                   List<CategoriesRecord>
                                                       listViewCategoriesRecordList =
                                                       snapshot.data!;
-                                                  if (listViewCategoriesRecordList
-                                                      .isEmpty) {
-                                                    return EmptyListWidget(
-                                                      text:
-                                                          'No categories defined yet...',
-                                                    );
-                                                  }
                                                   return ListView.builder(
                                                     padding: EdgeInsets.zero,
                                                     primary: false,
