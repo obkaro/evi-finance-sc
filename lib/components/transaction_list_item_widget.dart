@@ -33,7 +33,7 @@ class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(),
       child: InkWell(
         onTap: () async {
@@ -48,7 +48,7 @@ class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
           );
         },
         child: Column(
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
