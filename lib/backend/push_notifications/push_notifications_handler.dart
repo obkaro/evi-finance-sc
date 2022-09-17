@@ -94,11 +94,10 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
           command: getParameter(data, 'command'),
         )
       : NavBarPage(initialPage: 'ActiveBudget'),
-  'ConnectFirstAccount': (data) async => ConnectFirstAccountWidget(),
-  'BudgetSingle': (data) async => BudgetSingleWidget(
-        budget: await getDocumentParameter(
-            data, 'budget', BudgetsRecord.serializer),
+  'SingleBudget': (data) async => SingleBudgetWidget(
+        budgetRef: getParameter(data, 'budgetRef'),
       ),
+  'ConnectFirstAccount': (data) async => ConnectFirstAccountWidget(),
   'CreateBudget': (data) async => CreateBudgetWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
@@ -108,15 +107,15 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
             data, 'budget', BudgetsRecord.serializer),
       ),
   'Budgets': (data) async => BudgetsWidget(),
-  'CategorySingle': (data) async => CategorySingleWidget(
-        category: await getDocumentParameter(
-            data, 'category', CategoriesRecord.serializer),
-      ),
+  'Accounts': (data) async => AccountsWidget(),
   'AllocateBudget': (data) async => AllocateBudgetWidget(
         createdBudget: await getDocumentParameter(
             data, 'createdBudget', BudgetsRecord.serializer),
       ),
-  'Accounts': (data) async => AccountsWidget(),
+  'CategorySingle': (data) async => CategorySingleWidget(
+        category: await getDocumentParameter(
+            data, 'category', CategoriesRecord.serializer),
+      ),
   'AccountSingle': (data) async => AccountSingleWidget(
         account: await getDocumentParameter(
             data, 'account', AccountsRecord.serializer),

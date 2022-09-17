@@ -304,7 +304,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                           borderColor: Colors.transparent,
                                           borderRadius: 30,
                                           borderWidth: 1,
-                                          buttonSize: 60,
+                                          buttonSize: 48,
                                           icon: Icon(
                                             Icons.delete_rounded,
                                             color: Color(0xFFCE1515),

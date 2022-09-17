@@ -1,4 +1,5 @@
 import '../backend/backend.dart';
+import '../components/circular_indicator_big_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -10,7 +11,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class CategorySingleWidget extends StatefulWidget {
   const CategorySingleWidget({
@@ -152,42 +152,19 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 20, 0, 20),
-                                      child: CircularPercentIndicator(
-                                        percent:
-                                            functions.calcCategoryPercentCircle(
-                                                widget.category,
-                                                categorySingleTransactionsRecordList
-                                                    .toList()),
-                                        radius: 90,
-                                        lineWidth: 20,
-                                        animation: true,
-                                        progressColor:
-                                            FlutterFlowTheme.of(context)
-                                                .darkPrimary,
-                                        backgroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                        center: Text(
-                                          '${functions.subtractCurrency(widget.category!.categoryAmount, functions.sumTransactionAmounts(categorySingleTransactionsRecordList.toList()))}',
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .subtitle1
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle1Family,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .subtitle1Family),
-                                              ),
+                                      child: CircularIndicatorBigWidget(
+                                        totalAmount:
+                                            widget.category!.categoryAmount,
+                                        spentAmount: valueOrDefault<int>(
+                                          widget.category!.spentAmount,
+                                          0,
                                         ),
-                                        startAngle: 0,
+                                        centerText: functions.subtractCurrency(
+                                            widget.category!.categoryAmount,
+                                            valueOrDefault<int>(
+                                              widget.category!.spentAmount,
+                                              0,
+                                            )),
                                       ),
                                     ),
                                   ],

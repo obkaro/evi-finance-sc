@@ -5,7 +5,7 @@ import '../components/circular_indicator_big_widget.dart';
 import '../components/create_custom_category_widget.dart';
 import '../components/edit_category_widget.dart';
 import '../components/empty_list_widget.dart';
-import '../components/m_appbar_widget.dart';
+import '../components/progress_bar_widget.dart';
 import '../create_budget/create_budget_widget.dart';
 import '../edit_budget/edit_budget_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -19,21 +19,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
-class ActiveBudgetWidget extends StatefulWidget {
-  const ActiveBudgetWidget({
+class SingleBudgetWidget extends StatefulWidget {
+  const SingleBudgetWidget({
     Key? key,
-    this.command,
+    this.budgetRef,
   }) : super(key: key);
 
-  final String? command;
+  final DocumentReference? budgetRef;
 
   @override
-  _ActiveBudgetWidgetState createState() => _ActiveBudgetWidgetState();
+  _SingleBudgetWidgetState createState() => _SingleBudgetWidgetState();
 }
 
-class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
+class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
   BudgetsRecord? createdBudget2;
   BudgetsRecord? createdBudget;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -42,79 +41,76 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'ActiveBudget'});
+        parameters: {'screen_name': 'SingleBudget'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
   Widget build(BuildContext context) {
-    return AuthUserStreamWidget(
-      child: StreamBuilder<BudgetsRecord>(
-        stream: BudgetsRecord.getDocument(currentUserDocument!.activeBudget!),
-        builder: (context, snapshot) {
-          // Customize what your widget looks like when it's loading.
-          if (!snapshot.hasData) {
-            return Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: SpinKitRing(
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                  size: 50,
-                ),
-              ),
-            );
-          }
-          final activeBudgetBudgetsRecord = snapshot.data!;
-          return Scaffold(
-            key: scaffoldKey,
-            appBar: PreferredSize(
-              preferredSize: Size.fromHeight(100),
-              child: AppBar(
-                backgroundColor:
-                    FlutterFlowTheme.of(context).secondaryBackground,
-                automaticallyImplyLeading: false,
-                flexibleSpace: MAppbarWidget(
-                  titleText: 'Active Budget',
-                  icon: Icon(
-                    Icons.pie_chart_rounded,
-                    color: FlutterFlowTheme.of(context).secondaryPrimary,
-                    size: 32,
-                  ),
-                  bgColor: FlutterFlowTheme.of(context).secondaryColor,
-                  fgColor: FlutterFlowTheme.of(context).primaryBackground,
-                  textColor: FlutterFlowTheme.of(context).secondaryPrimary,
-                  actionIcon: Icon(
-                    Icons.edit_rounded,
-                    color: FlutterFlowTheme.of(context).secondaryPrimary,
-                    size: 24,
-                  ),
-                  iconAction: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditBudgetWidget(
-                          budget: activeBudgetBudgetsRecord,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                actions: [],
-                elevation: 0,
+    return StreamBuilder<BudgetsRecord>(
+      stream: BudgetsRecord.getDocument(widget.budgetRef!),
+      builder: (context, snapshot) {
+        // Customize what your widget looks like when it's loading.
+        if (!snapshot.hasData) {
+          return Center(
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: SpinKitRing(
+                color: FlutterFlowTheme.of(context).primaryColor,
+                size: 50,
               ),
             ),
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              child: GestureDetector(
-                onTap: () => FocusScope.of(context).unfocus(),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (currentUserDocument!.activeBudget != null)
-                        Column(
+          );
+        }
+        final singleBudgetBudgetsRecord = snapshot.data!;
+        return Scaffold(
+          key: scaffoldKey,
+          appBar: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
+            iconTheme: IconThemeData(
+                color: FlutterFlowTheme.of(context).secondaryPrimary),
+            automaticallyImplyLeading: true,
+            title: Text(
+              '${dateTimeFormat('d/M', singleBudgetBudgetsRecord.budgetStart)} - ${dateTimeFormat('d/M', singleBudgetBudgetsRecord.budgetEnd)}',
+              style: FlutterFlowTheme.of(context).title3.override(
+                    fontFamily: FlutterFlowTheme.of(context).title3Family,
+                    color: FlutterFlowTheme.of(context).secondaryPrimary,
+                    useGoogleFonts: GoogleFonts.asMap()
+                        .containsKey(FlutterFlowTheme.of(context).title3Family),
+                  ),
+            ),
+            actions: [
+              FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30,
+                borderWidth: 1,
+                buttonSize: 60,
+                icon: Icon(
+                  Icons.edit_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryPrimary,
+                  size: 20,
+                ),
+                onPressed: () {
+                  print('IconButton pressed ...');
+                },
+              ),
+            ],
+            centerTitle: true,
+            elevation: 0,
+          ),
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          body: SafeArea(
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (currentUserDocument!.activeBudget != null)
+                      AuthUserStreamWidget(
+                        child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Container(
@@ -154,7 +150,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                         builder: (context) =>
                                                             EditBudgetWidget(
                                                           budget:
-                                                              activeBudgetBudgetsRecord,
+                                                              singleBudgetBudgetsRecord,
                                                         ),
                                                       ),
                                                     );
@@ -191,15 +187,15 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                 child:
                                                                     CircularIndicatorBigWidget(
                                                                   totalAmount:
-                                                                      activeBudgetBudgetsRecord
+                                                                      singleBudgetBudgetsRecord
                                                                           .budgetAmount,
                                                                   spentAmount:
-                                                                      activeBudgetBudgetsRecord
+                                                                      singleBudgetBudgetsRecord
                                                                           .budgetSpent,
                                                                   centerText: functions.subtractCurrency(
-                                                                      activeBudgetBudgetsRecord
+                                                                      singleBudgetBudgetsRecord
                                                                           .budgetAmount,
-                                                                      activeBudgetBudgetsRecord
+                                                                      singleBudgetBudgetsRecord
                                                                           .budgetSpent),
                                                                 ),
                                                               ),
@@ -222,7 +218,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                       .center,
                                                               children: [
                                                                 Text(
-                                                                  '${dateTimeFormat('MMMEd', activeBudgetBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', activeBudgetBudgetsRecord.budgetEnd)}',
+                                                                  '${dateTimeFormat('MMMEd', singleBudgetBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', singleBudgetBudgetsRecord.budgetEnd)}',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText1,
@@ -256,7 +252,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                     valueOrDefault<
                                                                         String>(
                                                                       functions.formatTransCurrency(
-                                                                          activeBudgetBudgetsRecord
+                                                                          singleBudgetBudgetsRecord
                                                                               .budgetSpent),
                                                                       '0',
                                                                     ),
@@ -305,7 +301,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                         valueOrDefault<
                                                                             String>(
                                                                           functions
-                                                                              .formatTransCurrency(activeBudgetBudgetsRecord.budgetAmount),
+                                                                              .formatTransCurrency(singleBudgetBudgetsRecord.budgetAmount),
                                                                           '0',
                                                                         ),
                                                                         textAlign:
@@ -344,7 +340,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                 List<CategoriesRecord>>(
                                               stream: queryCategoriesRecord(
                                                 parent:
-                                                    activeBudgetBudgetsRecord
+                                                    singleBudgetBudgetsRecord
                                                         .reference,
                                               ),
                                               builder: (context, snapshot) {
@@ -425,7 +421,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                 child:
                                                                     EditCategoryWidget(
                                                                   budget:
-                                                                      activeBudgetBudgetsRecord,
+                                                                      singleBudgetBudgetsRecord,
                                                                   categoryToEdit:
                                                                       listViewCategoriesRecord,
                                                                 ),
@@ -517,27 +513,11 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                     children: [
                                                                       Expanded(
                                                                         child:
-                                                                            LinearPercentIndicator(
-                                                                          percent:
-                                                                              valueOrDefault<double>(
-                                                                            functions.calcCategoryPercent(listViewCategoriesRecord,
-                                                                                listViewCategoriesRecord.spentAmount),
-                                                                            1.0,
-                                                                          ),
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width * 0.81,
-                                                                          lineHeight:
-                                                                              8,
-                                                                          animation:
-                                                                              true,
-                                                                          progressColor:
-                                                                              FlutterFlowTheme.of(context).primaryColor,
-                                                                          backgroundColor:
-                                                                              FlutterFlowTheme.of(context).darkPrimary,
-                                                                          barRadius:
-                                                                              Radius.circular(12),
-                                                                          padding:
-                                                                              EdgeInsets.zero,
+                                                                            ProgressBarWidget(
+                                                                          totalAmount:
+                                                                              listViewCategoriesRecord.categoryAmount,
+                                                                          spentAmount:
+                                                                              listViewCategoriesRecord.spentAmount,
                                                                         ),
                                                                       ),
                                                                     ],
@@ -580,7 +560,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                       ],
                                     ),
                                   ),
-                                  if (activeBudgetBudgetsRecord
+                                  if (singleBudgetBudgetsRecord
                                           .unallocatedAmount! >
                                       0)
                                     Padding(
@@ -599,7 +579,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                 child:
                                                     CreateCustomCategoryWidget(
                                                   budget:
-                                                      activeBudgetBudgetsRecord,
+                                                      singleBudgetBudgetsRecord,
                                                 ),
                                               );
                                             },
@@ -653,7 +633,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                               ),
                                               Text(
                                                 functions.formatBudgetCurrency(
-                                                    activeBudgetBudgetsRecord
+                                                    singleBudgetBudgetsRecord
                                                         .unallocatedAmount),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -684,10 +664,11 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                             ),
                           ],
                         ),
-                      if (currentUserDocument!.activeBudget == null)
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                      ),
+                    if (currentUserDocument!.activeBudget == null)
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                        child: AuthUserStreamWidget(
                           child: InkWell(
                             onTap: () async {
                               final budgetsCreateData = createBudgetsRecordData(
@@ -801,14 +782,14 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                             ),
                           ),
                         ),
-                    ],
-                  ),
+                      ),
+                  ],
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

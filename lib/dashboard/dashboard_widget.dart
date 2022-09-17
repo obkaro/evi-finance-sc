@@ -4,6 +4,7 @@ import '../assign_transactions/assign_transactions_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../budgets/budgets_widget.dart';
+import '../components/circular_indicator_small_widget.dart';
 import '../components/empty_linked_accounts_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -17,7 +18,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class DashboardWidget extends StatefulWidget {
   const DashboardWidget({Key? key}) : super(key: key);
@@ -598,24 +598,13 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                       mainAxisSize:
                                                           MainAxisSize.max,
                                                       children: [
-                                                        CircularPercentIndicator(
-                                                          percent: functions
-                                                              .calcBudgetChart(
-                                                                  containerBudgetsRecord,
-                                                                  containerBudgetsRecord
-                                                                      .budgetSpent)!,
-                                                          radius: 32,
-                                                          lineWidth: 12,
-                                                          animation: true,
-                                                          progressColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .darkPrimary,
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .primaryColor,
-                                                          startAngle: 0,
+                                                        CircularIndicatorSmallWidget(
+                                                          totalAmount:
+                                                              containerBudgetsRecord
+                                                                  .budgetAmount,
+                                                          spentAmount:
+                                                              containerBudgetsRecord
+                                                                  .budgetSpent,
                                                         ),
                                                         Expanded(
                                                           child: Padding(
@@ -648,6 +637,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                     mainAxisSize:
                                                                         MainAxisSize
                                                                             .max,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .center,
                                                                     children: [
                                                                       Text(
                                                                         functions.subtractCurrencyDecimal(

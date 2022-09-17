@@ -1,10 +1,10 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../budget_single/budget_single_widget.dart';
 import '../components/dialog_box_widget.dart';
 import '../create_budget/create_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../single_budget/single_budget_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
@@ -230,9 +230,10 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        BudgetSingleWidget(
-                                                      budget:
-                                                          columnBudgetsRecord,
+                                                        SingleBudgetWidget(
+                                                      budgetRef:
+                                                          columnBudgetsRecord
+                                                              .reference,
                                                     ),
                                                   ),
                                                 );
