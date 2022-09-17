@@ -6,6 +6,7 @@ import '../components/create_custom_category_widget.dart';
 import '../components/edit_category_widget.dart';
 import '../components/empty_list_widget.dart';
 import '../components/m_appbar_widget.dart';
+import '../components/progress_bar_widget.dart';
 import '../create_budget/create_budget_widget.dart';
 import '../edit_budget/edit_budget_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -19,7 +20,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class ActiveBudgetWidget extends StatefulWidget {
   const ActiveBudgetWidget({
@@ -328,252 +328,241 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                             ),
                                           ],
                                         ),
-                                        Container(
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(32),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 8, 0, 8),
-                                            child: StreamBuilder<
-                                                List<CategoriesRecord>>(
-                                              stream: queryCategoriesRecord(
-                                                parent:
-                                                    activeBudgetBudgetsRecord
-                                                        .reference,
-                                              ),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50,
-                                                      height: 50,
-                                                      child: SpinKitRing(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                        size: 50,
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                                List<CategoriesRecord>
-                                                    listViewCategoriesRecordList =
-                                                    snapshot.data!;
-                                                if (listViewCategoriesRecordList
-                                                    .isEmpty) {
-                                                  return EmptyListWidget(
-                                                    text:
-                                                        'No categories defined yet...',
-                                                  );
-                                                }
-                                                return ListView.builder(
-                                                  padding: EdgeInsets.zero,
-                                                  primary: false,
-                                                  shrinkWrap: true,
-                                                  scrollDirection:
-                                                      Axis.vertical,
-                                                  itemCount:
-                                                      listViewCategoriesRecordList
-                                                          .length,
-                                                  itemBuilder:
-                                                      (context, listViewIndex) {
-                                                    final listViewCategoriesRecord =
-                                                        listViewCategoriesRecordList[
-                                                            listViewIndex];
-                                                    return Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 0, 0, 16),
-                                                      child: InkWell(
-                                                        onTap: () async {
-                                                          // Action_ViewSingleCategory
-                                                          await Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  CategorySingleWidget(
-                                                                category:
-                                                                    listViewCategoriesRecord,
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                        onLongPress: () async {
-                                                          HapticFeedback
-                                                              .lightImpact();
-                                                          await showModalBottomSheet(
-                                                            isScrollControlled:
-                                                                true,
-                                                            backgroundColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            context: context,
-                                                            builder: (context) {
-                                                              return Padding(
-                                                                padding: MediaQuery.of(
-                                                                        context)
-                                                                    .viewInsets,
-                                                                child:
-                                                                    EditCategoryWidget(
-                                                                  budget:
-                                                                      activeBudgetBudgetsRecord,
-                                                                  categoryToEdit:
-                                                                      listViewCategoriesRecord,
-                                                                ),
-                                                              );
-                                                            },
-                                                          );
-                                                        },
-                                                        child: Container(
-                                                          width: MediaQuery.of(
-                                                                  context)
-                                                              .size
-                                                              .width,
-                                                          height: 100,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        32),
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        20,
-                                                                        8,
-                                                                        20,
-                                                                        8),
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          2,
-                                                                          0,
-                                                                          2,
-                                                                          8),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .spaceBetween,
-                                                                    children: [
-                                                                      Text(
-                                                                        listViewCategoriesRecord
-                                                                            .categoryName!,
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .subtitle1,
-                                                                      ),
-                                                                      Expanded(
-                                                                        child:
-                                                                            Text(
-                                                                          functions
-                                                                              .formatBudgetCurrency(listViewCategoriesRecord.categoryAmount),
-                                                                          textAlign:
-                                                                              TextAlign.end,
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodyText1,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          0,
-                                                                          0,
-                                                                          8),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Expanded(
-                                                                        child:
-                                                                            LinearPercentIndicator(
-                                                                          percent:
-                                                                              valueOrDefault<double>(
-                                                                            functions.calcCategoryPercent(listViewCategoriesRecord,
-                                                                                listViewCategoriesRecord.spentAmount),
-                                                                            1.0,
-                                                                          ),
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width * 0.81,
-                                                                          lineHeight:
-                                                                              8,
-                                                                          animation:
-                                                                              true,
-                                                                          progressColor:
-                                                                              FlutterFlowTheme.of(context).primaryColor,
-                                                                          backgroundColor:
-                                                                              FlutterFlowTheme.of(context).darkPrimary,
-                                                                          barRadius:
-                                                                              Radius.circular(12),
-                                                                          padding:
-                                                                              EdgeInsets.zero,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          2,
-                                                                          0,
-                                                                          2,
-                                                                          0),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Text(
-                                                                        functions.subtractCurrencyOf(
-                                                                            listViewCategoriesRecord.categoryAmount,
-                                                                            listViewCategoriesRecord.spentAmount),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1,
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 0, 16),
+                                          child: Container(
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(32),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 8, 0, 8),
+                                              child: StreamBuilder<
+                                                  List<CategoriesRecord>>(
+                                                stream: queryCategoriesRecord(
+                                                  parent:
+                                                      activeBudgetBudgetsRecord
+                                                          .reference,
+                                                ),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50,
+                                                        height: 50,
+                                                        child: SpinKitRing(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
+                                                          size: 50,
                                                         ),
                                                       ),
                                                     );
-                                                  },
-                                                );
-                                              },
+                                                  }
+                                                  List<CategoriesRecord>
+                                                      listViewCategoriesRecordList =
+                                                      snapshot.data!;
+                                                  if (listViewCategoriesRecordList
+                                                      .isEmpty) {
+                                                    return EmptyListWidget(
+                                                      text:
+                                                          'No categories defined yet...',
+                                                    );
+                                                  }
+                                                  return ListView.builder(
+                                                    padding: EdgeInsets.zero,
+                                                    primary: false,
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    itemCount:
+                                                        listViewCategoriesRecordList
+                                                            .length,
+                                                    itemBuilder: (context,
+                                                        listViewIndex) {
+                                                      final listViewCategoriesRecord =
+                                                          listViewCategoriesRecordList[
+                                                              listViewIndex];
+                                                      return Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(0, 0,
+                                                                    0, 16),
+                                                        child: InkWell(
+                                                          onTap: () async {
+                                                            // Action_ViewSingleCategory
+                                                            await Navigator
+                                                                .push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        CategorySingleWidget(
+                                                                  category:
+                                                                      listViewCategoriesRecord,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                          onLongPress:
+                                                              () async {
+                                                            HapticFeedback
+                                                                .lightImpact();
+                                                            await showModalBottomSheet(
+                                                              isScrollControlled:
+                                                                  true,
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              context: context,
+                                                              builder:
+                                                                  (context) {
+                                                                return Padding(
+                                                                  padding: MediaQuery.of(
+                                                                          context)
+                                                                      .viewInsets,
+                                                                  child:
+                                                                      EditCategoryWidget(
+                                                                    budget:
+                                                                        activeBudgetBudgetsRecord,
+                                                                    categoryToEdit:
+                                                                        listViewCategoriesRecord,
+                                                                  ),
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                          child: Container(
+                                                            width:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                            height: 100,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          32),
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          20,
+                                                                          8,
+                                                                          20,
+                                                                          8),
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            2,
+                                                                            0,
+                                                                            2,
+                                                                            8),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                      children: [
+                                                                        Text(
+                                                                          listViewCategoriesRecord
+                                                                              .categoryName!,
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).subtitle1,
+                                                                        ),
+                                                                        Expanded(
+                                                                          child:
+                                                                              Text(
+                                                                            functions.formatBudgetCurrency(listViewCategoriesRecord.categoryAmount),
+                                                                            textAlign:
+                                                                                TextAlign.end,
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).bodyText1,
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0,
+                                                                            0,
+                                                                            0,
+                                                                            8),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        ProgressBarWidget(
+                                                                          totalAmount:
+                                                                              listViewCategoriesRecord.categoryAmount,
+                                                                          spentAmount:
+                                                                              listViewCategoriesRecord.spentAmount,
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            2,
+                                                                            0,
+                                                                            2,
+                                                                            0),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Text(
+                                                                          functions.subtractCurrencyOf(
+                                                                              listViewCategoriesRecord.categoryAmount,
+                                                                              listViewCategoriesRecord.spentAmount),
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyText1,
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -585,7 +574,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                       0)
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 16, 0, 16),
+                                          0, 0, 0, 16),
                                       child: InkWell(
                                         onTap: () async {
                                           await showModalBottomSheet(
