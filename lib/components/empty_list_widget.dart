@@ -27,8 +27,8 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 30,
+      width: double.infinity,
+      height: double.infinity,
       decoration: BoxDecoration(),
       child: Column(
         mainAxisSize: MainAxisSize.max,
