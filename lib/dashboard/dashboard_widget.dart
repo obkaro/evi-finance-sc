@@ -767,22 +767,19 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                     List<TransactionsRecord>
                                         columnTransactionsRecordList =
                                         snapshot.data!;
-                                    return SingleChildScrollView(
-                                      primary: false,
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: List.generate(
-                                            columnTransactionsRecordList.length,
-                                            (columnIndex) {
-                                          final columnTransactionsRecord =
-                                              columnTransactionsRecordList[
-                                                  columnIndex];
-                                          return TransactionListItemWidget(
-                                            transactionDoc:
-                                                columnTransactionsRecord,
-                                          );
-                                        }),
-                                      ),
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: List.generate(
+                                          columnTransactionsRecordList.length,
+                                          (columnIndex) {
+                                        final columnTransactionsRecord =
+                                            columnTransactionsRecordList[
+                                                columnIndex];
+                                        return TransactionListItemWidget(
+                                          transactionDoc:
+                                              columnTransactionsRecord,
+                                        );
+                                      }),
                                     );
                                   },
                                 ),
