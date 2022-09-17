@@ -28,6 +28,8 @@ abstract class CategoriesRecord
 
   int? get spentAmount;
 
+  DateTime? get createdDate;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -73,6 +75,7 @@ Map<String, dynamic> createCategoriesRecordData({
   int? categoryAmount,
   DocumentReference? categoryOwner,
   int? spentAmount,
+  DateTime? createdDate,
 }) {
   final firestoreData = serializers.toFirestore(
     CategoriesRecord.serializer,
@@ -83,7 +86,8 @@ Map<String, dynamic> createCategoriesRecordData({
         ..categoryBudget = categoryBudget
         ..categoryAmount = categoryAmount
         ..categoryOwner = categoryOwner
-        ..spentAmount = spentAmount,
+        ..spentAmount = spentAmount
+        ..createdDate = createdDate,
     ),
   );
 

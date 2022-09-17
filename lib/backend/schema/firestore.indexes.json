@@ -37,6 +37,20 @@
       ]
     },
     {
+      "collectionGroup": "categories",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "spentAmount",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "createdDate",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "constBudgetCategories",
       "queryScope": "COLLECTION",
       "fields": [

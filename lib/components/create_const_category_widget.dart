@@ -185,6 +185,7 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                                 ),
                                 spentAmount: 0,
                                 categoryOwner: currentUserReference,
+                                createdDate: getCurrentTimestamp,
                               );
                               await CategoriesRecord.createDoc(
                                       widget.budget!.reference)

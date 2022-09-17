@@ -356,6 +356,10 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                               .orderBy(
                                                                   'spentAmount',
                                                                   descending:
+                                                                      true)
+                                                              .orderBy(
+                                                                  'createdDate',
+                                                                  descending:
                                                                       true),
                                                 ),
                                                 builder: (context, snapshot) {
