@@ -65,7 +65,7 @@ class _CircularIndicatorBigWidgetState
             radius: 90,
             lineWidth: 20,
             animation: false,
-            progressColor: Color(0xFFFF0000),
+            progressColor: FlutterFlowTheme.of(context).tertiaryColor,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             center: Text(
               widget.centerText!,
@@ -109,7 +109,7 @@ class _CircularIndicatorBigWidgetState
             radius: 90,
             lineWidth: 20,
             animation: false,
-            progressColor: FlutterFlowTheme.of(context).tertiaryColor,
+            progressColor: Color(0xFFFF0000),
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             center: Text(
               widget.centerText!,

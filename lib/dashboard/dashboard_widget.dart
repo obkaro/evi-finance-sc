@@ -6,6 +6,7 @@ import '../backend/backend.dart';
 import '../budgets/budgets_widget.dart';
 import '../components/circular_indicator_small_widget.dart';
 import '../components/empty_linked_accounts_widget.dart';
+import '../components/empty_list_widget.dart';
 import '../components/transaction_list_item_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -763,6 +764,17 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                   List<TransactionsRecord>
                                       listViewTransactionsRecordList =
                                       snapshot.data!;
+                                  if (listViewTransactionsRecordList.isEmpty) {
+                                    return Center(
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 300,
+                                        child: EmptyListWidget(
+                                          text: 'Yet to import transactions',
+                                        ),
+                                      ),
+                                    );
+                                  }
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     primary: false,
