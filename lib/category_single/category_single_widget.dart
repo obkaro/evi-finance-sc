@@ -223,9 +223,15 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                               final transactionsFromPage =
                                   categorySingleTransactionsRecordList.toList();
                               if (transactionsFromPage.isEmpty) {
-                                return EmptyListWidget(
-                                  text:
-                                      'No transactions assigned to this category yet...',
+                                return Center(
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 240,
+                                    child: EmptyListWidget(
+                                      text:
+                                          'No transactions assigned to this category yet',
+                                    ),
+                                  ),
                                 );
                               }
                               return ListView.builder(
