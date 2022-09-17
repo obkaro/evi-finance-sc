@@ -30,35 +30,38 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.error_outline_rounded,
-                color: FlutterFlowTheme.of(context).secondaryText,
-                size: 128,
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-            child: Row(
+      child: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(32, 32, 32, 32),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  widget.text!,
-                  style: FlutterFlowTheme.of(context).subtitle2,
+                Icon(
+                  Icons.error_outline_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 128,
                 ),
               ],
             ),
-          ),
-        ],
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    widget.text!,
+                    style: FlutterFlowTheme.of(context).subtitle2,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

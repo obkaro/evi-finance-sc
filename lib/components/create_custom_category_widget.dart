@@ -201,6 +201,8 @@ class _CreateCustomCategoryWidgetState
                                   true,
                                   true,
                                 ),
+                                categoryOwner: currentUserReference,
+                                spentAmount: 0,
                               );
                               await CategoriesRecord.createDoc(
                                       widget.budget!.reference)

@@ -422,6 +422,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                               unallocatedAmount: functions.subInt(
                                   FFAppState().currencyTextField, 50000),
                               status: 'active',
+                              budgetSpent: 0,
                             );
                             await widget.budget!.reference
                                 .update(budgetsUpdateData);
