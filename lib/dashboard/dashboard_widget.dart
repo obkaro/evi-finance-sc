@@ -729,7 +729,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 0, 16, 10),
+                                EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
                             child: Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
@@ -773,13 +773,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                       final columnTransactionsRecord =
                                           columnTransactionsRecordList[
                                               columnIndex];
-                                      return Container(
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(),
-                                        child: TransactionListItemWidget(
-                                          transactionDoc:
-                                              columnTransactionsRecord,
-                                        ),
+                                      return TransactionListItemWidget(
+                                        transactionDoc:
+                                            columnTransactionsRecord,
                                       );
                                     }),
                                   );
