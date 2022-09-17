@@ -45,6 +45,10 @@ class _CircularIndicatorBigWidgetState
             animation: false,
             progressColor: Color(0xFFFF0000),
             backgroundColor: Color(0xFFFF0000),
+            center: Text(
+              widget.centerText!,
+              style: FlutterFlowTheme.of(context).subtitle2,
+            ),
             startAngle: 0,
           ),
         if (functions.chartDisplay(
@@ -57,6 +61,10 @@ class _CircularIndicatorBigWidgetState
             animation: false,
             progressColor: Color(0xFFFF0000),
             backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+            center: Text(
+              widget.centerText!,
+              style: FlutterFlowTheme.of(context).subtitle2,
+            ),
             startAngle: 0,
           ),
         if (functions.chartDisplay(
@@ -69,6 +77,10 @@ class _CircularIndicatorBigWidgetState
             animation: false,
             progressColor: FlutterFlowTheme.of(context).alternate,
             backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+            center: Text(
+              widget.centerText!,
+              style: FlutterFlowTheme.of(context).subtitle2,
+            ),
             startAngle: 0,
           ),
         if (functions.chartDisplay(
@@ -82,7 +94,7 @@ class _CircularIndicatorBigWidgetState
             progressColor: FlutterFlowTheme.of(context).tertiaryColor,
             backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
             center: Text(
-              'dsdg',
+              widget.centerText!,
               style: FlutterFlowTheme.of(context).subtitle2,
             ),
             startAngle: 0,
@@ -96,6 +108,10 @@ class _CircularIndicatorBigWidgetState
             animation: false,
             progressColor: FlutterFlowTheme.of(context).tertiaryColor,
             backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
+            center: Text(
+              widget.centerText!,
+              style: FlutterFlowTheme.of(context).subtitle2,
+            ),
             startAngle: 0,
           ),
       ],
