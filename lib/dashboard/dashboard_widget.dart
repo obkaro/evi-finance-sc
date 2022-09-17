@@ -775,16 +775,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                         final columnTransactionsRecord =
                                             columnTransactionsRecordList[
                                                 columnIndex];
-                                        return Container(
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                          ),
-                                          child: TransactionListItemWidget(
-                                            transactionDoc:
-                                                columnTransactionsRecord,
-                                          ),
+                                        return TransactionListItemWidget(
+                                          transactionDoc:
+                                              columnTransactionsRecord,
                                         );
                                       }),
                                     );
