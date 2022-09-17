@@ -286,10 +286,6 @@ class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
                   ],
                 ),
               ),
-              Divider(
-                height: 1,
-                color: FlutterFlowTheme.of(context).fadedDivider,
-              ),
             ],
           ),
         ),
