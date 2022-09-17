@@ -938,7 +938,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             height: 60,
                                                             color: FlutterFlowTheme
                                                                     .of(context)
-                                                                .secondaryBackground,
+                                                                .fadedDivider,
                                                             textStyle:
                                                                 FlutterFlowTheme.of(
                                                                         context)

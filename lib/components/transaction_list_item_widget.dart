@@ -114,9 +114,16 @@ class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              if (widget.transactionDoc!
-                                                      .categoryDetails ==
-                                                  null)
+                                              if (widget
+                                                          .transactionDoc!
+                                                          .categoryDetails
+                                                          .name ==
+                                                      null ||
+                                                  widget
+                                                          .transactionDoc!
+                                                          .categoryDetails
+                                                          .name ==
+                                                      '')
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 0, 0, 8),
