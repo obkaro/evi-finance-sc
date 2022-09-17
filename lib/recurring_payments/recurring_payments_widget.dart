@@ -1,7 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/add_recurring_payment_widget.dart';
-import '../components/m_appbar_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../subscription_details/subscription_details_widget.dart';
@@ -34,39 +33,23 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(132),
-        child: AppBar(
-          backgroundColor: Colors.transparent,
-          iconTheme:
-              IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
-          automaticallyImplyLeading: false,
-          flexibleSpace: MAppbarWidget(
-            titleText: 'Subscriptions',
-            icon: Icon(
-              Icons.credit_card_rounded,
-              color: FlutterFlowTheme.of(context).secondaryPrimary,
-              size: 32,
-            ),
-            bgColor: FlutterFlowTheme.of(context).secondaryColor,
-            fgColor: FlutterFlowTheme.of(context).primaryBackground,
-            textColor: FlutterFlowTheme.of(context).secondaryPrimary,
-            actionIcon: Icon(
-              Icons.credit_card_rounded,
-              size: 0,
-            ),
-            iconAction: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => RecurringPaymentsWidget(),
-                ),
-              );
-            },
-          ),
-          actions: [],
-          elevation: 0,
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
+        iconTheme:
+            IconThemeData(color: FlutterFlowTheme.of(context).secondaryPrimary),
+        automaticallyImplyLeading: true,
+        title: Text(
+          'Subscriptions',
+          style: FlutterFlowTheme.of(context).title3.override(
+                fontFamily: FlutterFlowTheme.of(context).title3Family,
+                color: FlutterFlowTheme.of(context).secondaryPrimary,
+                useGoogleFonts: GoogleFonts.asMap()
+                    .containsKey(FlutterFlowTheme.of(context).title3Family),
+              ),
         ),
+        actions: [],
+        centerTitle: true,
+        elevation: 0,
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton(

@@ -17,6 +17,7 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,11 +37,42 @@ class ActiveBudgetWidget extends StatefulWidget {
 class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
   BudgetsRecord? createdBudget2;
   BudgetsRecord? createdBudget;
+  BudgetsRecord? newcreatedBudget;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (currentUserDocument!.activeBudget == null) {
+        final budgetsCreateData = createBudgetsRecordData(
+          budgetID: random_data.randomString(
+            24,
+            24,
+            true,
+            true,
+            true,
+          ),
+          budgetDateCreated: getCurrentTimestamp,
+          status: 'no_parent',
+          budgetSpent: 0,
+        );
+        var budgetsRecordReference = BudgetsRecord.collection.doc();
+        await budgetsRecordReference.set(budgetsCreateData);
+        newcreatedBudget = BudgetsRecord.getDocumentFromData(
+            budgetsCreateData, budgetsRecordReference);
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CreateBudgetWidget(
+              budget: newcreatedBudget,
+            ),
+          ),
+        );
+      }
+    });
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ActiveBudget'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -355,6 +387,10 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                           categoriesRecord
                                                               .orderBy(
                                                                   'spentAmount',
+                                                                  descending:
+                                                                      true)
+                                                              .orderBy(
+                                                                  'createdDate',
                                                                   descending:
                                                                       true),
                                                 ),

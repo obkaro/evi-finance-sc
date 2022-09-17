@@ -203,6 +203,7 @@ class _CreateCustomCategoryWidgetState
                                 ),
                                 categoryOwner: currentUserReference,
                                 spentAmount: 0,
+                                createdDate: getCurrentTimestamp,
                               );
                               await CategoriesRecord.createDoc(
                                       widget.budget!.reference)

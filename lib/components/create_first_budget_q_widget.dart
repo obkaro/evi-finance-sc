@@ -133,6 +133,7 @@ class _CreateFirstBudgetQWidgetState extends State<CreateFirstBudgetQWidget> {
                               ),
                               budgetDateCreated: getCurrentTimestamp,
                               status: 'no_parent',
+                              budgetSpent: 0,
                             );
                             var budgetsRecordReference =
                                 BudgetsRecord.collection.doc();
