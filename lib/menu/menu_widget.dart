@@ -92,130 +92,125 @@ class _MenuWidgetState extends State<MenuWidget> {
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                       borderRadius: BorderRadius.circular(32),
                     ),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                      child: GridView(
-                        padding: EdgeInsets.zero,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 16,
-                          mainAxisSpacing: 16,
-                          childAspectRatio: 1,
-                        ),
-                        scrollDirection: Axis.vertical,
-                        children: [
-                          MGridMenuItemWidget(
-                            menuText: 'Subscriptions',
-                            menuIcon: Icon(
-                              Icons.credit_card_rounded,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 36,
-                            ),
-                            fgColor: FlutterFlowTheme.of(context).primaryText,
-                            bgColor: Colors.transparent,
-                            action: () async {
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      RecurringPaymentsWidget(),
-                                ),
-                              );
-                            },
-                          ),
-                          MGridMenuItemWidget(
-                            menuText: 'Transactions',
-                            menuIcon: Icon(
-                              Icons.compare_arrows_rounded,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 36,
-                            ),
-                            fgColor: FlutterFlowTheme.of(context).primaryText,
-                            bgColor: Colors.transparent,
-                            action: () async {
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => TransactionsWidget(),
-                                ),
-                              );
-                            },
-                          ),
-                          MGridMenuItemWidget(
-                            menuText: 'Accounts',
-                            menuIcon: Icon(
-                              Icons.account_balance_rounded,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 36,
-                            ),
-                            fgColor: FlutterFlowTheme.of(context).primaryText,
-                            bgColor: Colors.transparent,
-                            action: () async {
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AccountsWidget(),
-                                ),
-                              );
-                            },
-                          ),
-                          MGridMenuItemWidget(
-                            menuText: 'Budgets',
-                            menuIcon: Icon(
-                              Icons.pie_chart_rounded,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 36,
-                            ),
-                            fgColor: FlutterFlowTheme.of(context).primaryText,
-                            bgColor: Colors.transparent,
-                            action: () async {
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BudgetsWidget(),
-                                ),
-                              );
-                            },
-                          ),
-                          MGridMenuItemWidget(
-                            menuText: 'Income',
-                            menuIcon: Icon(
-                              Icons.attach_money_rounded,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 36,
-                            ),
-                            fgColor: FlutterFlowTheme.of(context).primaryText,
-                            bgColor: Colors.transparent,
-                            action: () async {
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      EditIncomeSourcesWidget(),
-                                ),
-                              );
-                            },
-                          ),
-                          MGridMenuItemWidget(
-                            menuText: 'Settings',
-                            menuIcon: Icon(
-                              Icons.settings_rounded,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 36,
-                            ),
-                            fgColor: FlutterFlowTheme.of(context).primaryText,
-                            bgColor: Colors.transparent,
-                            action: () async {
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SettingsWidget(),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
+                    child: GridView(
+                      padding: EdgeInsets.zero,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 0,
+                        mainAxisSpacing: 0,
+                        childAspectRatio: 1,
                       ),
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        MGridMenuItemWidget(
+                          menuText: 'Subscriptions',
+                          menuIcon: Icon(
+                            Icons.credit_card_rounded,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 36,
+                          ),
+                          fgColor: FlutterFlowTheme.of(context).primaryText,
+                          bgColor: Colors.transparent,
+                          action: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RecurringPaymentsWidget(),
+                              ),
+                            );
+                          },
+                        ),
+                        MGridMenuItemWidget(
+                          menuText: 'Transactions',
+                          menuIcon: Icon(
+                            Icons.compare_arrows_rounded,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 36,
+                          ),
+                          fgColor: FlutterFlowTheme.of(context).primaryText,
+                          bgColor: Colors.transparent,
+                          action: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TransactionsWidget(),
+                              ),
+                            );
+                          },
+                        ),
+                        MGridMenuItemWidget(
+                          menuText: 'Accounts',
+                          menuIcon: Icon(
+                            Icons.account_balance_rounded,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 36,
+                          ),
+                          fgColor: FlutterFlowTheme.of(context).primaryText,
+                          bgColor: Colors.transparent,
+                          action: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AccountsWidget(),
+                              ),
+                            );
+                          },
+                        ),
+                        MGridMenuItemWidget(
+                          menuText: 'Budgets',
+                          menuIcon: Icon(
+                            Icons.pie_chart_rounded,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 36,
+                          ),
+                          fgColor: FlutterFlowTheme.of(context).primaryText,
+                          bgColor: Colors.transparent,
+                          action: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BudgetsWidget(),
+                              ),
+                            );
+                          },
+                        ),
+                        MGridMenuItemWidget(
+                          menuText: 'Income',
+                          menuIcon: Icon(
+                            Icons.attach_money_rounded,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 36,
+                          ),
+                          fgColor: FlutterFlowTheme.of(context).primaryText,
+                          bgColor: Colors.transparent,
+                          action: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditIncomeSourcesWidget(),
+                              ),
+                            );
+                          },
+                        ),
+                        MGridMenuItemWidget(
+                          menuText: 'Settings',
+                          menuIcon: Icon(
+                            Icons.settings_rounded,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 36,
+                          ),
+                          fgColor: FlutterFlowTheme.of(context).primaryText,
+                          bgColor: Colors.transparent,
+                          action: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SettingsWidget(),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),

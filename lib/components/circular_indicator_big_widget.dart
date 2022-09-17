@@ -66,7 +66,7 @@ class _CircularIndicatorBigWidgetState
             lineWidth: 20,
             animation: false,
             progressColor: Color(0xFFFF0000),
-            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             center: Text(
               widget.centerText!,
               textAlign: TextAlign.center,
@@ -88,7 +88,7 @@ class _CircularIndicatorBigWidgetState
             lineWidth: 20,
             animation: false,
             progressColor: FlutterFlowTheme.of(context).alternate,
-            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             center: Text(
               widget.centerText!,
               textAlign: TextAlign.center,
@@ -110,7 +110,7 @@ class _CircularIndicatorBigWidgetState
             lineWidth: 20,
             animation: false,
             progressColor: FlutterFlowTheme.of(context).tertiaryColor,
-            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             center: Text(
               widget.centerText!,
               textAlign: TextAlign.center,

@@ -54,7 +54,7 @@ class _CircularIndicatorSmallWidgetState
             lineWidth: 12,
             animation: true,
             progressColor: Color(0xFFFF0000),
-            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             startAngle: 0,
           ),
         if (functions.chartDisplay(
@@ -78,7 +78,7 @@ class _CircularIndicatorSmallWidgetState
             lineWidth: 12,
             animation: true,
             progressColor: FlutterFlowTheme.of(context).tertiaryColor,
-            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             startAngle: 0,
           ),
         if (widget.spentAmount == 0)
