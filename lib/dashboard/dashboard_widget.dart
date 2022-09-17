@@ -730,59 +730,56 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 0, 16, 10),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(32),
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(32),
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                borderRadius: BorderRadius.circular(32),
+                              ),
+                              child: FutureBuilder<List<TransactionsRecord>>(
+                                future: queryTransactionsRecordOnce(
+                                  queryBuilder: (transactionsRecord) =>
+                                      transactionsRecord
+                                          .where('transactionOwner',
+                                              isEqualTo: currentUserReference)
+                                          .orderBy('trasactionDate',
+                                              descending: true),
+                                  limit: 7,
                                 ),
-                                child: FutureBuilder<List<TransactionsRecord>>(
-                                  future: queryTransactionsRecordOnce(
-                                    queryBuilder: (transactionsRecord) =>
-                                        transactionsRecord
-                                            .where('transactionOwner',
-                                                isEqualTo: currentUserReference)
-                                            .orderBy('trasactionDate',
-                                                descending: true),
-                                    limit: 7,
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50,
-                                          height: 50,
-                                          child: SpinKitRing(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            size: 50,
-                                          ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: SpinKitRing(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          size: 50,
                                         ),
-                                      );
-                                    }
-                                    List<TransactionsRecord>
-                                        columnTransactionsRecordList =
-                                        snapshot.data!;
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: List.generate(
-                                          columnTransactionsRecordList.length,
-                                          (columnIndex) {
-                                        final columnTransactionsRecord =
-                                            columnTransactionsRecordList[
-                                                columnIndex];
-                                        return TransactionListItemWidget(
-                                          transactionDoc:
-                                              columnTransactionsRecord,
-                                        );
-                                      }),
+                                      ),
                                     );
-                                  },
-                                ),
+                                  }
+                                  List<TransactionsRecord>
+                                      columnTransactionsRecordList =
+                                      snapshot.data!;
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: List.generate(
+                                        columnTransactionsRecordList.length,
+                                        (columnIndex) {
+                                      final columnTransactionsRecord =
+                                          columnTransactionsRecordList[
+                                              columnIndex];
+                                      return TransactionListItemWidget(
+                                        transactionDoc:
+                                            columnTransactionsRecord,
+                                      );
+                                    }),
+                                  );
+                                },
                               ),
                             ),
                           ),
