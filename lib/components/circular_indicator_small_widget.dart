@@ -66,7 +66,7 @@ class _CircularIndicatorSmallWidgetState
             lineWidth: 12,
             animation: true,
             progressColor: FlutterFlowTheme.of(context).alternate,
-            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             startAngle: 0,
           ),
         if (functions.chartDisplay(

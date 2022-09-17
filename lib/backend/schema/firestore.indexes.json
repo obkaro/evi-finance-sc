@@ -37,24 +37,6 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "transactionType",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "transactionCategory",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "trasactionDate",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "transactions",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
           "fieldPath": "transactionOwner",
           "order": "ASCENDING"
         },

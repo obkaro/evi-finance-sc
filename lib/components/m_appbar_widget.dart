@@ -1,3 +1,4 @@
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -52,60 +53,56 @@ class _MAppbarWidgetState extends State<MAppbarWidget> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(32, 0, 0, 0),
-                              child: widget.icon!,
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                              child: Text(
-                                widget.titleText!,
-                                style: FlutterFlowTheme.of(context)
-                                    .title1
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .title1Family,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryPrimary,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .title1Family),
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Row(
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 32, 0),
-                            child: InkWell(
-                              onTap: () async {
-                                await widget.iconAction?.call();
-                              },
-                              child: widget.actionIcon!,
+                                EdgeInsetsDirectional.fromSTEB(32, 0, 0, 0),
+                            child: widget.icon!,
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                            child: Text(
+                              widget.titleText!,
+                              style:
+                                  FlutterFlowTheme.of(context).title1.override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .title1Family,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryPrimary,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .title1Family),
+                                      ),
                             ),
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        FlutterFlowIconButton(
+                          borderColor: Colors.transparent,
+                          borderRadius: 30,
+                          borderWidth: 1,
+                          buttonSize: 60,
+                          icon: widget.actionIcon!,
+                          onPressed: () async {
+                            await widget.iconAction?.call();
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),
