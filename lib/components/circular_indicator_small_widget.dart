@@ -53,8 +53,8 @@ class _CircularIndicatorSmallWidgetState
             radius: 32,
             lineWidth: 12,
             animation: true,
-            progressColor: FlutterFlowTheme.of(context).darkPrimary,
-            backgroundColor: Color(0xFFFF0000),
+            progressColor: Color(0xFFFF0000),
+            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
             startAngle: 0,
           ),
         if (functions.chartDisplay(
@@ -65,8 +65,8 @@ class _CircularIndicatorSmallWidgetState
             radius: 32,
             lineWidth: 12,
             animation: true,
-            progressColor: FlutterFlowTheme.of(context).darkPrimary,
-            backgroundColor: FlutterFlowTheme.of(context).alternate,
+            progressColor: FlutterFlowTheme.of(context).alternate,
+            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
             startAngle: 0,
           ),
         if (functions.chartDisplay(
@@ -77,8 +77,8 @@ class _CircularIndicatorSmallWidgetState
             radius: 32,
             lineWidth: 12,
             animation: true,
-            progressColor: FlutterFlowTheme.of(context).darkPrimary,
-            backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
+            progressColor: FlutterFlowTheme.of(context).tertiaryColor,
+            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
             startAngle: 0,
           ),
         if (widget.spentAmount == 0)
