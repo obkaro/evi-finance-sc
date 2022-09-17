@@ -504,7 +504,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 8, 16, 16),
+                                      0, 0, 16, 0),
                                   child: InkWell(
                                     onTap: () async {
                                       await actions.flutterMono(
@@ -512,60 +512,52 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                       );
                                     },
                                     child: Container(
-                                      width: 148,
-                                      height: 148,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
                                         borderRadius: BorderRadius.circular(32),
                                       ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            20, 20, 20, 20),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Container(
-                                              width: 64,
-                                              height: 64,
-                                              child: Stack(
-                                                alignment:
-                                                    AlignmentDirectional(0, 0),
-                                                children: [
-                                                  Align(
-                                                    alignment:
-                                                        AlignmentDirectional(
-                                                            0, 0),
-                                                    child:
-                                                        FlutterFlowIconButton(
-                                                      borderColor:
-                                                          Colors.transparent,
-                                                      borderRadius: 30,
-                                                      borderWidth: 1,
-                                                      buttonSize: 60,
-                                                      icon: Icon(
-                                                        Icons.add,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        size: 30,
-                                                      ),
-                                                      onPressed: () async {
-                                                        await actions
-                                                            .flutterMono(
-                                                          context,
-                                                        );
-                                                      },
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Container(
+                                            width: 64,
+                                            height: 64,
+                                            child: Stack(
+                                              alignment:
+                                                  AlignmentDirectional(0, 0),
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0, 0),
+                                                  child: FlutterFlowIconButton(
+                                                    borderColor:
+                                                        Colors.transparent,
+                                                    borderRadius: 30,
+                                                    borderWidth: 1,
+                                                    buttonSize: 60,
+                                                    icon: Icon(
+                                                      Icons.add,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryColor,
+                                                      size: 30,
                                                     ),
+                                                    onPressed: () async {
+                                                      await actions.flutterMono(
+                                                        context,
+                                                      );
+                                                    },
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
