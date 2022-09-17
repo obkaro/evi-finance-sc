@@ -743,6 +743,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                       transactionsRecord.where(
                                           'transactionOwner',
                                           isEqualTo: currentUserReference),
+                                  limit: 7,
                                 ),
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
