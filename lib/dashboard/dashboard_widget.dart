@@ -737,15 +737,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                     .secondaryBackground,
                                 borderRadius: BorderRadius.circular(32),
                               ),
-                              child: FutureBuilder<List<TransactionsRecord>>(
-                                future: queryTransactionsRecordOnce(
+                              child: StreamBuilder<List<TransactionsRecord>>(
+                                stream: queryTransactionsRecord(
                                   queryBuilder: (transactionsRecord) =>
-                                      transactionsRecord
-                                          .where('transactionOwner',
-                                              isEqualTo: currentUserReference)
-                                          .orderBy('trasactionDate',
-                                              descending: true),
-                                  limit: 7,
+                                      transactionsRecord.where(
+                                          'transactionOwner',
+                                          isEqualTo: currentUserReference),
                                 ),
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
@@ -763,21 +760,24 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                     );
                                   }
                                   List<TransactionsRecord>
-                                      columnTransactionsRecordList =
+                                      listViewTransactionsRecordList =
                                       snapshot.data!;
-                                  return Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: List.generate(
-                                        columnTransactionsRecordList.length,
-                                        (columnIndex) {
-                                      final columnTransactionsRecord =
-                                          columnTransactionsRecordList[
-                                              columnIndex];
+                                  return ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    primary: false,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount:
+                                        listViewTransactionsRecordList.length,
+                                    itemBuilder: (context, listViewIndex) {
+                                      final listViewTransactionsRecord =
+                                          listViewTransactionsRecordList[
+                                              listViewIndex];
                                       return TransactionListItemWidget(
                                         transactionDoc:
-                                            columnTransactionsRecord,
+                                            listViewTransactionsRecord,
                                       );
-                                    }),
+                                    },
                                   );
                                 },
                               ),
