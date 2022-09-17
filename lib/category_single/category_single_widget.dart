@@ -226,10 +226,10 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                 return Center(
                                   child: Container(
                                     width: double.infinity,
-                                    height: 240,
+                                    height: 300,
                                     child: EmptyListWidget(
                                       text:
-                                          'No transactions assigned to this category yet',
+                                          'No transactions assigned to this category',
                                     ),
                                   ),
                                 );

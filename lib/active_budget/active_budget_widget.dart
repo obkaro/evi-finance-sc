@@ -382,10 +382,10 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                     return Center(
                                                       child: Container(
                                                         width: double.infinity,
-                                                        height: 240,
+                                                        height: 300,
                                                         child: EmptyListWidget(
                                                           text:
-                                                              'No categories defined yet...',
+                                                              'No categories found',
                                                         ),
                                                       ),
                                                     );
