@@ -350,6 +350,13 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                   parent:
                                                       activeBudgetBudgetsRecord
                                                           .reference,
+                                                  queryBuilder:
+                                                      (categoriesRecord) =>
+                                                          categoriesRecord
+                                                              .orderBy(
+                                                                  'spentAmount',
+                                                                  descending:
+                                                                      true),
                                                 ),
                                                 builder: (context, snapshot) {
                                                   // Customize what your widget looks like when it's loading.

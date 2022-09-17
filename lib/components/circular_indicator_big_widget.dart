@@ -47,7 +47,13 @@ class _CircularIndicatorBigWidgetState
             backgroundColor: Color(0xFFFF0000),
             center: Text(
               widget.centerText!,
-              style: FlutterFlowTheme.of(context).subtitle2,
+              textAlign: TextAlign.center,
+              style: FlutterFlowTheme.of(context).subtitle2.override(
+                    fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).subtitle2Family),
+                  ),
             ),
             startAngle: 0,
           ),
@@ -63,7 +69,13 @@ class _CircularIndicatorBigWidgetState
             backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
             center: Text(
               widget.centerText!,
-              style: FlutterFlowTheme.of(context).subtitle2,
+              textAlign: TextAlign.center,
+              style: FlutterFlowTheme.of(context).subtitle2.override(
+                    fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).subtitle2Family),
+                  ),
             ),
             startAngle: 0,
           ),
@@ -79,7 +91,13 @@ class _CircularIndicatorBigWidgetState
             backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
             center: Text(
               widget.centerText!,
-              style: FlutterFlowTheme.of(context).subtitle2,
+              textAlign: TextAlign.center,
+              style: FlutterFlowTheme.of(context).subtitle2.override(
+                    fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).subtitle2Family),
+                  ),
             ),
             startAngle: 0,
           ),
@@ -95,7 +113,13 @@ class _CircularIndicatorBigWidgetState
             backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
             center: Text(
               widget.centerText!,
-              style: FlutterFlowTheme.of(context).subtitle2,
+              textAlign: TextAlign.center,
+              style: FlutterFlowTheme.of(context).subtitle2.override(
+                    fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).subtitle2Family),
+                  ),
             ),
             startAngle: 0,
           ),
@@ -110,7 +134,13 @@ class _CircularIndicatorBigWidgetState
             backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
             center: Text(
               widget.centerText!,
-              style: FlutterFlowTheme.of(context).subtitle2,
+              textAlign: TextAlign.center,
+              style: FlutterFlowTheme.of(context).subtitle2.override(
+                    fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).subtitle2Family),
+                  ),
             ),
             startAngle: 0,
           ),

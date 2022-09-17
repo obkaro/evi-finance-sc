@@ -55,7 +55,7 @@ double? calcChartPercent(
     return 0;
   }
 
-  double percent = (spentAmount / totalAmount);
+  double percent = 1 - (spentAmount / totalAmount);
 
   if (spentAmount >= totalAmount) {
     percent = 0;
