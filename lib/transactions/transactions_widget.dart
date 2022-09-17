@@ -59,7 +59,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                   child: Container(
                     width: double.infinity,
                     height: 100,

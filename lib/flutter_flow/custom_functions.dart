@@ -45,23 +45,23 @@ String calcRemCatCurrency(
   return formatCurrency.format(remaining);
 }
 
-double? calcBudgetChart(
-  BudgetsRecord? budget,
-  int? transactionsSum,
+double? calcChartPercent(
+  int totalAmount,
+  int spentAmount,
 ) {
   // Add your function code here!
 
-  if (transactionsSum == 0) {
-    return 1;
+  if (spentAmount == 0) {
+    return 0;
   }
 
-  double budgPercent = (transactionsSum! / (budget!.budgetAmount as int));
+  double percent = (spentAmount / totalAmount);
 
-  if (transactionsSum >= (budget.budgetAmount as int)) {
-    budgPercent = 0;
+  if (spentAmount >= totalAmount) {
+    percent = 0;
   }
 
-  return budgPercent;
+  return percent;
 }
 
 double calcCategoryPercent(
@@ -400,4 +400,22 @@ int setNewExpectedSubDate(SubscriptionsRecord? subscription) {
   }
 
   return days;
+}
+
+bool chartDisplay(
+  int totalAmount,
+  double lowerLimit,
+  int spentAmount,
+  double upperLimit,
+) {
+  // Add your function code here!
+  bool display = false;
+
+  if (spentAmount != 0 &&
+      spentAmount >= (totalAmount * lowerLimit) &&
+      spentAmount < (totalAmount * upperLimit)) {
+    display = true;
+  }
+
+  return display;
 }
