@@ -10,134 +10,121 @@ const sdk = require('api')('@mono/v1.0#33hmc2izkyejmoej');
 const axios = require('axios');
 
 
-exports.accountupdate = functions.https.onRequest(async (req, res) => {
+exports.accountupdate = functions.https.runWith({ timeoutSeconds: 300, memory: '1GB', })
+  .onRequest(async (req, res) => {
 
-  functions.logger.log("REQUEST BODY", req.body);
+    functions.logger.log("REQUEST BODY", req.body);
 
-  let payload = req.body;
+    let payload = req.body;
 
-  //for MONO ACCOUNT UPDATE
-  if (payload.event == "mono.events.account_updated") {
+    //for MONO ACCOUNT UPDATE
+    if (payload.event == "mono.events.account_updated") {
 
-    const account = await admin.firestore().collection('accounts').where('authID', '==', payload.data.account._id).get();
+      const account = await admin.firestore().collection('accounts')
+        .where('authID', '==', payload.data.account._id)
+        .get();
 
-    const currentdate = new Date();
+      const logo = await admin.firestore().collection('constInstitutionLogos')
+        .where('institutionCode', '==', payload.data.account.institution.bankCode)
+        .get();
 
-    const update = {
-      accountBalance: req.body.data.account.balance,
-      accountName: req.body.data.account.name,
-      accountNumber: req.body.data.account.accountNumber,
-      accountType: req.body.data.account.type,
-      authID: req.body.data.account._id,
-      authMethod: req.body.data.meta.data_status,
-      bankCode: req.body.data.account.institution.bankCode,
-      bvn: req.body.data.account.bvn,
-      currency: req.body.data.account.currency,
-      dataStatus: req.body.data.meta.data_status,
-      institutionName: req.body.data.account.institution.name,
-      institutionType: req.body.data.account.institution.type,
-      lastSync: currentdate,
-      reauthRequired: false
-    };
+      const currentdate = new Date();
 
-    //functions.logger.log("Update Object", update);
-
-    if (!account.empty) {
-      const snapshot = account.docs[0];
-      await snapshot.ref.update(update);
-
-      const options = {
-        method: 'GET',
-        url: 'https://api.withmono.com/accounts/' + req.body.data.account._id + '/transactions',
-        headers: { Accept: 'application/json', 'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid' }
+      const update = {
+        accountBalance: req.body.data.account.balance,
+        accountName: req.body.data.account.name,
+        accountNumber: req.body.data.account.accountNumber,
+        accountType: req.body.data.account.type,
+        authID: req.body.data.account._id,
+        authMethod: req.body.data.meta.data_status,
+        bankCode: req.body.data.account.institution.bankCode,
+        bvn: req.body.data.account.bvn,
+        currency: req.body.data.account.currency,
+        dataStatus: req.body.data.meta.data_status,
+        institutionName: req.body.data.account.institution.name,
+        institutionType: req.body.data.account.institution.type,
+        lastSync: currentdate,
+        reauthRequired: false,
+        accountLogo: logo.docs[0].data().institutionLogo
       };
-      axios
-        .request(options)
-        .then(async function (response) {
 
-          //functions.logger.log("RESPONSE", response.data);
+      //functions.logger.log("Update Object", update);
 
-          const transactions = response.data.data;
+      if (!account.empty) {
+        const snapshot = account.docs[0];
+        await snapshot.ref.update(update);
 
-          //for (let element in transactions) {
+        const options = {
+          method: 'GET',
+          url: 'https://api.withmono.com/accounts/' + req.body.data.account._id + '/transactions',
+          headers: { Accept: 'application/json', 'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid' }
+        };
+        axios
+          .request(options)
+          .then(async function (response) {
 
-          response.data.data.forEach(async element => {
+            //functions.logger.log("RESPONSE", response.data);
 
-            //functions.logger.log("ELEMENT", element);
+            const transactions = response.data.data;
 
-            const id = element.amount + element.narration + element.date + element.balance;
-            const parsedDate = new Date(Date.parse(element.date));
+            //for (let element in transactions) {
 
-            //functions.logger.log(id);
+            response.data.data.forEach(async element => {
 
-            const hash = function (str, seed = 0) {
-              let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
-              for (let i = 0, ch; i < str.length; i++) {
-                ch = str.charCodeAt(i);
-                h1 = Math.imul(h1 ^ ch, 2654435761);
-                h2 = Math.imul(h2 ^ ch, 1597334677);
-              }
-              h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
-              h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
-              return 4294967296 * (2097151 & h2) + (h1 >>> 0);
-            };
+              //functions.logger.log("ELEMENT", element);
 
-            functions.logger.log(hash(id));
+              const id = element.amount + element.narration + element.date + element.balance;
+              const parsedDate = new Date(Date.parse(element.date));
 
-            const writetransactions = await admin.firestore().collection('transactions').doc(hash(id).toString()).set(
-              {
-                account: account.docs[0].ref,
-                trasactionDate: admin.firestore.Timestamp.fromDate(parsedDate),
-                //monoCategory: transaction.data[i].,
-                transactionOwner: account.docs[0].data().accountOwner,
-                balanceAfter: element.balance,
-                transactionAmount: element.amount,
-                transactionMonoID: element._id,
-                transactionType: element.type,
-                transactionNarration: element.narration,
-                monoCategory: element.category,
-              }, { merge: true }
-            )
+              //functions.logger.log(id);
+
+              const hash = function (str, seed = 0) {
+                let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+                for (let i = 0, ch; i < str.length; i++) {
+                  ch = str.charCodeAt(i);
+                  h1 = Math.imul(h1 ^ ch, 2654435761);
+                  h2 = Math.imul(h2 ^ ch, 1597334677);
+                }
+                h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+                h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+                return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+              };
+
+              functions.logger.log(hash(id));
+
+              const writetransactions = await admin.firestore().collection('transactions').doc(hash(id).toString()).set(
+                {
+                  account: account.docs[0].ref,
+                  trasactionDate: admin.firestore.Timestamp.fromDate(parsedDate),
+                  //monoCategory: transaction.data[i].,
+                  transactionOwner: account.docs[0].data().accountOwner,
+                  balanceAfter: element.balance,
+                  transactionAmount: element.amount,
+                  transactionMonoID: element._id,
+                  transactionType: element.type,
+                  transactionNarration: element.narration,
+                  monoCategory: element.category,
+                  accountDetails: {
+                    logo: logo.docs[0].data().institutionLogo
+                  }
+                }, { merge: true }
+              )
+            });
+            //functions.logger.log(response.data);
+          })
+          .catch(function (error) {
+            console.error(error);
           });
-          //functions.logger.log(response.data);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-    } else {
-      functions.logger.log("ACCOUNT NOT FOUND", account);
-    }
+      } else {
+        functions.logger.log("ACCOUNT NOT FOUND", account);
+      }
 
-    //functions.logger.log("ACCOUNT EXISTING DATA", account);
+      //functions.logger.log("ACCOUNT EXISTING DATA", account);
 
-    res.status(200).send('SUCCESS');
-  } else res.status(200).send('INVALID REQUEST');
+      res.status(200).send('SUCCESS');
+    } else res.status(200).send('INVALID REQUEST');
 
-})
-
-//DATASYNC WEBHOOK
-// exports.datasyncHook = functions.https.onRequest(async (req, res) => {
-
-//   const payload = req.body;
-
-//   if (payload.event == 'mono.events.reauthorisation_required') {
-//     const account = await admin.firestore().collection('accounts').where('authID', '==', payload.data.account._id).get();
-
-//     const currentdate = new Date();
-
-//     const update = {
-//       failedSync: currentdate,
-//       reauthRequired: true
-//     };
-
-//     //functions.logger.log("Update Object", update);
-
-//     if (!account.empty) {
-//       const snapshot = account.docs[0];
-//       await snapshot.ref.update(update);
-//     }
-//   };
-// })
+  })
 
 //PERIODIC DATA SYNC
 exports.datasync = functions.https.onRequest(async (req, res) => {
@@ -334,9 +321,7 @@ exports.subscriptionReminder = functions.firestore.document('subscriptions/{Id}'
     functions.logger.log(doc.expChargeDate);
     const daysBefore = 1;
     const parsedDate = doc.expChargeDate.toDate();
-    //functions.logger.log(parsedDate.toString());
-    //functions.logger.log(parsedDate.getTime());
-    //functions.logger.log(Date.parse(parsedDate));
+
     const reminderDate = new Date(parsedDate.getTime() - (daysBefore * 86400000));
     functions.logger.log(reminderDate);
     const ownerid = doc.owner.path.toString().substring(6);
@@ -356,4 +341,89 @@ exports.subscriptionReminder = functions.firestore.document('subscriptions/{Id}'
       user_refs: user.ref.path.toString()
     });
     return null;
+  })
+
+
+
+exports.recalcspentamounts = functions.firestore.document('transactions/{id}')
+  .onUpdate(async (change, context) => {
+    const oldDoc = change.before.data();
+    const newDoc = change.after.data();
+
+    if (oldDoc == newDoc) {
+      return null;
+    }
+
+    let budgetCase = 'default';
+
+    if (oldDoc.transactionBudget == null) { budgetCase = 'null' }
+    else if (newDoc.transactionBudget == null) { budgetCase = 'default' }
+    else if (oldDoc.transactionBudget.path == newDoc.transactionBudget.path) { budgetCase = 'same' }
+    else if (oldDoc.transactionBudget.path != newDoc.transactionBudget.path) { budgetCase = 'default' }
+
+    switch (budgetCase) {
+      case 'null':
+        functions.logger.log('CASE: NULL');
+        functions.logger.log(budgetCase);
+        const updateBudget = await admin.firestore().doc(newDoc.transactionBudget.path)
+          .update({
+            budgetSpent: admin.firestore.FieldValue.increment(newDoc.transactionAmount)
+          });
+        break;
+      case 'same':
+        functions.logger.log('CASE: EQUAL TO NEW BUDGET');
+        functions.logger.log(budgetCase);
+        break;
+      case 'default':
+        functions.logger.log('DEFAULT');
+        functions.logger.log(budgetCase);
+        const updateOldBudget = await admin.firestore().doc(oldDoc.transactionBudget.path)
+          .update({
+            budgetSpent: admin.firestore.FieldValue.increment(-(newDoc.transactionAmount))
+          });
+        if (newDoc.transactionBudget != null) {
+          const updateNewBudget = await admin.firestore().doc(newDoc.transactionBudget.path)
+            .update({
+              budgetSpent: admin.firestore.FieldValue.increment(newDoc.transactionAmount)
+            });
+        }
+    }
+
+    let categoryCase = 'default';
+
+    if (oldDoc.transactionCategory == null) { categoryCase = 'null' }
+    else if (newDoc.transactionCategory == null) { categoryCase = 'default' }
+    else if (oldDoc.transactionCategory.path == newDoc.transactionCategory.path) { categoryCase = 'same' }
+    else if (oldDoc.transactionCategory.path != newDoc.transactionCategory.path) { categoryCase = 'default' }
+
+    switch (categoryCase) {
+      case 'null':
+        functions.logger.log('CASE: NULL');
+        functions.logger.log(categoryCase);
+        const updateCategory = await admin.firestore().doc(newDoc.transactionCategory.path)
+          .update({
+            spentAmount: admin.firestore.FieldValue.increment(newDoc.transactionAmount)
+          });
+        break;
+      case 'same':
+        functions.logger.log('CASE: EQUAL TO NEW Category');
+        functions.logger.log(categoryCase);
+        break;
+      case 'default':
+        functions.logger.log('DEFAULT');
+        functions.logger.log(categoryCase);
+        const updateOldCategory = await admin.firestore().doc(oldDoc.transactionCategory.path)
+          .update({
+            spentAmount: admin.firestore.FieldValue.increment(-(newDoc.transactionAmount))
+          });
+        if (newDoc.transactionCategory != null) {
+          const updateNewCategory = await admin.firestore().doc(newDoc.transactionCategory.path)
+            .update({
+              spentAmount: admin.firestore.FieldValue.increment(newDoc.transactionAmount)
+            });
+        }
+    }
+
+    return null;
+
   })
