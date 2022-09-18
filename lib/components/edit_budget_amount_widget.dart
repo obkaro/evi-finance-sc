@@ -56,7 +56,7 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
           return Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).primaryBackground,
+              color: FlutterFlowTheme.of(context).secondaryBackground,
               boxShadow: [
                 BoxShadow(
                   blurRadius: 14,
@@ -116,7 +116,7 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                                 width: double.infinity,
                                 height: 60,
                                 color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
+                                    .secondaryBackground,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .bodyText2
                                     .override(

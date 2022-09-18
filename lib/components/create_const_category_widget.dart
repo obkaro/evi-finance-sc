@@ -41,7 +41,7 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).primaryBackground,
+          color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: [
             BoxShadow(
               blurRadius: 14,
@@ -133,8 +133,8 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 30,
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                             textStyle: FlutterFlowTheme.of(context)
                                 .bodyText2
                                 .override(

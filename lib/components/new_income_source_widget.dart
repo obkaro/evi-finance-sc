@@ -34,7 +34,7 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).primaryBackground,
+          color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: [
             BoxShadow(
               blurRadius: 14,
@@ -110,7 +110,7 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
                         ),
                         filled: true,
                         fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
+                            FlutterFlowTheme.of(context).primaryBackground,
                       ),
                       style: FlutterFlowTheme.of(context).bodyText1,
                       keyboardType: TextInputType.name,
@@ -142,8 +142,8 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 30,
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                             textStyle: FlutterFlowTheme.of(context)
                                 .bodyText2
                                 .override(
