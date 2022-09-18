@@ -42,7 +42,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).primaryBackground,
+          color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: [
             BoxShadow(
               blurRadius: 14,
@@ -123,8 +123,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       filled: true,
-                      fillColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
+                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1,
                     keyboardType: TextInputType.name,

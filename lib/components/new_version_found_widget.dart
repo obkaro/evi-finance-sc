@@ -40,7 +40,7 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).primaryBackground,
+                color: FlutterFlowTheme.of(context).secondaryBackground,
                 boxShadow: [
                   BoxShadow(
                     blurRadius: 14,

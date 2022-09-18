@@ -44,7 +44,7 @@ class _CreateCustomSubscriptionWidgetState
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).primaryBackground,
+          color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: [
             BoxShadow(
               blurRadius: 14,
@@ -113,8 +113,7 @@ class _CreateCustomSubscriptionWidgetState
                         borderRadius: BorderRadius.circular(12),
                       ),
                       filled: true,
-                      fillColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
+                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1,
                     keyboardType: TextInputType.name,

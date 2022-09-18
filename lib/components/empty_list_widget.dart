@@ -53,9 +53,12 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    widget.text!,
-                    style: FlutterFlowTheme.of(context).subtitle2,
+                  Expanded(
+                    child: Text(
+                      widget.text!,
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.of(context).subtitle2,
+                    ),
                   ),
                 ],
               ),
