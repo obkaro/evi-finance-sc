@@ -82,7 +82,7 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 1, 0, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                   child: StreamBuilder<List<SubscriptionsRecord>>(
                     stream: querySubscriptionsRecord(
                       queryBuilder: (subscriptionsRecord) => subscriptionsRecord
@@ -107,10 +107,16 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                       return Material(
                         color: Colors.transparent,
                         elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32),
+                        ),
                         child: Container(
                           width: double.infinity,
-                          height: 100,
+                          height: double.infinity,
                           decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(32),
                             border: Border.all(
                               color: Colors.transparent,
                               width: 0,
