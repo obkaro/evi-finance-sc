@@ -658,8 +658,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                       child: Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
-                                                                .fromSTEB(10,
-                                                                    10, 10, 10),
+                                                                .fromSTEB(
+                                                                    8, 8, 8, 8),
                                                         child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -739,7 +739,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                   .transparent,
                                                               borderRadius: 30,
                                                               borderWidth: 1,
-                                                              buttonSize: 60,
+                                                              buttonSize: 48,
                                                               icon: Icon(
                                                                 Icons
                                                                     .edit_rounded,
@@ -822,7 +822,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                   borderWidth:
                                                                       1,
                                                                   buttonSize:
-                                                                      60,
+                                                                      48,
                                                                   icon: Icon(
                                                                     Icons
                                                                         .delete_rounded,
