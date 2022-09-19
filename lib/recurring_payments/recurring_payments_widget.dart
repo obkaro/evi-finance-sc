@@ -218,7 +218,10 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                                         0,
                                                                         8),
                                                             child: Text(
-                                                              subsItem.name!,
+                                                              functions
+                                                                  .toTitleCase(
+                                                                      subsItem
+                                                                          .name!),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .subtitle1,
