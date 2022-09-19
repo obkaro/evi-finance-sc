@@ -103,8 +103,6 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                       0, 0, 10, 0),
                                   child: InkWell(
                                     onTap: () async {
-                                      Navigator.pop(context);
-
                                       final subscriptionsCreateData =
                                           createSubscriptionsRecordData(
                                         name: subsfromcontainerItem.name,
@@ -118,6 +116,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                           .getDocumentFromData(
                                               subscriptionsCreateData,
                                               subscriptionsRecordReference);
+                                      Navigator.pop(context);
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(
