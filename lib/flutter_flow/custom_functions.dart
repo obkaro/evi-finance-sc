@@ -422,5 +422,8 @@ bool chartDisplay(
 
 String toTitleCase(String string) {
   // Add your function code here!
-  return string.split(" ").map((str) => str.toUpperCase()).join(" ");
+  return string.toLowerCase().split(' ').map((word) {
+    String leftText = (word.length > 1) ? word.substring(1, word.length) : '';
+    return word[0].toUpperCase() + leftText;
+  }).join(' ');
 }
