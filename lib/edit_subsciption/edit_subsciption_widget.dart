@@ -10,7 +10,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
-import '../recurring_payments/recurring_payments_widget.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -783,14 +782,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                     await editSubsciptionSubscriptionsRecord
                                         .reference
                                         .update(subscriptionsUpdateData);
-                                    await Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            RecurringPaymentsWidget(),
-                                      ),
-                                      (r) => false,
-                                    );
+                                    Navigator.pop(context);
                                   },
                                   text: 'Save Details',
                                   options: FFButtonOptions(

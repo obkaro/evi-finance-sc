@@ -264,26 +264,24 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                         ],
                                                       ),
                                                     ),
-                                                    Expanded(
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            functions
-                                                                .formatTransCurrency(
-                                                                    subsItem
-                                                                        .expCharge
-                                                                        .amount),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .subtitle1,
-                                                          ),
-                                                        ],
-                                                      ),
+                                                    Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          functions
+                                                              .formatTransCurrency(
+                                                                  subsItem
+                                                                      .expCharge
+                                                                      .amount),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .subtitle1,
+                                                        ),
+                                                      ],
                                                     ),
                                                   ],
                                                 ),
