@@ -292,8 +292,9 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                                 .fromSTEB(0, 0,
                                                                     0, 10),
                                                         child: Text(
-                                                          listViewAccountsRecord
-                                                              .accountName!,
+                                                          functions.toTitleCase(
+                                                              listViewAccountsRecord
+                                                                  .accountName!),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .subtitle1,
