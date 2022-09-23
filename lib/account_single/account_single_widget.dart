@@ -54,7 +54,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
               ),
             );
           },
-        );
+        ).then((value) => setState(() {}));
       } else {
         return;
       }

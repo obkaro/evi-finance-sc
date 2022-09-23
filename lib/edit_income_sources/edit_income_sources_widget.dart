@@ -23,7 +23,6 @@ class EditIncomeSourcesWidget extends StatefulWidget {
 
 class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
   TextEditingController? textController;
-
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -33,6 +32,12 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'EditIncomeSources'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    textController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -469,7 +474,7 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                             child: NewIncomeSourceWidget(),
                           );
                         },
-                      );
+                      ).then((value) => setState(() {}));
                     },
                   ),
                 ),

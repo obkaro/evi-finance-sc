@@ -60,7 +60,7 @@ class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Allocate your budget',
+                        'Allocate Your Budget',
                         style: FlutterFlowTheme.of(context).title3,
                       ),
                     ],
@@ -68,7 +68,7 @@ class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
                 ),
                 Icon(
                   Icons.table_chart,
-                  color: FlutterFlowTheme.of(context).primaryText,
+                  color: FlutterFlowTheme.of(context).secondaryText,
                   size: 72,
                 ),
                 Padding(

@@ -2,7 +2,6 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/assign_transaction_widget.dart';
 import '../components/new_income_source_widget.dart';
-import '../components/set_trans_category_widget.dart';
 import '../components/text_transaction_type_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -843,79 +842,49 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 10, 0, 10),
-                                                  child: InkWell(
-                                                    onTap: () async {
-                                                      // Action_CategorizeTrans
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return Padding(
-                                                            padding:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .viewInsets,
-                                                            child:
-                                                                SetTransCategoryWidget(
-                                                              transaction: widget
-                                                                  .transaction,
-                                                              recievedBudget:
-                                                                  currentUserDocument!
-                                                                      .activeBudget,
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0, 0, 0, 4),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Text(
+                                                              'Category',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText2,
                                                             ),
-                                                          );
-                                                        },
-                                                      );
-                                                    },
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      0, 0, 4),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Text(
-                                                                'Category',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText2,
-                                                              ),
-                                                            ],
-                                                          ),
+                                                          ],
                                                         ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      0, 0, 10),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Text(
-                                                                columnTransactionsRecord
-                                                                    .categoryDetails
-                                                                    .name!,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle1,
-                                                              ),
-                                                            ],
-                                                          ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(0, 0,
+                                                                    0, 10),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Text(
+                                                              columnTransactionsRecord
+                                                                  .categoryDetails
+                                                                  .name!,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .subtitle1,
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                             ],
@@ -929,70 +898,42 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 10, 0, 0),
-                                                  child: InkWell(
-                                                    onTap: () async {
-                                                      // Action_CategorizeTrans
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return Padding(
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Padding(
                                                             padding:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .viewInsets,
-                                                            child:
-                                                                SetTransCategoryWidget(
-                                                              transaction: widget
-                                                                  .transaction,
-                                                              recievedBudget:
-                                                                  currentUserDocument!
-                                                                      .activeBudget,
-                                                            ),
-                                                          );
-                                                        },
-                                                      );
-                                                    },
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          0,
-                                                                          4,
-                                                                          0),
-                                                              child: Icon(
-                                                                Icons
-                                                                    .credit_card_rounded,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                                size: 24,
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                              columnTransactionsRecord
-                                                                  .subscriptionDetails
-                                                                  .name!,
-                                                              style: FlutterFlowTheme
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        4,
+                                                                        0),
+                                                            child: Icon(
+                                                              Icons
+                                                                  .credit_card_rounded,
+                                                              color: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .subtitle1,
+                                                                  .primaryText,
+                                                              size: 24,
                                                             ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
+                                                          ),
+                                                          Text(
+                                                            columnTransactionsRecord
+                                                                .subscriptionDetails
+                                                                .name!,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .subtitle1,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                             ],
@@ -1041,7 +982,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                             ),
                                                           );
                                                         },
-                                                      );
+                                                      ).then((value) =>
+                                                          setState(() {}));
                                                     },
                                                     text: 'Assign',
                                                     icon: Icon(
@@ -1432,7 +1374,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                   NewIncomeSourceWidget(),
                                                             );
                                                           },
-                                                        );
+                                                        ).then((value) =>
+                                                            setState(() {}));
                                                       },
                                                     ),
                                                   ],

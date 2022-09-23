@@ -20,11 +20,8 @@ class ProfileSettingsWidget extends StatefulWidget {
 
 class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
   TextEditingController? textController1;
-
   TextEditingController? textController2;
-
   TextEditingController? textController3;
-
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -38,6 +35,14 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
     textController2 = TextEditingController(text: currentUserEmail);
     textController3 = TextEditingController(text: currentPhoneNumber);
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    textController1?.dispose();
+    textController2?.dispose();
+    textController3?.dispose();
+    super.dispose();
   }
 
   @override

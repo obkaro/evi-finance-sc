@@ -124,7 +124,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                               Icons.lock_rounded,
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryText,
+                                                      .secondaryText,
                                               size: 36,
                                             ),
                                           ),
@@ -156,7 +156,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                               Icons.security,
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryText,
+                                                      .secondaryText,
                                               size: 36,
                                             ),
                                           ),
@@ -188,7 +188,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                               Icons.cancel_rounded,
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryText,
+                                                      .secondaryText,
                                               size: 36,
                                             ),
                                           ),

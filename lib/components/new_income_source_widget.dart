@@ -17,7 +17,6 @@ class NewIncomeSourceWidget extends StatefulWidget {
 
 class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
   TextEditingController? textController;
-
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -25,6 +24,12 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
     super.initState();
     textController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    textController?.dispose();
+    super.dispose();
   }
 
   @override

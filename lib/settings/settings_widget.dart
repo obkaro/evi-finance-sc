@@ -1,7 +1,7 @@
 import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../land_page/land_page_widget.dart';
+import '../landing_page_view/landing_page_view_widget.dart';
 import '../profile_settings/profile_settings_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
@@ -300,7 +300,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                             await Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => LandPageWidget(),
+                                builder: (context) => LandingPageViewWidget(),
                               ),
                               (r) => false,
                             );

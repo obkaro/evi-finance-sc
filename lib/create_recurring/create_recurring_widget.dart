@@ -32,11 +32,10 @@ class CreateRecurringWidget extends StatefulWidget {
 }
 
 class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
-  TextEditingController? nameController;
-
-  String uploadedFileUrl = '';
-  String? categoryValue;
   DateTimeRange? calendarSelectedDay;
+  String uploadedFileUrl = '';
+  TextEditingController? nameController;
+  String? categoryValue;
   String? durationValue;
   bool? switchListTileValue;
   final formKey = GlobalKey<FormState>();
@@ -52,6 +51,12 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'CreateRecurring'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    nameController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -478,7 +483,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                             ),
                                           );
                                         },
-                                      );
+                                      ).then((value) => setState(() {}));
                                     },
                                     child: Icon(
                                       Icons.help_outline_rounded,
@@ -789,7 +794,8 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                             ),
                                           );
                                         },
-                                      );
+                                      ).then((value) => setState(() {}));
+
                                       return;
                                     }
 

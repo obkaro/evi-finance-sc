@@ -91,13 +91,13 @@ DeviceSize getDeviceSize(BuildContext context) {
 
 class LightModeTheme extends FlutterFlowTheme {
   late Color primaryColor = const Color(0xFFE70B54);
-  late Color secondaryColor = const Color(0xFF0A0A0A);
+  late Color secondaryColor = const Color(0xFF293056);
   late Color tertiaryColor = const Color(0xFF1B998B);
   late Color alternate = const Color(0xFFFAA916);
-  late Color primaryBackground = const Color(0xFFF1F1F1);
+  late Color primaryBackground = const Color(0xFFF2F4F8);
   late Color secondaryBackground = const Color(0xFFFFFFFF);
-  late Color primaryText = const Color(0xFF101010);
-  late Color secondaryText = const Color(0xFF595959);
+  late Color primaryText = const Color(0xFF101323);
+  late Color secondaryText = const Color(0xFF414452);
 
   late Color eviredTransparent = Color(0x28FF0054);
   late Color secondaryPrimary = Color(0xFFECECEC);
@@ -297,18 +297,18 @@ class DesktopTypography extends Typography {
 
 class DarkModeTheme extends FlutterFlowTheme {
   late Color primaryColor = const Color(0xFFFF0054);
-  late Color secondaryColor = const Color(0xFF0A0A0A);
+  late Color secondaryColor = const Color(0xFF101323);
   late Color tertiaryColor = const Color(0xFF1B998B);
   late Color alternate = const Color(0xFFFAA916);
-  late Color primaryBackground = const Color(0xFF161616);
-  late Color secondaryBackground = const Color(0xFF1D1D1D);
+  late Color primaryBackground = const Color(0xFF1B1B1E);
+  late Color secondaryBackground = const Color(0xFF1F1F22);
   late Color primaryText = const Color(0xFFE0E0E0);
   late Color secondaryText = const Color(0xFFD2D2D2);
 
   late Color eviredTransparent = Color(0x2AFF0054);
   late Color secondaryPrimary = Color(0xFFECECEC);
   late Color secondarySecondary = Color(0xFFCECECE);
-  late Color lightPrimary = Color(0xFF1A1A1A);
+  late Color lightPrimary = Color(0xFF1D1D1F);
   late Color gray600 = Color(0xFF262D34);
   late Color fadedDivider = Color(0xFF2B2B2B);
   late Color darkPrimary = Color(0xFF370D1B);

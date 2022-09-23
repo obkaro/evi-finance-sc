@@ -69,12 +69,10 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
       ? Container(
           color: Colors.white,
           child: Center(
-            child: Builder(
-              builder: (context) => Image.asset(
-                'assets/images/Group_20_(2).png',
-                width: 200,
-                fit: BoxFit.contain,
-              ),
+            child: Image.asset(
+              'assets/images/Group_20_(2).png',
+              width: 200,
+              fit: BoxFit.contain,
             ),
           ),
         )
@@ -84,10 +82,6 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
 final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'LandPage': (data) async => LandPageWidget(),
   'Transactions': (data) async => TransactionsWidget(),
-  'AllocateBudgetCopy': (data) async => AllocateBudgetCopyWidget(
-        createdBudget: await getDocumentParameter(
-            data, 'createdBudget', BudgetsRecord.serializer),
-      ),
   'ForgotPassword': (data) async => ForgotPasswordWidget(),
   'ActiveBudget': (data) async => hasMatchingParameters(data, {'command'})
       ? ActiveBudgetWidget(
@@ -122,7 +116,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
       ),
   'Settings': (data) async => SettingsWidget(),
   'ProfileSettings': (data) async => ProfileSettingsWidget(),
-  'OnboardingPageView': (data) async => OnboardingPageViewWidget(),
+  'LandingPageView': (data) async => LandingPageViewWidget(),
   'WelcomeToEvi': (data) async => WelcomeToEviWidget(),
   'FirstBudget': (data) async => FirstBudgetWidget(
         budget: await getDocumentParameter(

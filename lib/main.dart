@@ -86,11 +86,11 @@ class _MyAppState extends State<MyApp> {
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: _themeMode,
       home: initialUser == null || displaySplashImage
-          ? Container(
-              color: Colors.white,
-              child: Center(
-                child: Builder(
-                  builder: (context) => Image.asset(
+          ? Builder(
+              builder: (context) => Container(
+                color: Colors.white,
+                child: Center(
+                  child: Image.asset(
                     'assets/images/Group_20_(2).png',
                     width: 200,
                     fit: BoxFit.contain,
@@ -100,7 +100,7 @@ class _MyAppState extends State<MyApp> {
             )
           : currentUser!.loggedIn
               ? PushNotificationsHandler(child: NavBarPage())
-              : LandPageWidget(),
+              : LandingPageViewWidget(),
     );
   }
 }
@@ -144,7 +144,7 @@ class _NavBarPageState extends State<NavBarPage> {
           _currentPageName = tabs.keys.toList()[i];
         }),
         backgroundColor: FlutterFlowTheme.of(context).lightPrimary,
-        color: Color(0xFF5D5B5B),
+        color: FlutterFlowTheme.of(context).secondaryText,
         activeColor: FlutterFlowTheme.of(context).primaryText,
         tabBackgroundColor: Color(0x00000000),
         tabActiveBorder: Border.all(

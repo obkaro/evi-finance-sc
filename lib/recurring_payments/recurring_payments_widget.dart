@@ -64,7 +64,7 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                 child: AddRecurringPaymentWidget(),
               );
             },
-          );
+          ).then((value) => setState(() {}));
         },
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         elevation: 3,
