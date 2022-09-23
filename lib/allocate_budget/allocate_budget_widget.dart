@@ -4,6 +4,7 @@ import '../components/create_const_category_widget.dart';
 import '../components/create_custom_category_widget.dart';
 import '../components/edit_budget_amount_widget.dart';
 import '../components/edit_category_widget.dart';
+import '../connect_first_account/connect_first_account_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -307,7 +308,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                         ),
                                                       );
                                                     },
-                                                  );
+                                                  ).then((value) =>
+                                                      setState(() {}));
                                                 },
                                                 child: Container(
                                                   height: 36,
@@ -502,7 +504,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                 ),
                                                               );
                                                             },
-                                                          );
+                                                          ).then((value) =>
+                                                              setState(() {}));
                                                         },
                                                         child: Container(
                                                           decoration:
@@ -646,7 +649,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                             ),
                                                           );
                                                         },
-                                                      );
+                                                      ).then((value) =>
+                                                          setState(() {}));
                                                     },
                                                     child: Container(
                                                       width: double.infinity,
@@ -774,7 +778,9 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                       ),
                                                                     );
                                                                   },
-                                                                );
+                                                                ).then((value) =>
+                                                                    setState(
+                                                                        () {}));
                                                               },
                                                             ),
                                                             StreamBuilder<
@@ -899,7 +905,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                     ),
                                                   );
                                                 },
-                                              );
+                                              ).then(
+                                                  (value) => setState(() {}));
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(
@@ -1031,15 +1038,30 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                             Colors.black,
                                                       ),
                                                     );
-                                                    await Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            NavBarPage(
-                                                                initialPage:
-                                                                    'ActiveBudget'),
-                                                      ),
-                                                    );
+                                                    if ((currentUserDocument
+                                                                    ?.accountsList
+                                                                    ?.toList() ??
+                                                                [])
+                                                            .length >
+                                                        0) {
+                                                      await Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              NavBarPage(
+                                                                  initialPage:
+                                                                      'ActiveBudget'),
+                                                        ),
+                                                      );
+                                                    } else {
+                                                      await Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ConnectFirstAccountWidget(),
+                                                        ),
+                                                      );
+                                                    }
                                                   },
                                                   text: 'Save',
                                                   options: FFButtonOptions(

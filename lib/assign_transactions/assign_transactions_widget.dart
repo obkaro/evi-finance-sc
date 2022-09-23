@@ -67,11 +67,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
             automaticallyImplyLeading: true,
             title: Text(
               'Assign Transactions',
-              style: FlutterFlowTheme.of(context).title1.override(
-                    fontFamily: 'Source Sans Pro',
-                    useGoogleFonts: GoogleFonts.asMap()
-                        .containsKey(FlutterFlowTheme.of(context).title1Family),
-                  ),
+              style: FlutterFlowTheme.of(context).title3,
             ),
             actions: [],
             centerTitle: true,

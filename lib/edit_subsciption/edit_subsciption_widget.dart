@@ -30,11 +30,10 @@ class EditSubsciptionWidget extends StatefulWidget {
 }
 
 class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
-  TextEditingController? nameController;
-
-  String uploadedFileUrl = '';
-  String? categoryValue;
   DateTimeRange? calendarSelectedDay;
+  String uploadedFileUrl = '';
+  TextEditingController? nameController;
+  String? categoryValue;
   String? durationValue;
   bool? switchListTileValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -49,6 +48,12 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'editSubsciption'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    nameController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -485,7 +490,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                           ),
                                         );
                                       },
-                                    );
+                                    ).then((value) => setState(() {}));
                                   },
                                   child: Icon(
                                     Icons.help_outline_rounded,

@@ -1,8 +1,6 @@
 // Export pages
 export 'land_page/land_page_widget.dart' show LandPageWidget;
 export 'transactions/transactions_widget.dart' show TransactionsWidget;
-export 'allocate_budget_copy/allocate_budget_copy_widget.dart'
-    show AllocateBudgetCopyWidget;
 export 'forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
 export 'dashboard/dashboard_widget.dart' show DashboardWidget;
 export 'active_budget/active_budget_widget.dart' show ActiveBudgetWidget;
@@ -19,8 +17,8 @@ export 'account_single/account_single_widget.dart' show AccountSingleWidget;
 export 'settings/settings_widget.dart' show SettingsWidget;
 export 'profile_settings/profile_settings_widget.dart'
     show ProfileSettingsWidget;
-export 'onboarding_page_view/onboarding_page_view_widget.dart'
-    show OnboardingPageViewWidget;
+export 'landing_page_view/landing_page_view_widget.dart'
+    show LandingPageViewWidget;
 export 'welcome_to_evi/welcome_to_evi_widget.dart' show WelcomeToEviWidget;
 export 'first_budget/first_budget_widget.dart' show FirstBudgetWidget;
 export 'transaction_single/transaction_single_widget.dart'

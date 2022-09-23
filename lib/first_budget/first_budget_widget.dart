@@ -1,4 +1,4 @@
-import '../allocate_budget_copy/allocate_budget_copy_widget.dart';
+import '../allocate_budget/allocate_budget_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_calendar.dart';
@@ -95,13 +95,13 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                         children: [
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 4),
+                                EdgeInsetsDirectional.fromSTEB(0, 16, 0, 4),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  'What type of budget would you like to create?',
+                                  'How often would you like to restart your budget?',
                                   style: FlutterFlowTheme.of(context).bodyText2,
                                 ),
                               ],
@@ -111,8 +111,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                             child: FlutterFlowDropDown(
-                              initialOption: dropDownValue ??= 'Monthly Budget',
-                              options: ['Weekly Budget', 'Monthly Budget'],
+                              options: ['Weekly', 'Monthly'],
                               onChanged: (val) =>
                                   setState(() => dropDownValue = val),
                               width: double.infinity,
@@ -141,8 +140,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                             ),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 4, 16, 4),
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 4),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -195,9 +193,9 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            16, 4, 16, 4),
+                                            0, 4, 0, 4),
                                         child: Text(
-                                          'When does this budget start?',
+                                          'When would you like to begin?',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText2,
                                         ),
@@ -452,8 +450,8 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AllocateBudgetCopyWidget(
-                                  createdBudget: widget.budget,
+                                builder: (context) => AllocateBudgetWidget(
+                                  createdBudget: columnBudgetsRecord,
                                 ),
                               ),
                             );

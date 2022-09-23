@@ -313,7 +313,9 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                               ),
                                                             );
                                                           },
-                                                        );
+                                                        ).then((value) =>
+                                                            setState(() {}));
+
                                                         if (FFAppState()
                                                             .dialogBoxReturn) {
                                                           await actions

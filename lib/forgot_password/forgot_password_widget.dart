@@ -16,7 +16,6 @@ class ForgotPasswordWidget extends StatefulWidget {
 
 class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
   TextEditingController? signInEmailController;
-
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -27,6 +26,12 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
         parameters: {'screen_name': 'ForgotPassword'});
     signInEmailController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    signInEmailController?.dispose();
+    super.dispose();
   }
 
   @override

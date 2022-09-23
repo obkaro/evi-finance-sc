@@ -360,7 +360,8 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                     ),
                                                   );
                                                 },
-                                              );
+                                              ).then(
+                                                  (value) => setState(() {}));
                                             },
                                             text: 'New Category',
                                             icon: Icon(
@@ -853,7 +854,7 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                   AddRecurringPaymentWidget(),
                                             );
                                           },
-                                        );
+                                        ).then((value) => setState(() {}));
                                       },
                                       text: 'New Subscription',
                                       icon: Icon(

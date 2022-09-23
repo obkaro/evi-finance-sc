@@ -487,7 +487,9 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                   ),
                                                                 );
                                                               },
-                                                            );
+                                                            ).then((value) =>
+                                                                setState(
+                                                                    () {}));
                                                           },
                                                           child: Container(
                                                             width:
@@ -641,7 +643,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                 ),
                                               );
                                             },
-                                          );
+                                          ).then((value) => setState(() {}));
                                         },
                                         child: Container(
                                           width:

@@ -116,7 +116,6 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                           .getDocumentFromData(
                                               subscriptionsCreateData,
                                               subscriptionsRecordReference);
-                                      Navigator.pop(context);
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -127,6 +126,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                           ),
                                         ),
                                       );
+                                      Navigator.pop(context);
 
                                       setState(() {});
                                     },

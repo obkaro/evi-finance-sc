@@ -471,7 +471,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                         ),
                                       );
                                     },
-                                  );
+                                  ).then((value) => setState(() {}));
                                 }
                               },
                               text: 'Save',

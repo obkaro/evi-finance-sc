@@ -427,7 +427,8 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                                                 ),
                                                               );
                                                             },
-                                                          );
+                                                          ).then((value) =>
+                                                              setState(() {}));
                                                         },
                                                         child: Container(
                                                           width: MediaQuery.of(
@@ -583,7 +584,7 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                                 ),
                                               );
                                             },
-                                          );
+                                          ).then((value) => setState(() {}));
                                         },
                                         child: Container(
                                           width:
