@@ -227,8 +227,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                 newSelectedDate) async {
                                               calendarSelectedDay =
                                                   newSelectedDate;
-                                              if (dropDownValue ==
-                                                  'Monthly Budget') {
+                                              if (dropDownValue == 'Monthly') {
                                                 final budgetsUpdateData =
                                                     createBudgetsRecordData(
                                                   budgetAmount: FFAppState()
