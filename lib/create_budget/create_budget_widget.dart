@@ -96,75 +96,99 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'How long is this budget to last?',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 8),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Duration',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      FlutterFlowDropDown(
+                                        initialOption: dropDownValue ??=
+                                            columnBudgetsRecord.budgetDuration,
+                                        options: ['Weekly', 'Monthly'],
+                                        onChanged: (val) =>
+                                            setState(() => dropDownValue = val),
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.44,
+                                        height: 55,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                        hintText: 'Please select...',
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        elevation: 2,
+                                        borderColor: Colors.transparent,
+                                        borderWidth: 0,
+                                        borderRadius: 12,
+                                        margin: EdgeInsetsDirectional.fromSTEB(
+                                            12, 4, 12, 4),
+                                        hidesUnderline: true,
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: FlutterFlowDropDown(
-                              initialOption: dropDownValue ??= 'Monthly Budget',
-                              options: ['Weekly Budget', 'Monthly Budget'],
-                              onChanged: (val) =>
-                                  setState(() => dropDownValue = val),
-                              width: double.infinity,
-                              height: 55,
-                              textStyle: FlutterFlowTheme.of(context).bodyText1,
-                              hintText: 'Please select...',
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              elevation: 2,
-                              borderColor: Colors.transparent,
-                              borderWidth: 0,
-                              borderRadius: 12,
-                              margin:
-                                  EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
-                              hidesUnderline: true,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16, 0, 16, 0),
-                                    child: Text(
-                                      'How much do you plan to spend within your budget period?',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
-                                    ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 8),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Amount',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      custom_widgets.CurrencyTextField(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.44,
+                                        height: 55,
+                                        amount: widget.budget!.budgetAmount,
+                                        labelText: 'Amount',
+                                        hintText: 'Enter amount',
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: custom_widgets.CurrencyTextField(
-                              width: MediaQuery.of(context).size.width,
-                              height: 55,
-                              amount: widget.budget!.budgetAmount,
-                              labelText: 'Amount',
-                              hintText: 'Enter amount',
+                                ],
+                              ),
                             ),
                           ),
                           Padding(
@@ -180,26 +204,22 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            16, 0, 16, 0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Expanded(
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 8),
-                                                child: Text(
-                                                  'When does this budget start?',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1,
-                                                ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 0, 8),
+                                              child: Text(
+                                                'Start date',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                       Container(
                                         width: double.infinity,
