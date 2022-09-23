@@ -4,6 +4,7 @@ import '../email_auth/email_auth_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -40,6 +41,14 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
+              Container(
+                width: 0,
+                height: 0,
+                child: custom_widgets.BackButtonControl(
+                  width: 0,
+                  height: 0,
+                ),
+              ),
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),

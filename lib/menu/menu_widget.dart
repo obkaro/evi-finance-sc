@@ -5,7 +5,6 @@ import '../components/m_grid_menu_item_widget.dart';
 import '../edit_income_sources/edit_income_sources_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../main.dart';
 import '../recurring_payments/recurring_payments_widget.dart';
 import '../settings/settings_widget.dart';
 import '../transactions/transactions_widget.dart';
@@ -43,7 +42,7 @@ class _MenuWidgetState extends State<MenuWidget> {
           flexibleSpace: MAppbarWidget(
             titleText: 'Menu',
             icon: Icon(
-              Icons.featured_play_list_rounded,
+              Icons.apps_rounded,
               color: Colors.white,
               size: 24,
             ),
@@ -59,7 +58,7 @@ class _MenuWidgetState extends State<MenuWidget> {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => NavBarPage(initialPage: 'Menu'),
+                  builder: (context) => SettingsWidget(),
                 ),
               );
             },

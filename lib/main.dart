@@ -174,9 +174,7 @@ class _NavBarPageState extends State<NavBarPage> {
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           ),
           GButton(
-            icon: currentIndex == 2
-                ? Icons.featured_play_list_rounded
-                : Icons.featured_play_list_rounded,
+            icon: currentIndex == 2 ? Icons.apps_rounded : Icons.apps_rounded,
             text: 'Menu',
             iconSize: 24,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
