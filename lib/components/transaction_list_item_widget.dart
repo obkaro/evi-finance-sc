@@ -114,8 +114,9 @@ class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              if (!widget
-                                                  .transactionDoc!.isAssigned!)
+                                              if (widget.transactionDoc!
+                                                      .isAssigned ==
+                                                  false)
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 0, 0, 8),
