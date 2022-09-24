@@ -358,7 +358,7 @@ exports.recalcspentamounts = functions.firestore.document('transactions/{id}')
     const oldDoc = change.before.data();
     const newDoc = change.after.data();
 
-    if (oldDoc == newDoc) {
+    if (oldDoc == newDoc || oldDoc == null) {
       return null;
     }
 
