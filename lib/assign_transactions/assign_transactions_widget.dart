@@ -80,6 +80,37 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'You have ',
+                          style: FlutterFlowTheme.of(context).bodyText1,
+                        ),
+                        Text(
+                          assignTransactionsTransactionsRecordList.length
+                              .toString(),
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyText1Family,
+                                color: Color(0xFFFF0000),
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyText1Family),
+                              ),
+                        ),
+                        Text(
+                          ' unassigned transactions',
+                          style: FlutterFlowTheme.of(context).bodyText1,
+                        ),
+                      ],
+                    ),
+                  ),
                   Expanded(
                     child: Builder(
                       builder: (context) {
@@ -123,136 +154,56 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0, 0, 16, 0),
-                                          child: StreamBuilder<AccountsRecord>(
-                                            stream: AccountsRecord.getDocument(
-                                                transactionFromPageItem
-                                                    .account!),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child: SpinKitRing(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      size: 50,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              final stackAccountsRecord =
-                                                  snapshot.data!;
-                                              return Container(
-                                                width: 80,
-                                                height: 80,
-                                                child: Stack(
+                                          child: Container(
+                                            width: 80,
+                                            height: 80,
+                                            child: Stack(
+                                              alignment:
+                                                  AlignmentDirectional(0, 0),
+                                              children: [
+                                                Align(
                                                   alignment:
                                                       AlignmentDirectional(
                                                           0, 0),
-                                                  children: [
-                                                    Align(
+                                                  child: Material(
+                                                    color: Colors.transparent,
+                                                    elevation: 0,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              300),
+                                                    ),
+                                                    child: Container(
+                                                      width: double.infinity,
+                                                      height: double.infinity,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(300),
+                                                      ),
                                                       alignment:
                                                           AlignmentDirectional(
                                                               0, 0),
-                                                      child: Material(
-                                                        color:
-                                                            Colors.transparent,
-                                                        elevation: 0,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      300),
-                                                        ),
-                                                        child: Container(
-                                                          width:
-                                                              double.infinity,
-                                                          height:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: Colors.white,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        300),
-                                                          ),
-                                                          alignment:
-                                                              AlignmentDirectional(
-                                                                  0, 0),
-                                                        ),
-                                                      ),
                                                     ),
-                                                    FutureBuilder<
-                                                        List<
-                                                            ConstInstitutionLogosRecord>>(
-                                                      future:
-                                                          queryConstInstitutionLogosRecordOnce(
-                                                        queryBuilder: (constInstitutionLogosRecord) =>
-                                                            constInstitutionLogosRecord.where(
-                                                                'institutionCode',
-                                                                isEqualTo:
-                                                                    stackAccountsRecord
-                                                                        .bankCode),
-                                                        singleRecord: true,
-                                                      ),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        // Customize what your widget looks like when it's loading.
-                                                        if (!snapshot.hasData) {
-                                                          return Center(
-                                                            child: SizedBox(
-                                                              width: 50,
-                                                              height: 50,
-                                                              child:
-                                                                  SpinKitRing(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryColor,
-                                                                size: 50,
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }
-                                                        List<ConstInstitutionLogosRecord>
-                                                            imageConstInstitutionLogosRecordList =
-                                                            snapshot.data!;
-                                                        // Return an empty Container when the document does not exist.
-                                                        if (snapshot
-                                                            .data!.isEmpty) {
-                                                          return Container();
-                                                        }
-                                                        final imageConstInstitutionLogosRecord =
-                                                            imageConstInstitutionLogosRecordList
-                                                                    .isNotEmpty
-                                                                ? imageConstInstitutionLogosRecordList
-                                                                    .first
-                                                                : null;
-                                                        return ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(12),
-                                                          child:
-                                                              CachedNetworkImage(
-                                                            imageUrl:
-                                                                imageConstInstitutionLogosRecord!
-                                                                    .institutionLogo!,
-                                                            width: 48,
-                                                            height: 48,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        );
-                                                      },
-                                                    ),
-                                                  ],
+                                                  ),
                                                 ),
-                                              );
-                                            },
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl:
+                                                        transactionFromPageItem
+                                                            .accountDetails
+                                                            .logo!,
+                                                    width: 48,
+                                                    height: 48,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                         Column(

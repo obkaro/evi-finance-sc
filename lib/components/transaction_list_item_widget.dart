@@ -114,16 +114,8 @@ class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              if (widget
-                                                          .transactionDoc!
-                                                          .categoryDetails
-                                                          .name ==
-                                                      null ||
-                                                  widget
-                                                          .transactionDoc!
-                                                          .categoryDetails
-                                                          .name ==
-                                                      '')
+                                              if (!widget
+                                                  .transactionDoc!.isAssigned!)
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 0, 0, 8),
@@ -152,9 +144,16 @@ class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
                                                         ),
                                                   ),
                                                 ),
-                                              if (widget.transactionDoc!
-                                                      .incomeCategory !=
-                                                  null)
+                                              if (widget
+                                                          .transactionDoc!
+                                                          .categoryDetails
+                                                          .name !=
+                                                      null &&
+                                                  widget
+                                                          .transactionDoc!
+                                                          .categoryDetails
+                                                          .name !=
+                                                      '')
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 0, 0, 8),
@@ -171,14 +170,17 @@ class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
                                                   ),
                                                 ),
                                               if (widget.transactionDoc!
-                                                      .transactionCategory !=
-                                                  null)
+                                                          .incomeDetails.name !=
+                                                      null &&
+                                                  widget.transactionDoc!
+                                                          .incomeDetails.name !=
+                                                      '')
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 0, 0, 8),
                                                   child: AutoSizeText(
                                                     widget.transactionDoc!
-                                                        .categoryDetails.name!
+                                                        .incomeDetails.name!
                                                         .maybeHandleOverflow(
                                                       maxChars: 25,
                                                       replacement: '…',

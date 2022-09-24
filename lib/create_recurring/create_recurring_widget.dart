@@ -466,11 +466,11 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                 children: [
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 4, 0),
+                                        8, 0, 4, 0),
                                     child: Text(
                                       'Next charge date (expected)',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                          .bodyText2,
                                     ),
                                   ),
                                   InkWell(

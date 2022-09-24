@@ -41,6 +41,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   AccountDetailsStruct,
   CategoryDetailsStruct,
   SubscriptionDetailsStruct,
+  IncomeDetailsStruct,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

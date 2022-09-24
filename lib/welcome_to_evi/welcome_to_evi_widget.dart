@@ -199,10 +199,15 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        Text(
-                                          'What do you like to be called?',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText2,
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  8, 0, 0, 0),
+                                          child: Text(
+                                            'What do you like to be called?',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -312,10 +317,14 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Text(
-                                        'How did you hear about Evi?',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            8, 0, 0, 0),
+                                        child: Text(
+                                          'How did you hear about Evi?',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText2,
+                                        ),
                                       ),
                                     ],
                                   ),
