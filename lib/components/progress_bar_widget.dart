@@ -31,7 +31,6 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
       height: 8,
       child: Stack(
         children: [
