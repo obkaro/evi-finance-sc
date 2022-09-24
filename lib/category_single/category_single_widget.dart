@@ -229,7 +229,13 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                     height: 300,
                                     child: EmptyListWidget(
                                       text:
-                                          'No transactions assigned to this category',
+                                          'No transactions assigned to this category yet',
+                                      icon: Icon(
+                                        Icons.list_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 64,
+                                      ),
                                     ),
                                   ),
                                 );

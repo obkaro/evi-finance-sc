@@ -15,7 +15,9 @@ import '../transactions/transactions_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -165,22 +167,93 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                         ],
                                       ),
                                     ),
-                                    InkWell(
-                                      onTap: () async {
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                AssignTransactionsWidget(),
+                                    StreamBuilder<List<TransactionsRecord>>(
+                                      stream: queryTransactionsRecord(
+                                        queryBuilder: (transactionsRecord) =>
+                                            transactionsRecord
+                                                .where('transactionOwner',
+                                                    isEqualTo:
+                                                        currentUserReference)
+                                                .where('isAssigned',
+                                                    isEqualTo: false),
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50,
+                                              height: 50,
+                                              child: SpinKitRing(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                size: 50,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<TransactionsRecord>
+                                            badgeTransactionsRecordList =
+                                            snapshot.data!;
+                                        return InkWell(
+                                          onTap: () async {
+                                            await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AssignTransactionsWidget(),
+                                              ),
+                                            );
+                                          },
+                                          child: Badge(
+                                            badgeContent: Text(
+                                              badgeTransactionsRecordList.length
+                                                  .toString(),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1Family,
+                                                        color: Colors.white,
+                                                        fontSize: 8,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
+                                                      ),
+                                            ),
+                                            showBadge:
+                                                badgeTransactionsRecordList
+                                                        .length >
+                                                    0,
+                                            shape: BadgeShape.circle,
+                                            badgeColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryColor,
+                                            elevation: 4,
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    6, 6, 6, 6),
+                                            position: BadgePosition.topEnd(),
+                                            animationType:
+                                                BadgeAnimationType.scale,
+                                            toAnimate: true,
+                                            child: Icon(
+                                              Icons.notifications,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryPrimary,
+                                              size: 24,
+                                            ),
                                           ),
                                         );
                                       },
-                                      child: Icon(
-                                        Icons.notifications_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondarySecondary,
-                                        size: 24,
-                                      ),
                                     ),
                                   ],
                                 ),
@@ -849,6 +922,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                         child: EmptyListWidget(
                                           text:
                                               'Connect an account to import transactions',
+                                          icon: Icon(
+                                            Icons.compare_arrows_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 64,
+                                          ),
                                         ),
                                       ),
                                     );
@@ -864,9 +943,22 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                       final listViewTransactionsRecord =
                                           listViewTransactionsRecordList[
                                               listViewIndex];
-                                      return TransactionListItemWidget(
-                                        transactionDoc:
-                                            listViewTransactionsRecord,
+                                      return InkWell(
+                                        onTap: () async {
+                                          final transactionsUpdateData =
+                                              createTransactionsRecordData(
+                                            categoryDetails:
+                                                createCategoryDetailsStruct(
+                                                    delete: true),
+                                          );
+                                          await listViewTransactionsRecord
+                                              .reference
+                                              .update(transactionsUpdateData);
+                                        },
+                                        child: TransactionListItemWidget(
+                                          transactionDoc:
+                                              listViewTransactionsRecord,
+                                        ),
                                       );
                                     },
                                   );

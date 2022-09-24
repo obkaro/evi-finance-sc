@@ -8,9 +8,11 @@ class EmptyListWidget extends StatefulWidget {
   const EmptyListWidget({
     Key? key,
     this.text,
+    this.icon,
   }) : super(key: key);
 
   final String? text;
+  final Widget? icon;
 
   @override
   _EmptyListWidgetState createState() => _EmptyListWidgetState();
@@ -40,11 +42,7 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.error_outline_rounded,
-                  color: FlutterFlowTheme.of(context).secondaryText,
-                  size: 128,
-                ),
+                widget.icon!,
               ],
             ),
             Padding(
@@ -57,7 +55,7 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
                     child: Text(
                       widget.text!,
                       textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.of(context).subtitle2,
+                      style: FlutterFlowTheme.of(context).bodyText2,
                     ),
                   ),
                 ],

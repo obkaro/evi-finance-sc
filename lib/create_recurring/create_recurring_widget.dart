@@ -349,13 +349,19 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Container(
-                                          width: double.infinity,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           height: 55,
                                           child:
                                               custom_widgets.CurrencyTextField(
-                                            width: double.infinity,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
                                             height: 55,
                                             labelText: 'Enter amount',
+                                            bgcolor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
                                           ),
                                         ),
                                       ],
@@ -454,7 +460,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -791,6 +797,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                               buttonYes: 'Okay',
                                               buttonNo: 'n',
                                               information: true,
+                                              yesAction: () async {},
                                             ),
                                           );
                                         },
@@ -812,6 +819,12 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                       ),
                                       notification: switchListTileValue,
                                       recurrence: durationValue,
+                                      categoryDetails:
+                                          createCategoryDetailsStruct(
+                                        name: buttonCategoriesRecord!
+                                            .categoryName,
+                                        clearUnsetFields: false,
+                                      ),
                                     );
                                     await createRecurringSubscriptionsRecord
                                         .reference

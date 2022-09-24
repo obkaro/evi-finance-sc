@@ -144,6 +144,7 @@ class _CreateCustomCategoryWidgetState
                     height: 50,
                     labelText: 'Amount',
                     hintText: 'Enter amount',
+                    bgcolor: FlutterFlowTheme.of(context).primaryBackground,
                   ),
                 ),
                 Divider(

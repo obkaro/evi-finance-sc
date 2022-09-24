@@ -69,7 +69,7 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
                     ),
                     Icon(
                       Icons.system_update_alt_rounded,
-                      color: FlutterFlowTheme.of(context).primaryText,
+                      color: FlutterFlowTheme.of(context).secondaryText,
                       size: 72,
                     ),
                     Padding(

@@ -29,6 +29,7 @@ class CreateBudgetWidget extends StatefulWidget {
 class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
   DateTimeRange? calendarSelectedDay;
   String? dropDownValue;
+  final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -107,85 +108,103 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 8),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Duration',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 8, 0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 0, 4),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Amount',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyText1,
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                          custom_widgets.CurrencyTextField(
+                                            width: double.infinity,
+                                            height: 55,
+                                            amount: widget.budget!.budgetAmount,
+                                            labelText: 'Amount',
+                                            hintText: 'Enter amount',
+                                            bgcolor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                          ),
+                                        ],
                                       ),
-                                      FlutterFlowDropDown(
-                                        initialOption: dropDownValue ??=
-                                            columnBudgetsRecord.budgetDuration,
-                                        options: ['Weekly', 'Monthly'],
-                                        onChanged: (val) =>
-                                            setState(() => dropDownValue = val),
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.44,
-                                        height: 55,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .bodyText1,
-                                        hintText: 'Please select...',
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        elevation: 2,
-                                        borderColor: Colors.transparent,
-                                        borderWidth: 0,
-                                        borderRadius: 12,
-                                        margin: EdgeInsetsDirectional.fromSTEB(
-                                            12, 4, 12, 4),
-                                        hidesUnderline: true,
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 8),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Amount',
-                                              style:
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8, 0, 0, 0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 0, 4),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Duration',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Form(
+                                            key: formKey,
+                                            autovalidateMode:
+                                                AutovalidateMode.disabled,
+                                            child: FlutterFlowDropDown(
+                                              options: ['Weekly', 'Monthly'],
+                                              onChanged: (val) => setState(
+                                                  () => dropDownValue = val),
+                                              width: double.infinity,
+                                              height: 55,
+                                              textStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyText1,
+                                              hintText: 'Please select...',
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              elevation: 2,
+                                              borderColor: Colors.transparent,
+                                              borderWidth: 0,
+                                              borderRadius: 12,
+                                              margin: EdgeInsetsDirectional
+                                                  .fromSTEB(12, 4, 12, 4),
+                                              hidesUnderline: true,
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
-                                      custom_widgets.CurrencyTextField(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.44,
-                                        height: 55,
-                                        amount: widget.budget!.budgetAmount,
-                                        labelText: 'Amount',
-                                        hintText: 'Enter amount',
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -204,23 +223,6 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Expanded(
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 0, 8),
-                                              child: Text(
-                                                'Start date',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
                                       Container(
                                         width: double.infinity,
                                         decoration: BoxDecoration(
@@ -267,10 +269,9 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                   budgetEnd:
                                                       functions.addDaysToDate(
                                                           calendarSelectedDay
-                                                              ?.start,
+                                                              ?.end,
                                                           30),
-                                                  budgetOwner:
-                                                      currentUserReference,
+                                                  budgetSpent: 0,
                                                 );
                                                 await widget.budget!.reference
                                                     .update(budgetsUpdateData);
@@ -294,10 +295,9 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                   budgetEnd:
                                                       functions.addDaysToDate(
                                                           calendarSelectedDay
-                                                              ?.start,
+                                                              ?.end,
                                                           7),
-                                                  budgetOwner:
-                                                      currentUserReference,
+                                                  budgetSpent: 0,
                                                 );
                                                 await widget.budget!.reference
                                                     .update(budgetsUpdateData);
@@ -431,21 +431,50 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                        padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                         child: FFButtonWidget(
                           onPressed: () async {
                             // Action_CreateBud
+                            if (formKey.currentState == null ||
+                                !formKey.currentState!.validate()) {
+                              return;
+                            }
 
-                            final budgetsUpdateData = createBudgetsRecordData(
-                              budgetOwner: currentUserReference,
-                              budgetAmount: FFAppState().currencyTextField,
-                              budgetDuration: dropDownValue,
-                              unallocatedAmount: functions.subInt(
-                                  FFAppState().currencyTextField, 50000),
-                              status: 'active',
-                            );
-                            await widget.budget!.reference
-                                .update(budgetsUpdateData);
+                            if (dropDownValue == 'Monthly') {
+                              final budgetsUpdateData = createBudgetsRecordData(
+                                budgetAmount: FFAppState().currencyTextField,
+                                budgetStart: calendarSelectedDay?.start,
+                                isRecurring: true,
+                                unallocatedAmount: functions.subInt(
+                                    FFAppState().currencyTextField, 20000),
+                                budgetDuration: 'Monthly',
+                                status: 'active',
+                                duration: 30,
+                                budgetEnd: functions.addDaysToDate(
+                                    calendarSelectedDay?.end, 30),
+                                budgetOwner: currentUserReference,
+                                budgetSpent: 0,
+                              );
+                              await widget.budget!.reference
+                                  .update(budgetsUpdateData);
+                            } else {
+                              final budgetsUpdateData = createBudgetsRecordData(
+                                budgetAmount: FFAppState().currencyTextField,
+                                budgetStart: calendarSelectedDay?.start,
+                                isRecurring: true,
+                                unallocatedAmount: functions.subInt(
+                                    FFAppState().currencyTextField, 20000),
+                                budgetDuration: 'Weekly',
+                                status: 'active',
+                                duration: 7,
+                                budgetEnd: functions.addDaysToDate(
+                                    calendarSelectedDay?.end, 7),
+                                budgetOwner: currentUserReference,
+                                budgetSpent: 0,
+                              );
+                              await widget.budget!.reference
+                                  .update(budgetsUpdateData);
+                            }
 
                             final usersUpdateData = createUsersRecordData(
                               activeBudget: widget.budget!.reference,

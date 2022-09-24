@@ -368,6 +368,14 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                                   return EmptyListWidget(
                                                     text:
                                                         'No categories defined yet...',
+                                                    icon: Icon(
+                                                      Icons.list_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 64,
+                                                    ),
                                                   );
                                                 }
                                                 return ListView.builder(

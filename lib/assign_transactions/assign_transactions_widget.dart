@@ -694,6 +694,8 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                     final transactionsUpdateData = createTransactionsRecordData(
                                                                                       transactionCategory: listViewCategoriesRecord.reference,
                                                                                       transactionBudget: listViewCategoriesRecord.categoryBudget,
+                                                                                      isAssigned: true,
+                                                                                      dateAssigned: getCurrentTimestamp,
                                                                                     );
                                                                                     await transactionFromPageItem.reference.update(transactionsUpdateData);
                                                                                     swipeableStackController.triggerSwipeUp();
@@ -863,6 +865,16 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                             transactionCategory: inheritedSubsItem.category,
                                                                                             transactionBudget: currentUserDocument!.activeBudget,
                                                                                             recurringRef: inheritedSubsItem.reference,
+                                                                                            dateAssigned: getCurrentTimestamp,
+                                                                                            categoryDetails: createCategoryDetailsStruct(
+                                                                                              name: inheritedSubsItem.categoryDetails.name,
+                                                                                              clearUnsetFields: true,
+                                                                                            ),
+                                                                                            subscriptionDetails: createSubscriptionDetailsStruct(
+                                                                                              name: inheritedSubsItem.name,
+                                                                                              clearUnsetFields: false,
+                                                                                            ),
+                                                                                            isAssigned: true,
                                                                                           );
                                                                                           await transactionFromPageItem.reference.update(transactionsUpdateData);
                                                                                           if (inheritedSubsItem.lastChargeDate != null) {
@@ -919,6 +931,16 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                             transactionCategory: inheritedSubsItem.category,
                                                                                             transactionBudget: currentUserDocument!.activeBudget,
                                                                                             recurringRef: inheritedSubsItem.reference,
+                                                                                            dateAssigned: getCurrentTimestamp,
+                                                                                            categoryDetails: createCategoryDetailsStruct(
+                                                                                              name: inheritedSubsItem.categoryDetails.name,
+                                                                                              clearUnsetFields: true,
+                                                                                            ),
+                                                                                            subscriptionDetails: createSubscriptionDetailsStruct(
+                                                                                              name: inheritedSubsItem.name,
+                                                                                              clearUnsetFields: false,
+                                                                                            ),
+                                                                                            isAssigned: true,
                                                                                           );
                                                                                           await transactionFromPageItem.reference.update(transactionsUpdateData);
                                                                                           if (inheritedSubsItem.lastChargeDate != null) {
