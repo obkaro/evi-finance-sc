@@ -257,7 +257,15 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                   '${dateTimeFormat('MMMEd', activeBudgetBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', activeBudgetBudgetsRecord.budgetEnd)}',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyText1,
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodyText1Family,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
+                                                                      ),
                                                                 ),
                                                               ],
                                                             ),

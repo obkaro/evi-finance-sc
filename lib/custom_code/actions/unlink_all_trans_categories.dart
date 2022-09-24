@@ -19,8 +19,9 @@ Future unlinkAllTransCategories(
       'incomeCategory': FieldValue.delete(),
       'dateAssigned': FieldValue.delete(),
       'isAssigned': FieldValue.delete,
+      categoryDetails: createCategoryDetailsStruct(delete: true),
+      subscriptionDetails: createSubscriptionDetailsStruct(delete: true),
     };
-
     await transactions[i].reference.update(transactionUpdateData);
   }
 }

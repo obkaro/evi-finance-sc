@@ -822,7 +822,15 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                   '${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetEnd)}',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle2,
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodyText1Family,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
+                                                                      ),
                                                                 ),
                                                               ],
                                                             ),
@@ -947,8 +955,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                         onTap: () async {
                                           final transactionsUpdateData =
                                               createTransactionsRecordData(
-                                            categoryDetails:
-                                                createCategoryDetailsStruct(
+                                            subscriptionDetails:
+                                                createSubscriptionDetailsStruct(
                                                     delete: true),
                                           );
                                           await listViewTransactionsRecord

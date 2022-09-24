@@ -221,7 +221,15 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                                                   '${dateTimeFormat('MMMEd', singleBudgetBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', singleBudgetBudgetsRecord.budgetEnd)}',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyText1,
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodyText1Family,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
+                                                                      ),
                                                                 ),
                                                               ],
                                                             ),

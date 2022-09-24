@@ -1,11 +1,14 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/dialog_box_widget.dart';
+import '../create_budget/create_budget_widget.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../single_budget/single_budget_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
+import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -20,6 +23,7 @@ class BudgetsWidget extends StatefulWidget {
 }
 
 class _BudgetsWidgetState extends State<BudgetsWidget> {
+  BudgetsRecord? newBudg;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -52,6 +56,50 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
         elevation: 0,
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print('FloatingActionButton pressed ...');
+        },
+        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+        elevation: 8,
+        child: FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30,
+          borderWidth: 1,
+          buttonSize: 60,
+          icon: Icon(
+            Icons.add_rounded,
+            color: FlutterFlowTheme.of(context).secondaryPrimary,
+            size: 30,
+          ),
+          onPressed: () async {
+            final budgetsCreateData = createBudgetsRecordData(
+              budgetDateCreated: getCurrentTimestamp,
+              budgetID: random_data.randomString(
+                32,
+                32,
+                true,
+                true,
+                true,
+              ),
+            );
+            var budgetsRecordReference = BudgetsRecord.collection.doc();
+            await budgetsRecordReference.set(budgetsCreateData);
+            newBudg = BudgetsRecord.getDocumentFromData(
+                budgetsCreateData, budgetsRecordReference);
+            await Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CreateBudgetWidget(
+                  budget: newBudg,
+                ),
+              ),
+            );
+
+            setState(() {});
+          },
+        ),
+      ),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
