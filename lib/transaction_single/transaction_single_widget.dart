@@ -1053,9 +1053,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                         categoryDetails:
                                                             createCategoryDetailsStruct(
                                                                 delete: true),
-                                                        accountDetails:
-                                                            createAccountDetailsStruct(
-                                                                delete: true),
                                                         subscriptionDetails:
                                                             createSubscriptionDetailsStruct(
                                                                 delete: true),
