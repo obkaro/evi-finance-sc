@@ -30,70 +30,77 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        if (widget.spentAmount! >= widget.totalAmount!)
-          LinearPercentIndicator(
-            percent: 1,
-            width: MediaQuery.of(context).size.width * 0.81,
-            lineHeight: 8,
-            animation: false,
-            progressColor: Color(0xFFFF0000),
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            barRadius: Radius.circular(12),
-            padding: EdgeInsets.zero,
-          ),
-        if (functions.chartDisplay(
-            widget.totalAmount!, 0.0, widget.spentAmount!, 0.35))
-          LinearPercentIndicator(
-            percent: functions.calcChartPercent(
-                widget.totalAmount!, widget.spentAmount!)!,
-            width: MediaQuery.of(context).size.width * 0.81,
-            lineHeight: 8,
-            animation: false,
-            progressColor: FlutterFlowTheme.of(context).tertiaryColor,
-            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
-            barRadius: Radius.circular(12),
-            padding: EdgeInsets.zero,
-          ),
-        if (functions.chartDisplay(
-            widget.totalAmount!, 0.35, widget.spentAmount!, 0.65))
-          LinearPercentIndicator(
-            percent: functions.calcChartPercent(
-                widget.totalAmount!, widget.spentAmount!)!,
-            width: MediaQuery.of(context).size.width * 0.81,
-            lineHeight: 8,
-            animation: false,
-            progressColor: FlutterFlowTheme.of(context).alternate,
-            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
-            barRadius: Radius.circular(12),
-            padding: EdgeInsets.zero,
-          ),
-        if (functions.chartDisplay(
-            widget.totalAmount!, 0.65, widget.spentAmount!, 1.0))
-          LinearPercentIndicator(
-            percent: functions.calcChartPercent(
-                widget.totalAmount!, widget.spentAmount!)!,
-            width: MediaQuery.of(context).size.width * 0.81,
-            lineHeight: 8,
-            animation: false,
-            progressColor: Color(0xFFFF0000),
-            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
-            barRadius: Radius.circular(12),
-            padding: EdgeInsets.zero,
-          ),
-        if (widget.spentAmount == 0)
-          LinearPercentIndicator(
-            percent: 1,
-            width: MediaQuery.of(context).size.width * 0.81,
-            lineHeight: 8,
-            animation: false,
-            progressColor: FlutterFlowTheme.of(context).tertiaryColor,
-            backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
-            barRadius: Radius.circular(12),
-            padding: EdgeInsets.zero,
-          ),
-      ],
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 100,
+      decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).secondaryBackground,
+      ),
+      child: Stack(
+        children: [
+          if (widget.spentAmount! >= widget.totalAmount!)
+            LinearPercentIndicator(
+              percent: 1,
+              width: MediaQuery.of(context).size.width * 0.81,
+              lineHeight: 8,
+              animation: false,
+              progressColor: Color(0xFFFF0000),
+              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+              barRadius: Radius.circular(12),
+              padding: EdgeInsets.zero,
+            ),
+          if (functions.chartDisplay(
+              widget.totalAmount!, 0.0, widget.spentAmount!, 0.35))
+            LinearPercentIndicator(
+              percent: functions.calcChartPercent(
+                  widget.totalAmount!, widget.spentAmount!)!,
+              width: MediaQuery.of(context).size.width * 0.81,
+              lineHeight: 8,
+              animation: false,
+              progressColor: FlutterFlowTheme.of(context).tertiaryColor,
+              backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+              barRadius: Radius.circular(12),
+              padding: EdgeInsets.zero,
+            ),
+          if (functions.chartDisplay(
+              widget.totalAmount!, 0.35, widget.spentAmount!, 0.65))
+            LinearPercentIndicator(
+              percent: functions.calcChartPercent(
+                  widget.totalAmount!, widget.spentAmount!)!,
+              width: MediaQuery.of(context).size.width * 0.81,
+              lineHeight: 8,
+              animation: false,
+              progressColor: FlutterFlowTheme.of(context).alternate,
+              backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+              barRadius: Radius.circular(12),
+              padding: EdgeInsets.zero,
+            ),
+          if (functions.chartDisplay(
+              widget.totalAmount!, 0.65, widget.spentAmount!, 1.0))
+            LinearPercentIndicator(
+              percent: functions.calcChartPercent(
+                  widget.totalAmount!, widget.spentAmount!)!,
+              width: MediaQuery.of(context).size.width * 0.81,
+              lineHeight: 8,
+              animation: false,
+              progressColor: Color(0xFFFF0000),
+              backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+              barRadius: Radius.circular(12),
+              padding: EdgeInsets.zero,
+            ),
+          if (widget.spentAmount == 0)
+            LinearPercentIndicator(
+              percent: 1,
+              width: MediaQuery.of(context).size.width * 0.81,
+              lineHeight: 8,
+              animation: false,
+              progressColor: FlutterFlowTheme.of(context).tertiaryColor,
+              backgroundColor: FlutterFlowTheme.of(context).darkPrimary,
+              barRadius: Radius.circular(12),
+              padding: EdgeInsets.zero,
+            ),
+        ],
+      ),
     );
   }
 }

@@ -503,6 +503,8 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                               categoryBudget: widget.budget!.reference,
                               categoryOwner: currentUserReference,
                               categoryAmount: 100000,
+                              spentAmount: 0,
+                              createdDate: getCurrentTimestamp,
                             );
                             await CategoriesRecord.createDoc(
                                     widget.budget!.reference)
