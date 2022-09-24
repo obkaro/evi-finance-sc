@@ -413,7 +413,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                        padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                         child: FFButtonWidget(
                           onPressed: () async {
                             if (formKey.currentState == null ||

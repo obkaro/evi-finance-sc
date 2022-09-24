@@ -70,8 +70,8 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
           color: FlutterFlowTheme.of(context).primaryBackground,
           child: Center(
             child: Image.asset(
-              'assets/images/evi-logo-2.svg',
-              width: MediaQuery.of(context).size.width * 0.5,
+              'assets/images/evi-logo-720h.png',
+              width: MediaQuery.of(context).size.width * 0.7,
               fit: BoxFit.contain,
             ),
           ),

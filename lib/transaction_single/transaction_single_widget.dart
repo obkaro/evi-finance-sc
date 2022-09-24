@@ -1049,11 +1049,25 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
 
                                                     final transactionsUpdateData =
                                                         {
+                                                      ...createTransactionsRecordData(
+                                                        categoryDetails:
+                                                            createCategoryDetailsStruct(
+                                                                delete: true),
+                                                        accountDetails:
+                                                            createAccountDetailsStruct(
+                                                                delete: true),
+                                                        subscriptionDetails:
+                                                            createSubscriptionDetailsStruct(
+                                                                delete: true),
+                                                        isAssigned: false,
+                                                      ),
                                                       'transactionCategory':
                                                           FieldValue.delete(),
                                                       'recurringRef':
                                                           FieldValue.delete(),
                                                       'transactionBudget':
+                                                          FieldValue.delete(),
+                                                      'dateAssigned':
                                                           FieldValue.delete(),
                                                     };
                                                     await widget
@@ -1231,8 +1245,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                       child: Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
-                                                                .fromSTEB(0, 0,
-                                                                    16, 0),
+                                                                .fromSTEB(
+                                                                    0, 0, 8, 0),
                                                         child: StreamBuilder<
                                                             List<
                                                                 IncomeCategoriesRecord>>(
