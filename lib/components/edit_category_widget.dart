@@ -143,6 +143,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                     amount: widget.categoryToEdit!.categoryAmount,
                     labelText: 'Amount',
                     hintText: 'Enter amount',
+                    bgcolor: FlutterFlowTheme.of(context).primaryBackground,
                   ),
                 ),
                 Divider(

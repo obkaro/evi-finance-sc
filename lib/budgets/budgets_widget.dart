@@ -1,13 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/dialog_box_widget.dart';
-import '../create_budget/create_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../single_budget/single_budget_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
-import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -22,7 +20,6 @@ class BudgetsWidget extends StatefulWidget {
 }
 
 class _BudgetsWidgetState extends State<BudgetsWidget> {
-  BudgetsRecord? createdBudget2;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -55,79 +52,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
         elevation: 0,
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      floatingActionButton: Visibility(
-        visible: currentUserDocument!.activeBudget != null,
-        child: AuthUserStreamWidget(
-          child: StreamBuilder<List<CategoriesRecord>>(
-            stream: queryCategoriesRecord(
-              parent: currentUserDocument!.activeBudget,
-              queryBuilder: (categoriesRecord) => categoriesRecord
-                  .where('category_name', isNotEqualTo: 'unallocated'),
-              singleRecord: true,
-            ),
-            builder: (context, snapshot) {
-              // Customize what your widget looks like when it's loading.
-              if (!snapshot.hasData) {
-                return Center(
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: SpinKitRing(
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 50,
-                    ),
-                  ),
-                );
-              }
-              List<CategoriesRecord> floatingActionButtonCategoriesRecordList =
-                  snapshot.data!;
-              // Return an empty Container when the document does not exist.
-              if (snapshot.data!.isEmpty) {
-                return Container();
-              }
-              final floatingActionButtonCategoriesRecord =
-                  floatingActionButtonCategoriesRecordList.isNotEmpty
-                      ? floatingActionButtonCategoriesRecordList.first
-                      : null;
-              return FloatingActionButton(
-                onPressed: () async {
-                  final budgetsCreateData = createBudgetsRecordData(
-                    budgetDateCreated: getCurrentTimestamp,
-                    budgetID: random_data.randomString(
-                      24,
-                      24,
-                      true,
-                      true,
-                      true,
-                    ),
-                  );
-                  var budgetsRecordReference = BudgetsRecord.collection.doc();
-                  await budgetsRecordReference.set(budgetsCreateData);
-                  createdBudget2 = BudgetsRecord.getDocumentFromData(
-                      budgetsCreateData, budgetsRecordReference);
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CreateBudgetWidget(
-                        budget: createdBudget2,
-                      ),
-                    ),
-                  );
-
-                  setState(() {});
-                },
-                backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-                elevation: 8,
-                child: Icon(
-                  Icons.add_rounded,
-                  color: Colors.white,
-                  size: 32,
-                ),
-              );
-            },
-          ),
-        ),
-      ),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -218,14 +142,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                 snapshot.data!;
                                             return InkWell(
                                               onTap: () async {
-                                                final budgetsUpdateData =
-                                                    createBudgetsRecordData(
-                                                  lastViewed:
-                                                      getCurrentTimestamp,
-                                                );
-                                                await columnBudgetsRecord
-                                                    .reference
-                                                    .update(budgetsUpdateData);
                                                 await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -310,6 +226,8 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                                     'Don\'t delete',
                                                                 information:
                                                                     false,
+                                                                yesAction:
+                                                                    () async {},
                                                               ),
                                                             );
                                                           },

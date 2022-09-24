@@ -331,6 +331,8 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                               editSubsciptionSubscriptionsRecord
                                                   .expCharge.amount,
                                           hintText: 'Enter amount',
+                                          bgcolor: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
                                         ),
                                       ),
                                     ],
@@ -461,7 +463,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                                EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [

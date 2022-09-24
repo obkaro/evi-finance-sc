@@ -17,6 +17,7 @@ Future normalizeTransSub(TransactionsRecord transaction) async {
     'transactions': FieldValue.arrayRemove([transaction!.reference]),
     'narrations': FieldValue.arrayRemove([transaction!.transactionNarration]),
     'lastChargeDate': FieldValue.delete(),
+    'dateAssigned': FieldValue.delete(),
   };
 
   //Update/reset the subscription record stored in the transaction collection

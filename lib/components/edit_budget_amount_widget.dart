@@ -95,6 +95,7 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                         amount: containerBudgetsRecord.budgetAmount,
                         labelText: 'Amount',
                         hintText: 'Enter amount',
+                        bgcolor: FlutterFlowTheme.of(context).primaryBackground,
                       ),
                     ),
                     Divider(

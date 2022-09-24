@@ -45,6 +45,10 @@ abstract class TransactionsRecord
 
   SubscriptionDetailsStruct get subscriptionDetails;
 
+  bool? get isAssigned;
+
+  DateTime? get dateAssigned;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -59,7 +63,8 @@ abstract class TransactionsRecord
     ..transactionID = ''
     ..categoryDetails = CategoryDetailsStructBuilder()
     ..accountDetails = AccountDetailsStructBuilder()
-    ..subscriptionDetails = SubscriptionDetailsStructBuilder();
+    ..subscriptionDetails = SubscriptionDetailsStructBuilder()
+    ..isAssigned = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('transactions');
@@ -101,6 +106,8 @@ Map<String, dynamic> createTransactionsRecordData({
   CategoryDetailsStruct? categoryDetails,
   AccountDetailsStruct? accountDetails,
   SubscriptionDetailsStruct? subscriptionDetails,
+  bool? isAssigned,
+  DateTime? dateAssigned,
 }) {
   final firestoreData = serializers.toFirestore(
     TransactionsRecord.serializer,
@@ -122,7 +129,9 @@ Map<String, dynamic> createTransactionsRecordData({
         ..incomeCategory = incomeCategory
         ..categoryDetails = CategoryDetailsStructBuilder()
         ..accountDetails = AccountDetailsStructBuilder()
-        ..subscriptionDetails = SubscriptionDetailsStructBuilder(),
+        ..subscriptionDetails = SubscriptionDetailsStructBuilder()
+        ..isAssigned = isAssigned
+        ..dateAssigned = dateAssigned,
     ),
   );
 

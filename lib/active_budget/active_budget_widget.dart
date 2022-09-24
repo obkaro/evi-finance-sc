@@ -422,6 +422,13 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                         child: EmptyListWidget(
                                                           text:
                                                               'No categories found',
+                                                          icon: Icon(
+                                                            Icons.list_rounded,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryText,
+                                                            size: 64,
+                                                          ),
                                                         ),
                                                       ),
                                                     );

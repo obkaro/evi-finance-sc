@@ -14,6 +14,7 @@ class DialogBoxWidget extends StatefulWidget {
     this.buttonYes,
     this.buttonNo,
     this.information,
+    this.yesAction,
   }) : super(key: key);
 
   final String? heading;
@@ -21,6 +22,7 @@ class DialogBoxWidget extends StatefulWidget {
   final String? buttonYes;
   final String? buttonNo;
   final bool? information;
+  final Future<dynamic> Function()? yesAction;
 
   @override
   _DialogBoxWidgetState createState() => _DialogBoxWidgetState();
@@ -171,6 +173,7 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                               onPressed: () async {
                                 setState(
                                     () => FFAppState().dialogBoxReturn = true);
+                                await widget.yesAction?.call();
                                 Navigator.pop(context);
                               },
                               text: widget.buttonYes!,

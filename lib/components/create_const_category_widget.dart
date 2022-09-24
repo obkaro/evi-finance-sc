@@ -113,6 +113,7 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                     height: 55,
                     labelText: 'Amount',
                     hintText: 'Enter amount',
+                    bgcolor: FlutterFlowTheme.of(context).primaryBackground,
                   ),
                 ),
                 Divider(

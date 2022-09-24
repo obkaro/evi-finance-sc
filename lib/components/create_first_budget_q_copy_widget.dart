@@ -91,7 +91,7 @@ class _CreateFirstBudgetQCopyWidgetState
                     ),
                     Icon(
                       Icons.refresh_rounded,
-                      color: FlutterFlowTheme.of(context).primaryText,
+                      color: FlutterFlowTheme.of(context).secondaryText,
                       size: 72,
                     ),
                     Padding(

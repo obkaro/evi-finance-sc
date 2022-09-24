@@ -1,6 +1,7 @@
 import '../allocate_budget/allocate_budget_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/dialog_box_widget.dart';
 import '../flutter_flow/flutter_flow_calendar.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -29,6 +30,7 @@ class FirstBudgetWidget extends StatefulWidget {
 class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
   DateTimeRange? calendarSelectedDay;
   String? dropDownValue;
+  final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -101,46 +103,50 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  'How often would you like to restart your budget?',
+                                  'How do you plan to track your money?',
                                   style: FlutterFlowTheme.of(context).bodyText2,
                                 ),
                               ],
                             ),
                           ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: FlutterFlowDropDown(
-                              options: ['Weekly', 'Monthly'],
-                              onChanged: (val) =>
-                                  setState(() => dropDownValue = val),
-                              width: double.infinity,
-                              height: 55,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyText1Family,
-                                    fontWeight: FontWeight.w600,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyText1Family),
-                                  ),
-                              hintText: 'Please select...',
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              elevation: 2,
-                              borderColor: Colors.transparent,
-                              borderWidth: 0,
-                              borderRadius: 12,
-                              margin:
-                                  EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
-                              hidesUnderline: true,
+                          Form(
+                            key: formKey,
+                            autovalidateMode: AutovalidateMode.disabled,
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                              child: FlutterFlowDropDown(
+                                options: ['Weekly', 'Monthly'],
+                                onChanged: (val) =>
+                                    setState(() => dropDownValue = val),
+                                width: double.infinity,
+                                height: 55,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyText1Family,
+                                      fontWeight: FontWeight.w600,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText1Family),
+                                    ),
+                                hintText: 'Please select...',
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                elevation: 2,
+                                borderColor: Colors.transparent,
+                                borderWidth: 0,
+                                borderRadius: 12,
+                                margin: EdgeInsetsDirectional.fromSTEB(
+                                    12, 4, 12, 4),
+                                hidesUnderline: true,
+                              ),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 4),
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -176,6 +182,8 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                               height: 55,
                               labelText: 'Amount',
                               hintText: 'Enter amount',
+                              bgcolor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                             ),
                           ),
                           Padding(
@@ -195,7 +203,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 4, 0, 4),
                                         child: Text(
-                                          'When would you like to begin?',
+                                          'When would you like your budget to begin?',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText2,
                                         ),
@@ -246,10 +254,9 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                                   budgetEnd:
                                                       functions.addDaysToDate(
                                                           calendarSelectedDay
-                                                              ?.start,
+                                                              ?.end,
                                                           30),
-                                                  budgetOwner:
-                                                      currentUserReference,
+                                                  budgetSpent: 0,
                                                 );
                                                 await widget.budget!.reference
                                                     .update(budgetsUpdateData);
@@ -273,10 +280,9 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                                   budgetEnd:
                                                       functions.addDaysToDate(
                                                           calendarSelectedDay
-                                                              ?.start,
+                                                              ?.end,
                                                           7),
-                                                  budgetOwner:
-                                                      currentUserReference,
+                                                  budgetSpent: 0,
                                                 );
                                                 await widget.budget!.reference
                                                     .update(budgetsUpdateData);
@@ -410,24 +416,70 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            // Action_CreateBud
+                            if (formKey.currentState == null ||
+                                !formKey.currentState!.validate()) {
+                              return;
+                            }
 
-                            final budgetsUpdateData = createBudgetsRecordData(
-                              budgetOwner: currentUserReference,
-                              budgetAmount: FFAppState().currencyTextField,
-                              budgetDuration: dropDownValue,
-                              unallocatedAmount: functions.subInt(
-                                  FFAppState().currencyTextField, 50000),
-                              status: 'active',
-                              budgetSpent: 0,
-                            );
-                            await widget.budget!.reference
-                                .update(budgetsUpdateData);
+                            if (dropDownValue == null) {
+                              await showModalBottomSheet(
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
+                                context: context,
+                                builder: (context) {
+                                  return Padding(
+                                    padding: MediaQuery.of(context).viewInsets,
+                                    child: DialogBoxWidget(
+                                      heading: 'No period set',
+                                      body:
+                                          'Please select a budget period from the dropdown',
+                                      buttonYes: 'Okay',
+                                      buttonNo: 'No',
+                                      information: true,
+                                      yesAction: () async {},
+                                    ),
+                                  );
+                                },
+                              ).then((value) => setState(() {}));
 
-                            final usersUpdateData = createUsersRecordData(
-                              activeBudget: widget.budget!.reference,
-                            );
-                            await currentUserReference!.update(usersUpdateData);
+                              return;
+                            }
+
+                            if (dropDownValue == 'Monthly') {
+                              final budgetsUpdateData = createBudgetsRecordData(
+                                budgetAmount: FFAppState().currencyTextField,
+                                budgetStart: calendarSelectedDay?.start,
+                                isRecurring: true,
+                                unallocatedAmount: functions.subInt(
+                                    FFAppState().currencyTextField, 20000),
+                                budgetDuration: 'Monthly',
+                                status: 'active',
+                                duration: 30,
+                                budgetEnd: functions.addDaysToDate(
+                                    calendarSelectedDay?.end, 30),
+                                budgetOwner: currentUserReference,
+                                budgetSpent: 0,
+                              );
+                              await widget.budget!.reference
+                                  .update(budgetsUpdateData);
+                            } else {
+                              final budgetsUpdateData = createBudgetsRecordData(
+                                budgetAmount: FFAppState().currencyTextField,
+                                budgetStart: calendarSelectedDay?.start,
+                                isRecurring: true,
+                                unallocatedAmount: functions.subInt(
+                                    FFAppState().currencyTextField, 20000),
+                                budgetDuration: 'Weekly',
+                                status: 'active',
+                                duration: 7,
+                                budgetEnd: functions.addDaysToDate(
+                                    calendarSelectedDay?.end, 7),
+                                budgetOwner: currentUserReference,
+                                budgetSpent: 0,
+                              );
+                              await widget.budget!.reference
+                                  .update(budgetsUpdateData);
+                            }
 
                             final categoriesCreateData =
                                 createCategoriesRecordData(
@@ -441,7 +493,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                               ),
                               categoryBudget: widget.budget!.reference,
                               categoryOwner: currentUserReference,
-                              categoryAmount: 50000,
+                              categoryAmount: 100000,
                             );
                             await CategoriesRecord.createDoc(
                                     widget.budget!.reference)

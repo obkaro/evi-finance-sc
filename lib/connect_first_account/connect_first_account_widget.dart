@@ -185,6 +185,38 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                         children: [
                                           Expanded(
                                             child: Icon(
+                                              Icons.remove_red_eye_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 36,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 4,
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Text(
+                                                  'Your login credentials are encrypted and securely validated by your bank. Evi does not have access to view or store bank login data.',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 20, 0, 20),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            child: Icon(
                                               Icons.cancel_rounded,
                                               color:
                                                   FlutterFlowTheme.of(context)

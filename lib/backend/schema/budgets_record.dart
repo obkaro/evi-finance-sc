@@ -24,8 +24,6 @@ abstract class BudgetsRecord
 
   String? get budgetID;
 
-  DateTime? get lastViewed;
-
   String? get budgetDuration;
 
   int? get unallocatedAmount;
@@ -79,7 +77,6 @@ Map<String, dynamic> createBudgetsRecordData({
   DateTime? budgetDateCreated,
   bool? isRecurring,
   String? budgetID,
-  DateTime? lastViewed,
   String? budgetDuration,
   int? unallocatedAmount,
   String? status,
@@ -97,7 +94,6 @@ Map<String, dynamic> createBudgetsRecordData({
         ..budgetDateCreated = budgetDateCreated
         ..isRecurring = isRecurring
         ..budgetID = budgetID
-        ..lastViewed = lastViewed
         ..budgetDuration = budgetDuration
         ..unallocatedAmount = unallocatedAmount
         ..status = status

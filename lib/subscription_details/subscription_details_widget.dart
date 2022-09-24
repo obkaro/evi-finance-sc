@@ -429,6 +429,12 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                 return Center(
                                   child: EmptyListWidget(
                                     text: 'No payments here yet...',
+                                    icon: Icon(
+                                      Icons.credit_card_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 64,
+                                    ),
                                   ),
                                 );
                               }
