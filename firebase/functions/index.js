@@ -346,7 +346,7 @@ exports.subscriptionReminder = functions.firestore.document('subscriptions/{Id}'
 
 
 exports.recalcspentamounts = functions.firestore.document('transactions/{id}')
-  .onUpdate(async (change, context) => {
+  .onWrite(async (change, context) => {
     const oldDoc = change.before.data();
     const newDoc = change.after.data();
 
