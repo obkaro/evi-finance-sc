@@ -588,11 +588,14 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                           MainAxisAlignment
                                                                               .center,
                                                                       children: [
-                                                                        ProgressBarWidget(
-                                                                          totalAmount:
-                                                                              listViewCategoriesRecord.categoryAmount,
-                                                                          spentAmount:
-                                                                              listViewCategoriesRecord.spentAmount,
+                                                                        Expanded(
+                                                                          child:
+                                                                              ProgressBarWidget(
+                                                                            totalAmount:
+                                                                                listViewCategoriesRecord.categoryAmount,
+                                                                            spentAmount:
+                                                                                listViewCategoriesRecord.spentAmount,
+                                                                          ),
                                                                         ),
                                                                       ],
                                                                     ),

@@ -31,10 +31,7 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-      ),
+      height: 8,
       child: Stack(
         children: [
           if (widget.spentAmount! >= widget.totalAmount!)
