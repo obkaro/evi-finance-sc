@@ -92,23 +92,31 @@ exports.accountupdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', 
 
               functions.logger.log(hash(id));
 
-              const writetransactions = await admin.firestore().collection('transactions').doc(hash(id).toString()).set(
-                {
-                  account: account.docs[0].ref,
-                  trasactionDate: admin.firestore.Timestamp.fromDate(parsedDate),
-                  //monoCategory: transaction.data[i].,
-                  transactionOwner: account.docs[0].data().accountOwner,
-                  balanceAfter: element.balance,
-                  transactionAmount: element.amount,
-                  transactionMonoID: element._id,
-                  transactionType: element.type,
-                  transactionNarration: element.narration,
-                  monoCategory: element.category,
-                  accountDetails: {
-                    logo: logo.docs[0].data().institutionLogo
-                  }
-                }, { merge: true }
-              )
+              const exisiting = await admin.firestore().collection('transactions').doc(hash(id).toString()).get();
+
+              if (!exisiting.exists) {
+                functions.logger.log('TRANSACTION DOES NOT EXIST. WRITING DATA...')
+                const writetransactions = await admin.firestore().collection('transactions').doc(hash(id).toString()).set(
+                  {
+                    account: account.docs[0].ref,
+                    trasactionDate: admin.firestore.Timestamp.fromDate(parsedDate),
+                    //monoCategory: transaction.data[i].,
+                    transactionOwner: account.docs[0].data().accountOwner,
+                    balanceAfter: element.balance,
+                    transactionAmount: element.amount,
+                    transactionMonoID: element._id,
+                    transactionType: element.type,
+                    transactionNarration: element.narration,
+                    monoCategory: element.category,
+                    accountDetails: {
+                      logo: logo.docs[0].data().institutionLogo
+                    },
+                    isAssigned: false
+                  },
+                )
+              } else {
+                functions.logger.log('TRANSACTION ALREADY EXISTS')
+              }
             });
             //functions.logger.log(response.data);
           })

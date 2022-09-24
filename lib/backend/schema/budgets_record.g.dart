@@ -69,13 +69,6 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.lastViewed;
-    if (value != null) {
-      result
-        ..add('lastViewed')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(DateTime)));
-    }
     value = object.budgetDuration;
     if (value != null) {
       result
@@ -161,10 +154,6 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
           result.budgetID = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'lastViewed':
-          result.lastViewed = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime?;
-          break;
         case 'budgetDuration':
           result.budgetDuration = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -214,8 +203,6 @@ class _$BudgetsRecord extends BudgetsRecord {
   @override
   final String? budgetID;
   @override
-  final DateTime? lastViewed;
-  @override
   final String? budgetDuration;
   @override
   final int? unallocatedAmount;
@@ -239,7 +226,6 @@ class _$BudgetsRecord extends BudgetsRecord {
       this.budgetDateCreated,
       this.isRecurring,
       this.budgetID,
-      this.lastViewed,
       this.budgetDuration,
       this.unallocatedAmount,
       this.status,
@@ -266,7 +252,6 @@ class _$BudgetsRecord extends BudgetsRecord {
         budgetDateCreated == other.budgetDateCreated &&
         isRecurring == other.isRecurring &&
         budgetID == other.budgetID &&
-        lastViewed == other.lastViewed &&
         budgetDuration == other.budgetDuration &&
         unallocatedAmount == other.unallocatedAmount &&
         status == other.status &&
@@ -289,18 +274,14 @@ class _$BudgetsRecord extends BudgetsRecord {
                                         $jc(
                                             $jc(
                                                 $jc(
-                                                    $jc(
-                                                        $jc(
-                                                            0,
-                                                            budgetOwner
-                                                                .hashCode),
-                                                        budgetAmount.hashCode),
-                                                    budgetStart.hashCode),
-                                                budgetEnd.hashCode),
-                                            budgetDateCreated.hashCode),
-                                        isRecurring.hashCode),
-                                    budgetID.hashCode),
-                                lastViewed.hashCode),
+                                                    $jc(0,
+                                                        budgetOwner.hashCode),
+                                                    budgetAmount.hashCode),
+                                                budgetStart.hashCode),
+                                            budgetEnd.hashCode),
+                                        budgetDateCreated.hashCode),
+                                    isRecurring.hashCode),
+                                budgetID.hashCode),
                             budgetDuration.hashCode),
                         unallocatedAmount.hashCode),
                     status.hashCode),
@@ -319,7 +300,6 @@ class _$BudgetsRecord extends BudgetsRecord {
           ..add('budgetDateCreated', budgetDateCreated)
           ..add('isRecurring', isRecurring)
           ..add('budgetID', budgetID)
-          ..add('lastViewed', lastViewed)
           ..add('budgetDuration', budgetDuration)
           ..add('unallocatedAmount', unallocatedAmount)
           ..add('status', status)
@@ -364,10 +344,6 @@ class BudgetsRecordBuilder
   String? get budgetID => _$this._budgetID;
   set budgetID(String? budgetID) => _$this._budgetID = budgetID;
 
-  DateTime? _lastViewed;
-  DateTime? get lastViewed => _$this._lastViewed;
-  set lastViewed(DateTime? lastViewed) => _$this._lastViewed = lastViewed;
-
   String? _budgetDuration;
   String? get budgetDuration => _$this._budgetDuration;
   set budgetDuration(String? budgetDuration) =>
@@ -408,7 +384,6 @@ class BudgetsRecordBuilder
       _budgetDateCreated = $v.budgetDateCreated;
       _isRecurring = $v.isRecurring;
       _budgetID = $v.budgetID;
-      _lastViewed = $v.lastViewed;
       _budgetDuration = $v.budgetDuration;
       _unallocatedAmount = $v.unallocatedAmount;
       _status = $v.status;
@@ -444,7 +419,6 @@ class BudgetsRecordBuilder
             budgetDateCreated: budgetDateCreated,
             isRecurring: isRecurring,
             budgetID: budgetID,
-            lastViewed: lastViewed,
             budgetDuration: budgetDuration,
             unallocatedAmount: unallocatedAmount,
             status: status,
