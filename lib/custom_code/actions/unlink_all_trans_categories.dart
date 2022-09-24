@@ -15,7 +15,6 @@ Future unlinkAllTransCategories(
     final transactionsUpdateData = {
       ...createTransactionsRecordData(
         categoryDetails: createCategoryDetailsStruct(delete: true),
-        accountDetails: createAccountDetailsStruct(delete: true),
         subscriptionDetails: createSubscriptionDetailsStruct(delete: true),
         isAssigned: false,
       ),

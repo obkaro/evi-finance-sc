@@ -265,6 +265,10 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                         clearUnsetFields:
                                                                             false,
                                                                       ),
+                                                                      isAssigned:
+                                                                          true,
+                                                                      dateAssigned:
+                                                                          getCurrentTimestamp,
                                                                     );
                                                                     await widget
                                                                         .transaction!
@@ -583,6 +587,10 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                         clearUnsetFields:
                                                                             false,
                                                                       ),
+                                                                      isAssigned:
+                                                                          true,
+                                                                      dateAssigned:
+                                                                          getCurrentTimestamp,
                                                                     );
                                                                     await widget
                                                                         .transaction!
@@ -701,6 +709,10 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                         clearUnsetFields:
                                                                             false,
                                                                       ),
+                                                                      isAssigned:
+                                                                          true,
+                                                                      dateAssigned:
+                                                                          getCurrentTimestamp,
                                                                     );
                                                                     await widget
                                                                         .transaction!
