@@ -1312,6 +1312,11 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                               createTransactionsRecordData(
                                                                             incomeCategory:
                                                                                 rowIncomeCategoriesRecord.reference,
+                                                                            incomeDetails:
+                                                                                createIncomeDetailsStruct(
+                                                                              name: rowIncomeCategoriesRecord.categoryName,
+                                                                              clearUnsetFields: false,
+                                                                            ),
                                                                           );
                                                                           await columnTransactionsRecord
                                                                               .reference

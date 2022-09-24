@@ -119,7 +119,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                             children: [
                                               Padding(
                                                 padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 4),
+                                                    .fromSTEB(8, 0, 0, 4),
                                                 child: Text(
                                                   'Amount',
                                                   style: FlutterFlowTheme.of(
@@ -159,7 +159,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                             children: [
                                               Padding(
                                                 padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 4),
+                                                    .fromSTEB(8, 0, 0, 4),
                                                 child: Text(
                                                   'Duration',
                                                   style: FlutterFlowTheme.of(

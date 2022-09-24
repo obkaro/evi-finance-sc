@@ -102,9 +102,14 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(
-                                  'How do you plan to track your money?',
-                                  style: FlutterFlowTheme.of(context).bodyText2,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 0, 0, 0),
+                                  child: Text(
+                                    'How do you plan to track your money?',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText2,
+                                  ),
                                 ),
                               ],
                             ),
@@ -163,10 +168,14 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                     verticalDirection: VerticalDirection.down,
                                     clipBehavior: Clip.none,
                                     children: [
-                                      Text(
-                                        'How much do you plan to spend within your budget period?',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            8, 0, 0, 0),
+                                        child: Text(
+                                          'How much do you plan to spend within your budget period?',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText2,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -201,7 +210,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 4, 0, 4),
+                                            8, 4, 0, 4),
                                         child: Text(
                                           'When would you like your budget to begin?',
                                           style: FlutterFlowTheme.of(context)

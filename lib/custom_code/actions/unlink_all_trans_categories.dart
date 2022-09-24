@@ -12,16 +12,18 @@ Future unlinkAllTransCategories(
 ) async {
   // Add your function code here!
   for (var i = 0; i < transactions!.length; i++) {
-    final transactionUpdateData = {
+    final transactionsUpdateData = {
+      ...createTransactionsRecordData(
+        categoryDetails: createCategoryDetailsStruct(delete: true),
+        accountDetails: createAccountDetailsStruct(delete: true),
+        subscriptionDetails: createSubscriptionDetailsStruct(delete: true),
+        isAssigned: false,
+      ),
       'transactionCategory': FieldValue.delete(),
-      'transactionBudget': FieldValue.delete(),
       'recurringRef': FieldValue.delete(),
-      'incomeCategory': FieldValue.delete(),
+      'transactionBudget': FieldValue.delete(),
       'dateAssigned': FieldValue.delete(),
-      'isAssigned': FieldValue.delete,
-      categoryDetails: createCategoryDetailsStruct(delete: true),
-      subscriptionDetails: createSubscriptionDetailsStruct(delete: true),
     };
-    await transactions[i].reference.update(transactionUpdateData);
+    await transactions[i].reference.update(transactionsUpdateData);
   }
 }

@@ -17,7 +17,6 @@ import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -951,22 +950,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                       final listViewTransactionsRecord =
                                           listViewTransactionsRecordList[
                                               listViewIndex];
-                                      return InkWell(
-                                        onTap: () async {
-                                          final transactionsUpdateData =
-                                              createTransactionsRecordData(
-                                            subscriptionDetails:
-                                                createSubscriptionDetailsStruct(
-                                                    delete: true),
-                                          );
-                                          await listViewTransactionsRecord
-                                              .reference
-                                              .update(transactionsUpdateData);
-                                        },
-                                        child: TransactionListItemWidget(
-                                          transactionDoc:
-                                              listViewTransactionsRecord,
-                                        ),
+                                      return TransactionListItemWidget(
+                                        transactionDoc:
+                                            listViewTransactionsRecord,
                                       );
                                     },
                                   );

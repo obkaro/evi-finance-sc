@@ -49,6 +49,8 @@ abstract class TransactionsRecord
 
   DateTime? get dateAssigned;
 
+  IncomeDetailsStruct get incomeDetails;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -64,7 +66,8 @@ abstract class TransactionsRecord
     ..categoryDetails = CategoryDetailsStructBuilder()
     ..accountDetails = AccountDetailsStructBuilder()
     ..subscriptionDetails = SubscriptionDetailsStructBuilder()
-    ..isAssigned = false;
+    ..isAssigned = false
+    ..incomeDetails = IncomeDetailsStructBuilder();
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('transactions');
@@ -108,6 +111,7 @@ Map<String, dynamic> createTransactionsRecordData({
   SubscriptionDetailsStruct? subscriptionDetails,
   bool? isAssigned,
   DateTime? dateAssigned,
+  IncomeDetailsStruct? incomeDetails,
 }) {
   final firestoreData = serializers.toFirestore(
     TransactionsRecord.serializer,
@@ -131,7 +135,8 @@ Map<String, dynamic> createTransactionsRecordData({
         ..accountDetails = AccountDetailsStructBuilder()
         ..subscriptionDetails = SubscriptionDetailsStructBuilder()
         ..isAssigned = isAssigned
-        ..dateAssigned = dateAssigned,
+        ..dateAssigned = dateAssigned
+        ..incomeDetails = IncomeDetailsStructBuilder(),
     ),
   );
 
@@ -145,6 +150,9 @@ Map<String, dynamic> createTransactionsRecordData({
   // Handle nested data for "subscriptionDetails" field.
   addSubscriptionDetailsStructData(
       firestoreData, subscriptionDetails, 'subscriptionDetails');
+
+  // Handle nested data for "incomeDetails" field.
+  addIncomeDetailsStructData(firestoreData, incomeDetails, 'incomeDetails');
 
   return firestoreData;
 }
