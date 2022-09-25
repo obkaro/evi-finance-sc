@@ -264,24 +264,16 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                               if (dropDownValue == 'Monthly') {
                                                 final budgetsUpdateData =
                                                     createBudgetsRecordData(
-                                                  budgetAmount: FFAppState()
-                                                      .currencyTextField,
                                                   budgetStart:
                                                       calendarSelectedDay
                                                           ?.start,
                                                   isRecurring: true,
-                                                  unallocatedAmount:
-                                                      functions.subInt(
-                                                          FFAppState()
-                                                              .currencyTextField,
-                                                          20000),
                                                   budgetDuration: 'Monthly',
-                                                  status: 'active',
                                                   duration: 30,
                                                   budgetEnd:
                                                       functions.addDaysToDate(
                                                           calendarSelectedDay
-                                                              ?.end,
+                                                              ?.start,
                                                           30),
                                                   budgetSpent: 0,
                                                 );
@@ -291,24 +283,16 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                 if (dropDownValue == 'Weekly') {
                                                   final budgetsUpdateData =
                                                       createBudgetsRecordData(
-                                                    budgetAmount: FFAppState()
-                                                        .currencyTextField,
                                                     budgetStart:
                                                         calendarSelectedDay
                                                             ?.start,
                                                     isRecurring: true,
-                                                    unallocatedAmount:
-                                                        functions.subInt(
-                                                            FFAppState()
-                                                                .currencyTextField,
-                                                            20000),
                                                     budgetDuration: 'Weekly',
-                                                    status: 'active',
                                                     duration: 7,
                                                     budgetEnd:
                                                         functions.addDaysToDate(
                                                             calendarSelectedDay
-                                                                ?.end,
+                                                                ?.start,
                                                             7),
                                                     budgetSpent: 0,
                                                   );
@@ -320,24 +304,16 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                       'Daily') {
                                                     final budgetsUpdateData =
                                                         createBudgetsRecordData(
-                                                      budgetAmount: FFAppState()
-                                                          .currencyTextField,
                                                       budgetStart:
                                                           calendarSelectedDay
                                                               ?.start,
                                                       isRecurring: true,
-                                                      unallocatedAmount:
-                                                          functions.subInt(
-                                                              FFAppState()
-                                                                  .currencyTextField,
-                                                              20000),
                                                       budgetDuration: 'Weekly',
-                                                      status: 'active',
                                                       duration: 1,
                                                       budgetEnd: functions
                                                           .addDaysToDate(
                                                               calendarSelectedDay
-                                                                  ?.end,
+                                                                  ?.start,
                                                               1),
                                                       budgetSpent: 0,
                                                     );
@@ -348,19 +324,11 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                   } else {
                                                     final budgetsUpdateData =
                                                         createBudgetsRecordData(
-                                                      budgetAmount: FFAppState()
-                                                          .currencyTextField,
                                                       budgetStart:
                                                           calendarSelectedDay
                                                               ?.start,
                                                       isRecurring: true,
-                                                      unallocatedAmount:
-                                                          functions.subInt(
-                                                              FFAppState()
-                                                                  .currencyTextField,
-                                                              20000),
                                                       budgetDuration: 'Weekly',
-                                                      status: 'active',
                                                       duration: 7,
                                                       budgetEnd:
                                                           calendarSelectedDay
@@ -523,7 +491,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                 status: 'active',
                                 duration: 30,
                                 budgetEnd: functions.addDaysToDate(
-                                    calendarSelectedDay?.end, 30),
+                                    calendarSelectedDay?.start, 30),
                                 budgetOwner: currentUserReference,
                                 budgetSpent: 0,
                               );
@@ -542,7 +510,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                   status: 'active',
                                   duration: 7,
                                   budgetEnd: functions.addDaysToDate(
-                                      calendarSelectedDay?.end, 7),
+                                      calendarSelectedDay?.start, 7),
                                   budgetOwner: currentUserReference,
                                   budgetSpent: 0,
                                 );
@@ -562,27 +530,14 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                     status: 'active',
                                     duration: 1,
                                     budgetEnd: functions.addDaysToDate(
-                                        calendarSelectedDay?.end, 1),
+                                        calendarSelectedDay?.start, 1),
                                     budgetOwner: currentUserReference,
                                     budgetSpent: 0,
                                   );
                                   await widget.budget!.reference
                                       .update(budgetsUpdateData);
                                 } else {
-                                  final budgetsUpdateData =
-                                      createBudgetsRecordData(
-                                    budgetAmount:
-                                        FFAppState().currencyTextField,
-                                    budgetStart: calendarSelectedDay?.start,
-                                    isRecurring: true,
-                                    unallocatedAmount: functions.subInt(
-                                        FFAppState().currencyTextField, 20000),
-                                    status: 'active',
-                                    budgetEnd: calendarSelectedDay?.end,
-                                    budgetSpent: 0,
-                                  );
-                                  await widget.budget!.reference
-                                      .update(budgetsUpdateData);
+                                  return;
                                 }
                               }
                             }

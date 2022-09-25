@@ -92,328 +92,352 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                     flex: 5,
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 16, 0, 4),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      8, 0, 0, 0),
-                                  child: Text(
-                                    'How do you plan to track your money?',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText2,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Form(
-                            key: formKey,
-                            autovalidateMode: AutovalidateMode.disabled,
-                            child: Padding(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                              child: FlutterFlowDropDown(
-                                options: ['Weekly', 'Monthly'],
-                                onChanged: (val) =>
-                                    setState(() => dropDownValue = val),
-                                width: double.infinity,
-                                height: 55,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
-                                      fontWeight: FontWeight.w600,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
+                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 4),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        8, 0, 0, 0),
+                                    child: Text(
+                                      'How do you plan to track your money?',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText2,
                                     ),
-                                hintText: 'Please select...',
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                elevation: 2,
-                                borderColor: Colors.transparent,
-                                borderWidth: 0,
-                                borderRadius: 12,
-                                margin: EdgeInsetsDirectional.fromSTEB(
-                                    12, 4, 12, 4),
-                                hidesUnderline: true,
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Wrap(
-                                    spacing: 0,
-                                    runSpacing: 0,
-                                    alignment: WrapAlignment.start,
-                                    crossAxisAlignment:
-                                        WrapCrossAlignment.start,
-                                    direction: Axis.horizontal,
-                                    runAlignment: WrapAlignment.start,
-                                    verticalDirection: VerticalDirection.down,
-                                    clipBehavior: Clip.none,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            8, 0, 0, 0),
-                                        child: Text(
-                                          'How much do you plan to spend within your budget period?',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText2,
-                                        ),
+                            Form(
+                              key: formKey,
+                              autovalidateMode: AutovalidateMode.disabled,
+                              child: Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                                child: FlutterFlowDropDown(
+                                  options: ['Weekly', 'Monthly'],
+                                  onChanged: (val) =>
+                                      setState(() => dropDownValue = val),
+                                  width: double.infinity,
+                                  height: 55,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyText1Family,
+                                        fontWeight: FontWeight.w600,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText1Family),
                                       ),
-                                    ],
-                                  ),
+                                  hintText: 'Please select...',
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  elevation: 2,
+                                  borderColor: Colors.transparent,
+                                  borderWidth: 0,
+                                  borderRadius: 12,
+                                  margin: EdgeInsetsDirectional.fromSTEB(
+                                      12, 4, 12, 4),
+                                  hidesUnderline: true,
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: custom_widgets.CurrencyTextField(
-                              width: MediaQuery.of(context).size.width,
-                              height: 55,
-                              labelText: 'Amount',
-                              hintText: 'Enter amount',
-                              bgcolor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            8, 4, 0, 4),
-                                        child: Text(
-                                          'When would you like your budget to begin?',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText2,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(32),
-                                        ),
-                                        child: Padding(
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Wrap(
+                                      spacing: 0,
+                                      runSpacing: 0,
+                                      alignment: WrapAlignment.start,
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.start,
+                                      direction: Axis.horizontal,
+                                      runAlignment: WrapAlignment.start,
+                                      verticalDirection: VerticalDirection.down,
+                                      clipBehavior: Clip.none,
+                                      children: [
+                                        Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  16, 10, 16, 16),
-                                          child: FlutterFlowCalendar(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            iconColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            weekFormat: false,
-                                            weekStartsMonday: false,
-                                            initialDate: getCurrentTimestamp,
-                                            rowHeight: 48,
-                                            onChange: (DateTimeRange?
-                                                newSelectedDate) async {
-                                              calendarSelectedDay =
-                                                  newSelectedDate;
-                                              if (dropDownValue == 'Monthly') {
-                                                final budgetsUpdateData =
-                                                    createBudgetsRecordData(
-                                                  budgetAmount: FFAppState()
-                                                      .currencyTextField,
-                                                  budgetStart:
-                                                      calendarSelectedDay
-                                                          ?.start,
-                                                  isRecurring: true,
-                                                  unallocatedAmount:
-                                                      functions.subInt(
-                                                          FFAppState()
-                                                              .currencyTextField,
-                                                          20000),
-                                                  budgetDuration: 'Monthly',
-                                                  status: 'active',
-                                                  duration: 30,
-                                                  budgetEnd:
-                                                      functions.addDaysToDate(
-                                                          calendarSelectedDay
-                                                              ?.end,
-                                                          30),
-                                                  budgetSpent: 0,
-                                                );
-                                                await widget.budget!.reference
-                                                    .update(budgetsUpdateData);
-                                              } else {
-                                                final budgetsUpdateData =
-                                                    createBudgetsRecordData(
-                                                  budgetAmount: FFAppState()
-                                                      .currencyTextField,
-                                                  budgetStart:
-                                                      calendarSelectedDay
-                                                          ?.start,
-                                                  isRecurring: true,
-                                                  unallocatedAmount:
-                                                      functions.subInt(
-                                                          FFAppState()
-                                                              .currencyTextField,
-                                                          20000),
-                                                  budgetDuration: 'Weekly',
-                                                  status: 'active',
-                                                  duration: 7,
-                                                  budgetEnd:
-                                                      functions.addDaysToDate(
-                                                          calendarSelectedDay
-                                                              ?.end,
-                                                          7),
-                                                  budgetSpent: 0,
-                                                );
-                                                await widget.budget!.reference
-                                                    .update(budgetsUpdateData);
-                                              }
-
-                                              setState(() {});
-                                            },
-                                            titleStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle2Family,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .subtitle2Family),
-                                                    ),
-                                            dayOfWeekStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText2
-                                                    .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText2Family,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText2Family),
-                                                    ),
-                                            dateStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText2
-                                                    .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText2Family,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText2Family),
-                                                    ),
-                                            selectedDateStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1Family,
-                                                      color: Colors.white,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText1Family),
-                                                    ),
-                                            inactiveDateStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText2
-                                                    .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText2Family,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .fadedDivider,
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText2Family),
-                                                    ),
-                                            locale: FFLocalizations.of(context)
-                                                .languageCode,
+                                                  8, 0, 0, 0),
+                                          child: Text(
+                                            'How much do you plan to spend within your budget period?',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2,
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                          if (columnBudgetsRecord.budgetStart != null)
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
-                                  style: FlutterFlowTheme.of(context).subtitle2,
-                                ),
-                              ],
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                              child: custom_widgets.CurrencyTextField(
+                                width: MediaQuery.of(context).size.width,
+                                height: 55,
+                                labelText: 'Amount',
+                                hintText: 'Enter amount',
+                                bgcolor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
                             ),
-                        ],
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  8, 4, 0, 4),
+                                          child: Text(
+                                            'When would you like your budget to begin?',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2,
+                                          ),
+                                        ),
+                                        Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(32),
+                                          ),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16, 10, 16, 16),
+                                            child: FlutterFlowCalendar(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              iconColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              weekFormat: false,
+                                              weekStartsMonday: false,
+                                              initialDate: getCurrentTimestamp,
+                                              rowHeight: 48,
+                                              onChange: (DateTimeRange?
+                                                  newSelectedDate) async {
+                                                calendarSelectedDay =
+                                                    newSelectedDate;
+                                                if (dropDownValue ==
+                                                    'Monthly') {
+                                                  final budgetsUpdateData =
+                                                      createBudgetsRecordData(
+                                                    budgetStart:
+                                                        calendarSelectedDay
+                                                            ?.start,
+                                                    isRecurring: true,
+                                                    budgetDuration:
+                                                        dropDownValue,
+                                                    duration: 30,
+                                                    budgetEnd:
+                                                        functions.addDaysToDate(
+                                                            calendarSelectedDay
+                                                                ?.start,
+                                                            30),
+                                                  );
+                                                  await widget.budget!.reference
+                                                      .update(
+                                                          budgetsUpdateData);
+                                                } else {
+                                                  if (dropDownValue ==
+                                                      'Weekly') {
+                                                    final budgetsUpdateData =
+                                                        createBudgetsRecordData(
+                                                      budgetStart:
+                                                          calendarSelectedDay
+                                                              ?.start,
+                                                      isRecurring: true,
+                                                      budgetDuration:
+                                                          dropDownValue,
+                                                      duration: 7,
+                                                      budgetEnd: functions
+                                                          .addDaysToDate(
+                                                              calendarSelectedDay
+                                                                  ?.start,
+                                                              7),
+                                                    );
+                                                    await widget
+                                                        .budget!.reference
+                                                        .update(
+                                                            budgetsUpdateData);
+                                                  } else {
+                                                    if (dropDownValue ==
+                                                        'Daily') {
+                                                      final budgetsUpdateData =
+                                                          createBudgetsRecordData(
+                                                        budgetStart:
+                                                            calendarSelectedDay
+                                                                ?.start,
+                                                        isRecurring: true,
+                                                        budgetDuration:
+                                                            dropDownValue,
+                                                        duration: 30,
+                                                        budgetEnd: functions
+                                                            .addDaysToDate(
+                                                                calendarSelectedDay
+                                                                    ?.start,
+                                                                1),
+                                                      );
+                                                      await widget
+                                                          .budget!.reference
+                                                          .update(
+                                                              budgetsUpdateData);
+                                                    } else {
+                                                      return;
+                                                    }
+                                                  }
+                                                }
+
+                                                setState(() {});
+                                              },
+                                              titleStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .subtitle2Family,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle2Family),
+                                                      ),
+                                              dayOfWeekStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText2Family,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText2Family),
+                                                      ),
+                                              dateStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText2Family,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText2Family),
+                                                      ),
+                                              selectedDateStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1Family,
+                                                        color: Colors.white,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
+                                                      ),
+                                              inactiveDateStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText2Family,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .fadedDivider,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText2Family),
+                                                      ),
+                                              locale:
+                                                  FFLocalizations.of(context)
+                                                      .languageCode,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            if (columnBudgetsRecord.budgetStart != null)
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
+                                    style:
+                                        FlutterFlowTheme.of(context).subtitle2,
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -488,6 +512,68 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                               );
                               await widget.budget!.reference
                                   .update(budgetsUpdateData);
+                            }
+
+                            if (dropDownValue == 'Monthly') {
+                              final budgetsUpdateData = createBudgetsRecordData(
+                                budgetAmount: FFAppState().currencyTextField,
+                                budgetStart: calendarSelectedDay?.start,
+                                isRecurring: true,
+                                unallocatedAmount: functions.subInt(
+                                    FFAppState().currencyTextField, 20000),
+                                budgetDuration: 'Monthly',
+                                status: 'active',
+                                duration: 30,
+                                budgetEnd: functions.addDaysToDate(
+                                    calendarSelectedDay?.start, 30),
+                                budgetOwner: currentUserReference,
+                                budgetSpent: 0,
+                              );
+                              await widget.budget!.reference
+                                  .update(budgetsUpdateData);
+                            } else {
+                              if (dropDownValue == 'Weekly') {
+                                final budgetsUpdateData =
+                                    createBudgetsRecordData(
+                                  budgetAmount: FFAppState().currencyTextField,
+                                  budgetStart: calendarSelectedDay?.start,
+                                  isRecurring: true,
+                                  unallocatedAmount: functions.subInt(
+                                      FFAppState().currencyTextField, 20000),
+                                  budgetDuration: 'Monthly',
+                                  status: 'active',
+                                  duration: 7,
+                                  budgetEnd: functions.addDaysToDate(
+                                      calendarSelectedDay?.start, 7),
+                                  budgetOwner: currentUserReference,
+                                  budgetSpent: 0,
+                                );
+                                await widget.budget!.reference
+                                    .update(budgetsUpdateData);
+                              } else {
+                                if (dropDownValue == 'Daily') {
+                                  final budgetsUpdateData =
+                                      createBudgetsRecordData(
+                                    budgetAmount:
+                                        FFAppState().currencyTextField,
+                                    budgetStart: calendarSelectedDay?.start,
+                                    isRecurring: true,
+                                    unallocatedAmount: functions.subInt(
+                                        FFAppState().currencyTextField, 20000),
+                                    budgetDuration: 'Monthly',
+                                    status: 'active',
+                                    duration: 1,
+                                    budgetEnd: functions.addDaysToDate(
+                                        calendarSelectedDay?.start, 1),
+                                    budgetOwner: currentUserReference,
+                                    budgetSpent: 0,
+                                  );
+                                  await widget.budget!.reference
+                                      .update(budgetsUpdateData);
+                                } else {
+                                  return;
+                                }
+                              }
                             }
 
                             final categoriesCreateData =
