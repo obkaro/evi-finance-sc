@@ -293,7 +293,7 @@ exports.renewbudgets = functions.pubsub.schedule('* * * * *').onRun(async (conte
               category_name: document.data().category_name,
               category_budget: newBudget,
               category_id: catID,
-              categoryOwner: document.data().categoryOwner,
+              category_owner: document.data().category_owner,
               spentAmount: 0,
               createdDate: time
             });
@@ -305,9 +305,9 @@ exports.renewbudgets = functions.pubsub.schedule('* * * * *').onRun(async (conte
         functions.logger.log('USER DATA = ', user.data());
 
         const renewedNotif = await admin.firestore().collection('ff_push_notifications').add({
-          initial_page_name: 'Budgets',
+          initial_page_name: 'ActiveBudget',
           notification_sound: 'default',
-          notification_text: 'Hey ' + user.data().username + ', your ' + documentSnapshot.data().budgetDuration + ' has been renewed. Come check it out!',
+          notification_text: 'Hi ' + user.data().username + ', your ' + documentSnapshot.data().budgetDuration + ' budget has been renewed. Come check it out!',
           notification_title: 'Evi',
           timestamp: time,
           user_refs: documentSnapshot.data().budgetOwner.path.toString()
