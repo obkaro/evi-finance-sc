@@ -34,6 +34,8 @@ abstract class BudgetsRecord
 
   int? get budgetSpent;
 
+  DocumentReference? get parentBudget;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -82,6 +84,7 @@ Map<String, dynamic> createBudgetsRecordData({
   String? status,
   int? duration,
   int? budgetSpent,
+  DocumentReference? parentBudget,
 }) {
   final firestoreData = serializers.toFirestore(
     BudgetsRecord.serializer,
@@ -98,7 +101,8 @@ Map<String, dynamic> createBudgetsRecordData({
         ..unallocatedAmount = unallocatedAmount
         ..status = status
         ..duration = duration
-        ..budgetSpent = budgetSpent,
+        ..budgetSpent = budgetSpent
+        ..parentBudget = parentBudget,
     ),
   );
 
