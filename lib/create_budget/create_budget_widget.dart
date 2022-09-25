@@ -506,7 +506,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                 budgetStart: calendarSelectedDay?.start,
                                 isRecurring: true,
                                 unallocatedAmount: functions.subInt(
-                                    FFAppState().currencyTextField, 20000),
+                                    FFAppState().currencyTextField, 100000),
                                 budgetDuration: 'Monthly',
                                 status: 'active',
                                 duration: 30,
@@ -525,7 +525,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                   budgetStart: calendarSelectedDay?.start,
                                   isRecurring: true,
                                   unallocatedAmount: functions.subInt(
-                                      FFAppState().currencyTextField, 20000),
+                                      FFAppState().currencyTextField, 100000),
                                   budgetDuration: 'Weekly',
                                   status: 'active',
                                   duration: 7,
@@ -545,7 +545,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                     budgetStart: calendarSelectedDay?.start,
                                     isRecurring: true,
                                     unallocatedAmount: functions.subInt(
-                                        FFAppState().currencyTextField, 20000),
+                                        FFAppState().currencyTextField, 100000),
                                     budgetDuration: 'Daily',
                                     status: 'active',
                                     duration: 1,
