@@ -226,7 +226,7 @@ exports.needsreauth = functions.runWith({ timeoutSeconds: 300 }).https.onRequest
 })
 
 
-exports.renewbudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (context) => {
+exports.renewbudgets = functions.pubsub.schedule('* * * * *').onRun(async (context) => {
 
   const time = admin.firestore.Timestamp.now();
 
@@ -248,7 +248,6 @@ exports.renewbudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (co
         const newEnd = new Date(existingEnd.getTime() + (endOffset * 86400000));
 
         functions.logger.log("end offset:", endOffset);
-
         functions.logger.log("after end:", existingEnd.getTime());
 
         functions.logger.log("NEW START:", newStart.toDateString());
@@ -265,6 +264,8 @@ exports.renewbudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (co
           unallocatedAmount: documentSnapshot.data().unallocatedAmount,
           duration: documentSnapshot.data().duration,
           status: 'active',
+          parentBudget: documentSnapshot.ref,
+          budgetSpent: 0
         })
 
         documentSnapshot.ref.update({
@@ -291,7 +292,10 @@ exports.renewbudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (co
               category_amount: document.data().category_amount,
               category_name: document.data().category_name,
               category_budget: newBudget,
-              category_id: catID
+              category_id: catID,
+              categoryOwner: document.data().categoryOwner,
+              spentAmount: 0,
+              createdDate: time
             });
           })
         })
@@ -359,6 +363,25 @@ exports.recalcspentamounts = functions.firestore.document('transactions/{id}')
     const newDoc = change.after.data();
 
     if (oldDoc == newDoc || oldDoc == null) {
+      functions.logger.log('CREATED NEW TRANSACTION, OR NO CHANGE')
+      return null;
+    }
+
+    if (newDoc == null && oldDoc.transactionBudget != null) {
+      functions.logger.log('DELETED NEW TRANSACTION')
+      const updateOldBudget = await admin.firestore().doc(oldDoc.transactionBudget.path)
+        .update({
+          budgetSpent: admin.firestore.FieldValue.increment(-(oldDoc.transactionAmount))
+        });
+      const updateOldCategory = await admin.firestore().doc(oldDoc.transactionCategory.path)
+        .update({
+          spentAmount: admin.firestore.FieldValue.increment(-(oldDoc.transactionAmount))
+        });
+        return null;
+    }
+
+    if (newDoc == null && oldDoc.transactionBudget == null) {
+      functions.logger.log('DELETED TRANSACTION - NO CHANGE')
       return null;
     }
 
