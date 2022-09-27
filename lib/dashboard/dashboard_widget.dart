@@ -633,6 +633,39 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                             .flutterMono(
                                                           context,
                                                         );
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                              'Refreshing transactions. This might take a minute...',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyText1Family,
+                                                                    color: Color(
+                                                                        0xFFC1C1C1),
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).bodyText1Family),
+                                                                  ),
+                                                            ),
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    4000),
+                                                            backgroundColor:
+                                                                Colors.black,
+                                                          ),
+                                                        );
                                                       },
                                                     ),
                                                   ),
