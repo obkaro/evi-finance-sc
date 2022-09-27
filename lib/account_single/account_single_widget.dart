@@ -698,7 +698,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                   SnackBar(
                                                                     content:
                                                                         Text(
-                                                                      'Synchronization Successful',
+                                                                      'Refreshing transactions. This might take a minute...',
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyText1
@@ -767,7 +767,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                     SnackBar(
                                                                       content:
                                                                           Text(
-                                                                        'Synchronization Successful',
+                                                                        'Refreshing transactions. This might take a minute...',
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyText1
                                                                             .override(

@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/dialog_box_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -193,23 +194,25 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                                   .set(categoriesCreateData);
                               Navigator.pop(context);
                             } else {
-                              await showDialog(
+                              await showModalBottomSheet(
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
                                 context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('Budget Amount Exceeded'),
-                                    content: Text(
-                                        'Please enter a value lower than the target budget, or increase the target budget value'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('Okay'),
-                                      ),
-                                    ],
+                                builder: (context) {
+                                  return Padding(
+                                    padding: MediaQuery.of(context).viewInsets,
+                                    child: DialogBoxWidget(
+                                      heading: 'Budget Amount Exceeded',
+                                      body:
+                                          'Please enter a value lower than the target budget, or increase the target budget value',
+                                      buttonYes: 'Okay',
+                                      buttonNo: 'n',
+                                      information: true,
+                                      yesAction: () async {},
+                                    ),
                                   );
                                 },
-                              );
+                              ).then((value) => setState(() {}));
                             }
                           },
                           text: 'Save',

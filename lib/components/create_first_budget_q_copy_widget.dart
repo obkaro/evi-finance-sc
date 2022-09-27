@@ -201,7 +201,7 @@ class _CreateFirstBudgetQCopyWidgetState
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                        'Synchronization Successful',
+                                        'Refreshing transactions. This might take a minute...',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -229,7 +229,7 @@ class _CreateFirstBudgetQCopyWidgetState
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                          'Synchronization Successful',
+                                          'Refreshing transactions. This might take a minute...',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
@@ -278,8 +278,6 @@ class _CreateFirstBudgetQCopyWidgetState
                                       ),
                                     );
                                   }
-
-                                  Navigator.pop(context);
                                 }
 
                                 Navigator.pop(context);
