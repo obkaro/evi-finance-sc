@@ -32,66 +32,71 @@ class _CircularIndicatorSmallWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
+      mainAxisSize: MainAxisSize.max,
       children: [
-        if (widget.spentAmount! >= widget.totalAmount!)
-          CircularPercentIndicator(
-            percent: functions.calcChartPercent(
-                widget.totalAmount!, widget.spentAmount!)!,
-            radius: 32,
-            lineWidth: 12,
-            animation: false,
-            progressColor: Color(0xFFFF0000),
-            backgroundColor: Color(0xFFFF0000),
-            startAngle: 0,
-          ),
-        if (functions.chartDisplay(
-            widget.totalAmount!, 0.0, widget.spentAmount!, 0.35))
-          CircularPercentIndicator(
-            percent: functions.calcChartPercent(
-                widget.totalAmount!, widget.spentAmount!)!,
-            radius: 32,
-            lineWidth: 12,
-            animation: true,
-            progressColor: FlutterFlowTheme.of(context).tertiaryColor,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            startAngle: 0,
-          ),
-        if (functions.chartDisplay(
-            widget.totalAmount!, 0.35, widget.spentAmount!, 0.65))
-          CircularPercentIndicator(
-            percent: functions.calcChartPercent(
-                widget.totalAmount!, widget.spentAmount!)!,
-            radius: 32,
-            lineWidth: 12,
-            animation: true,
-            progressColor: FlutterFlowTheme.of(context).alternate,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            startAngle: 0,
-          ),
-        if (functions.chartDisplay(
-            widget.totalAmount!, 0.65, widget.spentAmount!, 1.0))
-          CircularPercentIndicator(
-            percent: functions.calcChartPercent(
-                widget.totalAmount!, widget.spentAmount!)!,
-            radius: 32,
-            lineWidth: 12,
-            animation: true,
-            progressColor: Color(0xFFFF0000),
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            startAngle: 0,
-          ),
-        if (widget.spentAmount == 0)
-          CircularPercentIndicator(
-            percent: functions.calcChartPercent(
-                widget.totalAmount!, widget.spentAmount!)!,
-            radius: 32,
-            lineWidth: 12,
-            animation: false,
-            progressColor: FlutterFlowTheme.of(context).tertiaryColor,
-            backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
-            startAngle: 0,
-          ),
+        Stack(
+          children: [
+            if (widget.spentAmount! >= widget.totalAmount!)
+              CircularPercentIndicator(
+                percent: functions.calcChartPercent(
+                    widget.totalAmount!, widget.spentAmount!)!,
+                radius: 32,
+                lineWidth: 12,
+                animation: false,
+                progressColor: Color(0xFFFF0000),
+                backgroundColor: Color(0xFFFF0000),
+                startAngle: 0,
+              ),
+            if (functions.chartDisplay(
+                widget.totalAmount!, 0.0, widget.spentAmount!, 0.35))
+              CircularPercentIndicator(
+                percent: functions.calcChartPercent(
+                    widget.totalAmount!, widget.spentAmount!)!,
+                radius: 32,
+                lineWidth: 12,
+                animation: true,
+                progressColor: FlutterFlowTheme.of(context).tertiaryColor,
+                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+                startAngle: 0,
+              ),
+            if (functions.chartDisplay(
+                widget.totalAmount!, 0.35, widget.spentAmount!, 0.65))
+              CircularPercentIndicator(
+                percent: functions.calcChartPercent(
+                    widget.totalAmount!, widget.spentAmount!)!,
+                radius: 32,
+                lineWidth: 12,
+                animation: true,
+                progressColor: FlutterFlowTheme.of(context).alternate,
+                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+                startAngle: 0,
+              ),
+            if (functions.chartDisplay(
+                widget.totalAmount!, 0.65, widget.spentAmount!, 1.0))
+              CircularPercentIndicator(
+                percent: functions.calcChartPercent(
+                    widget.totalAmount!, widget.spentAmount!)!,
+                radius: 32,
+                lineWidth: 12,
+                animation: true,
+                progressColor: Color(0xFFFF0000),
+                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+                startAngle: 0,
+              ),
+            if (widget.spentAmount == 0)
+              CircularPercentIndicator(
+                percent: functions.calcChartPercent(
+                    widget.totalAmount!, widget.spentAmount!)!,
+                radius: 32,
+                lineWidth: 12,
+                animation: false,
+                progressColor: FlutterFlowTheme.of(context).tertiaryColor,
+                backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
+                startAngle: 0,
+              ),
+          ],
+        ),
       ],
     );
   }
