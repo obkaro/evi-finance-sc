@@ -37,122 +37,129 @@ class _CircularIndicatorBigWidgetState
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        Stack(
-          children: [
-            if (widget.spentAmount! >= widget.totalAmount!)
-              CircularPercentIndicator(
-                percent: functions.calcChartPercent(
-                    widget.totalAmount!, widget.spentAmount!)!,
-                radius: 90,
-                lineWidth: 20,
-                animation: false,
-                progressColor: Color(0xFFFF0000),
-                backgroundColor: Color(0xFFFF0000),
-                center: Text(
-                  widget.centerText!,
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).subtitle2Family,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).subtitle2Family),
-                      ),
+        Container(
+          width: 180,
+          height: 180,
+          child: Stack(
+            children: [
+              if (widget.spentAmount! >= widget.totalAmount!)
+                CircularPercentIndicator(
+                  percent: functions.calcChartPercent(
+                      widget.totalAmount!, widget.spentAmount!)!,
+                  radius: 90,
+                  lineWidth: 20,
+                  animation: false,
+                  progressColor: Color(0xFFFF0000),
+                  backgroundColor: Color(0xFFFF0000),
+                  center: Text(
+                    widget.centerText!,
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).subtitle2.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).subtitle2Family,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).subtitle2Family),
+                        ),
+                  ),
+                  startAngle: 0,
                 ),
-                startAngle: 0,
-              ),
-            if (functions.chartDisplay(
-                widget.totalAmount!, 0.0, widget.spentAmount!, 0.35))
-              CircularPercentIndicator(
-                percent: functions.calcChartPercent(
-                    widget.totalAmount!, widget.spentAmount!)!,
-                radius: 90,
-                lineWidth: 20,
-                animation: false,
-                progressColor: FlutterFlowTheme.of(context).tertiaryColor,
-                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-                center: Text(
-                  widget.centerText!,
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).subtitle2Family,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).subtitle2Family),
-                      ),
+              if (functions.chartDisplay(
+                  widget.totalAmount!, 0.0, widget.spentAmount!, 0.35))
+                CircularPercentIndicator(
+                  percent: functions.calcChartPercent(
+                      widget.totalAmount!, widget.spentAmount!)!,
+                  radius: 90,
+                  lineWidth: 20,
+                  animation: false,
+                  progressColor: FlutterFlowTheme.of(context).tertiaryColor,
+                  backgroundColor:
+                      FlutterFlowTheme.of(context).primaryBackground,
+                  center: Text(
+                    widget.centerText!,
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).subtitle2.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).subtitle2Family,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).subtitle2Family),
+                        ),
+                  ),
+                  startAngle: 0,
                 ),
-                startAngle: 0,
-              ),
-            if (functions.chartDisplay(
-                widget.totalAmount!, 0.35, widget.spentAmount!, 0.65))
-              CircularPercentIndicator(
-                percent: functions.calcChartPercent(
-                    widget.totalAmount!, widget.spentAmount!)!,
-                radius: 90,
-                lineWidth: 20,
-                animation: false,
-                progressColor: FlutterFlowTheme.of(context).alternate,
-                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-                center: Text(
-                  widget.centerText!,
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).subtitle2Family,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).subtitle2Family),
-                      ),
+              if (functions.chartDisplay(
+                  widget.totalAmount!, 0.35, widget.spentAmount!, 0.65))
+                CircularPercentIndicator(
+                  percent: functions.calcChartPercent(
+                      widget.totalAmount!, widget.spentAmount!)!,
+                  radius: 90,
+                  lineWidth: 20,
+                  animation: false,
+                  progressColor: FlutterFlowTheme.of(context).alternate,
+                  backgroundColor:
+                      FlutterFlowTheme.of(context).primaryBackground,
+                  center: Text(
+                    widget.centerText!,
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).subtitle2.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).subtitle2Family,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).subtitle2Family),
+                        ),
+                  ),
+                  startAngle: 0,
                 ),
-                startAngle: 0,
-              ),
-            if (functions.chartDisplay(
-                widget.totalAmount!, 0.65, widget.spentAmount!, 1.0))
-              CircularPercentIndicator(
-                percent: functions.calcChartPercent(
-                    widget.totalAmount!, widget.spentAmount!)!,
-                radius: 90,
-                lineWidth: 20,
-                animation: false,
-                progressColor: Color(0xFFFF0000),
-                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-                center: Text(
-                  widget.centerText!,
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).subtitle2Family,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).subtitle2Family),
-                      ),
+              if (functions.chartDisplay(
+                  widget.totalAmount!, 0.65, widget.spentAmount!, 1.0))
+                CircularPercentIndicator(
+                  percent: functions.calcChartPercent(
+                      widget.totalAmount!, widget.spentAmount!)!,
+                  radius: 90,
+                  lineWidth: 20,
+                  animation: false,
+                  progressColor: Color(0xFFFF0000),
+                  backgroundColor:
+                      FlutterFlowTheme.of(context).primaryBackground,
+                  center: Text(
+                    widget.centerText!,
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).subtitle2.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).subtitle2Family,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).subtitle2Family),
+                        ),
+                  ),
+                  startAngle: 0,
                 ),
-                startAngle: 0,
-              ),
-            if (widget.spentAmount == 0)
-              CircularPercentIndicator(
-                percent: functions.calcChartPercent(
-                    widget.totalAmount!, widget.spentAmount!)!,
-                radius: 90,
-                lineWidth: 20,
-                animation: false,
-                progressColor: FlutterFlowTheme.of(context).tertiaryColor,
-                backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
-                center: Text(
-                  widget.centerText!,
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).subtitle2Family,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).subtitle2Family),
-                      ),
+              if (widget.spentAmount == 0)
+                CircularPercentIndicator(
+                  percent: functions.calcChartPercent(
+                      widget.totalAmount!, widget.spentAmount!)!,
+                  radius: 90,
+                  lineWidth: 20,
+                  animation: false,
+                  progressColor: FlutterFlowTheme.of(context).tertiaryColor,
+                  backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
+                  center: Text(
+                    widget.centerText!,
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).subtitle2.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).subtitle2Family,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).subtitle2Family),
+                        ),
+                  ),
+                  startAngle: 0,
                 ),
-                startAngle: 0,
-              ),
-          ],
+            ],
+          ),
         ),
       ],
     );
