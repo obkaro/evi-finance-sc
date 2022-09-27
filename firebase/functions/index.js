@@ -135,9 +135,7 @@ exports.accountupdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', 
   })
 
 //PERIODIC DATA SYNC
-exports.datasync = functions.https.onRequest(async (req, res) => {
-
-  const payload = req.body;
+exports.datasync = functions.pubsub.schedule('0 */20 * * *').onRun(async (context) => {
 
   const accounts = await admin.firestore().collection('accounts').get();
 
@@ -226,7 +224,7 @@ exports.needsreauth = functions.runWith({ timeoutSeconds: 300 }).https.onRequest
 })
 
 
-exports.renewbudgets = functions.pubsub.schedule('* * * * *').onRun(async (context) => {
+exports.renewbudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (context) => {
 
   const time = admin.firestore.Timestamp.now();
 
@@ -237,11 +235,11 @@ exports.renewbudgets = functions.pubsub.schedule('* * * * *').onRun(async (conte
         const newID = Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 16);
 
         const existingEnd = documentSnapshot.data().budgetEnd.toDate();
-        const endOffset = documentSnapshot.data().duration + 1;
+        const endOffset = documentSnapshot.data().duration;
 
         functions.logger.log("EXISTING END", existingEnd.toString());
 
-        const newStart = new Date(existingEnd.getTime() + 86400000);
+        const newStart = new Date(existingEnd.getTime());
 
         functions.logger.log("after start:", existingEnd.getTime());
 
