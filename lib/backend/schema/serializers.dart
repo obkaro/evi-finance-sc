@@ -12,6 +12,8 @@ import 'subscriptions_record.dart';
 import 'const_recurring_payments_record.dart';
 import 'income_categories_record.dart';
 import 'const_income_categories_record.dart';
+import 'const_merchants_record.dart';
+import 'defaultimages_record.dart';
 
 import 'index.dart';
 
@@ -34,6 +36,8 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   ConstRecurringPaymentsRecord,
   IncomeCategoriesRecord,
   ConstIncomeCategoriesRecord,
+  ConstMerchantsRecord,
+  DefaultimagesRecord,
   VersionStruct,
   MoneyStruct,
   PaymentPlanStruct,

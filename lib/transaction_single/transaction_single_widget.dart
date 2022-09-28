@@ -1314,6 +1314,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                               name: rowIncomeCategoriesRecord.categoryName,
                                                                               clearUnsetFields: false,
                                                                             ),
+                                                                            isAssigned:
+                                                                                true,
+                                                                            dateAssigned:
+                                                                                getCurrentTimestamp,
                                                                           );
                                                                           await columnTransactionsRecord
                                                                               .reference

@@ -1,38 +1,37 @@
 {
   "project_info": {
-    "project_number": "492150333214",
-    "firebase_url": "https://evi-finance-dev-default-rtdb.firebaseio.com",
-    "project_id": "evi-finance-dev",
-    "storage_bucket": "evi-finance-dev.appspot.com"
+    "project_number": "1086289327978",
+    "project_id": "evi-finance-prod",
+    "storage_bucket": "evi-finance-prod.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:492150333214:android:744fa72c8bb16876c1330f",
+        "mobilesdk_app_id": "1:1086289327978:android:4a89b44e34329d9ee5d713",
         "android_client_info": {
           "package_name": "com.flutterflow.evifinance"
         }
       },
       "oauth_client": [
         {
-          "client_id": "492150333214-l00o9irq36q5ic854lvl4l45367n456c.apps.googleusercontent.com",
+          "client_id": "1086289327978-itdau2g49bl0sjs1pbevbtplm99gkjer.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB_SHaO3p5YNiJ9ATOy2Jc980NkH94Bf2E"
+          "current_key": "AIzaSyDns72oOF0pebitosEzn2gnlRD9J2I1POQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "492150333214-l00o9irq36q5ic854lvl4l45367n456c.apps.googleusercontent.com",
+              "client_id": "1086289327978-itdau2g49bl0sjs1pbevbtplm99gkjer.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "492150333214-gnibee8bsuq5gfpkgg374j0v5vvseaq4.apps.googleusercontent.com",
+              "client_id": "1086289327978-qtmik79nr4hjikll2olunpfhpr76id9a.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.flutterflow.evifinance"

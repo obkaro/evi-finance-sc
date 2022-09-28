@@ -103,14 +103,19 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             12, 12, 12, 12),
                                         child: Hero(
-                                          tag: widget.subscription!.icon!,
+                                          tag: valueOrDefault<String>(
+                                            widget.subscription!.icon,
+                                            'https://firebasestorage.googleapis.com/v0/b/evi-finance-prod.appspot.com/o/cms_uploads%2Fdefaultimages%2F1664354213902000%2Fcredit-card-icon-png-4401.png?alt=media&token=baaa1d09-a0f9-48ce-8f45-720785cdb67e',
+                                          ),
                                           transitionOnUserGestures: true,
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(12),
                                             child: CachedNetworkImage(
-                                              imageUrl:
-                                                  widget.subscription!.icon!,
+                                              imageUrl: valueOrDefault<String>(
+                                                widget.subscription!.icon,
+                                                'https://firebasestorage.googleapis.com/v0/b/evi-finance-prod.appspot.com/o/cms_uploads%2Fdefaultimages%2F1664354213902000%2Fcredit-card-icon-png-4401.png?alt=media&token=baaa1d09-a0f9-48ce-8f45-720785cdb67e',
+                                              ),
                                               width: double.infinity,
                                               height: double.infinity,
                                               fit: BoxFit.scaleDown,
