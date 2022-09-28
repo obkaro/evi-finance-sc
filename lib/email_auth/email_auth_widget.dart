@@ -4,7 +4,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../forgot_password/forgot_password_widget.dart';
-import '../landing_page_view/landing_page_view_widget.dart';
+import '../main.dart';
 import '../welcome_to_evi/welcome_to_evi_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -369,14 +369,14 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     return;
                                                   }
 
-                                                  await Navigator
-                                                      .pushAndRemoveUntil(
+                                                  await Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          LandingPageViewWidget(),
+                                                          NavBarPage(
+                                                              initialPage:
+                                                                  'Dashboard'),
                                                     ),
-                                                    (r) => false,
                                                   );
                                                 },
                                                 text: 'Sign in',
@@ -922,13 +922,12 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                         if (user == null) {
                                           return;
                                         }
-                                        await Navigator.pushAndRemoveUntil(
+                                        await Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                LandingPageViewWidget(),
+                                            builder: (context) => NavBarPage(
+                                                initialPage: 'Dashboard'),
                                           ),
-                                          (r) => false,
                                         );
                                       },
                                       child: Container(
