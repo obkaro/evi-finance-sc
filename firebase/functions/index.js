@@ -135,7 +135,7 @@ exports.accountupdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', 
   })
 
 //PERIODIC DATA SYNC
-exports.datasync = functions.pubsub.schedule('0 */20 * * *').onRun(async (context) => {
+exports.datasync = functions.pubsub.schedule('0 */14 * * *').onRun(async (context) => {
 
   const accounts = await admin.firestore().collection('accounts').get();
 
@@ -175,7 +175,6 @@ exports.datasync = functions.pubsub.schedule('0 */20 * * *').onRun(async (contex
     res.status(200).send();
   });
 })
-
 
 
 exports.needsreauth = functions.runWith({ timeoutSeconds: 300 }).https.onRequest(async (req, res) => {
@@ -319,6 +318,20 @@ exports.renewbudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (co
 })
 
 //SCHEDULE NOTIFICAITON TO CHECK TRANSACTIONS
+exports.checkreminder = functions.pubsub.schedule('0 15 */2 * *').onRun(async (context) => {
+  const userlist = await admin.firestore().collection('users').get();
+
+  userlist.docs.forEach(async (user) => {
+    const checknotif = await admin.firestore().collection('ff_push_notifications').add({
+      initial_page_name: 'dashboard',
+      notification_sound: 'default',
+      notification_text: `Hey ${user.data().username}, come see what's happened with your accounts over the last couple of days!`,
+      notification_title: 'Stay on track',
+      timestamp: time,
+      user_refs: user.ref.path.toString()
+    });
+  })
+})
 
 
 exports.subscriptionReminder = functions.firestore.document('subscriptions/{Id}')
@@ -352,7 +365,6 @@ exports.subscriptionReminder = functions.firestore.document('subscriptions/{Id}'
     });
     return null;
   })
-
 
 
 exports.recalcspentamounts = functions.firestore.document('transactions/{id}')
