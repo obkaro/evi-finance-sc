@@ -7,7 +7,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
-import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -181,14 +180,6 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                                     categoryName:
                                                         containerIncomeCategoriesItem
                                                             .categoryName,
-                                                    categoryID: random_data
-                                                        .randomString(
-                                                      32,
-                                                      32,
-                                                      true,
-                                                      true,
-                                                      true,
-                                                    ),
                                                   );
                                                   await IncomeCategoriesRecord
                                                           .createDoc(
@@ -478,6 +469,11 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                               },
                                             );
                                           },
+                                        ),
+                                        Text(
+                                          sourcesFromPageItem.categoryName!,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
                                         ),
                                       ],
                                     ),
