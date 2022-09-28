@@ -47,7 +47,7 @@ exports.accountupdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', 
         reauthRequired: false,
         accountLogo: logo.docs[0].data().institutionLogo
       };
-<<<<<<< HEAD
+
       // axios
       //   .request(options)
       //   .then(async function (response) {
