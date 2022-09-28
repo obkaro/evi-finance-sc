@@ -4,6 +4,7 @@ import '../email_auth/email_auth_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../main.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -243,8 +244,8 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              LandingPageViewWidget(),
+                                          builder: (context) => NavBarPage(
+                                              initialPage: 'Dashboard'),
                                         ),
                                       );
                                     },
