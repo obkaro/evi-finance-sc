@@ -99,6 +99,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                         mainAxisSpacing: 0,
                         childAspectRatio: 1,
                       ),
+                      primary: false,
                       scrollDirection: Axis.vertical,
                       children: [
                         MGridMenuItemWidget(

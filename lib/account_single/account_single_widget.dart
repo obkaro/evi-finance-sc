@@ -1,7 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
-import '../components/create_first_budget_q_copy_widget.dart';
+import '../components/account_data_refresh_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -49,7 +49,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
           builder: (context) {
             return Padding(
               padding: MediaQuery.of(context).viewInsets,
-              child: CreateFirstBudgetQCopyWidget(
+              child: AccountDataRefreshWidget(
                 account: widget.account,
               ),
             );
@@ -717,7 +717,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                     ),
                                                                     duration: Duration(
                                                                         milliseconds:
-                                                                            4000),
+                                                                            6000),
                                                                     backgroundColor:
                                                                         Colors
                                                                             .black,
@@ -780,7 +780,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                       ),
                                                                       duration: Duration(
                                                                           milliseconds:
-                                                                              4000),
+                                                                              6000),
                                                                       backgroundColor:
                                                                           Colors
                                                                               .black,
