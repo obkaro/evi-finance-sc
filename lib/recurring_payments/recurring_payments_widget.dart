@@ -178,7 +178,12 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                                   .fromSTEB(8,
                                                                       8, 8, 8),
                                                           child: Hero(
-                                                            tag: subsItem.icon!,
+                                                            tag: valueOrDefault<
+                                                                String>(
+                                                              subsItem.icon,
+                                                              'https://firebasestorage.googleapis.com/v0/b/evi-finance-prod.appspot.com/o/cms_uploads%2Fdefaultimages%2F1664354213902000%2Fcredit-card-icon-png-4401.png?alt=media&token=baaa1d09-a0f9-48ce-8f45-720785cdb67e' +
+                                                                  '$subsIndex',
+                                                            ),
                                                             transitionOnUserGestures:
                                                                 true,
                                                             child: ClipRRect(
@@ -189,8 +194,11 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                               child:
                                                                   CachedNetworkImage(
                                                                 imageUrl:
-                                                                    subsItem
-                                                                        .icon!,
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                  subsItem.icon,
+                                                                  'https://firebasestorage.googleapis.com/v0/b/evi-finance-prod.appspot.com/o/cms_uploads%2Fdefaultimages%2F1664354213902000%2Fcredit-card-icon-png-4401.png?alt=media&token=baaa1d09-a0f9-48ce-8f45-720785cdb67e',
+                                                                ),
                                                                 width: 44,
                                                                 height: 44,
                                                                 fit: BoxFit

@@ -16,6 +16,8 @@ import 'schema/subscriptions_record.dart';
 import 'schema/const_recurring_payments_record.dart';
 import 'schema/income_categories_record.dart';
 import 'schema/const_income_categories_record.dart';
+import 'schema/const_merchants_record.dart';
+import 'schema/defaultimages_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -35,6 +37,8 @@ export 'schema/subscriptions_record.dart';
 export 'schema/const_recurring_payments_record.dart';
 export 'schema/income_categories_record.dart';
 export 'schema/const_income_categories_record.dart';
+export 'schema/const_merchants_record.dart';
+export 'schema/defaultimages_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord({
@@ -551,6 +555,90 @@ Future<FFFirestorePage<ConstIncomeCategoriesRecord>>
           pageSize: pageSize,
           isStream: isStream,
         );
+
+/// Functions to query ConstMerchantsRecords (as a Stream and as a Future).
+Stream<List<ConstMerchantsRecord>> queryConstMerchantsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ConstMerchantsRecord.collection,
+      ConstMerchantsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ConstMerchantsRecord>> queryConstMerchantsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ConstMerchantsRecord.collection,
+      ConstMerchantsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<ConstMerchantsRecord>> queryConstMerchantsRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      ConstMerchantsRecord.collection,
+      ConstMerchantsRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query DefaultimagesRecords (as a Stream and as a Future).
+Stream<List<DefaultimagesRecord>> queryDefaultimagesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      DefaultimagesRecord.collection,
+      DefaultimagesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<DefaultimagesRecord>> queryDefaultimagesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      DefaultimagesRecord.collection,
+      DefaultimagesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<DefaultimagesRecord>> queryDefaultimagesRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      DefaultimagesRecord.collection,
+      DefaultimagesRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
 
 Stream<List<T>> queryCollection<T>(Query collection, Serializer<T> serializer,
     {Query Function(Query)? queryBuilder,

@@ -158,7 +158,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                 tag: valueOrDefault<String>(
                                                   createRecurringSubscriptionsRecord
                                                       .icon,
-                                                  'https://firebasestorage.googleapis.com/v0/b/evi-finance-dev.appspot.com/o/cms_uploads%2FconstRecurringPayments%2F1661483422451000%2Fcredit-card-icon-png-4401.png?alt=media&token=dcd086de-12fa-4424-8aba-bcba60e6ddae',
+                                                  'https://firebasestorage.googleapis.com/v0/b/evi-finance-prod.appspot.com/o/cms_uploads%2Fdefaultimages%2F1664354213902000%2Fcredit-card-icon-png-4401.png?alt=media&token=baaa1d09-a0f9-48ce-8f45-720785cdb67e',
                                                 ),
                                                 transitionOnUserGestures: true,
                                                 child: ClipRRect(
@@ -169,7 +169,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                         valueOrDefault<String>(
                                                       createRecurringSubscriptionsRecord
                                                           .icon,
-                                                      'https://firebasestorage.googleapis.com/v0/b/evi-finance-dev.appspot.com/o/cms_uploads%2FconstRecurringPayments%2F1661483422451000%2Fcredit-card-icon-png-4401.png?alt=media&token=dcd086de-12fa-4424-8aba-bcba60e6ddae',
+                                                      'https://firebasestorage.googleapis.com/v0/b/evi-finance-prod.appspot.com/o/cms_uploads%2Fdefaultimages%2F1664354213902000%2Fcredit-card-icon-png-4401.png?alt=media&token=baaa1d09-a0f9-48ce-8f45-720785cdb67e',
                                                     ),
                                                     width: 100,
                                                     height: 100,
