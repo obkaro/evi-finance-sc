@@ -9,7 +9,6 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +22,6 @@ class EditIncomeSourcesWidget extends StatefulWidget {
 }
 
 class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
-  TextEditingController? textController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -32,12 +30,6 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'EditIncomeSources'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
-  void dispose() {
-    textController?.dispose();
-    super.dispose();
   }
 
   @override
@@ -293,196 +285,97 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                         borderRadius: BorderRadius.circular(32),
                       ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                        child: Builder(
-                          builder: (context) {
-                            final sourcesFromPage =
-                                editIncomeSourcesIncomeCategoriesRecordList
-                                    .toList();
-                            return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemCount: sourcesFromPage.length,
-                              itemBuilder: (context, sourcesFromPageIndex) {
-                                final sourcesFromPageItem =
-                                    sourcesFromPage[sourcesFromPageIndex];
-                                return Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 8, 0, 0),
-                                  child: Container(
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Expanded(
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    12, 0, 0, 0),
-                                            child: TextFormField(
-                                              controller: textController ??=
-                                                  TextEditingController(
-                                                text: sourcesFromPageItem
-                                                    .categoryName,
-                                              ),
-                                              onChanged: (_) =>
-                                                  EasyDebounce.debounce(
-                                                'textController',
-                                                Duration(milliseconds: 2000),
-                                                () async {
-                                                  if ((textController?.text ??
-                                                              '') !=
-                                                          null &&
-                                                      (textController?.text ??
-                                                              '') !=
-                                                          '') {
-                                                    final incomeCategoriesUpdateData =
-                                                        createIncomeCategoriesRecordData(
-                                                      categoryName:
-                                                          textController
-                                                                  ?.text ??
-                                                              '',
-                                                    );
-                                                    await sourcesFromPageItem
-                                                        .reference
-                                                        .update(
-                                                            incomeCategoriesUpdateData);
-                                                  } else {
-                                                    return;
-                                                  }
-                                                },
-                                              ),
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                hintText: 'Enter income name',
-                                                hintStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText2,
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .fadedDivider,
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .fadedDivider,
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                ),
-                                                filled: true,
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .lightPrimary,
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1,
-                                            ),
-                                          ),
-                                        ),
-                                        StreamBuilder<List<TransactionsRecord>>(
-                                          stream: queryTransactionsRecord(
-                                            queryBuilder:
-                                                (transactionsRecord) =>
-                                                    transactionsRecord.where(
-                                                        'incomeCategory',
-                                                        isEqualTo:
-                                                            sourcesFromPageItem
-                                                                .reference),
-                                          ),
-                                          builder: (context, snapshot) {
-                                            // Customize what your widget looks like when it's loading.
-                                            if (!snapshot.hasData) {
-                                              return Center(
-                                                child: SizedBox(
-                                                  width: 50,
-                                                  height: 50,
-                                                  child: SpinKitRing(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                    size: 50,
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                            List<TransactionsRecord>
-                                                iconButtonTransactionsRecordList =
-                                                snapshot.data!;
-                                            return FlutterFlowIconButton(
-                                              borderColor: Colors.transparent,
-                                              borderRadius: 30,
-                                              borderWidth: 1,
-                                              buttonSize: 60,
-                                              icon: Icon(
-                                                Icons.delete_rounded,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 24,
-                                              ),
-                                              onPressed: () async {
-                                                await actions
-                                                    .unlinkAllTransCategories(
-                                                  iconButtonTransactionsRecordList
-                                                      .toList(),
-                                                );
-                                                // Action_DeleteCategory
-                                                await sourcesFromPageItem
-                                                    .reference
-                                                    .delete();
-                                              },
-                                            );
-                                          },
-                                        ),
-                                        Text(
-                                          sourcesFromPageItem.categoryName!,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ],
-                                    ),
+                      child: Builder(
+                        builder: (context) {
+                          final sourcesFromPage =
+                              editIncomeSourcesIncomeCategoriesRecordList
+                                  .toList();
+                          return ListView.builder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: sourcesFromPage.length,
+                            itemBuilder: (context, sourcesFromPageIndex) {
+                              final sourcesFromPageItem =
+                                  sourcesFromPage[sourcesFromPageIndex];
+                              return Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16, 12, 16, 0),
+                                child: Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16),
                                   ),
-                                );
-                              },
-                            );
-                          },
-                        ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        sourcesFromPageItem.categoryName!,
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle1,
+                                      ),
+                                      StreamBuilder<List<TransactionsRecord>>(
+                                        stream: queryTransactionsRecord(
+                                          queryBuilder: (transactionsRecord) =>
+                                              transactionsRecord.where(
+                                                  'incomeCategory',
+                                                  isEqualTo: sourcesFromPageItem
+                                                      .reference),
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50,
+                                                height: 50,
+                                                child: SpinKitRing(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  size: 50,
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          List<TransactionsRecord>
+                                              iconButtonTransactionsRecordList =
+                                              snapshot.data!;
+                                          return FlutterFlowIconButton(
+                                            borderColor: Colors.transparent,
+                                            borderRadius: 30,
+                                            borderWidth: 1,
+                                            buttonSize: 48,
+                                            icon: Icon(
+                                              Icons.delete_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 24,
+                                            ),
+                                            onPressed: () async {
+                                              await actions
+                                                  .unlinkAllTransCategories(
+                                                iconButtonTransactionsRecordList
+                                                    .toList(),
+                                              );
+                                              // Action_DeleteCategory
+                                              await sourcesFromPageItem
+                                                  .reference
+                                                  .delete();
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                     ),
                   ),
