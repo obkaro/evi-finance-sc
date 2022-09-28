@@ -36,13 +36,19 @@ class _CreateCustomCategoryWidgetState
   }
 
   @override
+  void dispose() {
+    textController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).primaryBackground,
+          color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: [
             BoxShadow(
               blurRadius: 14,
@@ -78,6 +84,9 @@ class _CreateCustomCategoryWidgetState
                                     .bodyText1Family,
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyText1Family),
                               ),
                         ),
                       ],
@@ -107,9 +116,22 @@ class _CreateCustomCategoryWidgetState
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       filled: true,
-                      fillColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
+                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1,
                     keyboardType: TextInputType.name,
@@ -122,6 +144,7 @@ class _CreateCustomCategoryWidgetState
                     height: 50,
                     labelText: 'Amount',
                     hintText: 'Enter amount',
+                    bgcolor: FlutterFlowTheme.of(context).primaryBackground,
                   ),
                 ),
                 Divider(
@@ -184,6 +207,9 @@ class _CreateCustomCategoryWidgetState
                                   true,
                                   true,
                                 ),
+                                categoryOwner: currentUserReference,
+                                spentAmount: 0,
+                                createdDate: getCurrentTimestamp,
                               );
                               await CategoriesRecord.createDoc(
                                       widget.budget!.reference)
@@ -214,12 +240,16 @@ class _CreateCustomCategoryWidgetState
                             width: double.infinity,
                             height: 60,
                             color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      color: Colors.white,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .subtitle2
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .subtitle2Family,
+                                  color: Colors.white,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .subtitle2Family),
+                                ),
                             elevation: 2,
                             borderSide: BorderSide(
                               color: Colors.transparent,

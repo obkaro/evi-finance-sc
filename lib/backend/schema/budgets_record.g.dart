@@ -69,13 +69,6 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.lastViewed;
-    if (value != null) {
-      result
-        ..add('lastViewed')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(DateTime)));
-    }
     value = object.budgetDuration;
     if (value != null) {
       result
@@ -101,6 +94,20 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
       result
         ..add('duration')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.budgetSpent;
+    if (value != null) {
+      result
+        ..add('budgetSpent')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.parentBudget;
+    if (value != null) {
+      result
+        ..add('parentBudget')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.ffRef;
     if (value != null) {
@@ -155,10 +162,6 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
           result.budgetID = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'lastViewed':
-          result.lastViewed = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime?;
-          break;
         case 'budgetDuration':
           result.budgetDuration = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
@@ -174,6 +177,16 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         case 'duration':
           result.duration = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
+          break;
+        case 'budgetSpent':
+          result.budgetSpent = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'parentBudget':
+          result.parentBudget = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
@@ -204,8 +217,6 @@ class _$BudgetsRecord extends BudgetsRecord {
   @override
   final String? budgetID;
   @override
-  final DateTime? lastViewed;
-  @override
   final String? budgetDuration;
   @override
   final int? unallocatedAmount;
@@ -213,6 +224,10 @@ class _$BudgetsRecord extends BudgetsRecord {
   final String? status;
   @override
   final int? duration;
+  @override
+  final int? budgetSpent;
+  @override
+  final DocumentReference<Object?>? parentBudget;
   @override
   final DocumentReference<Object?>? ffRef;
 
@@ -227,11 +242,12 @@ class _$BudgetsRecord extends BudgetsRecord {
       this.budgetDateCreated,
       this.isRecurring,
       this.budgetID,
-      this.lastViewed,
       this.budgetDuration,
       this.unallocatedAmount,
       this.status,
       this.duration,
+      this.budgetSpent,
+      this.parentBudget,
       this.ffRef})
       : super._();
 
@@ -253,11 +269,12 @@ class _$BudgetsRecord extends BudgetsRecord {
         budgetDateCreated == other.budgetDateCreated &&
         isRecurring == other.isRecurring &&
         budgetID == other.budgetID &&
-        lastViewed == other.lastViewed &&
         budgetDuration == other.budgetDuration &&
         unallocatedAmount == other.unallocatedAmount &&
         status == other.status &&
         duration == other.duration &&
+        budgetSpent == other.budgetSpent &&
+        parentBudget == other.parentBudget &&
         ffRef == other.ffRef;
   }
 
@@ -275,19 +292,23 @@ class _$BudgetsRecord extends BudgetsRecord {
                                         $jc(
                                             $jc(
                                                 $jc(
-                                                    $jc(0,
-                                                        budgetOwner.hashCode),
-                                                    budgetAmount.hashCode),
-                                                budgetStart.hashCode),
-                                            budgetEnd.hashCode),
-                                        budgetDateCreated.hashCode),
-                                    isRecurring.hashCode),
-                                budgetID.hashCode),
-                            lastViewed.hashCode),
-                        budgetDuration.hashCode),
-                    unallocatedAmount.hashCode),
-                status.hashCode),
-            duration.hashCode),
+                                                    $jc(
+                                                        $jc(
+                                                            0,
+                                                            budgetOwner
+                                                                .hashCode),
+                                                        budgetAmount.hashCode),
+                                                    budgetStart.hashCode),
+                                                budgetEnd.hashCode),
+                                            budgetDateCreated.hashCode),
+                                        isRecurring.hashCode),
+                                    budgetID.hashCode),
+                                budgetDuration.hashCode),
+                            unallocatedAmount.hashCode),
+                        status.hashCode),
+                    duration.hashCode),
+                budgetSpent.hashCode),
+            parentBudget.hashCode),
         ffRef.hashCode));
   }
 
@@ -301,11 +322,12 @@ class _$BudgetsRecord extends BudgetsRecord {
           ..add('budgetDateCreated', budgetDateCreated)
           ..add('isRecurring', isRecurring)
           ..add('budgetID', budgetID)
-          ..add('lastViewed', lastViewed)
           ..add('budgetDuration', budgetDuration)
           ..add('unallocatedAmount', unallocatedAmount)
           ..add('status', status)
           ..add('duration', duration)
+          ..add('budgetSpent', budgetSpent)
+          ..add('parentBudget', parentBudget)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -345,10 +367,6 @@ class BudgetsRecordBuilder
   String? get budgetID => _$this._budgetID;
   set budgetID(String? budgetID) => _$this._budgetID = budgetID;
 
-  DateTime? _lastViewed;
-  DateTime? get lastViewed => _$this._lastViewed;
-  set lastViewed(DateTime? lastViewed) => _$this._lastViewed = lastViewed;
-
   String? _budgetDuration;
   String? get budgetDuration => _$this._budgetDuration;
   set budgetDuration(String? budgetDuration) =>
@@ -366,6 +384,15 @@ class BudgetsRecordBuilder
   int? _duration;
   int? get duration => _$this._duration;
   set duration(int? duration) => _$this._duration = duration;
+
+  int? _budgetSpent;
+  int? get budgetSpent => _$this._budgetSpent;
+  set budgetSpent(int? budgetSpent) => _$this._budgetSpent = budgetSpent;
+
+  DocumentReference<Object?>? _parentBudget;
+  DocumentReference<Object?>? get parentBudget => _$this._parentBudget;
+  set parentBudget(DocumentReference<Object?>? parentBudget) =>
+      _$this._parentBudget = parentBudget;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -385,11 +412,12 @@ class BudgetsRecordBuilder
       _budgetDateCreated = $v.budgetDateCreated;
       _isRecurring = $v.isRecurring;
       _budgetID = $v.budgetID;
-      _lastViewed = $v.lastViewed;
       _budgetDuration = $v.budgetDuration;
       _unallocatedAmount = $v.unallocatedAmount;
       _status = $v.status;
       _duration = $v.duration;
+      _budgetSpent = $v.budgetSpent;
+      _parentBudget = $v.parentBudget;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -420,11 +448,12 @@ class BudgetsRecordBuilder
             budgetDateCreated: budgetDateCreated,
             isRecurring: isRecurring,
             budgetID: budgetID,
-            lastViewed: lastViewed,
             budgetDuration: budgetDuration,
             unallocatedAmount: unallocatedAmount,
             status: status,
             duration: duration,
+            budgetSpent: budgetSpent,
+            parentBudget: parentBudget,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

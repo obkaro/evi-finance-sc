@@ -9,39 +9,7 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "trasactionDate",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "transactions",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "transactionOwner",
-          "order": "ASCENDING"
-        },
-        {
           "fieldPath": "transactionType",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "trasactionDate",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "transactions",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "transactionType",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "transactionCategory",
           "order": "ASCENDING"
         },
         {
@@ -69,12 +37,26 @@
       ]
     },
     {
+      "collectionGroup": "categories",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "spentAmount",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "createdDate",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "constBudgetCategories",
       "queryScope": "COLLECTION",
       "fields": [
         {
           "fieldPath": "categoryName",
-          "order": "ASCENDING"
+          "order": "DESCENDING"
         },
         {
           "fieldPath": "categoryWeight",

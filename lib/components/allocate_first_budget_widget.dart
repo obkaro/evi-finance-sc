@@ -38,7 +38,7 @@ class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).primaryBackground,
+          color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: [
             BoxShadow(
               blurRadius: 14,
@@ -60,7 +60,7 @@ class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Allocate your budget',
+                        'Allocate Your Budget',
                         style: FlutterFlowTheme.of(context).title3,
                       ),
                     ],
@@ -68,7 +68,7 @@ class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
                 ),
                 Icon(
                   Icons.table_chart,
-                  color: FlutterFlowTheme.of(context).primaryText,
+                  color: FlutterFlowTheme.of(context).secondaryText,
                   size: 72,
                 ),
                 Padding(
@@ -100,6 +100,10 @@ class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .bodyText1Family,
                                       fontWeight: FontWeight.w500,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText1Family),
                                     ),
                               ),
                             ),
@@ -129,12 +133,16 @@ class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
                             width: double.infinity,
                             height: 60,
                             color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      color: Colors.white,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .subtitle2
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .subtitle2Family,
+                                  color: Colors.white,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .subtitle2Family),
+                                ),
                             elevation: 2,
                             borderSide: BorderSide(
                               color: Colors.transparent,

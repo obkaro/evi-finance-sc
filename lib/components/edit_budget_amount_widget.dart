@@ -56,7 +56,7 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
           return Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).primaryBackground,
+              color: FlutterFlowTheme.of(context).secondaryBackground,
               boxShadow: [
                 BoxShadow(
                   blurRadius: 14,
@@ -95,6 +95,7 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                         amount: containerBudgetsRecord.budgetAmount,
                         labelText: 'Amount',
                         hintText: 'Enter amount',
+                        bgcolor: FlutterFlowTheme.of(context).primaryBackground,
                       ),
                     ),
                     Divider(
@@ -116,13 +117,17 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                                 width: double.infinity,
                                 height: 60,
                                 color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
+                                    .secondaryBackground,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .bodyText2
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .bodyText2Family,
                                       fontSize: 14,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText2Family),
                                     ),
                                 elevation: 0,
                                 borderSide: BorderSide(
@@ -181,6 +186,10 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .subtitle2Family,
                                       color: Colors.white,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2Family),
                                     ),
                                 elevation: 2,
                                 borderSide: BorderSide(

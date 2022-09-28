@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CreateFirstBudgetQCopyWidget extends StatefulWidget {
-  const CreateFirstBudgetQCopyWidget({
+class AccountDataRefreshWidget extends StatefulWidget {
+  const AccountDataRefreshWidget({
     Key? key,
     this.account,
   }) : super(key: key);
@@ -17,14 +17,11 @@ class CreateFirstBudgetQCopyWidget extends StatefulWidget {
   final AccountsRecord? account;
 
   @override
-  _CreateFirstBudgetQCopyWidgetState createState() =>
-      _CreateFirstBudgetQCopyWidgetState();
+  _AccountDataRefreshWidgetState createState() =>
+      _AccountDataRefreshWidgetState();
 }
 
-class _CreateFirstBudgetQCopyWidgetState
-    extends State<CreateFirstBudgetQCopyWidget> {
-  ApiCallResponse? accountRespons;
-  ApiCallResponse? accountResponse;
+class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
   ApiCallResponse? dataSyncResponse;
   ApiCallResponse? reauthCode;
 
@@ -63,7 +60,7 @@ class _CreateFirstBudgetQCopyWidgetState
           return Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).primaryBackground,
+              color: FlutterFlowTheme.of(context).secondaryBackground,
               boxShadow: [
                 BoxShadow(
                   blurRadius: 14,
@@ -93,7 +90,7 @@ class _CreateFirstBudgetQCopyWidgetState
                     ),
                     Icon(
                       Icons.refresh_rounded,
-                      color: FlutterFlowTheme.of(context).primaryText,
+                      color: FlutterFlowTheme.of(context).secondaryText,
                       size: 72,
                     ),
                     Padding(
@@ -126,6 +123,10 @@ class _CreateFirstBudgetQCopyWidgetState
                                               FlutterFlowTheme.of(context)
                                                   .bodyText1Family,
                                           fontWeight: FontWeight.w500,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family),
                                         ),
                                   ),
                                 ),
@@ -196,14 +197,10 @@ class _CreateFirstBudgetQCopyWidgetState
                                       r'''$.token''',
                                     ).toString(),
                                   );
-                                  accountResponse =
-                                      await GetAccountInfoCall.call(
-                                    authID: widget.account!.authID,
-                                  );
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                        'Synchronization Successful',
+                                        'Refreshing transactions. This might take a minute...',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -213,6 +210,12 @@ class _CreateFirstBudgetQCopyWidgetState
                                               color: Color(0xFFD1D1D1),
                                               fontSize: 12,
                                               fontWeight: FontWeight.normal,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1Family),
                                             ),
                                       ),
                                       duration: Duration(milliseconds: 4000),
@@ -222,14 +225,10 @@ class _CreateFirstBudgetQCopyWidgetState
                                 } else {
                                   if (FFAppState().dataSyncCode ==
                                       'SYNC_SUCCESSFUL') {
-                                    accountRespons =
-                                        await GetAccountInfoCall.call(
-                                      authID: widget.account!.authID,
-                                    );
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                          'Synchronization Successful',
+                                          'Refreshing transactions. This might take a minute...',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
@@ -239,6 +238,12 @@ class _CreateFirstBudgetQCopyWidgetState
                                                 color: Color(0xFFC1C1C1),
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.normal,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1Family),
                                               ),
                                         ),
                                         duration: Duration(milliseconds: 4000),
@@ -259,6 +264,12 @@ class _CreateFirstBudgetQCopyWidgetState
                                                 color: Color(0xFFE7E7E7),
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.normal,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1Family),
                                               ),
                                         ),
                                         duration: Duration(milliseconds: 4000),
@@ -266,8 +277,6 @@ class _CreateFirstBudgetQCopyWidgetState
                                       ),
                                     );
                                   }
-
-                                  Navigator.pop(context);
                                 }
 
                                 Navigator.pop(context);
@@ -286,6 +295,10 @@ class _CreateFirstBudgetQCopyWidgetState
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .subtitle2Family,
                                       color: Colors.white,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2Family),
                                     ),
                                 elevation: 2,
                                 borderSide: BorderSide(

@@ -20,7 +20,20 @@ class _$TransactionsRecordSerializer
   Iterable<Object?> serialize(
       Serializers serializers, TransactionsRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[];
+    final result = <Object?>[
+      'categoryDetails',
+      serializers.serialize(object.categoryDetails,
+          specifiedType: const FullType(CategoryDetailsStruct)),
+      'accountDetails',
+      serializers.serialize(object.accountDetails,
+          specifiedType: const FullType(AccountDetailsStruct)),
+      'subscriptionDetails',
+      serializers.serialize(object.subscriptionDetails,
+          specifiedType: const FullType(SubscriptionDetailsStruct)),
+      'incomeDetails',
+      serializers.serialize(object.incomeDetails,
+          specifiedType: const FullType(IncomeDetailsStruct)),
+    ];
     Object? value;
     value = object.trasactionDate;
     if (value != null) {
@@ -100,13 +113,6 @@ class _$TransactionsRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
-    value = object.notes;
-    if (value != null) {
-      result
-        ..add('notes')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.transactionBudget;
     if (value != null) {
       result
@@ -115,13 +121,6 @@ class _$TransactionsRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
-    value = object.isRecurring;
-    if (value != null) {
-      result
-        ..add('isRecurring')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
     value = object.recurringRef;
     if (value != null) {
       result
@@ -129,6 +128,28 @@ class _$TransactionsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
+    }
+    value = object.incomeCategory;
+    if (value != null) {
+      result
+        ..add('incomeCategory')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
+    }
+    value = object.isAssigned;
+    if (value != null) {
+      result
+        ..add('isAssigned')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.dateAssigned;
+    if (value != null) {
+      result
+        ..add('dateAssigned')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
     }
     value = object.ffRef;
     if (value != null) {
@@ -203,25 +224,51 @@ class _$TransactionsRecordSerializer
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
-        case 'notes':
-          result.notes = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
         case 'transactionBudget':
           result.transactionBudget = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
-        case 'isRecurring':
-          result.isRecurring = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool?;
-          break;
         case 'recurringRef':
           result.recurringRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
+          break;
+        case 'incomeCategory':
+          result.incomeCategory = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
+          break;
+        case 'categoryDetails':
+          result.categoryDetails.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(CategoryDetailsStruct))!
+              as CategoryDetailsStruct);
+          break;
+        case 'accountDetails':
+          result.accountDetails.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(AccountDetailsStruct))!
+              as AccountDetailsStruct);
+          break;
+        case 'subscriptionDetails':
+          result.subscriptionDetails.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(SubscriptionDetailsStruct))!
+              as SubscriptionDetailsStruct);
+          break;
+        case 'isAssigned':
+          result.isAssigned = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'dateAssigned':
+          result.dateAssigned = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime?;
+          break;
+        case 'incomeDetails':
+          result.incomeDetails.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(IncomeDetailsStruct))!
+              as IncomeDetailsStruct);
           break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
@@ -260,13 +307,23 @@ class _$TransactionsRecord extends TransactionsRecord {
   @override
   final DocumentReference<Object?>? transactionCategory;
   @override
-  final String? notes;
-  @override
   final DocumentReference<Object?>? transactionBudget;
   @override
-  final bool? isRecurring;
-  @override
   final DocumentReference<Object?>? recurringRef;
+  @override
+  final DocumentReference<Object?>? incomeCategory;
+  @override
+  final CategoryDetailsStruct categoryDetails;
+  @override
+  final AccountDetailsStruct accountDetails;
+  @override
+  final SubscriptionDetailsStruct subscriptionDetails;
+  @override
+  final bool? isAssigned;
+  @override
+  final DateTime? dateAssigned;
+  @override
+  final IncomeDetailsStruct incomeDetails;
   @override
   final DocumentReference<Object?>? ffRef;
 
@@ -286,12 +343,26 @@ class _$TransactionsRecord extends TransactionsRecord {
       this.transactionNarration,
       this.transactionID,
       this.transactionCategory,
-      this.notes,
       this.transactionBudget,
-      this.isRecurring,
       this.recurringRef,
+      this.incomeCategory,
+      required this.categoryDetails,
+      required this.accountDetails,
+      required this.subscriptionDetails,
+      this.isAssigned,
+      this.dateAssigned,
+      required this.incomeDetails,
       this.ffRef})
-      : super._();
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        categoryDetails, r'TransactionsRecord', 'categoryDetails');
+    BuiltValueNullFieldError.checkNotNull(
+        accountDetails, r'TransactionsRecord', 'accountDetails');
+    BuiltValueNullFieldError.checkNotNull(
+        subscriptionDetails, r'TransactionsRecord', 'subscriptionDetails');
+    BuiltValueNullFieldError.checkNotNull(
+        incomeDetails, r'TransactionsRecord', 'incomeDetails');
+  }
 
   @override
   TransactionsRecord rebuild(
@@ -317,10 +388,15 @@ class _$TransactionsRecord extends TransactionsRecord {
         transactionNarration == other.transactionNarration &&
         transactionID == other.transactionID &&
         transactionCategory == other.transactionCategory &&
-        notes == other.notes &&
         transactionBudget == other.transactionBudget &&
-        isRecurring == other.isRecurring &&
         recurringRef == other.recurringRef &&
+        incomeCategory == other.incomeCategory &&
+        categoryDetails == other.categoryDetails &&
+        accountDetails == other.accountDetails &&
+        subscriptionDetails == other.subscriptionDetails &&
+        isAssigned == other.isAssigned &&
+        dateAssigned == other.dateAssigned &&
+        incomeDetails == other.incomeDetails &&
         ffRef == other.ffRef;
   }
 
@@ -342,26 +418,27 @@ class _$TransactionsRecord extends TransactionsRecord {
                                                         $jc(
                                                             $jc(
                                                                 $jc(
-                                                                    0,
-                                                                    trasactionDate
-                                                                        .hashCode),
-                                                                account
-                                                                    .hashCode),
-                                                            monoCategory
-                                                                .hashCode),
-                                                        transactionOwner
-                                                            .hashCode),
-                                                    balanceAfter.hashCode),
-                                                transactionMonoID.hashCode),
-                                            transactionAmount.hashCode),
-                                        transactionType.hashCode),
-                                    transactionNarration.hashCode),
-                                transactionID.hashCode),
-                            transactionCategory.hashCode),
-                        notes.hashCode),
-                    transactionBudget.hashCode),
-                isRecurring.hashCode),
-            recurringRef.hashCode),
+                                                                    $jc(
+                                                                        $jc(
+                                                                            $jc($jc($jc(0, trasactionDate.hashCode), account.hashCode),
+                                                                                monoCategory.hashCode),
+                                                                            transactionOwner.hashCode),
+                                                                        balanceAfter.hashCode),
+                                                                    transactionMonoID.hashCode),
+                                                                transactionAmount.hashCode),
+                                                            transactionType.hashCode),
+                                                        transactionNarration.hashCode),
+                                                    transactionID.hashCode),
+                                                transactionCategory.hashCode),
+                                            transactionBudget.hashCode),
+                                        recurringRef.hashCode),
+                                    incomeCategory.hashCode),
+                                categoryDetails.hashCode),
+                            accountDetails.hashCode),
+                        subscriptionDetails.hashCode),
+                    isAssigned.hashCode),
+                dateAssigned.hashCode),
+            incomeDetails.hashCode),
         ffRef.hashCode));
   }
 
@@ -379,10 +456,15 @@ class _$TransactionsRecord extends TransactionsRecord {
           ..add('transactionNarration', transactionNarration)
           ..add('transactionID', transactionID)
           ..add('transactionCategory', transactionCategory)
-          ..add('notes', notes)
           ..add('transactionBudget', transactionBudget)
-          ..add('isRecurring', isRecurring)
           ..add('recurringRef', recurringRef)
+          ..add('incomeCategory', incomeCategory)
+          ..add('categoryDetails', categoryDetails)
+          ..add('accountDetails', accountDetails)
+          ..add('subscriptionDetails', subscriptionDetails)
+          ..add('isAssigned', isAssigned)
+          ..add('dateAssigned', dateAssigned)
+          ..add('incomeDetails', incomeDetails)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -445,24 +527,55 @@ class TransactionsRecordBuilder
   set transactionCategory(DocumentReference<Object?>? transactionCategory) =>
       _$this._transactionCategory = transactionCategory;
 
-  String? _notes;
-  String? get notes => _$this._notes;
-  set notes(String? notes) => _$this._notes = notes;
-
   DocumentReference<Object?>? _transactionBudget;
   DocumentReference<Object?>? get transactionBudget =>
       _$this._transactionBudget;
   set transactionBudget(DocumentReference<Object?>? transactionBudget) =>
       _$this._transactionBudget = transactionBudget;
 
-  bool? _isRecurring;
-  bool? get isRecurring => _$this._isRecurring;
-  set isRecurring(bool? isRecurring) => _$this._isRecurring = isRecurring;
-
   DocumentReference<Object?>? _recurringRef;
   DocumentReference<Object?>? get recurringRef => _$this._recurringRef;
   set recurringRef(DocumentReference<Object?>? recurringRef) =>
       _$this._recurringRef = recurringRef;
+
+  DocumentReference<Object?>? _incomeCategory;
+  DocumentReference<Object?>? get incomeCategory => _$this._incomeCategory;
+  set incomeCategory(DocumentReference<Object?>? incomeCategory) =>
+      _$this._incomeCategory = incomeCategory;
+
+  CategoryDetailsStructBuilder? _categoryDetails;
+  CategoryDetailsStructBuilder get categoryDetails =>
+      _$this._categoryDetails ??= new CategoryDetailsStructBuilder();
+  set categoryDetails(CategoryDetailsStructBuilder? categoryDetails) =>
+      _$this._categoryDetails = categoryDetails;
+
+  AccountDetailsStructBuilder? _accountDetails;
+  AccountDetailsStructBuilder get accountDetails =>
+      _$this._accountDetails ??= new AccountDetailsStructBuilder();
+  set accountDetails(AccountDetailsStructBuilder? accountDetails) =>
+      _$this._accountDetails = accountDetails;
+
+  SubscriptionDetailsStructBuilder? _subscriptionDetails;
+  SubscriptionDetailsStructBuilder get subscriptionDetails =>
+      _$this._subscriptionDetails ??= new SubscriptionDetailsStructBuilder();
+  set subscriptionDetails(
+          SubscriptionDetailsStructBuilder? subscriptionDetails) =>
+      _$this._subscriptionDetails = subscriptionDetails;
+
+  bool? _isAssigned;
+  bool? get isAssigned => _$this._isAssigned;
+  set isAssigned(bool? isAssigned) => _$this._isAssigned = isAssigned;
+
+  DateTime? _dateAssigned;
+  DateTime? get dateAssigned => _$this._dateAssigned;
+  set dateAssigned(DateTime? dateAssigned) =>
+      _$this._dateAssigned = dateAssigned;
+
+  IncomeDetailsStructBuilder? _incomeDetails;
+  IncomeDetailsStructBuilder get incomeDetails =>
+      _$this._incomeDetails ??= new IncomeDetailsStructBuilder();
+  set incomeDetails(IncomeDetailsStructBuilder? incomeDetails) =>
+      _$this._incomeDetails = incomeDetails;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -486,10 +599,15 @@ class TransactionsRecordBuilder
       _transactionNarration = $v.transactionNarration;
       _transactionID = $v.transactionID;
       _transactionCategory = $v.transactionCategory;
-      _notes = $v.notes;
       _transactionBudget = $v.transactionBudget;
-      _isRecurring = $v.isRecurring;
       _recurringRef = $v.recurringRef;
+      _incomeCategory = $v.incomeCategory;
+      _categoryDetails = $v.categoryDetails.toBuilder();
+      _accountDetails = $v.accountDetails.toBuilder();
+      _subscriptionDetails = $v.subscriptionDetails.toBuilder();
+      _isAssigned = $v.isAssigned;
+      _dateAssigned = $v.dateAssigned;
+      _incomeDetails = $v.incomeDetails.toBuilder();
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -511,24 +629,49 @@ class TransactionsRecordBuilder
   TransactionsRecord build() => _build();
 
   _$TransactionsRecord _build() {
-    final _$result = _$v ??
-        new _$TransactionsRecord._(
-            trasactionDate: trasactionDate,
-            account: account,
-            monoCategory: monoCategory,
-            transactionOwner: transactionOwner,
-            balanceAfter: balanceAfter,
-            transactionMonoID: transactionMonoID,
-            transactionAmount: transactionAmount,
-            transactionType: transactionType,
-            transactionNarration: transactionNarration,
-            transactionID: transactionID,
-            transactionCategory: transactionCategory,
-            notes: notes,
-            transactionBudget: transactionBudget,
-            isRecurring: isRecurring,
-            recurringRef: recurringRef,
-            ffRef: ffRef);
+    _$TransactionsRecord _$result;
+    try {
+      _$result = _$v ??
+          new _$TransactionsRecord._(
+              trasactionDate: trasactionDate,
+              account: account,
+              monoCategory: monoCategory,
+              transactionOwner: transactionOwner,
+              balanceAfter: balanceAfter,
+              transactionMonoID: transactionMonoID,
+              transactionAmount: transactionAmount,
+              transactionType: transactionType,
+              transactionNarration: transactionNarration,
+              transactionID: transactionID,
+              transactionCategory: transactionCategory,
+              transactionBudget: transactionBudget,
+              recurringRef: recurringRef,
+              incomeCategory: incomeCategory,
+              categoryDetails: categoryDetails.build(),
+              accountDetails: accountDetails.build(),
+              subscriptionDetails: subscriptionDetails.build(),
+              isAssigned: isAssigned,
+              dateAssigned: dateAssigned,
+              incomeDetails: incomeDetails.build(),
+              ffRef: ffRef);
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'categoryDetails';
+        categoryDetails.build();
+        _$failedField = 'accountDetails';
+        accountDetails.build();
+        _$failedField = 'subscriptionDetails';
+        subscriptionDetails.build();
+
+        _$failedField = 'incomeDetails';
+        incomeDetails.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'TransactionsRecord', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

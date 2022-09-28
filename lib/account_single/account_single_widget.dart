@@ -1,11 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
-import '../components/create_first_budget_q_copy_widget.dart';
+import '../components/account_data_refresh_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../main.dart';
+import '../settings/settings_widget.dart';
 import '../transaction_single/transaction_single_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -49,12 +49,12 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
           builder: (context) {
             return Padding(
               padding: MediaQuery.of(context).viewInsets,
-              child: CreateFirstBudgetQCopyWidget(
+              child: AccountDataRefreshWidget(
                 account: widget.account,
               ),
             );
           },
-        );
+        ).then((value) => setState(() {}));
       } else {
         return;
       }
@@ -519,10 +519,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                     .push(
                                                                   context,
                                                                   MaterialPageRoute(
-                                                                    builder: (context) =>
-                                                                        NavBarPage(
-                                                                            initialPage:
-                                                                                'Settings'),
+                                                                    builder:
+                                                                        (context) =>
+                                                                            SettingsWidget(),
                                                                   ),
                                                                 );
                                                               } else {
@@ -549,6 +548,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                             FlutterFlowTheme.of(context).subtitle2Family,
                                                                         color: Colors
                                                                             .white,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
                                                                       ),
                                                               elevation: 2,
                                                               borderSide:
@@ -697,7 +698,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                   SnackBar(
                                                                     content:
                                                                         Text(
-                                                                      'Synchronization Successful',
+                                                                      'Refreshing transactions. This might take a minute...',
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyText1
@@ -710,11 +711,13 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                                 12,
                                                                             fontWeight:
                                                                                 FontWeight.normal,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                           ),
                                                                     ),
                                                                     duration: Duration(
                                                                         milliseconds:
-                                                                            4000),
+                                                                            6000),
                                                                     backgroundColor:
                                                                         Colors
                                                                             .black,
@@ -764,7 +767,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                     SnackBar(
                                                                       content:
                                                                           Text(
-                                                                        'Synchronization Successful',
+                                                                        'Refreshing transactions. This might take a minute...',
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyText1
                                                                             .override(
@@ -772,11 +775,12 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                               color: Color(0xFFC1C1C1),
                                                                               fontSize: 12,
                                                                               fontWeight: FontWeight.normal,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                             ),
                                                                       ),
                                                                       duration: Duration(
                                                                           milliseconds:
-                                                                              4000),
+                                                                              6000),
                                                                       backgroundColor:
                                                                           Colors
                                                                               .black,
@@ -797,6 +801,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                               color: Color(0xFFE7E7E7),
                                                                               fontSize: 12,
                                                                               fontWeight: FontWeight.normal,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                             ),
                                                                       ),
                                                                       duration: Duration(
@@ -840,6 +845,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                             FlutterFlowTheme.of(context).subtitle2Family,
                                                                         color: Colors
                                                                             .white,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
                                                                       ),
                                                               elevation: 2,
                                                               borderSide:
@@ -931,7 +938,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                             height: 60,
                                                             color: FlutterFlowTheme
                                                                     .of(context)
-                                                                .neutralGray,
+                                                                .fadedDivider,
                                                             textStyle:
                                                                 FlutterFlowTheme.of(
                                                                         context)
@@ -940,8 +947,13 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                       fontFamily:
                                                                           FlutterFlowTheme.of(context)
                                                                               .subtitle2Family,
-                                                                      color: Colors
-                                                                          .white,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryText,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).subtitle2Family),
                                                                     ),
                                                             borderSide:
                                                                 BorderSide(
@@ -1173,6 +1185,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                               Color(0xFFFF0003),
                                                                           fontStyle:
                                                                               FontStyle.italic,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                         ),
                                                                   ),
                                                                 ),
@@ -1246,6 +1260,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                                 FlutterFlowTheme.of(context).bodyText2Family,
                                                                             color:
                                                                                 Color(0xFFFF0003),
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText2Family),
                                                                           ),
                                                                     ),
                                                                   if (columnTransactionsRecord
@@ -1271,6 +1287,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                                 FlutterFlowTheme.of(context).bodyText2Family,
                                                                             color:
                                                                                 FlutterFlowTheme.of(context).tertiaryColor,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText2Family),
                                                                           ),
                                                                     ),
                                                                 ],

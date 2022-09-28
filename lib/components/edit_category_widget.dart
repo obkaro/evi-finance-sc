@@ -36,13 +36,19 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
   }
 
   @override
+  void dispose() {
+    textController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).primaryBackground,
+          color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: [
             BoxShadow(
               blurRadius: 14,
@@ -77,6 +83,9 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                                     .bodyText1Family,
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyText1Family),
                               ),
                         ),
                       ],
@@ -105,9 +114,22 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       filled: true,
-                      fillColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
+                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1,
                     keyboardType: TextInputType.name,
@@ -121,6 +143,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                     amount: widget.categoryToEdit!.categoryAmount,
                     labelText: 'Amount',
                     hintText: 'Enter amount',
+                    bgcolor: FlutterFlowTheme.of(context).primaryBackground,
                   ),
                 ),
                 Divider(
@@ -215,12 +238,16 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                             width: double.infinity,
                             height: 60,
                             color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      color: Colors.white,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .subtitle2
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .subtitle2Family,
+                                  color: Colors.white,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .subtitle2Family),
+                                ),
                             elevation: 2,
                             borderSide: BorderSide(
                               color: Colors.transparent,

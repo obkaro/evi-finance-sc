@@ -10,6 +10,8 @@ import 'categories_record.dart';
 import 'versions_record.dart';
 import 'subscriptions_record.dart';
 import 'const_recurring_payments_record.dart';
+import 'income_categories_record.dart';
+import 'const_income_categories_record.dart';
 
 import 'index.dart';
 
@@ -30,10 +32,16 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   VersionsRecord,
   SubscriptionsRecord,
   ConstRecurringPaymentsRecord,
+  IncomeCategoriesRecord,
+  ConstIncomeCategoriesRecord,
   VersionStruct,
   MoneyStruct,
   PaymentPlanStruct,
   ReminderStruct,
+  AccountDetailsStruct,
+  CategoryDetailsStruct,
+  SubscriptionDetailsStruct,
+  IncomeDetailsStruct,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

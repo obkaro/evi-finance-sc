@@ -57,6 +57,19 @@ class _$CategoriesRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
+    value = object.spentAmount;
+    if (value != null) {
+      result
+        ..add('spentAmount')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.createdDate;
+    if (value != null) {
+      result
+        ..add('createdDate')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -104,6 +117,14 @@ class _$CategoriesRecordSerializer
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
+        case 'spentAmount':
+          result.spentAmount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'createdDate':
+          result.createdDate = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -129,6 +150,10 @@ class _$CategoriesRecord extends CategoriesRecord {
   @override
   final DocumentReference<Object?>? categoryOwner;
   @override
+  final int? spentAmount;
+  @override
+  final DateTime? createdDate;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$CategoriesRecord(
@@ -141,6 +166,8 @@ class _$CategoriesRecord extends CategoriesRecord {
       this.categoryBudget,
       this.categoryAmount,
       this.categoryOwner,
+      this.spentAmount,
+      this.createdDate,
       this.ffRef})
       : super._();
 
@@ -161,6 +188,8 @@ class _$CategoriesRecord extends CategoriesRecord {
         categoryBudget == other.categoryBudget &&
         categoryAmount == other.categoryAmount &&
         categoryOwner == other.categoryOwner &&
+        spentAmount == other.spentAmount &&
+        createdDate == other.createdDate &&
         ffRef == other.ffRef;
   }
 
@@ -169,10 +198,16 @@ class _$CategoriesRecord extends CategoriesRecord {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, categoryName.hashCode), categoryId.hashCode),
-                    categoryBudget.hashCode),
-                categoryAmount.hashCode),
-            categoryOwner.hashCode),
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc($jc(0, categoryName.hashCode),
+                                categoryId.hashCode),
+                            categoryBudget.hashCode),
+                        categoryAmount.hashCode),
+                    categoryOwner.hashCode),
+                spentAmount.hashCode),
+            createdDate.hashCode),
         ffRef.hashCode));
   }
 
@@ -184,6 +219,8 @@ class _$CategoriesRecord extends CategoriesRecord {
           ..add('categoryBudget', categoryBudget)
           ..add('categoryAmount', categoryAmount)
           ..add('categoryOwner', categoryOwner)
+          ..add('spentAmount', spentAmount)
+          ..add('createdDate', createdDate)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -216,6 +253,14 @@ class CategoriesRecordBuilder
   set categoryOwner(DocumentReference<Object?>? categoryOwner) =>
       _$this._categoryOwner = categoryOwner;
 
+  int? _spentAmount;
+  int? get spentAmount => _$this._spentAmount;
+  set spentAmount(int? spentAmount) => _$this._spentAmount = spentAmount;
+
+  DateTime? _createdDate;
+  DateTime? get createdDate => _$this._createdDate;
+  set createdDate(DateTime? createdDate) => _$this._createdDate = createdDate;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -232,6 +277,8 @@ class CategoriesRecordBuilder
       _categoryBudget = $v.categoryBudget;
       _categoryAmount = $v.categoryAmount;
       _categoryOwner = $v.categoryOwner;
+      _spentAmount = $v.spentAmount;
+      _createdDate = $v.createdDate;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -260,6 +307,8 @@ class CategoriesRecordBuilder
             categoryBudget: categoryBudget,
             categoryAmount: categoryAmount,
             categoryOwner: categoryOwner,
+            spentAmount: spentAmount,
+            createdDate: createdDate,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

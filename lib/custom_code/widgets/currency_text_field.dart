@@ -11,21 +11,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 class CurrencyTextField extends StatefulWidget {
-  const CurrencyTextField({
-    Key? key,
-    this.width,
-    this.height,
-    this.amount,
-    this.labelText,
-    this.hintText,
-    //this.moneyController,
-  }) : super(key: key);
+  const CurrencyTextField(
+      {Key? key,
+      this.width,
+      this.height,
+      this.amount,
+      this.labelText,
+      this.hintText,
+      this.bgcolor
+      //this.moneyController,
+      })
+      : super(key: key);
 
   final double? width;
   final double? height;
   final int? amount;
   final String? labelText;
   final String? hintText;
+  final Color? bgcolor;
   //final MoneyMaskedTextController moneyController;
 
   @override
@@ -67,38 +70,37 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
     setState(() {});
 
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-      child: TextFormField(
-        controller: moneyController,
-        obscureText: false,
-        decoration: InputDecoration(
-          //labelText: widget.labelText,
-          hintText: widget.hintText,
-          hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
-                color: FlutterFlowTheme.of(context).secondaryText,
-                fontWeight: FontWeight.w500,
+        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+        child: TextFormField(
+          controller: moneyController,
+          obscureText: false,
+          decoration: InputDecoration(
+            //labelText: widget.labelText,
+            hintText: widget.hintText,
+            hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                  fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  fontWeight: FontWeight.w500,
+                ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Color(0x00000000),
+                width: 1,
               ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Color(0x00000000),
-              width: 1,
+              borderRadius: BorderRadius.circular(12),
             ),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Color(0x00000000),
-              width: 1,
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Color(0x00000000),
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(12),
             ),
-            borderRadius: BorderRadius.circular(12),
+            filled: true,
+            fillColor: widget.bgcolor,
           ),
-          filled: true,
-          fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-        ),
-        style: FlutterFlowTheme.of(context).bodyText1,
-        keyboardType: TextInputType.number,
-      ),
-    );
+          style: FlutterFlowTheme.of(context).bodyText1,
+          keyboardType: TextInputType.number,
+        ));
   }
 }

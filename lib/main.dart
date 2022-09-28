@@ -10,6 +10,7 @@ import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'index.dart';
 
 void main() async {
@@ -85,13 +86,13 @@ class _MyAppState extends State<MyApp> {
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: _themeMode,
       home: initialUser == null || displaySplashImage
-          ? Container(
-              color: Colors.white,
-              child: Center(
-                child: Builder(
-                  builder: (context) => Image.asset(
-                    'assets/images/Group_20_(2).png',
-                    width: 200,
+          ? Builder(
+              builder: (context) => Container(
+                color: FlutterFlowTheme.of(context).primaryBackground,
+                child: Center(
+                  child: Image.asset(
+                    'assets/images/evi-logo-720h.png',
+                    width: MediaQuery.of(context).size.width * 0.7,
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -99,15 +100,16 @@ class _MyAppState extends State<MyApp> {
             )
           : currentUser!.loggedIn
               ? PushNotificationsHandler(child: NavBarPage())
-              : LandPageWidget(),
+              : LandingPageViewWidget(),
     );
   }
 }
 
 class NavBarPage extends StatefulWidget {
-  NavBarPage({Key? key, this.initialPage}) : super(key: key);
+  NavBarPage({Key? key, this.initialPage, this.page}) : super(key: key);
 
   final String? initialPage;
+  final Widget? page;
 
   @override
   _NavBarPageState createState() => _NavBarPageState();
@@ -115,95 +117,67 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPage = 'Dashboard';
+  String _currentPageName = 'Dashboard';
+  late Widget? _currentPage;
 
   @override
   void initState() {
     super.initState();
-    _currentPage = widget.initialPage ?? _currentPage;
+    _currentPageName = widget.initialPage ?? _currentPageName;
+    _currentPage = widget.page;
   }
 
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'RecurringPayments': RecurringPaymentsWidget(),
-      'ActiveBudget': ActiveBudgetWidget(),
       'Dashboard': DashboardWidget(),
-      'Accounts': AccountsWidget(),
-      'Settings': SettingsWidget(),
+      'ActiveBudget': ActiveBudgetWidget(),
+      'Menu': MenuWidget(),
     };
-    final currentIndex = tabs.keys.toList().indexOf(_currentPage);
+    final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
-      body: tabs[_currentPage],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (i) => setState(() => _currentPage = tabs.keys.toList()[i]),
-        backgroundColor: Colors.black,
-        selectedItemColor: FlutterFlowTheme.of(context).primaryColor,
-        unselectedItemColor: Color(0xFF5D5B5B),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.payment_rounded,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.payment_rounded,
-              size: 32,
-            ),
-            label: 'Recurring Payments',
-            tooltip: '',
+      body: _currentPage ?? tabs[_currentPageName],
+      bottomNavigationBar: GNav(
+        selectedIndex: currentIndex,
+        onTabChange: (i) => setState(() {
+          _currentPage = null;
+          _currentPageName = tabs.keys.toList()[i];
+        }),
+        backgroundColor: FlutterFlowTheme.of(context).lightPrimary,
+        color: FlutterFlowTheme.of(context).secondaryText,
+        activeColor: FlutterFlowTheme.of(context).primaryText,
+        tabBackgroundColor: Color(0x00000000),
+        tabActiveBorder: Border.all(
+          color: FlutterFlowTheme.of(context).lightPrimary,
+          width: 8,
+        ),
+        tabBorderRadius: 100,
+        tabMargin: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+        gap: 8,
+        mainAxisAlignment: MainAxisAlignment.center,
+        duration: Duration(milliseconds: 500),
+        haptic: false,
+        tabs: [
+          GButton(
+            icon: currentIndex == 0 ? Icons.home_rounded : Icons.home_rounded,
+            text: 'Dashboard',
+            iconSize: 24,
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.pie_chart_rounded,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.pie_chart_rounded,
-              size: 32,
-            ),
-            label: 'Active Budget',
-            tooltip: '',
+          GButton(
+            icon: currentIndex == 1
+                ? Icons.pie_chart_rounded
+                : Icons.pie_chart_rounded,
+            text: 'Active Budget',
+            iconSize: 24,
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_rounded,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.home_rounded,
-              size: 32,
-            ),
-            label: 'Dashboard',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.account_balance_rounded,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.account_balance_rounded,
-              size: 32,
-            ),
-            label: 'Accounts',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.settings_rounded,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.settings_rounded,
-              size: 32,
-            ),
-            label: 'Profile',
-            tooltip: '',
+          GButton(
+            icon: currentIndex == 2 ? Icons.apps_rounded : Icons.apps_rounded,
+            text: 'Menu',
+            iconSize: 24,
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           )
         ],
       ),

@@ -50,14 +50,29 @@ class _TooltipWidgetState extends State<TooltipWidget> {
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text(
-                        widget.tip!,
-                        style: FlutterFlowTheme.of(context).bodyText2.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyText2Family,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              fontWeight: FontWeight.normal,
+                      Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.tip!,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText2
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyText2Family,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontWeight: FontWeight.normal,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyText2Family),
+                                  ),
                             ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

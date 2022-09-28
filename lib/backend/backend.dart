@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:built_value/serializer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +14,8 @@ import 'schema/categories_record.dart';
 import 'schema/versions_record.dart';
 import 'schema/subscriptions_record.dart';
 import 'schema/const_recurring_payments_record.dart';
+import 'schema/income_categories_record.dart';
+import 'schema/const_income_categories_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -32,6 +33,8 @@ export 'schema/categories_record.dart';
 export 'schema/versions_record.dart';
 export 'schema/subscriptions_record.dart';
 export 'schema/const_recurring_payments_record.dart';
+export 'schema/income_categories_record.dart';
+export 'schema/const_income_categories_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord({
@@ -460,6 +463,95 @@ Future<FFFirestorePage<ConstRecurringPaymentsRecord>>
           isStream: isStream,
         );
 
+/// Functions to query IncomeCategoriesRecords (as a Stream and as a Future).
+Stream<List<IncomeCategoriesRecord>> queryIncomeCategoriesRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      IncomeCategoriesRecord.collection(parent),
+      IncomeCategoriesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<IncomeCategoriesRecord>> queryIncomeCategoriesRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      IncomeCategoriesRecord.collection(parent),
+      IncomeCategoriesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<IncomeCategoriesRecord>>
+    queryIncomeCategoriesRecordPage({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+        queryCollectionPage(
+          IncomeCategoriesRecord.collection(parent),
+          IncomeCategoriesRecord.serializer,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        );
+
+/// Functions to query ConstIncomeCategoriesRecords (as a Stream and as a Future).
+Stream<List<ConstIncomeCategoriesRecord>> queryConstIncomeCategoriesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ConstIncomeCategoriesRecord.collection,
+      ConstIncomeCategoriesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ConstIncomeCategoriesRecord>> queryConstIncomeCategoriesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ConstIncomeCategoriesRecord.collection,
+      ConstIncomeCategoriesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<ConstIncomeCategoriesRecord>>
+    queryConstIncomeCategoriesRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+        queryCollectionPage(
+          ConstIncomeCategoriesRecord.collection,
+          ConstIncomeCategoriesRecord.serializer,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        );
+
 Stream<List<T>> queryCollection<T>(Query collection, Serializer<T> serializer,
     {Query Function(Query)? queryBuilder,
     int limit = -1,
@@ -505,12 +597,19 @@ Future<List<T>> queryCollectionOnce<T>(
       .toList());
 }
 
-extension WhereInExtension on Query {
-  Query whereIn(String field, List? list) => (list?.isEmpty ?? false)
-      //Ensures an empty list is returned for a query with no results
-      //since it is near impossible for list to have the same random double value
-      ? where(field, whereIn: [Random().nextDouble()])
+extension QueryExtension on Query {
+  Query whereIn(String field, List? list) => (list?.isEmpty ?? true)
+      ? where(field, whereIn: null)
       : where(field, whereIn: list);
+
+  Query whereNotIn(String field, List? list) => (list?.isEmpty ?? true)
+      ? where(field, whereNotIn: null)
+      : where(field, whereNotIn: list);
+
+  Query whereArrayContainsAny(String field, List? list) =>
+      (list?.isEmpty ?? true)
+          ? where(field, arrayContainsAny: null)
+          : where(field, arrayContainsAny: list);
 }
 
 class FFFirestorePage<T> {

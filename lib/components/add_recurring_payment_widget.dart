@@ -5,18 +5,14 @@ import '../create_recurring/create_recurring_widget.dart';
 import '../edit_subsciption/edit_subsciption_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddRecurringPaymentWidget extends StatefulWidget {
-  const AddRecurringPaymentWidget({
-    Key? key,
-    this.recurringPayment,
-  }) : super(key: key);
-
-  final SubscriptionsRecord? recurringPayment;
+  const AddRecurringPaymentWidget({Key? key}) : super(key: key);
 
   @override
   _AddRecurringPaymentWidgetState createState() =>
@@ -56,7 +52,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
             containerConstRecurringPaymentsRecordList = snapshot.data!;
         return Container(
           width: double.infinity,
-          height: 500,
+          height: 480,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).secondaryBackground,
             borderRadius: BorderRadius.only(
@@ -70,144 +66,138 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
             child: Column(
               mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Add new payment',
-                      style: FlutterFlowTheme.of(context).title3,
-                    ),
-                  ],
-                ),
                 SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Container(
                         width: double.infinity,
-                        height: 350,
+                        height: 372,
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
                         ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                          child: Builder(
-                            builder: (context) {
-                              final subsfromcontainer =
-                                  containerConstRecurringPaymentsRecordList
-                                      .toList();
-                              return GridView.builder(
-                                padding: EdgeInsets.zero,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 4,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10,
-                                  childAspectRatio: 1,
-                                ),
-                                scrollDirection: Axis.vertical,
-                                itemCount: subsfromcontainer.length,
-                                itemBuilder: (context, subsfromcontainerIndex) {
-                                  final subsfromcontainerItem =
-                                      subsfromcontainer[subsfromcontainerIndex];
-                                  return Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 10, 0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        Navigator.pop(context);
-
-                                        final subscriptionsCreateData =
-                                            createSubscriptionsRecordData(
-                                          name: subsfromcontainerItem.name,
-                                          icon: subsfromcontainerItem.icon,
-                                        );
-                                        var subscriptionsRecordReference =
-                                            SubscriptionsRecord.collection
-                                                .doc();
-                                        await subscriptionsRecordReference
-                                            .set(subscriptionsCreateData);
-                                        newSub = SubscriptionsRecord
-                                            .getDocumentFromData(
-                                                subscriptionsCreateData,
-                                                subscriptionsRecordReference);
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                CreateRecurringWidget(
-                                              subscriptionRecord:
-                                                  newSub!.reference,
-                                            ),
+                        child: Builder(
+                          builder: (context) {
+                            final subsfromcontainer =
+                                containerConstRecurringPaymentsRecordList
+                                    .toList();
+                            return GridView.builder(
+                              padding: EdgeInsets.zero,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 4,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10,
+                                childAspectRatio: 1,
+                              ),
+                              scrollDirection: Axis.vertical,
+                              itemCount: subsfromcontainer.length,
+                              itemBuilder: (context, subsfromcontainerIndex) {
+                                final subsfromcontainerItem =
+                                    subsfromcontainer[subsfromcontainerIndex];
+                                return Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 10, 0),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      final subscriptionsCreateData =
+                                          createSubscriptionsRecordData(
+                                        name: subsfromcontainerItem.name,
+                                        icon: subsfromcontainerItem.icon,
+                                      );
+                                      var subscriptionsRecordReference =
+                                          SubscriptionsRecord.collection.doc();
+                                      await subscriptionsRecordReference
+                                          .set(subscriptionsCreateData);
+                                      newSub = SubscriptionsRecord
+                                          .getDocumentFromData(
+                                              subscriptionsCreateData,
+                                              subscriptionsRecordReference);
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              CreateRecurringWidget(
+                                            subscriptionRecord:
+                                                newSub!.reference,
                                           ),
-                                        );
-
-                                        setState(() {});
-                                      },
-                                      child: Container(
-                                        width: 120,
-                                        height: 120,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
                                         ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  12, 12, 12, 12),
+                                      );
+                                      Navigator.pop(context);
+
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                      width: 100,
+                                      height: 100,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            8, 8, 8, 8),
+                                        child: Hero(
+                                          tag: subsfromcontainerItem.icon!,
+                                          transitionOnUserGestures: true,
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(8),
-                                            child: Image.network(
-                                              subsfromcontainerItem.icon!,
+                                            child: CachedNetworkImage(
+                                              imageUrl:
+                                                  subsfromcontainerItem.icon!,
                                               fit: BoxFit.scaleDown,
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  );
-                                },
-                              );
-                            },
-                          ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
                         ),
                       ),
                     ],
                   ),
                 ),
-                InkWell(
-                  onTap: () async {
-                    Navigator.pop(context);
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                  child: InkWell(
+                    onTap: () async {
+                      Navigator.pop(context);
 
-                    final subscriptionsCreateData =
-                        createSubscriptionsRecordData();
-                    var subscriptionsRecordReference =
-                        SubscriptionsRecord.collection.doc();
-                    await subscriptionsRecordReference
-                        .set(subscriptionsCreateData);
-                    newSub2 = SubscriptionsRecord.getDocumentFromData(
-                        subscriptionsCreateData, subscriptionsRecordReference);
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditSubsciptionWidget(
-                          subscriptionRecord: newSub2!.reference,
+                      final subscriptionsCreateData =
+                          createSubscriptionsRecordData();
+                      var subscriptionsRecordReference =
+                          SubscriptionsRecord.collection.doc();
+                      await subscriptionsRecordReference
+                          .set(subscriptionsCreateData);
+                      newSub2 = SubscriptionsRecord.getDocumentFromData(
+                          subscriptionsCreateData,
+                          subscriptionsRecordReference);
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditSubsciptionWidget(
+                            subscriptionRecord: newSub2!.reference,
+                          ),
                         ),
-                      ),
-                    );
+                      );
 
-                    setState(() {});
-                  },
-                  child: CButtonFilledCopyWidget(
-                    text: 'Custom',
-                    icon: Icon(
-                      Icons.add_rounded,
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 20,
+                      setState(() {});
+                    },
+                    child: CButtonFilledCopyWidget(
+                      text: 'Custom',
+                      icon: Icon(
+                        Icons.add_rounded,
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        size: 20,
+                      ),
+                      action: () async {},
                     ),
                   ),
                 ),

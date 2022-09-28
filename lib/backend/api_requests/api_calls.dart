@@ -4,6 +4,8 @@ import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
 
+const _kPrivateApiFunctionName = 'ffPrivateApiCall';
+
 class GetPermanentAuthCall {
   static Future<ApiCallResponse> call({
     String? tempKey = 'no temp key',
@@ -21,9 +23,7 @@ class GetPermanentAuthCall {
         'Content-Type': 'application/json',
         'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid',
       },
-      params: {
-        'tempKey': tempKey,
-      },
+      params: {},
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
@@ -167,4 +167,20 @@ class ReauthMonoCall {
       returnBody: true,
     );
   }
+}
+
+class ApiPagingParams {
+  int nextPageNumber = 0;
+  int numItems = 0;
+  dynamic lastResponse;
+
+  ApiPagingParams({
+    required this.nextPageNumber,
+    required this.numItems,
+    required this.lastResponse,
+  });
+
+  @override
+  String toString() =>
+      'PagingParams(nextPageNumber: $nextPageNumber, numItems: $numItems, lastResponse: $lastResponse,)';
 }

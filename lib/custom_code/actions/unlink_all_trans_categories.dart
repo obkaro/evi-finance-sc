@@ -8,17 +8,21 @@ import 'package:flutter/material.dart';
 
 // Begin custom action code
 Future unlinkAllTransCategories(
-  List<TransactionsRecord> transactions,
-  CategoriesRecord? category,
+  List<TransactionsRecord>? transactions,
 ) async {
   // Add your function code here!
-  for (var i = 0; i < transactions.length; i++) {
-    final transactionUpdateData = {
+  for (var i = 0; i < transactions!.length; i++) {
+    final transactionsUpdateData = {
+      ...createTransactionsRecordData(
+        categoryDetails: createCategoryDetailsStruct(delete: true),
+        subscriptionDetails: createSubscriptionDetailsStruct(delete: true),
+        isAssigned: false,
+      ),
       'transactionCategory': FieldValue.delete(),
-      'transactionBudget': FieldValue.delete(),
       'recurringRef': FieldValue.delete(),
+      'transactionBudget': FieldValue.delete(),
+      'dateAssigned': FieldValue.delete(),
     };
-
-    await transactions[i].reference.update(transactionUpdateData);
+    await transactions[i].reference.update(transactionsUpdateData);
   }
 }

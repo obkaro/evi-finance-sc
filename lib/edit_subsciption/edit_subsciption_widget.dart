@@ -10,8 +10,8 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
-import '../main.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -51,6 +51,12 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
   }
 
   @override
+  void dispose() {
+    nameController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<SubscriptionsRecord>(
       stream: SubscriptionsRecord.getDocument(widget.subscriptionRecord!),
@@ -72,13 +78,18 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            iconTheme:
-                IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
+            backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
+            iconTheme: IconThemeData(
+                color: FlutterFlowTheme.of(context).secondaryPrimary),
             automaticallyImplyLeading: true,
             title: Text(
               'Edit Subscription',
-              style: FlutterFlowTheme.of(context).title3,
+              style: FlutterFlowTheme.of(context).title3.override(
+                    fontFamily: FlutterFlowTheme.of(context).title3Family,
+                    color: FlutterFlowTheme.of(context).secondaryPrimary,
+                    useGoogleFonts: GoogleFonts.asMap()
+                        .containsKey(FlutterFlowTheme.of(context).title3Family),
+                  ),
             ),
             actions: [],
             centerTitle: true,
@@ -113,7 +124,6 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                         width: double.infinity,
                                         height: double.infinity,
                                         decoration: BoxDecoration(
-                                          color: Colors.white,
                                           shape: BoxShape.circle,
                                           border: Border.all(
                                             color: Colors.transparent,
@@ -129,7 +139,6 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                           width: double.infinity,
                                           height: double.infinity,
                                           decoration: BoxDecoration(
-                                            color: Colors.white,
                                             shape: BoxShape.circle,
                                             border: Border.all(
                                               color: Colors.transparent,
@@ -140,85 +149,100 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     20, 20, 20, 20),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              child: Image.network(
-                                                editSubsciptionSubscriptionsRecord
-                                                    .icon!,
-                                                width: 100,
-                                                height: 100,
-                                                fit: BoxFit.cover,
+                                            child: Hero(
+                                              tag:
+                                                  editSubsciptionSubscriptionsRecord
+                                                      .icon!,
+                                              transitionOnUserGestures: true,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      editSubsciptionSubscriptionsRecord
+                                                          .icon!,
+                                                  width: 100,
+                                                  height: 100,
+                                                  fit: BoxFit.scaleDown,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                      FlutterFlowIconButton(
-                                        borderColor: Colors.transparent,
-                                        borderRadius: 30,
-                                        borderWidth: 1,
-                                        buttonSize: 60,
-                                        icon: Icon(
-                                          Icons.edit_rounded,
-                                          color: Colors.white,
-                                          size: 32,
-                                        ),
-                                        onPressed: () async {
-                                          final selectedMedia =
-                                              await selectMedia(
-                                            maxWidth: 720.00,
-                                            imageQuality: 49,
-                                            mediaSource:
-                                                MediaSource.photoGallery,
-                                            multiImage: false,
-                                          );
-                                          if (selectedMedia != null &&
-                                              selectedMedia.every((m) =>
-                                                  validateFileFormat(
-                                                      m.storagePath,
-                                                      context))) {
-                                            showUploadMessage(
-                                              context,
-                                              'Uploading file...',
-                                              showLoading: true,
+                                      Align(
+                                        alignment: AlignmentDirectional(1, -1),
+                                        child: FlutterFlowIconButton(
+                                          borderColor: Colors.transparent,
+                                          borderRadius: 30,
+                                          borderWidth: 1,
+                                          buttonSize: 44,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .darkPrimary,
+                                          icon: Icon(
+                                            Icons.edit_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            size: 16,
+                                          ),
+                                          onPressed: () async {
+                                            final selectedMedia =
+                                                await selectMedia(
+                                              maxWidth: 720.00,
+                                              imageQuality: 49,
+                                              mediaSource:
+                                                  MediaSource.photoGallery,
+                                              multiImage: false,
                                             );
-                                            final downloadUrls =
-                                                (await Future.wait(selectedMedia
-                                                        .map((m) async =>
-                                                            await uploadData(
-                                                                m.storagePath,
-                                                                m.bytes))))
-                                                    .where((u) => u != null)
-                                                    .map((u) => u!)
-                                                    .toList();
-                                            ScaffoldMessenger.of(context)
-                                                .hideCurrentSnackBar();
-                                            if (downloadUrls.length ==
-                                                selectedMedia.length) {
-                                              setState(() => uploadedFileUrl =
-                                                  downloadUrls.first);
+                                            if (selectedMedia != null &&
+                                                selectedMedia.every((m) =>
+                                                    validateFileFormat(
+                                                        m.storagePath,
+                                                        context))) {
                                               showUploadMessage(
                                                 context,
-                                                'Success!',
+                                                'Uploading file...',
+                                                showLoading: true,
                                               );
-                                            } else {
-                                              showUploadMessage(
-                                                context,
-                                                'Failed to upload media',
-                                              );
-                                              return;
+                                              final downloadUrls = (await Future
+                                                      .wait(selectedMedia.map(
+                                                          (m) async =>
+                                                              await uploadData(
+                                                                  m.storagePath,
+                                                                  m.bytes))))
+                                                  .where((u) => u != null)
+                                                  .map((u) => u!)
+                                                  .toList();
+                                              ScaffoldMessenger.of(context)
+                                                  .hideCurrentSnackBar();
+                                              if (downloadUrls.length ==
+                                                  selectedMedia.length) {
+                                                setState(() => uploadedFileUrl =
+                                                    downloadUrls.first);
+                                                showUploadMessage(
+                                                  context,
+                                                  'Success!',
+                                                );
+                                              } else {
+                                                showUploadMessage(
+                                                  context,
+                                                  'Failed to upload media',
+                                                );
+                                                return;
+                                              }
                                             }
-                                          }
 
-                                          final subscriptionsUpdateData =
-                                              createSubscriptionsRecordData(
-                                            icon: uploadedFileUrl,
-                                          );
-                                          await editSubsciptionSubscriptionsRecord
-                                              .reference
-                                              .update(subscriptionsUpdateData);
-                                        },
+                                            final subscriptionsUpdateData =
+                                                createSubscriptionsRecordData(
+                                              icon: uploadedFileUrl,
+                                            );
+                                            await editSubsciptionSubscriptionsRecord
+                                                .reference
+                                                .update(
+                                                    subscriptionsUpdateData);
+                                          },
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -244,6 +268,10 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                   .bodyText1Family,
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryText,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family),
                                         ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -253,6 +281,20 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                     focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Color(0x00000000),
                                         width: 1,
@@ -289,6 +331,8 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                               editSubsciptionSubscriptionsRecord
                                                   .expCharge.amount,
                                           hintText: 'Enter amount',
+                                          bgcolor: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
                                         ),
                                       ),
                                     ],
@@ -384,6 +428,12 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primaryText,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
                                                       ),
                                                   hintText:
                                                       'Assign to a category...',
@@ -413,17 +463,18 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                                EdgeInsetsDirectional.fromSTEB(0, 16, 0, 4),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 4, 0),
+                                      8, 0, 0, 0),
                                   child: Text(
                                     'Edit expected charge date',
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                        FlutterFlowTheme.of(context).bodyText2,
                                   ),
                                 ),
                                 InkWell(
@@ -442,7 +493,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                           ),
                                         );
                                       },
-                                    );
+                                    ).then((value) => setState(() {}));
                                   },
                                   child: Icon(
                                     Icons.help_outline_rounded,
@@ -454,151 +505,183 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                            child: Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.circular(32),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 10, 16, 16),
-                                child: FlutterFlowCalendar(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  iconColor:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  weekFormat: false,
-                                  weekStartsMonday: false,
-                                  initialDate:
-                                      editSubsciptionSubscriptionsRecord
-                                          .expChargeDate,
-                                  rowHeight: 40,
-                                  onChange:
-                                      (DateTimeRange? newSelectedDate) async {
-                                    calendarSelectedDay = newSelectedDate;
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(32),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16, 10, 16, 16),
+                              child: FlutterFlowCalendar(
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                iconColor:
+                                    FlutterFlowTheme.of(context).primaryText,
+                                weekFormat: false,
+                                weekStartsMonday: false,
+                                initialDate: editSubsciptionSubscriptionsRecord
+                                    .expChargeDate,
+                                rowHeight: 48,
+                                onChange:
+                                    (DateTimeRange? newSelectedDate) async {
+                                  calendarSelectedDay = newSelectedDate;
 
-                                    final subscriptionsUpdateData =
-                                        createSubscriptionsRecordData(
-                                      expChargeDate: calendarSelectedDay?.start,
-                                    );
-                                    await editSubsciptionSubscriptionsRecord
-                                        .reference
-                                        .update(subscriptionsUpdateData);
-                                    setState(() {});
-                                  },
-                                  titleStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .subtitle2Family,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                      ),
-                                  dayOfWeekStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText2Family,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                      ),
-                                  dateStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText2Family,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                  selectedDateStyle:
-                                      FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
-                                            color: Colors.white,
-                                          ),
-                                  inactiveDateStyle:
-                                      FlutterFlowTheme.of(context)
-                                          .bodyText2
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText2Family,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryColor,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                  locale:
-                                      FFLocalizations.of(context).languageCode,
-                                ),
+                                  final subscriptionsUpdateData =
+                                      createSubscriptionsRecordData(
+                                    expChargeDate: calendarSelectedDay?.start,
+                                  );
+                                  await editSubsciptionSubscriptionsRecord
+                                      .reference
+                                      .update(subscriptionsUpdateData);
+                                  setState(() {});
+                                },
+                                titleStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .subtitle2Family,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2Family),
+                                    ),
+                                dayOfWeekStyle: FlutterFlowTheme.of(context)
+                                    .bodyText2
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyText2Family,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText2Family),
+                                    ),
+                                dateStyle: FlutterFlowTheme.of(context)
+                                    .bodyText2
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyText2Family,
+                                      fontWeight: FontWeight.normal,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText2Family),
+                                    ),
+                                selectedDateStyle: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyText1Family,
+                                      color: Colors.white,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText1Family),
+                                    ),
+                                inactiveDateStyle: FlutterFlowTheme.of(context)
+                                    .bodyText2
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyText2Family,
+                                      color: FlutterFlowTheme.of(context)
+                                          .fadedDivider,
+                                      fontWeight: FontWeight.w300,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText2Family),
+                                    ),
+                                locale:
+                                    FFLocalizations.of(context).languageCode,
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                FlutterFlowChoiceChips(
-                                  initiallySelected: durationValue != null
-                                      ? [durationValue!]
-                                      : [
-                                          editSubsciptionSubscriptionsRecord
-                                              .recurrence!
-                                        ],
-                                  options: [
-                                    ChipData('Weekly'),
-                                    ChipData('Monthly'),
-                                    ChipData('Quarterly'),
-                                    ChipData('Yearly')
-                                  ],
-                                  onChanged: (val) => setState(
-                                      () => durationValue = val?.first),
-                                  selectedChipStyle: ChipStyle(
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1Family,
-                                          color: Colors.white,
-                                        ),
-                                    iconColor: Color(0x00000000),
-                                    iconSize: 18,
-                                    elevation: 0,
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: FlutterFlowChoiceChips(
+                                      initiallySelected: durationValue != null
+                                          ? [durationValue!]
+                                          : [
+                                              editSubsciptionSubscriptionsRecord
+                                                  .recurrence!
+                                            ],
+                                      options: [
+                                        ChipData('Weekly'),
+                                        ChipData('Monthly'),
+                                        ChipData('Quarterly'),
+                                        ChipData('Yearly')
+                                      ],
+                                      onChanged: (val) => setState(
+                                          () => durationValue = val?.first),
+                                      selectedChipStyle: ChipStyle(
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family,
+                                              color: Colors.white,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1Family),
+                                            ),
+                                        iconColor: Color(0x00000000),
+                                        iconSize: 18,
+                                        elevation: 0,
+                                      ),
+                                      unselectedChipStyle: ChipStyle(
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .darkPrimary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2Family,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText2Family),
+                                            ),
+                                        iconColor: Color(0x00000000),
+                                        iconSize: 18,
+                                        elevation: 0,
+                                      ),
+                                      chipSpacing: 8,
+                                      multiselect: false,
+                                      initialized: durationValue != null,
+                                      alignment: WrapAlignment.start,
+                                    ),
                                   ),
-                                  unselectedChipStyle: ChipStyle(
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .darkPrimary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1Family,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                    iconColor: Color(0x00000000),
-                                    iconSize: 18,
-                                    elevation: 0,
-                                  ),
-                                  chipSpacing: 8,
-                                  multiselect: false,
-                                  initialized: durationValue != null,
-                                  alignment: WrapAlignment.start,
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                           Padding(
@@ -699,14 +782,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                     await editSubsciptionSubscriptionsRecord
                                         .reference
                                         .update(subscriptionsUpdateData);
-                                    await Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => NavBarPage(
-                                            initialPage: 'RecurringPayments'),
-                                      ),
-                                      (r) => false,
-                                    );
+                                    Navigator.pop(context);
                                   },
                                   text: 'Save Details',
                                   options: FFButtonOptions(
@@ -721,6 +797,10 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .subtitle2Family,
                                           color: Colors.white,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2Family),
                                         ),
                                     elevation: 2,
                                     borderSide: BorderSide(

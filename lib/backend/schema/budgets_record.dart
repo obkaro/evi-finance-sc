@@ -24,8 +24,6 @@ abstract class BudgetsRecord
 
   String? get budgetID;
 
-  DateTime? get lastViewed;
-
   String? get budgetDuration;
 
   int? get unallocatedAmount;
@@ -33,6 +31,10 @@ abstract class BudgetsRecord
   String? get status;
 
   int? get duration;
+
+  int? get budgetSpent;
+
+  DocumentReference? get parentBudget;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -45,7 +47,8 @@ abstract class BudgetsRecord
     ..budgetDuration = ''
     ..unallocatedAmount = 0
     ..status = ''
-    ..duration = 0;
+    ..duration = 0
+    ..budgetSpent = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('budgets');
@@ -76,11 +79,12 @@ Map<String, dynamic> createBudgetsRecordData({
   DateTime? budgetDateCreated,
   bool? isRecurring,
   String? budgetID,
-  DateTime? lastViewed,
   String? budgetDuration,
   int? unallocatedAmount,
   String? status,
   int? duration,
+  int? budgetSpent,
+  DocumentReference? parentBudget,
 }) {
   final firestoreData = serializers.toFirestore(
     BudgetsRecord.serializer,
@@ -93,11 +97,12 @@ Map<String, dynamic> createBudgetsRecordData({
         ..budgetDateCreated = budgetDateCreated
         ..isRecurring = isRecurring
         ..budgetID = budgetID
-        ..lastViewed = lastViewed
         ..budgetDuration = budgetDuration
         ..unallocatedAmount = unallocatedAmount
         ..status = status
-        ..duration = duration,
+        ..duration = duration
+        ..budgetSpent = budgetSpent
+        ..parentBudget = parentBudget,
     ),
   );
 

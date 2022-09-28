@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 Future normalizeTransSub(TransactionsRecord transaction) async {
   // Add your function code here!
+
   final subscriptionsUpdateData = {
     ...createSubscriptionsRecordData(
       lastCharge: createMoneyStruct(delete: true),
@@ -16,6 +17,9 @@ Future normalizeTransSub(TransactionsRecord transaction) async {
     'transactions': FieldValue.arrayRemove([transaction!.reference]),
     'narrations': FieldValue.arrayRemove([transaction!.transactionNarration]),
     'lastChargeDate': FieldValue.delete(),
+    'dateAssigned': FieldValue.delete(),
   };
+
+  //Update/reset the subscription record stored in the transaction collection
   await transaction!.recurringRef!.update(subscriptionsUpdateData);
 }
