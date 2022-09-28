@@ -32,10 +32,109 @@ class ForceUpdateWidget extends StatefulWidget {
 }
 
 class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
+  Future getVersion(VersionsRecord dashboardVersionsRecord) async {
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    String appName = packageInfo.appName;
+    String packageName = packageInfo.packageName;
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+
+    bool forceUpdateCalc = false;
+
+    var _androidAppRetain = MethodChannel("android_app_retain");
+
+    final List<int> currentVersion =
+        version.split('.').map((String number) => int.parse(number)).toList();
+    final List<int> enforcedVersion = dashboardVersionsRecord
+        .versionNumberString!
+        .split('.')
+        .map((String number) => int.parse(number))
+        .toList();
+
+    for (int i = 0; i < 1; i++) {
+      if (enforcedVersion[i] != currentVersion[i] &&
+          enforcedVersion[i] > currentVersion[i]) {
+        forceUpdateCalc = true;
+      } else
+        forceUpdateCalc = false;
+    }
+    // print(version);
+    // print(currentVersion);
+    // print(dashboardVersionsRecord.versionNumberString);
+    // print(enforcedVersion);
+
+    if (forceUpdateCalc == true) {
+      FFAppState().hasUpdatePromptShown = true;
+      await showModalBottomSheet(
+        isScrollControlled: true,
+        isDismissible: false,
+        enableDrag: false,
+        constraints: BoxConstraints(
+          minWidth: 1,
+          minHeight: 1,
+        ),
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (context) {
+          DateTime timeBackPressed = DateTime.now();
+          return WillPopScope(
+              onWillPop: () async {
+                final difference = DateTime.now().difference(timeBackPressed);
+                timeBackPressed = DateTime.now();
+                if (difference >= Duration(seconds: 2)) {
+                  final String msg = 'Press the back button to exit';
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        msg,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyText1Family,
+                              color: Color(0xFFE7E7E7),
+                              fontSize: 12,
+                              fontWeight: FontWeight.normal,
+                            ),
+                      ),
+                      duration: Duration(milliseconds: 4000),
+                      backgroundColor: Colors.black,
+                    ),
+                  );
+                  return false;
+                } else {
+                  if (Platform.isAndroid) {
+                    SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                  } else {
+                    _androidAppRetain.invokeMethod("sendToBackground");
+                    //MinimizeApp.minimizeApp();
+                  }
+                  return true;
+                }
+              },
+              child: Padding(
+                padding: MediaQuery.of(context).viewInsets,
+                child: NewVersionFoundWidget(
+                  forceUpdate: dashboardVersionsRecord.forceUpdate,
+                ),
+              ));
+          // return Padding(
+          //   padding: MediaQuery.of(context).viewInsets,
+          //   child: NewVersionFoundWidget(
+          //     forceUpdate: dashboardVersionsRecord.forceUpdate,
+          //   ),
+          // );
+        },
+      );
+      // setState(() {
+      //   FFAppState().hasUpdatePromptShown = false;
+      // });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<VersionsRecord>>(
-        stream: queryVersionsRecord(
+    return FutureBuilder<List<VersionsRecord>>(
+        future: queryVersionsRecordOnce(
           queryBuilder: (versionsRecord) =>
               versionsRecord.orderBy('releaseDate', descending: true),
           singleRecord: true,
@@ -61,109 +160,9 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
             return Container();
           }
           final dashboardVersionsRecord = dashboardVersionsRecordList.first;
-
-          Future getVersion() async {
-            final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-
-            String appName = packageInfo.appName;
-            String packageName = packageInfo.packageName;
-            String version = packageInfo.version;
-            String buildNumber = packageInfo.buildNumber;
-
-            bool forceUpdateCalc = false;
-
-            var _androidAppRetain = MethodChannel("android_app_retain");
-
-            final List<int> currentVersion = version
-                .split('.')
-                .map((String number) => int.parse(number))
-                .toList();
-            final List<int> enforcedVersion = dashboardVersionsRecord
-                .versionNumberString!
-                .split('.')
-                .map((String number) => int.parse(number))
-                .toList();
-
-            for (int i = 0; i < 3; i++) {
-              if (enforcedVersion[i] != currentVersion[i] &&
-                  enforcedVersion[i] > currentVersion[i]) {
-                forceUpdateCalc = true;
-              } else
-                forceUpdateCalc = false;
-            }
-            print(version);
-            print(currentVersion);
-            print(dashboardVersionsRecord.versionNumberString);
-            print(enforcedVersion);
-
-            if (forceUpdateCalc == true) {
-              await showModalBottomSheet(
-                isScrollControlled: true,
-                isDismissible: false,
-                enableDrag: false,
-                constraints: BoxConstraints(
-                  minWidth: 1,
-                  minHeight: 1,
-                ),
-                backgroundColor: Colors.transparent,
-                context: context,
-                builder: (context) {
-                  DateTime timeBackPressed = DateTime.now();
-                  return WillPopScope(
-                      onWillPop: () async {
-                        final difference =
-                            DateTime.now().difference(timeBackPressed);
-                        timeBackPressed = DateTime.now();
-                        if (difference >= Duration(seconds: 2)) {
-                          final String msg = 'Press the back button to exit';
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                msg,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
-                                      color: Color(0xFFE7E7E7),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                              ),
-                              duration: Duration(milliseconds: 4000),
-                              backgroundColor: Colors.black,
-                            ),
-                          );
-                          return false;
-                        } else {
-                          if (Platform.isAndroid) {
-                            SystemChannels.platform
-                                .invokeMethod('SystemNavigator.pop');
-                          } else {
-                            _androidAppRetain.invokeMethod("sendToBackground");
-                            //MinimizeApp.minimizeApp();
-                          }
-                          return true;
-                        }
-                      },
-                      child: Padding(
-                        padding: MediaQuery.of(context).viewInsets,
-                        child: NewVersionFoundWidget(
-                          forceUpdate: dashboardVersionsRecord.forceUpdate,
-                        ),
-                      ));
-                  // return Padding(
-                  //   padding: MediaQuery.of(context).viewInsets,
-                  //   child: NewVersionFoundWidget(
-                  //     forceUpdate: dashboardVersionsRecord.forceUpdate,
-                  //   ),
-                  // );
-                },
-              );
-            }
+          if (FFAppState().hasUpdatePromptShown == false) {
+            getVersion(dashboardVersionsRecord);
           }
-
-          getVersion();
 
           return SizedBox(
             width: MediaQuery.of(context).size.width,

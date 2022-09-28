@@ -4,7 +4,7 @@ import '../email_auth/email_auth_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../onboarding_page_view/onboarding_page_view_widget.dart';
+import '../landing_page_view/landing_page_view_widget.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +25,7 @@ class _LandPageWidgetState extends State<LandPageWidget> {
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'LandPage'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -95,6 +96,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                               color: Color(0xFF010101),
                                               fontSize: 48,
                                               fontWeight: FontWeight.bold,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .title1Family),
                                             ),
                                       ),
                                       Text(
@@ -111,6 +118,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                       .primaryColor,
                                               fontSize: 48,
                                               fontWeight: FontWeight.bold,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .title1Family),
                                             ),
                                       ),
                                       Text(
@@ -125,6 +138,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                               color: Color(0xFF010101),
                                               fontSize: 48,
                                               fontWeight: FontWeight.bold,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .title1Family),
                                             ),
                                       ),
                                       Padding(
@@ -142,6 +161,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                 color: Color(0xFF010101),
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w600,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .subtitle1Family),
                                                 lineHeight: 1.4,
                                               ),
                                         ),
@@ -184,7 +209,7 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        OnboardingPageViewWidget(),
+                                                        LandingPageViewWidget(),
                                                   ),
                                                 );
                                               },
@@ -208,8 +233,14 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                                   .subtitle2Family,
                                                           color:
                                                               Color(0xFF0C0C0C),
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle2Family),
                                                         ),
-                                                elevation: 0,
+                                                elevation: 2,
                                                 borderSide: BorderSide(
                                                   color: Colors.transparent,
                                                   width: 0,
@@ -280,7 +311,8 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                     ),
                                                   );
                                                 },
-                                              );
+                                              ).then(
+                                                  (value) => setState(() {}));
                                             },
                                             text: 'Continue with Email',
                                             icon: Icon(
@@ -303,6 +335,12 @@ class _LandPageWidgetState extends State<LandPageWidget> {
                                                                     context)
                                                                 .subtitle2Family,
                                                         color: Colors.white,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle2Family),
                                                       ),
                                               elevation: 2,
                                               borderSide: BorderSide(

@@ -28,7 +28,7 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.googleusercontent.apps.1086289327978-qtmik79nr4hjikll2olunpfhpr76id9a</string>
+                <string>com.googleusercontent.apps.492150333214-gnibee8bsuq5gfpkgg374j0v5vvseaq4</string>
                 
             </array>
         </dict>
@@ -41,7 +41,10 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 
-
+	<key>NSCameraUsageDescription</key>
+      <string>In order to take a picture or video, this app requires permission to access the camera.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+      <string>In order to upload media, this app requires permission to access the photo library.</string>
 
     <key>UIBackgroundModes</key>
     <array>

@@ -50,6 +50,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ConnectFirstAccount'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -98,8 +99,11 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
                                             .bodyText2Family,
-                                        fontWeight: FontWeight.w500,
                                         fontStyle: FontStyle.italic,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText2Family),
                                       ),
                                 ),
                               ),
@@ -120,7 +124,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                               Icons.lock_rounded,
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryText,
+                                                      .secondaryText,
                                               size: 36,
                                             ),
                                           ),
@@ -133,15 +137,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                                   'Evi will not have the ability to credit, debit or perform any transactions on your accounts.',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1Family,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
+                                                      .bodyText1,
                                                 ),
                                               ],
                                             ),
@@ -160,7 +156,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                               Icons.security,
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryText,
+                                                      .secondaryText,
                                               size: 36,
                                             ),
                                           ),
@@ -173,15 +169,39 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                                   'All data retrieved from your account is secured and encrypted. We take your data protection seriously and will not share this data with any other users.',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1Family,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
+                                                      .bodyText1,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 20, 0, 20),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            child: Icon(
+                                              Icons.remove_red_eye_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 36,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 4,
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Text(
+                                                  'Your login credentials are encrypted and securely validated by your bank. Evi does not have access to view or store bank login data.',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1,
                                                 ),
                                               ],
                                             ),
@@ -200,7 +220,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                               Icons.cancel_rounded,
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryText,
+                                                      .secondaryText,
                                               size: 36,
                                             ),
                                           ),
@@ -213,15 +233,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                                   'You can disconnect your accounts and delete your data from Evi at any time.',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1Family,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
+                                                      .bodyText1,
                                                 ),
                                               ],
                                             ),
@@ -269,6 +281,10 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                         fontFamily: FlutterFlowTheme.of(context)
                                             .subtitle2Family,
                                         color: Colors.white,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2Family),
                                       ),
                                   elevation: 2,
                                   borderSide: BorderSide(

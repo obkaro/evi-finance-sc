@@ -19,6 +19,13 @@ class TextTransactionTypeWidget extends StatefulWidget {
 
 class _TextTransactionTypeWidgetState extends State<TextTransactionTypeWidget> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Text(
       widget.transactionType!,

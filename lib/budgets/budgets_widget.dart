@@ -1,10 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../budget_single/budget_single_widget.dart';
 import '../components/dialog_box_widget.dart';
 import '../create_budget/create_budget_widget.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../single_budget/single_budget_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
@@ -22,13 +23,14 @@ class BudgetsWidget extends StatefulWidget {
 }
 
 class _BudgetsWidgetState extends State<BudgetsWidget> {
-  BudgetsRecord? createdBudget2;
+  BudgetsRecord? newBudg;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Budgets'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -36,88 +38,66 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
         iconTheme:
-            IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
+            IconThemeData(color: FlutterFlowTheme.of(context).secondaryPrimary),
         automaticallyImplyLeading: true,
         title: Text(
-          'Budget History',
-          style: FlutterFlowTheme.of(context).title3,
+          'Budget Archives',
+          style: FlutterFlowTheme.of(context).title3.override(
+                fontFamily: FlutterFlowTheme.of(context).title3Family,
+                color: FlutterFlowTheme.of(context).secondaryPrimary,
+                useGoogleFonts: GoogleFonts.asMap()
+                    .containsKey(FlutterFlowTheme.of(context).title3Family),
+              ),
         ),
         actions: [],
         centerTitle: true,
         elevation: 0,
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      floatingActionButton: Visibility(
-        visible: currentUserDocument!.activeBudget != null,
-        child: AuthUserStreamWidget(
-          child: StreamBuilder<List<CategoriesRecord>>(
-            stream: queryCategoriesRecord(
-              parent: currentUserDocument!.activeBudget,
-              queryBuilder: (categoriesRecord) => categoriesRecord
-                  .where('category_name', isNotEqualTo: 'unallocated'),
-              singleRecord: true,
-            ),
-            builder: (context, snapshot) {
-              // Customize what your widget looks like when it's loading.
-              if (!snapshot.hasData) {
-                return Center(
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: SpinKitRing(
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 50,
-                    ),
-                  ),
-                );
-              }
-              List<CategoriesRecord> floatingActionButtonCategoriesRecordList =
-                  snapshot.data!;
-              // Return an empty Container when the document does not exist.
-              if (snapshot.data!.isEmpty) {
-                return Container();
-              }
-              final floatingActionButtonCategoriesRecord =
-                  floatingActionButtonCategoriesRecordList.first;
-              return FloatingActionButton(
-                onPressed: () async {
-                  final budgetsCreateData = createBudgetsRecordData(
-                    budgetDateCreated: getCurrentTimestamp,
-                    budgetID: random_data.randomString(
-                      24,
-                      24,
-                      true,
-                      true,
-                      true,
-                    ),
-                  );
-                  var budgetsRecordReference = BudgetsRecord.collection.doc();
-                  await budgetsRecordReference.set(budgetsCreateData);
-                  createdBudget2 = BudgetsRecord.getDocumentFromData(
-                      budgetsCreateData, budgetsRecordReference);
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CreateBudgetWidget(
-                        budget: createdBudget2,
-                      ),
-                    ),
-                  );
-
-                  setState(() {});
-                },
-                backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-                elevation: 8,
-                child: Icon(
-                  Icons.add_rounded,
-                  color: Colors.white,
-                  size: 32,
-                ),
-              );
-            },
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print('FloatingActionButton pressed ...');
+        },
+        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+        elevation: 8,
+        child: FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30,
+          borderWidth: 1,
+          buttonSize: 60,
+          icon: Icon(
+            Icons.add_rounded,
+            color: FlutterFlowTheme.of(context).secondaryPrimary,
+            size: 30,
           ),
+          onPressed: () async {
+            final budgetsCreateData = createBudgetsRecordData(
+              budgetDateCreated: getCurrentTimestamp,
+              budgetID: random_data.randomString(
+                32,
+                32,
+                true,
+                true,
+                true,
+              ),
+            );
+            var budgetsRecordReference = BudgetsRecord.collection.doc();
+            await budgetsRecordReference.set(budgetsCreateData);
+            newBudg = BudgetsRecord.getDocumentFromData(
+                budgetsCreateData, budgetsRecordReference);
+            await Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CreateBudgetWidget(
+                  budget: newBudg,
+                ),
+              ),
+            );
+
+            setState(() {});
+          },
         ),
       ),
       body: SafeArea(
@@ -128,7 +108,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                   child: Material(
                     color: Colors.transparent,
                     elevation: 0,
@@ -139,12 +119,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 14,
-                            color: FlutterFlowTheme.of(context).shadowGray,
-                          )
-                        ],
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: StreamBuilder<List<BudgetsRecord>>(
@@ -216,21 +190,14 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                 snapshot.data!;
                                             return InkWell(
                                               onTap: () async {
-                                                final budgetsUpdateData =
-                                                    createBudgetsRecordData(
-                                                  lastViewed:
-                                                      getCurrentTimestamp,
-                                                );
-                                                await columnBudgetsRecord
-                                                    .reference
-                                                    .update(budgetsUpdateData);
                                                 await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        BudgetSingleWidget(
-                                                      budget:
-                                                          columnBudgetsRecord,
+                                                        SingleBudgetWidget(
+                                                      budgetRef:
+                                                          columnBudgetsRecord
+                                                              .reference,
                                                     ),
                                                   ),
                                                 );
@@ -307,10 +274,14 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                                     'Don\'t delete',
                                                                 information:
                                                                     false,
+                                                                yesAction:
+                                                                    () async {},
                                                               ),
                                                             );
                                                           },
-                                                        );
+                                                        ).then((value) =>
+                                                            setState(() {}));
+
                                                         if (FFAppState()
                                                             .dialogBoxReturn) {
                                                           await actions
@@ -380,6 +351,12 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .bodyText1Family,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1Family),
                                                           lineHeight: 2,
                                                         ),
                                                   ),
@@ -393,6 +370,12 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .bodyText2Family,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText2Family),
                                                           lineHeight: 2,
                                                         ),
                                                   ),
@@ -424,7 +407,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 16),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                   child: Container(
                     width: double.infinity,
                     height: 100,
@@ -441,12 +424,16 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                           Text(
                             'This is where your budgets live. \nSwipe left on a single budget for more options.',
                             textAlign: TextAlign.center,
-                            style:
-                                FlutterFlowTheme.of(context).bodyText2.override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText2Family,
-                                      lineHeight: 1.4,
-                                    ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyText2
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyText2Family,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyText2Family),
+                                  lineHeight: 1.4,
+                                ),
                           ),
                         ],
                       ),

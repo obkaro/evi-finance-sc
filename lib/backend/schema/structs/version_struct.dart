@@ -83,7 +83,7 @@ void addVersionStructData(
     return;
   }
   if (!forFieldValue && version.firestoreUtilData.clearUnsetFields) {
-    firestoreData[fieldName] = {};
+    firestoreData[fieldName] = <String, dynamic>{};
   }
   final versionData = getVersionFirestoreData(version, forFieldValue);
   final nestedData = versionData.map((k, v) => MapEntry('$fieldName.$k', v));

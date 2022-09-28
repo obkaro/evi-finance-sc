@@ -20,6 +20,13 @@ class NewVersionFoundWidget extends StatefulWidget {
 
 class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
@@ -33,7 +40,7 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).primaryBackground,
+                color: FlutterFlowTheme.of(context).secondaryBackground,
                 boxShadow: [
                   BoxShadow(
                     blurRadius: 14,
@@ -62,7 +69,7 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
                     ),
                     Icon(
                       Icons.system_update_alt_rounded,
-                      color: FlutterFlowTheme.of(context).primaryText,
+                      color: FlutterFlowTheme.of(context).secondaryText,
                       size: 72,
                     ),
                     Padding(
@@ -95,6 +102,10 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .bodyText1Family,
                                           fontWeight: FontWeight.w500,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family),
                                         ),
                                   ),
                                 ),
@@ -153,6 +164,10 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
                                       fontFamily: FlutterFlowTheme.of(context)
                                           .subtitle2Family,
                                       color: Colors.white,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2Family),
                                     ),
                                 elevation: 2,
                                 borderSide: BorderSide(

@@ -7,11 +7,22 @@ part of 'serializers.dart';
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(AccountDetailsStruct.serializer)
       ..add(AccountsRecord.serializer)
       ..add(BudgetsRecord.serializer)
       ..add(CategoriesRecord.serializer)
+      ..add(CategoryDetailsStruct.serializer)
       ..add(ConstBudgetCategoriesRecord.serializer)
+      ..add(ConstIncomeCategoriesRecord.serializer)
       ..add(ConstInstitutionLogosRecord.serializer)
+      ..add(ConstRecurringPaymentsRecord.serializer)
+      ..add(IncomeCategoriesRecord.serializer)
+      ..add(IncomeDetailsStruct.serializer)
+      ..add(MoneyStruct.serializer)
+      ..add(PaymentPlanStruct.serializer)
+      ..add(ReminderStruct.serializer)
+      ..add(SubscriptionDetailsStruct.serializer)
+      ..add(SubscriptionsRecord.serializer)
       ..add(TransactionsRecord.serializer)
       ..add(UsersRecord.serializer)
       ..add(VersionStruct.serializer)
@@ -22,6 +33,18 @@ Serializers _$serializers = (new Serializers().toBuilder()
                 DocumentReference, const [const FullType.nullable(Object)])
           ]),
           () => new ListBuilder<DocumentReference<Object?>>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [
+            const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])
+          ]),
+          () => new ListBuilder<DocumentReference<Object?>>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(PaymentPlanStruct)]),
+          () => new ListBuilder<PaymentPlanStruct>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [
             const FullType(

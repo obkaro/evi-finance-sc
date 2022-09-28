@@ -1,5 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/c_button_filled_copy_widget.dart';
+import '../edit_income_sources/edit_income_sources_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -32,6 +34,15 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
         text: valueOrDefault(currentUserDocument?.username, ''));
     textController2 = TextEditingController(text: currentUserEmail);
     textController3 = TextEditingController(text: currentPhoneNumber);
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    textController1?.dispose();
+    textController2?.dispose();
+    textController3?.dispose();
+    super.dispose();
   }
 
   @override
@@ -39,13 +50,18 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
         iconTheme:
-            IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
+            IconThemeData(color: FlutterFlowTheme.of(context).secondaryPrimary),
         automaticallyImplyLeading: true,
         title: Text(
           'Profile Settings',
-          style: FlutterFlowTheme.of(context).title3,
+          style: FlutterFlowTheme.of(context).title3.override(
+                fontFamily: FlutterFlowTheme.of(context).title3Family,
+                color: FlutterFlowTheme.of(context).secondaryPrimary,
+                useGoogleFonts: GoogleFonts.asMap()
+                    .containsKey(FlutterFlowTheme.of(context).title3Family),
+              ),
         ),
         actions: [],
         centerTitle: true,
@@ -71,78 +87,106 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 24),
-                          child: AuthUserStreamWidget(
-                            child: TextFormField(
-                              controller: textController1,
-                              onChanged: (_) => EasyDebounce.debounce(
-                                'textController1',
-                                Duration(milliseconds: 2000),
-                                () => setState(() {}),
-                              ),
-                              autofocus: true,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                hintText: 'New username here',
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                filled: true,
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                              ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
-                              keyboardType: TextInputType.name,
+                        AuthUserStreamWidget(
+                          child: TextFormField(
+                            controller: textController1,
+                            onChanged: (_) => EasyDebounce.debounce(
+                              'textController1',
+                              Duration(milliseconds: 2000),
+                              () => setState(() {}),
                             ),
+                            autofocus: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              hintText: 'New username here',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            style: FlutterFlowTheme.of(context).bodyText1,
+                            keyboardType: TextInputType.name,
                           ),
                         ),
-                        TextFormField(
-                          controller: textController2,
-                          onChanged: (_) => EasyDebounce.debounce(
-                            'textController2',
-                            Duration(milliseconds: 2000),
-                            () => setState(() {}),
-                          ),
-                          autofocus: true,
-                          readOnly: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            hintText: 'Email address here',
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(12),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                          child: TextFormField(
+                            controller: textController2,
+                            onChanged: (_) => EasyDebounce.debounce(
+                              'textController2',
+                              Duration(milliseconds: 2000),
+                              () => setState(() {}),
                             ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1,
+                            autofocus: true,
+                            readOnly: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              hintText: 'Email address here',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              borderRadius: BorderRadius.circular(12),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                             ),
-                            filled: true,
-                            fillColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            style: FlutterFlowTheme.of(context).bodyText1,
+                            keyboardType: TextInputType.emailAddress,
                           ),
-                          style: FlutterFlowTheme.of(context).bodyText1,
-                          keyboardType: TextInputType.emailAddress,
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: AuthUserStreamWidget(
                             child: TextFormField(
                               controller: textController3,
@@ -170,6 +214,20 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                   ),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -177,6 +235,25 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               style: FlutterFlowTheme.of(context).bodyText1,
                               keyboardType: TextInputType.phone,
                             ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                          child: CButtonFilledCopyWidget(
+                            text: 'Edit Income Sources',
+                            icon: Icon(
+                              Icons.edit_rounded,
+                              size: 16,
+                            ),
+                            action: () async {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      EditIncomeSourcesWidget(),
+                                ),
+                              );
+                            },
                           ),
                         ),
                         Padding(
@@ -189,9 +266,9 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               }
 
                               final usersUpdateData = createUsersRecordData(
-                                displayName: textController1!.text,
                                 email: textController2!.text,
                                 phoneNumber: textController3!.text,
+                                username: textController1!.text,
                               );
                               await currentUserReference!
                                   .update(usersUpdateData);
@@ -208,6 +285,10 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                     fontFamily: FlutterFlowTheme.of(context)
                                         .subtitle2Family,
                                     color: Colors.white,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .subtitle2Family),
                                   ),
                               elevation: 2,
                               borderSide: BorderSide(

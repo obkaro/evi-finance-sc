@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/dialog_box_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -28,13 +29,20 @@ class CreateConstCategoryWidget extends StatefulWidget {
 
 class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).primaryBackground,
+          color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: [
             BoxShadow(
               blurRadius: 14,
@@ -86,6 +94,10 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                                           .bodyText1Family,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText1Family),
                                     ),
                               ),
                             ],
@@ -102,6 +114,7 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                     height: 55,
                     labelText: 'Amount',
                     hintText: 'Enter amount',
+                    bgcolor: FlutterFlowTheme.of(context).primaryBackground,
                   ),
                 ),
                 Divider(
@@ -122,14 +135,18 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 30,
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            textStyle:
-                                FlutterFlowTheme.of(context).bodyText2.override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText2Family,
-                                      fontSize: 14,
-                                    ),
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .bodyText2
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyText2Family,
+                                  fontSize: 14,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyText2Family),
+                                ),
                             elevation: 0,
                             borderSide: BorderSide(
                               color: Colors.transparent,
@@ -168,29 +185,34 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                                   true,
                                   true,
                                 ),
+                                spentAmount: 0,
+                                categoryOwner: currentUserReference,
+                                createdDate: getCurrentTimestamp,
                               );
                               await CategoriesRecord.createDoc(
                                       widget.budget!.reference)
                                   .set(categoriesCreateData);
                               Navigator.pop(context);
                             } else {
-                              await showDialog(
+                              await showModalBottomSheet(
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
                                 context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('Budget Amount Exceeded'),
-                                    content: Text(
-                                        'Please enter a value lower than the target budget, or increase the target budget value'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('Okay'),
-                                      ),
-                                    ],
+                                builder: (context) {
+                                  return Padding(
+                                    padding: MediaQuery.of(context).viewInsets,
+                                    child: DialogBoxWidget(
+                                      heading: 'Budget Amount Exceeded',
+                                      body:
+                                          'Please enter a value lower than the target budget, or increase the target budget value',
+                                      buttonYes: 'Okay',
+                                      buttonNo: 'n',
+                                      information: true,
+                                      yesAction: () async {},
+                                    ),
                                   );
                                 },
-                              );
+                              ).then((value) => setState(() {}));
                             }
                           },
                           text: 'Save',
@@ -198,12 +220,16 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                             width: double.infinity,
                             height: 60,
                             color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      color: Colors.white,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .subtitle2
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .subtitle2Family,
+                                  color: Colors.white,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .subtitle2Family),
+                                ),
                             elevation: 2,
                             borderSide: BorderSide(
                               color: Colors.transparent,

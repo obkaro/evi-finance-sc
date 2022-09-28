@@ -67,14 +67,12 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
   @override
   Widget build(BuildContext context) => _loading
       ? Container(
-          color: Colors.white,
+          color: FlutterFlowTheme.of(context).primaryBackground,
           child: Center(
-            child: Builder(
-              builder: (context) => Image.asset(
-                'assets/images/Group_20_(2).png',
-                width: 200,
-                fit: BoxFit.contain,
-              ),
+            child: Image.asset(
+              'assets/images/evi-logo-720h.png',
+              width: MediaQuery.of(context).size.width * 0.7,
+              fit: BoxFit.contain,
             ),
           ),
         )
@@ -84,26 +82,16 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
 final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'LandPage': (data) async => LandPageWidget(),
   'Transactions': (data) async => TransactionsWidget(),
-  'NewBudgetCategories': (data) async => NewBudgetCategoriesWidget(
-        createdBudget: await getDocumentParameter(
-            data, 'createdBudget', BudgetsRecord.serializer),
-      ),
-  'EmailAuth': (data) async => EmailAuthWidget(),
   'ForgotPassword': (data) async => ForgotPasswordWidget(),
-  'ConnectFirstAccount': (data) async => ConnectFirstAccountWidget(),
-  'TransactionSingle': (data) async => TransactionSingleWidget(
-        transaction: await getDocumentParameter(
-            data, 'transaction', TransactionsRecord.serializer),
-      ),
   'ActiveBudget': (data) async => hasMatchingParameters(data, {'command'})
       ? ActiveBudgetWidget(
           command: getParameter(data, 'command'),
         )
       : NavBarPage(initialPage: 'ActiveBudget'),
-  'BudgetSingle': (data) async => BudgetSingleWidget(
-        budget: await getDocumentParameter(
-            data, 'budget', BudgetsRecord.serializer),
+  'SingleBudget': (data) async => SingleBudgetWidget(
+        budgetRef: getParameter(data, 'budgetRef'),
       ),
+  'ConnectFirstAccount': (data) async => ConnectFirstAccountWidget(),
   'CreateBudget': (data) async => CreateBudgetWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
@@ -111,38 +99,48 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'EditBudget': (data) async => EditBudgetWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
-        categoriesSum: getParameter(data, 'categoriesSum'),
       ),
   'Budgets': (data) async => BudgetsWidget(),
-  'CategorySingle': (data) async => CategorySingleWidget(
-        category: await getDocumentParameter(
-            data, 'category', CategoriesRecord.serializer),
-      ),
+  'Accounts': (data) async => AccountsWidget(),
   'AllocateBudget': (data) async => AllocateBudgetWidget(
         createdBudget: await getDocumentParameter(
             data, 'createdBudget', BudgetsRecord.serializer),
       ),
-  'Accounts': (data) async => NavBarPage(initialPage: 'Accounts'),
+  'CategorySingle': (data) async => CategorySingleWidget(
+        category: await getDocumentParameter(
+            data, 'category', CategoriesRecord.serializer),
+      ),
   'AccountSingle': (data) async => AccountSingleWidget(
         account: await getDocumentParameter(
             data, 'account', AccountsRecord.serializer),
       ),
-  'Settings': (data) async => NavBarPage(initialPage: 'Settings'),
+  'Settings': (data) async => SettingsWidget(),
   'ProfileSettings': (data) async => ProfileSettingsWidget(),
-  'OnboardingPageView': (data) async => OnboardingPageViewWidget(),
+  'LandingPageView': (data) async => LandingPageViewWidget(),
   'WelcomeToEvi': (data) async => WelcomeToEviWidget(),
   'FirstBudget': (data) async => FirstBudgetWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
       ),
-  'BudgetSingleCopy': (data) async => BudgetSingleCopyWidget(
-        budget: await getDocumentParameter(
-            data, 'budget', BudgetsRecord.serializer),
-      ),
-  'TransactionSingleCopy': (data) async => TransactionSingleCopyWidget(
+  'TransactionSingle': (data) async => TransactionSingleWidget(
         transaction: await getDocumentParameter(
             data, 'transaction', TransactionsRecord.serializer),
       ),
+  'RecurringPayments': (data) async => RecurringPaymentsWidget(),
+  'CreateRecurring': (data) async => CreateRecurringWidget(
+        subscriptionRecord: getParameter(data, 'subscriptionRecord'),
+      ),
+  'editSubsciption': (data) async => EditSubsciptionWidget(
+        subscriptionRecord: getParameter(data, 'subscriptionRecord'),
+      ),
+  'subscriptionDetails': (data) async => SubscriptionDetailsWidget(
+        subscription: await getDocumentParameter(
+            data, 'subscription', SubscriptionsRecord.serializer),
+      ),
+  'EditIncomeSources': (data) async => EditIncomeSourcesWidget(),
+  'Menu': (data) async => NavBarPage(initialPage: 'Menu'),
+  'assignTransactions': (data) async => AssignTransactionsWidget(),
+  'EmailAuth': (data) async => EmailAuthWidget(),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

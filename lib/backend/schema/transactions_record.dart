@@ -33,9 +33,23 @@ abstract class TransactionsRecord
 
   DocumentReference? get transactionCategory;
 
-  String? get notes;
-
   DocumentReference? get transactionBudget;
+
+  DocumentReference? get recurringRef;
+
+  DocumentReference? get incomeCategory;
+
+  CategoryDetailsStruct get categoryDetails;
+
+  AccountDetailsStruct get accountDetails;
+
+  SubscriptionDetailsStruct get subscriptionDetails;
+
+  bool? get isAssigned;
+
+  DateTime? get dateAssigned;
+
+  IncomeDetailsStruct get incomeDetails;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -49,7 +63,11 @@ abstract class TransactionsRecord
     ..transactionType = ''
     ..transactionNarration = ''
     ..transactionID = ''
-    ..notes = '';
+    ..categoryDetails = CategoryDetailsStructBuilder()
+    ..accountDetails = AccountDetailsStructBuilder()
+    ..subscriptionDetails = SubscriptionDetailsStructBuilder()
+    ..isAssigned = false
+    ..incomeDetails = IncomeDetailsStructBuilder();
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('transactions');
@@ -85,8 +103,15 @@ Map<String, dynamic> createTransactionsRecordData({
   String? transactionNarration,
   String? transactionID,
   DocumentReference? transactionCategory,
-  String? notes,
   DocumentReference? transactionBudget,
+  DocumentReference? recurringRef,
+  DocumentReference? incomeCategory,
+  CategoryDetailsStruct? categoryDetails,
+  AccountDetailsStruct? accountDetails,
+  SubscriptionDetailsStruct? subscriptionDetails,
+  bool? isAssigned,
+  DateTime? dateAssigned,
+  IncomeDetailsStruct? incomeDetails,
 }) {
   final firestoreData = serializers.toFirestore(
     TransactionsRecord.serializer,
@@ -103,10 +128,31 @@ Map<String, dynamic> createTransactionsRecordData({
         ..transactionNarration = transactionNarration
         ..transactionID = transactionID
         ..transactionCategory = transactionCategory
-        ..notes = notes
-        ..transactionBudget = transactionBudget,
+        ..transactionBudget = transactionBudget
+        ..recurringRef = recurringRef
+        ..incomeCategory = incomeCategory
+        ..categoryDetails = CategoryDetailsStructBuilder()
+        ..accountDetails = AccountDetailsStructBuilder()
+        ..subscriptionDetails = SubscriptionDetailsStructBuilder()
+        ..isAssigned = isAssigned
+        ..dateAssigned = dateAssigned
+        ..incomeDetails = IncomeDetailsStructBuilder(),
     ),
   );
+
+  // Handle nested data for "categoryDetails" field.
+  addCategoryDetailsStructData(
+      firestoreData, categoryDetails, 'categoryDetails');
+
+  // Handle nested data for "accountDetails" field.
+  addAccountDetailsStructData(firestoreData, accountDetails, 'accountDetails');
+
+  // Handle nested data for "subscriptionDetails" field.
+  addSubscriptionDetailsStructData(
+      firestoreData, subscriptionDetails, 'subscriptionDetails');
+
+  // Handle nested data for "incomeDetails" field.
+  addIncomeDetailsStructData(firestoreData, incomeDetails, 'incomeDetails');
 
   return firestoreData;
 }

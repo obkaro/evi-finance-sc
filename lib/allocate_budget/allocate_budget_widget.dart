@@ -2,9 +2,9 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/create_const_category_widget.dart';
 import '../components/create_custom_category_widget.dart';
-import '../components/dialog_box_widget.dart';
 import '../components/edit_budget_amount_widget.dart';
 import '../components/edit_category_widget.dart';
+import '../connect_first_account/connect_first_account_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -39,6 +39,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AllocateBudget'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -68,13 +69,18 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            iconTheme:
-                IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
+            backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
+            iconTheme: IconThemeData(
+                color: FlutterFlowTheme.of(context).secondaryPrimary),
             automaticallyImplyLeading: true,
             title: Text(
               'Allocate your budget',
-              style: FlutterFlowTheme.of(context).title3,
+              style: FlutterFlowTheme.of(context).title3.override(
+                    fontFamily: FlutterFlowTheme.of(context).title3Family,
+                    color: FlutterFlowTheme.of(context).secondaryPrimary,
+                    useGoogleFonts: GoogleFonts.asMap()
+                        .containsKey(FlutterFlowTheme.of(context).title3Family),
+                  ),
             ),
             actions: [],
             centerTitle: true,
@@ -88,7 +94,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
               children: [
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                     child: StreamBuilder<BudgetsRecord>(
                       stream: BudgetsRecord.getDocument(
                           widget.createdBudget!.reference),
@@ -116,20 +122,13 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 0, 20, 0),
+                                      16, 0, 16, 16),
                                   child: Container(
                                     width: double.infinity,
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 14,
-                                          color: FlutterFlowTheme.of(context)
-                                              .shadowGray,
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(16),
+                                      borderRadius: BorderRadius.circular(32),
                                     ),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -187,6 +186,12 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryColor,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1Family),
                                                         ),
                                                   ),
                                                 ),
@@ -234,20 +239,48 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                   size: 24,
                                                 ),
                                                 onPressed: () async {
-                                                  // Action_BudgetAmountMinus
+                                                  if (functions.sumCategoryAmounts(
+                                                          allocateBudgetCategoriesRecordList
+                                                              .toList()) <
+                                                      columnBudgetsRecord
+                                                          .budgetAmount!) {
+                                                    // Action_BudgetAmountMinus
 
-                                                  final budgetsUpdateData = {
-                                                    'budgetAmount':
-                                                        FieldValue.increment(
-                                                            -100000),
-                                                    'unallocatedAmount':
-                                                        FieldValue.increment(
-                                                            -(100000)),
-                                                  };
-                                                  await columnBudgetsRecord
-                                                      .reference
-                                                      .update(
-                                                          budgetsUpdateData);
+                                                    final budgetsUpdateData = {
+                                                      'budgetAmount':
+                                                          FieldValue.increment(
+                                                              -100000),
+                                                      'unallocatedAmount':
+                                                          FieldValue.increment(
+                                                              -(100000)),
+                                                    };
+                                                    await columnBudgetsRecord
+                                                        .reference
+                                                        .update(
+                                                            budgetsUpdateData);
+                                                  } else {
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text(
+                                                              'Invalid Entry'),
+                                                          content: Text(
+                                                              'Budget amount needs to be greater than the total amount of already created categories. '),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext),
+                                                              child:
+                                                                  Text('Okay'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  }
                                                 },
                                               ),
                                               InkWell(
@@ -275,7 +308,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                         ),
                                                       );
                                                     },
-                                                  );
+                                                  ).then((value) =>
+                                                      setState(() {}));
                                                 },
                                                 child: Container(
                                                   height: 36,
@@ -302,6 +336,12 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                       context)
                                                                   .subtitle1Family,
                                                           fontSize: 22,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1Family),
                                                         ),
                                                   ),
                                                 ),
@@ -345,229 +385,230 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                               ],
                             ),
                             Expanded(
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    if (allocateBudgetCategoriesRecordList
-                                            .length <=
-                                        10)
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 20, 0, 0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(20, 0, 20, 4),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Text(
-                                                    'Swipe for more suggestions  ',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  if (allocateBudgetCategoriesRecordList
+                                          .length <=
+                                      10)
+                                    Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  20, 0, 20, 4),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                'Swipe for more suggestions  ',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
                                                         .bodyText2,
-                                                  ),
-                                                  Icon(
-                                                    Icons.arrow_forward_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    size: 16,
-                                                  ),
-                                                ],
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 4, 0, 0),
-                                              child: StreamBuilder<
-                                                  List<
-                                                      ConstBudgetCategoriesRecord>>(
-                                                stream:
-                                                    queryConstBudgetCategoriesRecord(
-                                                  queryBuilder: (constBudgetCategoriesRecord) =>
-                                                      constBudgetCategoriesRecord.where(
-                                                          'categoryName',
-                                                          whereNotIn:
+                                              Icon(
+                                                Icons.arrow_forward_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 16,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 4, 0, 0),
+                                          child: StreamBuilder<
+                                              List<
+                                                  ConstBudgetCategoriesRecord>>(
+                                            stream:
+                                                queryConstBudgetCategoriesRecord(
+                                              queryBuilder:
+                                                  (constBudgetCategoriesRecord) =>
+                                                      constBudgetCategoriesRecord
+                                                          .whereNotIn(
+                                                              'categoryName',
                                                               allocateBudgetCategoriesRecordList
                                                                   .map((e) => e
                                                                       .categoryName!)
-                                                                  .toList()),
-                                                ),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return Center(
-                                                      child: SizedBox(
-                                                        width: 50,
-                                                        height: 50,
-                                                        child: SpinKitRing(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
+                                                                  .toList())
+                                                          .orderBy(
+                                                              'categoryName',
+                                                              descending: true)
+                                                          .orderBy(
+                                                              'categoryWeight',
+                                                              descending: true),
+                                            ),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 50,
+                                                    height: 50,
+                                                    child: SpinKitRing(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
                                                               .primaryColor,
-                                                          size: 50,
+                                                      size: 50,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              List<ConstBudgetCategoriesRecord>
+                                                  rowConstBudgetCategoriesRecordList =
+                                                  snapshot.data!;
+                                              return SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: List.generate(
+                                                      rowConstBudgetCategoriesRecordList
+                                                          .length, (rowIndex) {
+                                                    final rowConstBudgetCategoriesRecord =
+                                                        rowConstBudgetCategoriesRecordList[
+                                                            rowIndex];
+                                                    return Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  10, 0, 0, 0),
+                                                      child: InkWell(
+                                                        onTap: () async {
+                                                          await showModalBottomSheet(
+                                                            isScrollControlled:
+                                                                true,
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return Padding(
+                                                                padding: MediaQuery.of(
+                                                                        context)
+                                                                    .viewInsets,
+                                                                child:
+                                                                    CreateConstCategoryWidget(
+                                                                  constCategory:
+                                                                      rowConstBudgetCategoriesRecord,
+                                                                  budget:
+                                                                      columnBudgetsRecord,
+                                                                ),
+                                                              );
+                                                            },
+                                                          ).then((value) =>
+                                                              setState(() {}));
+                                                        },
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryBackground,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        16),
+                                                            border: Border.all(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryColor,
+                                                            ),
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        12,
+                                                                        12,
+                                                                        12,
+                                                                        12),
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          4,
+                                                                          0),
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Icon(
+                                                                        Icons
+                                                                            .add_rounded,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryColor,
+                                                                        size:
+                                                                            24,
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            4,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                        child:
+                                                                            AutoSizeText(
+                                                                          rowConstBudgetCategoriesRecord
+                                                                              .categoryName!,
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                                color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                fontSize: 12,
+                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
                                                     );
-                                                  }
-                                                  List<ConstBudgetCategoriesRecord>
-                                                      rowConstBudgetCategoriesRecordList =
-                                                      snapshot.data!;
-                                                  return SingleChildScrollView(
-                                                    scrollDirection:
-                                                        Axis.horizontal,
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: List.generate(
-                                                          rowConstBudgetCategoriesRecordList
-                                                              .length,
-                                                          (rowIndex) {
-                                                        final rowConstBudgetCategoriesRecord =
-                                                            rowConstBudgetCategoriesRecordList[
-                                                                rowIndex];
-                                                        return Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(10,
-                                                                      0, 0, 0),
-                                                          child: InkWell(
-                                                            onTap: () async {
-                                                              await showModalBottomSheet(
-                                                                isScrollControlled:
-                                                                    true,
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (context) {
-                                                                  return Padding(
-                                                                    padding: MediaQuery.of(
-                                                                            context)
-                                                                        .viewInsets,
-                                                                    child:
-                                                                        CreateConstCategoryWidget(
-                                                                      constCategory:
-                                                                          rowConstBudgetCategoriesRecord,
-                                                                      budget:
-                                                                          columnBudgetsRecord,
-                                                                    ),
-                                                                  );
-                                                                },
-                                                              );
-                                                            },
-                                                            child: Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryBackground,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            16),
-                                                                border:
-                                                                    Border.all(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryColor,
-                                                                ),
-                                                              ),
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            12,
-                                                                            12,
-                                                                            12,
-                                                                            12),
-                                                                child: Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              4,
-                                                                              0),
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children: [
-                                                                          Icon(
-                                                                            Icons.add_rounded,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primaryColor,
-                                                                            size:
-                                                                                24,
-                                                                          ),
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                4,
-                                                                                0,
-                                                                                0,
-                                                                                0),
-                                                                            child:
-                                                                                AutoSizeText(
-                                                                              rowConstBudgetCategoriesRecord.categoryName!,
-                                                                              textAlign: TextAlign.center,
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
-                                                                                    color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                    fontSize: 12,
-                                                                                  ),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }),
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          ],
+                                                  }),
+                                                ),
+                                              );
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                    Padding(
+                                      ],
+                                    ),
+                                  Expanded(
+                                    child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          20, 20, 20, 0),
+                                          16, 16, 16, 0),
                                       child: Container(
                                         width: double.infinity,
                                         decoration: BoxDecoration(
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryBackground,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 14,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .shadowGray,
-                                            )
-                                          ],
                                           borderRadius:
-                                              BorderRadius.circular(16),
+                                              BorderRadius.circular(32),
                                         ),
                                         child: Builder(
                                           builder: (context) {
@@ -608,7 +649,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                             ),
                                                           );
                                                         },
-                                                      );
+                                                      ).then((value) =>
+                                                          setState(() {}));
                                                     },
                                                     child: Container(
                                                       width: double.infinity,
@@ -620,8 +662,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                       child: Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
-                                                                .fromSTEB(10,
-                                                                    10, 10, 10),
+                                                                .fromSTEB(
+                                                                    8, 8, 8, 8),
                                                         child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -701,7 +743,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                   .transparent,
                                                               borderRadius: 30,
                                                               borderWidth: 1,
-                                                              buttonSize: 60,
+                                                              buttonSize: 48,
                                                               icon: Icon(
                                                                 Icons
                                                                     .edit_rounded,
@@ -736,7 +778,9 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                       ),
                                                                     );
                                                                   },
-                                                                );
+                                                                ).then((value) =>
+                                                                    setState(
+                                                                        () {}));
                                                               },
                                                             ),
                                                             StreamBuilder<
@@ -784,7 +828,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                   borderWidth:
                                                                       1,
                                                                   buttonSize:
-                                                                      60,
+                                                                      48,
                                                                   icon: Icon(
                                                                     Icons
                                                                         .delete_rounded,
@@ -810,7 +854,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                         .unlinkAllTransCategories(
                                                                       iconButtonTransactionsRecordList
                                                                           .toList(),
-                                                                      existingCategoriesItem,
                                                                     );
                                                                     // Action_DeleteCategory
                                                                     await existingCategoriesItem
@@ -832,306 +875,235 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          20, 20, 20, 0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Expanded(
-                                            child: InkWell(
-                                              onTap: () async {
-                                                // Action_BSCreateCustomCategory
-                                                await showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return Padding(
-                                                      padding:
-                                                          MediaQuery.of(context)
-                                                              .viewInsets,
-                                                      child:
-                                                          CreateCustomCategoryWidget(
-                                                        budget:
-                                                            columnBudgetsRecord,
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                              child: Container(
-                                                decoration: BoxDecoration(
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16, 16, 16, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          child: InkWell(
+                                            onTap: () async {
+                                              // Action_BSCreateCustomCategory
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets,
+                                                    child:
+                                                        CreateCustomCategoryWidget(
+                                                      budget:
+                                                          columnBudgetsRecord,
+                                                    ),
+                                                  );
+                                                },
+                                              ).then(
+                                                  (value) => setState(() {}));
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                                shape: BoxShape.rectangle,
+                                                border: Border.all(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primaryBackground,
-                                                  borderRadius:
-                                                      BorderRadius.circular(16),
-                                                  shape: BoxShape.rectangle,
-                                                  border: Border.all(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                  ),
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(12, 12, 12, 12),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0, 0, 4, 0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Icon(
-                                                              Icons.add_rounded,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryColor,
-                                                              size: 24,
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          4,
-                                                                          0,
-                                                                          0,
-                                                                          0),
-                                                              child:
-                                                                  AutoSizeText(
-                                                                'Custom category',
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyText1Family,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryColor,
-                                                                      fontSize:
-                                                                          12,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
+                                                      .primaryColor,
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          20, 20, 20, 20),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Expanded(
-                                            child: Container(
-                                              decoration: BoxDecoration(),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 0, 0, 16),
-                                                    child: FFButtonWidget(
-                                                      onPressed: () async {
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                          SnackBar(
-                                                            content: Text(
-                                                              'Saved',
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(12, 12, 12, 12),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 0, 4, 0),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons.add_rounded,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryColor,
+                                                            size: 24,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        4,
+                                                                        0,
+                                                                        0,
+                                                                        0),
+                                                            child: AutoSizeText(
+                                                              'Custom category',
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodyText2
+                                                                  .bodyText1
                                                                   .override(
                                                                     fontFamily:
                                                                         FlutterFlowTheme.of(context)
-                                                                            .bodyText2Family,
-                                                                    color: Color(
-                                                                        0xFFF9F9F9),
+                                                                            .bodyText1Family,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryColor,
+                                                                    fontSize:
+                                                                        12,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).bodyText1Family),
                                                                   ),
                                                             ),
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    4000),
-                                                            backgroundColor:
-                                                                Colors.black,
                                                           ),
-                                                        );
-                                                        await Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                NavBarPage(
-                                                                    initialPage:
-                                                                        'ActiveBudget'),
-                                                          ),
-                                                        );
-                                                      },
-                                                      text: 'Save',
-                                                      options: FFButtonOptions(
-                                                        width: double.infinity,
-                                                        height: 60,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                        textStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .subtitle1
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .subtitle1Family,
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
-                                                        elevation: 2,
-                                                        borderSide: BorderSide(
-                                                          color: Colors
-                                                              .transparent,
-                                                          width: 1,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
+                                                        ],
                                                       ),
                                                     ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 0, 0, 16),
-                                                    child: FFButtonWidget(
-                                                      onPressed: () async {
-                                                        setState(() => FFAppState()
-                                                                .dialogBoxReturn =
-                                                            false);
-                                                        await showModalBottomSheet(
-                                                          isScrollControlled:
-                                                              true,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return Padding(
-                                                              padding: MediaQuery
-                                                                      .of(context)
-                                                                  .viewInsets,
-                                                              child:
-                                                                  DialogBoxWidget(
-                                                                heading:
-                                                                    'Confirm Reset',
-                                                                body:
-                                                                    'A reset will delete all categories from this budget',
-                                                                buttonYes:
-                                                                    'Delete',
-                                                                buttonNo:
-                                                                    'Don\'t delete',
-                                                                information:
-                                                                    false,
-                                                              ),
-                                                            );
-                                                          },
-                                                        );
-                                                        if (FFAppState()
-                                                            .dialogBoxReturn) {
-                                                          // Action_ResetCategories
-                                                          await actions
-                                                              .deleteCategories(
-                                                            allocateBudgetCategoriesRecordList
-                                                                .toList(),
-                                                            columnBudgetsRecord,
-                                                          );
-
-                                                          final budgetsUpdateData =
-                                                              {
-                                                            'unallocatedAmount':
-                                                                FieldValue.increment(
-                                                                    functions.sumCategoryAmounts(
-                                                                        allocateBudgetCategoriesRecordList
-                                                                            .toList())),
-                                                          };
-                                                          await columnBudgetsRecord
-                                                              .reference
-                                                              .update(
-                                                                  budgetsUpdateData);
-                                                        } else {
-                                                          return;
-                                                        }
-                                                      },
-                                                      text: 'Reset',
-                                                      icon: Icon(
-                                                        Icons.restore,
-                                                        size: 16,
-                                                      ),
-                                                      options: FFButtonOptions(
-                                                        width: double.infinity,
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .primaryBackground,
-                                                        textStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText2,
-                                                        elevation: 0,
-                                                        borderSide: BorderSide(
-                                                          color: Colors
-                                                              .transparent,
-                                                          width: 1,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16, 16, 16, 16),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            decoration: BoxDecoration(),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                FFButtonWidget(
+                                                  onPressed: () async {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          'Saved',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText2
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText2Family,
+                                                                color: Color(
+                                                                    0xFFF9F9F9),
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyText2Family),
+                                                              ),
+                                                        ),
+                                                        duration: Duration(
+                                                            milliseconds: 4000),
+                                                        backgroundColor:
+                                                            Colors.black,
+                                                      ),
+                                                    );
+                                                    if ((currentUserDocument
+                                                                    ?.accountsList
+                                                                    ?.toList() ??
+                                                                [])
+                                                            .length >
+                                                        0) {
+                                                      await Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              NavBarPage(
+                                                                  initialPage:
+                                                                      'ActiveBudget'),
+                                                        ),
+                                                      );
+                                                    } else {
+                                                      await Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ConnectFirstAccountWidget(),
+                                                        ),
+                                                      );
+                                                    }
+                                                  },
+                                                  text: 'Save',
+                                                  options: FFButtonOptions(
+                                                    width: double.infinity,
+                                                    height: 60,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryColor,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .subtitle1
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle1Family,
+                                                          color: Colors.white,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1Family),
+                                                        ),
+                                                    elevation: 2,
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],

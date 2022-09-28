@@ -45,41 +45,37 @@ String calcRemCatCurrency(
   return formatCurrency.format(remaining);
 }
 
-double? calcBudgetChart(
-  BudgetsRecord? budget,
-  List<TransactionsRecord> transactions,
+double? calcChartPercent(
+  int totalAmount,
+  int spentAmount,
 ) {
   // Add your function code here!
 
-  int totalCategoriesSpent = 0;
-
-  for (var e = 0; e < transactions.length; e++) {
-    totalCategoriesSpent += transactions[e].transactionAmount as int;
+  if (spentAmount == 0) {
+    return 0;
   }
 
-  double budgPercent = (totalCategoriesSpent / (budget!.budgetAmount as int));
+  double percent = 1 - (spentAmount / totalAmount);
 
-  if (totalCategoriesSpent >= (budget.budgetAmount as int)) {
-    budgPercent = 0;
+  if (spentAmount >= totalAmount) {
+    percent = 0;
   }
 
-  return budgPercent;
+  return percent;
 }
 
 double calcCategoryPercent(
   CategoriesRecord? category,
-  List<TransactionsRecord>? transactions,
+  int? spentAmount,
 ) {
   // Add your function code here!
-  int totalTransactions = 0;
-
-  for (var i = 0; i < transactions!.length; i++) {
-    totalTransactions += transactions[i].transactionAmount as int;
+  if (spentAmount == 0) {
+    return 1;
   }
 
-  double percent = 1 - (totalTransactions / (category!.categoryAmount as int));
+  double percent = 1 - (spentAmount! / (category!.categoryAmount as int));
 
-  if (totalTransactions >= (category.categoryAmount as int)) {
+  if (spentAmount >= (category.categoryAmount as int)) {
     percent = 0;
   }
 
@@ -381,4 +377,59 @@ String transactionTypeColor(String transactionType) {
     color = "0xFFFF0003";
   }
   return color;
+}
+
+int setNewExpectedSubDate(SubscriptionsRecord? subscription) {
+  // Add your function code here!
+
+  int days = 0;
+
+  switch (subscription!.recurrence) {
+    case "Weekly":
+      days = 7;
+      break;
+    case "Monthly":
+      days = 30;
+      break;
+    case "Quaterly":
+      days = 90;
+      break;
+    case "Yearly":
+      days = 365;
+      break;
+  }
+
+  return days;
+}
+
+bool chartDisplay(
+  int totalAmount,
+  double lowerLimit,
+  int spentAmount,
+  double upperLimit,
+) {
+  // Add your function code here!
+  bool display = false;
+
+  if (spentAmount != 0 &&
+      spentAmount >= (totalAmount * lowerLimit) &&
+      spentAmount < (totalAmount * upperLimit)) {
+    display = true;
+  }
+
+  return display;
+}
+
+String toTitleCase(String string) {
+  // Add your function code here!
+  return string
+      .trim()
+      .splitMapJoin(
+        RegExp(r'\s+'),
+        onMatch: (m) => ' ',
+        onNonMatch: (n) {
+          return '${n.substring(0, 1).toUpperCase()}${n.substring(1).toLowerCase()}';
+        },
+      )
+      .trim();
 }
