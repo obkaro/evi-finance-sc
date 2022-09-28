@@ -261,6 +261,31 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                   await actions.flutterMono(
                                     context,
                                   );
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Fetching account data. This might take a minute...',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family,
+                                              color: Color(0xFFC1C1C1),
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.normal,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1Family),
+                                            ),
+                                      ),
+                                      duration: Duration(milliseconds: 6000),
+                                      backgroundColor: Colors.black,
+                                    ),
+                                  );
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(
