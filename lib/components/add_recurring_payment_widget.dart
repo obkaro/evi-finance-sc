@@ -32,8 +32,11 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<ConstRecurringPaymentsRecord>>(
-      stream: queryConstRecurringPaymentsRecord(),
+    return StreamBuilder<List<ConstMerchantsRecord>>(
+      stream: queryConstMerchantsRecord(
+        queryBuilder: (constMerchantsRecord) =>
+            constMerchantsRecord.where('tags', arrayContains: 'subscription'),
+      ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -48,8 +51,8 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
             ),
           );
         }
-        List<ConstRecurringPaymentsRecord>
-            containerConstRecurringPaymentsRecordList = snapshot.data!;
+        List<ConstMerchantsRecord> containerConstMerchantsRecordList =
+            snapshot.data!;
         return Container(
           width: double.infinity,
           height: 480,
@@ -82,8 +85,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                         child: Builder(
                           builder: (context) {
                             final subsfromcontainer =
-                                containerConstRecurringPaymentsRecordList
-                                    .toList();
+                                containerConstMerchantsRecordList.toList();
                             return GridView.builder(
                               padding: EdgeInsets.zero,
                               gridDelegate:
@@ -106,7 +108,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                       final subscriptionsCreateData =
                                           createSubscriptionsRecordData(
                                         name: subsfromcontainerItem.name,
-                                        icon: subsfromcontainerItem.icon,
+                                        icon: subsfromcontainerItem.logo,
                                       );
                                       var subscriptionsRecordReference =
                                           SubscriptionsRecord.collection.doc();
@@ -140,14 +142,14 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             8, 8, 8, 8),
                                         child: Hero(
-                                          tag: subsfromcontainerItem.icon!,
+                                          tag: subsfromcontainerItem.logo!,
                                           transitionOnUserGestures: true,
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(8),
                                             child: CachedNetworkImage(
                                               imageUrl:
-                                                  subsfromcontainerItem.icon!,
+                                                  subsfromcontainerItem.logo!,
                                               fit: BoxFit.scaleDown,
                                             ),
                                           ),

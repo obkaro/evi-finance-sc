@@ -150,17 +150,22 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     20, 20, 20, 20),
                                             child: Hero(
-                                              tag:
-                                                  editSubsciptionSubscriptionsRecord
-                                                      .icon!,
+                                              tag: valueOrDefault<String>(
+                                                editSubsciptionSubscriptionsRecord
+                                                    .icon,
+                                                'https://firebasestorage.googleapis.com/v0/b/evi-finance-prod.appspot.com/o/cms_uploads%2Fdefaultimages%2F1664354213902000%2Fcredit-card-icon-png-4401.png?alt=media&token=baaa1d09-a0f9-48ce-8f45-720785cdb67e',
+                                              ),
                                               transitionOnUserGestures: true,
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(12),
                                                 child: CachedNetworkImage(
                                                   imageUrl:
-                                                      editSubsciptionSubscriptionsRecord
-                                                          .icon!,
+                                                      valueOrDefault<String>(
+                                                    editSubsciptionSubscriptionsRecord
+                                                        .icon,
+                                                    'https://firebasestorage.googleapis.com/v0/b/evi-finance-prod.appspot.com/o/cms_uploads%2Fdefaultimages%2F1664354213902000%2Fcredit-card-icon-png-4401.png?alt=media&token=baaa1d09-a0f9-48ce-8f45-720785cdb67e',
+                                                  ),
                                                   width: 100,
                                                   height: 100,
                                                   fit: BoxFit.scaleDown,
