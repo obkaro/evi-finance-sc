@@ -92,7 +92,7 @@ class _MyAppState extends State<MyApp> {
                 child: Center(
                   child: Image.asset(
                     'assets/images/evi-logo-720h.png',
-                    width: MediaQuery.of(context).size.width * 0.7,
+                    width: MediaQuery.of(context).size.width * 0.5,
                     fit: BoxFit.contain,
                   ),
                 ),

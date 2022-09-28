@@ -478,80 +478,10 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                               return;
                             }
 
-                            if (dropDownValue == 'Monthly') {
-                              final budgetsUpdateData = createBudgetsRecordData(
-                                budgetAmount: FFAppState().currencyTextField,
-                                budgetStart: calendarSelectedDay?.start,
-                                isRecurring: true,
-                                unallocatedAmount: functions.subInt(
-                                    FFAppState().currencyTextField, 20000),
-                                budgetDuration: 'Monthly',
-                                status: 'active',
-                                duration: 30,
-                                budgetEnd: functions.addDaysToDate(
-                                    calendarSelectedDay?.end, 30),
-                                budgetOwner: currentUserReference,
-                                budgetSpent: 0,
-                              );
-                              await widget.budget!.reference
-                                  .update(budgetsUpdateData);
-                            } else {
-                              final budgetsUpdateData = createBudgetsRecordData(
-                                budgetAmount: FFAppState().currencyTextField,
-                                budgetStart: calendarSelectedDay?.start,
-                                isRecurring: true,
-                                unallocatedAmount: functions.subInt(
-                                    FFAppState().currencyTextField, 20000),
-                                budgetDuration: 'Weekly',
-                                status: 'active',
-                                duration: 7,
-                                budgetEnd: functions.addDaysToDate(
-                                    calendarSelectedDay?.end, 7),
-                                budgetOwner: currentUserReference,
-                                budgetSpent: 0,
-                              );
-                              await widget.budget!.reference
-                                  .update(budgetsUpdateData);
-                            }
-
-                            if (dropDownValue == 'Monthly') {
-                              final budgetsUpdateData = createBudgetsRecordData(
-                                budgetAmount: FFAppState().currencyTextField,
-                                budgetStart: calendarSelectedDay?.start,
-                                isRecurring: true,
-                                unallocatedAmount: functions.subInt(
-                                    FFAppState().currencyTextField, 20000),
-                                budgetDuration: 'Monthly',
-                                status: 'active',
-                                duration: 30,
-                                budgetEnd: functions.addDaysToDate(
-                                    calendarSelectedDay?.start, 30),
-                                budgetOwner: currentUserReference,
-                                budgetSpent: 0,
-                              );
-                              await widget.budget!.reference
-                                  .update(budgetsUpdateData);
-                            } else {
-                              if (dropDownValue == 'Weekly') {
-                                final budgetsUpdateData =
-                                    createBudgetsRecordData(
-                                  budgetAmount: FFAppState().currencyTextField,
-                                  budgetStart: calendarSelectedDay?.start,
-                                  isRecurring: true,
-                                  unallocatedAmount: functions.subInt(
-                                      FFAppState().currencyTextField, 20000),
-                                  budgetDuration: 'Monthly',
-                                  status: 'active',
-                                  duration: 7,
-                                  budgetEnd: functions.addDaysToDate(
-                                      calendarSelectedDay?.start, 7),
-                                  budgetOwner: currentUserReference,
-                                  budgetSpent: 0,
-                                );
-                                await widget.budget!.reference
-                                    .update(budgetsUpdateData);
-                              } else {
-                                if (dropDownValue == 'Daily') {
+                            if (FFAppState().currencyTextField > 0) {
+                              if (dropDownValue != null &&
+                                  dropDownValue != '') {
+                                if (dropDownValue == 'Monthly') {
                                   final budgetsUpdateData =
                                       createBudgetsRecordData(
                                     budgetAmount:
@@ -559,21 +489,106 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                     budgetStart: calendarSelectedDay?.start,
                                     isRecurring: true,
                                     unallocatedAmount: functions.subInt(
-                                        FFAppState().currencyTextField, 20000),
+                                        FFAppState().currencyTextField, 100000),
                                     budgetDuration: 'Monthly',
                                     status: 'active',
-                                    duration: 1,
+                                    duration: 30,
                                     budgetEnd: functions.addDaysToDate(
-                                        calendarSelectedDay?.start, 1),
+                                        calendarSelectedDay?.start, 30),
                                     budgetOwner: currentUserReference,
                                     budgetSpent: 0,
                                   );
                                   await widget.budget!.reference
                                       .update(budgetsUpdateData);
                                 } else {
-                                  return;
+                                  if (dropDownValue == 'Weekly') {
+                                    final budgetsUpdateData =
+                                        createBudgetsRecordData(
+                                      budgetAmount:
+                                          FFAppState().currencyTextField,
+                                      budgetStart: calendarSelectedDay?.start,
+                                      isRecurring: true,
+                                      unallocatedAmount: functions.subInt(
+                                          FFAppState().currencyTextField,
+                                          100000),
+                                      budgetDuration: 'Monthly',
+                                      status: 'active',
+                                      duration: 7,
+                                      budgetEnd: functions.addDaysToDate(
+                                          calendarSelectedDay?.start, 7),
+                                      budgetOwner: currentUserReference,
+                                      budgetSpent: 0,
+                                    );
+                                    await widget.budget!.reference
+                                        .update(budgetsUpdateData);
+                                  } else {
+                                    if (dropDownValue == 'Daily') {
+                                      final budgetsUpdateData =
+                                          createBudgetsRecordData(
+                                        budgetAmount:
+                                            FFAppState().currencyTextField,
+                                        budgetStart: calendarSelectedDay?.start,
+                                        isRecurring: true,
+                                        unallocatedAmount: functions.subInt(
+                                            FFAppState().currencyTextField,
+                                            100000),
+                                        budgetDuration: 'Monthly',
+                                        status: 'active',
+                                        duration: 1,
+                                        budgetEnd: functions.addDaysToDate(
+                                            calendarSelectedDay?.start, 1),
+                                        budgetOwner: currentUserReference,
+                                        budgetSpent: 0,
+                                      );
+                                      await widget.budget!.reference
+                                          .update(budgetsUpdateData);
+                                    } else {
+                                      return;
+                                    }
+                                  }
                                 }
+                              } else {
+                                await showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  builder: (context) {
+                                    return Padding(
+                                      padding:
+                                          MediaQuery.of(context).viewInsets,
+                                      child: DialogBoxWidget(
+                                        heading: 'Budget Duration',
+                                        body:
+                                            'Please select a budget duration from the dropdown',
+                                        buttonYes: 'Got it',
+                                        buttonNo: 'n',
+                                        information: true,
+                                        yesAction: () async {},
+                                      ),
+                                    );
+                                  },
+                                ).then((value) => setState(() {}));
                               }
+                            } else {
+                              await showModalBottomSheet(
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
+                                context: context,
+                                builder: (context) {
+                                  return Padding(
+                                    padding: MediaQuery.of(context).viewInsets,
+                                    child: DialogBoxWidget(
+                                      heading: 'Invalid Amount',
+                                      body:
+                                          'Your budget amount should be greater than zero',
+                                      buttonYes: 'Got it',
+                                      buttonNo: 'n',
+                                      information: true,
+                                      yesAction: () async {},
+                                    ),
+                                  );
+                                },
+                              ).then((value) => setState(() {}));
                             }
 
                             final categoriesCreateData =
@@ -595,6 +610,11 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                             await CategoriesRecord.createDoc(
                                     widget.budget!.reference)
                                 .set(categoriesCreateData);
+
+                            final usersUpdateData = createUsersRecordData(
+                              activeBudget: columnBudgetsRecord.reference,
+                            );
+                            await currentUserReference!.update(usersUpdateData);
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
