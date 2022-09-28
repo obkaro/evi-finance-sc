@@ -10,6 +10,7 @@ import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -89,175 +90,207 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 if (editIncomeSourcesIncomeCategoriesRecordList.length <= 10)
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 4),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                'Swipe for more suggestions  ',
-                                style: FlutterFlowTheme.of(context).bodyText2,
-                              ),
-                              Icon(
-                                Icons.arrow_forward_rounded,
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(),
+                    child: StreamBuilder<List<ConstIncomeCategoriesRecord>>(
+                      stream: queryConstIncomeCategoriesRecord(
+                        queryBuilder: (constIncomeCategoriesRecord) =>
+                            constIncomeCategoriesRecord.whereNotIn(
+                                'categoryName',
+                                editIncomeSourcesIncomeCategoriesRecordList
+                                    .map((e) => e.categoryName!)
+                                    .toList()),
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: SpinKitRing(
                                 color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 16,
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                size: 50,
                               ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                          child:
-                              StreamBuilder<List<ConstIncomeCategoriesRecord>>(
-                            stream: queryConstIncomeCategoriesRecord(
-                              queryBuilder: (constIncomeCategoriesRecord) =>
-                                  constIncomeCategoriesRecord.whereNotIn(
-                                      'categoryName',
-                                      editIncomeSourcesIncomeCategoriesRecordList
-                                          .map((e) => e.categoryName!)
-                                          .toList()),
                             ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: SpinKitRing(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      size: 50,
+                          );
+                        }
+                        List<ConstIncomeCategoriesRecord>
+                            containerConstIncomeCategoriesRecordList =
+                            snapshot.data!;
+                        return Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                if (containerConstIncomeCategoriesRecordList
+                                        .length >
+                                    0)
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 0, 20, 4),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Swipe for more suggestions  ',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText2,
+                                        ),
+                                        Icon(
+                                          Icons.arrow_forward_rounded,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 16,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                );
-                              }
-                              List<ConstIncomeCategoriesRecord>
-                                  rowConstIncomeCategoriesRecordList =
-                                  snapshot.data!;
-                              return SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: List.generate(
-                                      rowConstIncomeCategoriesRecordList.length,
-                                      (rowIndex) {
-                                    final rowConstIncomeCategoriesRecord =
-                                        rowConstIncomeCategoriesRecordList[
-                                            rowIndex];
-                                    return Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 0, 0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          final incomeCategoriesCreateData =
-                                              createIncomeCategoriesRecordData(
-                                            categoryName:
-                                                rowConstIncomeCategoriesRecord
-                                                    .categoryName,
-                                            categoryID:
-                                                random_data.randomString(
-                                              32,
-                                              32,
-                                              true,
-                                              true,
-                                              true,
-                                            ),
-                                          );
-                                          await IncomeCategoriesRecord
-                                                  .createDoc(
-                                                      currentUserReference!)
-                                              .set(incomeCategoriesCreateData);
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                            border: Border.all(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    12, 12, 12, 12),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 4, 0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Icon(
-                                                        Icons.add_rounded,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                        size: 24,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    4, 0, 0, 0),
-                                                        child: AutoSizeText(
-                                                          rowConstIncomeCategoriesRecord
-                                                              .categoryName!,
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1Family,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 4, 0, 0),
+                                  child: Builder(
+                                    builder: (context) {
+                                      final containerIncomeCategories =
+                                          containerConstIncomeCategoriesRecordList
+                                              .toList();
+                                      return SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: List.generate(
+                                              containerIncomeCategories.length,
+                                              (containerIncomeCategoriesIndex) {
+                                            final containerIncomeCategoriesItem =
+                                                containerIncomeCategories[
+                                                    containerIncomeCategoriesIndex];
+                                            return Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(10, 0, 0, 0),
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  final incomeCategoriesCreateData =
+                                                      createIncomeCategoriesRecordData(
+                                                    categoryName:
+                                                        containerIncomeCategoriesItem
+                                                            .categoryName,
+                                                    categoryID: random_data
+                                                        .randomString(
+                                                      32,
+                                                      32,
+                                                      true,
+                                                      true,
+                                                      true,
+                                                    ),
+                                                  );
+                                                  await IncomeCategoriesRecord
+                                                          .createDoc(
+                                                              currentUserReference!)
+                                                      .set(
+                                                          incomeCategoriesCreateData);
+                                                },
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryBackground,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                    border: Border.all(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryColor,
+                                                    ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                12, 12, 12, 12),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(0,
+                                                                      0, 4, 0),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Icon(
+                                                                Icons
+                                                                    .add_rounded,
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryColor,
-                                                                fontSize: 12,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyText1Family),
+                                                                size: 24,
                                                               ),
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            4,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                child:
+                                                                    AutoSizeText(
+                                                                  containerIncomeCategoriesItem
+                                                                      .categoryName!,
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodyText1Family,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryColor,
+                                                                        fontSize:
+                                                                            12,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
+                                                                      ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
-                                              ],
-                                            ),
-                                          ),
+                                              ),
+                                            );
+                                          }),
                                         ),
-                                      ),
-                                    );
-                                  }),
+                                      );
+                                    },
+                                  ),
                                 ),
-                              );
-                            },
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        );
+                      },
                     ),
                   ),
                 Expanded(
@@ -308,27 +341,33 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                                 text: sourcesFromPageItem
                                                     .categoryName,
                                               ),
-                                              onFieldSubmitted: (_) async {
-                                                if ((textController?.text ??
-                                                            '') !=
-                                                        null &&
-                                                    (textController?.text ??
-                                                            '') !=
-                                                        '') {
-                                                  final incomeCategoriesUpdateData =
-                                                      createIncomeCategoriesRecordData(
-                                                    categoryName:
-                                                        textController?.text ??
-                                                            '',
-                                                  );
-                                                  await sourcesFromPageItem
-                                                      .reference
-                                                      .update(
-                                                          incomeCategoriesUpdateData);
-                                                } else {
-                                                  return;
-                                                }
-                                              },
+                                              onChanged: (_) =>
+                                                  EasyDebounce.debounce(
+                                                'textController',
+                                                Duration(milliseconds: 2000),
+                                                () async {
+                                                  if ((textController?.text ??
+                                                              '') !=
+                                                          null &&
+                                                      (textController?.text ??
+                                                              '') !=
+                                                          '') {
+                                                    final incomeCategoriesUpdateData =
+                                                        createIncomeCategoriesRecordData(
+                                                      categoryName:
+                                                          textController
+                                                                  ?.text ??
+                                                              '',
+                                                    );
+                                                    await sourcesFromPageItem
+                                                        .reference
+                                                        .update(
+                                                            incomeCategoriesUpdateData);
+                                                  } else {
+                                                    return;
+                                                  }
+                                                },
+                                              ),
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 hintText: 'Enter income name',
