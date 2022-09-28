@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CreateFirstBudgetQCopyWidget extends StatefulWidget {
-  const CreateFirstBudgetQCopyWidget({
+class AccountDataRefreshWidget extends StatefulWidget {
+  const AccountDataRefreshWidget({
     Key? key,
     this.account,
   }) : super(key: key);
@@ -17,12 +17,11 @@ class CreateFirstBudgetQCopyWidget extends StatefulWidget {
   final AccountsRecord? account;
 
   @override
-  _CreateFirstBudgetQCopyWidgetState createState() =>
-      _CreateFirstBudgetQCopyWidgetState();
+  _AccountDataRefreshWidgetState createState() =>
+      _AccountDataRefreshWidgetState();
 }
 
-class _CreateFirstBudgetQCopyWidgetState
-    extends State<CreateFirstBudgetQCopyWidget> {
+class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
   ApiCallResponse? dataSyncResponse;
   ApiCallResponse? reauthCode;
 

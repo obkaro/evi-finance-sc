@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
+import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,6 @@ class EditIncomeSourcesWidget extends StatefulWidget {
 
 class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
   TextEditingController? textController;
-  final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -163,6 +163,14 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                             categoryName:
                                                 rowConstIncomeCategoriesRecord
                                                     .categoryName,
+                                            categoryID:
+                                                random_data.randomString(
+                                              32,
+                                              32,
+                                              true,
+                                              true,
+                                              true,
+                                            ),
                                           );
                                           await IncomeCategoriesRecord
                                                   .createDoc(
@@ -290,27 +298,23 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Expanded(
-                                          child: Form(
-                                            key: formKey,
-                                            autovalidateMode:
-                                                AutovalidateMode.disabled,
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(12, 0, 0, 0),
-                                              child: TextFormField(
-                                                controller: textController ??=
-                                                    TextEditingController(
-                                                  text: sourcesFromPageItem
-                                                      .categoryName,
-                                                ),
-                                                onFieldSubmitted: (_) async {
-                                                  if (formKey.currentState ==
-                                                          null ||
-                                                      !formKey.currentState!
-                                                          .validate()) {
-                                                    return;
-                                                  }
-
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    12, 0, 0, 0),
+                                            child: TextFormField(
+                                              controller: textController ??=
+                                                  TextEditingController(
+                                                text: sourcesFromPageItem
+                                                    .categoryName,
+                                              ),
+                                              onFieldSubmitted: (_) async {
+                                                if ((textController?.text ??
+                                                            '') !=
+                                                        null &&
+                                                    (textController?.text ??
+                                                            '') !=
+                                                        '') {
                                                   final incomeCategoriesUpdateData =
                                                       createIncomeCategoriesRecordData(
                                                     categoryName:
@@ -321,70 +325,63 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                                       .reference
                                                       .update(
                                                           incomeCategoriesUpdateData);
-                                                },
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  hintText: 'Enter income name',
-                                                  hintStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyText2,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .fadedDivider,
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .fadedDivider,
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12),
-                                                  ),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Color(0x00000000),
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Color(0x00000000),
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12),
-                                                  ),
-                                                  filled: true,
-                                                  fillColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .lightPrimary,
-                                                ),
-                                                style:
+                                                } else {
+                                                  return;
+                                                }
+                                              },
+                                              obscureText: false,
+                                              decoration: InputDecoration(
+                                                hintText: 'Enter income name',
+                                                hintStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1,
+                                                        .bodyText2,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .fadedDivider,
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .fadedDivider,
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                filled: true,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .lightPrimary,
                                               ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1,
                                             ),
                                           ),
                                         ),
