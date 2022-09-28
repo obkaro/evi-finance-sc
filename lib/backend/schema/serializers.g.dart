@@ -15,7 +15,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ConstBudgetCategoriesRecord.serializer)
       ..add(ConstIncomeCategoriesRecord.serializer)
       ..add(ConstInstitutionLogosRecord.serializer)
+      ..add(ConstMerchantsRecord.serializer)
       ..add(ConstRecurringPaymentsRecord.serializer)
+      ..add(DefaultimagesRecord.serializer)
       ..add(IncomeCategoriesRecord.serializer)
       ..add(IncomeDetailsStruct.serializer)
       ..add(MoneyStruct.serializer)
@@ -42,6 +44,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(PaymentPlanStruct)]),
           () => new ListBuilder<PaymentPlanStruct>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())

@@ -77,7 +77,7 @@ exports.accountupdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', 
 
               //functions.logger.log("ELEMENT", element);
 
-              const id = element.amount + element.narration + element.date + element.balance;
+              const id = element.amount + element.narration + element.date + element.balance + account.docs[0].ref.path.toString();
               const parsedDate = new Date(Date.parse(element.date));
 
               //functions.logger.log(id);
@@ -137,48 +137,6 @@ exports.accountupdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', 
     } else res.status(200).send('INVALID REQUEST');
 
   })
-
-//PERIODIC DATA SYNC
-exports.datasync = functions.pubsub.schedule('0 */14 * * *').onRun(async (context) => {
-
-  const accounts = await admin.firestore().collection('accounts').get();
-
-  accounts.docs.forEach(async (account) => {
-    const options = {
-      method: 'POST',
-      url: 'https://api.withmono.com/accounts/' + account.data().authID + '/sync?allow_incomplete_statement=false',
-      headers: { Accept: 'application/json', 'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid' }
-    };
-    axios
-      .request(options)
-      .then(async function (response) {
-
-        // if(response.data.event === "mono.events.account_synced") {
-
-        //     const options = {
-        //       method: 'GET',
-        //       url: 'https://api.withmono.com/accounts/' + req.body.data.account._id + '/transactions',
-        //       headers: { Accept: 'application/json', 'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid' }
-        //     };
-        //     axios
-        //       .request(options)
-        //       .then(async function (response) {});
-        // }
-
-        functions.logger.log(account.data().authID, response.data);
-
-        // if (response.data.event === "mono.events.reauthorisation_required") {
-        //   //Set requth required to true and notify user
-        // }
-
-        // if (response.data.event === "mono.events.sync_failed") { }
-        //Set failed sync date
-      }).catch(function (error) {
-        console.error(error);
-      });
-    res.status(200).send();
-  });
-})
 
 //PERIODIC DATA SYNC
 exports.datasync = functions.pubsub.schedule('0 */14 * * *').onRun(async (context) => {
@@ -336,7 +294,7 @@ exports.renewbudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (co
               category_name: document.data().category_name,
               category_budget: newBudget,
               category_id: catID,
-              category_owner: document.data().category_owner,
+              //category_owner: document.data().category_owner,
               spentAmount: 0,
               createdDate: time
             });
