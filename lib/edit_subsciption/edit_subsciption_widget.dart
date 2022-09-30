@@ -379,9 +379,9 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           AuthUserStreamWidget(
-                                            child: StreamBuilder<
+                                            child: FutureBuilder<
                                                 List<CategoriesRecord>>(
-                                              stream: queryCategoriesRecord(
+                                              future: queryCategoriesRecordOnce(
                                                 parent: currentUserDocument!
                                                     .activeBudget,
                                               ),
@@ -529,7 +529,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                 weekStartsMonday: false,
                                 initialDate: editSubsciptionSubscriptionsRecord
                                     .expChargeDate,
-                                rowHeight: 48,
+                                rowHeight: 40,
                                 onChange:
                                     (DateTimeRange? newSelectedDate) async {
                                   calendarSelectedDay = newSelectedDate;

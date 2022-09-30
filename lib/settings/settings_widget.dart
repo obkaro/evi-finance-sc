@@ -198,8 +198,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           ),
                           InkWell(
                             onTap: () async {
-                              await launchURL(
-                                  'https://www.evifinance.com/privacy-policy');
+                              await launchURL('https://evifinance.com/privacy');
                             },
                             child: ListTile(
                               leading: Icon(
@@ -232,8 +231,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           ),
                           InkWell(
                             onTap: () async {
-                              await launchURL(
-                                  'https://www.evifinance.com/general-terms');
+                              await launchURL('https://evifinance.com/terms');
                             },
                             child: ListTile(
                               leading: Icon(

@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/add_recurring_payment_widget.dart';
+import '../components/empty_list_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../subscription_details/subscription_details_widget.dart';
@@ -86,7 +87,8 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                   child: StreamBuilder<List<SubscriptionsRecord>>(
                     stream: querySubscriptionsRecord(
                       queryBuilder: (subscriptionsRecord) => subscriptionsRecord
-                          .where('owner', isEqualTo: currentUserReference),
+                          .where('owner', isEqualTo: currentUserReference)
+                          .orderBy('expChargeDate', descending: true),
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -126,6 +128,24 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                             builder: (context) {
                               final subs =
                                   containerSubscriptionsRecordList.toList();
+                              if (subs.isEmpty) {
+                                return Center(
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 300,
+                                    child: EmptyListWidget(
+                                      text:
+                                          'No subscriptions added yet. Use the + button to create a new subsscription.',
+                                      icon: Icon(
+                                        Icons.credit_card,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 73,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 scrollDirection: Axis.vertical,
