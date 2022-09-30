@@ -109,6 +109,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                           createSubscriptionsRecordData(
                                         name: subsfromcontainerItem.name,
                                         icon: subsfromcontainerItem.logo,
+                                        owner: currentUserReference,
                                       );
                                       var subscriptionsRecordReference =
                                           SubscriptionsRecord.collection.doc();

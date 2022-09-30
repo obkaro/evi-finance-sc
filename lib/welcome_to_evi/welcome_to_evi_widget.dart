@@ -335,7 +335,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                       options: [
                                         'From a friend',
                                         'Google or other search engines',
-                                        'Twitter, Instagrem, etc.',
+                                        'Twitter, Instagram, etc.',
                                         'Evi Finance Blog',
                                         'Other news websites or blogs',
                                         'From paid advertisements',
