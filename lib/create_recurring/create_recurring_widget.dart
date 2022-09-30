@@ -381,9 +381,9 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         AuthUserStreamWidget(
-                                          child: StreamBuilder<
+                                          child: FutureBuilder<
                                               List<CategoriesRecord>>(
-                                            stream: queryCategoriesRecord(
+                                            future: queryCategoriesRecordOnce(
                                               parent: currentUserDocument!
                                                   .activeBudget,
                                             ),
@@ -523,7 +523,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                     weekStartsMonday: false,
                                     initialDate: functions.addDaysToDate(
                                         getCurrentTimestamp, 30),
-                                    rowHeight: 48,
+                                    rowHeight: 40,
                                     onChange:
                                         (DateTimeRange? newSelectedDate) async {
                                       calendarSelectedDay = newSelectedDate;

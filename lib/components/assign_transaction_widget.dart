@@ -414,8 +414,10 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                         StreamBuilder<List<SubscriptionsRecord>>(
                           stream: querySubscriptionsRecord(
                             queryBuilder: (subscriptionsRecord) =>
-                                subscriptionsRecord.where('owner',
-                                    isEqualTo: currentUserReference),
+                                subscriptionsRecord
+                                    .where('owner',
+                                        isEqualTo: currentUserReference)
+                                    .orderBy('expChargeDate'),
                           ),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.

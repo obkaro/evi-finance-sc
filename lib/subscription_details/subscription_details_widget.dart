@@ -433,12 +433,12 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                               if (listViewTransactionsRecordList.isEmpty) {
                                 return Center(
                                   child: EmptyListWidget(
-                                    text: 'No payments here yet...',
+                                    text: 'No payments made yet',
                                     icon: Icon(
                                       Icons.credit_card_rounded,
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
-                                      size: 64,
+                                      size: 72,
                                     ),
                                   ),
                                 );
