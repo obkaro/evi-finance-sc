@@ -1,6 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/create_first_budget_q_widget.dart';
+import '../components/create_first_budget_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -410,7 +410,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                             builder: (context) {
                               return Padding(
                                 padding: MediaQuery.of(context).viewInsets,
-                                child: CreateFirstBudgetQWidget(),
+                                child: CreateFirstBudgetWidget(),
                               );
                             },
                           ).then((value) => setState(() {}));

@@ -82,6 +82,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                 true,
                 true,
               ),
+              budgetOwner: currentUserReference,
             );
             var budgetsRecordReference = BudgetsRecord.collection.doc();
             await budgetsRecordReference.set(budgetsCreateData);
