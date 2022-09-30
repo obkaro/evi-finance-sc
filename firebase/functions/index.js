@@ -204,18 +204,18 @@ exports.needsreauth = functions.runWith({ timeoutSeconds: 300 }).https.onRequest
       const snapshot = account.docs[0];
       await snapshot.ref.update(update);
 
-      const userid = snapshot.data().accountOwner.path.toString().substring(6);
+      // const userid = snapshot.data().accountOwner.path.toString().substring(6);
 
-      const user = await admin.firestore().collection('users').doc(userid).get();
+      // const user = await admin.firestore().collection('users').doc(userid).get();
 
-      const reauthNotif = await admin.firestore().collection('ff_push_notifications').add({
-        initial_page_name: 'Accounts',
-        notification_sound: 'default',
-        notification_text: 'Hi ' + user.data().username + ', your authentication is required to update one of your accounts. Kindly ignore this message if you have provided authentication in the last few minutes.',
-        notification_title: 'Evi',
-        timestamp: currentdate,
-        user_refs: snapshot.data().accountOwner.path.toString()
-      });
+      // const reauthNotif = await admin.firestore().collection('ff_push_notifications').add({
+      //   initial_page_name: 'Accounts',
+      //   notification_sound: 'default',
+      //   notification_text: 'Hi ' + user.data().username + ', your authentication is required to update one of your accounts. Kindly ignore this message if you have provided authentication in the last few minutes.',
+      //   notification_title: 'Evi',
+      //   timestamp: currentdate,
+      //   user_refs: snapshot.data().accountOwner.path.toString()
+      // });
 
 
     } else {
