@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/circular_indicator_big_widget.dart';
 import '../components/empty_list_widget.dart';
@@ -38,9 +39,9 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
   Widget build(BuildContext context) {
     return StreamBuilder<List<TransactionsRecord>>(
       stream: queryTransactionsRecord(
-        queryBuilder: (transactionsRecord) => transactionsRecord.where(
-            'transactionCategory',
-            isEqualTo: widget.category!.reference),
+        queryBuilder: (transactionsRecord) => transactionsRecord
+            .where('transactionCategory', isEqualTo: widget.category!.reference)
+            .where('transactionOwner', isEqualTo: currentUserReference),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.

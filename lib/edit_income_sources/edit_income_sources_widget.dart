@@ -319,10 +319,14 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
                                       StreamBuilder<List<TransactionsRecord>>(
                                         stream: queryTransactionsRecord(
                                           queryBuilder: (transactionsRecord) =>
-                                              transactionsRecord.where(
-                                                  'incomeCategory',
-                                                  isEqualTo: sourcesFromPageItem
-                                                      .reference),
+                                              transactionsRecord
+                                                  .where('incomeCategory',
+                                                      isEqualTo:
+                                                          sourcesFromPageItem
+                                                              .reference)
+                                                  .where('transactionOwner',
+                                                      isEqualTo:
+                                                          currentUserReference),
                                         ),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.

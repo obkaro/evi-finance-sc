@@ -796,11 +796,16 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                     TransactionsRecord>>(
                                                               future:
                                                                   queryTransactionsRecordOnce(
-                                                                queryBuilder: (transactionsRecord) => transactionsRecord.where(
-                                                                    'transactionCategory',
-                                                                    isEqualTo:
-                                                                        existingCategoriesItem
-                                                                            .reference),
+                                                                queryBuilder: (transactionsRecord) => transactionsRecord
+                                                                    .where(
+                                                                        'transactionCategory',
+                                                                        isEqualTo:
+                                                                            existingCategoriesItem
+                                                                                .reference)
+                                                                    .where(
+                                                                        'transactionOwner',
+                                                                        isEqualTo:
+                                                                            currentUserReference),
                                                               ),
                                                               builder: (context,
                                                                   snapshot) {
