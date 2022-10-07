@@ -138,6 +138,7 @@ exports.accountupdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', 
 
   })
 
+
 //PERIODIC DATA SYNC
 exports.datasync = functions.pubsub.schedule('0 */14 * * *').onRun(async (context) => {
 
