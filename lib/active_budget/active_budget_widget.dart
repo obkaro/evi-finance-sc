@@ -11,6 +11,7 @@ import '../components/m_appbar_widget.dart';
 import '../components/progress_bar_widget.dart';
 import '../create_budget/create_budget_widget.dart';
 import '../edit_budget/edit_budget_widget.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -21,6 +22,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -36,7 +38,8 @@ class ActiveBudgetWidget extends StatefulWidget {
   _ActiveBudgetWidgetState createState() => _ActiveBudgetWidgetState();
 }
 
-class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
+class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
+    with TickerProviderStateMixin {
   BudgetsRecord? createdBudget2;
   BudgetsRecord? createdBudget;
   BudgetsRecord? newcreatedBudget;
@@ -196,8 +199,9 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                         MaterialPageRoute(
                                                           builder: (context) =>
                                                               EditBudgetWidget(
-                                                            budget:
-                                                                pageBudgetBudgetsRecord,
+                                                            budgetRef:
+                                                                pageBudgetBudgetsRecord
+                                                                    .reference,
                                                           ),
                                                         ),
                                                       );
