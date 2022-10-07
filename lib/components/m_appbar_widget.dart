@@ -46,6 +46,7 @@ class _MAppbarWidgetState extends State<MAppbarWidget> {
         Expanded(
           child: Container(
             width: double.infinity,
+            height: double.infinity,
             decoration: BoxDecoration(
               color: widget.bgColor,
             ),
