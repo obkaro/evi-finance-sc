@@ -108,31 +108,38 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                 automaticallyImplyLeading: false,
                 actions: [],
                 flexibleSpace: FlexibleSpaceBar(
-                  title: MAppbarWidget(
-                    titleText: 'Active Budget',
-                    icon: Icon(
-                      Icons.pie_chart_rounded,
-                      color: FlutterFlowTheme.of(context).secondaryPrimary,
-                      size: 32,
+                  title: Container(
+                    width: double.infinity,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    bgColor: FlutterFlowTheme.of(context).secondaryColor,
-                    fgColor: FlutterFlowTheme.of(context).primaryBackground,
-                    textColor: FlutterFlowTheme.of(context).secondaryPrimary,
-                    actionIcon: Icon(
-                      Icons.edit_rounded,
-                      color: FlutterFlowTheme.of(context).secondaryPrimary,
-                      size: 20,
-                    ),
-                    iconAction: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditBudgetWidget(
-                            budget: activeBudgetBudgetsRecord,
+                    child: MAppbarWidget(
+                      titleText: 'Active Budget',
+                      icon: Icon(
+                        Icons.pie_chart_rounded,
+                        color: FlutterFlowTheme.of(context).secondaryPrimary,
+                        size: 32,
+                      ),
+                      bgColor: FlutterFlowTheme.of(context).secondaryColor,
+                      fgColor: FlutterFlowTheme.of(context).primaryBackground,
+                      textColor: FlutterFlowTheme.of(context).secondaryPrimary,
+                      actionIcon: Icon(
+                        Icons.edit_rounded,
+                        color: FlutterFlowTheme.of(context).secondaryPrimary,
+                        size: 20,
+                      ),
+                      iconAction: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditBudgetWidget(
+                              budget: activeBudgetBudgetsRecord,
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                   centerTitle: true,
                   expandedTitleScale: 1.0,

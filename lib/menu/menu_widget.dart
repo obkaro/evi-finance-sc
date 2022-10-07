@@ -42,29 +42,36 @@ class _MenuWidgetState extends State<MenuWidget> {
           automaticallyImplyLeading: false,
           actions: [],
           flexibleSpace: FlexibleSpaceBar(
-            title: MAppbarWidget(
-              titleText: 'Menu',
-              icon: Icon(
-                Icons.apps_rounded,
-                color: Colors.white,
-                size: 24,
+            title: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).secondaryBackground,
               ),
-              bgColor: FlutterFlowTheme.of(context).secondaryColor,
-              fgColor: FlutterFlowTheme.of(context).primaryBackground,
-              textColor: FlutterFlowTheme.of(context).secondaryPrimary,
-              actionIcon: Icon(
-                Icons.settings_rounded,
-                color: FlutterFlowTheme.of(context).secondaryPrimary,
-                size: 20,
+              child: MAppbarWidget(
+                titleText: 'Menu',
+                icon: Icon(
+                  Icons.apps_rounded,
+                  color: Colors.white,
+                  size: 24,
+                ),
+                bgColor: FlutterFlowTheme.of(context).secondaryColor,
+                fgColor: FlutterFlowTheme.of(context).primaryBackground,
+                textColor: FlutterFlowTheme.of(context).secondaryPrimary,
+                actionIcon: Icon(
+                  Icons.settings_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryPrimary,
+                  size: 20,
+                ),
+                iconAction: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SettingsWidget(),
+                    ),
+                  );
+                },
               ),
-              iconAction: () async {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SettingsWidget(),
-                  ),
-                );
-              },
             ),
             centerTitle: true,
             expandedTitleScale: 1.0,
