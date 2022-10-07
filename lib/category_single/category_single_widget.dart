@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/circular_indicator_big_widget.dart';
 import '../components/empty_list_widget.dart';
@@ -38,9 +39,9 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
   Widget build(BuildContext context) {
     return StreamBuilder<List<TransactionsRecord>>(
       stream: queryTransactionsRecord(
-        queryBuilder: (transactionsRecord) => transactionsRecord.where(
-            'transactionCategory',
-            isEqualTo: widget.category!.reference),
+        queryBuilder: (transactionsRecord) => transactionsRecord
+            .where('transactionCategory', isEqualTo: widget.category!.reference)
+            .where('transactionOwner', isEqualTo: currentUserReference),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -60,6 +61,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
             snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
             iconTheme: IconThemeData(
@@ -95,7 +97,6 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
             centerTitle: true,
             elevation: 0,
           ),
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),

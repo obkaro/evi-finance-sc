@@ -11,15 +11,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CreateFirstBudgetQWidget extends StatefulWidget {
-  const CreateFirstBudgetQWidget({Key? key}) : super(key: key);
+class CreateFirstBudgetWidget extends StatefulWidget {
+  const CreateFirstBudgetWidget({Key? key}) : super(key: key);
 
   @override
-  _CreateFirstBudgetQWidgetState createState() =>
-      _CreateFirstBudgetQWidgetState();
+  _CreateFirstBudgetWidgetState createState() =>
+      _CreateFirstBudgetWidgetState();
 }
 
-class _CreateFirstBudgetQWidgetState extends State<CreateFirstBudgetQWidget> {
+class _CreateFirstBudgetWidgetState extends State<CreateFirstBudgetWidget> {
   BudgetsRecord? createdBudget;
 
   @override
@@ -171,6 +171,7 @@ class _CreateFirstBudgetQWidgetState extends State<CreateFirstBudgetQWidget> {
                               budgetDateCreated: getCurrentTimestamp,
                               status: 'no_parent',
                               budgetSpent: 0,
+                              budgetOwner: currentUserReference,
                             );
                             var budgetsRecordReference =
                                 BudgetsRecord.collection.doc();

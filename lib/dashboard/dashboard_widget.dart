@@ -836,7 +836,21 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                   ),
                                                                 ),
                                                                 Text(
-                                                                  '${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', containerBudgetsRecord.budgetEnd)}',
+                                                                  '${dateTimeFormat(
+                                                                    'MMMEd',
+                                                                    containerBudgetsRecord
+                                                                        .budgetStart,
+                                                                    locale: FFLocalizations.of(
+                                                                            context)
+                                                                        .languageCode,
+                                                                  )} - ${dateTimeFormat(
+                                                                    'MMMEd',
+                                                                    containerBudgetsRecord
+                                                                        .budgetEnd,
+                                                                    locale: FFLocalizations.of(
+                                                                            context)
+                                                                        .languageCode,
+                                                                  )}',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText1

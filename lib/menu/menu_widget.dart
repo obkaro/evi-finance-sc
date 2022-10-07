@@ -34,40 +34,51 @@ class _MenuWidgetState extends State<MenuWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(100),
         child: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
           automaticallyImplyLeading: false,
-          flexibleSpace: MAppbarWidget(
-            titleText: 'Menu',
-            icon: Icon(
-              Icons.apps_rounded,
-              color: Colors.white,
-              size: 24,
-            ),
-            bgColor: FlutterFlowTheme.of(context).secondaryColor,
-            fgColor: FlutterFlowTheme.of(context).primaryBackground,
-            textColor: FlutterFlowTheme.of(context).secondaryPrimary,
-            actionIcon: Icon(
-              Icons.settings_rounded,
-              color: FlutterFlowTheme.of(context).secondaryPrimary,
-              size: 20,
-            ),
-            iconAction: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SettingsWidget(),
-                ),
-              );
-            },
-          ),
           actions: [],
+          flexibleSpace: FlexibleSpaceBar(
+            title: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).secondaryBackground,
+              ),
+              child: MAppbarWidget(
+                titleText: 'Menu',
+                icon: Icon(
+                  Icons.apps_rounded,
+                  color: Colors.white,
+                  size: 32,
+                ),
+                bgColor: FlutterFlowTheme.of(context).secondaryColor,
+                fgColor: FlutterFlowTheme.of(context).primaryBackground,
+                textColor: FlutterFlowTheme.of(context).secondaryPrimary,
+                actionIcon: Icon(
+                  Icons.settings_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryPrimary,
+                  size: 20,
+                ),
+                iconAction: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SettingsWidget(),
+                    ),
+                  );
+                },
+              ),
+            ),
+            centerTitle: true,
+            expandedTitleScale: 1.0,
+          ),
           elevation: 0,
         ),
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),

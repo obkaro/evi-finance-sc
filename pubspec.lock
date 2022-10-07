@@ -419,6 +419,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_animate:
+    dependency: "direct main"
+    description:
+      name: flutter_animate
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -497,6 +504,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "10.1.0"
+  from_css_color:
+    dependency: "direct main"
+    description:
+      name: from_css_color
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   frontend_server_client:
     dependency: transitive
     description:

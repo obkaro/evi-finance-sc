@@ -90,6 +90,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
               snapshot.data!;
           return Scaffold(
             key: scaffoldKey,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             appBar: AppBar(
               backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
               iconTheme: IconThemeData(
@@ -103,7 +104,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
               centerTitle: true,
               elevation: 0,
             ),
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: SafeArea(
               child: GestureDetector(
                 onTap: () => FocusScope.of(context).unfocus(),
@@ -441,12 +441,15 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               TransactionsRecord>>(
                                                         stream:
                                                             queryTransactionsRecord(
-                                                          queryBuilder: (transactionsRecord) =>
-                                                              transactionsRecord.where(
-                                                                  'account',
+                                                          queryBuilder: (transactionsRecord) => transactionsRecord
+                                                              .where('account',
                                                                   isEqualTo: widget
                                                                       .account!
-                                                                      .reference),
+                                                                      .reference)
+                                                              .where(
+                                                                  'transactionOwner',
+                                                                  isEqualTo:
+                                                                      currentUserReference),
                                                         ),
                                                         builder: (context,
                                                             snapshot) {
@@ -583,12 +586,15 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               TransactionsRecord>>(
                                                         stream:
                                                             queryTransactionsRecord(
-                                                          queryBuilder: (transactionsRecord) =>
-                                                              transactionsRecord.where(
-                                                                  'account',
+                                                          queryBuilder: (transactionsRecord) => transactionsRecord
+                                                              .where('account',
                                                                   isEqualTo: widget
                                                                       .account!
-                                                                      .reference),
+                                                                      .reference)
+                                                              .where(
+                                                                  'transactionOwner',
+                                                                  isEqualTo:
+                                                                      currentUserReference),
                                                         ),
                                                         builder: (context,
                                                             snapshot) {
@@ -717,7 +723,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                     ),
                                                                     duration: Duration(
                                                                         milliseconds:
-                                                                            6000),
+                                                                            8000),
                                                                     backgroundColor:
                                                                         Colors
                                                                             .black,
@@ -780,7 +786,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                       ),
                                                                       duration: Duration(
                                                                           milliseconds:
-                                                                              6000),
+                                                                              8000),
                                                                       backgroundColor:
                                                                           Colors
                                                                               .black,
@@ -891,11 +897,16 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                       stream:
                                                           queryTransactionsRecord(
                                                         queryBuilder: (transactionsRecord) =>
-                                                            transactionsRecord.where(
-                                                                'account',
-                                                                isEqualTo: widget
-                                                                    .account!
-                                                                    .reference),
+                                                            transactionsRecord
+                                                                .where(
+                                                                    'account',
+                                                                    isEqualTo: widget
+                                                                        .account!
+                                                                        .reference)
+                                                                .where(
+                                                                    'transactionOwner',
+                                                                    isEqualTo:
+                                                                        currentUserReference),
                                                       ),
                                                       builder:
                                                           (context, snapshot) {
@@ -1191,7 +1202,21 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                                   ),
                                                                 ),
                                                               Text(
-                                                                '${dateTimeFormat('Hm', columnTransactionsRecord.trasactionDate)} | ${dateTimeFormat('MMMEd', columnTransactionsRecord.trasactionDate)}',
+                                                                '${dateTimeFormat(
+                                                                  'Hm',
+                                                                  columnTransactionsRecord
+                                                                      .trasactionDate,
+                                                                  locale: FFLocalizations.of(
+                                                                          context)
+                                                                      .languageCode,
+                                                                )} | ${dateTimeFormat(
+                                                                  'MMMEd',
+                                                                  columnTransactionsRecord
+                                                                      .trasactionDate,
+                                                                  locale: FFLocalizations.of(
+                                                                          context)
+                                                                      .languageCode,
+                                                                )}',
                                                                 textAlign:
                                                                     TextAlign
                                                                         .start,

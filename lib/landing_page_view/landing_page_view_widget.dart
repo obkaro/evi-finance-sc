@@ -6,11 +6,12 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
+import 'package:smooth_page_indicator/smooth_page_indicator.dart'
+    as smooth_page_indicator;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class LandingPageViewWidget extends StatefulWidget {
   const LandingPageViewWidget({Key? key}) : super(key: key);
@@ -182,7 +183,7 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                           child: Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                            child: SmoothPageIndicator(
+                            child: smooth_page_indicator.SmoothPageIndicator(
                               controller: pageViewController ??=
                                   PageController(initialPage: 0),
                               count: 3,
@@ -194,7 +195,7 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                   curve: Curves.ease,
                                 );
                               },
-                              effect: ExpandingDotsEffect(
+                              effect: smooth_page_indicator.ExpandingDotsEffect(
                                 expansionFactor: 2,
                                 spacing: 8,
                                 radius: 16,

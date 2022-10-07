@@ -68,6 +68,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
             snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
             iconTheme: IconThemeData(
@@ -86,7 +87,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
             centerTitle: true,
             elevation: 0,
           ),
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Column(
@@ -217,7 +217,15 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                         AlignmentDirectional(
                                                             0, 0),
                                                     child: Text(
-                                                      'From ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)}',
+                                                      'From ${dateTimeFormat(
+                                                        'MMMEd',
+                                                        columnBudgetsRecord
+                                                            .budgetStart,
+                                                        locale:
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .languageCode,
+                                                      )}',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -783,16 +791,21 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                         () {}));
                                                               },
                                                             ),
-                                                            StreamBuilder<
+                                                            FutureBuilder<
                                                                 List<
                                                                     TransactionsRecord>>(
-                                                              stream:
-                                                                  queryTransactionsRecord(
-                                                                queryBuilder: (transactionsRecord) => transactionsRecord.where(
-                                                                    'transactionCategory',
-                                                                    isEqualTo:
-                                                                        existingCategoriesItem
-                                                                            .reference),
+                                                              future:
+                                                                  queryTransactionsRecordOnce(
+                                                                queryBuilder: (transactionsRecord) => transactionsRecord
+                                                                    .where(
+                                                                        'transactionCategory',
+                                                                        isEqualTo:
+                                                                            existingCategoriesItem
+                                                                                .reference)
+                                                                    .where(
+                                                                        'transactionOwner',
+                                                                        isEqualTo:
+                                                                            currentUserReference),
                                                               ),
                                                               builder: (context,
                                                                   snapshot) {

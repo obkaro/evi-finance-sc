@@ -58,6 +58,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
             snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
             iconTheme: IconThemeData(
@@ -76,7 +77,6 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
             centerTitle: true,
             elevation: 0,
           ),
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
@@ -370,7 +370,11 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                               Clip.none,
                                                                           children: [
                                                                             Text(
-                                                                              dateTimeFormat('MMMMEEEEd', transactionFromPageItem.trasactionDate!),
+                                                                              dateTimeFormat(
+                                                                                'MMMMEEEEd',
+                                                                                transactionFromPageItem.trasactionDate!,
+                                                                                locale: FFLocalizations.of(context).languageCode,
+                                                                              ),
                                                                               style: FlutterFlowTheme.of(context).subtitle1.override(
                                                                                     fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                                                                                     color: FlutterFlowTheme.of(context).primaryText,
