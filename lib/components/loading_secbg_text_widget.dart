@@ -32,15 +32,12 @@ class _LoadingSecbgTextWidgetState extends State<LoadingSecbgTextWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.width?.toDouble(),
-      height: widget.height?.toDouble(),
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-      ),
+      height: 40,
+      decoration: BoxDecoration(),
       child: Container(
         width: widget.width?.toDouble(),
-        height: 10,
+        height: 6,
         decoration: BoxDecoration(
-          color: widget.color,
           borderRadius: BorderRadius.circular(32),
         ),
       ),

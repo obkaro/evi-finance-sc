@@ -171,10 +171,10 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                   child: InkWell(
                     onTap: () async {
-                      Navigator.pop(context);
-
                       final subscriptionsCreateData =
-                          createSubscriptionsRecordData();
+                          createSubscriptionsRecordData(
+                        owner: currentUserReference,
+                      );
                       var subscriptionsRecordReference =
                           SubscriptionsRecord.collection.doc();
                       await subscriptionsRecordReference
@@ -190,6 +190,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                           ),
                         ),
                       );
+                      Navigator.pop(context);
 
                       setState(() {});
                     },
