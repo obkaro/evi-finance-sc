@@ -1,5 +1,6 @@
 import '../account_single/account_single_widget.dart';
 import '../accounts/accounts_widget.dart';
+import '../assign_transactions/assign_transactions_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../budgets/budgets_widget.dart';
@@ -165,43 +166,54 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                     List<TransactionsRecord>
                                         badgeTransactionsRecordList =
                                         snapshot.data!;
-                                    return Badge(
-                                      badgeContent: Text(
-                                        badgeTransactionsRecordList.length
-                                            .toString(),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1Family,
-                                              color: Colors.white,
-                                              fontSize: 8,
-                                              useGoogleFonts:
-                                                  GoogleFonts.asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1Family),
-                                            ),
-                                      ),
-                                      showBadge:
-                                          badgeTransactionsRecordList.length >
-                                              0,
-                                      shape: BadgeShape.circle,
-                                      badgeColor: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      elevation: 4,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          6, 6, 6, 6),
-                                      position: BadgePosition.topEnd(),
-                                      animationType: BadgeAnimationType.scale,
-                                      toAnimate: true,
-                                      child: Icon(
-                                        Icons.notifications,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryPrimary,
-                                        size: 24,
+                                    return InkWell(
+                                      onTap: () async {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                AssignTransactionsWidget(),
+                                          ),
+                                        );
+                                      },
+                                      child: Badge(
+                                        badgeContent: Text(
+                                          badgeTransactionsRecordList.length
+                                              .toString(),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1Family,
+                                                color: Colors.white,
+                                                fontSize: 8,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1Family),
+                                              ),
+                                        ),
+                                        showBadge:
+                                            badgeTransactionsRecordList.length >
+                                                0,
+                                        shape: BadgeShape.circle,
+                                        badgeColor: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        elevation: 4,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            6, 6, 6, 6),
+                                        position: BadgePosition.topEnd(),
+                                        animationType: BadgeAnimationType.scale,
+                                        toAnimate: true,
+                                        child: Icon(
+                                          Icons.notifications,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryPrimary,
+                                          size: 24,
+                                        ),
                                       ),
                                     );
                                   },
