@@ -38,7 +38,7 @@ class _MenuWidgetState extends State<MenuWidget> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(100),
         child: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
           automaticallyImplyLeading: false,
           actions: [],
           flexibleSpace: FlexibleSpaceBar(
