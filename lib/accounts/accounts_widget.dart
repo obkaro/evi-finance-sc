@@ -51,22 +51,6 @@ class _AccountsWidgetState extends State<AccountsWidget> {
         List<AccountsRecord> accountsAccountsRecordList = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
-          appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
-            automaticallyImplyLeading: true,
-            title: Text(
-              'Accounts',
-              style: FlutterFlowTheme.of(context).title3.override(
-                    fontFamily: FlutterFlowTheme.of(context).title3Family,
-                    color: FlutterFlowTheme.of(context).secondaryPrimary,
-                    useGoogleFonts: GoogleFonts.asMap()
-                        .containsKey(FlutterFlowTheme.of(context).title3Family),
-                  ),
-            ),
-            actions: [],
-            centerTitle: true,
-            elevation: 0,
-          ),
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
@@ -88,7 +72,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                               FlutterFlowTheme.of(context).bodyText1Family),
                         ),
                   ),
-                  duration: Duration(milliseconds: 6000),
+                  duration: Duration(milliseconds: 8000),
                   backgroundColor: Colors.black,
                 ),
               );
@@ -100,6 +84,22 @@ class _AccountsWidgetState extends State<AccountsWidget> {
               color: Colors.white,
               size: 32,
             ),
+          ),
+          appBar: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
+            automaticallyImplyLeading: true,
+            title: Text(
+              'Accounts',
+              style: FlutterFlowTheme.of(context).title3.override(
+                    fontFamily: FlutterFlowTheme.of(context).title3Family,
+                    color: FlutterFlowTheme.of(context).secondaryPrimary,
+                    useGoogleFonts: GoogleFonts.asMap()
+                        .containsKey(FlutterFlowTheme.of(context).title3Family),
+                  ),
+            ),
+            actions: [],
+            centerTitle: true,
+            elevation: 0,
           ),
           body: SafeArea(
             child: GestureDetector(

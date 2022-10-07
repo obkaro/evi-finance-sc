@@ -34,24 +34,6 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
-        iconTheme:
-            IconThemeData(color: FlutterFlowTheme.of(context).secondaryPrimary),
-        automaticallyImplyLeading: true,
-        title: Text(
-          'Subscriptions',
-          style: FlutterFlowTheme.of(context).title3.override(
-                fontFamily: FlutterFlowTheme.of(context).title3Family,
-                color: FlutterFlowTheme.of(context).secondaryPrimary,
-                useGoogleFonts: GoogleFonts.asMap()
-                    .containsKey(FlutterFlowTheme.of(context).title3Family),
-              ),
-        ),
-        actions: [],
-        centerTitle: true,
-        elevation: 0,
-      ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -74,6 +56,24 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
           color: Colors.white,
           size: 32,
         ),
+      ),
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
+        iconTheme:
+            IconThemeData(color: FlutterFlowTheme.of(context).secondaryPrimary),
+        automaticallyImplyLeading: true,
+        title: Text(
+          'Subscriptions',
+          style: FlutterFlowTheme.of(context).title3.override(
+                fontFamily: FlutterFlowTheme.of(context).title3Family,
+                color: FlutterFlowTheme.of(context).secondaryPrimary,
+                useGoogleFonts: GoogleFonts.asMap()
+                    .containsKey(FlutterFlowTheme.of(context).title3Family),
+              ),
+        ),
+        actions: [],
+        centerTitle: true,
+        elevation: 0,
       ),
       body: SafeArea(
         child: GestureDetector(
@@ -268,9 +268,13 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                                                               ),
                                                               Text(
                                                                 dateTimeFormat(
-                                                                    'MMMEd',
-                                                                    subsItem
-                                                                        .expChargeDate!),
+                                                                  'MMMEd',
+                                                                  subsItem
+                                                                      .expChargeDate!,
+                                                                  locale: FFLocalizations.of(
+                                                                          context)
+                                                                      .languageCode,
+                                                                ),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText2

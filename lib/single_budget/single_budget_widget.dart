@@ -65,13 +65,22 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
         final singleBudgetBudgetsRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
             iconTheme: IconThemeData(
                 color: FlutterFlowTheme.of(context).secondaryPrimary),
             automaticallyImplyLeading: true,
             title: Text(
-              '${dateTimeFormat('d/M', singleBudgetBudgetsRecord.budgetStart)} - ${dateTimeFormat('d/M', singleBudgetBudgetsRecord.budgetEnd)}',
+              '${dateTimeFormat(
+                'd/M',
+                singleBudgetBudgetsRecord.budgetStart,
+                locale: FFLocalizations.of(context).languageCode,
+              )} - ${dateTimeFormat(
+                'd/M',
+                singleBudgetBudgetsRecord.budgetEnd,
+                locale: FFLocalizations.of(context).languageCode,
+              )}',
               style: FlutterFlowTheme.of(context).title3.override(
                     fontFamily: FlutterFlowTheme.of(context).title3Family,
                     color: FlutterFlowTheme.of(context).secondaryPrimary,
@@ -98,7 +107,6 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
             centerTitle: true,
             elevation: 0,
           ),
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
@@ -209,7 +217,21 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                                                       .center,
                                                               children: [
                                                                 Text(
-                                                                  '${dateTimeFormat('MMMEd', singleBudgetBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', singleBudgetBudgetsRecord.budgetEnd)}',
+                                                                  '${dateTimeFormat(
+                                                                    'MMMEd',
+                                                                    singleBudgetBudgetsRecord
+                                                                        .budgetStart,
+                                                                    locale: FFLocalizations.of(
+                                                                            context)
+                                                                        .languageCode,
+                                                                  )} - ${dateTimeFormat(
+                                                                    'MMMEd',
+                                                                    singleBudgetBudgetsRecord
+                                                                        .budgetEnd,
+                                                                    locale: FFLocalizations.of(
+                                                                            context)
+                                                                        .languageCode,
+                                                                  )}',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText1

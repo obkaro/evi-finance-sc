@@ -8,6 +8,8 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,85 +26,10 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
   TextEditingController? textController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final animationsMap = {
-    'rowOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 800,
-      hideBeforeAnimating: true,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
-    ),
-    'columnOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 1000,
-      hideBeforeAnimating: true,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
-    ),
-    'columnOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 400,
-      delay: 2000,
-      hideBeforeAnimating: true,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
-    ),
-    'columnOnPageLoadAnimation3': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 100,
-      delay: 2200,
-      hideBeforeAnimating: true,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
-    ),
-  };
 
   @override
   void initState() {
     super.initState();
-    startPageLoadAnimations(
-      animationsMap.values
-          .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
-      this,
-    );
-
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'WelcomeToEvi'});
     textController = TextEditingController();
@@ -150,7 +77,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                 ),
                           ),
                         ],
-                      ).animated([animationsMap['rowOnPageLoadAnimation']!]),
+                      ),
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -176,8 +103,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                       ),
                                 ),
                               ],
-                            ).animated(
-                                [animationsMap['columnOnPageLoadAnimation1']!]),
+                            ),
                           ),
                         ],
                       ),
@@ -373,8 +299,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                 ],
                               ),
                             ],
-                          ).animated(
-                              [animationsMap['columnOnPageLoadAnimation2']!]),
+                          ),
                         ),
                       ),
                     ],
@@ -440,7 +365,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                     ),
                   ),
                 ],
-              ).animated([animationsMap['columnOnPageLoadAnimation3']!]),
+              ),
             ],
           ),
         ),

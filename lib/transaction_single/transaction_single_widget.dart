@@ -45,6 +45,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
         iconTheme:
@@ -63,7 +64,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
         centerTitle: true,
         elevation: 0,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -319,8 +319,13 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                     children: [
                                                                       Text(
                                                                         dateTimeFormat(
-                                                                            'MMMMEEEEd',
-                                                                            widget.transaction!.trasactionDate!),
+                                                                          'MMMMEEEEd',
+                                                                          widget
+                                                                              .transaction!
+                                                                              .trasactionDate!,
+                                                                          locale:
+                                                                              FFLocalizations.of(context).languageCode,
+                                                                        ),
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .subtitle1
                                                                             .override(
@@ -496,8 +501,13 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                                     children: [
                                                                       Text(
                                                                         dateTimeFormat(
-                                                                            'jm',
-                                                                            widget.transaction!.trasactionDate!),
+                                                                          'jm',
+                                                                          widget
+                                                                              .transaction!
+                                                                              .trasactionDate!,
+                                                                          locale:
+                                                                              FFLocalizations.of(context).languageCode,
+                                                                        ),
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .subtitle1,
                                                                       ),

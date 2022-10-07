@@ -37,24 +37,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
-        iconTheme:
-            IconThemeData(color: FlutterFlowTheme.of(context).secondaryPrimary),
-        automaticallyImplyLeading: true,
-        title: Text(
-          'Budget Archives',
-          style: FlutterFlowTheme.of(context).title3.override(
-                fontFamily: FlutterFlowTheme.of(context).title3Family,
-                color: FlutterFlowTheme.of(context).secondaryPrimary,
-                useGoogleFonts: GoogleFonts.asMap()
-                    .containsKey(FlutterFlowTheme.of(context).title3Family),
-              ),
-        ),
-        actions: [],
-        centerTitle: true,
-        elevation: 0,
-      ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -100,6 +82,24 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
             setState(() {});
           },
         ),
+      ),
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
+        iconTheme:
+            IconThemeData(color: FlutterFlowTheme.of(context).secondaryPrimary),
+        automaticallyImplyLeading: true,
+        title: Text(
+          'Budget Archives',
+          style: FlutterFlowTheme.of(context).title3.override(
+                fontFamily: FlutterFlowTheme.of(context).title3Family,
+                color: FlutterFlowTheme.of(context).secondaryPrimary,
+                useGoogleFonts: GoogleFonts.asMap()
+                    .containsKey(FlutterFlowTheme.of(context).title3Family),
+              ),
+        ),
+        actions: [],
+        centerTitle: true,
+        elevation: 0,
       ),
       body: SafeArea(
         child: GestureDetector(
@@ -362,7 +362,23 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                         ),
                                                   ),
                                                   subtitle: Text(
-                                                    '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
+                                                    '${dateTimeFormat(
+                                                      'MMMEd',
+                                                      columnBudgetsRecord
+                                                          .budgetStart,
+                                                      locale:
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .languageCode,
+                                                    )} - ${dateTimeFormat(
+                                                      'MMMEd',
+                                                      columnBudgetsRecord
+                                                          .budgetEnd,
+                                                      locale:
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .languageCode,
+                                                    )}',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText2
