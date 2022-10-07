@@ -11,14 +11,12 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../main.dart';
 import '../transactions/transactions_widget.dart';
-import '../welcome_to_evi/welcome_to_evi_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -35,21 +33,6 @@ class _DashboardWidgetState extends State<DashboardWidget> {
   @override
   void initState() {
     super.initState();
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (valueOrDefault(currentUserDocument?.username, '') == null ||
-          valueOrDefault(currentUserDocument?.username, '') == '') {
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => WelcomeToEviWidget(),
-          ),
-        );
-      } else {
-        return;
-      }
-    });
-
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
