@@ -5,8 +5,10 @@ import '../backend/backend.dart';
 import '../budgets/budgets_widget.dart';
 import '../components/circular_indicator_small_widget.dart';
 import '../components/empty_list_widget.dart';
+import '../components/loading_budget_summary_widget.dart';
 import '../components/loading_dash_accounts_widget.dart';
 import '../components/loading_empty_widget.dart';
+import '../components/loading_nothingtext_title1_widget.dart';
 import '../components/loading_test_widget.dart';
 import '../components/loading_transaction_widget.dart';
 import '../components/transaction_list_item_widget.dart';
@@ -256,7 +258,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                               child: Container(
                                                 width: 0,
                                                 height: 29,
-                                                child: LoadingEmptyWidget(),
+                                                child:
+                                                    LoadingNothingtextTitle1Widget(),
                                               ),
                                             ),
                                           );
@@ -646,15 +649,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                 // Customize what your widget looks like when it's loading.
                                 if (!snapshot.hasData) {
                                   return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitRing(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 50,
-                                      ),
-                                    ),
+                                    child: LoadingBudgetSummaryWidget(),
                                   );
                                 }
                                 final containerBudgetsRecord = snapshot.data!;
