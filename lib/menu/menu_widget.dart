@@ -38,7 +38,7 @@ class _MenuWidgetState extends State<MenuWidget> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(100),
         child: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           actions: [],
           flexibleSpace: FlexibleSpaceBar(
@@ -66,7 +66,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                 );
               },
             ),
-            centerTitle: false,
+            centerTitle: true,
             expandedTitleScale: 1.0,
           ),
           elevation: 0,
