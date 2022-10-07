@@ -138,7 +138,9 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
       ),
   'EditIncomeSources': (data) async => EditIncomeSourcesWidget(),
   'Menu': (data) async => NavBarPage(initialPage: 'Menu'),
-  'assignTransactions': (data) async => AssignTransactionsWidget(),
+  'assignTransactions': (data) async => AssignTransactionsWidget(
+        transactions: [],
+      ),
   'EmailAuth': (data) async => EmailAuthWidget(),
 };
 
