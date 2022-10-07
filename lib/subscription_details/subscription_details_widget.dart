@@ -42,6 +42,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
         iconTheme:
@@ -60,7 +61,6 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
         centerTitle: true,
         elevation: 0,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -176,9 +176,13 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                           ),
                                           Text(
                                             dateTimeFormat(
-                                                'MMMEd',
-                                                widget.subscription!
-                                                    .expChargeDate!),
+                                              'MMMEd',
+                                              widget
+                                                  .subscription!.expChargeDate!,
+                                              locale:
+                                                  FFLocalizations.of(context)
+                                                      .languageCode,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText2
                                                 .override(
@@ -483,9 +487,14 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                                     children: [
                                                       Text(
                                                         dateTimeFormat(
-                                                            'MMMMEEEEd',
-                                                            listViewTransactionsRecord
-                                                                .trasactionDate!),
+                                                          'MMMMEEEEd',
+                                                          listViewTransactionsRecord
+                                                              .trasactionDate!,
+                                                          locale:
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .languageCode,
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)

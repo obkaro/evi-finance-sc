@@ -48,6 +48,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
         automaticallyImplyLeading: false,
@@ -64,7 +65,6 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
         centerTitle: true,
         elevation: 0,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -121,8 +121,53 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                               child: FlutterFlowDropDown(
                                 options: ['Weekly', 'Monthly'],
-                                onChanged: (val) =>
-                                    setState(() => dropDownValue = val),
+                                onChanged: (val) async {
+                                  setState(() => dropDownValue = val);
+                                  if (dropDownValue == 'Monthly') {
+                                    final budgetsUpdateData =
+                                        createBudgetsRecordData(
+                                      budgetStart: calendarSelectedDay?.start,
+                                      isRecurring: true,
+                                      budgetDuration: dropDownValue,
+                                      duration: 30,
+                                      budgetEnd: functions.addDaysToDate(
+                                          calendarSelectedDay?.start, 30),
+                                    );
+                                    await widget.budget!.reference
+                                        .update(budgetsUpdateData);
+                                  } else {
+                                    if (dropDownValue == 'Weekly') {
+                                      final budgetsUpdateData =
+                                          createBudgetsRecordData(
+                                        budgetStart: calendarSelectedDay?.start,
+                                        isRecurring: true,
+                                        budgetDuration: dropDownValue,
+                                        duration: 7,
+                                        budgetEnd: functions.addDaysToDate(
+                                            calendarSelectedDay?.start, 7),
+                                      );
+                                      await widget.budget!.reference
+                                          .update(budgetsUpdateData);
+                                    } else {
+                                      if (dropDownValue == 'Daily') {
+                                        final budgetsUpdateData =
+                                            createBudgetsRecordData(
+                                          budgetStart:
+                                              calendarSelectedDay?.start,
+                                          isRecurring: true,
+                                          budgetDuration: dropDownValue,
+                                          duration: 30,
+                                          budgetEnd: functions.addDaysToDate(
+                                              calendarSelectedDay?.start, 1),
+                                        );
+                                        await widget.budget!.reference
+                                            .update(budgetsUpdateData);
+                                      } else {
+                                        return;
+                                      }
+                                    }
+                                  }
+                                },
                                 width: double.infinity,
                                 height: 55,
                                 textStyle: FlutterFlowTheme.of(context)
@@ -418,7 +463,17 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  '${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', columnBudgetsRecord.budgetEnd)}',
+                                  '${dateTimeFormat(
+                                    'MMMEd',
+                                    columnBudgetsRecord.budgetStart,
+                                    locale: FFLocalizations.of(context)
+                                        .languageCode,
+                                  )} - ${dateTimeFormat(
+                                    'MMMEd',
+                                    columnBudgetsRecord.budgetEnd,
+                                    locale: FFLocalizations.of(context)
+                                        .languageCode,
+                                  )}',
                                   style: FlutterFlowTheme.of(context).subtitle2,
                                 ),
                               ],

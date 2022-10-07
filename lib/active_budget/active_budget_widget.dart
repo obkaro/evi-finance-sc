@@ -100,43 +100,47 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
           final activeBudgetBudgetsRecord = snapshot.data!;
           return Scaffold(
             key: scaffoldKey,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(100),
               child: AppBar(
                 backgroundColor:
                     FlutterFlowTheme.of(context).secondaryBackground,
                 automaticallyImplyLeading: false,
-                flexibleSpace: MAppbarWidget(
-                  titleText: 'Active Budget',
-                  icon: Icon(
-                    Icons.pie_chart_rounded,
-                    color: FlutterFlowTheme.of(context).secondaryPrimary,
-                    size: 32,
-                  ),
-                  bgColor: FlutterFlowTheme.of(context).secondaryColor,
-                  fgColor: FlutterFlowTheme.of(context).primaryBackground,
-                  textColor: FlutterFlowTheme.of(context).secondaryPrimary,
-                  actionIcon: Icon(
-                    Icons.edit_rounded,
-                    color: FlutterFlowTheme.of(context).secondaryPrimary,
-                    size: 20,
-                  ),
-                  iconAction: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditBudgetWidget(
-                          budget: activeBudgetBudgetsRecord,
-                        ),
-                      ),
-                    );
-                  },
-                ),
                 actions: [],
+                flexibleSpace: FlexibleSpaceBar(
+                  title: MAppbarWidget(
+                    titleText: 'Active Budget',
+                    icon: Icon(
+                      Icons.pie_chart_rounded,
+                      color: FlutterFlowTheme.of(context).secondaryPrimary,
+                      size: 32,
+                    ),
+                    bgColor: FlutterFlowTheme.of(context).secondaryColor,
+                    fgColor: FlutterFlowTheme.of(context).primaryBackground,
+                    textColor: FlutterFlowTheme.of(context).secondaryPrimary,
+                    actionIcon: Icon(
+                      Icons.edit_rounded,
+                      color: FlutterFlowTheme.of(context).secondaryPrimary,
+                      size: 20,
+                    ),
+                    iconAction: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditBudgetWidget(
+                            budget: activeBudgetBudgetsRecord,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  centerTitle: true,
+                  expandedTitleScale: 1.0,
+                ),
                 elevation: 0,
               ),
             ),
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: SafeArea(
               child: GestureDetector(
                 onTap: () => FocusScope.of(context).unfocus(),
@@ -254,7 +258,21 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                                                                       .center,
                                                               children: [
                                                                 Text(
-                                                                  '${dateTimeFormat('MMMEd', activeBudgetBudgetsRecord.budgetStart)} - ${dateTimeFormat('MMMEd', activeBudgetBudgetsRecord.budgetEnd)}',
+                                                                  '${dateTimeFormat(
+                                                                    'MMMEd',
+                                                                    activeBudgetBudgetsRecord
+                                                                        .budgetStart,
+                                                                    locale: FFLocalizations.of(
+                                                                            context)
+                                                                        .languageCode,
+                                                                  )} - ${dateTimeFormat(
+                                                                    'MMMEd',
+                                                                    activeBudgetBudgetsRecord
+                                                                        .budgetEnd,
+                                                                    locale: FFLocalizations.of(
+                                                                            context)
+                                                                        .languageCode,
+                                                                  )}',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText1

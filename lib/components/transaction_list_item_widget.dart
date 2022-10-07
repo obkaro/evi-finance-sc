@@ -198,7 +198,17 @@ class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
                                     ),
                                   ),
                                   Text(
-                                    '${dateTimeFormat('jm', widget.transactionDoc!.trasactionDate)} | ${dateTimeFormat('MMMEd', widget.transactionDoc!.trasactionDate)}',
+                                    '${dateTimeFormat(
+                                      'jm',
+                                      widget.transactionDoc!.trasactionDate,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    )} | ${dateTimeFormat(
+                                      'MMMEd',
+                                      widget.transactionDoc!.trasactionDate,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    )}',
                                     textAlign: TextAlign.start,
                                     style:
                                         FlutterFlowTheme.of(context).bodyText2,

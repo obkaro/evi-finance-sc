@@ -56,6 +56,7 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
             editIncomeSourcesIncomeCategoriesRecordList = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
             iconTheme: IconThemeData(
@@ -74,7 +75,6 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget> {
             centerTitle: true,
             elevation: 0,
           ),
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Column(

@@ -218,7 +218,7 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                                                               .bodyText1Family),
                                             ),
                                       ),
-                                      duration: Duration(milliseconds: 4000),
+                                      duration: Duration(milliseconds: 8000),
                                       backgroundColor: Colors.black,
                                     ),
                                   );
@@ -246,7 +246,7 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                                                             .bodyText1Family),
                                               ),
                                         ),
-                                        duration: Duration(milliseconds: 4000),
+                                        duration: Duration(milliseconds: 8000),
                                         backgroundColor: Colors.black,
                                       ),
                                     );

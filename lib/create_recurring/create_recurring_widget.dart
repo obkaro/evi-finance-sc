@@ -32,10 +32,12 @@ class CreateRecurringWidget extends StatefulWidget {
 }
 
 class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
-  DateTimeRange? calendarSelectedDay;
+  bool isMediaUploading = false;
   String uploadedFileUrl = '';
+
   TextEditingController? nameController;
   String? categoryValue;
+  DateTimeRange? calendarSelectedDay;
   String? durationValue;
   bool? switchListTileValue;
   final formKey = GlobalKey<FormState>();
@@ -80,6 +82,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
         final createRecurringSubscriptionsRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).secondaryColor,
             iconTheme: IconThemeData(
@@ -98,7 +101,6 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
             centerTitle: true,
             elevation: 0,
           ),
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
@@ -212,36 +214,44 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                       validateFileFormat(
                                                           m.storagePath,
                                                           context))) {
-                                                showUploadMessage(
-                                                  context,
-                                                  'Uploading file...',
-                                                  showLoading: true,
-                                                );
-                                                final downloadUrls = (await Future
-                                                        .wait(selectedMedia.map(
-                                                            (m) async =>
-                                                                await uploadData(
-                                                                    m.storagePath,
-                                                                    m.bytes))))
-                                                    .where((u) => u != null)
-                                                    .map((u) => u!)
-                                                    .toList();
-                                                ScaffoldMessenger.of(context)
-                                                    .hideCurrentSnackBar();
+                                                setState(() =>
+                                                    isMediaUploading = true);
+                                                var downloadUrls = <String>[];
+                                                try {
+                                                  showUploadMessage(
+                                                    context,
+                                                    'Uploading file...',
+                                                    showLoading: true,
+                                                  );
+                                                  downloadUrls =
+                                                      (await Future.wait(
+                                                    selectedMedia.map(
+                                                      (m) async =>
+                                                          await uploadData(
+                                                              m.storagePath,
+                                                              m.bytes),
+                                                    ),
+                                                  ))
+                                                          .where(
+                                                              (u) => u != null)
+                                                          .map((u) => u!)
+                                                          .toList();
+                                                } finally {
+                                                  ScaffoldMessenger.of(context)
+                                                      .hideCurrentSnackBar();
+                                                  isMediaUploading = false;
+                                                }
                                                 if (downloadUrls.length ==
                                                     selectedMedia.length) {
                                                   setState(() =>
                                                       uploadedFileUrl =
                                                           downloadUrls.first);
                                                   showUploadMessage(
-                                                    context,
-                                                    'Success!',
-                                                  );
+                                                      context, 'Success!');
                                                 } else {
-                                                  showUploadMessage(
-                                                    context,
-                                                    'Failed to upload media',
-                                                  );
+                                                  setState(() {});
+                                                  showUploadMessage(context,
+                                                      'Failed to upload media');
                                                   return;
                                                 }
                                               }
@@ -622,9 +632,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                   children: [
                                     Expanded(
                                       child: FlutterFlowChoiceChips(
-                                        initiallySelected: durationValue != null
-                                            ? [durationValue!]
-                                            : ['Monthly'],
+                                        initiallySelected: ['Monthly'],
                                         options: FFAppState()
                                             .durations
                                             .map((e) => getJsonField(
