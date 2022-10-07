@@ -441,12 +441,15 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               TransactionsRecord>>(
                                                         stream:
                                                             queryTransactionsRecord(
-                                                          queryBuilder: (transactionsRecord) =>
-                                                              transactionsRecord.where(
-                                                                  'account',
+                                                          queryBuilder: (transactionsRecord) => transactionsRecord
+                                                              .where('account',
                                                                   isEqualTo: widget
                                                                       .account!
-                                                                      .reference),
+                                                                      .reference)
+                                                              .where(
+                                                                  'transactionOwner',
+                                                                  isEqualTo:
+                                                                      currentUserReference),
                                                         ),
                                                         builder: (context,
                                                             snapshot) {
@@ -583,12 +586,15 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                               TransactionsRecord>>(
                                                         stream:
                                                             queryTransactionsRecord(
-                                                          queryBuilder: (transactionsRecord) =>
-                                                              transactionsRecord.where(
-                                                                  'account',
+                                                          queryBuilder: (transactionsRecord) => transactionsRecord
+                                                              .where('account',
                                                                   isEqualTo: widget
                                                                       .account!
-                                                                      .reference),
+                                                                      .reference)
+                                                              .where(
+                                                                  'transactionOwner',
+                                                                  isEqualTo:
+                                                                      currentUserReference),
                                                         ),
                                                         builder: (context,
                                                             snapshot) {
@@ -891,11 +897,16 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                       stream:
                                                           queryTransactionsRecord(
                                                         queryBuilder: (transactionsRecord) =>
-                                                            transactionsRecord.where(
-                                                                'account',
-                                                                isEqualTo: widget
-                                                                    .account!
-                                                                    .reference),
+                                                            transactionsRecord
+                                                                .where(
+                                                                    'account',
+                                                                    isEqualTo: widget
+                                                                        .account!
+                                                                        .reference)
+                                                                .where(
+                                                                    'transactionOwner',
+                                                                    isEqualTo:
+                                                                        currentUserReference),
                                                       ),
                                                       builder:
                                                           (context, snapshot) {

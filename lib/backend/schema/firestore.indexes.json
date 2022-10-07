@@ -101,6 +101,10 @@
           "order": "ASCENDING"
         },
         {
+          "fieldPath": "transactionOwner",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "trasactionDate",
           "order": "DESCENDING"
         }
