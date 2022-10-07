@@ -12,7 +12,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:swipeable_card_stack/swipeable_card_stack.dart';
 
 class AssignTransactionsWidget extends StatefulWidget {
-  const AssignTransactionsWidget({Key? key}) : super(key: key);
+  const AssignTransactionsWidget({
+    Key? key,
+    this.transactions,
+  }) : super(key: key);
+
+  final List<TransactionsRecord>? transactions;
 
   @override
   _AssignTransactionsWidgetState createState() =>
@@ -127,26 +132,31 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                 assignTransactionsTransactionsRecordList
                                     .toList();
                             return FlutterFlowSwipeableStack(
-                              topCardHeightFraction: 0.85,
+                              topCardHeightFraction: 0.8,
                               middleCardHeightFraction: 0.68,
                               botttomCardHeightFraction: 0.75,
                               topCardWidthFraction: 0.9,
                               middleCardWidthFraction: 0.85,
                               botttomCardWidthFraction: 0.8,
-                              onSwipeFn: (index) async {
+                              onSwipeFn: (index) {},
+                              onLeftSwipe: (index) async {
+                                swipeableStackController.triggerSwipeLeft();
+                              },
+                              onRightSwipe: (index) async {
+                                swipeableStackController.triggerSwipeRight();
+                              },
+                              onUpSwipe: (index) async {
                                 swipeableStackController.triggerSwipeUp();
                               },
-                              onLeftSwipe: (index) {},
-                              onRightSwipe: (index) {},
-                              onUpSwipe: (index) {},
-                              onDownSwipe: (index) {},
+                              onDownSwipe: (index) async {
+                                swipeableStackController.triggerSwipeDown();
+                              },
                               itemBuilder: (context, transactionFromPageIndex) {
                                 final transactionFromPageItem =
                                     transactionFromPage[
                                         transactionFromPageIndex];
                                 return Container(
                                   width: double.infinity,
-                                  height: double.infinity,
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
@@ -156,7 +166,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         20, 20, 20, 20),
                                     child: Column(
-                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -489,25 +499,10 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                               },
                               itemCount: transactionFromPage.length,
                               controller: swipeableStackController,
-                              enableSwipeUp: false,
-                              enableSwipeDown: false,
+                              enableSwipeUp: true,
+                              enableSwipeDown: true,
                             );
                           },
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
-                      child: Container(
-                        width: double.infinity,
-                        height: 300,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(32),
                         ),
                       ),
                     ),

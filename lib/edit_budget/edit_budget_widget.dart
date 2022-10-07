@@ -17,10 +17,10 @@ import 'package:google_fonts/google_fonts.dart';
 class EditBudgetWidget extends StatefulWidget {
   const EditBudgetWidget({
     Key? key,
-    this.budget,
+    this.budgetRef,
   }) : super(key: key);
 
-  final BudgetsRecord? budget;
+  final DocumentReference? budgetRef;
 
   @override
   _EditBudgetWidgetState createState() => _EditBudgetWidgetState();
@@ -69,7 +69,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: StreamBuilder<BudgetsRecord>(
-            stream: BudgetsRecord.getDocument(widget.budget!.reference),
+            stream: BudgetsRecord.getDocument(widget.budgetRef!),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
               if (!snapshot.hasData) {
@@ -132,7 +132,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                           custom_widgets.CurrencyTextField(
                                             width: double.infinity,
                                             height: 55,
-                                            amount: widget.budget!.budgetAmount,
+                                            amount: columnBudgetsRecord
+                                                .budgetAmount,
                                             labelText: 'Amount',
                                             hintText: 'Enter amount',
                                             bgcolor:
@@ -197,7 +198,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                           30),
                                                   budgetSpent: 0,
                                                 );
-                                                await widget.budget!.reference
+                                                await columnBudgetsRecord
+                                                    .reference
                                                     .update(budgetsUpdateData);
                                               } else {
                                                 if (dropDownValue == 'Weekly') {
@@ -216,7 +218,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                             7),
                                                     budgetSpent: 0,
                                                   );
-                                                  await widget.budget!.reference
+                                                  await columnBudgetsRecord
+                                                      .reference
                                                       .update(
                                                           budgetsUpdateData);
                                                 } else {
@@ -237,28 +240,12 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                               1),
                                                       budgetSpent: 0,
                                                     );
-                                                    await widget
-                                                        .budget!.reference
+                                                    await columnBudgetsRecord
+                                                        .reference
                                                         .update(
                                                             budgetsUpdateData);
                                                   } else {
-                                                    final budgetsUpdateData =
-                                                        createBudgetsRecordData(
-                                                      budgetStart:
-                                                          calendarSelectedDay
-                                                              ?.start,
-                                                      isRecurring: true,
-                                                      budgetDuration: 'Weekly',
-                                                      duration: 7,
-                                                      budgetEnd:
-                                                          calendarSelectedDay
-                                                              ?.start,
-                                                      budgetSpent: 0,
-                                                    );
-                                                    await widget
-                                                        .budget!.reference
-                                                        .update(
-                                                            budgetsUpdateData);
+                                                    return;
                                                   }
                                                 }
                                               }
@@ -322,8 +309,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                       .primaryText,
                                               weekFormat: false,
                                               weekStartsMonday: false,
-                                              initialDate:
-                                                  widget.budget!.budgetStart,
+                                              initialDate: columnBudgetsRecord
+                                                  .budgetStart,
                                               rowHeight: 48,
                                               onChange: (DateTimeRange?
                                                   newSelectedDate) async {
@@ -346,7 +333,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                                 ?.start,
                                                             30),
                                                   );
-                                                  await widget.budget!.reference
+                                                  await columnBudgetsRecord
+                                                      .reference
                                                       .update(
                                                           budgetsUpdateData);
                                                 } else {
@@ -367,8 +355,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                                   ?.start,
                                                               7),
                                                     );
-                                                    await widget
-                                                        .budget!.reference
+                                                    await columnBudgetsRecord
+                                                        .reference
                                                         .update(
                                                             budgetsUpdateData);
                                                   } else {
@@ -389,8 +377,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                                     ?.start,
                                                                 1),
                                                       );
-                                                      await widget
-                                                          .budget!.reference
+                                                      await columnBudgetsRecord
+                                                          .reference
                                                           .update(
                                                               budgetsUpdateData);
                                                     } else {
@@ -624,7 +612,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                       budgetEnd: functions.addDaysToDate(
                                           calendarSelectedDay?.start, 30),
                                     );
-                                    await widget.budget!.reference
+                                    await columnBudgetsRecord.reference
                                         .update(budgetsUpdateData);
                                   } else {
                                     if (dropDownValue == 'Weekly') {
@@ -645,7 +633,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                         budgetEnd: functions.addDaysToDate(
                                             calendarSelectedDay?.start, 7),
                                       );
-                                      await widget.budget!.reference
+                                      await columnBudgetsRecord.reference
                                           .update(budgetsUpdateData);
                                     } else {
                                       if (dropDownValue == 'Daily') {
@@ -667,7 +655,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                           budgetEnd: functions.addDaysToDate(
                                               calendarSelectedDay?.start, 1),
                                         );
-                                        await widget.budget!.reference
+                                        await columnBudgetsRecord.reference
                                             .update(budgetsUpdateData);
                                       } else {
                                         return;
