@@ -110,7 +110,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget> {
                 flexibleSpace: FlexibleSpaceBar(
                   title: Container(
                     width: double.infinity,
-                    height: 100,
+                    height: double.infinity,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
