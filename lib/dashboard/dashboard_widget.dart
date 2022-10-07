@@ -5,7 +5,12 @@ import '../backend/backend.dart';
 import '../budgets/budgets_widget.dart';
 import '../components/circular_indicator_small_widget.dart';
 import '../components/empty_list_widget.dart';
+import '../components/loading_dash_accounts_widget.dart';
+import '../components/loading_secbg_text_widget.dart';
+import '../components/loading_test_widget.dart';
+import '../components/loading_transaction_widget.dart';
 import '../components/transaction_list_item_widget.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -17,6 +22,8 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,7 +34,8 @@ class DashboardWidget extends StatefulWidget {
   _DashboardWidgetState createState() => _DashboardWidgetState();
 }
 
-class _DashboardWidgetState extends State<DashboardWidget> {
+class _DashboardWidgetState extends State<DashboardWidget>
+    with TickerProviderStateMixin {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -179,16 +187,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                         // Customize what your widget looks like when it's loading.
                                         if (!snapshot.hasData) {
                                           return Center(
-                                            child: SizedBox(
-                                              width: 50,
-                                              height: 50,
-                                              child: SpinKitRing(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                size: 50,
-                                              ),
-                                            ),
+                                            child: LoadingTestWidget(),
                                           );
                                         }
                                         List<TransactionsRecord>
@@ -291,15 +290,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             // Customize what your widget looks like when it's loading.
                                             if (!snapshot.hasData) {
                                               return Center(
-                                                child: SizedBox(
-                                                  width: 50,
-                                                  height: 50,
-                                                  child: SpinKitRing(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                    size: 50,
-                                                  ),
+                                                child: LoadingSecbgTextWidget(
+                                                  height: 29,
+                                                  width: 128,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
                                                 ),
                                               );
                                             }
@@ -413,16 +409,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                         // Customize what your widget looks like when it's loading.
                                         if (!snapshot.hasData) {
                                           return Center(
-                                            child: SizedBox(
-                                              width: 50,
-                                              height: 50,
-                                              child: SpinKitRing(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                size: 50,
-                                              ),
-                                            ),
+                                            child: LoadingDashAccountsWidget(),
                                           );
                                         }
                                         List<AccountsRecord>
@@ -939,15 +926,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                   // Customize what your widget looks like when it's loading.
                                   if (!snapshot.hasData) {
                                     return Center(
-                                      child: SizedBox(
-                                        width: 50,
-                                        height: 50,
-                                        child: SpinKitRing(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                          size: 50,
-                                        ),
-                                      ),
+                                      child: LoadingTransactionWidget(),
                                     );
                                   }
                                   List<TransactionsRecord>

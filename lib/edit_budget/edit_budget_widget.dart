@@ -18,9 +18,11 @@ class EditBudgetWidget extends StatefulWidget {
   const EditBudgetWidget({
     Key? key,
     this.budget,
+    this.budgetRef,
   }) : super(key: key);
 
   final BudgetsRecord? budget;
+  final DocumentReference? budgetRef;
 
   @override
   _EditBudgetWidgetState createState() => _EditBudgetWidgetState();
@@ -69,7 +71,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: StreamBuilder<BudgetsRecord>(
-            stream: BudgetsRecord.getDocument(widget.budget!.reference),
+            stream: BudgetsRecord.getDocument(widget.budgetRef!),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
               if (!snapshot.hasData) {
