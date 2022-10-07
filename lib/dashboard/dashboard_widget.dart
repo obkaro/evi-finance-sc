@@ -255,12 +255,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                         if (!snapshot.hasData) {
                                           return Center(
                                             child: Center(
-                                              child: Container(
-                                                width: 0,
-                                                height: 29,
-                                                child:
-                                                    LoadingNothingtextTitle1Widget(),
-                                              ),
+                                              child:
+                                                  LoadingNothingtextTitle1Widget(),
                                             ),
                                           );
                                         }
