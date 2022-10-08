@@ -30,7 +30,7 @@ class _OverlayAlertWidgetState extends State<OverlayAlertWidget> {
           child: Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Color(0xF2FFFFFF),
+              color: FlutterFlowTheme.of(context).secondaryBackground,
               borderRadius: BorderRadius.circular(32),
             ),
             child: Visibility(
@@ -51,7 +51,7 @@ class _OverlayAlertWidgetState extends State<OverlayAlertWidget> {
                     ),
                     Text(
                       'Transaction Assigned',
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).subtitle1,
                     ),
                   ],
                 ),
