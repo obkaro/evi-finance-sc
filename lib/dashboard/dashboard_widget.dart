@@ -69,10 +69,10 @@ class _DashboardWidgetState extends State<DashboardWidget>
     'containerOnPageLoadAnimation2': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
-        VisibilityEffect(duration: 100.ms),
+        VisibilityEffect(duration: 1.ms),
         FadeEffect(
           curve: Curves.easeInOut,
-          delay: 100.ms,
+          delay: 0.ms,
           duration: 600.ms,
           begin: 0,
           end: 1,
