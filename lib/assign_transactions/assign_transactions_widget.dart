@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/empty_list_widget.dart';
 import '../components/loading_empty_widget.dart';
 import '../components/overlay_alert_widget.dart';
 import '../components/text_transaction_type_widget.dart';
@@ -128,51 +129,55 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 16, 0, 0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              'You have ',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1,
-                                            ),
-                                            Text(
-                                              containerTransactionsRecordList
-                                                  .length
-                                                  .toString(),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1Family,
-                                                        color:
-                                                            Color(0xFFFF0000),
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1Family),
-                                                      ),
-                                            ),
-                                            Text(
-                                              ' unassigned transactions',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1,
-                                            ),
-                                          ],
+                                      if (containerTransactionsRecordList
+                                              .length >
+                                          0)
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 16, 0, 0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                'You have ',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
+                                              ),
+                                              Text(
+                                                containerTransactionsRecordList
+                                                    .length
+                                                    .toString(),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText1Family,
+                                                          color:
+                                                              Color(0xFFFF0000),
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1Family),
+                                                        ),
+                                              ),
+                                              Text(
+                                                ' unassigned transactions',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
                                       Expanded(
                                         flex: 2,
                                         child: Container(
@@ -187,6 +192,23 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                 final unassignedtransactions =
                                                     containerTransactionsRecordList
                                                         .toList();
+                                                if (unassignedtransactions
+                                                    .isEmpty) {
+                                                  return Center(
+                                                    child: EmptyListWidget(
+                                                      text:
+                                                          'Nice work ${valueOrDefault(currentUserDocument?.username, '')}, you have assigned all transactions. Keep it up!',
+                                                      icon: Icon(
+                                                        Icons.celebration,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        size: 128,
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
                                                 return ListView.builder(
                                                   padding: EdgeInsets.zero,
                                                   scrollDirection:

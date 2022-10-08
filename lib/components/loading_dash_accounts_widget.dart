@@ -43,18 +43,6 @@ class _LoadingDashAccountsWidgetState extends State<LoadingDashAccountsWidget> {
                 child: Stack(
                   alignment: AlignmentDirectional(0, 0),
                   children: [
-                    Align(
-                      alignment: AlignmentDirectional(0, 0),
-                      child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(300),
-                        ),
-                        alignment: AlignmentDirectional(0, 0),
-                      ),
-                    ),
                     Container(
                       width: 40,
                       height: 40,
