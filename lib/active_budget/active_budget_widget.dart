@@ -44,11 +44,10 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
     'containerOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
-        VisibilityEffect(duration: 1.ms),
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
-          duration: 900.ms,
+          duration: 700.ms,
           begin: 0,
           end: 1,
         ),
@@ -57,11 +56,11 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
     'containerOnPageLoadAnimation2': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
-        VisibilityEffect(duration: 400.ms),
+        VisibilityEffect(duration: 250.ms),
         FadeEffect(
           curve: Curves.easeInOut,
-          delay: 400.ms,
-          duration: 900.ms,
+          delay: 250.ms,
+          duration: 700.ms,
           begin: 0,
           end: 1,
         ),
