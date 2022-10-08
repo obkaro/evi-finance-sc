@@ -713,8 +713,6 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                     onPressed: () async {
                                                                                       showModalBottomSheet(
                                                                                         isScrollControlled: true,
-                                                                                        backgroundColor: Colors.transparent,
-                                                                                        barrierColor: FlutterFlowTheme.of(context).primaryBackground,
                                                                                         context: context,
                                                                                         builder: (context) {
                                                                                           return Padding(
