@@ -37,6 +37,8 @@ class FFAppState {
   ];
 
   bool hasUpdatePromptShown = false;
+
+  String showCategoryOrSub = '';
 }
 
 LatLng? _latLngFromString(String? val) {
