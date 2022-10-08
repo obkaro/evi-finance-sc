@@ -584,6 +584,8 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                 color: FFAppState().showCategoryOrSub == 'category' ? Colors.white : FlutterFlowTheme.of(context).secondaryText,
                                                                                 useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
                                                                               ),
+                                                                          elevation:
+                                                                              0,
                                                                           borderSide:
                                                                               BorderSide(
                                                                             color:
@@ -631,6 +633,8 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                 color: FFAppState().showCategoryOrSub == 'sub' ? Colors.white : FlutterFlowTheme.of(context).secondaryText,
                                                                                 useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
                                                                               ),
+                                                                          elevation:
+                                                                              0,
                                                                           borderSide:
                                                                               BorderSide(
                                                                             color:
@@ -665,150 +669,123 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                     BorderRadius
                                                                         .circular(
                                                                             8),
-                                                                border:
-                                                                    Border.all(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryColor,
-                                                                ),
                                                               ),
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            8,
-                                                                            8,
-                                                                            8,
-                                                                            8),
-                                                                child:
-                                                                    Container(
-                                                                  width: double
-                                                                      .infinity,
-                                                                  child: Stack(
-                                                                    children: [
-                                                                      if (FFAppState()
-                                                                              .showCategoryOrSub ==
-                                                                          'category')
-                                                                        Builder(
-                                                                          builder:
-                                                                              (context) {
-                                                                            final categories =
-                                                                                containerCategoriesRecordList.toList();
-                                                                            return Wrap(
-                                                                              spacing: 8,
-                                                                              runSpacing: 8,
-                                                                              alignment: WrapAlignment.start,
-                                                                              crossAxisAlignment: WrapCrossAlignment.start,
-                                                                              direction: Axis.horizontal,
-                                                                              runAlignment: WrapAlignment.start,
-                                                                              verticalDirection: VerticalDirection.down,
-                                                                              clipBehavior: Clip.none,
-                                                                              children: List.generate(categories.length, (categoriesIndex) {
-                                                                                final categoriesItem = categories[categoriesIndex];
-                                                                                return FFButtonWidget(
-                                                                                  onPressed: () async {
-                                                                                    final transactionsUpdateData = createTransactionsRecordData(
-                                                                                      transactionCategory: categoriesItem.reference,
-                                                                                      transactionBudget: currentUserDocument!.activeBudget,
-                                                                                      categoryDetails: createCategoryDetailsStruct(
-                                                                                        name: categoriesItem.categoryName,
-                                                                                        clearUnsetFields: false,
-                                                                                      ),
-                                                                                      isAssigned: true,
-                                                                                      dateAssigned: getCurrentTimestamp,
-                                                                                    );
-                                                                                    await unassignedtransactionsItem.reference.update(transactionsUpdateData);
-                                                                                  },
-                                                                                  text: categoriesItem.categoryName!,
-                                                                                  options: FFButtonOptions(
-                                                                                    width: 130,
-                                                                                    height: 32,
-                                                                                    color: FlutterFlowTheme.of(context).darkPrimary,
-                                                                                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                                                                                          fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
-                                                                                          color: FlutterFlowTheme.of(context).primaryText,
-                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
-                                                                                        ),
-                                                                                    elevation: 0,
-                                                                                    borderSide: BorderSide(
-                                                                                      color: Colors.transparent,
-                                                                                      width: 1,
+                                                              child: Container(
+                                                                width: double
+                                                                    .infinity,
+                                                                child: Stack(
+                                                                  children: [
+                                                                    if (FFAppState()
+                                                                            .showCategoryOrSub ==
+                                                                        'category')
+                                                                      Builder(
+                                                                        builder:
+                                                                            (context) {
+                                                                          final categories =
+                                                                              containerCategoriesRecordList.toList();
+                                                                          return Wrap(
+                                                                            spacing:
+                                                                                8,
+                                                                            runSpacing:
+                                                                                8,
+                                                                            alignment:
+                                                                                WrapAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                WrapCrossAlignment.start,
+                                                                            direction:
+                                                                                Axis.horizontal,
+                                                                            runAlignment:
+                                                                                WrapAlignment.start,
+                                                                            verticalDirection:
+                                                                                VerticalDirection.down,
+                                                                            clipBehavior:
+                                                                                Clip.none,
+                                                                            children:
+                                                                                List.generate(categories.length, (categoriesIndex) {
+                                                                              final categoriesItem = categories[categoriesIndex];
+                                                                              return FFButtonWidget(
+                                                                                onPressed: () async {
+                                                                                  final transactionsUpdateData = createTransactionsRecordData(
+                                                                                    transactionCategory: categoriesItem.reference,
+                                                                                    transactionBudget: currentUserDocument!.activeBudget,
+                                                                                    categoryDetails: createCategoryDetailsStruct(
+                                                                                      name: categoriesItem.categoryName,
+                                                                                      clearUnsetFields: false,
                                                                                     ),
-                                                                                    borderRadius: BorderRadius.circular(32),
+                                                                                    isAssigned: true,
+                                                                                    dateAssigned: getCurrentTimestamp,
+                                                                                  );
+                                                                                  await unassignedtransactionsItem.reference.update(transactionsUpdateData);
+                                                                                },
+                                                                                text: categoriesItem.categoryName!,
+                                                                                options: FFButtonOptions(
+                                                                                  height: 32,
+                                                                                  color: FlutterFlowTheme.of(context).darkPrimary,
+                                                                                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                                                                                        fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
+                                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                                      ),
+                                                                                  elevation: 0,
+                                                                                  borderSide: BorderSide(
+                                                                                    color: Colors.transparent,
+                                                                                    width: 1,
                                                                                   ),
-                                                                                );
-                                                                              }),
-                                                                            );
-                                                                          },
-                                                                        ),
-                                                                      if (FFAppState()
-                                                                              .showCategoryOrSub ==
-                                                                          'sub')
-                                                                        Builder(
-                                                                          builder:
-                                                                              (context) {
-                                                                            final subscriptions =
-                                                                                containerSubscriptionsRecordList.toList();
-                                                                            return Wrap(
-                                                                              spacing: 8,
-                                                                              runSpacing: 8,
-                                                                              alignment: WrapAlignment.start,
-                                                                              crossAxisAlignment: WrapCrossAlignment.start,
-                                                                              direction: Axis.horizontal,
-                                                                              runAlignment: WrapAlignment.start,
-                                                                              verticalDirection: VerticalDirection.down,
-                                                                              clipBehavior: Clip.none,
-                                                                              children: List.generate(subscriptions.length, (subscriptionsIndex) {
-                                                                                final subscriptionsItem = subscriptions[subscriptionsIndex];
-                                                                                return FFButtonWidget(
-                                                                                  onPressed: () async {
-                                                                                    final transactionsUpdateData = createTransactionsRecordData(
-                                                                                      transactionCategory: subscriptionsItem.category,
-                                                                                      transactionBudget: currentUserDocument!.activeBudget,
-                                                                                      recurringRef: subscriptionsItem.reference,
-                                                                                      categoryDetails: createCategoryDetailsStruct(
-                                                                                        name: subscriptionsItem.categoryDetails.name,
-                                                                                        clearUnsetFields: false,
-                                                                                      ),
-                                                                                      subscriptionDetails: createSubscriptionDetailsStruct(
-                                                                                        name: subscriptionsItem.name,
-                                                                                        clearUnsetFields: false,
-                                                                                      ),
-                                                                                      isAssigned: true,
-                                                                                      dateAssigned: getCurrentTimestamp,
-                                                                                    );
-                                                                                    await unassignedtransactionsItem.reference.update(transactionsUpdateData);
-                                                                                    if (subscriptionsItem.lastChargeDate != null) {
-                                                                                      if (unassignedtransactionsItem.trasactionDate! > subscriptionsItem.lastChargeDate!) {
-                                                                                        final subscriptionsUpdateData = {
-                                                                                          ...createSubscriptionsRecordData(
-                                                                                            lastChargeDate: unassignedtransactionsItem.trasactionDate,
-                                                                                            lastCharge: createMoneyStruct(
-                                                                                              amount: unassignedtransactionsItem.transactionAmount,
-                                                                                              clearUnsetFields: false,
-                                                                                            ),
-                                                                                            expChargeDate: functions.addDaysToDate(unassignedtransactionsItem.trasactionDate, functions.setNewExpectedSubDate(subscriptionsItem)),
-                                                                                          ),
-                                                                                          'transactions': FieldValue.arrayUnion([
-                                                                                            unassignedtransactionsItem.reference
-                                                                                          ]),
-                                                                                          'narrations': FieldValue.arrayUnion([
-                                                                                            unassignedtransactionsItem.transactionNarration
-                                                                                          ]),
-                                                                                        };
-                                                                                        await subscriptionsItem.reference.update(subscriptionsUpdateData);
-                                                                                      } else {
-                                                                                        final subscriptionsUpdateData = {
-                                                                                          'transactions': FieldValue.arrayUnion([
-                                                                                            unassignedtransactionsItem.reference
-                                                                                          ]),
-                                                                                          'narrations': FieldValue.arrayUnion([
-                                                                                            unassignedtransactionsItem.transactionNarration
-                                                                                          ]),
-                                                                                        };
-                                                                                        await subscriptionsItem.reference.update(subscriptionsUpdateData);
-                                                                                      }
-                                                                                    } else {
+                                                                                  borderRadius: BorderRadius.circular(32),
+                                                                                ),
+                                                                              );
+                                                                            }),
+                                                                          );
+                                                                        },
+                                                                      ),
+                                                                    if (FFAppState()
+                                                                            .showCategoryOrSub ==
+                                                                        'sub')
+                                                                      Builder(
+                                                                        builder:
+                                                                            (context) {
+                                                                          final subscriptions =
+                                                                              containerSubscriptionsRecordList.toList();
+                                                                          return Wrap(
+                                                                            spacing:
+                                                                                8,
+                                                                            runSpacing:
+                                                                                8,
+                                                                            alignment:
+                                                                                WrapAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                WrapCrossAlignment.start,
+                                                                            direction:
+                                                                                Axis.horizontal,
+                                                                            runAlignment:
+                                                                                WrapAlignment.start,
+                                                                            verticalDirection:
+                                                                                VerticalDirection.down,
+                                                                            clipBehavior:
+                                                                                Clip.none,
+                                                                            children:
+                                                                                List.generate(subscriptions.length, (subscriptionsIndex) {
+                                                                              final subscriptionsItem = subscriptions[subscriptionsIndex];
+                                                                              return FFButtonWidget(
+                                                                                onPressed: () async {
+                                                                                  final transactionsUpdateData = createTransactionsRecordData(
+                                                                                    transactionCategory: subscriptionsItem.category,
+                                                                                    transactionBudget: currentUserDocument!.activeBudget,
+                                                                                    recurringRef: subscriptionsItem.reference,
+                                                                                    categoryDetails: createCategoryDetailsStruct(
+                                                                                      name: subscriptionsItem.categoryDetails.name,
+                                                                                      clearUnsetFields: false,
+                                                                                    ),
+                                                                                    subscriptionDetails: createSubscriptionDetailsStruct(
+                                                                                      name: subscriptionsItem.name,
+                                                                                      clearUnsetFields: false,
+                                                                                    ),
+                                                                                    isAssigned: true,
+                                                                                    dateAssigned: getCurrentTimestamp,
+                                                                                  );
+                                                                                  await unassignedtransactionsItem.reference.update(transactionsUpdateData);
+                                                                                  if (subscriptionsItem.lastChargeDate != null) {
+                                                                                    if (unassignedtransactionsItem.trasactionDate! > subscriptionsItem.lastChargeDate!) {
                                                                                       final subscriptionsUpdateData = {
                                                                                         ...createSubscriptionsRecordData(
                                                                                           lastChargeDate: unassignedtransactionsItem.trasactionDate,
@@ -826,32 +803,55 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                         ]),
                                                                                       };
                                                                                       await subscriptionsItem.reference.update(subscriptionsUpdateData);
+                                                                                    } else {
+                                                                                      final subscriptionsUpdateData = {
+                                                                                        'transactions': FieldValue.arrayUnion([
+                                                                                          unassignedtransactionsItem.reference
+                                                                                        ]),
+                                                                                        'narrations': FieldValue.arrayUnion([
+                                                                                          unassignedtransactionsItem.transactionNarration
+                                                                                        ]),
+                                                                                      };
+                                                                                      await subscriptionsItem.reference.update(subscriptionsUpdateData);
                                                                                     }
-                                                                                  },
-                                                                                  text: subscriptionsItem.name!,
-                                                                                  options: FFButtonOptions(
-                                                                                    width: 130,
-                                                                                    height: 32,
-                                                                                    color: FlutterFlowTheme.of(context).darkPrimary,
-                                                                                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                                                                                          fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
-                                                                                          color: FlutterFlowTheme.of(context).primaryText,
-                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                                  } else {
+                                                                                    final subscriptionsUpdateData = {
+                                                                                      ...createSubscriptionsRecordData(
+                                                                                        lastChargeDate: unassignedtransactionsItem.trasactionDate,
+                                                                                        lastCharge: createMoneyStruct(
+                                                                                          amount: unassignedtransactionsItem.transactionAmount,
+                                                                                          clearUnsetFields: false,
                                                                                         ),
-                                                                                    elevation: 0,
-                                                                                    borderSide: BorderSide(
-                                                                                      color: Colors.transparent,
-                                                                                      width: 1,
-                                                                                    ),
-                                                                                    borderRadius: BorderRadius.circular(32),
+                                                                                        expChargeDate: functions.addDaysToDate(unassignedtransactionsItem.trasactionDate, functions.setNewExpectedSubDate(subscriptionsItem)),
+                                                                                      ),
+                                                                                      'transactions': FieldValue.arrayUnion([
+                                                                                        unassignedtransactionsItem.reference
+                                                                                      ]),
+                                                                                      'narrations': FieldValue.arrayUnion([
+                                                                                        unassignedtransactionsItem.transactionNarration
+                                                                                      ]),
+                                                                                    };
+                                                                                    await subscriptionsItem.reference.update(subscriptionsUpdateData);
+                                                                                  }
+                                                                                },
+                                                                                text: subscriptionsItem.name!,
+                                                                                options: FFButtonOptions(
+                                                                                  height: 24,
+                                                                                  color: FlutterFlowTheme.of(context).darkPrimary,
+                                                                                  textStyle: FlutterFlowTheme.of(context).bodyText1,
+                                                                                  elevation: 0,
+                                                                                  borderSide: BorderSide(
+                                                                                    color: Colors.transparent,
+                                                                                    width: 1,
                                                                                   ),
-                                                                                );
-                                                                              }),
-                                                                            );
-                                                                          },
-                                                                        ),
-                                                                    ],
-                                                                  ),
+                                                                                  borderRadius: BorderRadius.circular(32),
+                                                                                ),
+                                                                              );
+                                                                            }),
+                                                                          );
+                                                                        },
+                                                                      ),
+                                                                  ],
                                                                 ),
                                                               ),
                                                             ),
