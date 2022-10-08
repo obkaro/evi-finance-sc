@@ -39,14 +39,14 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
         FadeEffect(
           curve: Curves.linear,
           delay: 0.ms,
-          duration: 400.ms,
+          duration: 250.ms,
           begin: 0,
           end: 1,
         ),
         FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 400.ms,
-          duration: 200.ms,
+          curve: Curves.linear,
+          delay: 1200.ms,
+          duration: 400.ms,
           begin: 1,
           end: 0,
         ),
@@ -706,6 +706,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                         dateAssigned: getCurrentTimestamp,
                                                                                       );
                                                                                       await unassignedtransactionsItem.reference.update(transactionsUpdateData);
+                                                                                      setState(() => FFAppState().pageOverlayVisible = false);
                                                                                     },
                                                                                     text: categoriesItem.categoryName!,
                                                                                     options: FFButtonOptions(
@@ -817,6 +818,8 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                         };
                                                                                         await subscriptionsItem.reference.update(subscriptionsUpdateData);
                                                                                       }
+
+                                                                                      setState(() => FFAppState().pageOverlayVisible = false);
                                                                                     },
                                                                                     text: subscriptionsItem.name!,
                                                                                     options: FFButtonOptions(
@@ -871,23 +874,26 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                 decoration: BoxDecoration(
                   color: Color(0xF2FFFFFF),
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                      child: Icon(
-                        Icons.check_circle_rounded,
-                        color: FlutterFlowTheme.of(context).tertiaryColor,
-                        size: 128,
+                child: Visibility(
+                  visible: FFAppState().pageOverlayVisible,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                        child: Icon(
+                          Icons.check_circle_rounded,
+                          color: FlutterFlowTheme.of(context).tertiaryColor,
+                          size: 128,
+                        ),
                       ),
-                    ),
-                    Text(
-                      'Transaction Assigned',
-                      style: FlutterFlowTheme.of(context).bodyText1,
-                    ),
-                  ],
+                      Text(
+                        'Transaction Assigned',
+                        style: FlutterFlowTheme.of(context).bodyText1,
+                      ),
+                    ],
+                  ),
                 ),
               ).animateOnActionTrigger(
                 animationsMap['containerOnActionTriggerAnimation']!,
