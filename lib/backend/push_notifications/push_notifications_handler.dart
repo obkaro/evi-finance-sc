@@ -109,11 +109,11 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         category: await getDocumentParameter(
             data, 'category', CategoriesRecord.serializer),
       ),
+  'Settings': (data) async => SettingsWidget(),
   'AccountSingle': (data) async => AccountSingleWidget(
         account: await getDocumentParameter(
             data, 'account', AccountsRecord.serializer),
       ),
-  'Settings': (data) async => SettingsWidget(),
   'ProfileSettings': (data) async => ProfileSettingsWidget(),
   'LandingPageView': (data) async => LandingPageViewWidget(),
   'WelcomeToEvi': (data) async => WelcomeToEviWidget(),

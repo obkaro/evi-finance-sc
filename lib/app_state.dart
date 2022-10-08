@@ -15,6 +15,8 @@ class FFAppState {
 
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
+    _showQuickTransAssign =
+        prefs.getBool('ff_showQuickTransAssign') ?? _showQuickTransAssign;
   }
 
   late SharedPreferences prefs;
@@ -41,6 +43,13 @@ class FFAppState {
   String showCategoryOrSub = 'category';
 
   bool pageOverlayVisible = true;
+
+  bool _showQuickTransAssign = true;
+  bool get showQuickTransAssign => _showQuickTransAssign;
+  set showQuickTransAssign(bool _value) {
+    _showQuickTransAssign = _value;
+    prefs.setBool('ff_showQuickTransAssign', _value);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

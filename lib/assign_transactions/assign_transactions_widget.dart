@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/empty_list_widget.dart';
+import '../components/info_box_widget.dart';
 import '../components/loading_empty_widget.dart';
 import '../components/overlay_alert_widget.dart';
 import '../components/text_transaction_type_widget.dart';
@@ -63,6 +64,38 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
   @override
   void initState() {
     super.initState();
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (FFAppState().showQuickTransAssign) {
+        await showModalBottomSheet(
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          context: context,
+          builder: (context) {
+            return Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: InfoBoxWidget(
+                heading: 'Quickly Assign Transactions',
+                body:
+                    'You can assingn multiple transactions in quick succession here. Let\'s see if you can clear that backlog of unassigned transactions huh?',
+                buttonText: 'Okay',
+                showIcon: true,
+                icon: Icon(
+                  Icons.info_outline_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 72,
+                ),
+              ),
+            );
+          },
+        ).then((value) => setState(() {}));
+
+        setState(() => FFAppState().showQuickTransAssign = false);
+      } else {
+        return;
+      }
+    });
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'assignTransactions'});
@@ -217,7 +250,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    0, 10, 0, 0),
+                                                    0, 10, 0, 10),
                                             child: Builder(
                                               builder: (context) {
                                                 final unassignedtransactions =
@@ -758,10 +791,10 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                     options: FFButtonOptions(
                                                                                       height: 32,
                                                                                       color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                      textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                                                                                            fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
-                                                                                            color: FlutterFlowTheme.of(context).primaryText,
-                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                                      textStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                                            color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                                           ),
                                                                                       elevation: 0,
                                                                                       borderSide: BorderSide(

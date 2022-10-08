@@ -1,12 +1,16 @@
 import '../account_single/account_single_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/loading_empty_widget.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,12 +21,28 @@ class AccountsWidget extends StatefulWidget {
   _AccountsWidgetState createState() => _AccountsWidgetState();
 }
 
-class _AccountsWidgetState extends State<AccountsWidget> {
+class _AccountsWidgetState extends State<AccountsWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'listViewOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 200.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Accounts'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -108,15 +128,7 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                           // Customize what your widget looks like when it's loading.
                           if (!snapshot.hasData) {
                             return Center(
-                              child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: SpinKitRing(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  size: 50,
-                                ),
-                              ),
+                              child: LoadingEmptyWidget(),
                             );
                           }
                           List<AccountsRecord> listViewAccountsRecordList =
@@ -183,63 +195,17 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                                             0, 0),
                                                   ),
                                                 ),
-                                                FutureBuilder<
-                                                    List<
-                                                        ConstInstitutionLogosRecord>>(
-                                                  future:
-                                                      queryConstInstitutionLogosRecordOnce(
-                                                    queryBuilder: (constInstitutionLogosRecord) =>
-                                                        constInstitutionLogosRecord.where(
-                                                            'institutionCode',
-                                                            isEqualTo:
-                                                                listViewAccountsRecord
-                                                                    .bankCode),
-                                                    singleRecord: true,
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl:
+                                                        listViewAccountsRecord
+                                                            .accountLogo!,
+                                                    width: 45,
+                                                    height: 45,
+                                                    fit: BoxFit.cover,
                                                   ),
-                                                  builder: (context, snapshot) {
-                                                    // Customize what your widget looks like when it's loading.
-                                                    if (!snapshot.hasData) {
-                                                      return Center(
-                                                        child: SizedBox(
-                                                          width: 50,
-                                                          height: 50,
-                                                          child: SpinKitRing(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryColor,
-                                                            size: 50,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }
-                                                    List<ConstInstitutionLogosRecord>
-                                                        imageConstInstitutionLogosRecordList =
-                                                        snapshot.data!;
-                                                    // Return an empty Container when the document does not exist.
-                                                    if (snapshot
-                                                        .data!.isEmpty) {
-                                                      return Container();
-                                                    }
-                                                    final imageConstInstitutionLogosRecord =
-                                                        imageConstInstitutionLogosRecordList
-                                                                .isNotEmpty
-                                                            ? imageConstInstitutionLogosRecordList
-                                                                .first
-                                                            : null;
-                                                    return ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12),
-                                                      child: CachedNetworkImage(
-                                                        imageUrl:
-                                                            imageConstInstitutionLogosRecord!
-                                                                .institutionLogo!,
-                                                        width: 45,
-                                                        height: 45,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    );
-                                                  },
                                                 ),
                                                 if (listViewAccountsRecord
                                                         .reauthRequired ==
@@ -315,7 +281,8 @@ class _AccountsWidgetState extends State<AccountsWidget> {
                                 ),
                               );
                             },
-                          );
+                          ).animateOnPageLoad(
+                              animationsMap['listViewOnPageLoadAnimation']!);
                         },
                       ),
                     ),
