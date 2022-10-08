@@ -680,17 +680,47 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                   final categoriesItem = categories[categoriesIndex];
                                                                                   return FFButtonWidget(
                                                                                     onPressed: () async {
-                                                                                      final transactionsUpdateData = createTransactionsRecordData(
-                                                                                        transactionCategory: categoriesItem.reference,
-                                                                                        transactionBudget: currentUserDocument!.activeBudget,
-                                                                                        categoryDetails: createCategoryDetailsStruct(
-                                                                                          name: categoriesItem.categoryName,
-                                                                                          clearUnsetFields: false,
-                                                                                        ),
-                                                                                        isAssigned: true,
-                                                                                        dateAssigned: getCurrentTimestamp,
-                                                                                      );
-                                                                                      await unassignedtransactionsItem.reference.update(transactionsUpdateData);
+                                                                                      showModalBottomSheet(
+                                                                                        isScrollControlled: true,
+                                                                                        backgroundColor: Colors.transparent,
+                                                                                        barrierColor: FlutterFlowTheme.of(context).primaryBackground,
+                                                                                        context: context,
+                                                                                        builder: (context) {
+                                                                                          return Padding(
+                                                                                            padding: MediaQuery.of(context).viewInsets,
+                                                                                            child: OverlayAlertWidget(),
+                                                                                          );
+                                                                                        },
+                                                                                      ).then((value) => setState(() {}));
+
+                                                                                      if (containerTransactionsRecordList.length == 1) {
+                                                                                        Navigator.pop(context);
+
+                                                                                        final transactionsUpdateData = createTransactionsRecordData(
+                                                                                          transactionCategory: categoriesItem.reference,
+                                                                                          transactionBudget: currentUserDocument!.activeBudget,
+                                                                                          categoryDetails: createCategoryDetailsStruct(
+                                                                                            name: categoriesItem.categoryName,
+                                                                                            clearUnsetFields: false,
+                                                                                          ),
+                                                                                          isAssigned: true,
+                                                                                          dateAssigned: getCurrentTimestamp,
+                                                                                        );
+                                                                                        await unassignedtransactionsItem.reference.update(transactionsUpdateData);
+                                                                                      } else {
+                                                                                        final transactionsUpdateData = createTransactionsRecordData(
+                                                                                          transactionCategory: categoriesItem.reference,
+                                                                                          transactionBudget: currentUserDocument!.activeBudget,
+                                                                                          categoryDetails: createCategoryDetailsStruct(
+                                                                                            name: categoriesItem.categoryName,
+                                                                                            clearUnsetFields: false,
+                                                                                          ),
+                                                                                          isAssigned: true,
+                                                                                          dateAssigned: getCurrentTimestamp,
+                                                                                        );
+                                                                                        await unassignedtransactionsItem.reference.update(transactionsUpdateData);
+                                                                                        Navigator.pop(context);
+                                                                                      }
                                                                                     },
                                                                                     text: categoriesItem.categoryName!,
                                                                                     options: FFButtonOptions(
@@ -736,7 +766,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                       showModalBottomSheet(
                                                                                         isScrollControlled: true,
                                                                                         backgroundColor: Colors.transparent,
-                                                                                        barrierColor: FlutterFlowTheme.of(context).secondaryColor,
+                                                                                        barrierColor: FlutterFlowTheme.of(context).primaryBackground,
                                                                                         context: context,
                                                                                         builder: (context) {
                                                                                           return Padding(
