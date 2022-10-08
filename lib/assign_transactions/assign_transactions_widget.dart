@@ -4,6 +4,7 @@ import '../components/empty_list_widget.dart';
 import '../components/loading_empty_widget.dart';
 import '../components/overlay_alert_widget.dart';
 import '../components/text_transaction_type_widget.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -11,6 +12,8 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,12 +30,40 @@ class AssignTransactionsWidget extends StatefulWidget {
       _AssignTransactionsWidgetState();
 }
 
-class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
+class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'wrapOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 250.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+    'wrapOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 250.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'assignTransactions'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -742,7 +773,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                     showLoadingIndicator: false,
                                                                                   );
                                                                                 }),
-                                                                              );
+                                                                              ).animateOnPageLoad(animationsMap['wrapOnPageLoadAnimation1']!);
                                                                             },
                                                                           ),
                                                                         if (FFAppState().showCategoryOrSub ==
@@ -935,7 +966,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                     showLoadingIndicator: false,
                                                                                   );
                                                                                 }),
-                                                                              );
+                                                                              ).animateOnPageLoad(animationsMap['wrapOnPageLoadAnimation2']!);
                                                                             },
                                                                           ),
                                                                       ],
