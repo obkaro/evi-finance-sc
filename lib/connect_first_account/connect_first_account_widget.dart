@@ -20,12 +20,34 @@ class ConnectFirstAccountWidget extends StatefulWidget {
 
 class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
     with TickerProviderStateMixin {
+  final animationsMap = {
+    'columnOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        VisibilityEffect(duration: 1.ms),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ConnectFirstAccount'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -306,7 +328,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                 ),
               ),
             ],
-          ),
+          ).animateOnPageLoad(animationsMap['columnOnPageLoadAnimation']!),
         ),
       ),
     );

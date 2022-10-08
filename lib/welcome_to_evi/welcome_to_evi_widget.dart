@@ -22,6 +22,60 @@ class WelcomeToEviWidget extends StatefulWidget {
 
 class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
     with TickerProviderStateMixin {
+  final animationsMap = {
+    'rowOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        VisibilityEffect(duration: 1.ms),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 800.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+    'columnOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        VisibilityEffect(duration: 1000.ms),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 1000.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+    'columnOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        VisibilityEffect(duration: 2000.ms),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 2000.ms,
+          duration: 400.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+    'columnOnPageLoadAnimation3': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        VisibilityEffect(duration: 2200.ms),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 2200.ms,
+          duration: 100.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   String? dropDownValue;
   TextEditingController? textController;
   final formKey = GlobalKey<FormState>();
@@ -30,6 +84,13 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
   @override
   void initState() {
     super.initState();
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'WelcomeToEvi'});
     textController = TextEditingController();
@@ -77,7 +138,8 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                 ),
                           ),
                         ],
-                      ),
+                      ).animateOnPageLoad(
+                          animationsMap['rowOnPageLoadAnimation']!),
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -103,7 +165,8 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                       ),
                                 ),
                               ],
-                            ),
+                            ).animateOnPageLoad(
+                                animationsMap['columnOnPageLoadAnimation1']!),
                           ),
                         ],
                       ),
@@ -299,7 +362,8 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                 ],
                               ),
                             ],
-                          ),
+                          ).animateOnPageLoad(
+                              animationsMap['columnOnPageLoadAnimation2']!),
                         ),
                       ),
                     ],
@@ -365,7 +429,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                     ),
                   ),
                 ],
-              ),
+              ).animateOnPageLoad(animationsMap['columnOnPageLoadAnimation3']!),
             ],
           ),
         ),

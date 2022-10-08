@@ -40,6 +40,33 @@ class ActiveBudgetWidget extends StatefulWidget {
 
 class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
     with TickerProviderStateMixin {
+  final animationsMap = {
+    'containerOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 450.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+    'containerOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        VisibilityEffect(duration: 200.ms),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 450.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   BudgetsRecord? createdBudget2;
   BudgetsRecord? createdBudget;
   BudgetsRecord? newcreatedBudget;
@@ -80,6 +107,13 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ActiveBudget'});
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -388,7 +422,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
+                                                  ).animateOnPageLoad(animationsMap[
+                                                      'containerOnPageLoadAnimation1']!),
                                                 ),
                                               ),
                                             ],
@@ -646,7 +681,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                                   },
                                                 ),
                                               ),
-                                            ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'containerOnPageLoadAnimation2']!),
                                           ),
                                         ],
                                       ),

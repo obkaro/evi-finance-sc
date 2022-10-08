@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 
-version: 0.8.5+32
+version: 0.8.6+33
 
 
 environment:
@@ -87,7 +87,6 @@ dependencies:
   sign_in_with_apple_platform_interface: 1.0.0
   sign_in_with_apple_web: 1.0.1
   smooth_page_indicator: 1.0.0+2
-  swipeable_card_stack: ^0.0.5
   table_calendar: 3.0.6
   timeago: 3.2.2
   url_launcher: 6.1.5

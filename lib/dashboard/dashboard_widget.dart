@@ -39,11 +39,39 @@ class DashboardWidget extends StatefulWidget {
 
 class _DashboardWidgetState extends State<DashboardWidget>
     with TickerProviderStateMixin {
+  final animationsMap = {
+    'textOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        VisibilityEffect(duration: 1.ms),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+    'rowOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -296,7 +324,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                     context)
                                                                 .title1Family),
                                               ),
-                                        );
+                                        ).animateOnPageLoad(animationsMap[
+                                            'textOnPageLoadAnimation']!);
                                       },
                                     ),
                                   ],
@@ -511,7 +540,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                           ),
                                         );
                                       }),
-                                    );
+                                    ).animateOnPageLoad(animationsMap[
+                                        'rowOnPageLoadAnimation']!);
                                   },
                                 ),
                               ),

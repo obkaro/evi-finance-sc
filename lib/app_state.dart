@@ -37,6 +37,10 @@ class FFAppState {
   ];
 
   bool hasUpdatePromptShown = false;
+
+  String showCategoryOrSub = 'category';
+
+  bool pageOverlayVisible = true;
 }
 
 LatLng? _latLngFromString(String? val) {
