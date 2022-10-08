@@ -1,8 +1,8 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/loading_empty_widget.dart';
+import '../components/overlay_alert_widget.dart';
 import '../components/text_transaction_type_widget.dart';
-import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -10,8 +10,6 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -28,43 +26,12 @@ class AssignTransactionsWidget extends StatefulWidget {
       _AssignTransactionsWidgetState();
 }
 
-class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
-    with TickerProviderStateMixin {
-  final animationsMap = {
-    'containerOnActionTriggerAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      applyInitialState: true,
-      effects: [
-        VisibilityEffect(duration: 1.ms),
-        FadeEffect(
-          curve: Curves.linear,
-          delay: 0.ms,
-          duration: 250.ms,
-          begin: 0,
-          end: 1,
-        ),
-        FadeEffect(
-          curve: Curves.linear,
-          delay: 1200.ms,
-          duration: 400.ms,
-          begin: 1,
-          end: 0,
-        ),
-      ],
-    ),
-  };
+class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    setupAnimations(
-      animationsMap.values.where((anim) =>
-          anim.trigger == AnimationTrigger.onActionTrigger ||
-          !anim.applyInitialState),
-      this,
-    );
-
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'assignTransactions'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -691,10 +658,6 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                   final categoriesItem = categories[categoriesIndex];
                                                                                   return FFButtonWidget(
                                                                                     onPressed: () async {
-                                                                                      if (animationsMap['containerOnActionTriggerAnimation'] != null) {
-                                                                                        animationsMap['containerOnActionTriggerAnimation']!.controller.forward(from: 0.0);
-                                                                                      }
-
                                                                                       final transactionsUpdateData = createTransactionsRecordData(
                                                                                         transactionCategory: categoriesItem.reference,
                                                                                         transactionBudget: currentUserDocument!.activeBudget,
@@ -706,7 +669,6 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                         dateAssigned: getCurrentTimestamp,
                                                                                       );
                                                                                       await unassignedtransactionsItem.reference.update(transactionsUpdateData);
-                                                                                      setState(() => FFAppState().pageOverlayVisible = false);
                                                                                     },
                                                                                     text: categoriesItem.categoryName!,
                                                                                     options: FFButtonOptions(
@@ -749,9 +711,18 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                   final subscriptionsItem = subscriptions[subscriptionsIndex];
                                                                                   return FFButtonWidget(
                                                                                     onPressed: () async {
-                                                                                      if (animationsMap['containerOnActionTriggerAnimation'] != null) {
-                                                                                        animationsMap['containerOnActionTriggerAnimation']!.controller.forward(from: 0.0);
-                                                                                      }
+                                                                                      showModalBottomSheet(
+                                                                                        isScrollControlled: true,
+                                                                                        backgroundColor: Colors.transparent,
+                                                                                        barrierColor: FlutterFlowTheme.of(context).primaryBackground,
+                                                                                        context: context,
+                                                                                        builder: (context) {
+                                                                                          return Padding(
+                                                                                            padding: MediaQuery.of(context).viewInsets,
+                                                                                            child: OverlayAlertWidget(),
+                                                                                          );
+                                                                                        },
+                                                                                      ).then((value) => setState(() {}));
 
                                                                                       final transactionsUpdateData = createTransactionsRecordData(
                                                                                         transactionCategory: subscriptionsItem.category,
@@ -819,7 +790,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                         await subscriptionsItem.reference.update(subscriptionsUpdateData);
                                                                                       }
 
-                                                                                      setState(() => FFAppState().pageOverlayVisible = false);
+                                                                                      Navigator.pop(context);
                                                                                     },
                                                                                     text: subscriptionsItem.name!,
                                                                                     options: FFButtonOptions(
@@ -867,36 +838,6 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                     ),
                   );
                 },
-              ),
-              Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  color: Color(0xF2FFFFFF),
-                ),
-                child: Visibility(
-                  visible: FFAppState().pageOverlayVisible,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                        child: Icon(
-                          Icons.check_circle_rounded,
-                          color: FlutterFlowTheme.of(context).tertiaryColor,
-                          size: 128,
-                        ),
-                      ),
-                      Text(
-                        'Transaction Assigned',
-                        style: FlutterFlowTheme.of(context).bodyText1,
-                      ),
-                    ],
-                  ),
-                ),
-              ).animateOnActionTrigger(
-                animationsMap['containerOnActionTriggerAnimation']!,
               ),
             ],
           ),
