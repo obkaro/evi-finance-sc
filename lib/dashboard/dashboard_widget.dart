@@ -40,19 +40,7 @@ class DashboardWidget extends StatefulWidget {
 class _DashboardWidgetState extends State<DashboardWidget>
     with TickerProviderStateMixin {
   final animationsMap = {
-    'containerOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0,
-          end: 1,
-        ),
-      ],
-    ),
-    'textOnPageLoadAnimation1': AnimationInfo(
+    'textOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
         VisibilityEffect(duration: 1.ms),
@@ -65,74 +53,9 @@ class _DashboardWidgetState extends State<DashboardWidget>
         ),
       ],
     ),
-    'containerOnPageLoadAnimation2': AnimationInfo(
+    'rowOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0,
-          end: 1,
-        ),
-      ],
-    ),
-    'circularIndicatorSmallOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 1.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0,
-          end: 1,
-        ),
-      ],
-    ),
-    'textOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 1.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0,
-          end: 1,
-        ),
-      ],
-    ),
-    'textOnPageLoadAnimation3': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 1.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0,
-          end: 1,
-        ),
-      ],
-    ),
-    'textOnPageLoadAnimation4': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 1.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0,
-          end: 1,
-        ),
-      ],
-    ),
-    'transactionListItemOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 1.ms),
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
@@ -148,12 +71,6 @@ class _DashboardWidgetState extends State<DashboardWidget>
   @override
   void initState() {
     super.initState();
-    setupAnimations(
-      animationsMap.values.where((anim) =>
-          anim.trigger == AnimationTrigger.onActionTrigger ||
-          !anim.applyInitialState),
-      this,
-    );
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -408,7 +325,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                 .title1Family),
                                               ),
                                         ).animateOnPageLoad(animationsMap[
-                                            'textOnPageLoadAnimation1']!);
+                                            'textOnPageLoadAnimation']!);
                                       },
                                     ),
                                   ],
@@ -419,8 +336,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                         ],
                       ),
                     ),
-                  ).animateOnPageLoad(
-                      animationsMap['containerOnPageLoadAnimation1']!),
+                  ),
                 ),
                 Container(
                   width: double.infinity,
@@ -621,11 +537,11 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                 ),
                                               ),
                                             ),
-                                          ).animateOnPageLoad(animationsMap[
-                                              'containerOnPageLoadAnimation2']!),
+                                          ),
                                         );
                                       }),
-                                    );
+                                    ).animateOnPageLoad(animationsMap[
+                                        'rowOnPageLoadAnimation']!);
                                   },
                                 ),
                               ),
@@ -816,9 +732,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                       spentAmount:
                                                           containerBudgetsRecord
                                                               .budgetSpent,
-                                                    ).animateOnPageLoad(
-                                                        animationsMap[
-                                                            'circularIndicatorSmallOnPageLoadAnimation']!),
+                                                    ),
                                                     Expanded(
                                                       child: Padding(
                                                         padding:
@@ -860,9 +774,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
                                                                         .subtitle1,
-                                                                  ).animateOnPageLoad(
-                                                                      animationsMap[
-                                                                          'textOnPageLoadAnimation2']!),
+                                                                  ),
                                                                   Expanded(
                                                                     flex: 2,
                                                                     child:
@@ -878,8 +790,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                         '${functions.subtractCurrencyText(containerBudgetsRecord.budgetAmount, containerBudgetsRecord.budgetSpent)}',
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .subtitle2,
-                                                                      ).animateOnPageLoad(
-                                                                              animationsMap['textOnPageLoadAnimation3']!),
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ],
@@ -916,9 +827,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                         .containsKey(
                                                                             FlutterFlowTheme.of(context).bodyText1Family),
                                                                   ),
-                                                            ).animateOnPageLoad(
-                                                                animationsMap[
-                                                                    'textOnPageLoadAnimation4']!),
+                                                            ),
                                                           ],
                                                         ),
                                                       ),
@@ -1027,8 +936,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                           listViewIndex];
                                   return TransactionListItemWidget(
                                     transactionDoc: listViewTransactionsRecord,
-                                  ).animateOnPageLoad(animationsMap[
-                                      'transactionListItemOnPageLoadAnimation']!);
+                                  );
                                 },
                               );
                             },
