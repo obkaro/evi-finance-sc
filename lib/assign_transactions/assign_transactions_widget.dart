@@ -736,7 +736,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                       showModalBottomSheet(
                                                                                         isScrollControlled: true,
                                                                                         backgroundColor: Colors.transparent,
-                                                                                        barrierColor: Colors.transparent,
+                                                                                        barrierColor: FlutterFlowTheme.of(context).secondaryColor,
                                                                                         context: context,
                                                                                         builder: (context) {
                                                                                           return Padding(
@@ -746,24 +746,56 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                         },
                                                                                       ).then((value) => setState(() {}));
 
-                                                                                      final transactionsUpdateData = createTransactionsRecordData(
-                                                                                        transactionCategory: subscriptionsItem.category,
-                                                                                        transactionBudget: currentUserDocument!.activeBudget,
-                                                                                        recurringRef: subscriptionsItem.reference,
-                                                                                        categoryDetails: createCategoryDetailsStruct(
-                                                                                          name: subscriptionsItem.categoryDetails.name,
-                                                                                          clearUnsetFields: false,
-                                                                                        ),
-                                                                                        subscriptionDetails: createSubscriptionDetailsStruct(
-                                                                                          name: subscriptionsItem.name,
-                                                                                          clearUnsetFields: false,
-                                                                                        ),
-                                                                                        isAssigned: true,
-                                                                                        dateAssigned: getCurrentTimestamp,
-                                                                                      );
-                                                                                      await unassignedtransactionsItem.reference.update(transactionsUpdateData);
-                                                                                      if (subscriptionsItem.lastChargeDate != null) {
-                                                                                        if (unassignedtransactionsItem.trasactionDate! > subscriptionsItem.lastChargeDate!) {
+                                                                                      if (containerTransactionsRecordList.length == 1) {
+                                                                                        Navigator.pop(context);
+
+                                                                                        final transactionsUpdateData = createTransactionsRecordData(
+                                                                                          transactionCategory: subscriptionsItem.category,
+                                                                                          transactionBudget: currentUserDocument!.activeBudget,
+                                                                                          recurringRef: subscriptionsItem.reference,
+                                                                                          categoryDetails: createCategoryDetailsStruct(
+                                                                                            name: subscriptionsItem.categoryDetails.name,
+                                                                                            clearUnsetFields: false,
+                                                                                          ),
+                                                                                          subscriptionDetails: createSubscriptionDetailsStruct(
+                                                                                            name: subscriptionsItem.name,
+                                                                                            clearUnsetFields: false,
+                                                                                          ),
+                                                                                          isAssigned: true,
+                                                                                          dateAssigned: getCurrentTimestamp,
+                                                                                        );
+                                                                                        await unassignedtransactionsItem.reference.update(transactionsUpdateData);
+                                                                                        if (subscriptionsItem.lastChargeDate != null) {
+                                                                                          if (unassignedtransactionsItem.trasactionDate! > subscriptionsItem.lastChargeDate!) {
+                                                                                            final subscriptionsUpdateData = {
+                                                                                              ...createSubscriptionsRecordData(
+                                                                                                lastChargeDate: unassignedtransactionsItem.trasactionDate,
+                                                                                                lastCharge: createMoneyStruct(
+                                                                                                  amount: unassignedtransactionsItem.transactionAmount,
+                                                                                                  clearUnsetFields: false,
+                                                                                                ),
+                                                                                                expChargeDate: functions.addDaysToDate(unassignedtransactionsItem.trasactionDate, functions.setNewExpectedSubDate(subscriptionsItem)),
+                                                                                              ),
+                                                                                              'transactions': FieldValue.arrayUnion([
+                                                                                                unassignedtransactionsItem.reference
+                                                                                              ]),
+                                                                                              'narrations': FieldValue.arrayUnion([
+                                                                                                unassignedtransactionsItem.transactionNarration
+                                                                                              ]),
+                                                                                            };
+                                                                                            await subscriptionsItem.reference.update(subscriptionsUpdateData);
+                                                                                          } else {
+                                                                                            final subscriptionsUpdateData = {
+                                                                                              'transactions': FieldValue.arrayUnion([
+                                                                                                unassignedtransactionsItem.reference
+                                                                                              ]),
+                                                                                              'narrations': FieldValue.arrayUnion([
+                                                                                                unassignedtransactionsItem.transactionNarration
+                                                                                              ]),
+                                                                                            };
+                                                                                            await subscriptionsItem.reference.update(subscriptionsUpdateData);
+                                                                                          }
+                                                                                        } else {
                                                                                           final subscriptionsUpdateData = {
                                                                                             ...createSubscriptionsRecordData(
                                                                                               lastChargeDate: unassignedtransactionsItem.trasactionDate,
@@ -781,8 +813,64 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                             ]),
                                                                                           };
                                                                                           await subscriptionsItem.reference.update(subscriptionsUpdateData);
+                                                                                        }
+                                                                                      } else {
+                                                                                        final transactionsUpdateData = createTransactionsRecordData(
+                                                                                          transactionCategory: subscriptionsItem.category,
+                                                                                          transactionBudget: currentUserDocument!.activeBudget,
+                                                                                          recurringRef: subscriptionsItem.reference,
+                                                                                          categoryDetails: createCategoryDetailsStruct(
+                                                                                            name: subscriptionsItem.categoryDetails.name,
+                                                                                            clearUnsetFields: false,
+                                                                                          ),
+                                                                                          subscriptionDetails: createSubscriptionDetailsStruct(
+                                                                                            name: subscriptionsItem.name,
+                                                                                            clearUnsetFields: false,
+                                                                                          ),
+                                                                                          isAssigned: true,
+                                                                                          dateAssigned: getCurrentTimestamp,
+                                                                                        );
+                                                                                        await unassignedtransactionsItem.reference.update(transactionsUpdateData);
+                                                                                        if (subscriptionsItem.lastChargeDate != null) {
+                                                                                          if (unassignedtransactionsItem.trasactionDate! > subscriptionsItem.lastChargeDate!) {
+                                                                                            final subscriptionsUpdateData = {
+                                                                                              ...createSubscriptionsRecordData(
+                                                                                                lastChargeDate: unassignedtransactionsItem.trasactionDate,
+                                                                                                lastCharge: createMoneyStruct(
+                                                                                                  amount: unassignedtransactionsItem.transactionAmount,
+                                                                                                  clearUnsetFields: false,
+                                                                                                ),
+                                                                                                expChargeDate: functions.addDaysToDate(unassignedtransactionsItem.trasactionDate, functions.setNewExpectedSubDate(subscriptionsItem)),
+                                                                                              ),
+                                                                                              'transactions': FieldValue.arrayUnion([
+                                                                                                unassignedtransactionsItem.reference
+                                                                                              ]),
+                                                                                              'narrations': FieldValue.arrayUnion([
+                                                                                                unassignedtransactionsItem.transactionNarration
+                                                                                              ]),
+                                                                                            };
+                                                                                            await subscriptionsItem.reference.update(subscriptionsUpdateData);
+                                                                                          } else {
+                                                                                            final subscriptionsUpdateData = {
+                                                                                              'transactions': FieldValue.arrayUnion([
+                                                                                                unassignedtransactionsItem.reference
+                                                                                              ]),
+                                                                                              'narrations': FieldValue.arrayUnion([
+                                                                                                unassignedtransactionsItem.transactionNarration
+                                                                                              ]),
+                                                                                            };
+                                                                                            await subscriptionsItem.reference.update(subscriptionsUpdateData);
+                                                                                          }
                                                                                         } else {
                                                                                           final subscriptionsUpdateData = {
+                                                                                            ...createSubscriptionsRecordData(
+                                                                                              lastChargeDate: unassignedtransactionsItem.trasactionDate,
+                                                                                              lastCharge: createMoneyStruct(
+                                                                                                amount: unassignedtransactionsItem.transactionAmount,
+                                                                                                clearUnsetFields: false,
+                                                                                              ),
+                                                                                              expChargeDate: functions.addDaysToDate(unassignedtransactionsItem.trasactionDate, functions.setNewExpectedSubDate(subscriptionsItem)),
+                                                                                            ),
                                                                                             'transactions': FieldValue.arrayUnion([
                                                                                               unassignedtransactionsItem.reference
                                                                                             ]),
@@ -792,27 +880,9 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                           };
                                                                                           await subscriptionsItem.reference.update(subscriptionsUpdateData);
                                                                                         }
-                                                                                      } else {
-                                                                                        final subscriptionsUpdateData = {
-                                                                                          ...createSubscriptionsRecordData(
-                                                                                            lastChargeDate: unassignedtransactionsItem.trasactionDate,
-                                                                                            lastCharge: createMoneyStruct(
-                                                                                              amount: unassignedtransactionsItem.transactionAmount,
-                                                                                              clearUnsetFields: false,
-                                                                                            ),
-                                                                                            expChargeDate: functions.addDaysToDate(unassignedtransactionsItem.trasactionDate, functions.setNewExpectedSubDate(subscriptionsItem)),
-                                                                                          ),
-                                                                                          'transactions': FieldValue.arrayUnion([
-                                                                                            unassignedtransactionsItem.reference
-                                                                                          ]),
-                                                                                          'narrations': FieldValue.arrayUnion([
-                                                                                            unassignedtransactionsItem.transactionNarration
-                                                                                          ]),
-                                                                                        };
-                                                                                        await subscriptionsItem.reference.update(subscriptionsUpdateData);
-                                                                                      }
 
-                                                                                      Navigator.pop(context);
+                                                                                        Navigator.pop(context);
+                                                                                      }
                                                                                     },
                                                                                     text: subscriptionsItem.name!,
                                                                                     options: FFButtonOptions(
