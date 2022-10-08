@@ -196,13 +196,18 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                         snapshot.data!;
                                     return InkWell(
                                       onTap: () async {
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                AssignTransactionsWidget(),
-                                          ),
-                                        );
+                                        if (badgeTransactionsRecordList.length >
+                                            0) {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AssignTransactionsWidget(),
+                                            ),
+                                          );
+                                        } else {
+                                          return;
+                                        }
                                       },
                                       child: Badge(
                                         badgeContent: Text(
