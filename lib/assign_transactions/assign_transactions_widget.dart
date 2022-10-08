@@ -693,6 +693,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                         },
                                                                                       ).then((value) => setState(() {}));
 
+                                                                                      await Future.delayed(const Duration(milliseconds: 1000));
                                                                                       if (containerTransactionsRecordList.length == 1) {
                                                                                         Navigator.pop(context);
 
@@ -725,7 +726,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                     text: categoriesItem.categoryName!,
                                                                                     options: FFButtonOptions(
                                                                                       height: 32,
-                                                                                      color: FlutterFlowTheme.of(context).darkPrimary,
+                                                                                      color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                       textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                                                                                             fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
                                                                                             color: FlutterFlowTheme.of(context).primaryText,
@@ -733,7 +734,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                           ),
                                                                                       elevation: 0,
                                                                                       borderSide: BorderSide(
-                                                                                        color: Colors.transparent,
+                                                                                        color: FlutterFlowTheme.of(context).primaryColor,
                                                                                         width: 1,
                                                                                       ),
                                                                                       borderRadius: BorderRadius.circular(32),
@@ -776,6 +777,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                         },
                                                                                       ).then((value) => setState(() {}));
 
+                                                                                      await Future.delayed(const Duration(milliseconds: 1000));
                                                                                       if (containerTransactionsRecordList.length == 1) {
                                                                                         Navigator.pop(context);
 
@@ -917,11 +919,15 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                     text: subscriptionsItem.name!,
                                                                                     options: FFButtonOptions(
                                                                                       height: 32,
-                                                                                      color: FlutterFlowTheme.of(context).darkPrimary,
-                                                                                      textStyle: FlutterFlowTheme.of(context).subtitle2,
+                                                                                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                      textStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                                            color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
+                                                                                          ),
                                                                                       elevation: 0,
                                                                                       borderSide: BorderSide(
-                                                                                        color: Colors.transparent,
+                                                                                        color: FlutterFlowTheme.of(context).primaryColor,
                                                                                         width: 1,
                                                                                       ),
                                                                                       borderRadius: BorderRadius.circular(32),

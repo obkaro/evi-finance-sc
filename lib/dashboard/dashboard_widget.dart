@@ -47,7 +47,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
-          duration: 600.ms,
+          duration: 300.ms,
           begin: 0,
           end: 1,
         ),
@@ -59,7 +59,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
-          duration: 600.ms,
+          duration: 300.ms,
           begin: 0,
           end: 1,
         ),
