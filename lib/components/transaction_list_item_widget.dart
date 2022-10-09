@@ -236,18 +236,8 @@ class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
                                           maxChars: 15,
                                           replacement: '…',
                                         ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .subtitle1
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle1Family,
-                                          fontSize: 16,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle1Family),
-                                        ),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
                                   ),
                                 ),
                                 Stack(
