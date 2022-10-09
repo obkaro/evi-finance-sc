@@ -390,11 +390,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                   ],
                                                 ),
                                               ),
-                                              Divider(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .fadedDivider,
-                                              ),
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(0, 10, 0, 10),
@@ -436,11 +431,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                   ],
                                                 ),
                                               ),
-                                              Divider(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .fadedDivider,
-                                              ),
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(0, 10, 0, 10),
@@ -481,11 +471,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                              Divider(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .fadedDivider,
                                               ),
                                               Padding(
                                                 padding: EdgeInsetsDirectional
