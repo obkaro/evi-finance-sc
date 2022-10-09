@@ -1,7 +1,9 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/dialog_box_widget.dart';
+import '../components/loading_empty_widget.dart';
 import '../create_budget/create_budget_widget.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -11,6 +13,8 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,13 +26,29 @@ class BudgetsWidget extends StatefulWidget {
   _BudgetsWidgetState createState() => _BudgetsWidgetState();
 }
 
-class _BudgetsWidgetState extends State<BudgetsWidget> {
+class _BudgetsWidgetState extends State<BudgetsWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'columnOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 150.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   BudgetsRecord? newBudg;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Budgets'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -132,14 +152,8 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                           // Customize what your widget looks like when it's loading.
                           if (!snapshot.hasData) {
                             return Center(
-                              child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: SpinKitRing(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  size: 50,
-                                ),
+                              child: Center(
+                                child: LoadingEmptyWidget(),
                               ),
                             );
                           }
@@ -174,14 +188,10 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                             // Customize what your widget looks like when it's loading.
                                             if (!snapshot.hasData) {
                                               return Center(
-                                                child: SizedBox(
-                                                  width: 50,
-                                                  height: 50,
-                                                  child: SpinKitRing(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                    size: 50,
+                                                child: Center(
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    child: LoadingEmptyWidget(),
                                                   ),
                                                 ),
                                               );
@@ -340,8 +350,43 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                 ],
                                                 child: ListTile(
                                                   title: Text(
+                                                    '${dateTimeFormat(
+                                                      'MMMEd',
+                                                      columnBudgetsRecord
+                                                          .budgetStart,
+                                                      locale:
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .languageCode,
+                                                    )} - ${'${dateTimeFormat(
+                                                      'MMMEd',
+                                                      columnBudgetsRecord
+                                                          .budgetEnd,
+                                                      locale:
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .languageCode,
+                                                    )}'}',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .subtitle1
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle1Family,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1Family),
+                                                          lineHeight: 2,
+                                                        ),
+                                                  ),
+                                                  subtitle: Text(
                                                     functions
-                                                        .formatTransCurrency(
+                                                        .formatBudgetCurrency(
                                                             columnBudgetsRecord
                                                                 .budgetAmount),
                                                     style: FlutterFlowTheme.of(
@@ -358,41 +403,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                                                   FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText1Family),
-                                                          lineHeight: 2,
-                                                        ),
-                                                  ),
-                                                  subtitle: Text(
-                                                    '${dateTimeFormat(
-                                                      'MMMEd',
-                                                      columnBudgetsRecord
-                                                          .budgetStart,
-                                                      locale:
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .languageCode,
-                                                    )} - ${dateTimeFormat(
-                                                      'MMMEd',
-                                                      columnBudgetsRecord
-                                                          .budgetEnd,
-                                                      locale:
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .languageCode,
-                                                    )}',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText2
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText2Family,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText2Family),
                                                           lineHeight: 2,
                                                         ),
                                                   ),
@@ -417,46 +427,49 @@ class _BudgetsWidgetState extends State<BudgetsWidget> {
                                 );
                               }),
                             ),
-                          );
+                          ).animateOnPageLoad(
+                              animationsMap['columnOnPageLoadAnimation']!);
                         },
                       ),
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                  child: Container(
-                    width: double.infinity,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'This is where your budgets live. \nSwipe left on a single budget for more options.',
-                            textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context)
-                                .bodyText2
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText2Family,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyText2Family),
-                                  lineHeight: 1.4,
-                                ),
-                          ),
-                        ],
+                if (currentUserReference == null)
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                    child: Container(
+                      width: double.infinity,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'This is where your archived budgets live. \nSwipe left on a single budget for more options.',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText2
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyText2Family,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyText2Family),
+                                    lineHeight: 1.4,
+                                  ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
               ],
             ),
           ),

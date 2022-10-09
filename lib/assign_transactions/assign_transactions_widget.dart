@@ -1,9 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/empty_list_widget.dart';
+import '../components/info_box_widget.dart';
 import '../components/loading_empty_widget.dart';
 import '../components/overlay_alert_widget.dart';
 import '../components/text_transaction_type_widget.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -11,6 +13,8 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,12 +31,72 @@ class AssignTransactionsWidget extends StatefulWidget {
       _AssignTransactionsWidgetState();
 }
 
-class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
+class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'wrapOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 250.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+    'wrapOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 250.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (FFAppState().showQuickTransAssign) {
+        await showModalBottomSheet(
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          context: context,
+          builder: (context) {
+            return Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: InfoBoxWidget(
+                heading: 'Quickly Assign Transactions',
+                body:
+                    'You can assingn multiple transactions in quick succession here. Let\'s see if you can clear that backlog of unassigned transactions huh?',
+                buttonText: 'Okay',
+                showIcon: true,
+                icon: Icon(
+                  Icons.info_outline_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 72,
+                ),
+              ),
+            );
+          },
+        ).then((value) => setState(() {}));
+
+        setState(() => FFAppState().showQuickTransAssign = false);
+      } else {
+        return;
+      }
+    });
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'assignTransactions'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -186,7 +250,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    0, 10, 0, 0),
+                                                    0, 10, 0, 10),
                                             child: Builder(
                                               builder: (context) {
                                                 final unassignedtransactions =
@@ -693,6 +757,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                         },
                                                                                       ).then((value) => setState(() {}));
 
+                                                                                      await Future.delayed(const Duration(milliseconds: 1000));
                                                                                       if (containerTransactionsRecordList.length == 1) {
                                                                                         Navigator.pop(context);
 
@@ -725,15 +790,15 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                     text: categoriesItem.categoryName!,
                                                                                     options: FFButtonOptions(
                                                                                       height: 32,
-                                                                                      color: FlutterFlowTheme.of(context).darkPrimary,
-                                                                                      textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                                                                                            fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
-                                                                                            color: FlutterFlowTheme.of(context).primaryText,
-                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                      textStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                                            color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                                           ),
                                                                                       elevation: 0,
                                                                                       borderSide: BorderSide(
-                                                                                        color: Colors.transparent,
+                                                                                        color: FlutterFlowTheme.of(context).primaryColor,
                                                                                         width: 1,
                                                                                       ),
                                                                                       borderRadius: BorderRadius.circular(32),
@@ -741,7 +806,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                     showLoadingIndicator: false,
                                                                                   );
                                                                                 }),
-                                                                              );
+                                                                              ).animateOnPageLoad(animationsMap['wrapOnPageLoadAnimation1']!);
                                                                             },
                                                                           ),
                                                                         if (FFAppState().showCategoryOrSub ==
@@ -776,6 +841,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                         },
                                                                                       ).then((value) => setState(() {}));
 
+                                                                                      await Future.delayed(const Duration(milliseconds: 1000));
                                                                                       if (containerTransactionsRecordList.length == 1) {
                                                                                         Navigator.pop(context);
 
@@ -917,11 +983,15 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                     text: subscriptionsItem.name!,
                                                                                     options: FFButtonOptions(
                                                                                       height: 32,
-                                                                                      color: FlutterFlowTheme.of(context).darkPrimary,
-                                                                                      textStyle: FlutterFlowTheme.of(context).subtitle2,
+                                                                                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                      textStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                                            color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
+                                                                                          ),
                                                                                       elevation: 0,
                                                                                       borderSide: BorderSide(
-                                                                                        color: Colors.transparent,
+                                                                                        color: FlutterFlowTheme.of(context).primaryColor,
                                                                                         width: 1,
                                                                                       ),
                                                                                       borderRadius: BorderRadius.circular(32),
@@ -929,7 +999,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget> {
                                                                                     showLoadingIndicator: false,
                                                                                   );
                                                                                 }),
-                                                                              );
+                                                                              ).animateOnPageLoad(animationsMap['wrapOnPageLoadAnimation2']!);
                                                                             },
                                                                           ),
                                                                       ],

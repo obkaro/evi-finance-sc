@@ -2,12 +2,16 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/add_recurring_payment_widget.dart';
 import '../components/empty_list_widget.dart';
+import '../components/loading_empty_widget.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../subscription_details/subscription_details_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,12 +23,28 @@ class RecurringPaymentsWidget extends StatefulWidget {
       _RecurringPaymentsWidgetState();
 }
 
-class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
+class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'containerOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 200.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'RecurringPayments'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -94,13 +114,8 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
                         return Center(
-                          child: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: SpinKitRing(
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              size: 50,
-                            ),
+                          child: Center(
+                            child: LoadingEmptyWidget(),
                           ),
                         );
                       }
@@ -335,7 +350,8 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget> {
                             },
                           ),
                         ),
-                      );
+                      ).animateOnPageLoad(
+                          animationsMap['containerOnPageLoadAnimation']!);
                     },
                   ),
                 ),

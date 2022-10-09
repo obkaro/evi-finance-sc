@@ -19,24 +19,6 @@
       ]
     },
     {
-      "collectionGroup": "transactions",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "transactionOwner",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "account",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "trasactionDate",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
       "collectionGroup": "categories",
       "queryScope": "COLLECTION",
       "fields": [

@@ -13,8 +13,8 @@ export 'budgets/budgets_widget.dart' show BudgetsWidget;
 export 'accounts/accounts_widget.dart' show AccountsWidget;
 export 'allocate_budget/allocate_budget_widget.dart' show AllocateBudgetWidget;
 export 'category_single/category_single_widget.dart' show CategorySingleWidget;
-export 'account_single/account_single_widget.dart' show AccountSingleWidget;
 export 'settings/settings_widget.dart' show SettingsWidget;
+export 'account_single/account_single_widget.dart' show AccountSingleWidget;
 export 'profile_settings/profile_settings_widget.dart'
     show ProfileSettingsWidget;
 export 'landing_page_view/landing_page_view_widget.dart'

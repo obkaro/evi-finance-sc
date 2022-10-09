@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/loading_transaction_widget.dart';
 import '../components/transaction_list_item_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -137,16 +138,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                         // Customize what your widget looks like when it's loading.
                                         if (!snapshot.hasData) {
                                           return Center(
-                                            child: SizedBox(
-                                              width: 50,
-                                              height: 50,
-                                              child: SpinKitRing(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                size: 50,
-                                              ),
-                                            ),
+                                            child: LoadingTransactionWidget(),
                                           );
                                         }
                                         List<TransactionsRecord>
@@ -191,16 +183,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                         // Customize what your widget looks like when it's loading.
                                         if (!snapshot.hasData) {
                                           return Center(
-                                            child: SizedBox(
-                                              width: 50,
-                                              height: 50,
-                                              child: SpinKitRing(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                size: 50,
-                                              ),
-                                            ),
+                                            child: LoadingTransactionWidget(),
                                           );
                                         }
                                         List<TransactionsRecord>

@@ -6,29 +6,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DialogBoxWidget extends StatefulWidget {
-  const DialogBoxWidget({
+class InfoBoxWidget extends StatefulWidget {
+  const InfoBoxWidget({
     Key? key,
     this.heading,
     this.body,
-    this.buttonYes,
-    this.buttonNo,
-    this.information,
-    this.yesAction,
+    this.buttonText,
+    this.showIcon,
+    this.icon,
   }) : super(key: key);
 
   final String? heading;
   final String? body;
-  final String? buttonYes;
-  final String? buttonNo;
-  final bool? information;
-  final Future<dynamic> Function()? yesAction;
+  final String? buttonText;
+  final bool? showIcon;
+  final Widget? icon;
 
   @override
-  _DialogBoxWidgetState createState() => _DialogBoxWidgetState();
+  _InfoBoxWidgetState createState() => _InfoBoxWidgetState();
 }
 
-class _DialogBoxWidgetState extends State<DialogBoxWidget> {
+class _InfoBoxWidgetState extends State<InfoBoxWidget> {
   @override
   void initState() {
     super.initState();
@@ -85,6 +83,7 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                         ],
                       ),
                     ),
+                    if (widget.showIcon ?? true) widget.icon!,
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
                       child: Row(
@@ -138,39 +137,12 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          if (!widget.information!)
-                            Expanded(
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  setState(() =>
-                                      FFAppState().dialogBoxReturn = false);
-                                  Navigator.pop(context);
-                                },
-                                text: widget.buttonNo!,
-                                options: FFButtonOptions(
-                                  width: double.infinity,
-                                  height: 30,
-                                  color: Color(0x00D2D2D2),
-                                  textStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
-                                  elevation: 0,
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                              ),
-                            ),
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
-                                setState(
-                                    () => FFAppState().dialogBoxReturn = true);
-                                await widget.yesAction?.call();
                                 Navigator.pop(context);
                               },
-                              text: widget.buttonYes!,
+                              text: widget.buttonText!,
                               options: FFButtonOptions(
                                 width: double.infinity,
                                 height: 60,
