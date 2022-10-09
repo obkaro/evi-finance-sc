@@ -47,19 +47,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
-          duration: 300.ms,
-          begin: 0,
-          end: 1,
-        ),
-      ],
-    ),
-    'rowOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
+          duration: 150.ms,
           begin: 0,
           end: 1,
         ),
@@ -71,6 +59,12 @@ class _DashboardWidgetState extends State<DashboardWidget>
   @override
   void initState() {
     super.initState();
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -545,8 +539,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                           ),
                                         );
                                       }),
-                                    ).animateOnPageLoad(animationsMap[
-                                        'rowOnPageLoadAnimation']!);
+                                    );
                                   },
                                 ),
                               ),
@@ -855,7 +848,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(32, 16, 32, 8),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
                               padding:

@@ -6,6 +6,7 @@ import '../components/create_custom_category_widget.dart';
 import '../components/edit_category_widget.dart';
 import '../components/empty_list_widget.dart';
 import '../components/loading_catlist_widget.dart';
+import '../components/loading_empty_widget.dart';
 import '../components/progress_bar_widget.dart';
 import '../create_budget/create_budget_widget.dart';
 import '../edit_budget/edit_budget_widget.dart';
@@ -99,13 +100,8 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
               // Customize what your widget looks like when it's loading.
               if (!snapshot.hasData) {
                 return Center(
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: SpinKitRing(
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 50,
-                    ),
+                  child: Center(
+                    child: LoadingEmptyWidget(),
                   ),
                 );
               }

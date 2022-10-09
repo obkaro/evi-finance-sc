@@ -35,7 +35,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
-          duration: 250.ms,
+          duration: 150.ms,
           begin: 0,
           end: 1,
         ),
@@ -152,14 +152,8 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
                           // Customize what your widget looks like when it's loading.
                           if (!snapshot.hasData) {
                             return Center(
-                              child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: SpinKitRing(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  size: 50,
-                                ),
+                              child: Center(
+                                child: LoadingEmptyWidget(),
                               ),
                             );
                           }
@@ -440,40 +434,42 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                  child: Container(
-                    width: double.infinity,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'This is where your archived budgets live. \nSwipe left on a single budget for more options.',
-                            textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context)
-                                .bodyText2
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText2Family,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyText2Family),
-                                  lineHeight: 1.4,
-                                ),
-                          ),
-                        ],
+                if (currentUserReference == null)
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                    child: Container(
+                      width: double.infinity,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'This is where your archived budgets live. \nSwipe left on a single budget for more options.',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText2
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyText2Family,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyText2Family),
+                                    lineHeight: 1.4,
+                                  ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
               ],
             ),
           ),

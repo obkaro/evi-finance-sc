@@ -34,7 +34,7 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
-          duration: 200.ms,
+          duration: 150.ms,
           begin: 0,
           end: 1,
         ),
@@ -95,9 +95,7 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
             return Container(
               width: double.infinity,
               height: double.infinity,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-              ),
+              decoration: BoxDecoration(),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [

@@ -47,7 +47,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
-          duration: 250.ms,
+          duration: 150.ms,
           begin: 0,
           end: 1,
         ),
@@ -60,7 +60,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 150.ms,
-          duration: 250.ms,
+          duration: 150.ms,
           begin: 0,
           end: 1,
         ),
