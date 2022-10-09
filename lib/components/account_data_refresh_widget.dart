@@ -307,6 +307,7 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                                 ),
                                 borderRadius: BorderRadius.circular(16),
                               ),
+                              showLoadingIndicator: false,
                             ),
                           ),
                         ],
