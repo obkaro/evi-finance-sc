@@ -154,6 +154,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                   columnTransactionsRecordList[
                                                       columnIndex];
                                               return TransactionListItemWidget(
+                                                key: Key(
+                                                    'transactionListItem_${columnIndex}'),
                                                 transactionDoc:
                                                     columnTransactionsRecord,
                                               );
@@ -199,6 +201,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                   columnTransactionsRecordList[
                                                       columnIndex];
                                               return TransactionListItemWidget(
+                                                key: Key(
+                                                    'transactionListItem_${columnIndex}'),
                                                 transactionDoc:
                                                     columnTransactionsRecord,
                                               );

@@ -67,11 +67,11 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
         if (!snapshot.hasData) {
           return Center(
             child: SizedBox(
-              width: 50,
-              height: 50,
-              child: SpinKitRing(
+              width: 42,
+              height: 42,
+              child: SpinKitChasingDots(
                 color: FlutterFlowTheme.of(context).primaryColor,
-                size: 50,
+                size: 42,
               ),
             ),
           );
@@ -371,13 +371,13 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                       if (!snapshot.hasData) {
                                         return Center(
                                           child: SizedBox(
-                                            width: 50,
-                                            height: 50,
-                                            child: SpinKitRing(
+                                            width: 42,
+                                            height: 42,
+                                            child: SpinKitChasingDots(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
-                                              size: 50,
+                                              size: 42,
                                             ),
                                           ),
                                         );
@@ -399,14 +399,14 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                 if (!snapshot.hasData) {
                                                   return Center(
                                                     child: SizedBox(
-                                                      width: 50,
-                                                      height: 50,
-                                                      child: SpinKitRing(
+                                                      width: 42,
+                                                      height: 42,
+                                                      child: SpinKitChasingDots(
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primaryColor,
-                                                        size: 50,
+                                                        size: 42,
                                                       ),
                                                     ),
                                                   );
@@ -709,24 +709,26 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                               child: Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: SwitchListTile(
-                                    value: switchListTileValue ??=
-                                        editSubsciptionSubscriptionsRecord
-                                            .notification!,
-                                    onChanged: (newValue) => setState(
-                                        () => switchListTileValue = newValue),
-                                    title: Text(
-                                      'Remind me',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
-                                    ),
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    dense: false,
-                                    controlAffinity:
-                                        ListTileControlAffinity.leading,
+                                child: SwitchListTile(
+                                  value: switchListTileValue ??=
+                                      editSubsciptionSubscriptionsRecord
+                                          .notification!,
+                                  onChanged: (newValue) async {
+                                    setState(
+                                        () => switchListTileValue = newValue!);
+                                  },
+                                  title: Text(
+                                    'Remind me',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
+                                  activeColor:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  dense: false,
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
                                   ),
                                 ),
                               ),
@@ -756,12 +758,12 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                 if (!snapshot.hasData) {
                                   return Center(
                                     child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitRing(
+                                      width: 42,
+                                      height: 42,
+                                      child: SpinKitChasingDots(
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
-                                        size: 50,
+                                        size: 42,
                                       ),
                                     ),
                                   );

@@ -75,11 +75,11 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
               if (!snapshot.hasData) {
                 return Center(
                   child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: SpinKitRing(
+                    width: 42,
+                    height: 42,
+                    child: SpinKitChasingDots(
                       color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 50,
+                      size: 42,
                     ),
                   ),
                 );
@@ -577,12 +577,12 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                             if (!snapshot.hasData) {
                               return Center(
                                 child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: SpinKitRing(
+                                  width: 42,
+                                  height: 42,
+                                  child: SpinKitChasingDots(
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
-                                    size: 50,
+                                    size: 42,
                                   ),
                                 ),
                               );
