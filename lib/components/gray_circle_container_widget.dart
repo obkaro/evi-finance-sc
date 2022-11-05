@@ -29,7 +29,7 @@ class _GrayCircleContainerWidgetState extends State<GrayCircleContainerWidget> {
         shape: BoxShape.circle,
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+        padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
         child: Container(
           width: double.infinity,
           height: double.infinity,

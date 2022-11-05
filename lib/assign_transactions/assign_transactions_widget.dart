@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/empty_list_widget.dart';
+import '../components/empty_loading_text_widget.dart';
 import '../components/info_box_widget.dart';
 import '../components/loading_empty_widget.dart';
 import '../components/overlay_alert_widget.dart';
@@ -89,8 +90,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
               padding: MediaQuery.of(context).viewInsets,
               child: InfoBoxWidget(
                 heading: 'Quickly Assign Transactions',
-                body:
-                    'You can assingn multiple transactions in quick succession here. Let\'s see if you can clear that backlog of unassigned transactions huh?',
+                body: 'Asingn multiple transactions in quick succession.',
                 buttonText: 'Okay',
                 showIcon: true,
                 icon: Icon(
@@ -697,6 +697,11 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                           Builder(
                                                                                             builder: (context) {
                                                                                               final categories = containerCategoriesRecordList.toList();
+                                                                                              if (categories.isEmpty) {
+                                                                                                return EmptyLoadingTextWidget(
+                                                                                                  text: 'No categories added yet',
+                                                                                                );
+                                                                                              }
                                                                                               return Wrap(
                                                                                                 spacing: 8,
                                                                                                 runSpacing: 8,
@@ -779,6 +784,11 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                           Builder(
                                                                                             builder: (context) {
                                                                                               final subscriptions = containerSubscriptionsRecordList.toList();
+                                                                                              if (subscriptions.isEmpty) {
+                                                                                                return EmptyLoadingTextWidget(
+                                                                                                  text: 'No subscriptions added yet',
+                                                                                                );
+                                                                                              }
                                                                                               return Wrap(
                                                                                                 spacing: 8,
                                                                                                 runSpacing: 8,
@@ -1026,6 +1036,11 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                   child: Builder(
                                                                                     builder: (context) {
                                                                                       final incomeSources = containerIncomeCategoriesRecordList.toList();
+                                                                                      if (incomeSources.isEmpty) {
+                                                                                        return EmptyLoadingTextWidget(
+                                                                                          text: 'No income sources added yet',
+                                                                                        );
+                                                                                      }
                                                                                       return Wrap(
                                                                                         spacing: 8,
                                                                                         runSpacing: 8,

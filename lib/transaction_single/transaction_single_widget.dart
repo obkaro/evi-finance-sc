@@ -1,7 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/add_recurring_payment_widget.dart';
-import '../components/assign_transaction_widget.dart';
 import '../components/create_custom_category_widget.dart';
 import '../components/loading_empty_widget.dart';
 import '../components/new_income_source_widget.dart';
@@ -1932,21 +1931,17 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                           final iconButtonBudgetsRecord =
                                                               snapshot.data!;
                                                           return FlutterFlowIconButton(
-                                                            borderColor:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryColor,
                                                             borderRadius: 30,
                                                             borderWidth: 1,
                                                             buttonSize: 40,
-                                                            fillColor: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
+                                                            fillColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
                                                             icon: Icon(
                                                               Icons.add,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryColor,
+                                                              color:
+                                                                  Colors.white,
                                                               size: 16,
                                                             ),
                                                             onPressed:
@@ -2131,10 +2126,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                             0),
                                                                 child:
                                                                     FlutterFlowIconButton(
-                                                                  borderColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryColor,
                                                                   borderRadius:
                                                                       30,
                                                                   borderWidth:
@@ -2143,12 +2134,11 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                       40,
                                                                   fillColor: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .secondaryBackground,
+                                                                      .primaryColor,
                                                                   icon: Icon(
                                                                     Icons.add,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryColor,
+                                                                    color: Colors
+                                                                        .white,
                                                                     size: 16,
                                                                   ),
                                                                   onPressed:
@@ -2333,89 +2323,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                 Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    if (widget.transaction!.transactionType ==
-                                        'debit')
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 16),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            if (currentUserDocument!
-                                                    .activeBudget !=
-                                                null)
-                                              Expanded(
-                                                child: AuthUserStreamWidget(
-                                                  child: FFButtonWidget(
-                                                    onPressed: () async {
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return Padding(
-                                                            padding:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .viewInsets,
-                                                            child:
-                                                                AssignTransactionWidget(
-                                                              transaction:
-                                                                  columnTransactionsRecord,
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).then((value) =>
-                                                          setState(() {}));
-                                                    },
-                                                    text: 'Assign',
-                                                    icon: Icon(
-                                                      Icons.edit_rounded,
-                                                      size: 16,
-                                                    ),
-                                                    options: FFButtonOptions(
-                                                      width: 130,
-                                                      height: 60,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle2
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle2Family,
-                                                                color: Colors
-                                                                    .white,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .subtitle2Family),
-                                                              ),
-                                                      elevation: 2,
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              16),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                          ],
-                                        ),
-                                      ),
                                     if (widget.transaction!.transactionType ==
                                         'debit')
                                       Padding(
