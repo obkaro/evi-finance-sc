@@ -889,8 +889,11 @@ class _DashboardWidgetState extends State<DashboardWidget>
                           child: StreamBuilder<List<TransactionsRecord>>(
                             stream: queryTransactionsRecord(
                               queryBuilder: (transactionsRecord) =>
-                                  transactionsRecord.where('transactionOwner',
-                                      isEqualTo: currentUserReference),
+                                  transactionsRecord
+                                      .where('transactionOwner',
+                                          isEqualTo: currentUserReference)
+                                      .orderBy('trasactionDate',
+                                          descending: true),
                               limit: 7,
                             ),
                             builder: (context, snapshot) {
