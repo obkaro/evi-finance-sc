@@ -126,7 +126,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                 ),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      8, 8, 8, 8),
+                                      10, 10, 10, 10),
                                   child: Hero(
                                     tag: gridViewConstMerchantsRecord.logo!,
                                     transitionOnUserGestures: true,

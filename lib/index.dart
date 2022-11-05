@@ -23,6 +23,8 @@ export 'welcome_to_evi/welcome_to_evi_widget.dart' show WelcomeToEviWidget;
 export 'first_budget/first_budget_widget.dart' show FirstBudgetWidget;
 export 'transaction_single/transaction_single_widget.dart'
     show TransactionSingleWidget;
+export 'assign_transactions/assign_transactions_widget.dart'
+    show AssignTransactionsWidget;
 export 'recurring_payments/recurring_payments_widget.dart'
     show RecurringPaymentsWidget;
 export 'create_recurring/create_recurring_widget.dart'
@@ -34,6 +36,4 @@ export 'subscription_details/subscription_details_widget.dart'
 export 'edit_income_sources/edit_income_sources_widget.dart'
     show EditIncomeSourcesWidget;
 export 'menu/menu_widget.dart' show MenuWidget;
-export 'assign_transactions/assign_transactions_widget.dart'
-    show AssignTransactionsWidget;
 export 'email_auth/email_auth_widget.dart' show EmailAuthWidget;
