@@ -848,7 +848,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(32, 16, 32, 8),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
                               padding:
@@ -933,6 +933,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                       listViewTransactionsRecordList[
                                           listViewIndex];
                                   return TransactionListItemWidget(
+                                    key: Key(
+                                        'transactionListItem_${listViewIndex}'),
                                     transactionDoc: listViewTransactionsRecord,
                                   );
                                 },

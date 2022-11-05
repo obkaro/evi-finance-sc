@@ -123,11 +123,11 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
               if (!snapshot.hasData) {
                 return Center(
                   child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: SpinKitRing(
+                    width: 42,
+                    height: 42,
+                    child: SpinKitChasingDots(
                       color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 50,
+                      size: 42,
                     ),
                   ),
                 );
@@ -147,12 +147,12 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                           if (!snapshot.hasData) {
                             return Center(
                               child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: SpinKitRing(
+                                width: 42,
+                                height: 42,
+                                child: SpinKitChasingDots(
                                   color:
                                       FlutterFlowTheme.of(context).primaryColor,
-                                  size: 50,
+                                  size: 42,
                                 ),
                               ),
                             );
@@ -1175,14 +1175,14 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                               .hasData) {
                                                             return Center(
                                                               child: SizedBox(
-                                                                width: 50,
-                                                                height: 50,
+                                                                width: 42,
+                                                                height: 42,
                                                                 child:
-                                                                    SpinKitRing(
+                                                                    SpinKitChasingDots(
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryColor,
-                                                                  size: 50,
+                                                                  size: 42,
                                                                 ),
                                                               ),
                                                             );
@@ -1449,17 +1449,11 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                     .hasData) {
                                                                   return Center(
                                                                     child:
-                                                                        SizedBox(
-                                                                      width: 50,
+                                                                        Container(
                                                                       height:
-                                                                          50,
+                                                                          72,
                                                                       child:
-                                                                          SpinKitRing(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primaryColor,
-                                                                        size:
-                                                                            50,
-                                                                      ),
+                                                                          LoadingEmptyWidget(),
                                                                     ),
                                                                   );
                                                                 }
@@ -1601,16 +1595,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                   .hasData) {
                                                                 return Center(
                                                                   child:
-                                                                      SizedBox(
-                                                                    width: 50,
-                                                                    height: 50,
+                                                                      Container(
+                                                                    height: 72,
                                                                     child:
-                                                                        SpinKitRing(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryColor,
-                                                                      size: 50,
-                                                                    ),
+                                                                        LoadingEmptyWidget(),
                                                                   ),
                                                                 );
                                                               }
