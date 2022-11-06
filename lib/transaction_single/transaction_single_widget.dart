@@ -938,6 +938,25 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                           ),
                                                           InkWell(
                                                             onTap: () async {
+                                                              final subscriptionsUpdateData =
+                                                                  {
+                                                                'narrations':
+                                                                    FieldValue
+                                                                        .arrayRemove([
+                                                                  columnTransactionsRecord
+                                                                      .transactionNarration
+                                                                ]),
+                                                                'transactions':
+                                                                    FieldValue
+                                                                        .arrayRemove([
+                                                                  columnTransactionsRecord
+                                                                      .reference
+                                                                ]),
+                                                              };
+                                                              await columnTransactionsRecord
+                                                                  .recurringRef!
+                                                                  .update(
+                                                                      subscriptionsUpdateData);
                                                               // Action_CategorizeTrans
 
                                                               final transactionsUpdateData =
@@ -972,26 +991,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                   .reference
                                                                   .update(
                                                                       transactionsUpdateData);
-
-                                                              final subscriptionsUpdateData =
-                                                                  {
-                                                                'narrations':
-                                                                    FieldValue
-                                                                        .arrayRemove([
-                                                                  columnTransactionsRecord
-                                                                      .transactionNarration
-                                                                ]),
-                                                                'transactions':
-                                                                    FieldValue
-                                                                        .arrayRemove([
-                                                                  columnTransactionsRecord
-                                                                      .reference
-                                                                ]),
-                                                              };
-                                                              await columnTransactionsRecord
-                                                                  .recurringRef!
-                                                                  .update(
-                                                                      subscriptionsUpdateData);
                                                             },
                                                             child: Icon(
                                                               Icons
@@ -2075,46 +2074,56 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                     .spaceBetween,
                                                             children: [
                                                               Expanded(
-                                                                child:
-                                                                    FFButtonWidget(
-                                                                  onPressed:
-                                                                      () {
-                                                                    print(
-                                                                        'Button pressed ...');
-                                                                  },
-                                                                  text:
-                                                                      'Income Sources',
-                                                                  options:
-                                                                      FFButtonOptions(
-                                                                    height: 40,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryColor,
-                                                                    textStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .subtitle2
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              FlutterFlowTheme.of(context).subtitle2Family,
-                                                                          color:
-                                                                              Colors.white,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
-                                                                        ),
-                                                                    elevation:
-                                                                        0,
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: Colors
-                                                                          .transparent,
-                                                                      width: 1,
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          8,
+                                                                          0),
+                                                                  child:
+                                                                      FFButtonWidget(
+                                                                    onPressed:
+                                                                        () {
+                                                                      print(
+                                                                          'Button pressed ...');
+                                                                    },
+                                                                    text:
+                                                                        'Income Sources',
+                                                                    options:
+                                                                        FFButtonOptions(
+                                                                      height:
+                                                                          40,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryColor,
+                                                                      textStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .subtitle2
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                FlutterFlowTheme.of(context).subtitle2Family,
+                                                                            color:
+                                                                                Colors.white,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                          ),
+                                                                      elevation:
+                                                                          0,
+                                                                      borderSide:
+                                                                          BorderSide(
+                                                                        color: Colors
+                                                                            .transparent,
+                                                                        width:
+                                                                            1,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              12),
                                                                     ),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            12),
+                                                                    showLoadingIndicator:
+                                                                        false,
                                                                   ),
-                                                                  showLoadingIndicator:
-                                                                      false,
                                                                 ),
                                                               ),
                                                               Padding(
@@ -2321,98 +2330,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                       ),
                                     ],
                                   ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    if (widget.transaction!.transactionType ==
-                                        'debit')
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 16),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            if (columnTransactionsRecord
-                                                    .transactionCategory !=
-                                                null)
-                                              Expanded(
-                                                child: FFButtonWidget(
-                                                  onPressed: () async {
-                                                    // Action_CategorizeTrans
-
-                                                    final transactionsUpdateData =
-                                                        {
-                                                      ...createTransactionsRecordData(
-                                                        categoryDetails:
-                                                            createCategoryDetailsStruct(
-                                                                delete: true),
-                                                        subscriptionDetails:
-                                                            createSubscriptionDetailsStruct(
-                                                                delete: true),
-                                                        isAssigned: false,
-                                                      ),
-                                                      'transactionCategory':
-                                                          FieldValue.delete(),
-                                                      'recurringRef':
-                                                          FieldValue.delete(),
-                                                      'transactionBudget':
-                                                          FieldValue.delete(),
-                                                      'dateAssigned':
-                                                          FieldValue.delete(),
-                                                    };
-                                                    await widget
-                                                        .transaction!.reference
-                                                        .update(
-                                                            transactionsUpdateData);
-                                                    Navigator.pop(context);
-                                                  },
-                                                  text: 'Clear Assignment',
-                                                  icon: Icon(
-                                                    Icons.clear_rounded,
-                                                    size: 16,
-                                                  ),
-                                                  options: FFButtonOptions(
-                                                    width: 130,
-                                                    height: 60,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .fadedDivider,
-                                                    textStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .subtitle2
-                                                            .override(
-                                                              fontFamily:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .subtitle2Family,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryText,
-                                                              useGoogleFonts: GoogleFonts
-                                                                      .asMap()
-                                                                  .containsKey(
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .subtitle2Family),
-                                                            ),
-                                                    borderSide: BorderSide(
-                                                      color: Colors.transparent,
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            16),
-                                                  ),
-                                                ),
-                                              ),
-                                          ],
-                                        ),
-                                      ),
-                                  ],
-                                ),
                               ],
                             ),
                           );
