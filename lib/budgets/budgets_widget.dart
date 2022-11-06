@@ -369,18 +369,21 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
                                                     )}'}',
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .subtitle1
+                                                        .subtitle2
                                                         .override(
                                                           fontFamily:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .subtitle1Family,
+                                                                  .subtitle2Family,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
                                                           useGoogleFonts: GoogleFonts
                                                                   .asMap()
                                                               .containsKey(
                                                                   FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle1Family),
+                                                                      .subtitle2Family),
                                                           lineHeight: 2,
                                                         ),
                                                   ),
@@ -397,6 +400,9 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .bodyText1Family,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
                                                           useGoogleFonts: GoogleFonts
                                                                   .asMap()
                                                               .containsKey(

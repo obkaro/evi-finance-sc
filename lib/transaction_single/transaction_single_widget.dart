@@ -1,17 +1,24 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/assign_transaction_widget.dart';
+import '../components/add_recurring_payment_widget.dart';
+import '../components/create_custom_category_widget.dart';
+import '../components/loading_empty_widget.dart';
 import '../components/new_income_source_widget.dart';
+import '../components/overlay_alert_widget.dart';
 import '../components/text_transaction_type_widget.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,13 +36,53 @@ class TransactionSingleWidget extends StatefulWidget {
       _TransactionSingleWidgetState();
 }
 
-class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
+class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'wrapOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 250.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+    'wrapOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 250.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+    'wrapOnPageLoadAnimation3': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 250.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   DateTime? datePicked;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'TransactionSingle'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -75,11 +122,11 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
               if (!snapshot.hasData) {
                 return Center(
                   child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: SpinKitRing(
+                    width: 42,
+                    height: 42,
+                    child: SpinKitChasingDots(
                       color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 50,
+                      size: 42,
                     ),
                   ),
                 );
@@ -99,12 +146,12 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                           if (!snapshot.hasData) {
                             return Center(
                               child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: SpinKitRing(
+                                width: 42,
+                                height: 42,
+                                child: SpinKitChasingDots(
                                   color:
                                       FlutterFlowTheme.of(context).primaryColor,
-                                  size: 50,
+                                  size: 42,
                                 ),
                               ),
                             );
@@ -874,72 +921,85 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                           ],
                                                         ),
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(0, 0,
-                                                                    0, 10),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Text(
-                                                              columnTransactionsRecord
-                                                                  .categoryDetails
-                                                                  .name!,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .subtitle1,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                            ],
-                                          ),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              if (columnTransactionsRecord
-                                                      .recurringRef !=
-                                                  null)
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 10, 0, 0),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
                                                       Row(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0,
-                                                                        0,
-                                                                        4,
-                                                                        0),
-                                                            child: Icon(
-                                                              Icons
-                                                                  .credit_card_rounded,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryText,
-                                                              size: 24,
-                                                            ),
-                                                          ),
                                                           Text(
                                                             columnTransactionsRecord
-                                                                .subscriptionDetails
+                                                                .categoryDetails
                                                                 .name!,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .subtitle1,
+                                                          ),
+                                                          InkWell(
+                                                            onTap: () async {
+                                                              final subscriptionsUpdateData =
+                                                                  {
+                                                                'narrations':
+                                                                    FieldValue
+                                                                        .arrayRemove([
+                                                                  columnTransactionsRecord
+                                                                      .transactionNarration
+                                                                ]),
+                                                                'transactions':
+                                                                    FieldValue
+                                                                        .arrayRemove([
+                                                                  columnTransactionsRecord
+                                                                      .reference
+                                                                ]),
+                                                              };
+                                                              await columnTransactionsRecord
+                                                                  .recurringRef!
+                                                                  .update(
+                                                                      subscriptionsUpdateData);
+                                                              // Action_CategorizeTrans
+
+                                                              final transactionsUpdateData =
+                                                                  {
+                                                                ...createTransactionsRecordData(
+                                                                  categoryDetails:
+                                                                      createCategoryDetailsStruct(
+                                                                          delete:
+                                                                              true),
+                                                                  subscriptionDetails:
+                                                                      createSubscriptionDetailsStruct(
+                                                                          delete:
+                                                                              true),
+                                                                  isAssigned:
+                                                                      false,
+                                                                ),
+                                                                'transactionCategory':
+                                                                    FieldValue
+                                                                        .delete(),
+                                                                'recurringRef':
+                                                                    FieldValue
+                                                                        .delete(),
+                                                                'transactionBudget':
+                                                                    FieldValue
+                                                                        .delete(),
+                                                                'dateAssigned':
+                                                                    FieldValue
+                                                                        .delete(),
+                                                              };
+                                                              await widget
+                                                                  .transaction!
+                                                                  .reference
+                                                                  .update(
+                                                                      transactionsUpdateData);
+                                                            },
+                                                            child: Icon(
+                                                              Icons
+                                                                  .cancel_rounded,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryText,
+                                                              size: 24,
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
@@ -948,186 +1008,1013 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                 ),
                                             ],
                                           ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 10, 0, 10),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                if (columnTransactionsRecord
+                                                        .recurringRef !=
+                                                    null)
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 10, 0, 0),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          4,
+                                                                          0),
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .credit_card_rounded,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
+                                                                    size: 24,
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  columnTransactionsRecord
+                                                                      .subscriptionDetails
+                                                                      .name!,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            InkWell(
+                                                              onTap: () async {
+                                                                // Action_CategorizeTrans
+
+                                                                final transactionsUpdateData =
+                                                                    {
+                                                                  ...createTransactionsRecordData(
+                                                                    subscriptionDetails:
+                                                                        createSubscriptionDetailsStruct(
+                                                                            delete:
+                                                                                true),
+                                                                  ),
+                                                                  'recurringRef':
+                                                                      FieldValue
+                                                                          .delete(),
+                                                                };
+                                                                await widget
+                                                                    .transaction!
+                                                                    .reference
+                                                                    .update(
+                                                                        transactionsUpdateData);
+
+                                                                final subscriptionsUpdateData =
+                                                                    {
+                                                                  'narrations':
+                                                                      FieldValue
+                                                                          .arrayRemove([
+                                                                    columnTransactionsRecord
+                                                                        .transactionNarration
+                                                                  ]),
+                                                                  'transactions':
+                                                                      FieldValue
+                                                                          .arrayRemove([
+                                                                    columnTransactionsRecord
+                                                                        .reference
+                                                                  ]),
+                                                                };
+                                                                await columnTransactionsRecord
+                                                                    .recurringRef!
+                                                                    .update(
+                                                                        subscriptionsUpdateData);
+                                                              },
+                                                              child: Icon(
+                                                                Icons
+                                                                    .cancel_rounded,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                                size: 24,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                              ],
+                                            ),
+                                          ),
+                                          if (columnTransactionsRecord
+                                                  .incomeCategory !=
+                                              null)
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 10, 0, 10),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 0, 0, 4),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Text(
+                                                          'Income Source',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText2,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      StreamBuilder<
+                                                          IncomeCategoriesRecord>(
+                                                        stream: IncomeCategoriesRecord
+                                                            .getDocument(
+                                                                columnTransactionsRecord
+                                                                    .incomeCategory!),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          // Customize what your widget looks like when it's loading.
+                                                          if (!snapshot
+                                                              .hasData) {
+                                                            return Center(
+                                                              child: SizedBox(
+                                                                width: 42,
+                                                                height: 42,
+                                                                child:
+                                                                    SpinKitChasingDots(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryColor,
+                                                                  size: 42,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          }
+                                                          final textIncomeCategoriesRecord =
+                                                              snapshot.data!;
+                                                          return Text(
+                                                            textIncomeCategoriesRecord
+                                                                .categoryName!,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .subtitle1,
+                                                          );
+                                                        },
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          final transactionsUpdateData =
+                                                              {
+                                                            ...createTransactionsRecordData(
+                                                              incomeDetails:
+                                                                  createIncomeDetailsStruct(
+                                                                      delete:
+                                                                          true),
+                                                              isAssigned: false,
+                                                            ),
+                                                            'incomeCategory':
+                                                                FieldValue
+                                                                    .delete(),
+                                                            'dateAssigned':
+                                                                FieldValue
+                                                                    .delete(),
+                                                          };
+                                                          await columnTransactionsRecord
+                                                              .reference
+                                                              .update(
+                                                                  transactionsUpdateData);
+                                                        },
+                                                        child: Icon(
+                                                          Icons.cancel_rounded,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          size: 24,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                         ],
                                       ),
                                     ),
                                   ),
                                 ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    if (widget.transaction!.transactionType ==
-                                        'debit')
+                                if (columnTransactionsRecord.transactionType ==
+                                    'debit')
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 16),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            if (currentUserDocument!
-                                                    .activeBudget !=
-                                                null)
-                                              Expanded(
-                                                child: AuthUserStreamWidget(
-                                                  child: FFButtonWidget(
-                                                    onPressed: () async {
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return Padding(
-                                                            padding:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .viewInsets,
-                                                            child:
-                                                                AssignTransactionWidget(
-                                                              transaction:
-                                                                  columnTransactionsRecord,
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).then((value) =>
-                                                          setState(() {}));
-                                                    },
-                                                    text: 'Assign',
-                                                    icon: Icon(
-                                                      Icons.edit_rounded,
-                                                      size: 16,
-                                                    ),
-                                                    options: FFButtonOptions(
-                                                      width: 130,
-                                                      height: 60,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle2
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle2Family,
-                                                                color: Colors
-                                                                    .white,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .subtitle2Family),
-                                                              ),
-                                                      elevation: 2,
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              16),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                          ],
-                                        ),
-                                      ),
-                                    if (widget.transaction!.transactionType ==
-                                        'debit')
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 16),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            if (columnTransactionsRecord
-                                                    .transactionCategory !=
-                                                null)
-                                              Expanded(
-                                                child: FFButtonWidget(
-                                                  onPressed: () async {
-                                                    // Action_CategorizeTrans
-
-                                                    final transactionsUpdateData =
-                                                        {
-                                                      ...createTransactionsRecordData(
-                                                        categoryDetails:
-                                                            createCategoryDetailsStruct(
-                                                                delete: true),
-                                                        subscriptionDetails:
-                                                            createSubscriptionDetailsStruct(
-                                                                delete: true),
-                                                        isAssigned: false,
-                                                      ),
-                                                      'transactionCategory':
-                                                          FieldValue.delete(),
-                                                      'recurringRef':
-                                                          FieldValue.delete(),
-                                                      'transactionBudget':
-                                                          FieldValue.delete(),
-                                                      'dateAssigned':
-                                                          FieldValue.delete(),
-                                                    };
-                                                    await widget
-                                                        .transaction!.reference
-                                                        .update(
-                                                            transactionsUpdateData);
-                                                    Navigator.pop(context);
-                                                  },
-                                                  text: 'Clear Assignment',
-                                                  icon: Icon(
-                                                    Icons.clear_rounded,
-                                                    size: 16,
-                                                  ),
-                                                  options: FFButtonOptions(
-                                                    width: 130,
-                                                    height: 60,
+                                            0, 0, 0, 20),
+                                        child: Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(32),
+                                          ),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    20, 20, 20, 20),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  decoration: BoxDecoration(
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .fadedDivider,
-                                                    textStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .subtitle2
-                                                            .override(
-                                                              fontFamily:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .subtitle2Family,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryText,
-                                                              useGoogleFonts: GoogleFonts
-                                                                      .asMap()
-                                                                  .containsKey(
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .subtitle2Family),
+                                                        .secondaryBackground,
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 0, 0, 16),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        8,
+                                                                        0),
+                                                            child:
+                                                                FFButtonWidget(
+                                                              onPressed:
+                                                                  () async {
+                                                                setState(() =>
+                                                                    FFAppState()
+                                                                            .showCategoryOrSub =
+                                                                        'category');
+                                                              },
+                                                              text:
+                                                                  'Categories',
+                                                              options:
+                                                                  FFButtonOptions(
+                                                                width: 130,
+                                                                height: 40,
+                                                                color: FFAppState()
+                                                                            .showCategoryOrSub ==
+                                                                        'category'
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryColor
+                                                                    : FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .fadedDivider,
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle2
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .subtitle2Family,
+                                                                      color: FFAppState().showCategoryOrSub ==
+                                                                              'category'
+                                                                          ? Colors
+                                                                              .white
+                                                                          : FlutterFlowTheme.of(context)
+                                                                              .secondaryText,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).subtitle2Family),
+                                                                    ),
+                                                                elevation: 0,
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: Colors
+                                                                      .transparent,
+                                                                  width: 1,
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            12),
+                                                              ),
                                                             ),
-                                                    borderSide: BorderSide(
-                                                      color: Colors.transparent,
-                                                      width: 1,
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        8,
+                                                                        0,
+                                                                        0,
+                                                                        0),
+                                                            child:
+                                                                FFButtonWidget(
+                                                              onPressed:
+                                                                  () async {
+                                                                setState(() =>
+                                                                    FFAppState()
+                                                                            .showCategoryOrSub =
+                                                                        'sub');
+                                                              },
+                                                              text:
+                                                                  'Subscriptions',
+                                                              options:
+                                                                  FFButtonOptions(
+                                                                width: 130,
+                                                                height: 40,
+                                                                color: FFAppState()
+                                                                            .showCategoryOrSub ==
+                                                                        'sub'
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryColor
+                                                                    : FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .fadedDivider,
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle2
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .subtitle2Family,
+                                                                      color: FFAppState().showCategoryOrSub ==
+                                                                              'sub'
+                                                                          ? Colors
+                                                                              .white
+                                                                          : FlutterFlowTheme.of(context)
+                                                                              .secondaryText,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).subtitle2Family),
+                                                                    ),
+                                                                elevation: 0,
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: Colors
+                                                                      .transparent,
+                                                                  width: 1,
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            12),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            16),
                                                   ),
                                                 ),
-                                              ),
-                                          ],
+                                                Container(
+                                                  width: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    child: Stack(
+                                                      children: [
+                                                        if (FFAppState()
+                                                                .showCategoryOrSub ==
+                                                            'category')
+                                                          AuthUserStreamWidget(
+                                                            child: FutureBuilder<
+                                                                List<
+                                                                    CategoriesRecord>>(
+                                                              future:
+                                                                  queryCategoriesRecordOnce(
+                                                                parent: currentUserDocument!
+                                                                    .activeBudget,
+                                                              ),
+                                                              builder: (context,
+                                                                  snapshot) {
+                                                                // Customize what your widget looks like when it's loading.
+                                                                if (!snapshot
+                                                                    .hasData) {
+                                                                  return Center(
+                                                                    child:
+                                                                        Container(
+                                                                      height:
+                                                                          72,
+                                                                      child:
+                                                                          LoadingEmptyWidget(),
+                                                                    ),
+                                                                  );
+                                                                }
+                                                                List<CategoriesRecord>
+                                                                    wrapCategoriesRecordList =
+                                                                    snapshot
+                                                                        .data!;
+                                                                return Wrap(
+                                                                  spacing: 8,
+                                                                  runSpacing: 8,
+                                                                  alignment:
+                                                                      WrapAlignment
+                                                                          .start,
+                                                                  crossAxisAlignment:
+                                                                      WrapCrossAlignment
+                                                                          .start,
+                                                                  direction: Axis
+                                                                      .horizontal,
+                                                                  runAlignment:
+                                                                      WrapAlignment
+                                                                          .start,
+                                                                  verticalDirection:
+                                                                      VerticalDirection
+                                                                          .down,
+                                                                  clipBehavior:
+                                                                      Clip.none,
+                                                                  children: List.generate(
+                                                                      wrapCategoriesRecordList
+                                                                          .length,
+                                                                      (wrapIndex) {
+                                                                    final wrapCategoriesRecord =
+                                                                        wrapCategoriesRecordList[
+                                                                            wrapIndex];
+                                                                    return FFButtonWidget(
+                                                                      onPressed:
+                                                                          () async {
+                                                                        showModalBottomSheet(
+                                                                          isScrollControlled:
+                                                                              true,
+                                                                          backgroundColor:
+                                                                              Colors.transparent,
+                                                                          barrierColor:
+                                                                              FlutterFlowTheme.of(context).primaryBackground,
+                                                                          context:
+                                                                              context,
+                                                                          builder:
+                                                                              (context) {
+                                                                            return Padding(
+                                                                              padding: MediaQuery.of(context).viewInsets,
+                                                                              child: OverlayAlertWidget(),
+                                                                            );
+                                                                          },
+                                                                        ).then((value) =>
+                                                                            setState(() {}));
+
+                                                                        await Future.delayed(const Duration(
+                                                                            milliseconds:
+                                                                                1000));
+
+                                                                        final transactionsUpdateData =
+                                                                            createTransactionsRecordData(
+                                                                          transactionCategory:
+                                                                              wrapCategoriesRecord.reference,
+                                                                          transactionBudget:
+                                                                              currentUserDocument!.activeBudget,
+                                                                          categoryDetails:
+                                                                              createCategoryDetailsStruct(
+                                                                            name:
+                                                                                wrapCategoriesRecord.categoryName,
+                                                                            clearUnsetFields:
+                                                                                false,
+                                                                          ),
+                                                                          isAssigned:
+                                                                              true,
+                                                                          dateAssigned:
+                                                                              getCurrentTimestamp,
+                                                                        );
+                                                                        await columnTransactionsRecord
+                                                                            .reference
+                                                                            .update(transactionsUpdateData);
+                                                                        Navigator.pop(
+                                                                            context);
+                                                                      },
+                                                                      text: wrapCategoriesRecord
+                                                                          .categoryName!,
+                                                                      options:
+                                                                          FFButtonOptions(
+                                                                        height:
+                                                                            32,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                        textStyle: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                              color: FlutterFlowTheme.of(context).primaryColor,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
+                                                                            ),
+                                                                        elevation:
+                                                                            0,
+                                                                        borderSide:
+                                                                            BorderSide(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryColor,
+                                                                          width:
+                                                                              1,
+                                                                        ),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(32),
+                                                                      ),
+                                                                      showLoadingIndicator:
+                                                                          false,
+                                                                    );
+                                                                  }),
+                                                                ).animateOnPageLoad(
+                                                                    animationsMap[
+                                                                        'wrapOnPageLoadAnimation1']!);
+                                                              },
+                                                            ),
+                                                          ),
+                                                        if (FFAppState()
+                                                                .showCategoryOrSub ==
+                                                            'sub')
+                                                          FutureBuilder<
+                                                              List<
+                                                                  SubscriptionsRecord>>(
+                                                            future:
+                                                                querySubscriptionsRecordOnce(
+                                                              queryBuilder: (subscriptionsRecord) =>
+                                                                  subscriptionsRecord.where(
+                                                                      'owner',
+                                                                      isEqualTo:
+                                                                          currentUserReference),
+                                                            ),
+                                                            builder: (context,
+                                                                snapshot) {
+                                                              // Customize what your widget looks like when it's loading.
+                                                              if (!snapshot
+                                                                  .hasData) {
+                                                                return Center(
+                                                                  child:
+                                                                      Container(
+                                                                    height: 72,
+                                                                    child:
+                                                                        LoadingEmptyWidget(),
+                                                                  ),
+                                                                );
+                                                              }
+                                                              List<SubscriptionsRecord>
+                                                                  wrapSubscriptionsRecordList =
+                                                                  snapshot
+                                                                      .data!;
+                                                              return Wrap(
+                                                                spacing: 8,
+                                                                runSpacing: 8,
+                                                                alignment:
+                                                                    WrapAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    WrapCrossAlignment
+                                                                        .start,
+                                                                direction: Axis
+                                                                    .horizontal,
+                                                                runAlignment:
+                                                                    WrapAlignment
+                                                                        .start,
+                                                                verticalDirection:
+                                                                    VerticalDirection
+                                                                        .down,
+                                                                clipBehavior:
+                                                                    Clip.none,
+                                                                children: List.generate(
+                                                                    wrapSubscriptionsRecordList
+                                                                        .length,
+                                                                    (wrapIndex) {
+                                                                  final wrapSubscriptionsRecord =
+                                                                      wrapSubscriptionsRecordList[
+                                                                          wrapIndex];
+                                                                  return FFButtonWidget(
+                                                                    onPressed:
+                                                                        () async {
+                                                                      showModalBottomSheet(
+                                                                        isScrollControlled:
+                                                                            true,
+                                                                        backgroundColor:
+                                                                            Colors.transparent,
+                                                                        barrierColor:
+                                                                            FlutterFlowTheme.of(context).primaryBackground,
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            (context) {
+                                                                          return Padding(
+                                                                            padding:
+                                                                                MediaQuery.of(context).viewInsets,
+                                                                            child:
+                                                                                OverlayAlertWidget(),
+                                                                          );
+                                                                        },
+                                                                      ).then((value) =>
+                                                                          setState(
+                                                                              () {}));
+
+                                                                      await Future.delayed(const Duration(
+                                                                          milliseconds:
+                                                                              1000));
+                                                                      if (widget
+                                                                              .transaction!
+                                                                              .recurringRef !=
+                                                                          null) {
+                                                                        await actions
+                                                                            .normalizeTransSub(
+                                                                          widget
+                                                                              .transaction!,
+                                                                        );
+
+                                                                        final transactionsUpdateData =
+                                                                            createTransactionsRecordData(
+                                                                          transactionCategory:
+                                                                              wrapSubscriptionsRecord.category,
+                                                                          transactionBudget:
+                                                                              currentUserDocument!.activeBudget,
+                                                                          recurringRef:
+                                                                              wrapSubscriptionsRecord.reference,
+                                                                          categoryDetails:
+                                                                              createCategoryDetailsStruct(
+                                                                            name:
+                                                                                wrapSubscriptionsRecord.categoryDetails.name,
+                                                                            clearUnsetFields:
+                                                                                false,
+                                                                          ),
+                                                                          subscriptionDetails:
+                                                                              createSubscriptionDetailsStruct(
+                                                                            name:
+                                                                                wrapSubscriptionsRecord.name,
+                                                                            clearUnsetFields:
+                                                                                false,
+                                                                          ),
+                                                                          isAssigned:
+                                                                              true,
+                                                                          dateAssigned:
+                                                                              getCurrentTimestamp,
+                                                                        );
+                                                                        await widget
+                                                                            .transaction!
+                                                                            .reference
+                                                                            .update(transactionsUpdateData);
+                                                                        if (wrapSubscriptionsRecord.lastChargeDate !=
+                                                                            null) {
+                                                                          if (widget.transaction!.trasactionDate! >
+                                                                              wrapSubscriptionsRecord.lastChargeDate!) {
+                                                                            final subscriptionsUpdateData =
+                                                                                {
+                                                                              ...createSubscriptionsRecordData(
+                                                                                lastChargeDate: widget.transaction!.trasactionDate,
+                                                                                lastCharge: createMoneyStruct(
+                                                                                  amount: widget.transaction!.transactionAmount,
+                                                                                  clearUnsetFields: false,
+                                                                                ),
+                                                                                expChargeDate: functions.addDaysToDate(widget.transaction!.trasactionDate, functions.setNewExpectedSubDate(wrapSubscriptionsRecord)),
+                                                                              ),
+                                                                              'transactions': FieldValue.arrayUnion([
+                                                                                widget.transaction!.reference
+                                                                              ]),
+                                                                              'narrations': FieldValue.arrayUnion([
+                                                                                widget.transaction!.transactionNarration
+                                                                              ]),
+                                                                            };
+                                                                            await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData);
+                                                                          } else {
+                                                                            final subscriptionsUpdateData =
+                                                                                {
+                                                                              'transactions': FieldValue.arrayUnion([
+                                                                                widget.transaction!.reference
+                                                                              ]),
+                                                                              'narrations': FieldValue.arrayUnion([
+                                                                                widget.transaction!.transactionNarration
+                                                                              ]),
+                                                                            };
+                                                                            await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData);
+                                                                          }
+                                                                        } else {
+                                                                          final subscriptionsUpdateData =
+                                                                              {
+                                                                            ...createSubscriptionsRecordData(
+                                                                              lastChargeDate: widget.transaction!.trasactionDate,
+                                                                              lastCharge: createMoneyStruct(
+                                                                                amount: widget.transaction!.transactionAmount,
+                                                                                clearUnsetFields: false,
+                                                                              ),
+                                                                              expChargeDate: functions.addDaysToDate(widget.transaction!.trasactionDate, functions.setNewExpectedSubDate(wrapSubscriptionsRecord)),
+                                                                            ),
+                                                                            'transactions':
+                                                                                FieldValue.arrayUnion([
+                                                                              widget.transaction!.reference
+                                                                            ]),
+                                                                            'narrations':
+                                                                                FieldValue.arrayUnion([
+                                                                              widget.transaction!.transactionNarration
+                                                                            ]),
+                                                                          };
+                                                                          await wrapSubscriptionsRecord
+                                                                              .reference
+                                                                              .update(subscriptionsUpdateData);
+                                                                        }
+                                                                      } else {
+                                                                        final transactionsUpdateData =
+                                                                            createTransactionsRecordData(
+                                                                          transactionCategory:
+                                                                              wrapSubscriptionsRecord.category,
+                                                                          transactionBudget:
+                                                                              currentUserDocument!.activeBudget,
+                                                                          recurringRef:
+                                                                              wrapSubscriptionsRecord.reference,
+                                                                          categoryDetails:
+                                                                              createCategoryDetailsStruct(
+                                                                            name:
+                                                                                wrapSubscriptionsRecord.name,
+                                                                            clearUnsetFields:
+                                                                                false,
+                                                                          ),
+                                                                          subscriptionDetails:
+                                                                              createSubscriptionDetailsStruct(
+                                                                            name:
+                                                                                wrapSubscriptionsRecord.name,
+                                                                            clearUnsetFields:
+                                                                                false,
+                                                                          ),
+                                                                          isAssigned:
+                                                                              true,
+                                                                          dateAssigned:
+                                                                              getCurrentTimestamp,
+                                                                        );
+                                                                        await widget
+                                                                            .transaction!
+                                                                            .reference
+                                                                            .update(transactionsUpdateData);
+                                                                        if (wrapSubscriptionsRecord.lastChargeDate !=
+                                                                            null) {
+                                                                          if (widget.transaction!.trasactionDate! >
+                                                                              wrapSubscriptionsRecord.lastChargeDate!) {
+                                                                            final subscriptionsUpdateData =
+                                                                                {
+                                                                              ...createSubscriptionsRecordData(
+                                                                                lastChargeDate: widget.transaction!.trasactionDate,
+                                                                                lastCharge: createMoneyStruct(
+                                                                                  amount: widget.transaction!.transactionAmount,
+                                                                                  clearUnsetFields: false,
+                                                                                ),
+                                                                                expChargeDate: functions.addDaysToDate(widget.transaction!.trasactionDate, functions.setNewExpectedSubDate(wrapSubscriptionsRecord)),
+                                                                              ),
+                                                                              'transactions': FieldValue.arrayUnion([
+                                                                                widget.transaction!.reference
+                                                                              ]),
+                                                                              'narrations': FieldValue.arrayUnion([
+                                                                                widget.transaction!.transactionNarration
+                                                                              ]),
+                                                                            };
+                                                                            await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData);
+                                                                          } else {
+                                                                            final subscriptionsUpdateData =
+                                                                                {
+                                                                              'transactions': FieldValue.arrayUnion([
+                                                                                widget.transaction!.reference
+                                                                              ]),
+                                                                              'narrations': FieldValue.arrayUnion([
+                                                                                widget.transaction!.transactionNarration
+                                                                              ]),
+                                                                            };
+                                                                            await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData);
+                                                                          }
+                                                                        } else {
+                                                                          final subscriptionsUpdateData =
+                                                                              {
+                                                                            ...createSubscriptionsRecordData(
+                                                                              lastChargeDate: widget.transaction!.trasactionDate,
+                                                                              lastCharge: createMoneyStruct(
+                                                                                amount: widget.transaction!.transactionAmount,
+                                                                                clearUnsetFields: false,
+                                                                              ),
+                                                                              expChargeDate: functions.addDaysToDate(widget.transaction!.trasactionDate, functions.setNewExpectedSubDate(wrapSubscriptionsRecord)),
+                                                                            ),
+                                                                            'transactions':
+                                                                                FieldValue.arrayUnion([
+                                                                              widget.transaction!.reference
+                                                                            ]),
+                                                                            'narrations':
+                                                                                FieldValue.arrayUnion([
+                                                                              widget.transaction!.transactionNarration
+                                                                            ]),
+                                                                          };
+                                                                          await wrapSubscriptionsRecord
+                                                                              .reference
+                                                                              .update(subscriptionsUpdateData);
+                                                                        }
+                                                                      }
+
+                                                                      Navigator.pop(
+                                                                          context);
+                                                                    },
+                                                                    text: wrapSubscriptionsRecord
+                                                                        .name!,
+                                                                    options:
+                                                                        FFButtonOptions(
+                                                                      height:
+                                                                          32,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryBackground,
+                                                                      textStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                FlutterFlowTheme.of(context).bodyText1Family,
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryColor,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
+                                                                          ),
+                                                                      elevation:
+                                                                          0,
+                                                                      borderSide:
+                                                                          BorderSide(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryColor,
+                                                                        width:
+                                                                            1,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              32),
+                                                                    ),
+                                                                    showLoadingIndicator:
+                                                                        false,
+                                                                  );
+                                                                }),
+                                                              ).animateOnPageLoad(
+                                                                  animationsMap[
+                                                                      'wrapOnPageLoadAnimation2']!);
+                                                            },
+                                                          ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 16, 0, 0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      AuthUserStreamWidget(
+                                                        child: FutureBuilder<
+                                                            BudgetsRecord>(
+                                                          future: BudgetsRecord
+                                                              .getDocumentOnce(
+                                                                  currentUserDocument!
+                                                                      .activeBudget!),
+                                                          builder: (context,
+                                                              snapshot) {
+                                                            // Customize what your widget looks like when it's loading.
+                                                            if (!snapshot
+                                                                .hasData) {
+                                                              return Center(
+                                                                child:
+                                                                    Container(
+                                                                  width: 40,
+                                                                  height: 40,
+                                                                  child:
+                                                                      LoadingEmptyWidget(),
+                                                                ),
+                                                              );
+                                                            }
+                                                            final iconButtonBudgetsRecord =
+                                                                snapshot.data!;
+                                                            return FlutterFlowIconButton(
+                                                              borderRadius: 30,
+                                                              borderWidth: 1,
+                                                              buttonSize: 40,
+                                                              fillColor: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryColor,
+                                                              icon: Icon(
+                                                                Icons.add,
+                                                                color: Colors
+                                                                    .white,
+                                                                size: 16,
+                                                              ),
+                                                              onPressed:
+                                                                  () async {
+                                                                if (FFAppState()
+                                                                        .showCategoryOrSub ==
+                                                                    'category') {
+                                                                  await showModalBottomSheet(
+                                                                    isScrollControlled:
+                                                                        true,
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (context) {
+                                                                      return Padding(
+                                                                        padding:
+                                                                            MediaQuery.of(context).viewInsets,
+                                                                        child:
+                                                                            CreateCustomCategoryWidget(
+                                                                          budget:
+                                                                              iconButtonBudgetsRecord,
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  ).then((value) =>
+                                                                      setState(
+                                                                          () {}));
+                                                                } else {
+                                                                  if (FFAppState()
+                                                                          .showCategoryOrSub ==
+                                                                      'sub') {
+                                                                    await showModalBottomSheet(
+                                                                      isScrollControlled:
+                                                                          true,
+                                                                      backgroundColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (context) {
+                                                                        return Padding(
+                                                                          padding:
+                                                                              MediaQuery.of(context).viewInsets,
+                                                                          child:
+                                                                              AddRecurringPaymentWidget(),
+                                                                        );
+                                                                      },
+                                                                    ).then((value) =>
+                                                                        setState(
+                                                                            () {}));
+                                                                  } else {
+                                                                    return;
+                                                                  }
+                                                                }
+                                                              },
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                  ],
-                                ),
+                                    ],
+                                  ),
                                 if (columnTransactionsRecord.transactionType ==
                                     'credit')
                                   Column(
@@ -1156,260 +2043,286 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 if (columnTransactionsRecord
-                                                        .incomeCategory !=
-                                                    null)
+                                                        .transactionType ==
+                                                    'credit')
                                                   Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
                                                     children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0, 0, 0, 4),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Text(
-                                                              'Income Source',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText2,
-                                                            ),
-                                                          ],
+                                                      Container(
+                                                        width: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .width,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
                                                         ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(0, 0,
-                                                                    0, 16),
-                                                        child: StreamBuilder<
-                                                            IncomeCategoriesRecord>(
-                                                          stream: IncomeCategoriesRecord
-                                                              .getDocument(
-                                                                  columnTransactionsRecord
-                                                                      .incomeCategory!),
-                                                          builder: (context,
-                                                              snapshot) {
-                                                            // Customize what your widget looks like when it's loading.
-                                                            if (!snapshot
-                                                                .hasData) {
-                                                              return Center(
-                                                                child: SizedBox(
-                                                                  width: 50,
-                                                                  height: 50,
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(0,
+                                                                      0, 0, 16),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          8,
+                                                                          0),
                                                                   child:
-                                                                      SpinKitRing(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryColor,
-                                                                    size: 50,
+                                                                      FFButtonWidget(
+                                                                    onPressed:
+                                                                        () {
+                                                                      print(
+                                                                          'Button pressed ...');
+                                                                    },
+                                                                    text:
+                                                                        'Income Sources',
+                                                                    options:
+                                                                        FFButtonOptions(
+                                                                      height:
+                                                                          40,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryColor,
+                                                                      textStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .subtitle2
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                FlutterFlowTheme.of(context).subtitle2Family,
+                                                                            color:
+                                                                                Colors.white,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                          ),
+                                                                      elevation:
+                                                                          0,
+                                                                      borderSide:
+                                                                          BorderSide(
+                                                                        color: Colors
+                                                                            .transparent,
+                                                                        width:
+                                                                            1,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              12),
+                                                                    ),
+                                                                    showLoadingIndicator:
+                                                                        false,
                                                                   ),
                                                                 ),
-                                                              );
-                                                            }
-                                                            final textIncomeCategoriesRecord =
-                                                                snapshot.data!;
-                                                            return Text(
-                                                              textIncomeCategoriesRecord
-                                                                  .categoryName!,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .subtitle1,
-                                                            );
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 0, 4),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Text(
-                                                        'Select Source',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText2,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0, 0, 8, 0),
-                                                        child: StreamBuilder<
-                                                            List<
-                                                                IncomeCategoriesRecord>>(
-                                                          stream:
-                                                              queryIncomeCategoriesRecord(
-                                                            parent:
-                                                                currentUserReference,
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            8,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                child:
+                                                                    FlutterFlowIconButton(
+                                                                  borderRadius:
+                                                                      30,
+                                                                  borderWidth:
+                                                                      1,
+                                                                  buttonSize:
+                                                                      40,
+                                                                  fillColor: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryColor,
+                                                                  icon: Icon(
+                                                                    Icons.add,
+                                                                    color: Colors
+                                                                        .white,
+                                                                    size: 16,
+                                                                  ),
+                                                                  onPressed:
+                                                                      () async {
+                                                                    await showModalBottomSheet(
+                                                                      isScrollControlled:
+                                                                          true,
+                                                                      backgroundColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (context) {
+                                                                        return Padding(
+                                                                          padding:
+                                                                              MediaQuery.of(context).viewInsets,
+                                                                          child:
+                                                                              NewIncomeSourceWidget(),
+                                                                        );
+                                                                      },
+                                                                    ).then((value) =>
+                                                                        setState(
+                                                                            () {}));
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
-                                                          builder: (context,
-                                                              snapshot) {
-                                                            // Customize what your widget looks like when it's loading.
-                                                            if (!snapshot
-                                                                .hasData) {
-                                                              return Center(
-                                                                child: SizedBox(
-                                                                  width: 50,
-                                                                  height: 50,
-                                                                  child:
-                                                                      SpinKitRing(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryColor,
-                                                                    size: 50,
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            }
-                                                            List<IncomeCategoriesRecord>
-                                                                rowIncomeCategoriesRecordList =
-                                                                snapshot.data!;
-                                                            return SingleChildScrollView(
-                                                              scrollDirection:
-                                                                  Axis.horizontal,
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: List.generate(
-                                                                    rowIncomeCategoriesRecordList
-                                                                        .length,
-                                                                    (rowIndex) {
-                                                                  final rowIncomeCategoriesRecord =
-                                                                      rowIncomeCategoriesRecordList[
-                                                                          rowIndex];
-                                                                  return Visibility(
-                                                                    visible: rowIncomeCategoriesRecord
-                                                                            .reference !=
-                                                                        columnTransactionsRecord
-                                                                            .incomeCategory,
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        width: double.infinity,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(0,
+                                                                      0, 0, 8),
+                                                          child: StreamBuilder<
+                                                              List<
+                                                                  IncomeCategoriesRecord>>(
+                                                            stream:
+                                                                queryIncomeCategoriesRecord(
+                                                              parent:
+                                                                  currentUserReference,
+                                                            ),
+                                                            builder: (context,
+                                                                snapshot) {
+                                                              // Customize what your widget looks like when it's loading.
+                                                              if (!snapshot
+                                                                  .hasData) {
+                                                                return Center(
+                                                                  child: Center(
                                                                     child:
-                                                                        Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              8,
-                                                                              0),
+                                                                        Container(
+                                                                      width: double
+                                                                          .infinity,
+                                                                      height:
+                                                                          32,
                                                                       child:
-                                                                          FFButtonWidget(
-                                                                        onPressed:
-                                                                            () async {
-                                                                          final transactionsUpdateData =
-                                                                              createTransactionsRecordData(
-                                                                            incomeCategory:
-                                                                                rowIncomeCategoriesRecord.reference,
-                                                                            incomeDetails:
-                                                                                createIncomeDetailsStruct(
-                                                                              name: rowIncomeCategoriesRecord.categoryName,
-                                                                              clearUnsetFields: false,
-                                                                            ),
-                                                                            isAssigned:
-                                                                                true,
-                                                                            dateAssigned:
-                                                                                getCurrentTimestamp,
-                                                                          );
-                                                                          await columnTransactionsRecord
-                                                                              .reference
-                                                                              .update(transactionsUpdateData);
-                                                                        },
-                                                                        text: rowIncomeCategoriesRecord
-                                                                            .categoryName!,
-                                                                        options:
-                                                                            FFButtonOptions(
-                                                                          height:
-                                                                              48,
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).secondaryBackground,
-                                                                          textStyle: FlutterFlowTheme.of(context)
-                                                                              .bodyText1
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
-                                                                                color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
-                                                                              ),
-                                                                          elevation:
-                                                                              0,
-                                                                          borderSide:
-                                                                              BorderSide(
+                                                                          LoadingEmptyWidget(),
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              }
+                                                              List<IncomeCategoriesRecord>
+                                                                  wrapIncomeCategoriesRecordList =
+                                                                  snapshot
+                                                                      .data!;
+                                                              return Wrap(
+                                                                spacing: 8,
+                                                                runSpacing: 8,
+                                                                alignment:
+                                                                    WrapAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    WrapCrossAlignment
+                                                                        .start,
+                                                                direction: Axis
+                                                                    .horizontal,
+                                                                runAlignment:
+                                                                    WrapAlignment
+                                                                        .start,
+                                                                verticalDirection:
+                                                                    VerticalDirection
+                                                                        .down,
+                                                                clipBehavior:
+                                                                    Clip.none,
+                                                                children: List.generate(
+                                                                    wrapIncomeCategoriesRecordList
+                                                                        .length,
+                                                                    (wrapIndex) {
+                                                                  final wrapIncomeCategoriesRecord =
+                                                                      wrapIncomeCategoriesRecordList[
+                                                                          wrapIndex];
+                                                                  return FFButtonWidget(
+                                                                    onPressed:
+                                                                        () async {
+                                                                      final transactionsUpdateData =
+                                                                          createTransactionsRecordData(
+                                                                        incomeCategory:
+                                                                            wrapIncomeCategoriesRecord.reference,
+                                                                        incomeDetails:
+                                                                            createIncomeDetailsStruct(
+                                                                          name:
+                                                                              wrapIncomeCategoriesRecord.categoryName,
+                                                                          clearUnsetFields:
+                                                                              false,
+                                                                        ),
+                                                                        isAssigned:
+                                                                            true,
+                                                                        dateAssigned:
+                                                                            getCurrentTimestamp,
+                                                                      );
+                                                                      await columnTransactionsRecord
+                                                                          .reference
+                                                                          .update(
+                                                                              transactionsUpdateData);
+                                                                    },
+                                                                    text: wrapIncomeCategoriesRecord
+                                                                        .categoryName!,
+                                                                    options:
+                                                                        FFButtonOptions(
+                                                                      height:
+                                                                          32,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryBackground,
+                                                                      textStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                FlutterFlowTheme.of(context).bodyText1Family,
                                                                             color:
                                                                                 FlutterFlowTheme.of(context).primaryColor,
-                                                                            width:
-                                                                                1,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                           ),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(16),
-                                                                        ),
+                                                                      elevation:
+                                                                          0,
+                                                                      borderSide:
+                                                                          BorderSide(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryColor,
+                                                                        width:
+                                                                            1,
                                                                       ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              32),
                                                                     ),
+                                                                    showLoadingIndicator:
+                                                                        false,
                                                                   );
                                                                 }),
-                                                              ),
-                                                            );
-                                                          },
+                                                              ).animateOnPageLoad(
+                                                                  animationsMap[
+                                                                      'wrapOnPageLoadAnimation3']!);
+                                                            },
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    FlutterFlowIconButton(
-                                                      borderColor:
-                                                          Colors.transparent,
-                                                      borderRadius: 30,
-                                                      borderWidth: 1,
-                                                      buttonSize: 48,
-                                                      fillColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      icon: Icon(
-                                                        Icons.add,
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryPrimary,
-                                                        size: 30,
-                                                      ),
-                                                      onPressed: () async {
-                                                        await showModalBottomSheet(
-                                                          isScrollControlled:
-                                                              true,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return Padding(
-                                                              padding: MediaQuery
-                                                                      .of(context)
-                                                                  .viewInsets,
-                                                              child:
-                                                                  NewIncomeSourceWidget(),
-                                                            );
-                                                          },
-                                                        ).then((value) =>
-                                                            setState(() {}));
-                                                      },
-                                                    ),
-                                                  ],
-                                                ),
+                                                    ],
+                                                  ),
                                               ],
                                             ),
                                           ),

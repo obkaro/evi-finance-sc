@@ -17,6 +17,7 @@ import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import '../transactions/transactions_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
@@ -848,7 +849,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(32, 16, 32, 8),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
                               padding:
@@ -878,7 +879,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
+                        padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
@@ -933,11 +934,50 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                       listViewTransactionsRecordList[
                                           listViewIndex];
                                   return TransactionListItemWidget(
+                                    key: Key(
+                                        'transactionListItem_${listViewIndex}'),
                                     transactionDoc: listViewTransactionsRecord,
                                   );
                                 },
                               );
                             },
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TransactionsWidget(),
+                              ),
+                            );
+                          },
+                          text: 'All Transactions',
+                          options: FFButtonOptions(
+                            width: double.infinity,
+                            height: 48,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .bodyText1
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyText1Family,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyText1Family),
+                                ),
+                            elevation: 0,
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(16),
                           ),
                         ),
                       ),

@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'auth_util.dart';
-
 class EviFirebaseUser {
   EviFirebaseUser(this.user);
   User? user;
@@ -19,7 +17,6 @@ Stream<EviFirebaseUser> eviFirebaseUserStream() => FirebaseAuth.instance
         .map<EviFirebaseUser>(
       (user) {
         currentUser = EviFirebaseUser(user);
-        updateUserJwtTimer(user);
         return currentUser!;
       },
     );

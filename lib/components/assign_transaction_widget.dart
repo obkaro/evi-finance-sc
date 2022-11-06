@@ -89,12 +89,12 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                               if (!snapshot.hasData) {
                                 return Center(
                                   child: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: SpinKitRing(
+                                    width: 42,
+                                    height: 42,
+                                    child: SpinKitChasingDots(
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
-                                      size: 50,
+                                      size: 42,
                                     ),
                                   ),
                                 );
@@ -187,15 +187,15 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                   return Center(
                                                                     child:
                                                                         SizedBox(
-                                                                      width: 50,
+                                                                      width: 42,
                                                                       height:
-                                                                          50,
+                                                                          42,
                                                                       child:
-                                                                          SpinKitRing(
+                                                                          SpinKitChasingDots(
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .primaryColor,
                                                                         size:
-                                                                            50,
+                                                                            42,
                                                                       ),
                                                                     ),
                                                                   );
@@ -332,13 +332,13 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                           if (!snapshot.hasData) {
                                             return Center(
                                               child: SizedBox(
-                                                width: 50,
-                                                height: 50,
-                                                child: SpinKitRing(
+                                                width: 42,
+                                                height: 42,
+                                                child: SpinKitChasingDots(
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryColor,
-                                                  size: 50,
+                                                  size: 42,
                                                 ),
                                               ),
                                             );
@@ -424,12 +424,12 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                             if (!snapshot.hasData) {
                               return Center(
                                 child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: SpinKitRing(
+                                  width: 42,
+                                  height: 42,
+                                  child: SpinKitChasingDots(
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
-                                    size: 50,
+                                    size: 42,
                                   ),
                                 ),
                               );
