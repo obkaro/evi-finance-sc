@@ -320,7 +320,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 4, 0, 0),
-                                    child: FlutterFlowDropDown(
+                                    child: FlutterFlowDropDown<String>(
                                       options: [
                                         'From a friend',
                                         'Google or other search engines',

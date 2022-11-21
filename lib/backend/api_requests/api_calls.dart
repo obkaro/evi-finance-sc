@@ -29,6 +29,7 @@ class GetPermanentAuthCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -47,6 +48,7 @@ class GetAccountInfoCall {
       },
       params: {},
       returnBody: true,
+      cache: false,
     );
   }
 
@@ -110,6 +112,7 @@ class GetTransactionsCall {
       },
       params: {},
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -129,6 +132,7 @@ class UnlinkMonoCall {
       params: {},
       bodyType: BodyType.NONE,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -148,6 +152,7 @@ class DataSyncMonoCall {
       params: {},
       bodyType: BodyType.NONE,
       returnBody: true,
+      cache: false,
     );
   }
 }
@@ -167,6 +172,7 @@ class ReauthMonoCall {
       params: {},
       bodyType: BodyType.NONE,
       returnBody: true,
+      cache: false,
     );
   }
 }

@@ -119,7 +119,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                             child: Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                              child: FlutterFlowDropDown(
+                              child: FlutterFlowDropDown<String>(
                                 options: ['Weekly', 'Monthly'],
                                 onChanged: (val) async {
                                   setState(() => dropDownValue = val);

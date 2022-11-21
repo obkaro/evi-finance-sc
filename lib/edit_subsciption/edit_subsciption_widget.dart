@@ -414,7 +414,8 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                 List<CategoriesRecord>
                                                     categoryCategoriesRecordList =
                                                     snapshot.data!;
-                                                return FlutterFlowDropDown(
+                                                return FlutterFlowDropDown<
+                                                    String>(
                                                   initialOption:
                                                       categoryValue ??=
                                                           columnCategoriesRecord
