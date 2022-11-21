@@ -121,14 +121,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
               // Customize what your widget looks like when it's loading.
               if (!snapshot.hasData) {
                 return Center(
-                  child: SizedBox(
-                    width: 42,
-                    height: 42,
-                    child: SpinKitChasingDots(
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 42,
-                    ),
-                  ),
+                  child: LoadingEmptyWidget(),
                 );
               }
               final columnTransactionsRecord = snapshot.data!;
@@ -145,15 +138,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                           // Customize what your widget looks like when it's loading.
                           if (!snapshot.hasData) {
                             return Center(
-                              child: SizedBox(
-                                width: 42,
-                                height: 42,
-                                child: SpinKitChasingDots(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  size: 42,
-                                ),
-                              ),
+                              child: LoadingEmptyWidget(),
                             );
                           }
                           final columnAccountsRecord = snapshot.data!;
