@@ -417,7 +417,8 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                               List<CategoriesRecord>
                                                   categoryCategoriesRecordList =
                                                   snapshot.data!;
-                                              return FlutterFlowDropDown(
+                                              return FlutterFlowDropDown<
+                                                  String>(
                                                 options:
                                                     categoryCategoriesRecordList
                                                         .map((e) =>

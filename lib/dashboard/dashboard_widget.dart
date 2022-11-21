@@ -41,6 +41,20 @@ class DashboardWidget extends StatefulWidget {
 class _DashboardWidgetState extends State<DashboardWidget>
     with TickerProviderStateMixin {
   final animationsMap = {
+    'iconOnPageLoadAnimation1': AnimationInfo(
+      loop: true,
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ShakeEffect(
+          curve: Curves.easeInOut,
+          delay: 1500.ms,
+          duration: 1000.ms,
+          hz: 7,
+          offset: Offset(0, 0),
+          rotation: 0.122,
+        ),
+      ],
+    ),
     'textOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
@@ -54,18 +68,26 @@ class _DashboardWidgetState extends State<DashboardWidget>
         ),
       ],
     ),
+    'iconOnPageLoadAnimation2': AnimationInfo(
+      loop: true,
+      reverse: true,
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 600.ms,
+          duration: 600.ms,
+          begin: 1,
+          end: 1.2,
+        ),
+      ],
+    ),
   };
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    setupAnimations(
-      animationsMap.values.where((anim) =>
-          anim.trigger == AnimationTrigger.onActionTrigger ||
-          !anim.applyInitialState),
-      this,
-    );
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -236,11 +258,30 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                         position: BadgePosition.topEnd(),
                                         animationType: BadgeAnimationType.scale,
                                         toAnimate: true,
-                                        child: Icon(
-                                          Icons.notifications,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryPrimary,
-                                          size: 24,
+                                        child: Stack(
+                                          children: [
+                                            if (badgeTransactionsRecordList
+                                                    .length ==
+                                                0)
+                                              Icon(
+                                                Icons.notifications,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryPrimary,
+                                                size: 24,
+                                              ),
+                                            if (badgeTransactionsRecordList
+                                                    .length >
+                                                0)
+                                              Icon(
+                                                Icons.notifications,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryPrimary,
+                                                size: 24,
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'iconOnPageLoadAnimation1']!),
+                                          ],
                                         ),
                                       ),
                                     );
@@ -513,7 +554,9 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                         context)
                                                                     .alternate,
                                                                 size: 16,
-                                                              ),
+                                                              ).animateOnPageLoad(
+                                                                  animationsMap[
+                                                                      'iconOnPageLoadAnimation2']!),
                                                             ),
                                                         ],
                                                       ),

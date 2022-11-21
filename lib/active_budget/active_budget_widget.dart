@@ -89,6 +89,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
           budgetDateCreated: getCurrentTimestamp,
           status: 'no_parent',
           budgetSpent: 0,
+          budgetOwner: currentUserReference,
         );
         var budgetsRecordReference = BudgetsRecord.collection.doc();
         await budgetsRecordReference.set(budgetsCreateData);
