@@ -170,7 +170,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                               ),
                                             ],
                                           ),
-                                          FlutterFlowDropDown(
+                                          FlutterFlowDropDown<String>(
                                             initialOption: dropDownValue ??=
                                                 columnBudgetsRecord
                                                     .budgetDuration,

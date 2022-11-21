@@ -194,7 +194,8 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                               key: formKey,
                                               autovalidateMode:
                                                   AutovalidateMode.disabled,
-                                              child: FlutterFlowDropDown(
+                                              child:
+                                                  FlutterFlowDropDown<String>(
                                                 options: [
                                                   'Weekly',
                                                   'Monthly',
