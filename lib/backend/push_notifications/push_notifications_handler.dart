@@ -91,7 +91,6 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
 }
 
 final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
-  'LandPage': (data) async => LandPageWidget(),
   'Transactions': (data) async => TransactionsWidget(),
   'ForgotPassword': (data) async => ForgotPasswordWidget(),
   'ActiveBudget': (data) async => hasMatchingParameters(data, {'command'})
