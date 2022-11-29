@@ -1,5 +1,4 @@
 // Export pages
-export 'land_page/land_page_widget.dart' show LandPageWidget;
 export 'transactions/transactions_widget.dart' show TransactionsWidget;
 export 'forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
 export 'dashboard/dashboard_widget.dart' show DashboardWidget;
