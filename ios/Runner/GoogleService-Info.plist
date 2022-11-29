@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1086289327978-qtmik79nr4hjikll2olunpfhpr76id9a.apps.googleusercontent.com</string>
+	<string>1086289327978-qa2n3o0j1lsouqhj84ag9relrd99m1gq.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1086289327978-qtmik79nr4hjikll2olunpfhpr76id9a</string>
+	<string>com.googleusercontent.apps.1086289327978-qa2n3o0j1lsouqhj84ag9relrd99m1gq</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1086289327978-ejsaao5u7si3lggrv4an5p036jisg6ao.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAGyMd-vhatn5CXUHiYNZ8K2WqmXU84LOo</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.flutterflow.evifinance</string>
+	<string>com.evi.finance</string>
 	<key>PROJECT_ID</key>
 	<string>evi-finance-prod</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1086289327978:ios:2dc006a74ba7ec47e5d713</string>
+	<string>1:1086289327978:ios:80491a80e7a6279ce5d713</string>
 </dict>
 </plist>
