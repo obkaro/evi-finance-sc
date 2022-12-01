@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1086289327978-qa2n3o0j1lsouqhj84ag9relrd99m1gq.apps.googleusercontent.com</string>
+	<string>1086289327978-2qaa8h22iak7t5586m4rcs28nbft2clm.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1086289327978-qa2n3o0j1lsouqhj84ag9relrd99m1gq</string>
+	<string>com.googleusercontent.apps.1086289327978-2qaa8h22iak7t5586m4rcs28nbft2clm</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>1086289327978-ejsaao5u7si3lggrv4an5p036jisg6ao.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.evi.finance</string>
+	<string>com.evitech.evifinance</string>
 	<key>PROJECT_ID</key>
 	<string>evi-finance-prod</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1086289327978:ios:80491a80e7a6279ce5d713</string>
+	<string>1:1086289327978:ios:48be161a924f1814e5d713</string>
 </dict>
 </plist>
