@@ -19,10 +19,13 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
+import '../paywall/paywall_widget.dart';
 import '../transactions/transactions_widget.dart';
+import '../welcome_to_evi/welcome_to_evi_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
+import '../flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +92,36 @@ class _DashboardWidgetState extends State<DashboardWidget>
   @override
   void initState() {
     super.initState();
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      final isEntitled = await revenue_cat.isEntitled('starter');
+      if (isEntitled == null) {
+        return;
+      } else if (!isEntitled) {
+        await revenue_cat.loadOfferings();
+      }
+
+      if (isEntitled) {
+        if (valueOrDefault(currentUserDocument?.username, '') == null ||
+            valueOrDefault(currentUserDocument?.username, '') == '') {
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => WelcomeToEviWidget(),
+            ),
+          );
+        }
+      } else {
+        await Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PaywallWidget(),
+          ),
+          (r) => false,
+        );
+      }
+    });
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
