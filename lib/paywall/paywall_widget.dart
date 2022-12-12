@@ -224,8 +224,10 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                       child: CButtonFilledWidget(
-                        text: revenue_cat
-                            .offerings!.current!.monthly!.product.priceString,
+                        text: revenue_cat.offerings!.current!
+                            .getPackage('Monthly')!
+                            .product
+                            .priceString,
                       ),
                     ),
                     Text(
