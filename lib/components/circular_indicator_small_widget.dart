@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 class CircularIndicatorSmallWidget extends StatefulWidget {
   const CircularIndicatorSmallWidget({
@@ -32,6 +33,8 @@ class _CircularIndicatorSmallWidgetState
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: 64,
       height: 64,

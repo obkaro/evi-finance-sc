@@ -8,12 +8,14 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../subscription_details/subscription_details_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:styled_divider/styled_divider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class RecurringPaymentsWidget extends StatefulWidget {
   const RecurringPaymentsWidget({Key? key}) : super(key: key);
@@ -52,6 +54,8 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

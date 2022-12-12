@@ -4,6 +4,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class CButtonFilledCopyWidget extends StatefulWidget {
   const CButtonFilledCopyWidget({
@@ -32,6 +33,8 @@ class _CButtonFilledCopyWidgetState extends State<CButtonFilledCopyWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return FFButtonWidget(
       onPressed: () async {
         await widget.action?.call();

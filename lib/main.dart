@@ -1,3 +1,4 @@
+import 'package:provider/provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,15 +13,24 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'index.dart';
+import 'flutter_flow/revenue_cat_util.dart' as revenue_cat;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FlutterFlowTheme.initialize();
 
-  FFAppState(); // Initialize FFAppState
+  final appState = FFAppState(); // Initialize FFAppState
+  await revenue_cat.initialize(
+    "",
+    "testkey",
+    loadDataAfterLaunch: true,
+  );
 
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => appState,
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -40,7 +50,9 @@ class _MyAppState extends State<MyApp> {
   EviFirebaseUser? initialUser;
   bool displaySplashImage = true;
 
-  final authUserSub = authenticatedUserStream.listen((_) {});
+  final authUserSub = authenticatedUserStream.listen((user) {
+    revenue_cat.login(user?.uid);
+  });
   final fcmTokenSub = fcmTokenUserStream.listen((_) {});
 
   @override

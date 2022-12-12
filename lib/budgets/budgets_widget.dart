@@ -18,6 +18,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class BudgetsWidget extends StatefulWidget {
   const BudgetsWidget({Key? key}) : super(key: key);
@@ -55,6 +56,8 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -258,9 +261,11 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
                                                                   },
                                                                 ) ??
                                                                 false;
-                                                        setState(() => FFAppState()
-                                                                .dialogBoxReturn =
-                                                            false);
+                                                        setState(() {
+                                                          FFAppState()
+                                                                  .dialogBoxReturn =
+                                                              false;
+                                                        });
                                                         await showModalBottomSheet(
                                                           isScrollControlled:
                                                               true,

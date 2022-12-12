@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-// Begin custom widget code
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 class CurrencyTextField extends StatefulWidget {
