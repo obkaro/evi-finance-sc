@@ -1,4 +1,4 @@
-package com.evitech.evifinance
+package com.evi.finance
 
 import io.flutter.embedding.android.FlutterActivity
 
