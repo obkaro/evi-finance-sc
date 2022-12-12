@@ -235,7 +235,9 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                   onChanged: (_) => EasyDebounce.debounce(
                     'textController',
                     Duration(milliseconds: 2000),
-                    () => setState(() {}),
+                    () async {
+                      await Future.delayed(const Duration(milliseconds: 1000));
+                    },
                   ),
                   obscureText: false,
                   decoration: InputDecoration(
@@ -275,6 +277,8 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                         ? InkWell(
                             onTap: () async {
                               textController?.clear();
+                              await Future.delayed(
+                                  const Duration(milliseconds: 1000));
                               setState(() {});
                             },
                             child: Icon(
