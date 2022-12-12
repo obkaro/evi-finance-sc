@@ -3,6 +3,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class EmptyLoadingTextWidget extends StatefulWidget {
   const EmptyLoadingTextWidget({
@@ -26,6 +27,8 @@ class _EmptyLoadingTextWidgetState extends State<EmptyLoadingTextWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Text(
       widget.text!,
       style: FlutterFlowTheme.of(context).bodyText1.override(

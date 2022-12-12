@@ -11,6 +11,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:styled_divider/styled_divider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class AssignTransactionsWidget extends StatefulWidget {
   const AssignTransactionsWidget({
@@ -103,7 +105,9 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
           },
         ).then((value) => setState(() {}));
 
-        setState(() => FFAppState().showQuickTransAssign = false);
+        setState(() {
+          FFAppState().showQuickTransAssign = false;
+        });
       } else {
         return;
       }
@@ -116,6 +120,8 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -629,7 +635,9 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
                                                                                           child: FFButtonWidget(
                                                                                             onPressed: () async {
-                                                                                              setState(() => FFAppState().showCategoryOrSub = 'category');
+                                                                                              setState(() {
+                                                                                                FFAppState().showCategoryOrSub = 'category';
+                                                                                              });
                                                                                             },
                                                                                             text: 'Categories',
                                                                                             options: FFButtonOptions(
@@ -656,7 +664,9 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                           padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                                                                                           child: FFButtonWidget(
                                                                                             onPressed: () async {
-                                                                                              setState(() => FFAppState().showCategoryOrSub = 'sub');
+                                                                                              setState(() {
+                                                                                                FFAppState().showCategoryOrSub = 'sub';
+                                                                                              });
                                                                                             },
                                                                                             text: 'Subscriptions',
                                                                                             options: FFButtonOptions(

@@ -19,9 +19,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class TransactionSingleWidget extends StatefulWidget {
   const TransactionSingleWidget({
@@ -90,6 +90,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -377,63 +379,35 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                     ),
                                                     InkWell(
                                                       onTap: () async {
-                                                        if (kIsWeb) {
-                                                          final _datePickedTime =
-                                                              await showTimePicker(
-                                                            context: context,
-                                                            initialTime: TimeOfDay
-                                                                .fromDateTime(widget
-                                                                    .transaction!
-                                                                    .trasactionDate!),
-                                                          );
-                                                          if (_datePickedTime !=
-                                                              null) {
-                                                            setState(
-                                                              () => datePicked =
-                                                                  DateTime(
-                                                                widget
-                                                                    .transaction!
-                                                                    .trasactionDate!
-                                                                    .year,
-                                                                widget
-                                                                    .transaction!
-                                                                    .trasactionDate!
-                                                                    .month,
-                                                                widget
-                                                                    .transaction!
-                                                                    .trasactionDate!
-                                                                    .day,
-                                                                _datePickedTime
-                                                                    .hour,
-                                                                _datePickedTime
-                                                                    .minute,
-                                                              ),
-                                                            );
-                                                          }
-                                                        } else {
-                                                          await DatePicker
-                                                              .showTimePicker(
-                                                            context,
-                                                            showTitleActions:
-                                                                true,
-                                                            onConfirm: (date) {
-                                                              setState(() =>
-                                                                  datePicked =
-                                                                      date);
-                                                            },
-                                                            currentTime: widget
-                                                                .transaction!
-                                                                .trasactionDate!,
-                                                            locale: LocaleType
-                                                                .values
-                                                                .firstWhere(
-                                                              (l) =>
-                                                                  l.name ==
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .languageCode,
-                                                              orElse: () =>
-                                                                  LocaleType.en,
+                                                        final _datePickedTime =
+                                                            await showTimePicker(
+                                                          context: context,
+                                                          initialTime: TimeOfDay
+                                                              .fromDateTime(widget
+                                                                  .transaction!
+                                                                  .trasactionDate!),
+                                                        );
+                                                        if (_datePickedTime !=
+                                                            null) {
+                                                          setState(
+                                                            () => datePicked =
+                                                                DateTime(
+                                                              widget
+                                                                  .transaction!
+                                                                  .trasactionDate!
+                                                                  .year,
+                                                              widget
+                                                                  .transaction!
+                                                                  .trasactionDate!
+                                                                  .month,
+                                                              widget
+                                                                  .transaction!
+                                                                  .trasactionDate!
+                                                                  .day,
+                                                              _datePickedTime
+                                                                  .hour,
+                                                              _datePickedTime
+                                                                  .minute,
                                                             ),
                                                           );
                                                         }
@@ -1279,10 +1253,11 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                 FFButtonWidget(
                                                               onPressed:
                                                                   () async {
-                                                                setState(() =>
-                                                                    FFAppState()
-                                                                            .showCategoryOrSub =
-                                                                        'category');
+                                                                setState(() {
+                                                                  FFAppState()
+                                                                          .showCategoryOrSub =
+                                                                      'category';
+                                                                });
                                                               },
                                                               text:
                                                                   'Categories',
@@ -1345,10 +1320,11 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                 FFButtonWidget(
                                                               onPressed:
                                                                   () async {
-                                                                setState(() =>
-                                                                    FFAppState()
-                                                                            .showCategoryOrSub =
-                                                                        'sub');
+                                                                setState(() {
+                                                                  FFAppState()
+                                                                          .showCategoryOrSub =
+                                                                      'sub';
+                                                                });
                                                               },
                                                               text:
                                                                   'Subscriptions',

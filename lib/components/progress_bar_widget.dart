@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 class ProgressBarWidget extends StatefulWidget {
   const ProgressBarWidget({
@@ -30,6 +31,8 @@ class _ProgressBarWidgetState extends State<ProgressBarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: MediaQuery.of(context).size.width * 0.81,
       height: 8,

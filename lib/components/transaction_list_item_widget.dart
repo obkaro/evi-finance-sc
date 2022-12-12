@@ -8,6 +8,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class TransactionListItemWidget extends StatefulWidget {
   const TransactionListItemWidget({
@@ -32,6 +33,8 @@ class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(),

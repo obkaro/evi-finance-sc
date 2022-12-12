@@ -2,9 +2,11 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
+import 'package:styled_divider/styled_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class DialogBoxWidget extends StatefulWidget {
   const DialogBoxWidget({
@@ -38,6 +40,8 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(),
@@ -142,8 +146,9 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                             Expanded(
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  setState(() =>
-                                      FFAppState().dialogBoxReturn = false);
+                                  setState(() {
+                                    FFAppState().dialogBoxReturn = false;
+                                  });
                                   Navigator.pop(context);
                                 },
                                 text: widget.buttonNo!,
@@ -165,8 +170,9 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
-                                setState(
-                                    () => FFAppState().dialogBoxReturn = true);
+                                setState(() {
+                                  FFAppState().dialogBoxReturn = true;
+                                });
                                 await widget.yesAction?.call();
                                 Navigator.pop(context);
                               },

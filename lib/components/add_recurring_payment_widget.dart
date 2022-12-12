@@ -11,6 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class AddRecurringPaymentWidget extends StatefulWidget {
   const AddRecurringPaymentWidget({Key? key}) : super(key: key);
@@ -33,6 +34,8 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       height: 480,
