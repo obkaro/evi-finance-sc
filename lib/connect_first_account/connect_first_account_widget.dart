@@ -9,6 +9,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ConnectFirstAccountWidget extends StatefulWidget {
   const ConnectFirstAccountWidget({Key? key}) : super(key: key);
@@ -55,6 +56,8 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

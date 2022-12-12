@@ -5,8 +5,6 @@ export 'write_new_acct_transactions.dart' show writeNewAcctTransactions;
 export 'delete_categories.dart' show deleteCategories;
 export 'delete_transactions.dart' show deleteTransactions;
 export 'unlink_all_trans_categories.dart' show unlinkAllTransCategories;
-export 'select_date_range.dart' show selectDateRange;
-export 'select_date_range_existing.dart' show selectDateRangeExisting;
 export 'update_category.dart' show updateCategory;
 export 'launch_store.dart' show launchStore;
 export 'get_version_number.dart' show getVersionNumber;

@@ -9,9 +9,12 @@ import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:provider/provider.dart';
 
 class LandingPageViewWidget extends StatefulWidget {
   const LandingPageViewWidget({Key? key}) : super(key: key);
@@ -22,6 +25,7 @@ class LandingPageViewWidget extends StatefulWidget {
 
 class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
   PageController? pageViewController;
+  TextEditingController? textController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -29,11 +33,20 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'LandingPageView'});
+    textController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
+  void dispose() {
+    textController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -213,6 +226,75 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                       ],
                     ),
                   ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
+                child: TextFormField(
+                  controller: textController,
+                  onChanged: (_) => EasyDebounce.debounce(
+                    'textController',
+                    Duration(milliseconds: 2000),
+                    () async {
+                      await Future.delayed(const Duration(milliseconds: 1000));
+                    },
+                  ),
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    hintText: 'Naira here',
+                    hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0x00000000),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0x00000000),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0x00000000),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0x00000000),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    filled: true,
+                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    suffixIcon: textController!.text.isNotEmpty
+                        ? InkWell(
+                            onTap: () async {
+                              textController?.clear();
+                              await Future.delayed(
+                                  const Duration(milliseconds: 1000));
+                              setState(() {});
+                            },
+                            child: Icon(
+                              Icons.clear,
+                              color: Color(0xFF757575),
+                              size: 16,
+                            ),
+                          )
+                        : null,
+                  ),
+                  style: FlutterFlowTheme.of(context).bodyText1,
+                  keyboardType: const TextInputType.numberWithOptions(
+                      signed: true, decimal: true),
+                  inputFormatters: [
+                    MaskTextInputFormatter(mask: '₦ ###,##0.00')
+                  ],
                 ),
               ),
               Padding(
