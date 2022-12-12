@@ -23,7 +23,8 @@ void main() async {
   final appState = FFAppState(); // Initialize FFAppState
   await revenue_cat.initialize(
     "",
-    "testkey",
+    "goog_RRbRBosEHJVeJGgBddaWnGJnXXB",
+    debugLogEnabled: true,
     loadDataAfterLaunch: true,
   );
 
