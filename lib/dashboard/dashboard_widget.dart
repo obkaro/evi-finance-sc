@@ -4,6 +4,7 @@ import '../assign_transactions/assign_transactions_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../budgets/budgets_widget.dart';
+import '../components/c_button_filled_widget.dart';
 import '../components/circular_indicator_small_widget.dart';
 import '../components/empty_list_widget.dart';
 import '../components/loading_budget_summary_widget.dart';
@@ -92,36 +93,6 @@ class _DashboardWidgetState extends State<DashboardWidget>
   @override
   void initState() {
     super.initState();
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      final isEntitled = await revenue_cat.isEntitled('starter');
-      if (isEntitled == null) {
-        return;
-      } else if (!isEntitled) {
-        await revenue_cat.loadOfferings();
-      }
-
-      if (isEntitled) {
-        if (valueOrDefault(currentUserDocument?.username, '') == null ||
-            valueOrDefault(currentUserDocument?.username, '') == '') {
-          await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => WelcomeToEviWidget(),
-            ),
-          );
-        }
-      } else {
-        await Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PaywallWidget(),
-          ),
-          (r) => false,
-        );
-      }
-    });
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
   }
@@ -714,6 +685,44 @@ class _DashboardWidgetState extends State<DashboardWidget>
                               ),
                             ],
                           ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          final isEntitled =
+                              await revenue_cat.isEntitled('starter');
+                          if (isEntitled == null) {
+                            return;
+                          } else if (!isEntitled) {
+                            await revenue_cat.loadOfferings();
+                          }
+
+                          if (isEntitled) {
+                            if (valueOrDefault(
+                                        currentUserDocument?.username, '') ==
+                                    null ||
+                                valueOrDefault(
+                                        currentUserDocument?.username, '') ==
+                                    '') {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => WelcomeToEviWidget(),
+                                ),
+                              );
+                            }
+                          } else {
+                            await Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PaywallWidget(),
+                              ),
+                              (r) => false,
+                            );
+                          }
+                        },
+                        child: CButtonFilledWidget(
+                          text: 'test pay',
                         ),
                       ),
                       if (currentUserDocument!.activeBudget != null)
