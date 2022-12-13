@@ -697,7 +697,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                             final _datePickedDate = await showDatePicker(
                               context: context,
                               initialDate: getCurrentTimestamp,
-                              firstDate: DateTime(1900),
+                              firstDate: getCurrentTimestamp,
                               lastDate: DateTime(2050),
                             );
 
