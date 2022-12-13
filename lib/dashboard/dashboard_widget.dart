@@ -687,42 +687,45 @@ class _DashboardWidgetState extends State<DashboardWidget>
                           ),
                         ),
                       ),
-                      InkWell(
-                        onTap: () async {
-                          final isEntitled =
-                              await revenue_cat.isEntitled('starter');
-                          if (isEntitled == null) {
-                            return;
-                          } else if (!isEntitled) {
-                            await revenue_cat.loadOfferings();
-                          }
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                        child: InkWell(
+                          onTap: () async {
+                            final isEntitled =
+                                await revenue_cat.isEntitled('starter');
+                            if (isEntitled == null) {
+                              return;
+                            } else if (!isEntitled) {
+                              await revenue_cat.loadOfferings();
+                            }
 
-                          if (isEntitled) {
-                            if (valueOrDefault(
-                                        currentUserDocument?.username, '') ==
-                                    null ||
-                                valueOrDefault(
-                                        currentUserDocument?.username, '') ==
-                                    '') {
-                              await Navigator.push(
+                            if (isEntitled) {
+                              if (valueOrDefault(
+                                          currentUserDocument?.username, '') ==
+                                      null ||
+                                  valueOrDefault(
+                                          currentUserDocument?.username, '') ==
+                                      '') {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => WelcomeToEviWidget(),
+                                  ),
+                                );
+                              }
+                            } else {
+                              await Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => WelcomeToEviWidget(),
+                                  builder: (context) => PaywallWidget(),
                                 ),
+                                (r) => false,
                               );
                             }
-                          } else {
-                            await Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PaywallWidget(),
-                              ),
-                              (r) => false,
-                            );
-                          }
-                        },
-                        child: CButtonFilledWidget(
-                          text: 'test pay',
+                          },
+                          child: CButtonFilledWidget(
+                            text: 'test pay',
+                          ),
                         ),
                       ),
                       if (currentUserDocument!.activeBudget != null)
