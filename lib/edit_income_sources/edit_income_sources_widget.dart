@@ -50,7 +50,6 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'EditIncomeSources'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

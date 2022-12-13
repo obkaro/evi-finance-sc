@@ -16,13 +16,6 @@ class LoadingNothingtextTitle1Widget extends StatefulWidget {
 class _LoadingNothingtextTitle1WidgetState
     extends State<LoadingNothingtextTitle1Widget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

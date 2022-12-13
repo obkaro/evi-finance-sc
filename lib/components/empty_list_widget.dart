@@ -21,13 +21,6 @@ class EmptyListWidget extends StatefulWidget {
 
 class _EmptyListWidgetState extends State<EmptyListWidget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

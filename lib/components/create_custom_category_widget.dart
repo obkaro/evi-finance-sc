@@ -34,7 +34,6 @@ class _CreateCustomCategoryWidgetState
   void initState() {
     super.initState();
     textController = TextEditingController();
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

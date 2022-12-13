@@ -46,7 +46,6 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
     super.initState();
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Menu'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

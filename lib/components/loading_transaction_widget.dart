@@ -15,13 +15,6 @@ class LoadingTransactionWidget extends StatefulWidget {
 
 class _LoadingTransactionWidgetState extends State<LoadingTransactionWidget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

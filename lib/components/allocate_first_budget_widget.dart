@@ -27,13 +27,6 @@ class AllocateFirstBudgetWidget extends StatefulWidget {
 
 class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

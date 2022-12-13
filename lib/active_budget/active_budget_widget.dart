@@ -115,8 +115,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
           !anim.applyInitialState),
       this,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

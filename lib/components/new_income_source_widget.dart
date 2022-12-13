@@ -25,7 +25,6 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
   void initState() {
     super.initState();
     textController = TextEditingController();
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
