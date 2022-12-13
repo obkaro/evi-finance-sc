@@ -4,6 +4,7 @@ import '../assign_transactions/assign_transactions_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../budgets/budgets_widget.dart';
+import '../components/c_button_filled_copy_widget.dart';
 import '../components/c_button_filled_widget.dart';
 import '../components/circular_indicator_small_widget.dart';
 import '../components/empty_list_widget.dart';
@@ -29,6 +30,7 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -88,6 +90,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
       ],
     ),
   };
+  DateTime? datePicked;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -691,6 +694,36 @@ class _DashboardWidgetState extends State<DashboardWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                         child: InkWell(
                           onTap: () async {
+                            final _datePickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: getCurrentTimestamp,
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime(2050),
+                            );
+
+                            if (_datePickedDate != null) {
+                              setState(
+                                () => datePicked = DateTime(
+                                  _datePickedDate.year,
+                                  _datePickedDate.month,
+                                  _datePickedDate.day,
+                                ),
+                              );
+                            }
+                          },
+                          child: CButtonFilledCopyWidget(
+                            text: 'Date Time',
+                            icon: Icon(
+                              Icons.add_rounded,
+                            ),
+                            action: () async {},
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                        child: InkWell(
+                          onTap: () async {
                             final isEntitled =
                                 await revenue_cat.isEntitled('starter');
                             if (isEntitled == null) {
@@ -724,7 +757,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                             }
                           },
                           child: CButtonFilledWidget(
-                            text: 'test pay',
+                            text: 'Test Pay',
                           ),
                         ),
                       ),
