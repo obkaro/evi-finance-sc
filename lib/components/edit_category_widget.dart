@@ -34,7 +34,6 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
     super.initState();
     textController =
         TextEditingController(text: widget.categoryToEdit!.categoryName);
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

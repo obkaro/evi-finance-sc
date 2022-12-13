@@ -33,7 +33,6 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'CategorySingle'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

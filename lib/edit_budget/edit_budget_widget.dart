@@ -40,7 +40,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
       end: DateTime.now().endOfDay,
     );
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'EditBudget'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

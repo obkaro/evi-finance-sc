@@ -49,7 +49,6 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'RecurringPayments'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

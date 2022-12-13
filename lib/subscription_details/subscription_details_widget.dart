@@ -38,7 +38,6 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'subscriptionDetails'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

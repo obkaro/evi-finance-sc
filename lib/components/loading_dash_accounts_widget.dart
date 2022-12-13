@@ -15,13 +15,6 @@ class LoadingDashAccountsWidget extends StatefulWidget {
 
 class _LoadingDashAccountsWidgetState extends State<LoadingDashAccountsWidget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

@@ -85,7 +85,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'TransactionSingle'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

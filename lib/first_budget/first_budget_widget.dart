@@ -42,7 +42,6 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
       end: DateTime.now().endOfDay,
     );
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'FirstBudget'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
