@@ -373,55 +373,32 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     return;
                                                   }
 
-                                                  final isEntitled =
-                                                      await revenue_cat
-                                                          .isEntitled(
-                                                              'starter');
-                                                  if (isEntitled == null) {
-                                                    return;
-                                                  } else if (!isEntitled) {
-                                                    await revenue_cat
-                                                        .loadOfferings();
-                                                  }
-
-                                                  if (isEntitled) {
-                                                    if (valueOrDefault(
-                                                                currentUserDocument
-                                                                    ?.username,
-                                                                '') ==
-                                                            null ||
-                                                        valueOrDefault(
-                                                                currentUserDocument
-                                                                    ?.username,
-                                                                '') ==
-                                                            '') {
-                                                      await Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              WelcomeToEviWidget(),
-                                                        ),
-                                                      );
-                                                    } else {
-                                                      await Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              NavBarPage(
-                                                                  initialPage:
-                                                                      'Dashboard'),
-                                                        ),
-                                                      );
-                                                    }
-                                                  } else {
-                                                    await Navigator
-                                                        .pushAndRemoveUntil(
+                                                  if (valueOrDefault(
+                                                              currentUserDocument
+                                                                  ?.username,
+                                                              '') ==
+                                                          null ||
+                                                      valueOrDefault(
+                                                              currentUserDocument
+                                                                  ?.username,
+                                                              '') ==
+                                                          '') {
+                                                    await Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
-                                                            PaywallWidget(),
+                                                            WelcomeToEviWidget(),
                                                       ),
-                                                      (r) => false,
+                                                    );
+                                                  } else {
+                                                    await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            NavBarPage(
+                                                                initialPage:
+                                                                    'Dashboard'),
+                                                      ),
                                                     );
                                                   }
                                                 },
