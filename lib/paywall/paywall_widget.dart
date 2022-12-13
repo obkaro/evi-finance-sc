@@ -242,13 +242,12 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                           setState(() {});
                         },
                         child: CButtonFilledWidget(
-                          text: revenue_cat
-                              .offerings!.current!.monthly!.product.priceString,
+                          text: 'pay',
                         ),
                       ),
                     ),
                     Text(
-                      '${revenue_cat.offerings!.current!.monthly!.product.description}',
+                      'nom',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).bodyText1Family,
