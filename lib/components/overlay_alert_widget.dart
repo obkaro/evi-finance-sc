@@ -14,13 +14,6 @@ class OverlayAlertWidget extends StatefulWidget {
 
 class _OverlayAlertWidgetState extends State<OverlayAlertWidget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

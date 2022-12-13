@@ -28,13 +28,6 @@ class EditBudgetAmountWidget extends StatefulWidget {
 
 class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

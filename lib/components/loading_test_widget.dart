@@ -14,13 +14,6 @@ class LoadingTestWidget extends StatefulWidget {
 
 class _LoadingTestWidgetState extends State<LoadingTestWidget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

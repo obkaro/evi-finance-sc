@@ -31,13 +31,6 @@ class CreateConstCategoryWidget extends StatefulWidget {
 
 class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

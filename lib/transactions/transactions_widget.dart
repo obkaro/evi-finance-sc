@@ -24,7 +24,6 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'Transactions'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

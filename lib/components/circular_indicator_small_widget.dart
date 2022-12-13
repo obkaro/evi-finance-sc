@@ -25,13 +25,6 @@ class CircularIndicatorSmallWidget extends StatefulWidget {
 class _CircularIndicatorSmallWidgetState
     extends State<CircularIndicatorSmallWidget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

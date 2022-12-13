@@ -95,7 +95,6 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'WelcomeToEvi'});
     textController = TextEditingController();
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -124,7 +124,6 @@ class _DashboardWidgetState extends State<DashboardWidget>
     });
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

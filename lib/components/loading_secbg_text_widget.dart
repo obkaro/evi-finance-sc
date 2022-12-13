@@ -23,13 +23,6 @@ class LoadingSecbgTextWidget extends StatefulWidget {
 
 class _LoadingSecbgTextWidgetState extends State<LoadingSecbgTextWidget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

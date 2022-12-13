@@ -1,6 +1,7 @@
 import '../components/c_button_filled_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../main.dart';
 import '../flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
@@ -18,13 +19,13 @@ class PaywallWidget extends StatefulWidget {
 
 class _PaywallWidgetState extends State<PaywallWidget> {
   PageController? pageViewController;
+  bool? didPurchase;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Paywall'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -223,11 +224,27 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                   children: [
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                      child: CButtonFilledWidget(
-                        text: revenue_cat.offerings!.current!
-                            .getPackage('Monthly')!
-                            .product
-                            .priceString,
+                      child: InkWell(
+                        onTap: () async {
+                          didPurchase = await revenue_cat.purchasePackage(
+                              revenue_cat
+                                  .offerings!.current!.monthly!.identifier);
+                          if (didPurchase == true) {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    NavBarPage(initialPage: 'Dashboard'),
+                              ),
+                            );
+                          }
+
+                          setState(() {});
+                        },
+                        child: CButtonFilledWidget(
+                          text: revenue_cat
+                              .offerings!.current!.monthly!.product.priceString,
+                        ),
                       ),
                     ),
                     Text(

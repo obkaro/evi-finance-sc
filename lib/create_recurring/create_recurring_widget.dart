@@ -53,7 +53,6 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
     );
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'CreateRecurring'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

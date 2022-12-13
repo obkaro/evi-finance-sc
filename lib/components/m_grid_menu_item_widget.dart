@@ -27,13 +27,6 @@ class MGridMenuItemWidget extends StatefulWidget {
 
 class _MGridMenuItemWidgetState extends State<MGridMenuItemWidget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

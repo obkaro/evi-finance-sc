@@ -50,7 +50,6 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
     );
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'editSubsciption'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

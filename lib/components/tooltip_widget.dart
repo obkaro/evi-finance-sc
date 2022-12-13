@@ -19,13 +19,6 @@ class TooltipWidget extends StatefulWidget {
 
 class _TooltipWidgetState extends State<TooltipWidget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

@@ -14,13 +14,6 @@ class LoadingCatlistWidget extends StatefulWidget {
 
 class _LoadingCatlistWidgetState extends State<LoadingCatlistWidget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

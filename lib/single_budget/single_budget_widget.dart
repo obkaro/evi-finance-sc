@@ -44,7 +44,6 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'SingleBudget'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

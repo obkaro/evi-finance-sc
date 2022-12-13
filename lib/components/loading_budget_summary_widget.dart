@@ -16,13 +16,6 @@ class LoadingBudgetSummaryWidget extends StatefulWidget {
 class _LoadingBudgetSummaryWidgetState
     extends State<LoadingBudgetSummaryWidget> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

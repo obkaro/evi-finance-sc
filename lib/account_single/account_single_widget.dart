@@ -64,7 +64,6 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AccountSingle'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
