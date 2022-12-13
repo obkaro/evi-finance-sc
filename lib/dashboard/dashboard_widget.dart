@@ -97,36 +97,6 @@ class _DashboardWidgetState extends State<DashboardWidget>
   void initState() {
     super.initState();
 
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      final isEntitled = await revenue_cat.isEntitled('starter');
-      if (isEntitled == null) {
-        return;
-      } else if (!isEntitled) {
-        await revenue_cat.loadOfferings();
-      }
-
-      if (isEntitled) {
-        if (valueOrDefault(currentUserDocument?.username, '') == null ||
-            valueOrDefault(currentUserDocument?.username, '') == '') {
-          await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => WelcomeToEviWidget(),
-            ),
-          );
-        }
-      } else {
-        await Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PaywallWidget(),
-          ),
-          (r) => false,
-        );
-      }
-    });
-
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
   }
 
