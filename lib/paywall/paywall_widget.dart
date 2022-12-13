@@ -1,6 +1,7 @@
 import '../components/c_button_filled_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import '../flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
@@ -222,28 +223,48 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
+                    FFButtonWidget(
+                      onPressed: () async {
+                        didPurchase = await revenue_cat.purchasePackage(
+                            revenue_cat
+                                .offerings!.current!.monthly!.identifier);
+                        if (didPurchase == true) {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  NavBarPage(initialPage: 'Dashboard'),
+                            ),
+                          );
+                        }
+
+                        setState(() {});
+                      },
+                      text: 'pay',
+                      options: FFButtonOptions(
+                        width: 130,
+                        height: 40,
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        textStyle: FlutterFlowTheme.of(context)
+                            .subtitle2
+                            .override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).subtitle2Family,
+                              color: Colors.white,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).subtitle2Family),
+                            ),
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                      child: InkWell(
-                        onTap: () async {
-                          didPurchase = await revenue_cat.purchasePackage(
-                              revenue_cat
-                                  .offerings!.current!.monthly!.identifier);
-                          if (didPurchase == true) {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    NavBarPage(initialPage: 'Dashboard'),
-                              ),
-                            );
-                          }
-
-                          setState(() {});
-                        },
-                        child: CButtonFilledWidget(
-                          text: 'pay',
-                        ),
+                      child: CButtonFilledWidget(
+                        text: 'pay',
                       ),
                     ),
                     Text(
