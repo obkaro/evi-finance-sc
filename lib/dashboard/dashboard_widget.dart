@@ -18,8 +18,8 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../init_paywall/init_paywall_widget.dart';
 import '../main.dart';
-import '../paywall/paywall_widget.dart';
 import '../transactions/transactions_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
@@ -27,7 +27,6 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -87,12 +86,43 @@ class _DashboardWidgetState extends State<DashboardWidget>
       ],
     ),
   };
-  DateTime? datePicked;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      final isEntitled = await revenue_cat.isEntitled('starter');
+      if (isEntitled == null) {
+        return;
+      } else if (!isEntitled) {
+        await revenue_cat.loadOfferings();
+      }
+
+      if (isEntitled) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'User is entitled',
+              style: TextStyle(
+                color: FlutterFlowTheme.of(context).primaryText,
+              ),
+            ),
+            duration: Duration(milliseconds: 4000),
+            backgroundColor: Color(0x00000000),
+          ),
+        );
+      } else {
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InitPaywallWidget(),
+          ),
+        );
+      }
+    });
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
   }
@@ -684,135 +714,6 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                 ),
                               ),
                             ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                        child: Container(
-                          width: double.infinity,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(32),
-                          ),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                FFButtonWidget(
-                                  onPressed: () async {
-                                    final isEntitled =
-                                        await revenue_cat.isEntitled('starter');
-                                    if (isEntitled == null) {
-                                      return;
-                                    } else if (!isEntitled) {
-                                      await revenue_cat.loadOfferings();
-                                    }
-
-                                    if (isEntitled) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'User is entitled',
-                                            style: TextStyle(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                            ),
-                                          ),
-                                          duration:
-                                              Duration(milliseconds: 4000),
-                                          backgroundColor: Color(0x00000000),
-                                        ),
-                                      );
-                                    } else {
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => PaywallWidget(),
-                                        ),
-                                      );
-                                    }
-                                  },
-                                  text: 'Pay',
-                                  options: FFButtonOptions(
-                                    width: 130,
-                                    height: 40,
-                                    color: FlutterFlowTheme.of(context)
-                                        .darkPrimary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2Family,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2Family),
-                                        ),
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                                FFButtonWidget(
-                                  onPressed: () async {
-                                    final _datePickedDate =
-                                        await showDatePicker(
-                                      context: context,
-                                      initialDate: getCurrentTimestamp,
-                                      firstDate: getCurrentTimestamp,
-                                      lastDate: DateTime(2050),
-                                    );
-
-                                    if (_datePickedDate != null) {
-                                      setState(
-                                        () => datePicked = DateTime(
-                                          _datePickedDate.year,
-                                          _datePickedDate.month,
-                                          _datePickedDate.day,
-                                        ),
-                                      );
-                                    }
-                                  },
-                                  text: 'Date',
-                                  options: FFButtonOptions(
-                                    width: 130,
-                                    height: 40,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2Family,
-                                          color: Colors.white,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2Family),
-                                        ),
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                              ],
-                            ),
                           ),
                         ),
                       ),
