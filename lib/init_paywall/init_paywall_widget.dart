@@ -44,126 +44,148 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(32, 36, 32, 20),
-                child: Text(
-                  'Cheers to a fresh journey into financial bliss, Karo',
-                  style: FlutterFlowTheme.of(context).title1.override(
-                        fontFamily: FlutterFlowTheme.of(context).title1Family,
-                        fontSize: 36,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).title1Family),
-                        lineHeight: 1.3,
-                      ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12, 0, 20, 20),
+              Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
-                      child: Row(
+                      padding: EdgeInsetsDirectional.fromSTEB(32, 36, 32, 20),
+                      child: Text(
+                        'Cheers to a fresh journey into financial bliss, Karo',
+                        style: FlutterFlowTheme.of(context).title1.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).title1Family,
+                              fontSize: 36,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).title1Family),
+                              lineHeight: 1.3,
+                            ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(12, 0, 20, 20),
+                      child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Expanded(
-                            child: Icon(
-                              Icons.account_balance_rounded,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 24,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 4,
-                            child: Column(
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                            child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Text(
-                                  'See what’s happening with your money across all bank accounts',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                Expanded(
+                                  child: Icon(
+                                    Icons.account_balance_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24,
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        'See what’s happening with your money across all bank accounts',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: Icon(
-                              Icons.pie_chart_rounded,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 24,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 4,
-                            child: Column(
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                            child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Text(
-                                  'Create flexible spending plans that you will actually stick to',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                Expanded(
+                                  child: Icon(
+                                    Icons.pie_chart_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24,
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        'Create flexible spending plans that you will actually stick to',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: Icon(
-                              Icons.credit_card_rounded,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 24,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 4,
-                            child: Column(
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                            child: Row(
                               mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Get a handle on those pesky subscriptions',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                Expanded(
+                                  child: Icon(
+                                    Icons.credit_card_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24,
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Get a handle on those pesky subscriptions',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: Icon(
-                              Icons.bar_chart_rounded,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 24,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 4,
-                            child: Column(
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                            child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Text(
-                                  'Find and plug holes in your finances, no spreadsheets required',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                Expanded(
+                                  child: Icon(
+                                    Icons.bar_chart_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24,
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        'Find and plug holes in your finances, no spreadsheets required',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -175,17 +197,19 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(32, 10, 32, 10),
-                child: Text(
-                  'For a limited time, save 50% on your first 2 months!',
-                  style: FlutterFlowTheme.of(context).subtitle1,
-                ),
-              ),
-              Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(32, 10, 32, 10),
+                      child: Text(
+                        'For a limited time, save 50% on your first 2 months!',
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).subtitle1,
+                      ),
+                    ),
                     FFButtonWidget(
                       onPressed: () async {
                         didPurchase = await revenue_cat.purchasePackage(
@@ -260,17 +284,25 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget> {
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                      child: Text(
-                        'Restore subscription',
-                        style: FlutterFlowTheme.of(context).bodyText2.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyText2Family,
-                              fontSize: 10,
-                              fontWeight: FontWeight.normal,
-                              decoration: TextDecoration.underline,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyText2Family),
-                            ),
+                      child: InkWell(
+                        onTap: () async {
+                          await revenue_cat.restorePurchases();
+                        },
+                        child: Text(
+                          'Restore subscription',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText2
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyText2Family,
+                                fontSize: 10,
+                                fontWeight: FontWeight.normal,
+                                decoration: TextDecoration.underline,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyText2Family),
+                              ),
+                        ),
                       ),
                     ),
                   ],

@@ -18,8 +18,8 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../init_paywall/init_paywall_widget.dart';
 import '../main.dart';
+import '../paywall/paywall_widget.dart';
 import '../transactions/transactions_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
@@ -118,7 +118,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
         await Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => InitPaywallWidget(),
+            builder: (context) => PaywallWidget(),
           ),
         );
       }
