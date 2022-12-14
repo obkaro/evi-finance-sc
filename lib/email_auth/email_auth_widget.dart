@@ -5,9 +5,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../forgot_password/forgot_password_widget.dart';
 import '../main.dart';
-import '../paywall/paywall_widget.dart';
 import '../welcome_to_evi/welcome_to_evi_widget.dart';
-import '../flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -857,36 +855,15 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                       .doc(user.uid)
                                                       .update(usersCreateData);
 
-                                                  final isEntitled =
-                                                      await revenue_cat
-                                                          .isEntitled(
-                                                              'starter');
-                                                  if (isEntitled == null) {
-                                                    return;
-                                                  } else if (!isEntitled) {
-                                                    await revenue_cat
-                                                        .loadOfferings();
-                                                  }
-
-                                                  if (isEntitled) {
-                                                    await Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            WelcomeToEviWidget(),
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    await Navigator
-                                                        .pushAndRemoveUntil(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            PaywallWidget(),
-                                                      ),
-                                                      (r) => false,
-                                                    );
-                                                  }
+                                                  await Navigator
+                                                      .pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          WelcomeToEviWidget(),
+                                                    ),
+                                                    (r) => false,
+                                                  );
                                                 },
                                                 text: 'Sign up',
                                                 options: FFButtonOptions(
@@ -968,51 +945,30 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                         if (user == null) {
                                           return;
                                         }
-                                        final isEntitled = await revenue_cat
-                                            .isEntitled('starter');
-                                        if (isEntitled == null) {
-                                          return;
-                                        } else if (!isEntitled) {
-                                          await revenue_cat.loadOfferings();
-                                        }
-
-                                        if (isEntitled) {
-                                          if (valueOrDefault(
-                                                      currentUserDocument
-                                                          ?.username,
-                                                      '') ==
-                                                  null ||
-                                              valueOrDefault(
-                                                      currentUserDocument
-                                                          ?.username,
-                                                      '') ==
-                                                  '') {
-                                            await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    WelcomeToEviWidget(),
-                                              ),
-                                            );
-                                          } else {
-                                            await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    NavBarPage(
-                                                        initialPage:
-                                                            'Dashboard'),
-                                              ),
-                                            );
-                                          }
-                                        } else {
-                                          await Navigator.pushAndRemoveUntil(
+                                        if (valueOrDefault(
+                                                    currentUserDocument
+                                                        ?.username,
+                                                    '') ==
+                                                null ||
+                                            valueOrDefault(
+                                                    currentUserDocument
+                                                        ?.username,
+                                                    '') ==
+                                                '') {
+                                          await Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  PaywallWidget(),
+                                                  WelcomeToEviWidget(),
                                             ),
-                                            (r) => false,
+                                          );
+                                        } else {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => NavBarPage(
+                                                  initialPage: 'Dashboard'),
+                                            ),
                                           );
                                         }
                                       },
