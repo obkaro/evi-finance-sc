@@ -4,7 +4,6 @@ import '../assign_transactions/assign_transactions_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../budgets/budgets_widget.dart';
-import '../components/c_button_filled_widget.dart';
 import '../components/circular_indicator_small_widget.dart';
 import '../components/empty_list_widget.dart';
 import '../components/loading_budget_summary_widget.dart';
@@ -22,7 +21,6 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import '../paywall/paywall_widget.dart';
 import '../transactions/transactions_widget.dart';
-import '../welcome_to_evi/welcome_to_evi_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -93,6 +91,38 @@ class _DashboardWidgetState extends State<DashboardWidget>
   @override
   void initState() {
     super.initState();
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      final isEntitled = await revenue_cat.isEntitled('starter');
+      if (isEntitled == null) {
+        return;
+      } else if (!isEntitled) {
+        await revenue_cat.loadOfferings();
+      }
+
+      if (isEntitled) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'User is entitled',
+              style: TextStyle(
+                color: FlutterFlowTheme.of(context).primaryText,
+              ),
+            ),
+            duration: Duration(milliseconds: 4000),
+            backgroundColor: Color(0x00000000),
+          ),
+        );
+      } else {
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PaywallWidget(),
+          ),
+        );
+      }
+    });
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
   }
@@ -684,47 +714,6 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                 ),
                               ),
                             ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                        child: InkWell(
-                          onTap: () async {
-                            final isEntitled =
-                                await revenue_cat.isEntitled('starter');
-                            if (isEntitled == null) {
-                              return;
-                            } else if (!isEntitled) {
-                              await revenue_cat.loadOfferings();
-                            }
-
-                            if (isEntitled) {
-                              if (valueOrDefault(
-                                          currentUserDocument?.username, '') ==
-                                      null ||
-                                  valueOrDefault(
-                                          currentUserDocument?.username, '') ==
-                                      '') {
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => WelcomeToEviWidget(),
-                                  ),
-                                );
-                              }
-                            } else {
-                              await Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PaywallWidget(),
-                                ),
-                                (r) => false,
-                              );
-                            }
-                          },
-                          child: CButtonFilledWidget(
-                            text: 'test pay',
                           ),
                         ),
                       ),

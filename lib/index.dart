@@ -36,4 +36,5 @@ export 'edit_income_sources/edit_income_sources_widget.dart'
     show EditIncomeSourcesWidget;
 export 'menu/menu_widget.dart' show MenuWidget;
 export 'email_auth/email_auth_widget.dart' show EmailAuthWidget;
+export 'init_paywall/init_paywall_widget.dart' show InitPaywallWidget;
 export 'paywall/paywall_widget.dart' show PaywallWidget;

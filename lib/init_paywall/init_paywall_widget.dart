@@ -12,14 +12,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class PaywallWidget extends StatefulWidget {
-  const PaywallWidget({Key? key}) : super(key: key);
+class InitPaywallWidget extends StatefulWidget {
+  const InitPaywallWidget({Key? key}) : super(key: key);
 
   @override
-  _PaywallWidgetState createState() => _PaywallWidgetState();
+  _InitPaywallWidgetState createState() => _InitPaywallWidgetState();
 }
 
-class _PaywallWidgetState extends State<PaywallWidget> {
+class _InitPaywallWidgetState extends State<InitPaywallWidget> {
   BudgetsRecord? createdBudget;
   bool? didPurchase;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -27,7 +27,7 @@ class _PaywallWidgetState extends State<PaywallWidget> {
   @override
   void initState() {
     super.initState();
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Paywall'});
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'InitPaywall'});
   }
 
   @override
@@ -52,7 +52,7 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(32, 36, 32, 20),
                       child: Text(
-                        'Let\'s keep a good thing going, shall we?',
+                        'Cheers to a fresh journey into financial bliss, Karo',
                         style: FlutterFlowTheme.of(context).title1.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).title1Family,
@@ -200,6 +200,7 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(32, 10, 32, 10),

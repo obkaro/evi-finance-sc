@@ -1,11 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/create_first_budget_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../init_paywall/init_paywall_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -394,17 +394,12 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                             username: textController!.text,
                           );
                           await currentUserReference!.update(usersUpdateData);
-                          await showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            context: context,
-                            builder: (context) {
-                              return Padding(
-                                padding: MediaQuery.of(context).viewInsets,
-                                child: CreateFirstBudgetWidget(),
-                              );
-                            },
-                          ).then((value) => setState(() {}));
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => InitPaywallWidget(),
+                            ),
+                          );
                         }
                       },
                       text: 'Continue',

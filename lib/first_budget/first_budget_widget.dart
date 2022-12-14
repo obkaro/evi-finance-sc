@@ -1,6 +1,7 @@
 import '../allocate_budget/allocate_budget_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/create_first_budget_widget.dart';
 import '../components/dialog_box_widget.dart';
 import '../flutter_flow/flutter_flow_calendar.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
@@ -12,6 +13,7 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -37,11 +39,26 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
   @override
   void initState() {
     super.initState();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (context) {
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: CreateFirstBudgetWidget(),
+          );
+        },
+      ).then((value) => setState(() {}));
+    });
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'FirstBudget'});
     calendarSelectedDay = DateTimeRange(
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'FirstBudget'});
   }
 
   @override
