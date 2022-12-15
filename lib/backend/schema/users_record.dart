@@ -43,6 +43,8 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
 
   String? get username;
 
+  String? get status;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -59,7 +61,8 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..budgetList = ListBuilder()
     ..onboardingStep = 0
     ..experience = ''
-    ..username = '';
+    ..username = ''
+    ..status = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -96,6 +99,7 @@ Map<String, dynamic> createUsersRecordData({
   int? onboardingStep,
   String? experience,
   String? username,
+  String? status,
 }) {
   final firestoreData = serializers.toFirestore(
     UsersRecord.serializer,
@@ -115,7 +119,8 @@ Map<String, dynamic> createUsersRecordData({
         ..defaultAccount = defaultAccount
         ..onboardingStep = onboardingStep
         ..experience = experience
-        ..username = username,
+        ..username = username
+        ..status = status,
     ),
   );
 
