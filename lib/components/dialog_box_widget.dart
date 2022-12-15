@@ -2,7 +2,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
-import 'package:styled_divider/styled_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -139,6 +138,8 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                             Expanded(
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'DIALOG_BOX_COMP_UPDATE_LATER_BTN_ON_TAP');
                                   setState(() {
                                     FFAppState().dialogBoxReturn = false;
                                   });
@@ -163,6 +164,8 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent(
+                                    'DIALOG_BOX_COMP_UPDATE_NOW_BTN_ON_TAP');
                                 setState(() {
                                   FFAppState().dialogBoxReturn = true;
                                 });

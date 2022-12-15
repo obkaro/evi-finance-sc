@@ -45,7 +45,8 @@
       <string>In order to take a picture or video, this app requires permission to access the camera.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
       <string>In order to upload media, this app requires permission to access the photo library.</string>
-
+	<key>PermissionGroupNotification</key>
+      <string>Evi requires permission to send you push notifications on your finances</string>
     <key>UIBackgroundModes</key>
     <array>
         <string>fetch</string>

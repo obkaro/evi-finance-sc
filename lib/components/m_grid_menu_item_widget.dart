@@ -32,6 +32,7 @@ class _MGridMenuItemWidgetState extends State<MGridMenuItemWidget> {
 
     return InkWell(
       onTap: () async {
+        logFirebaseEvent('M_GRID_MENU_ITEM_Container_226mg333_ON_T');
         await widget.action?.call();
       },
       child: Container(

@@ -2,7 +2,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
-import 'package:styled_divider/styled_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -126,6 +125,8 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
                             Expanded(
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'NEW_VERSION_FOUND_UPDATE_LATER_BTN_ON_TA');
                                   Navigator.pop(context);
                                 },
                                 text: 'Update later',
@@ -147,6 +148,8 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent(
+                                    'NEW_VERSION_FOUND_UPDATE_NOW_BTN_ON_TAP');
                                 await actions.launchStore();
                               },
                               text: 'Update now',

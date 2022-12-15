@@ -5,7 +5,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:styled_divider/styled_divider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -161,6 +160,8 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'EDIT_CATEGORY_COMP_CANCEL_BTN_ON_TAP');
                             Navigator.pop(context);
                           },
                           text: 'Cancel',
@@ -181,6 +182,8 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'EDIT_CATEGORY_COMP_SAVE_BTN_ON_TAP');
                             if (functions.checkEditCatTotal(
                                     widget.budget!.unallocatedAmount,
                                     FFAppState().currencyTextField,

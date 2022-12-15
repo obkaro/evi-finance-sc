@@ -213,6 +213,8 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget> {
                     ),
                     FFButtonWidget(
                       onPressed: () async {
+                        logFirebaseEvent(
+                            'INIT_PAYWALL_₦240_MONTHLY_BTN_ON_TAP');
                         didPurchase = await revenue_cat.purchasePackage(
                             revenue_cat
                                 .offerings!.current!.monthly!.identifier);
@@ -286,6 +288,8 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                       child: InkWell(
                         onTap: () async {
+                          logFirebaseEvent(
+                              'INIT_PAYWALL_PAGE_Text_9y7jv2qg_ON_TAP');
                           await revenue_cat.restorePurchases();
                         },
                         child: Text(

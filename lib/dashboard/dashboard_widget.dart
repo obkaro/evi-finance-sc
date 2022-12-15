@@ -94,6 +94,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('DASHBOARD_PAGE_Dashboard_ON_PAGE_LOAD');
       final isEntitled = await revenue_cat.isEntitled('starter');
       if (isEntitled == null) {
         return;
@@ -249,6 +250,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                         snapshot.data!;
                                     return InkWell(
                                       onTap: () async {
+                                        logFirebaseEvent(
+                                            'DASHBOARD_PAGE_Badge_iml1klbb_ON_TAP');
                                         if (badgeTransactionsRecordList.length >
                                             0) {
                                           await Navigator.push(
@@ -445,6 +448,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                             ),
                             InkWell(
                               onTap: () async {
+                                logFirebaseEvent(
+                                    'DASHBOARD_PAGE_Icon_o3c2hqhm_ON_TAP');
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -500,6 +505,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                   0, 0, 12, 0),
                                           child: InkWell(
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'DASHBOARD_PAGE_Container_gw8cyv8f_ON_TAP');
                                               await Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
@@ -628,6 +635,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 16, 0),
                                 child: InkWell(
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'DASHBOARD_PAGE_Container_cvyufl6e_ON_TAP');
                                     await actions.flutterMono(
                                       context,
                                     );
@@ -667,6 +676,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                     size: 30,
                                                   ),
                                                   onPressed: () async {
+                                                    logFirebaseEvent(
+                                                        'DASHBOARD_PAGE_add_ICN_ON_TAP');
                                                     await actions.flutterMono(
                                                       context,
                                                     );
@@ -736,6 +747,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                 ),
                                 InkWell(
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'DASHBOARD_PAGE_Icon_ercdr4jr_ON_TAP');
                                     await Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -778,6 +791,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                   ),
                                   child: InkWell(
                                     onTap: () async {
+                                      logFirebaseEvent(
+                                          'DASHBOARD_PAGE_Container_f5qboylq_ON_TAP');
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -940,6 +955,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                             ),
                             InkWell(
                               onTap: () async {
+                                logFirebaseEvent(
+                                    'DASHBOARD_PAGE_Icon_1ui1jzrj_ON_TAP');
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -1027,6 +1044,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'DASHBOARD_ALL_TRANSACTIONS_BTN_ON_TAP');
                             await Navigator.push(
                               context,
                               MaterialPageRoute(

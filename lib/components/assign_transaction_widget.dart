@@ -246,6 +246,9 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                   ),
                                                                   onPressed:
                                                                       () async {
+                                                                    logFirebaseEvent(
+                                                                        'ASSIGN_TRANSACTION_radio_button_off_roun');
+
                                                                     final transactionsUpdateData =
                                                                         createTransactionsRecordData(
                                                                       transactionCategory:
@@ -343,6 +346,8 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                               snapshot.data!;
                                           return FFButtonWidget(
                                             onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'ASSIGN_TRANSACTION_NEW_CATEGORY_BTN_ON_T');
                                               await showModalBottomSheet(
                                                 isScrollControlled: true,
                                                 backgroundColor:
@@ -549,6 +554,8 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                 ),
                                                                 onPressed:
                                                                     () async {
+                                                                  logFirebaseEvent(
+                                                                      'ASSIGN_TRANSACTION_radio_button_off_roun');
                                                                   if (widget
                                                                           .transaction!
                                                                           .recurringRef !=
@@ -852,6 +859,8 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                         20, 16, 20, 0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
+                                        logFirebaseEvent(
+                                            'ASSIGN_TRANSACTION_NEW_SUBSCRIPTION_BTN_');
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
                                           backgroundColor: Colors.transparent,

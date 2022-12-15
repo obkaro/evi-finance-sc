@@ -88,6 +88,9 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                 gridViewConstMerchantsRecordList[gridViewIndex];
                             return InkWell(
                               onTap: () async {
+                                logFirebaseEvent(
+                                    'ADD_RECURRING_PAYMENT_Container_plflhx2n');
+
                                 final subscriptionsCreateData =
                                     createSubscriptionsRecordData(
                                   name: gridViewConstMerchantsRecord.name,
@@ -150,6 +153,8 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
               child: InkWell(
                 onTap: () async {
+                  logFirebaseEvent('ADD_RECURRING_PAYMENT_Container_u0y2wmhl');
+
                   final subscriptionsCreateData = createSubscriptionsRecordData(
                     owner: currentUserReference,
                   );

@@ -94,6 +94,7 @@ class _MAppbarWidgetState extends State<MAppbarWidget> {
                           buttonSize: 60,
                           icon: widget.actionIcon!,
                           onPressed: () async {
+                            logFirebaseEvent('M_APPBAR_COMP_add_ICN_ON_TAP');
                             await widget.iconAction?.call();
                           },
                         ),

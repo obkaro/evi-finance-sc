@@ -1,7 +1,6 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -196,16 +195,10 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
-                      child: Text(
-                        'For a limited time, save 50% on your first 2 months!',
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).subtitle1,
-                      ),
-                    ),
                     FFButtonWidget(
                       onPressed: () async {
+                        logFirebaseEvent(
+                            'PAYWALL_PAGE_₦240_MONTHLY_BTN_ON_TAP');
                         didPurchase = await revenue_cat.purchasePackage(
                             revenue_cat
                                 .offerings!.current!.monthly!.identifier);
@@ -239,7 +232,7 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                       child: Text(
-                        '₦${functions.fiftyPercent(revenue_cat.offerings!.current!.monthly!.product.price)}/mo for the first 2 months, ${revenue_cat.offerings!.current!.monthly!.product.priceString}/mo after',
+                        '${revenue_cat.offerings!.current!.monthly!.product.priceString} monthly',
                         style: FlutterFlowTheme.of(context).bodyText2.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).bodyText2Family,
@@ -253,6 +246,7 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                       child: InkWell(
                         onTap: () async {
+                          logFirebaseEvent('PAYWALL_PAGE_Text_u9wlovrh_ON_TAP');
                           await revenue_cat.restorePurchases();
                         },
                         child: Text(
