@@ -4,6 +4,7 @@ import '../first_budget/first_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import '../flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -202,7 +203,7 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(32, 10, 32, 10),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
                       child: Text(
                         'For a limited time, save 50% on your first 2 months!',
                         textAlign: TextAlign.center,
@@ -215,6 +216,11 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                             revenue_cat
                                 .offerings!.current!.monthly!.identifier);
                         if (didPurchase == true) {
+                          final usersUpdateData = createUsersRecordData(
+                            status: 'subscribed',
+                          );
+                          await currentUserReference!.update(usersUpdateData);
+
                           final budgetsCreateData = createBudgetsRecordData(
                             budgetID: random_data.randomString(
                               24,
@@ -246,8 +252,7 @@ class _PaywallWidgetState extends State<PaywallWidget> {
 
                         setState(() {});
                       },
-                      text:
-                          '${revenue_cat.offerings!.current!.monthly!.product.priceString} monthly',
+                      text: 'Subscribe',
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 60,
@@ -271,7 +276,7 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                       child: Text(
-                        '₦240/mo for the first 2 months, ₦480/mo after',
+                        '₦${functions.fiftyPercent(revenue_cat.offerings!.current!.monthly!.product.price)}/mo for the first 2 months, ${revenue_cat.offerings!.current!.monthly!.product.priceString}/mo after',
                         style: FlutterFlowTheme.of(context).bodyText2.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).bodyText2Family,

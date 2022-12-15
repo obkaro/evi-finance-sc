@@ -4,7 +4,6 @@ import '../components/create_const_category_widget.dart';
 import '../components/create_custom_category_widget.dart';
 import '../components/edit_budget_amount_widget.dart';
 import '../components/edit_category_widget.dart';
-import '../connect_first_account/connect_first_account_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -1053,30 +1052,15 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                             Colors.black,
                                                       ),
                                                     );
-                                                    if ((currentUserDocument
-                                                                    ?.accountsList
-                                                                    ?.toList() ??
-                                                                [])
-                                                            .length >
-                                                        0) {
-                                                      await Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              NavBarPage(
-                                                                  initialPage:
-                                                                      'ActiveBudget'),
-                                                        ),
-                                                      );
-                                                    } else {
-                                                      await Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              ConnectFirstAccountWidget(),
-                                                        ),
-                                                      );
-                                                    }
+                                                    await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            NavBarPage(
+                                                                initialPage:
+                                                                    'ActiveBudget'),
+                                                      ),
+                                                    );
                                                   },
                                                   text: 'Save',
                                                   options: FFButtonOptions(
