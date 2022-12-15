@@ -233,7 +233,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                             keyboardType: TextInputType.number,
                                             inputFormatters: [
                                               MaskTextInputFormatter(
-                                                  mask: '₦ 000.000.000-000')
+                                                  mask: '₦ ###,###,###.##')
                                             ],
                                           ),
                                         ],
@@ -661,6 +661,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                 ),
                             elevation: 0,
                             borderSide: BorderSide(
+                              color: Colors.transparent,
                               width: 0,
                             ),
                             borderRadius: BorderRadius.circular(16),
