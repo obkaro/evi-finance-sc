@@ -1,4 +1,4 @@
-const functions = require("firebase-functions");
+const functions = require('firebase-functions');
 
 //const moment = require('moment');
 // The Firebase Admin SDK to access Firestore.
@@ -9,7 +9,41 @@ admin.initializeApp();
 const sdk = require('api')('@mono/v1.0#33hmc2izkyejmoej');
 const axios = require('axios');
 
+const firestore = require('@google-cloud/firestore');
+const client = new firestore.v1.FirestoreAdminClient();
 
+
+// Replace BUCKET_NAME
+const bucket = 'gs://evi-prod-backups';
+
+exports.scheduledbackup24 = functions.pubsub
+                                            .schedule('every 24 hours')
+                                            .onRun((context) => {
+
+  const projectId = process.env.GCP_PROJECT || process.env.GCLOUD_PROJECT;
+  const databaseName = 
+    client.databasePath(projectId, '(default)');
+
+  return client.exportDocuments({
+    name: databaseName,
+    outputUriPrefix: bucket,
+    // Leave collectionIds empty to export all collections
+    // or set to a list of collection IDs to export,
+    // collectionIds: ['users', 'posts']
+    collectionIds: []
+    })
+  .then(responses => {
+    const response = responses[0];
+    console.log(`Operation Name: ${response['name']}`);
+    return;
+  })
+  .catch(err => {
+    console.error(err);
+    throw new Error('Export operation failed');
+  });
+});
+
+// UPDATE ACCOUNTS
 exports.accountupdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', })
   .https.onRequest(async (req, res) => {
 
