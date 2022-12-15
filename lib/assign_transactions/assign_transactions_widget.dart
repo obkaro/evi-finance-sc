@@ -11,7 +11,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:styled_divider/styled_divider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -82,6 +81,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('ASSIGN_TRANSACTIONS_assignTransactions_O');
       if (FFAppState().showQuickTransAssign) {
         await showModalBottomSheet(
           isScrollControlled: true,
@@ -634,6 +634,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
                                                                                           child: FFButtonWidget(
                                                                                             onPressed: () async {
+                                                                                              logFirebaseEvent('ASSIGN_TRANSACTIONS_CATEGORIES_BTN_ON_TA');
                                                                                               setState(() {
                                                                                                 FFAppState().showCategoryOrSub = 'category';
                                                                                               });
@@ -663,6 +664,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                           padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                                                                                           child: FFButtonWidget(
                                                                                             onPressed: () async {
+                                                                                              logFirebaseEvent('ASSIGN_TRANSACTIONS_SUBSCRIPTIONS_BTN_ON');
                                                                                               setState(() {
                                                                                                 FFAppState().showCategoryOrSub = 'sub';
                                                                                               });
@@ -724,6 +726,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                   final categoriesItem = categories[categoriesIndex];
                                                                                                   return FFButtonWidget(
                                                                                                     onPressed: () async {
+                                                                                                      logFirebaseEvent('ASSIGN_TRANSACTIONS_BUTTON_BTN_ON_TAP');
                                                                                                       showModalBottomSheet(
                                                                                                         isScrollControlled: true,
                                                                                                         backgroundColor: Colors.transparent,
@@ -811,6 +814,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                   final subscriptionsItem = subscriptions[subscriptionsIndex];
                                                                                                   return FFButtonWidget(
                                                                                                     onPressed: () async {
+                                                                                                      logFirebaseEvent('ASSIGN_TRANSACTIONS_BUTTON_BTN_ON_TAP');
                                                                                                       showModalBottomSheet(
                                                                                                         isScrollControlled: true,
                                                                                                         backgroundColor: Colors.transparent,
@@ -1063,6 +1067,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                           final incomeSourcesItem = incomeSources[incomeSourcesIndex];
                                                                                           return FFButtonWidget(
                                                                                             onPressed: () async {
+                                                                                              logFirebaseEvent('ASSIGN_TRANSACTIONS_BUTTON_BTN_ON_TAP');
                                                                                               showModalBottomSheet(
                                                                                                 isScrollControlled: true,
                                                                                                 backgroundColor: Colors.transparent,

@@ -18,6 +18,7 @@ import 'flutter_flow/revenue_cat_util.dart' as revenue_cat;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   await FlutterFlowTheme.initialize();
 
   final appState = FFAppState(); // Initialize FFAppState

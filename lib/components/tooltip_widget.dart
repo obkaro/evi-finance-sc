@@ -79,6 +79,7 @@ class _TooltipWidgetState extends State<TooltipWidget> {
               alignment: AlignmentDirectional(1, -0.95),
               child: InkWell(
                 onTap: () async {
+                  logFirebaseEvent('TOOLTIP_COMP_Icon_a6ytjwga_ON_TAP');
                   Navigator.pop(context);
                 },
                 child: Icon(

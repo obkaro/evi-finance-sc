@@ -196,6 +196,8 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                             size: 16,
                                           ),
                                           onPressed: () async {
+                                            logFirebaseEvent(
+                                                'EDIT_SUBSCIPTION_edit_rounded_ICN_ON_TAP');
                                             final selectedMedia =
                                                 await selectMedia(
                                               maxWidth: 720.00,
@@ -496,6 +498,8 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                 ),
                                 InkWell(
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'EDIT_SUBSCIPTION_Icon_45k5tu3n_ON_TAP');
                                     await showModalBottomSheet(
                                       isScrollControlled: true,
                                       backgroundColor: Colors.transparent,
@@ -545,6 +549,8 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                 onChange:
                                     (DateTimeRange? newSelectedDate) async {
                                   calendarSelectedDay = newSelectedDate;
+                                  logFirebaseEvent(
+                                      'EDIT_SUBSCIPTION_Calendar_km2udt9i_ON_DA');
 
                                   final subscriptionsUpdateData =
                                       createSubscriptionsRecordData(
@@ -773,7 +779,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                 }
                                 List<CategoriesRecord>
                                     buttonCategoriesRecordList = snapshot.data!;
-                                // Return an empty Container when the document does not exist.
+                                // Return an empty Container when the item does not exist.
                                 if (snapshot.data!.isEmpty) {
                                   return Container();
                                 }
@@ -783,6 +789,9 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                         : null;
                                 return FFButtonWidget(
                                   onPressed: () async {
+                                    logFirebaseEvent(
+                                        'EDIT_SUBSCIPTION_SAVE_DETAILS_BTN_ON_TAP');
+
                                     final subscriptionsUpdateData =
                                         createSubscriptionsRecordData(
                                       name: nameController?.text ?? '',

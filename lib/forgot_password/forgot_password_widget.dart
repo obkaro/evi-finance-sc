@@ -181,6 +181,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    logFirebaseEvent(
+                                        'FORGOT_PASSWORD_RESET_PASSWORD_BTN_ON_TA');
                                     if (formKey.currentState == null ||
                                         !formKey.currentState!.validate()) {
                                       return;

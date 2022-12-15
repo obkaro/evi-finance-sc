@@ -206,6 +206,8 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                 onChanged: (val) async {
                                                   setState(() =>
                                                       dropDownValue = val);
+                                                  logFirebaseEvent(
+                                                      'CREATE_BUDGET_DropDown_rx88a1oa_ON_FORM_');
                                                   if (dropDownValue ==
                                                       'Monthly') {
                                                     final budgetsUpdateData =
@@ -362,6 +364,8 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                                   newSelectedDate) async {
                                                 calendarSelectedDay =
                                                     newSelectedDate;
+                                                logFirebaseEvent(
+                                                    'CREATE_BUDGET_Calendar_xun9k9js_ON_DATE_');
                                                 if (dropDownValue ==
                                                     'Monthly') {
                                                   final budgetsUpdateData =
@@ -594,6 +598,8 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'CREATE_BUDGET_PAGE_CONTINUE_BTN_ON_TAP');
                             // Action_CreateBud
                             if (formKey.currentState == null ||
                                 !formKey.currentState!.validate()) {

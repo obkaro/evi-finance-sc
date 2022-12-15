@@ -41,6 +41,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
     super.initState();
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('FIRST_BUDGET_FirstBudget_ON_LOAD');
       await showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
@@ -142,6 +143,8 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                 options: ['Weekly', 'Monthly'],
                                 onChanged: (val) async {
                                   setState(() => dropDownValue = val);
+                                  logFirebaseEvent(
+                                      'FIRST_BUDGET_DropDown_d18h0a4u_ON_FORM_W');
                                   if (dropDownValue == 'Monthly') {
                                     final budgetsUpdateData =
                                         createBudgetsRecordData(
@@ -306,6 +309,8 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                                 newSelectedDate) async {
                                               calendarSelectedDay =
                                                   newSelectedDate;
+                                              logFirebaseEvent(
+                                                  'FIRST_BUDGET_Calendar_yunrx4p3_ON_DATE_S');
                                               if (dropDownValue == 'Monthly') {
                                                 final budgetsUpdateData =
                                                     createBudgetsRecordData(
@@ -509,6 +514,8 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                               EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                           child: FFButtonWidget(
                             onPressed: () async {
+                              logFirebaseEvent(
+                                  'FIRST_BUDGET_PAGE_CONTINUE_BTN_ON_TAP');
                               if (formKey.currentState == null ||
                                   !formKey.currentState!.validate()) {
                                 return;

@@ -6,7 +6,6 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
-import 'package:styled_divider/styled_divider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -162,6 +161,8 @@ class _CreateCustomCategoryWidgetState
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'CREATE_CUSTOM_CATEGORY_CANCEL_BTN_ON_TAP');
                             Navigator.pop(context);
                           },
                           text: 'Cancel',
@@ -189,6 +190,8 @@ class _CreateCustomCategoryWidgetState
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'CREATE_CUSTOM_CATEGORY_SAVE_BTN_ON_TAP');
                             if (FFAppState().currencyTextField <=
                                 widget.budget!.unallocatedAmount!) {
                               final budgetsUpdateData = {

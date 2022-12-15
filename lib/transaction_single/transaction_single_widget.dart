@@ -378,6 +378,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                     ),
                                                     InkWell(
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'TRANSACTION_SINGLE_Column_2kl2s8ce_ON_TA');
+
                                                         final _datePickedTime =
                                                             await showTimePicker(
                                                           context: context,
@@ -896,6 +899,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                           ),
                                                           InkWell(
                                                             onTap: () async {
+                                                              logFirebaseEvent(
+                                                                  'TRANSACTION_SINGLE_Icon_zyy7tpod_ON_TAP');
+
                                                               final subscriptionsUpdateData =
                                                                   {
                                                                 'narrations':
@@ -1025,6 +1031,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                             ),
                                                             InkWell(
                                                               onTap: () async {
+                                                                logFirebaseEvent(
+                                                                    'TRANSACTION_SINGLE_Icon_ct8tp1ui_ON_TAP');
                                                                 // Action_CategorizeTrans
 
                                                                 final transactionsUpdateData =
@@ -1156,6 +1164,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                       ),
                                                       InkWell(
                                                         onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'TRANSACTION_SINGLE_Icon_ul545jwj_ON_TAP');
+
                                                           final transactionsUpdateData =
                                                               {
                                                             ...createTransactionsRecordData(
@@ -1252,6 +1263,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                 FFButtonWidget(
                                                               onPressed:
                                                                   () async {
+                                                                logFirebaseEvent(
+                                                                    'TRANSACTION_SINGLE_CATEGORIES_BTN_ON_TAP');
                                                                 setState(() {
                                                                   FFAppState()
                                                                           .showCategoryOrSub =
@@ -1319,6 +1332,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                 FFButtonWidget(
                                                               onPressed:
                                                                   () async {
+                                                                logFirebaseEvent(
+                                                                    'TRANSACTION_SINGLE_SUBSCRIPTIONS_BTN_ON_');
                                                                 setState(() {
                                                                   FFAppState()
                                                                           .showCategoryOrSub =
@@ -1448,6 +1463,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                     return FFButtonWidget(
                                                                       onPressed:
                                                                           () async {
+                                                                        logFirebaseEvent(
+                                                                            'TRANSACTION_SINGLE_BUTTON_BTN_ON_TAP');
                                                                         showModalBottomSheet(
                                                                           isScrollControlled:
                                                                               true,
@@ -1593,6 +1610,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                   return FFButtonWidget(
                                                                     onPressed:
                                                                         () async {
+                                                                      logFirebaseEvent(
+                                                                          'TRANSACTION_SINGLE_BUTTON_BTN_ON_TAP');
                                                                       showModalBottomSheet(
                                                                         isScrollControlled:
                                                                             true,
@@ -1906,6 +1925,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                               ),
                                                               onPressed:
                                                                   () async {
+                                                                logFirebaseEvent(
+                                                                    'TRANSACTION_SINGLE_PAGE_add_ICN_ON_TAP');
                                                                 if (FFAppState()
                                                                         .showCategoryOrSub ==
                                                                     'category') {
@@ -2113,6 +2134,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                   ),
                                                                   onPressed:
                                                                       () async {
+                                                                    logFirebaseEvent(
+                                                                        'TRANSACTION_SINGLE_PAGE_add_ICN_ON_TAP');
                                                                     await showModalBottomSheet(
                                                                       isScrollControlled:
                                                                           true,
@@ -2216,6 +2239,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                   return FFButtonWidget(
                                                                     onPressed:
                                                                         () async {
+                                                                      logFirebaseEvent(
+                                                                          'TRANSACTION_SINGLE_BUTTON_BTN_ON_TAP');
+
                                                                       final transactionsUpdateData =
                                                                           createTransactionsRecordData(
                                                                         incomeCategory:

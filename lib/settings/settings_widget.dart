@@ -26,6 +26,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
     super.initState();
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('SETTINGS_PAGE_Settings_ON_PAGE_LOAD');
       versionNumber = await actions.getVersionNumber();
     });
 
@@ -79,6 +80,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         children: [
                           InkWell(
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'SETTINGS_PAGE_ListTile_qqxxabj2_ON_TAP');
                               await Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -122,6 +125,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           ),
                           InkWell(
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'SETTINGS_PAGE_ListTile_3wei8tcz_ON_TAP');
                               logFirebaseEvent('premiumClick');
                             },
                             child: ListTile(
@@ -155,6 +160,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           ),
                           InkWell(
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'SETTINGS_PAGE_ListTile_70fqxdup_ON_TAP');
                               if ((Theme.of(context).brightness ==
                                       Brightness.dark) ==
                                   true) {
@@ -200,6 +207,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           ),
                           InkWell(
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'SETTINGS_PAGE_ListTile_m9i30zwn_ON_TAP');
                               await launchURL('https://evifinance.com/privacy');
                             },
                             child: ListTile(
@@ -233,6 +242,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           ),
                           InkWell(
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'SETTINGS_PAGE_ListTile_sqoev60t_ON_TAP');
                               await launchURL('https://evifinance.com/terms');
                             },
                             child: ListTile(
@@ -266,6 +277,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           ),
                           InkWell(
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'SETTINGS_PAGE_ListTile_zlwx8mil_ON_TAP');
                               await launchURL('https://www.evifinance.com');
                             },
                             child: ListTile(
@@ -299,6 +312,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           ),
                           InkWell(
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'SETTINGS_PAGE_ListTile_e96bswaa_ON_TAP');
                               await signOut();
                               await Navigator.pushAndRemoveUntil(
                                 context,

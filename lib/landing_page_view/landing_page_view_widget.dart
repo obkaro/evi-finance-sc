@@ -239,6 +239,8 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                       0, 0, 0, 1),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      logFirebaseEvent(
+                                          'LANDING_VIEW_SIGN_IN_WITH_GOOGLE_BTN_ON_');
                                       final user =
                                           await signInWithGoogle(context);
                                       if (user == null) {
@@ -316,6 +318,8 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                               alignment: AlignmentDirectional(0, 0),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'LANDING_VIEW_CONTINUE_WITH_EMAIL_BTN_ON_');
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(

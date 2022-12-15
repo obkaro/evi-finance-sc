@@ -2,7 +2,6 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import 'package:styled_divider/styled_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -123,6 +122,8 @@ class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'ALLOCATE_FIRST_BUDGET_CONTINUE_BTN_ON_TA');
                             Navigator.pop(context);
                           },
                           text: 'Continue',

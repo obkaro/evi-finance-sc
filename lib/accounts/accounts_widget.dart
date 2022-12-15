@@ -56,6 +56,7 @@ class _AccountsWidgetState extends State<AccountsWidget>
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          logFirebaseEvent('ACCOUNTS_FloatingActionButton_j3kq3zrt_O');
           // Action_LinkNewAcct
           await actions.flutterMono(
             context,
@@ -148,6 +149,8 @@ class _AccountsWidgetState extends State<AccountsWidget>
                                     20, 0, 20, 10),
                                 child: InkWell(
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'ACCOUNTS_PAGE_Container_tcuae8g2_ON_TAP');
                                     // Action_NavToAcctSingle
                                     await Navigator.push(
                                       context,

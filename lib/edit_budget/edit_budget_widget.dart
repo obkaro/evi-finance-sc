@@ -7,12 +7,13 @@ import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 
 class EditBudgetWidget extends StatefulWidget {
@@ -30,6 +31,7 @@ class EditBudgetWidget extends StatefulWidget {
 class _EditBudgetWidgetState extends State<EditBudgetWidget> {
   DateTimeRange? calendarSelectedDay;
   String? dropDownValue;
+  TextEditingController? textController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -40,6 +42,12 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
       end: DateTime.now().endOfDay,
     );
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'EditBudget'});
+  }
+
+  @override
+  void dispose() {
+    textController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -131,16 +139,102 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                               ),
                                             ],
                                           ),
-                                          custom_widgets.CurrencyTextField(
-                                            width: double.infinity,
-                                            height: 55,
-                                            amount: columnBudgetsRecord
-                                                .budgetAmount,
-                                            labelText: 'Amount',
-                                            hintText: 'Enter amount',
-                                            bgcolor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
+                                          TextFormField(
+                                            controller: textController ??=
+                                                TextEditingController(
+                                              text: columnBudgetsRecord
+                                                  .budgetAmount
+                                                  ?.toString(),
+                                            ),
+                                            onChanged: (_) =>
+                                                EasyDebounce.debounce(
+                                              'textController',
+                                              Duration(milliseconds: 2000),
+                                              () => setState(() {}),
+                                            ),
+                                            obscureText: false,
+                                            decoration: InputDecoration(
+                                              hintText: 'Amount',
+                                              hintStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2,
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              errorBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0xFFFF0000),
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              focusedErrorBorder:
+                                                  OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0xFFFF0000),
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              filled: true,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              contentPadding:
+                                                  EdgeInsetsDirectional
+                                                      .fromSTEB(12, 12, 12, 12),
+                                              suffixIcon: textController!
+                                                      .text.isNotEmpty
+                                                  ? InkWell(
+                                                      onTap: () async {
+                                                        textController?.clear();
+                                                        setState(() {});
+                                                      },
+                                                      child: Icon(
+                                                        Icons.clear,
+                                                        color:
+                                                            Color(0xFF757575),
+                                                        size: 16,
+                                                      ),
+                                                    )
+                                                  : null,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyText1Family,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1Family),
+                                                  lineHeight: 2.8,
+                                                ),
+                                            maxLines: null,
+                                            keyboardType: TextInputType.number,
+                                            inputFormatters: [
+                                              MaskTextInputFormatter(
+                                                  mask: '₦ 000.000.000-000')
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -184,6 +278,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                             onChanged: (val) async {
                                               setState(
                                                   () => dropDownValue = val);
+                                              logFirebaseEvent(
+                                                  'EDIT_BUDGET_DropDown_esyzqg1i_ON_FORM_WI');
                                               if (dropDownValue == 'Monthly') {
                                                 final budgetsUpdateData =
                                                     createBudgetsRecordData(
@@ -318,6 +414,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                   newSelectedDate) async {
                                                 calendarSelectedDay =
                                                     newSelectedDate;
+                                                logFirebaseEvent(
+                                                    'EDIT_BUDGET_Calendar_oih23j9r_ON_DATE_SE');
                                                 if (dropDownValue ==
                                                     'Monthly') {
                                                   final budgetsUpdateData =
@@ -530,6 +628,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'EDIT_BUDGET_EDIT_CATEGORIES_BTN_ON_TAP');
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -540,9 +640,12 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                             );
                           },
                           text: 'Edit Categories',
+                          icon: Icon(
+                            Icons.edit_rounded,
+                            size: 12,
+                          ),
                           options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 48,
+                            height: 36,
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
                             textStyle: FlutterFlowTheme.of(context)
@@ -558,11 +661,11 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                 ),
                             elevation: 0,
                             borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              width: 1,
+                              width: 0,
                             ),
                             borderRadius: BorderRadius.circular(16),
                           ),
+                          showLoadingIndicator: false,
                         ),
                       ),
                       Padding(
@@ -593,6 +696,9 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                 snapshot.data!;
                             return FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent(
+                                    'EDIT_BUDGET_PAGE_SAVE_BTN_ON_TAP');
+                                var _shouldSetState = false;
                                 if (FFAppState().currencyTextField >=
                                     functions.sumCategoryAmounts(
                                         buttonCategoriesRecordList.toList())) {
@@ -616,6 +722,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                     );
                                     await columnBudgetsRecord.reference
                                         .update(budgetsUpdateData);
+                                    _shouldSetState = true;
                                   } else {
                                     if (dropDownValue == 'Weekly') {
                                       // Action_CreateBudgetStep1
@@ -637,6 +744,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                       );
                                       await columnBudgetsRecord.reference
                                           .update(budgetsUpdateData);
+                                      _shouldSetState = true;
                                     } else {
                                       if (dropDownValue == 'Daily') {
                                         // Action_CreateBudgetStep1
@@ -659,7 +767,9 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                         );
                                         await columnBudgetsRecord.reference
                                             .update(budgetsUpdateData);
+                                        _shouldSetState = true;
                                       } else {
+                                        if (_shouldSetState) setState(() {});
                                         return;
                                       }
                                     }
@@ -688,6 +798,8 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                     },
                                   ).then((value) => setState(() {}));
                                 }
+
+                                if (_shouldSetState) setState(() {});
                               },
                               text: 'Save',
                               options: FFButtonOptions(

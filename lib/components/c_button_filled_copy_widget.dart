@@ -30,6 +30,7 @@ class _CButtonFilledCopyWidgetState extends State<CButtonFilledCopyWidget> {
 
     return FFButtonWidget(
       onPressed: () async {
+        logFirebaseEvent('C_BUTTON_FILLED_COPY_SAVE_BTN_ON_TAP');
         await widget.action?.call();
       },
       text: widget.text!,

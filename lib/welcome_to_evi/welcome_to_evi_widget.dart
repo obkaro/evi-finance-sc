@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/notification_prompt_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -380,6 +381,8 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                     padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                     child: FFButtonWidget(
                       onPressed: () async {
+                        logFirebaseEvent(
+                            'WELCOME_TO_EVI_PAGE_CONTINUE_BTN_ON_TAP');
                         if (formKey.currentState == null ||
                             !formKey.currentState!.validate()) {
                           return;
@@ -394,6 +397,19 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                             username: textController!.text,
                           );
                           await currentUserReference!.update(usersUpdateData);
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            isDismissible: false,
+                            context: context,
+                            builder: (context) {
+                              return Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: NotificationPromptWidget(),
+                              );
+                            },
+                          ).then((value) => setState(() {}));
+
                           await Navigator.push(
                             context,
                             MaterialPageRoute(

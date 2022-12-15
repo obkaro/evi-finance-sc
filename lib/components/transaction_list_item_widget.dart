@@ -33,6 +33,7 @@ class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
       decoration: BoxDecoration(),
       child: InkWell(
         onTap: () async {
+          logFirebaseEvent('TRANSACTION_LIST_ITEM_Column_1pzhg4m5_ON');
           // Action_TransactionSingle
           await Navigator.push(
             context,

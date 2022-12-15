@@ -260,6 +260,8 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'CONNECT_FIRST_ACCOUNT_CONTINUE_BTN_ON_TA');
                                   await actions.flutterMono(
                                     context,
                                   );
@@ -320,6 +322,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                   ),
                                   borderRadius: BorderRadius.circular(16),
                                 ),
+                                showLoadingIndicator: false,
                               ),
                             ),
                           ],

@@ -43,6 +43,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
     super.initState();
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('ACCOUNT_SINGLE_AccountSingle_ON_LOAD');
       if (widget.account!.reauthRequired == true) {
         showModalBottomSheet(
           isScrollControlled: true,
@@ -116,6 +117,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                   decoration: BoxDecoration(),
                   child: RefreshIndicator(
                     onRefresh: () async {
+                      logFirebaseEvent(
+                          'ACCOUNT_SINGLE_Column_l9ejeq0i_ON_PULL_T');
                       // Action_dataSyncCall
                       dataSyncResponse = await DataSyncMonoCall.call(
                         authID: widget.account!.authID,
@@ -640,6 +643,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                       snapshot.data!;
                                   return InkWell(
                                     onLongPress: () async {
+                                      logFirebaseEvent(
+                                          'ACCOUNT_SINGLE_DISCONNECT_ACCOUNT_BTN_ON');
                                       HapticFeedback.vibrate();
                                       await actions.deleteTransactions(
                                         buttonTransactionsRecordList.toList(),
@@ -647,6 +652,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                                     },
                                     child: FFButtonWidget(
                                       onPressed: () async {
+                                        logFirebaseEvent(
+                                            'ACCOUNT_SINGLE_DISCONNECT_ACCOUNT_BTN_ON');
                                         setState(() {
                                           FFAppState().dialogBoxReturn = false;
                                         });

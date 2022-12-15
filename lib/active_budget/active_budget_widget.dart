@@ -78,6 +78,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
     super.initState();
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('ACTIVE_BUDGET_ActiveBudget_ON_LOAD');
       if (currentUserDocument!.activeBudget == null) {
         final budgetsCreateData = createBudgetsRecordData(
           budgetID: random_data.randomString(
@@ -230,6 +231,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                                       .fromSTEB(0, 16, 0, 16),
                                                   child: InkWell(
                                                     onTap: () async {
+                                                      logFirebaseEvent(
+                                                          'ACTIVE_BUDGET_Container_eu0bkfkf_ON_TAP');
                                                       await Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
@@ -519,6 +522,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                                                       0, 0, 16),
                                                           child: InkWell(
                                                             onTap: () async {
+                                                              logFirebaseEvent(
+                                                                  'ACTIVE_BUDGET_Container_zqit0w8p_ON_TAP');
                                                               // Action_ViewSingleCategory
                                                               await Navigator
                                                                   .push(
@@ -535,6 +540,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                                             },
                                                             onLongPress:
                                                                 () async {
+                                                              logFirebaseEvent(
+                                                                  'ACTIVE_BUDGET_Container_zqit0w8p_ON_LONG');
                                                               HapticFeedback
                                                                   .lightImpact();
                                                               await showModalBottomSheet(
@@ -697,6 +704,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                             0, 0, 0, 16),
                                         child: InkWell(
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'ACTIVE_BUDGET_Container_3yzcnnt3_ON_TAP');
                                             await showModalBottomSheet(
                                               isScrollControlled: true,
                                               backgroundColor:
@@ -805,6 +814,9 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                 EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                             child: InkWell(
                               onTap: () async {
+                                logFirebaseEvent(
+                                    'ACTIVE_BUDGET_Container_q4ihd9jn_ON_TAP');
+
                                 final budgetsCreateData =
                                     createBudgetsRecordData(
                                   budgetDateCreated: getCurrentTimestamp,
@@ -881,6 +893,9 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                           size: 48,
                                         ),
                                         onPressed: () async {
+                                          logFirebaseEvent(
+                                              'ACTIVE_BUDGET_add_rounded_ICN_ON_TAP');
+
                                           final budgetsCreateData =
                                               createBudgetsRecordData(
                                             budgetDateCreated:

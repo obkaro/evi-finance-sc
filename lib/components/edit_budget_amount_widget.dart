@@ -5,7 +5,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:styled_divider/styled_divider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -107,6 +106,8 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent(
+                                    'EDIT_BUDGET_AMOUNT_CANCEL_BTN_ON_TAP');
                                 Navigator.pop(context);
                               },
                               text: 'Cancel',
@@ -138,6 +139,8 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent(
+                                    'EDIT_BUDGET_AMOUNT_COMP_SAVE_BTN_ON_TAP');
                                 if (FFAppState().currencyTextField >=
                                     widget.categoryTotal!) {
                                   final budgetsUpdateData =

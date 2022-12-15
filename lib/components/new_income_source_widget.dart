@@ -3,7 +3,6 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import 'package:styled_divider/styled_divider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -144,6 +143,8 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'NEW_INCOME_SOURCE_COMP_CANCEL_BTN_ON_TAP');
                             Navigator.pop(context);
                           },
                           text: 'Cancel',
@@ -174,6 +175,8 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'NEW_INCOME_SOURCE_COMP_SAVE_BTN_ON_TAP');
                             if (formKey.currentState == null ||
                                 !formKey.currentState!.validate()) {
                               return;

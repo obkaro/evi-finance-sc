@@ -1,28 +1,31 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../connect_first_account/connect_first_account_widget.dart';
-import '../first_budget/first_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/random_data_util.dart' as random_data;
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '../flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class CreateFirstBudgetWidget extends StatefulWidget {
-  const CreateFirstBudgetWidget({Key? key}) : super(key: key);
+class NotificationPromptWidget extends StatefulWidget {
+  const NotificationPromptWidget({
+    Key? key,
+    this.budget,
+    this.categoryToEdit,
+    this.categoriesTotal,
+  }) : super(key: key);
+
+  final BudgetsRecord? budget;
+  final CategoriesRecord? categoryToEdit;
+  final int? categoriesTotal;
 
   @override
-  _CreateFirstBudgetWidgetState createState() =>
-      _CreateFirstBudgetWidgetState();
+  _NotificationPromptWidgetState createState() =>
+      _NotificationPromptWidgetState();
 }
 
-class _CreateFirstBudgetWidgetState extends State<CreateFirstBudgetWidget> {
-  BudgetsRecord? createdBudget;
-
+class _NotificationPromptWidgetState extends State<NotificationPromptWidget> {
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -54,14 +57,14 @@ class _CreateFirstBudgetWidgetState extends State<CreateFirstBudgetWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Your First Budget',
+                        'Stay Informed',
                         style: FlutterFlowTheme.of(context).title3,
                       ),
                     ],
                   ),
                 ),
                 Icon(
-                  Icons.table_view_rounded,
+                  Icons.notification_important_rounded,
                   color: FlutterFlowTheme.of(context).secondaryText,
                   size: 72,
                 ),
@@ -86,7 +89,7 @@ class _CreateFirstBudgetWidgetState extends State<CreateFirstBudgetWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
                               child: Text(
-                                'Next, let\'s create your first budget. Monthly and weekly budgets will automatically repeat when the budget time period elapses.',
+                                'Allow notifications for Evi to let you know when you might need to check on what\'s happening in your finances',
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
@@ -121,76 +124,11 @@ class _CreateFirstBudgetWidgetState extends State<CreateFirstBudgetWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
-                                'CREATE_FIRST_BUDGET_COMP_SKIP_BTN_ON_TAP');
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    ConnectFirstAccountWidget(),
-                              ),
-                            );
+                                'NOTIFICATION_PROMPT_COMP_OKAY_BTN_ON_TAP');
+                            await requestPermission(notificationsPermission);
+                            Navigator.pop(context);
                           },
-                          text: 'Skip',
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 60,
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .bodyText2
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText2Family,
-                                  fontSize: 14,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyText2Family),
-                                ),
-                            elevation: 0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'CREATE_FIRST_BUDGET_CONTINUE_BTN_ON_TAP');
-
-                            final budgetsCreateData = createBudgetsRecordData(
-                              budgetID: random_data.randomString(
-                                24,
-                                24,
-                                true,
-                                true,
-                                true,
-                              ),
-                              budgetDateCreated: getCurrentTimestamp,
-                              status: 'no_parent',
-                              budgetSpent: 0,
-                              budgetOwner: currentUserReference,
-                            );
-                            var budgetsRecordReference =
-                                BudgetsRecord.collection.doc();
-                            await budgetsRecordReference.set(budgetsCreateData);
-                            createdBudget = BudgetsRecord.getDocumentFromData(
-                                budgetsCreateData, budgetsRecordReference);
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => FirstBudgetWidget(
-                                  budget: createdBudget,
-                                ),
-                              ),
-                            );
-
-                            setState(() {});
-                          },
-                          text: 'Continue',
+                          text: 'Okay',
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 60,
