@@ -135,7 +135,7 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
                                   height: 30,
                                   color: Color(0x00D2D2D2),
                                   textStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
+                                      FlutterFlowTheme.of(context).bodyText1,
                                   elevation: 0,
                                   borderSide: BorderSide(
                                     color: Colors.transparent,
