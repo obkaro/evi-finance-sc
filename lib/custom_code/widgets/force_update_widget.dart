@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-// Begin custom widget code
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../components/new_version_found_widget.dart';
@@ -61,10 +60,10 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
       } else
         forceUpdateCalc = false;
     }
-    // print(version);
-    // print(currentVersion);
-    // print(dashboardVersionsRecord.versionNumberString);
-    // print(enforcedVersion);
+    print(version);
+    print(currentVersion);
+    print(dashboardVersionsRecord.versionNumberString);
+    print(enforcedVersion);
 
     if (forceUpdateCalc == true) {
       FFAppState().hasUpdatePromptShown = true;
