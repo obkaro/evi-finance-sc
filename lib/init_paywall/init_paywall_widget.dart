@@ -217,11 +217,6 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget> {
                             revenue_cat
                                 .offerings!.current!.monthly!.identifier);
                         if (didPurchase == true) {
-                          final usersUpdateData = createUsersRecordData(
-                            status: 'subscribed',
-                          );
-                          await currentUserReference!.update(usersUpdateData);
-
                           final budgetsCreateData = createBudgetsRecordData(
                             budgetID: random_data.randomString(
                               24,

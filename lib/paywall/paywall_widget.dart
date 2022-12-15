@@ -1,13 +1,8 @@
-import '../auth/auth_util.dart';
-import '../backend/backend.dart';
-import '../first_budget/first_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
-import '../flutter_flow/random_data_util.dart' as random_data;
 import '../flutter_flow/revenue_cat_util.dart' as revenue_cat;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,7 +16,6 @@ class PaywallWidget extends StatefulWidget {
 }
 
 class _PaywallWidgetState extends State<PaywallWidget> {
-  BudgetsRecord? createdBudget;
   bool? didPurchase;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -216,38 +210,7 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                             revenue_cat
                                 .offerings!.current!.monthly!.identifier);
                         if (didPurchase == true) {
-                          final usersUpdateData = createUsersRecordData(
-                            status: 'subscribed',
-                          );
-                          await currentUserReference!.update(usersUpdateData);
-
-                          final budgetsCreateData = createBudgetsRecordData(
-                            budgetID: random_data.randomString(
-                              24,
-                              24,
-                              true,
-                              true,
-                              true,
-                            ),
-                            budgetDateCreated: getCurrentTimestamp,
-                            status: 'no_parent',
-                            budgetSpent: 0,
-                            budgetOwner: currentUserReference,
-                          );
-                          var budgetsRecordReference =
-                              BudgetsRecord.collection.doc();
-                          await budgetsRecordReference.set(budgetsCreateData);
-                          createdBudget = BudgetsRecord.getDocumentFromData(
-                              budgetsCreateData, budgetsRecordReference);
-                          await Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => FirstBudgetWidget(
-                                budget: createdBudget,
-                              ),
-                            ),
-                            (r) => false,
-                          );
+                          Navigator.pop(context);
                         }
 
                         setState(() {});
