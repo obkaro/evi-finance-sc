@@ -2,7 +2,7 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{document} {
-      allow create: if request.auth.uid == request.resource.data.uid;
+      allow create: if request.auth != null;
       allow read: if request.auth.uid == resource.data.uid;
       allow write: if request.auth.uid == resource.data.uid;
       allow delete: if false;
@@ -72,9 +72,9 @@ service cloud.firestore {
     }
 
     match /users/{parent}/incomeCategories/{document} {
-      allow create: if request.auth.uid == parent;
-      allow read: if request.auth.uid == parent;
-      allow write: if request.auth.uid == parent;
+      allow create: if request.auth.uid == get(/databases/$(database)/documents/users/$(parent)).data.uid;
+      allow read: if request.auth.uid == get(/databases/$(database)/documents/users/$(parent)).data.uid;
+      allow write: if request.auth.uid == get(/databases/$(database)/documents/users/$(parent)).data.uid;
       allow delete: if false;
     }
 
