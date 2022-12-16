@@ -92,6 +92,10 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
 
 final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'Transactions': (data) async => TransactionsWidget(),
+  'TransactionSingle': (data) async => TransactionSingleWidget(
+        transaction: await getDocumentParameter(
+            data, 'transaction', TransactionsRecord.serializer),
+      ),
   'ForgotPassword': (data) async => ForgotPasswordWidget(),
   'ActiveBudget': (data) async => hasMatchingParameters(data, {'command'})
       ? ActiveBudgetWidget(
@@ -130,10 +134,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'FirstBudget': (data) async => FirstBudgetWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
-      ),
-  'TransactionSingle': (data) async => TransactionSingleWidget(
-        transaction: await getDocumentParameter(
-            data, 'transaction', TransactionsRecord.serializer),
       ),
   'assignTransactions': (data) async => AssignTransactionsWidget(
         transactions: [],

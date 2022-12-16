@@ -3,7 +3,6 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import 'package:styled_divider/styled_divider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -149,19 +148,10 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
                           text: 'Cancel',
                           options: FFButtonOptions(
                             width: double.infinity,
-                            height: 30,
+                            height: 60,
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .bodyText2
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText2Family,
-                                  fontSize: 14,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyText2Family),
-                                ),
+                            textStyle: FlutterFlowTheme.of(context).subtitle2,
                             elevation: 0,
                             borderSide: BorderSide(
                               color: Colors.transparent,
@@ -169,6 +159,14 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
                             ),
                             borderRadius: BorderRadius.circular(16),
                           ),
+                        ),
+                      ),
+                      Container(
+                        width: 20,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
                         ),
                       ),
                       Expanded(

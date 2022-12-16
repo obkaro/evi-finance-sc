@@ -6,7 +6,6 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
-import 'package:styled_divider/styled_divider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -167,9 +166,9 @@ class _CreateCustomCategoryWidgetState
                           text: 'Cancel',
                           options: FFButtonOptions(
                             width: double.infinity,
-                            height: 30,
+                            height: 60,
                             color: Color(0x00D2D2D2),
-                            textStyle: FlutterFlowTheme.of(context).bodyText2,
+                            textStyle: FlutterFlowTheme.of(context).subtitle2,
                             elevation: 0,
                             borderSide: BorderSide(
                               color: Colors.transparent,

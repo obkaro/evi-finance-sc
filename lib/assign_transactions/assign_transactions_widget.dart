@@ -11,7 +11,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:styled_divider/styled_divider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -112,9 +111,6 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
         return;
       }
     });
-
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'assignTransactions'});
   }
 
   @override

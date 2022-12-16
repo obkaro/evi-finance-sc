@@ -82,9 +82,6 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
   @override
   void initState() {
     super.initState();
-
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'TransactionSingle'});
   }
 
   @override

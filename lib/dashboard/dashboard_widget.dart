@@ -101,20 +101,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
         await revenue_cat.loadOfferings();
       }
 
-      if (isEntitled) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              'User is entitled',
-              style: TextStyle(
-                color: FlutterFlowTheme.of(context).primaryText,
-              ),
-            ),
-            duration: Duration(milliseconds: 4000),
-            backgroundColor: Color(0x00000000),
-          ),
-        );
-      } else {
+      if (!isEntitled) {
         await Navigator.push(
           context,
           MaterialPageRoute(
@@ -123,8 +110,6 @@ class _DashboardWidgetState extends State<DashboardWidget>
         );
       }
     });
-
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
   }
 
   @override
@@ -675,7 +660,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                         .showSnackBar(
                                                       SnackBar(
                                                         content: Text(
-                                                          'Refreshing transactions. This might take a minute...',
+                                                          'Refreshing transactions. This might take some time...',
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyText1
@@ -1065,9 +1050,10 @@ class _DashboardWidgetState extends State<DashboardWidget>
                 ),
                 StreamBuilder<List<VersionsRecord>>(
                   stream: queryVersionsRecord(
-                    queryBuilder: (versionsRecord) => versionsRecord.where(
-                        'releaseDate',
-                        isGreaterThan: getCurrentTimestamp),
+                    queryBuilder: (versionsRecord) => versionsRecord
+                        .where('releaseDate',
+                            isGreaterThan: getCurrentTimestamp)
+                        .orderBy('releaseDate', descending: true),
                     singleRecord: true,
                   ),
                   builder: (context, snapshot) {

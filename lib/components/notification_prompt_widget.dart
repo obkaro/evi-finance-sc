@@ -2,13 +2,14 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class AllocateFirstBudgetWidget extends StatefulWidget {
-  const AllocateFirstBudgetWidget({
+class NotificationPromptWidget extends StatefulWidget {
+  const NotificationPromptWidget({
     Key? key,
     this.budget,
     this.categoryToEdit,
@@ -20,11 +21,11 @@ class AllocateFirstBudgetWidget extends StatefulWidget {
   final int? categoriesTotal;
 
   @override
-  _AllocateFirstBudgetWidgetState createState() =>
-      _AllocateFirstBudgetWidgetState();
+  _NotificationPromptWidgetState createState() =>
+      _NotificationPromptWidgetState();
 }
 
-class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
+class _NotificationPromptWidgetState extends State<NotificationPromptWidget> {
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -56,14 +57,14 @@ class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Allocate Your Budget',
+                        'Stay Informed',
                         style: FlutterFlowTheme.of(context).title3,
                       ),
                     ],
                   ),
                 ),
                 Icon(
-                  Icons.table_chart,
+                  Icons.notification_important_rounded,
                   color: FlutterFlowTheme.of(context).secondaryText,
                   size: 72,
                 ),
@@ -88,7 +89,7 @@ class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
                               child: Text(
-                                'If you can\'t remember everything just yet, don\'t sweat it. We make it super easy for you to edit all of these at any time during your budget period.',
+                                'Allow notifications for Evi to let you know when you might need to check on what\'s happening in your finances',
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
@@ -122,9 +123,10 @@ class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
+                            await requestPermission(notificationsPermission);
                             Navigator.pop(context);
                           },
-                          text: 'Continue',
+                          text: 'Okay',
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 60,

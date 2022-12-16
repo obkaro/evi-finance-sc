@@ -29,13 +29,6 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'CategorySingle'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

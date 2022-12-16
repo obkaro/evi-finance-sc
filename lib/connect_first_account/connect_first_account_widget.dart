@@ -48,9 +48,6 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
           !anim.applyInitialState),
       this,
     );
-
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'ConnectFirstAccount'});
   }
 
   @override
@@ -320,6 +317,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                   ),
                                   borderRadius: BorderRadius.circular(16),
                                 ),
+                                showLoadingIndicator: false,
                               ),
                             ),
                           ],

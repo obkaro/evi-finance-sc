@@ -49,8 +49,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
   @override
   void initState() {
     super.initState();
-
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Budgets'});
   }
 
   @override

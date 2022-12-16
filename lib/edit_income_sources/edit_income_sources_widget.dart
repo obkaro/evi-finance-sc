@@ -47,9 +47,6 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
   @override
   void initState() {
     super.initState();
-
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'EditIncomeSources'});
   }
 
   @override

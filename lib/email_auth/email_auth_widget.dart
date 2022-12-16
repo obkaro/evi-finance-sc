@@ -46,7 +46,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
     signInEmailController = TextEditingController();
     signInPasswordController = TextEditingController();
     signInPasswordVisibility = false;
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'EmailAuth'});
   }
 
   @override

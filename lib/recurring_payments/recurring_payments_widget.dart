@@ -8,7 +8,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../subscription_details/subscription_details_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:styled_divider/styled_divider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -46,9 +45,6 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget>
   @override
   void initState() {
     super.initState();
-
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'RecurringPayments'});
   }
 
   @override

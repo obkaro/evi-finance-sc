@@ -2,7 +2,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
-import 'package:styled_divider/styled_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -147,10 +146,10 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                                 text: widget.buttonNo!,
                                 options: FFButtonOptions(
                                   width: double.infinity,
-                                  height: 30,
+                                  height: 60,
                                   color: Color(0x00D2D2D2),
                                   textStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
+                                      FlutterFlowTheme.of(context).subtitle2,
                                   elevation: 0,
                                   borderSide: BorderSide(
                                     color: Colors.transparent,
@@ -160,6 +159,14 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                                 ),
                               ),
                             ),
+                          Container(
+                            width: 20,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                          ),
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {

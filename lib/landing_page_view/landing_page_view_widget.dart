@@ -26,13 +26,6 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'LandingPageView'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 

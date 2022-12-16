@@ -434,3 +434,7 @@ String toTitleCase(String string) {
       )
       .trim();
 }
+
+String fiftyPercent(double numberValue) {
+  return (numberValue / 2).toStringAsFixed(2);
+}

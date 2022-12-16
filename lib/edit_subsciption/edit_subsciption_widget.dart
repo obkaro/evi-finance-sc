@@ -48,8 +48,6 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'editSubsciption'});
   }
 
   @override
@@ -668,7 +666,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                       unselectedChipStyle: ChipStyle(
                                         backgroundColor:
                                             FlutterFlowTheme.of(context)
-                                                .darkPrimary,
+                                                .primaryBackground,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
@@ -773,7 +771,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                 }
                                 List<CategoriesRecord>
                                     buttonCategoriesRecordList = snapshot.data!;
-                                // Return an empty Container when the document does not exist.
+                                // Return an empty Container when the item does not exist.
                                 if (snapshot.data!.isEmpty) {
                                   return Container();
                                 }

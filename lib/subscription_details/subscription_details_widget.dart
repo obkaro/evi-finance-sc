@@ -9,7 +9,6 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
-import 'package:styled_divider/styled_divider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -32,13 +31,6 @@ class SubscriptionDetailsWidget extends StatefulWidget {
 class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
   Completer<List<TransactionsRecord>>? _firestoreRequestCompleter;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'subscriptionDetails'});
-  }
 
   @override
   Widget build(BuildContext context) {

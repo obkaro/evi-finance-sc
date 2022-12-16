@@ -107,8 +107,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
       }
     });
 
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'ActiveBudget'});
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||

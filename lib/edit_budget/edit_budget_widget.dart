@@ -39,7 +39,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'EditBudget'});
   }
 
   @override
@@ -126,7 +125,23 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                   'Amount',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText1,
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1Family,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
+                                                      ),
                                                 ),
                                               ),
                                             ],
@@ -167,7 +182,23 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                   'Duration',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText1,
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1Family,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
+                                                      ),
                                                 ),
                                               ),
                                             ],
@@ -540,9 +571,12 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                             );
                           },
                           text: 'Edit Categories',
+                          icon: Icon(
+                            Icons.edit_rounded,
+                            size: 12,
+                          ),
                           options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 48,
+                            height: 36,
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
                             textStyle: FlutterFlowTheme.of(context)
@@ -558,11 +592,12 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                 ),
                             elevation: 0,
                             borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              width: 1,
+                              color: Colors.transparent,
+                              width: 0,
                             ),
                             borderRadius: BorderRadius.circular(16),
                           ),
+                          showLoadingIndicator: false,
                         ),
                       ),
                       Padding(

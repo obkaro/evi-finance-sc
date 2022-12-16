@@ -51,8 +51,6 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'CreateRecurring'});
   }
 
   @override
@@ -673,7 +671,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                         unselectedChipStyle: ChipStyle(
                                           backgroundColor:
                                               FlutterFlowTheme.of(context)
-                                                  .darkPrimary,
+                                                  .primaryBackground,
                                           textStyle: FlutterFlowTheme.of(
                                                   context)
                                               .bodyText2
@@ -778,7 +776,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                 }
                                 List<CategoriesRecord>
                                     buttonCategoriesRecordList = snapshot.data!;
-                                // Return an empty Container when the document does not exist.
+                                // Return an empty Container when the item does not exist.
                                 if (snapshot.data!.isEmpty) {
                                   return Container();
                                 }

@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-// Begin custom widget code
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../components/new_version_found_widget.dart';
@@ -54,17 +53,18 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
         .map((String number) => int.parse(number))
         .toList();
 
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < currentVersion.length; i++) {
       if (enforcedVersion[i] != currentVersion[i] &&
           enforcedVersion[i] > currentVersion[i]) {
         forceUpdateCalc = true;
       } else
         forceUpdateCalc = false;
     }
-    // print(version);
-    // print(currentVersion);
-    // print(dashboardVersionsRecord.versionNumberString);
-    // print(enforcedVersion);
+    /* print(version);
+    print(currentVersion);
+    print(dashboardVersionsRecord.versionNumberString);
+    print(enforcedVersion);
+    print('SHOULD SHOW BUTTOM SHEET = $forceUpdateCalc'); */
 
     if (forceUpdateCalc == true) {
       FFAppState().hasUpdatePromptShown = true;

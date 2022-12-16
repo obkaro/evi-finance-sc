@@ -5,7 +5,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:styled_divider/styled_divider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -168,7 +167,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                             width: double.infinity,
                             height: 60,
                             color: Color(0x00D2D2D2),
-                            textStyle: FlutterFlowTheme.of(context).bodyText2,
+                            textStyle: FlutterFlowTheme.of(context).subtitle2,
                             elevation: 0,
                             borderSide: BorderSide(
                               color: Colors.transparent,
@@ -176,6 +175,14 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                             ),
                             borderRadius: BorderRadius.circular(16),
                           ),
+                        ),
+                      ),
+                      Container(
+                        width: 20,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
                         ),
                       ),
                       Expanded(
