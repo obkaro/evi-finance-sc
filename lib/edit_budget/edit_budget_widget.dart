@@ -699,7 +699,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                               onPressed: () async {
                                 logFirebaseEvent(
                                     'EDIT_BUDGET_PAGE_SAVE_BTN_ON_TAP');
-                                var _shouldSetState = false;
                                 if (FFAppState().currencyTextField >=
                                     functions.sumCategoryAmounts(
                                         buttonCategoriesRecordList.toList())) {
@@ -723,7 +722,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                     );
                                     await columnBudgetsRecord.reference
                                         .update(budgetsUpdateData);
-                                    _shouldSetState = true;
                                   } else {
                                     if (dropDownValue == 'Weekly') {
                                       // Action_CreateBudgetStep1
@@ -745,7 +743,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                       );
                                       await columnBudgetsRecord.reference
                                           .update(budgetsUpdateData);
-                                      _shouldSetState = true;
                                     } else {
                                       if (dropDownValue == 'Daily') {
                                         // Action_CreateBudgetStep1
@@ -768,9 +765,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                         );
                                         await columnBudgetsRecord.reference
                                             .update(budgetsUpdateData);
-                                        _shouldSetState = true;
                                       } else {
-                                        if (_shouldSetState) setState(() {});
                                         return;
                                       }
                                     }
@@ -799,8 +794,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                     },
                                   ).then((value) => setState(() {}));
                                 }
-
-                                if (_shouldSetState) setState(() {});
                               },
                               text: 'Save',
                               options: FFButtonOptions(

@@ -1084,9 +1084,10 @@ class _DashboardWidgetState extends State<DashboardWidget>
                 ),
                 StreamBuilder<List<VersionsRecord>>(
                   stream: queryVersionsRecord(
-                    queryBuilder: (versionsRecord) => versionsRecord.where(
-                        'releaseDate',
-                        isGreaterThan: getCurrentTimestamp),
+                    queryBuilder: (versionsRecord) => versionsRecord
+                        .where('releaseDate',
+                            isGreaterThan: getCurrentTimestamp)
+                        .orderBy('releaseDate', descending: true),
                     singleRecord: true,
                   ),
                   builder: (context, snapshot) {
