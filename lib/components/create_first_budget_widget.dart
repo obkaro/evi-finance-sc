@@ -120,8 +120,6 @@ class _CreateFirstBudgetWidgetState extends State<CreateFirstBudgetWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent(
-                                'CREATE_FIRST_BUDGET_COMP_SKIP_BTN_ON_TAP');
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -158,9 +156,6 @@ class _CreateFirstBudgetWidgetState extends State<CreateFirstBudgetWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent(
-                                'CREATE_FIRST_BUDGET_CONTINUE_BTN_ON_TAP');
-
                             final budgetsCreateData = createBudgetsRecordData(
                               budgetID: random_data.randomString(
                                 24,

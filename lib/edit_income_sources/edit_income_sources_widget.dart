@@ -47,9 +47,6 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
   @override
   void initState() {
     super.initState();
-
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'EditIncomeSources'});
   }
 
   @override
@@ -184,9 +181,6 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
                                                     .fromSTEB(10, 0, 0, 0),
                                                 child: InkWell(
                                                   onTap: () async {
-                                                    logFirebaseEvent(
-                                                        'EDIT_INCOME_SOURCES_Container_tcws0lif_O');
-
                                                     final incomeCategoriesCreateData =
                                                         createIncomeCategoriesRecordData(
                                                       categoryName:
@@ -382,8 +376,6 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
                                                 size: 24,
                                               ),
                                               onPressed: () async {
-                                                logFirebaseEvent(
-                                                    'EDIT_INCOME_SOURCES_delete_rounded_ICN_O');
                                                 await actions
                                                     .unlinkAllTransCategories(
                                                   iconButtonTransactionsRecordList
@@ -435,8 +427,6 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
                     padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                     child: InkWell(
                       onTap: () async {
-                        logFirebaseEvent(
-                            'EDIT_INCOME_SOURCES_Row_cuonni25_ON_TAP');
                         Navigator.pop(context);
                       },
                       child: Row(
@@ -454,8 +444,6 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
                                         0, 0, 0, 16),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        logFirebaseEvent(
-                                            'EDIT_INCOME_SOURCES_PAGE_SAVE_BTN_ON_TAP');
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(

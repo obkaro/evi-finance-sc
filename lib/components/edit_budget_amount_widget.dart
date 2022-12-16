@@ -106,8 +106,6 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
-                                logFirebaseEvent(
-                                    'EDIT_BUDGET_AMOUNT_CANCEL_BTN_ON_TAP');
                                 Navigator.pop(context);
                               },
                               text: 'Cancel',
@@ -139,8 +137,6 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
-                                logFirebaseEvent(
-                                    'EDIT_BUDGET_AMOUNT_COMP_SAVE_BTN_ON_TAP');
                                 if (FFAppState().currencyTextField >=
                                     widget.categoryTotal!) {
                                   final budgetsUpdateData =

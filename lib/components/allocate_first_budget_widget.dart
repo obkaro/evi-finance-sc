@@ -122,8 +122,6 @@ class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent(
-                                'ALLOCATE_FIRST_BUDGET_CONTINUE_BTN_ON_TA');
                             Navigator.pop(context);
                           },
                           text: 'Continue',

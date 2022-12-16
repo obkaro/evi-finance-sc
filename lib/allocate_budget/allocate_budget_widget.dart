@@ -35,13 +35,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'AllocateBudget'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
@@ -248,8 +241,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                   size: 24,
                                                 ),
                                                 onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'ALLOCATE_BUDGET_do_disturb_on_rounded_IC');
                                                   if (functions.sumCategoryAmounts(
                                                           allocateBudgetCategoriesRecordList
                                                               .toList()) <
@@ -296,8 +287,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                               ),
                                               InkWell(
                                                 onTap: () async {
-                                                  logFirebaseEvent(
-                                                      'ALLOCATE_BUDGET_Container_3rcwh8p1_ON_TA');
                                                   // Action_EditBudgetAmount
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
@@ -372,8 +361,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                   size: 24,
                                                 ),
                                                 onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'ALLOCATE_BUDGET_add_circle_rounded_ICN_O');
                                                   // Action_BudgetAmountPlus
 
                                                   final budgetsUpdateData = {
@@ -498,8 +485,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                   10, 0, 0, 0),
                                                       child: InkWell(
                                                         onTap: () async {
-                                                          logFirebaseEvent(
-                                                              'ALLOCATE_BUDGET_Container_uzq402z6_ON_TA');
                                                           await showModalBottomSheet(
                                                             isScrollControlled:
                                                                 true,
@@ -643,8 +628,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                           existingCategoriesIndex];
                                                   return InkWell(
                                                     onLongPress: () async {
-                                                      logFirebaseEvent(
-                                                          'ALLOCATE_BUDGET_Container_h4sdjhzv_ON_LO');
                                                       HapticFeedback
                                                           .lightImpact();
                                                       await showModalBottomSheet(
@@ -773,8 +756,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                               ),
                                                               onPressed:
                                                                   () async {
-                                                                logFirebaseEvent(
-                                                                    'ALLOCATE_BUDGET_edit_rounded_ICN_ON_TAP');
                                                                 // Action_BSEditCateogoryAmt
                                                                 await showModalBottomSheet(
                                                                   isScrollControlled:
@@ -865,9 +846,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                   ),
                                                                   onPressed:
                                                                       () async {
-                                                                    logFirebaseEvent(
-                                                                        'ALLOCATE_BUDGET_delete_rounded_ICN_ON_TA');
-
                                                                     final budgetsUpdateData =
                                                                         {
                                                                       'unallocatedAmount':
@@ -916,8 +894,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                         Expanded(
                                           child: InkWell(
                                             onTap: () async {
-                                              logFirebaseEvent(
-                                                  'ALLOCATE_BUDGET_Container_eccekwof_ON_TA');
                                               // Action_BSCreateCustomCategory
                                               await showModalBottomSheet(
                                                 isScrollControlled: true,
@@ -1041,8 +1017,6 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                               children: [
                                                 FFButtonWidget(
                                                   onPressed: () async {
-                                                    logFirebaseEvent(
-                                                        'ALLOCATE_BUDGET_PAGE_SAVE_BTN_ON_TAP');
                                                     ScaffoldMessenger.of(
                                                             context)
                                                         .showSnackBar(

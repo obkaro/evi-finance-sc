@@ -1,5 +1,7 @@
 // Export pages
 export 'transactions/transactions_widget.dart' show TransactionsWidget;
+export 'transaction_single/transaction_single_widget.dart'
+    show TransactionSingleWidget;
 export 'forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
 export 'dashboard/dashboard_widget.dart' show DashboardWidget;
 export 'active_budget/active_budget_widget.dart' show ActiveBudgetWidget;
@@ -20,8 +22,6 @@ export 'landing_page_view/landing_page_view_widget.dart'
     show LandingPageViewWidget;
 export 'welcome_to_evi/welcome_to_evi_widget.dart' show WelcomeToEviWidget;
 export 'first_budget/first_budget_widget.dart' show FirstBudgetWidget;
-export 'transaction_single/transaction_single_widget.dart'
-    show TransactionSingleWidget;
 export 'assign_transactions/assign_transactions_widget.dart'
     show AssignTransactionsWidget;
 export 'recurring_payments/recurring_payments_widget.dart'

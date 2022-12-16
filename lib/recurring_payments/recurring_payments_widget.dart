@@ -45,9 +45,6 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget>
   @override
   void initState() {
     super.initState();
-
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'RecurringPayments'});
   }
 
   @override
@@ -59,7 +56,6 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget>
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          logFirebaseEvent('RECURRING_PAYMENTS_FloatingActionButton_');
           await showModalBottomSheet(
             isScrollControlled: true,
             backgroundColor: Colors.transparent,
@@ -172,8 +168,6 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget>
                                   final subsItem = subs[subsIndex];
                                   return InkWell(
                                     onTap: () async {
-                                      logFirebaseEvent(
-                                          'RECURRING_PAYMENTS_Column_a3yq0muv_ON_TA');
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(

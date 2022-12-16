@@ -33,13 +33,6 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'subscriptionDetails'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
@@ -232,8 +225,6 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                             0, 0, 8, 0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
-                                            logFirebaseEvent(
-                                                'SUBSCRIPTION_DETAILS_EDIT_BTN_ON_TAP');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -328,8 +319,6 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                             size: 24,
                                           ),
                                           onPressed: () async {
-                                            logFirebaseEvent(
-                                                'SUBSCRIPTION_DETAILS_delete_rounded_ICN_');
                                             var confirmDialogResponse =
                                                 await showDialog<bool>(
                                                       context: context,
@@ -463,8 +452,6 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                               }
                               return RefreshIndicator(
                                 onRefresh: () async {
-                                  logFirebaseEvent(
-                                      'SUBSCRIPTION_DETAILS_ListView_r0e6kaq1_O');
                                   setState(
                                       () => _firestoreRequestCompleter = null);
                                   await waitForFirestoreRequestCompleter();

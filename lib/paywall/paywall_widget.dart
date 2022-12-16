@@ -19,12 +19,6 @@ class _PaywallWidgetState extends State<PaywallWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Paywall'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
@@ -197,8 +191,6 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                   children: [
                     FFButtonWidget(
                       onPressed: () async {
-                        logFirebaseEvent(
-                            'PAYWALL_PAGE_₦240_MONTHLY_BTN_ON_TAP');
                         didPurchase = await revenue_cat.purchasePackage(
                             revenue_cat
                                 .offerings!.current!.monthly!.identifier);
@@ -246,7 +238,6 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                       child: InkWell(
                         onTap: () async {
-                          logFirebaseEvent('PAYWALL_PAGE_Text_u9wlovrh_ON_TAP');
                           await revenue_cat.restorePurchases();
                         },
                         child: Text(

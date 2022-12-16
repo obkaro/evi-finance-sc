@@ -160,8 +160,6 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent(
-                                'EDIT_CATEGORY_COMP_CANCEL_BTN_ON_TAP');
                             Navigator.pop(context);
                           },
                           text: 'Cancel',
@@ -182,8 +180,6 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent(
-                                'EDIT_CATEGORY_COMP_SAVE_BTN_ON_TAP');
                             if (functions.checkEditCatTotal(
                                     widget.budget!.unallocatedAmount,
                                     FFAppState().currencyTextField,

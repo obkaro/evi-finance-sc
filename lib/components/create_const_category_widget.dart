@@ -125,8 +125,6 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent(
-                                'CREATE_CONST_CATEGORY_CANCEL_BTN_ON_TAP');
                             Navigator.pop(context);
                           },
                           text: 'Cancel',
@@ -161,8 +159,6 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent(
-                                'CREATE_CONST_CATEGORY_SAVE_BTN_ON_TAP');
                             if (FFAppState().currencyTextField <=
                                 widget.budget!.unallocatedAmount!) {
                               final budgetsUpdateData = {

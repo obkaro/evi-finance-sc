@@ -145,8 +145,6 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
-                                logFirebaseEvent(
-                                    'ACCOUNT_DATA_REFRESH_DON\'T_REFRESH_BTN_');
                                 Navigator.pop(context);
                               },
                               text: 'Don\'t Refresh',
@@ -172,8 +170,6 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
-                                logFirebaseEvent(
-                                    'ACCOUNT_DATA_REFRESH_CONTINUE_BTN_ON_TAP');
                                 // Action_dataSyncCall
                                 dataSyncResponse = await DataSyncMonoCall.call(
                                   authID: widget.account!.authID,

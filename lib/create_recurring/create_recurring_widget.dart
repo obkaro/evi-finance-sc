@@ -51,8 +51,6 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'CreateRecurring'});
   }
 
   @override
@@ -203,8 +201,6 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                               size: 16,
                                             ),
                                             onPressed: () async {
-                                              logFirebaseEvent(
-                                                  'CREATE_RECURRING_edit_rounded_ICN_ON_TAP');
                                               final selectedMedia =
                                                   await selectMedia(
                                                 maxWidth: 720.00,
@@ -490,8 +486,6 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                   ),
                                   InkWell(
                                     onTap: () async {
-                                      logFirebaseEvent(
-                                          'CREATE_RECURRING_Icon_lom4dnse_ON_TAP');
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
                                         backgroundColor: Colors.transparent,
@@ -544,8 +538,6 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                     onChange:
                                         (DateTimeRange? newSelectedDate) async {
                                       calendarSelectedDay = newSelectedDate;
-                                      logFirebaseEvent(
-                                          'CREATE_RECURRING_Calendar_i1qai2rh_ON_DA');
 
                                       final subscriptionsUpdateData =
                                           createSubscriptionsRecordData(
@@ -679,7 +671,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                         unselectedChipStyle: ChipStyle(
                                           backgroundColor:
                                               FlutterFlowTheme.of(context)
-                                                  .darkPrimary,
+                                                  .primaryBackground,
                                           textStyle: FlutterFlowTheme.of(
                                                   context)
                                               .bodyText2
@@ -794,8 +786,6 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                         : null;
                                 return FFButtonWidget(
                                   onPressed: () async {
-                                    logFirebaseEvent(
-                                        'CREATE_RECURRING_SAVE_DETAILS_BTN_ON_TAP');
                                     if (formKey.currentState == null ||
                                         !formKey.currentState!.validate()) {
                                       return;
