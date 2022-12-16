@@ -61,7 +61,7 @@ class _AccountsWidgetState extends State<AccountsWidget>
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                'Fetching account data. This might take a minute...',
+                'Fetching account data. This might take some time...',
                 style: FlutterFlowTheme.of(context).bodyText1.override(
                       fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                       color: Color(0xFFC1C1C1),

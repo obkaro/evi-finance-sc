@@ -1,12 +1,7 @@
-import '../auth/auth_util.dart';
-import '../backend/backend.dart';
 import '../connect_first_account/connect_first_account_widget.dart';
-import '../first_budget/first_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/random_data_util.dart' as random_data;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,8 +16,6 @@ class CreateFirstBudgetWidget extends StatefulWidget {
 }
 
 class _CreateFirstBudgetWidgetState extends State<CreateFirstBudgetWidget> {
-  BudgetsRecord? createdBudget;
-
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -134,16 +127,7 @@ class _CreateFirstBudgetWidgetState extends State<CreateFirstBudgetWidget> {
                             height: 60,
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .bodyText2
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText2Family,
-                                  fontSize: 14,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyText2Family),
-                                ),
+                            textStyle: FlutterFlowTheme.of(context).subtitle2,
                             elevation: 0,
                             borderSide: BorderSide(
                               color: Colors.transparent,
@@ -156,34 +140,7 @@ class _CreateFirstBudgetWidgetState extends State<CreateFirstBudgetWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            final budgetsCreateData = createBudgetsRecordData(
-                              budgetID: random_data.randomString(
-                                24,
-                                24,
-                                true,
-                                true,
-                                true,
-                              ),
-                              budgetDateCreated: getCurrentTimestamp,
-                              status: 'no_parent',
-                              budgetSpent: 0,
-                              budgetOwner: currentUserReference,
-                            );
-                            var budgetsRecordReference =
-                                BudgetsRecord.collection.doc();
-                            await budgetsRecordReference.set(budgetsCreateData);
-                            createdBudget = BudgetsRecord.getDocumentFromData(
-                                budgetsCreateData, budgetsRecordReference);
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => FirstBudgetWidget(
-                                  budget: createdBudget,
-                                ),
-                              ),
-                            );
-
-                            setState(() {});
+                            Navigator.pop(context);
                           },
                           text: 'Continue',
                           options: FFButtonOptions(

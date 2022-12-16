@@ -7,6 +7,7 @@ import '../components/empty_list_widget.dart';
 import '../components/loading_empty_widget.dart';
 import '../components/loading_transaction_widget.dart';
 import '../components/transaction_list_item_widget.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -17,6 +18,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +35,23 @@ class AccountSingleWidget extends StatefulWidget {
   _AccountSingleWidgetState createState() => _AccountSingleWidgetState();
 }
 
-class _AccountSingleWidgetState extends State<AccountSingleWidget> {
+class _AccountSingleWidgetState extends State<AccountSingleWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'iconOnPageLoadAnimation': AnimationInfo(
+      loop: true,
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        RotateEffect(
+          curve: Curves.linear,
+          delay: 0.ms,
+          duration: 2000.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   ApiCallResponse? dataSyncResponse;
   ApiCallResponse? reauthCode;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -41,6 +59,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
   @override
   void initState() {
     super.initState();
+
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (widget.account!.reauthRequired == true) {
@@ -214,6 +233,45 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
+                          if (false)
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(32),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16, 16, 16, 16),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.sync,
+                                        color: FlutterFlowTheme.of(context)
+                                            .alternate,
+                                        size: 24,
+                                      ).animateOnPageLoad(animationsMap[
+                                          'iconOnPageLoadAnimation']!),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            8, 0, 0, 0),
+                                        child: Text(
+                                          'Fetching account data. Please check back soon.',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
