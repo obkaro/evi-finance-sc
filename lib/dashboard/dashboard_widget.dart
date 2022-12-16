@@ -1022,7 +1022,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                           text: 'All Transactions',
                           options: FFButtonOptions(
                             width: double.infinity,
-                            height: 48,
+                            height: 55,
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
                             textStyle: FlutterFlowTheme.of(context)

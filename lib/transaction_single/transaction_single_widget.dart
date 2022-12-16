@@ -845,240 +845,252 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                 ],
                                               ),
                                             ),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              if (columnTransactionsRecord
-                                                      .transactionCategory !=
-                                                  null)
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 10, 0, 10),
-                                                  child: Column(
+                                          if (columnTransactionsRecord
+                                                  .transactionCategory !=
+                                              null)
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 10, 0, 10),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 0, 0, 4),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Text(
+                                                          'Category',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText2,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
                                                     children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0, 0, 0, 4),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Text(
-                                                              'Category',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText2,
-                                                            ),
-                                                          ],
+                                                      Text(
+                                                        columnTransactionsRecord
+                                                            .categoryDetails
+                                                            .name!,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .subtitle1,
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          if (columnTransactionsRecord
+                                                                  .recurringRef !=
+                                                              null) {
+                                                            final subscriptionsUpdateData =
+                                                                {
+                                                              'narrations':
+                                                                  FieldValue
+                                                                      .arrayRemove([
+                                                                columnTransactionsRecord
+                                                                    .transactionNarration
+                                                              ]),
+                                                              'transactions':
+                                                                  FieldValue
+                                                                      .arrayRemove([
+                                                                columnTransactionsRecord
+                                                                    .reference
+                                                              ]),
+                                                            };
+                                                            await columnTransactionsRecord
+                                                                .recurringRef!
+                                                                .update(
+                                                                    subscriptionsUpdateData);
+                                                            // Action_CategorizeTrans
+
+                                                            final transactionsUpdateData =
+                                                                {
+                                                              ...createTransactionsRecordData(
+                                                                categoryDetails:
+                                                                    createCategoryDetailsStruct(
+                                                                        delete:
+                                                                            true),
+                                                                subscriptionDetails:
+                                                                    createSubscriptionDetailsStruct(
+                                                                        delete:
+                                                                            true),
+                                                                isAssigned:
+                                                                    false,
+                                                              ),
+                                                              'transactionCategory':
+                                                                  FieldValue
+                                                                      .delete(),
+                                                              'recurringRef':
+                                                                  FieldValue
+                                                                      .delete(),
+                                                              'transactionBudget':
+                                                                  FieldValue
+                                                                      .delete(),
+                                                              'dateAssigned':
+                                                                  FieldValue
+                                                                      .delete(),
+                                                            };
+                                                            await widget
+                                                                .transaction!
+                                                                .reference
+                                                                .update(
+                                                                    transactionsUpdateData);
+                                                          } else {
+                                                            // Action_CategorizeTrans
+
+                                                            final transactionsUpdateData =
+                                                                {
+                                                              ...createTransactionsRecordData(
+                                                                categoryDetails:
+                                                                    createCategoryDetailsStruct(
+                                                                        delete:
+                                                                            true),
+                                                                isAssigned:
+                                                                    false,
+                                                              ),
+                                                              'transactionCategory':
+                                                                  FieldValue
+                                                                      .delete(),
+                                                              'transactionBudget':
+                                                                  FieldValue
+                                                                      .delete(),
+                                                              'dateAssigned':
+                                                                  FieldValue
+                                                                      .delete(),
+                                                            };
+                                                            await widget
+                                                                .transaction!
+                                                                .reference
+                                                                .update(
+                                                                    transactionsUpdateData);
+                                                          }
+                                                        },
+                                                        child: Icon(
+                                                          Icons.cancel_rounded,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          size: 24,
                                                         ),
                                                       ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          if (columnTransactionsRecord
+                                                  .recurringRef !=
+                                              null)
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 10, 0, 10),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
                                                       Row(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
                                                         children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        4,
+                                                                        0),
+                                                            child: Icon(
+                                                              Icons
+                                                                  .credit_card_rounded,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryText,
+                                                              size: 24,
+                                                            ),
+                                                          ),
                                                           Text(
                                                             columnTransactionsRecord
-                                                                .categoryDetails
+                                                                .subscriptionDetails
                                                                 .name!,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .subtitle1,
                                                           ),
-                                                          InkWell(
-                                                            onTap: () async {
-                                                              final subscriptionsUpdateData =
-                                                                  {
-                                                                'narrations':
-                                                                    FieldValue
-                                                                        .arrayRemove([
-                                                                  columnTransactionsRecord
-                                                                      .transactionNarration
-                                                                ]),
-                                                                'transactions':
-                                                                    FieldValue
-                                                                        .arrayRemove([
-                                                                  columnTransactionsRecord
-                                                                      .reference
-                                                                ]),
-                                                              };
-                                                              await columnTransactionsRecord
-                                                                  .recurringRef!
-                                                                  .update(
-                                                                      subscriptionsUpdateData);
-                                                              // Action_CategorizeTrans
-
-                                                              final transactionsUpdateData =
-                                                                  {
-                                                                ...createTransactionsRecordData(
-                                                                  categoryDetails:
-                                                                      createCategoryDetailsStruct(
-                                                                          delete:
-                                                                              true),
-                                                                  subscriptionDetails:
-                                                                      createSubscriptionDetailsStruct(
-                                                                          delete:
-                                                                              true),
-                                                                  isAssigned:
-                                                                      false,
-                                                                ),
-                                                                'transactionCategory':
-                                                                    FieldValue
-                                                                        .delete(),
-                                                                'recurringRef':
-                                                                    FieldValue
-                                                                        .delete(),
-                                                                'transactionBudget':
-                                                                    FieldValue
-                                                                        .delete(),
-                                                                'dateAssigned':
-                                                                    FieldValue
-                                                                        .delete(),
-                                                              };
-                                                              await widget
-                                                                  .transaction!
-                                                                  .reference
-                                                                  .update(
-                                                                      transactionsUpdateData);
-                                                            },
-                                                            child: Icon(
-                                                              Icons
-                                                                  .cancel_rounded,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryText,
-                                                              size: 24,
-                                                            ),
-                                                          ),
                                                         ],
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          // Action_CategorizeTrans
+
+                                                          final transactionsUpdateData =
+                                                              {
+                                                            ...createTransactionsRecordData(
+                                                              subscriptionDetails:
+                                                                  createSubscriptionDetailsStruct(
+                                                                      delete:
+                                                                          true),
+                                                            ),
+                                                            'recurringRef':
+                                                                FieldValue
+                                                                    .delete(),
+                                                          };
+                                                          await widget
+                                                              .transaction!
+                                                              .reference
+                                                              .update(
+                                                                  transactionsUpdateData);
+
+                                                          final subscriptionsUpdateData =
+                                                              {
+                                                            'narrations':
+                                                                FieldValue
+                                                                    .arrayRemove([
+                                                              columnTransactionsRecord
+                                                                  .transactionNarration
+                                                            ]),
+                                                            'transactions':
+                                                                FieldValue
+                                                                    .arrayRemove([
+                                                              columnTransactionsRecord
+                                                                  .reference
+                                                            ]),
+                                                          };
+                                                          await columnTransactionsRecord
+                                                              .recurringRef!
+                                                              .update(
+                                                                  subscriptionsUpdateData);
+                                                        },
+                                                        child: Icon(
+                                                          Icons.cancel_rounded,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          size: 24,
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
-                                                ),
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 10, 0, 10),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                if (columnTransactionsRecord
-                                                        .recurringRef !=
-                                                    null)
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 10, 0, 0),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          0,
-                                                                          4,
-                                                                          0),
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .credit_card_rounded,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryText,
-                                                                    size: 24,
-                                                                  ),
-                                                                ),
-                                                                Text(
-                                                                  columnTransactionsRecord
-                                                                      .subscriptionDetails
-                                                                      .name!,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .subtitle1,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () async {
-                                                                // Action_CategorizeTrans
-
-                                                                final transactionsUpdateData =
-                                                                    {
-                                                                  ...createTransactionsRecordData(
-                                                                    subscriptionDetails:
-                                                                        createSubscriptionDetailsStruct(
-                                                                            delete:
-                                                                                true),
-                                                                  ),
-                                                                  'recurringRef':
-                                                                      FieldValue
-                                                                          .delete(),
-                                                                };
-                                                                await widget
-                                                                    .transaction!
-                                                                    .reference
-                                                                    .update(
-                                                                        transactionsUpdateData);
-
-                                                                final subscriptionsUpdateData =
-                                                                    {
-                                                                  'narrations':
-                                                                      FieldValue
-                                                                          .arrayRemove([
-                                                                    columnTransactionsRecord
-                                                                        .transactionNarration
-                                                                  ]),
-                                                                  'transactions':
-                                                                      FieldValue
-                                                                          .arrayRemove([
-                                                                    columnTransactionsRecord
-                                                                        .reference
-                                                                  ]),
-                                                                };
-                                                                await columnTransactionsRecord
-                                                                    .recurringRef!
-                                                                    .update(
-                                                                        subscriptionsUpdateData);
-                                                              },
-                                                              child: Icon(
-                                                                Icons
-                                                                    .cancel_rounded,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                                size: 24,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
-                                          ),
                                           if (columnTransactionsRecord
                                                   .incomeCategory !=
                                               null)

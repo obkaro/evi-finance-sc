@@ -149,7 +149,9 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               border: Border.all(
-                                                color: Colors.transparent,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
                                                 width: 0,
                                               ),
                                             ),
