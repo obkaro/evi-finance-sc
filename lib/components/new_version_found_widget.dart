@@ -130,10 +130,10 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
                                 text: 'Update later',
                                 options: FFButtonOptions(
                                   width: double.infinity,
-                                  height: 30,
+                                  height: 60,
                                   color: Color(0x00D2D2D2),
                                   textStyle:
-                                      FlutterFlowTheme.of(context).bodyText1,
+                                      FlutterFlowTheme.of(context).subtitle2,
                                   elevation: 0,
                                   borderSide: BorderSide(
                                     color: Colors.transparent,
@@ -143,6 +143,14 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
                                 ),
                               ),
                             ),
+                          Container(
+                            width: 20,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                          ),
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {

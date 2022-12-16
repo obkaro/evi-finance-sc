@@ -11,7 +11,7 @@ import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../settings/settings_widget.dart';
+import '../main.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -738,12 +738,13 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                         );
                                         await widget.account!.reference
                                             .delete();
-                                        await Navigator.push(
+                                        await Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                SettingsWidget(),
+                                            builder: (context) => NavBarPage(
+                                                initialPage: 'Dashboard'),
                                           ),
+                                          (r) => false,
                                         );
                                       },
                                       text: 'Disconnect Account',

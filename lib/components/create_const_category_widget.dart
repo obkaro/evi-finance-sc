@@ -130,19 +130,10 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                           text: 'Cancel',
                           options: FFButtonOptions(
                             width: double.infinity,
-                            height: 30,
+                            height: 60,
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .bodyText2
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText2Family,
-                                  fontSize: 14,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyText2Family),
-                                ),
+                            textStyle: FlutterFlowTheme.of(context).subtitle2,
                             elevation: 0,
                             borderSide: BorderSide(
                               color: Colors.transparent,

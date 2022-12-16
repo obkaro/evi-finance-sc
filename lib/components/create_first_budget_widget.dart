@@ -137,6 +137,14 @@ class _CreateFirstBudgetWidgetState extends State<CreateFirstBudgetWidget> {
                           ),
                         ),
                       ),
+                      Container(
+                        width: 20,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                      ),
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {

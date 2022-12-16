@@ -150,7 +150,7 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                               text: 'Don\'t Refresh',
                               options: FFButtonOptions(
                                 width: double.infinity,
-                                height: 30,
+                                height: 60,
                                 color: Color(0x00D2D2D2),
                                 textStyle:
                                     FlutterFlowTheme.of(context).subtitle2,
