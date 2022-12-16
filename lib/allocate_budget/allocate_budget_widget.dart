@@ -385,6 +385,12 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                     ),
                                   ),
                                 ),
+                                Divider(
+                                  height: 0,
+                                  thickness: 1,
+                                  color:
+                                      FlutterFlowTheme.of(context).fadedDivider,
+                                ),
                               ],
                             ),
                             Expanded(
@@ -401,7 +407,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                               10)
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(16, 0, 16, 16),
+                                                  .fromSTEB(16, 16, 16, 16),
                                               child: Container(
                                                 width: double.infinity,
                                                 decoration: BoxDecoration(
@@ -479,10 +485,12 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                           ConstBudgetCategoriesRecord>>(
                                                                     stream:
                                                                         queryConstBudgetCategoriesRecord(
-                                                                      queryBuilder: (constBudgetCategoriesRecord) => constBudgetCategoriesRecord.orderBy(
-                                                                          'categoryWeight',
-                                                                          descending:
-                                                                              true),
+                                                                      queryBuilder: (constBudgetCategoriesRecord) => constBudgetCategoriesRecord
+                                                                          .whereNotIn(
+                                                                              'categoryName',
+                                                                              allocateBudgetCategoriesRecordList.map((e) => e.categoryName!).toList())
+                                                                          .orderBy('categoryName', descending: true)
+                                                                          .orderBy('categoryWeight', descending: true),
                                                                     ),
                                                                     builder:
                                                                         (context,

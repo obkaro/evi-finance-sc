@@ -146,10 +146,10 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                                 text: widget.buttonNo!,
                                 options: FFButtonOptions(
                                   width: double.infinity,
-                                  height: 30,
+                                  height: 60,
                                   color: Color(0x00D2D2D2),
                                   textStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
+                                      FlutterFlowTheme.of(context).subtitle2,
                                   elevation: 0,
                                   borderSide: BorderSide(
                                     color: Colors.transparent,
@@ -159,6 +159,14 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                                 ),
                               ),
                             ),
+                          Container(
+                            width: 20,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                          ),
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {

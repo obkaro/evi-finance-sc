@@ -167,7 +167,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                             width: double.infinity,
                             height: 60,
                             color: Color(0x00D2D2D2),
-                            textStyle: FlutterFlowTheme.of(context).bodyText2,
+                            textStyle: FlutterFlowTheme.of(context).subtitle2,
                             elevation: 0,
                             borderSide: BorderSide(
                               color: Colors.transparent,
@@ -175,6 +175,14 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                             ),
                             borderRadius: BorderRadius.circular(16),
                           ),
+                        ),
+                      ),
+                      Container(
+                        width: 20,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
                         ),
                       ),
                       Expanded(
