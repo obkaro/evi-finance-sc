@@ -232,7 +232,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                 0)
                                               Padding(
                                                 padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 16, 0, 0),
+                                                    .fromSTEB(0, 16, 0, 16),
                                                 child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -277,6 +277,13 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                   ],
                                                 ),
                                               ),
+                                            Divider(
+                                              height: 0,
+                                              thickness: 1,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .fadedDivider,
+                                            ),
                                             Expanded(
                                               flex: 2,
                                               child: Container(
@@ -284,7 +291,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                 decoration: BoxDecoration(),
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 10, 0, 10),
+                                                      .fromSTEB(0, 0, 0, 10),
                                                   child: Builder(
                                                     builder: (context) {
                                                       final unassignedtransactions =
