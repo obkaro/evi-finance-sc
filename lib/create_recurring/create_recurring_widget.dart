@@ -679,7 +679,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                         unselectedChipStyle: ChipStyle(
                                           backgroundColor:
                                               FlutterFlowTheme.of(context)
-                                                  .darkPrimary,
+                                                  .primaryBackground,
                                           textStyle: FlutterFlowTheme.of(
                                                   context)
                                               .bodyText2

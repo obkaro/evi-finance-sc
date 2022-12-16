@@ -674,7 +674,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                       unselectedChipStyle: ChipStyle(
                                         backgroundColor:
                                             FlutterFlowTheme.of(context)
-                                                .darkPrimary,
+                                                .primaryBackground,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
