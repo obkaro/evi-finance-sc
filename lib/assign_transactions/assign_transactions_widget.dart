@@ -494,10 +494,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                 ),
                                                                                                 child: Icon(
                                                                                                   Icons.call_made_rounded,
-                                                                                                  color: valueOrDefault<Color>(
-                                                                                                    unassignedtransactionsItem.transactionType == 'debit' ? FlutterFlowTheme.of(context).tertiaryColor : Color(0xFFFF0000),
-                                                                                                    FlutterFlowTheme.of(context).tertiaryColor,
-                                                                                                  ),
+                                                                                                  color: Color(0xFFFF0000),
                                                                                                   size: 24,
                                                                                                 ),
                                                                                               ),
@@ -511,10 +508,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                 ),
                                                                                                 child: Icon(
                                                                                                   Icons.call_received_rounded,
-                                                                                                  color: valueOrDefault<Color>(
-                                                                                                    unassignedtransactionsItem.transactionType == 'debit' ? Color(0xFFFF0000) : FlutterFlowTheme.of(context).tertiaryColor,
-                                                                                                    FlutterFlowTheme.of(context).tertiaryColor,
-                                                                                                  ),
+                                                                                                  color: FlutterFlowTheme.of(context).tertiaryColor,
                                                                                                   size: 24,
                                                                                                 ),
                                                                                               ),
