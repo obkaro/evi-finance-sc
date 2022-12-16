@@ -564,10 +564,10 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                                 FFButtonOptions(
                                                                               height: 36,
                                                                               color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                              textStyle: FlutterFlowTheme.of(context).subtitle1.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
+                                                                              textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                                                                                    fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
                                                                                     color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
+                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
                                                                                   ),
                                                                               elevation: 0,
                                                                               borderSide: BorderSide(
@@ -1189,6 +1189,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                               borderRadius:
                                                   BorderRadius.circular(16),
                                             ),
+                                            showLoadingIndicator: false,
                                           ),
                                         ),
                                       ],
