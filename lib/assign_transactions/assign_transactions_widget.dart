@@ -4,7 +4,6 @@ import '../components/empty_list_widget.dart';
 import '../components/empty_loading_text_widget.dart';
 import '../components/info_box_widget.dart';
 import '../components/loading_empty_widget.dart';
-import '../components/overlay_alert_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -341,10 +340,10 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                 padding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            20,
+                                                                            16,
                                                                             10,
-                                                                            20,
-                                                                            10),
+                                                                            16,
+                                                                            0),
                                                                 child:
                                                                     Container(
                                                                   width: double
@@ -362,10 +361,10 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                       Padding(
                                                                     padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            20,
-                                                                            20,
-                                                                            20,
-                                                                            20),
+                                                                            16,
+                                                                            16,
+                                                                            16,
+                                                                            16),
                                                                     child:
                                                                         Column(
                                                                       mainAxisSize:
@@ -438,68 +437,73 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                           ),
                                                                                         ),
                                                                                       ),
-                                                                                      Column(
-                                                                                        mainAxisSize: MainAxisSize.max,
-                                                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                        children: [
-                                                                                          Row(
-                                                                                            mainAxisSize: MainAxisSize.max,
-                                                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                                                            children: [
-                                                                                              Padding(
-                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                                                                                                child: Text(
-                                                                                                  functions.formatTransCurrency(unassignedtransactionsItem.transactionAmount),
-                                                                                                  style: FlutterFlowTheme.of(context).subtitle1.override(
-                                                                                                        fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
-                                                                                                        fontSize: 20,
-                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
+                                                                                      Expanded(
+                                                                                        child: Column(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                          children: [
+                                                                                            Row(
+                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                                              children: [
+                                                                                                Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                                                                                                  child: Text(
+                                                                                                    functions.formatTransCurrency(unassignedtransactionsItem.transactionAmount),
+                                                                                                    style: FlutterFlowTheme.of(context).subtitle1.override(
+                                                                                                          fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
+                                                                                                          fontSize: 20,
+                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
+                                                                                                        ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ],
+                                                                                            ),
+                                                                                            Row(
+                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                                              children: [
+                                                                                                Text(
+                                                                                                  dateTimeFormat(
+                                                                                                    'MMMMEEEEd',
+                                                                                                    unassignedtransactionsItem.trasactionDate!,
+                                                                                                    locale: FFLocalizations.of(context).languageCode,
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                                                        color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                                                       ),
                                                                                                 ),
-                                                                                              ),
-                                                                                            ],
-                                                                                          ),
-                                                                                          Row(
-                                                                                            mainAxisSize: MainAxisSize.max,
-                                                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                                                            children: [
-                                                                                              Text(
-                                                                                                dateTimeFormat(
-                                                                                                  'MMMMEEEEd',
-                                                                                                  unassignedtransactionsItem.trasactionDate!,
-                                                                                                  locale: FFLocalizations.of(context).languageCode,
-                                                                                                ),
-                                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
-                                                                                                      color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
-                                                                                                    ),
-                                                                                              ),
-                                                                                            ],
-                                                                                          ),
-                                                                                        ],
+                                                                                              ],
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
                                                                                       ),
-                                                                                      Stack(
-                                                                                        children: [
-                                                                                          if (unassignedtransactionsItem.transactionType == 'credit')
-                                                                                            Icon(
-                                                                                              Icons.call_made_rounded,
-                                                                                              color: valueOrDefault<Color>(
-                                                                                                unassignedtransactionsItem.transactionType == 'debit' ? FlutterFlowTheme.of(context).tertiaryColor : Color(0xFFFF0000),
-                                                                                                FlutterFlowTheme.of(context).tertiaryColor,
+                                                                                      Padding(
+                                                                                        padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                                                                                        child: Stack(
+                                                                                          children: [
+                                                                                            if (unassignedtransactionsItem.transactionType == 'credit')
+                                                                                              Icon(
+                                                                                                Icons.call_made_rounded,
+                                                                                                color: valueOrDefault<Color>(
+                                                                                                  unassignedtransactionsItem.transactionType == 'debit' ? FlutterFlowTheme.of(context).tertiaryColor : Color(0xFFFF0000),
+                                                                                                  FlutterFlowTheme.of(context).tertiaryColor,
+                                                                                                ),
+                                                                                                size: 24,
                                                                                               ),
-                                                                                              size: 32,
-                                                                                            ),
-                                                                                          if (unassignedtransactionsItem.transactionType == 'debit')
-                                                                                            Icon(
-                                                                                              Icons.call_received_rounded,
-                                                                                              color: valueOrDefault<Color>(
-                                                                                                unassignedtransactionsItem.transactionType == 'debit' ? FlutterFlowTheme.of(context).tertiaryColor : Color(0xFFFF0000),
-                                                                                                FlutterFlowTheme.of(context).tertiaryColor,
+                                                                                            if (unassignedtransactionsItem.transactionType == 'debit')
+                                                                                              Icon(
+                                                                                                Icons.call_received_rounded,
+                                                                                                color: valueOrDefault<Color>(
+                                                                                                  unassignedtransactionsItem.transactionType == 'debit' ? FlutterFlowTheme.of(context).tertiaryColor : Color(0xFFFF0000),
+                                                                                                  FlutterFlowTheme.of(context).tertiaryColor,
+                                                                                                ),
+                                                                                                size: 24,
                                                                                               ),
-                                                                                              size: 32,
-                                                                                            ),
-                                                                                        ],
+                                                                                          ],
+                                                                                        ),
                                                                                       ),
                                                                                     ],
                                                                                   ),
@@ -514,62 +518,32 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                     mainAxisSize: MainAxisSize.max,
                                                                                     children: [
                                                                                       Padding(
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
+                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
                                                                                         child: Container(
                                                                                           width: double.infinity,
                                                                                           decoration: BoxDecoration(
                                                                                             borderRadius: BorderRadius.circular(32),
                                                                                           ),
-                                                                                          child: Padding(
-                                                                                            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                                                                                            child: Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              children: [
-                                                                                                Padding(
-                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                                                                                                  child: Column(
-                                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                                    children: [
-                                                                                                      Row(
-                                                                                                        mainAxisSize: MainAxisSize.max,
-                                                                                                        children: [
-                                                                                                          Expanded(
-                                                                                                            child: Column(
-                                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                              children: [
-                                                                                                                Wrap(
-                                                                                                                  spacing: 0,
-                                                                                                                  runSpacing: 0,
-                                                                                                                  alignment: WrapAlignment.start,
-                                                                                                                  crossAxisAlignment: WrapCrossAlignment.start,
-                                                                                                                  direction: Axis.horizontal,
-                                                                                                                  runAlignment: WrapAlignment.start,
-                                                                                                                  verticalDirection: VerticalDirection.down,
-                                                                                                                  clipBehavior: Clip.none,
-                                                                                                                  children: [
-                                                                                                                    Text(
-                                                                                                                      unassignedtransactionsItem.transactionNarration!,
-                                                                                                                      style: FlutterFlowTheme.of(context).subtitle1,
-                                                                                                                    ),
-                                                                                                                  ],
-                                                                                                                ),
-                                                                                                              ],
-                                                                                                            ),
-                                                                                                          ),
-                                                                                                        ],
-                                                                                                      ),
-                                                                                                    ],
-                                                                                                  ),
-                                                                                                ),
-                                                                                              ],
-                                                                                            ),
+                                                                                          child: Wrap(
+                                                                                            spacing: 0,
+                                                                                            runSpacing: 0,
+                                                                                            alignment: WrapAlignment.start,
+                                                                                            crossAxisAlignment: WrapCrossAlignment.start,
+                                                                                            direction: Axis.horizontal,
+                                                                                            runAlignment: WrapAlignment.start,
+                                                                                            verticalDirection: VerticalDirection.down,
+                                                                                            clipBehavior: Clip.none,
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                unassignedtransactionsItem.transactionNarration!,
+                                                                                                style: FlutterFlowTheme.of(context).subtitle1,
+                                                                                              ),
+                                                                                            ],
                                                                                           ),
                                                                                         ),
                                                                                       ),
                                                                                       Divider(
-                                                                                        indent: 16,
-                                                                                        endIndent: 16,
+                                                                                        height: 0,
                                                                                         color: FlutterFlowTheme.of(context).fadedDivider,
                                                                                       ),
                                                                                       Stack(
@@ -584,7 +558,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                     color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                                   ),
                                                                                                   child: Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 16),
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
                                                                                                     child: Row(
                                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -684,23 +658,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                                     final categoriesItem = categories[categoriesIndex];
                                                                                                                     return FFButtonWidget(
                                                                                                                       onPressed: () async {
-                                                                                                                        showModalBottomSheet(
-                                                                                                                          isScrollControlled: true,
-                                                                                                                          backgroundColor: Colors.transparent,
-                                                                                                                          barrierColor: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                                                          context: context,
-                                                                                                                          builder: (context) {
-                                                                                                                            return Padding(
-                                                                                                                              padding: MediaQuery.of(context).viewInsets,
-                                                                                                                              child: OverlayAlertWidget(),
-                                                                                                                            );
-                                                                                                                          },
-                                                                                                                        ).then((value) => setState(() {}));
-
-                                                                                                                        await Future.delayed(const Duration(milliseconds: 1000));
                                                                                                                         if (containerTransactionsRecordList.length == 1) {
-                                                                                                                          Navigator.pop(context);
-
                                                                                                                           final transactionsUpdateData = createTransactionsRecordData(
                                                                                                                             transactionCategory: categoriesItem.reference,
                                                                                                                             transactionBudget: currentUserDocument!.activeBudget,
@@ -724,8 +682,23 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                                             dateAssigned: getCurrentTimestamp,
                                                                                                                           );
                                                                                                                           await unassignedtransactionsItem.reference.update(transactionsUpdateData);
-                                                                                                                          Navigator.pop(context);
                                                                                                                         }
+
+                                                                                                                        ScaffoldMessenger.of(context).clearSnackBars();
+                                                                                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                                          SnackBar(
+                                                                                                                            content: Text(
+                                                                                                                              'Transaction assigned',
+                                                                                                                              style: FlutterFlowTheme.of(context).bodyText2.override(
+                                                                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyText2Family,
+                                                                                                                                    color: Colors.white,
+                                                                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText2Family),
+                                                                                                                                  ),
+                                                                                                                            ),
+                                                                                                                            duration: Duration(milliseconds: 1500),
+                                                                                                                            backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
+                                                                                                                          ),
+                                                                                                                        );
                                                                                                                       },
                                                                                                                       text: categoriesItem.categoryName!,
                                                                                                                       options: FFButtonOptions(
@@ -771,20 +744,6 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                                     final subscriptionsItem = subscriptions[subscriptionsIndex];
                                                                                                                     return FFButtonWidget(
                                                                                                                       onPressed: () async {
-                                                                                                                        showModalBottomSheet(
-                                                                                                                          isScrollControlled: true,
-                                                                                                                          backgroundColor: Colors.transparent,
-                                                                                                                          barrierColor: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                                                          context: context,
-                                                                                                                          builder: (context) {
-                                                                                                                            return Padding(
-                                                                                                                              padding: MediaQuery.of(context).viewInsets,
-                                                                                                                              child: OverlayAlertWidget(),
-                                                                                                                            );
-                                                                                                                          },
-                                                                                                                        ).then((value) => setState(() {}));
-
-                                                                                                                        await Future.delayed(const Duration(milliseconds: 1000));
                                                                                                                         if (containerTransactionsRecordList.length == 1) {
                                                                                                                           Navigator.pop(context);
 
@@ -899,9 +858,23 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                                             };
                                                                                                                             await subscriptionsItem.reference.update(subscriptionsUpdateData);
                                                                                                                           }
-
-                                                                                                                          Navigator.pop(context);
                                                                                                                         }
+
+                                                                                                                        ScaffoldMessenger.of(context).clearSnackBars();
+                                                                                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                                          SnackBar(
+                                                                                                                            content: Text(
+                                                                                                                              'Transaction assigned',
+                                                                                                                              style: FlutterFlowTheme.of(context).bodyText2.override(
+                                                                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyText2Family,
+                                                                                                                                    color: Colors.white,
+                                                                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText2Family),
+                                                                                                                                  ),
+                                                                                                                            ),
+                                                                                                                            duration: Duration(milliseconds: 1500),
+                                                                                                                            backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
+                                                                                                                          ),
+                                                                                                                        );
                                                                                                                       },
                                                                                                                       text: subscriptionsItem.name!,
                                                                                                                       options: FFButtonOptions(
@@ -1001,23 +974,22 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                             final incomeSourcesItem = incomeSources[incomeSourcesIndex];
                                                                                                             return FFButtonWidget(
                                                                                                               onPressed: () async {
-                                                                                                                showModalBottomSheet(
-                                                                                                                  isScrollControlled: true,
-                                                                                                                  backgroundColor: Colors.transparent,
-                                                                                                                  barrierColor: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                                                  context: context,
-                                                                                                                  builder: (context) {
-                                                                                                                    return Padding(
-                                                                                                                      padding: MediaQuery.of(context).viewInsets,
-                                                                                                                      child: OverlayAlertWidget(),
-                                                                                                                    );
-                                                                                                                  },
-                                                                                                                ).then((value) => setState(() {}));
-
-                                                                                                                await Future.delayed(const Duration(milliseconds: 1000));
+                                                                                                                ScaffoldMessenger.of(context).clearSnackBars();
+                                                                                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                                  SnackBar(
+                                                                                                                    content: Text(
+                                                                                                                      'Transaction assigned',
+                                                                                                                      style: FlutterFlowTheme.of(context).bodyText2.override(
+                                                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyText2Family,
+                                                                                                                            color: Colors.white,
+                                                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText2Family),
+                                                                                                                          ),
+                                                                                                                    ),
+                                                                                                                    duration: Duration(milliseconds: 1500),
+                                                                                                                    backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
+                                                                                                                  ),
+                                                                                                                );
                                                                                                                 if (containerTransactionsRecordList.length == 1) {
-                                                                                                                  Navigator.pop(context);
-
                                                                                                                   final transactionsUpdateData = createTransactionsRecordData(
                                                                                                                     incomeCategory: incomeSourcesItem.reference,
                                                                                                                     incomeDetails: createIncomeDetailsStruct(
@@ -1039,7 +1011,6 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                                     dateAssigned: getCurrentTimestamp,
                                                                                                                   );
                                                                                                                   await unassignedtransactionsItem.reference.update(transactionsUpdateData);
-                                                                                                                  Navigator.pop(context);
                                                                                                                 }
                                                                                                               },
                                                                                                               text: incomeSourcesItem.categoryName!,
@@ -1117,6 +1088,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                               height: double.infinity,
                               loop: false,
                               particleCount: 10,
+                              gravity: 1.0,
                             ),
                           ),
                       ],
