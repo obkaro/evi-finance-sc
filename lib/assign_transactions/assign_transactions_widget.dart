@@ -484,23 +484,39 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                         padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                                                                                         child: Stack(
                                                                                           children: [
-                                                                                            if (unassignedtransactionsItem.transactionType == 'credit')
-                                                                                              Icon(
-                                                                                                Icons.call_made_rounded,
-                                                                                                color: valueOrDefault<Color>(
-                                                                                                  unassignedtransactionsItem.transactionType == 'debit' ? FlutterFlowTheme.of(context).tertiaryColor : Color(0xFFFF0000),
-                                                                                                  FlutterFlowTheme.of(context).tertiaryColor,
-                                                                                                ),
-                                                                                                size: 24,
-                                                                                              ),
                                                                                             if (unassignedtransactionsItem.transactionType == 'debit')
-                                                                                              Icon(
-                                                                                                Icons.call_received_rounded,
-                                                                                                color: valueOrDefault<Color>(
-                                                                                                  unassignedtransactionsItem.transactionType == 'debit' ? FlutterFlowTheme.of(context).tertiaryColor : Color(0xFFFF0000),
-                                                                                                  FlutterFlowTheme.of(context).tertiaryColor,
+                                                                                              Container(
+                                                                                                width: 36,
+                                                                                                height: 36,
+                                                                                                decoration: BoxDecoration(
+                                                                                                  color: Color(0x1AFF0000),
+                                                                                                  shape: BoxShape.circle,
                                                                                                 ),
-                                                                                                size: 24,
+                                                                                                child: Icon(
+                                                                                                  Icons.call_received_rounded,
+                                                                                                  color: valueOrDefault<Color>(
+                                                                                                    unassignedtransactionsItem.transactionType == 'debit' ? FlutterFlowTheme.of(context).tertiaryColor : Color(0xFFFF0000),
+                                                                                                    FlutterFlowTheme.of(context).tertiaryColor,
+                                                                                                  ),
+                                                                                                  size: 24,
+                                                                                                ),
+                                                                                              ),
+                                                                                            if (unassignedtransactionsItem.transactionType == 'credit')
+                                                                                              Container(
+                                                                                                width: 36,
+                                                                                                height: 36,
+                                                                                                decoration: BoxDecoration(
+                                                                                                  color: Color(0x191B998B),
+                                                                                                  shape: BoxShape.circle,
+                                                                                                ),
+                                                                                                child: Icon(
+                                                                                                  Icons.call_made_rounded,
+                                                                                                  color: valueOrDefault<Color>(
+                                                                                                    unassignedtransactionsItem.transactionType == 'debit' ? FlutterFlowTheme.of(context).tertiaryColor : Color(0xFFFF0000),
+                                                                                                    FlutterFlowTheme.of(context).tertiaryColor,
+                                                                                                  ),
+                                                                                                  size: 24,
+                                                                                                ),
                                                                                               ),
                                                                                           ],
                                                                                         ),
@@ -544,6 +560,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                       ),
                                                                                       Divider(
                                                                                         height: 0,
+                                                                                        thickness: 1,
                                                                                         color: FlutterFlowTheme.of(context).fadedDivider,
                                                                                       ),
                                                                                       Stack(
@@ -1087,7 +1104,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                               width: double.infinity,
                               height: double.infinity,
                               loop: false,
-                              particleCount: 10,
+                              particleCount: 3,
                               gravity: 1.0,
                             ),
                           ),
