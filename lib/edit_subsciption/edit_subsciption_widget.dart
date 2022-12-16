@@ -48,8 +48,6 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'editSubsciption'});
   }
 
   @override
@@ -196,8 +194,6 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                             size: 16,
                                           ),
                                           onPressed: () async {
-                                            logFirebaseEvent(
-                                                'EDIT_SUBSCIPTION_edit_rounded_ICN_ON_TAP');
                                             final selectedMedia =
                                                 await selectMedia(
                                               maxWidth: 720.00,
@@ -498,8 +494,6 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                 ),
                                 InkWell(
                                   onTap: () async {
-                                    logFirebaseEvent(
-                                        'EDIT_SUBSCIPTION_Icon_45k5tu3n_ON_TAP');
                                     await showModalBottomSheet(
                                       isScrollControlled: true,
                                       backgroundColor: Colors.transparent,
@@ -549,8 +543,6 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                 onChange:
                                     (DateTimeRange? newSelectedDate) async {
                                   calendarSelectedDay = newSelectedDate;
-                                  logFirebaseEvent(
-                                      'EDIT_SUBSCIPTION_Calendar_km2udt9i_ON_DA');
 
                                   final subscriptionsUpdateData =
                                       createSubscriptionsRecordData(
@@ -789,9 +781,6 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                         : null;
                                 return FFButtonWidget(
                                   onPressed: () async {
-                                    logFirebaseEvent(
-                                        'EDIT_SUBSCIPTION_SAVE_DETAILS_BTN_ON_TAP');
-
                                     final subscriptionsUpdateData =
                                         createSubscriptionsRecordData(
                                       name: nameController?.text ?? '',

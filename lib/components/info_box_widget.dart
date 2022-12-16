@@ -136,8 +136,6 @@ class _InfoBoxWidgetState extends State<InfoBoxWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
-                                logFirebaseEvent(
-                                    'INFO_BOX_COMP_UPDATE_NOW_BTN_ON_TAP');
                                 Navigator.pop(context);
                               },
                               text: widget.buttonText!,

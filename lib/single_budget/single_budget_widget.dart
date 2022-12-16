@@ -40,13 +40,6 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'SingleBudget'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
@@ -79,7 +72,6 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
               size: 20,
             ),
             onPressed: () async {
-              logFirebaseEvent('SINGLE_BUDGET_edit_rounded_ICN_ON_TAP');
               await Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -145,8 +137,6 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                                       .fromSTEB(0, 16, 0, 16),
                                                   child: InkWell(
                                                     onTap: () async {
-                                                      logFirebaseEvent(
-                                                          'SINGLE_BUDGET_Container_w8l3txue_ON_TAP');
                                                       await Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
@@ -409,8 +399,6 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                                                     0, 16),
                                                         child: InkWell(
                                                           onTap: () async {
-                                                            logFirebaseEvent(
-                                                                'SINGLE_BUDGET_Container_yxoank43_ON_TAP');
                                                             // Action_ViewSingleCategory
                                                             await Navigator
                                                                 .push(
@@ -427,8 +415,6 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                                           },
                                                           onLongPress:
                                                               () async {
-                                                            logFirebaseEvent(
-                                                                'SINGLE_BUDGET_Container_yxoank43_ON_LONG');
                                                             HapticFeedback
                                                                 .lightImpact();
                                                             await showModalBottomSheet(
@@ -596,8 +582,6 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                             0, 16, 0, 16),
                                         child: InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent(
-                                                'SINGLE_BUDGET_Container_m3zrla6h_ON_TAP');
                                             await showModalBottomSheet(
                                               isScrollControlled: true,
                                               backgroundColor:
@@ -708,9 +692,6 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                           child: AuthUserStreamWidget(
                             child: InkWell(
                               onTap: () async {
-                                logFirebaseEvent(
-                                    'SINGLE_BUDGET_Container_whe209e3_ON_TAP');
-
                                 final budgetsCreateData =
                                     createBudgetsRecordData(
                                   budgetDateCreated: getCurrentTimestamp,
@@ -787,9 +768,6 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                           size: 48,
                                         ),
                                         onPressed: () async {
-                                          logFirebaseEvent(
-                                              'SINGLE_BUDGET_add_rounded_ICN_ON_TAP');
-
                                           final budgetsCreateData =
                                               createBudgetsRecordData(
                                             budgetDateCreated:

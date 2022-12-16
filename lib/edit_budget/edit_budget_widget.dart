@@ -39,7 +39,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'EditBudget'});
   }
 
   @override
@@ -216,8 +215,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                             onChanged: (val) async {
                                               setState(
                                                   () => dropDownValue = val);
-                                              logFirebaseEvent(
-                                                  'EDIT_BUDGET_DropDown_esyzqg1i_ON_FORM_WI');
                                               if (dropDownValue == 'Monthly') {
                                                 final budgetsUpdateData =
                                                     createBudgetsRecordData(
@@ -352,8 +349,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                                   newSelectedDate) async {
                                                 calendarSelectedDay =
                                                     newSelectedDate;
-                                                logFirebaseEvent(
-                                                    'EDIT_BUDGET_Calendar_oih23j9r_ON_DATE_SE');
                                                 if (dropDownValue ==
                                                     'Monthly') {
                                                   final budgetsUpdateData =
@@ -566,8 +561,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent(
-                                'EDIT_BUDGET_EDIT_CATEGORIES_BTN_ON_TAP');
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -635,8 +628,6 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                 snapshot.data!;
                             return FFButtonWidget(
                               onPressed: () async {
-                                logFirebaseEvent(
-                                    'EDIT_BUDGET_PAGE_SAVE_BTN_ON_TAP');
                                 if (FFAppState().currencyTextField >=
                                     functions.sumCategoryAmounts(
                                         buttonCategoriesRecordList.toList())) {

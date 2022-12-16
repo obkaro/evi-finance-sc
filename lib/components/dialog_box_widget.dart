@@ -138,8 +138,6 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                             Expanded(
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  logFirebaseEvent(
-                                      'DIALOG_BOX_COMP_UPDATE_LATER_BTN_ON_TAP');
                                   setState(() {
                                     FFAppState().dialogBoxReturn = false;
                                   });
@@ -164,8 +162,6 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
-                                logFirebaseEvent(
-                                    'DIALOG_BOX_COMP_UPDATE_NOW_BTN_ON_TAP');
                                 setState(() {
                                   FFAppState().dialogBoxReturn = true;
                                 });

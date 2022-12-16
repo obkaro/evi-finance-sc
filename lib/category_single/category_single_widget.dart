@@ -29,13 +29,6 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'CategorySingle'});
-  }
-
-  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
@@ -91,8 +84,6 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
                     child: InkWell(
                       onTap: () async {
-                        logFirebaseEvent(
-                            'CATEGORY_SINGLE_Container_n5a9b4bu_ON_TA');
                         await showModalBottomSheet(
                           isScrollControlled: true,
                           backgroundColor: Colors.transparent,

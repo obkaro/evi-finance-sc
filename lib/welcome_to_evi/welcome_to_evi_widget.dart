@@ -93,8 +93,6 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
       this,
     );
 
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'WelcomeToEvi'});
     textController = TextEditingController();
   }
 
@@ -381,8 +379,6 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                     padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        logFirebaseEvent(
-                            'WELCOME_TO_EVI_PAGE_CONTINUE_BTN_ON_TAP');
                         if (formKey.currentState == null ||
                             !formKey.currentState!.validate()) {
                           return;

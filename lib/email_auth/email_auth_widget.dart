@@ -46,7 +46,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
     signInEmailController = TextEditingController();
     signInPasswordController = TextEditingController();
     signInPasswordVisibility = false;
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'EmailAuth'});
   }
 
   @override
@@ -353,8 +352,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                   .fromSTEB(0, 0, 0, 16),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'EMAIL_AUTH_PAGE_SIGN_IN_BTN_ON_TAP');
                                                   if (formKey2.currentState ==
                                                           null ||
                                                       !formKey2.currentState!
@@ -441,8 +438,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                   .fromSTEB(0, 0, 0, 16),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'EMAIL_AUTH_PAGE_forgot_pass_ON_TAP');
                                                   await Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
@@ -814,8 +809,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                   .fromSTEB(0, 0, 0, 16),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'EMAIL_AUTH_PAGE_SIGN_UP_BTN_ON_TAP');
                                                   if (formKey1.currentState ==
                                                           null ||
                                                       !formKey1.currentState!
@@ -946,8 +939,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                         0, 16, 0, 0),
                                     child: InkWell(
                                       onTap: () async {
-                                        logFirebaseEvent(
-                                            'EMAIL_AUTH_CircleImage_jrb79fko_ON_TAP');
                                         final user =
                                             await signInWithGoogle(context);
                                         if (user == null) {

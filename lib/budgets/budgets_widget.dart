@@ -49,8 +49,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
   @override
   void initState() {
     super.initState();
-
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Budgets'});
   }
 
   @override
@@ -77,8 +75,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
             size: 30,
           ),
           onPressed: () async {
-            logFirebaseEvent('BUDGETS_PAGE_add_rounded_ICN_ON_TAP');
-
             final budgetsCreateData = createBudgetsRecordData(
               budgetDateCreated: getCurrentTimestamp,
               budgetID: random_data.randomString(
@@ -205,8 +201,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
                                                 snapshot.data!;
                                             return InkWell(
                                               onTap: () async {
-                                                logFirebaseEvent(
-                                                    'BUDGETS_PAGE_ListTile_ON_TAP');
                                                 await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -228,8 +222,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
                                                     color: Color(0xFFC72323),
                                                     icon: Icons.delete_rounded,
                                                     onTap: () async {
-                                                      logFirebaseEvent(
-                                                          'BUDGETS_SlidableActionWidget_38dvfl97_ON');
                                                       if (columnBudgetsRecord
                                                               .reference ==
                                                           currentUserDocument!
@@ -346,9 +338,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
                                                         .tertiaryColor,
                                                     icon: Icons.check_rounded,
                                                     onTap: () async {
-                                                      logFirebaseEvent(
-                                                          'BUDGETS_SlidableActionWidget_xms3pwoz_ON');
-
                                                       final usersUpdateData =
                                                           createUsersRecordData(
                                                         activeBudget:

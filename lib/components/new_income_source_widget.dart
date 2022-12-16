@@ -143,8 +143,6 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent(
-                                'NEW_INCOME_SOURCE_COMP_CANCEL_BTN_ON_TAP');
                             Navigator.pop(context);
                           },
                           text: 'Cancel',
@@ -175,8 +173,6 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent(
-                                'NEW_INCOME_SOURCE_COMP_SAVE_BTN_ON_TAP');
                             if (formKey.currentState == null ||
                                 !formKey.currentState!.validate()) {
                               return;

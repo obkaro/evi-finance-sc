@@ -161,8 +161,6 @@ class _CreateCustomCategoryWidgetState
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent(
-                                'CREATE_CUSTOM_CATEGORY_CANCEL_BTN_ON_TAP');
                             Navigator.pop(context);
                           },
                           text: 'Cancel',
@@ -190,8 +188,6 @@ class _CreateCustomCategoryWidgetState
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent(
-                                'CREATE_CUSTOM_CATEGORY_SAVE_BTN_ON_TAP');
                             if (FFAppState().currencyTextField <=
                                 widget.budget!.unallocatedAmount!) {
                               final budgetsUpdateData = {

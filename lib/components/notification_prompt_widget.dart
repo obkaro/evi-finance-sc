@@ -123,8 +123,6 @@ class _NotificationPromptWidgetState extends State<NotificationPromptWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent(
-                                'NOTIFICATION_PROMPT_COMP_OKAY_BTN_ON_TAP');
                             await requestPermission(notificationsPermission);
                             Navigator.pop(context);
                           },
