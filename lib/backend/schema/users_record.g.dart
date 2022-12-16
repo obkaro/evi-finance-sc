@@ -131,13 +131,6 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.status;
-    if (value != null) {
-      result
-        ..add('status')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -230,10 +223,6 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
           result.username = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'status':
-          result.status = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -279,8 +268,6 @@ class _$UsersRecord extends UsersRecord {
   @override
   final String? username;
   @override
-  final String? status;
-  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
@@ -302,7 +289,6 @@ class _$UsersRecord extends UsersRecord {
       this.onboardingStep,
       this.experience,
       this.username,
-      this.status,
       this.ffRef})
       : super._();
 
@@ -332,7 +318,6 @@ class _$UsersRecord extends UsersRecord {
         onboardingStep == other.onboardingStep &&
         experience == other.experience &&
         username == other.username &&
-        status == other.status &&
         ffRef == other.ffRef;
   }
 
@@ -354,27 +339,24 @@ class _$UsersRecord extends UsersRecord {
                                                         $jc(
                                                             $jc(
                                                                 $jc(
-                                                                    $jc(
-                                                                        0,
-                                                                        email
-                                                                            .hashCode),
-                                                                    displayName
+                                                                    0,
+                                                                    email
                                                                         .hashCode),
-                                                                photoUrl
+                                                                displayName
                                                                     .hashCode),
-                                                            uid.hashCode),
-                                                        createdTime.hashCode),
-                                                    phoneNumber.hashCode),
-                                                income.hashCode),
-                                            tempAuthCode.hashCode),
-                                        accountsList.hashCode),
-                                    budgetList.hashCode),
-                                activeBudget.hashCode),
-                            defaultAccount.hashCode),
-                        onboardingStep.hashCode),
-                    experience.hashCode),
-                username.hashCode),
-            status.hashCode),
+                                                            photoUrl.hashCode),
+                                                        uid.hashCode),
+                                                    createdTime.hashCode),
+                                                phoneNumber.hashCode),
+                                            income.hashCode),
+                                        tempAuthCode.hashCode),
+                                    accountsList.hashCode),
+                                budgetList.hashCode),
+                            activeBudget.hashCode),
+                        defaultAccount.hashCode),
+                    onboardingStep.hashCode),
+                experience.hashCode),
+            username.hashCode),
         ffRef.hashCode));
   }
 
@@ -396,7 +378,6 @@ class _$UsersRecord extends UsersRecord {
           ..add('onboardingStep', onboardingStep)
           ..add('experience', experience)
           ..add('username', username)
-          ..add('status', status)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -472,10 +453,6 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   String? get username => _$this._username;
   set username(String? username) => _$this._username = username;
 
-  String? _status;
-  String? get status => _$this._status;
-  set status(String? status) => _$this._status = status;
-
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -502,7 +479,6 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _onboardingStep = $v.onboardingStep;
       _experience = $v.experience;
       _username = $v.username;
-      _status = $v.status;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -543,7 +519,6 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
               onboardingStep: onboardingStep,
               experience: experience,
               username: username,
-              status: status,
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;
