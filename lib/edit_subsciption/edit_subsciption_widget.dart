@@ -67,11 +67,11 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
         if (!snapshot.hasData) {
           return Center(
             child: SizedBox(
-              width: 42,
-              height: 42,
-              child: SpinKitChasingDots(
+              width: 36,
+              height: 36,
+              child: SpinKitThreeBounce(
                 color: FlutterFlowTheme.of(context).primaryColor,
-                size: 42,
+                size: 36,
               ),
             ),
           );
@@ -143,7 +143,9 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             border: Border.all(
-                                              color: Colors.transparent,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
                                               width: 0,
                                             ),
                                           ),
@@ -371,13 +373,13 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                       if (!snapshot.hasData) {
                                         return Center(
                                           child: SizedBox(
-                                            width: 42,
-                                            height: 42,
-                                            child: SpinKitChasingDots(
+                                            width: 36,
+                                            height: 36,
+                                            child: SpinKitThreeBounce(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
-                                              size: 42,
+                                              size: 36,
                                             ),
                                           ),
                                         );
@@ -399,14 +401,14 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                 if (!snapshot.hasData) {
                                                   return Center(
                                                     child: SizedBox(
-                                                      width: 42,
-                                                      height: 42,
-                                                      child: SpinKitChasingDots(
+                                                      width: 36,
+                                                      height: 36,
+                                                      child: SpinKitThreeBounce(
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primaryColor,
-                                                        size: 42,
+                                                        size: 36,
                                                       ),
                                                     ),
                                                   );
@@ -759,12 +761,12 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                 if (!snapshot.hasData) {
                                   return Center(
                                     child: SizedBox(
-                                      width: 42,
-                                      height: 42,
-                                      child: SpinKitChasingDots(
+                                      width: 36,
+                                      height: 36,
+                                      child: SpinKitThreeBounce(
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
-                                        size: 42,
+                                        size: 36,
                                       ),
                                     ),
                                   );

@@ -13,7 +13,7 @@ const firestore = require('@google-cloud/firestore');
 const client = new firestore.v1.FirestoreAdminClient();
 
 
-// Replace BUCKET_NAME
+// BACKUP FIRESTORE
 const bucket = 'gs://evi-prod-backups';
 
 exports.scheduledbackup24 = functions.pubsub
@@ -79,7 +79,8 @@ exports.accountupdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', 
         institutionType: req.body.data.account.institution.type,
         lastSync: currentdate,
         reauthRequired: false,
-        accountLogo: logo.docs[0].data().institutionLogo
+        accountLogo: logo.docs[0].data().institutionLogo,
+        awaitingWebhook: false,
       };
 
       // axios

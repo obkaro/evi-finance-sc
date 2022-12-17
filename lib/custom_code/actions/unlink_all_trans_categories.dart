@@ -17,10 +17,12 @@ Future unlinkAllTransCategories(
       ...createTransactionsRecordData(
         categoryDetails: createCategoryDetailsStruct(delete: true),
         subscriptionDetails: createSubscriptionDetailsStruct(delete: true),
+        incomeDetails: createIncomeDetailsStruct(delete: true),
         isAssigned: false,
       ),
       'transactionCategory': FieldValue.delete(),
       'recurringRef': FieldValue.delete(),
+      'incomeCategory': FieldValue.delete(),
       'transactionBudget': FieldValue.delete(),
       'dateAssigned': FieldValue.delete(),
     };

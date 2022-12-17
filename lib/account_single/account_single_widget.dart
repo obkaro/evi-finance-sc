@@ -155,6 +155,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                             (reauthCode?.jsonBody ?? ''),
                             r'''$.token''',
                           ).toString(),
+                          widget.account!,
                         );
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -233,45 +234,73 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          if (false)
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                              child: Container(
+                          StreamBuilder<AccountsRecord>(
+                            stream: AccountsRecord.getDocument(
+                                widget.account!.reference),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: Container(
+                                    width: 0,
+                                    height: 0,
+                                    child: LoadingEmptyWidget(),
+                                  ),
+                                );
+                              }
+                              final containerAccountsRecord = snapshot.data!;
+                              return Container(
                                 width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(32),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 16, 16, 16),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.sync,
+                                decoration: BoxDecoration(),
+                                child: Visibility(
+                                  visible:
+                                      containerAccountsRecord.awaitingWebhook ??
+                                          true,
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16, 16, 16, 0),
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        size: 24,
-                                      ).animateOnPageLoad(animationsMap[
-                                          'iconOnPageLoadAnimation']!),
-                                      Padding(
+                                            .secondaryBackground,
+                                        borderRadius: BorderRadius.circular(32),
+                                      ),
+                                      child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            8, 0, 0, 0),
-                                        child: Text(
-                                          'Fetching account data. Please check back soon.',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
+                                            16, 16, 16, 16),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.sync,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              size: 24,
+                                            ).animateOnPageLoad(animationsMap[
+                                                'iconOnPageLoadAnimation']!),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(8, 0, 0, 0),
+                                              child: Text(
+                                                'Fetching account data. Please check back soon.',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
+                              );
+                            },
+                          ),
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -296,13 +325,13 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                         if (!snapshot.hasData) {
                                           return Center(
                                             child: SizedBox(
-                                              width: 42,
-                                              height: 42,
-                                              child: SpinKitChasingDots(
+                                              width: 36,
+                                              height: 36,
+                                              child: SpinKitThreeBounce(
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryColor,
-                                                size: 42,
+                                                size: 36,
                                               ),
                                             ),
                                           );
@@ -367,7 +396,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),
-                                                      if (widget.account!
+                                                      if (columnAccountsRecord
                                                               .reauthRequired ==
                                                           true)
                                                         Align(
@@ -680,12 +709,12 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                   if (!snapshot.hasData) {
                                     return Center(
                                       child: SizedBox(
-                                        width: 42,
-                                        height: 42,
-                                        child: SpinKitChasingDots(
+                                        width: 36,
+                                        height: 36,
+                                        child: SpinKitThreeBounce(
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
-                                          size: 42,
+                                          size: 36,
                                         ),
                                       ),
                                     );

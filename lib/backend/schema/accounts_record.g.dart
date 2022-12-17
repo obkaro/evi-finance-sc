@@ -140,6 +140,13 @@ class _$AccountsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
+    value = object.awaitingWebhook;
+    if (value != null) {
+      result
+        ..add('awaitingWebhook')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -233,6 +240,10 @@ class _$AccountsRecordSerializer
           result.lastSync = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
+        case 'awaitingWebhook':
+          result.awaitingWebhook = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -282,6 +293,8 @@ class _$AccountsRecord extends AccountsRecord {
   @override
   final DateTime? lastSync;
   @override
+  final bool? awaitingWebhook;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$AccountsRecord([void Function(AccountsRecordBuilder)? updates]) =>
@@ -305,6 +318,7 @@ class _$AccountsRecord extends AccountsRecord {
       this.accountLogo,
       this.reauthRequired,
       this.lastSync,
+      this.awaitingWebhook,
       this.ffRef})
       : super._();
 
@@ -337,6 +351,7 @@ class _$AccountsRecord extends AccountsRecord {
         accountLogo == other.accountLogo &&
         reauthRequired == other.reauthRequired &&
         lastSync == other.lastSync &&
+        awaitingWebhook == other.awaitingWebhook &&
         ffRef == other.ffRef;
   }
 
@@ -360,29 +375,32 @@ class _$AccountsRecord extends AccountsRecord {
                                                                 $jc(
                                                                     $jc(
                                                                         $jc(
-                                                                            0,
-                                                                            accountName
+                                                                            $jc(
+                                                                                0,
+                                                                                accountName
+                                                                                    .hashCode),
+                                                                            accountOwner
                                                                                 .hashCode),
-                                                                        accountOwner
+                                                                        dataStatus
                                                                             .hashCode),
-                                                                    dataStatus
+                                                                    accountType
                                                                         .hashCode),
-                                                                accountType
+                                                                institutionType
                                                                     .hashCode),
-                                                            institutionType
+                                                            authMethod
                                                                 .hashCode),
-                                                        authMethod.hashCode),
-                                                    currency.hashCode),
-                                                authID.hashCode),
-                                            institutionName.hashCode),
-                                        accountBalance.hashCode),
-                                    bankCode.hashCode),
-                                accountNumber.hashCode),
-                            bvn.hashCode),
-                        dateLinked.hashCode),
-                    accountLogo.hashCode),
-                reauthRequired.hashCode),
-            lastSync.hashCode),
+                                                        currency.hashCode),
+                                                    authID.hashCode),
+                                                institutionName.hashCode),
+                                            accountBalance.hashCode),
+                                        bankCode.hashCode),
+                                    accountNumber.hashCode),
+                                bvn.hashCode),
+                            dateLinked.hashCode),
+                        accountLogo.hashCode),
+                    reauthRequired.hashCode),
+                lastSync.hashCode),
+            awaitingWebhook.hashCode),
         ffRef.hashCode));
   }
 
@@ -406,6 +424,7 @@ class _$AccountsRecord extends AccountsRecord {
           ..add('accountLogo', accountLogo)
           ..add('reauthRequired', reauthRequired)
           ..add('lastSync', lastSync)
+          ..add('awaitingWebhook', awaitingWebhook)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -489,6 +508,11 @@ class AccountsRecordBuilder
   DateTime? get lastSync => _$this._lastSync;
   set lastSync(DateTime? lastSync) => _$this._lastSync = lastSync;
 
+  bool? _awaitingWebhook;
+  bool? get awaitingWebhook => _$this._awaitingWebhook;
+  set awaitingWebhook(bool? awaitingWebhook) =>
+      _$this._awaitingWebhook = awaitingWebhook;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -517,6 +541,7 @@ class AccountsRecordBuilder
       _accountLogo = $v.accountLogo;
       _reauthRequired = $v.reauthRequired;
       _lastSync = $v.lastSync;
+      _awaitingWebhook = $v.awaitingWebhook;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -557,6 +582,7 @@ class AccountsRecordBuilder
             accountLogo: accountLogo,
             reauthRequired: reauthRequired,
             lastSync: lastSync,
+            awaitingWebhook: awaitingWebhook,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
