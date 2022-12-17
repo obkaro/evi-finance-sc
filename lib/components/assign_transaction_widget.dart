@@ -85,12 +85,12 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                               if (!snapshot.hasData) {
                                 return Center(
                                   child: SizedBox(
-                                    width: 42,
-                                    height: 42,
-                                    child: SpinKitChasingDots(
+                                    width: 36,
+                                    height: 36,
+                                    child: SpinKitThreeBounce(
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
-                                      size: 42,
+                                      size: 36,
                                     ),
                                   ),
                                 );
@@ -183,15 +183,15 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                                                   return Center(
                                                                     child:
                                                                         SizedBox(
-                                                                      width: 42,
+                                                                      width: 36,
                                                                       height:
-                                                                          42,
+                                                                          36,
                                                                       child:
-                                                                          SpinKitChasingDots(
+                                                                          SpinKitThreeBounce(
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .primaryColor,
                                                                         size:
-                                                                            42,
+                                                                            36,
                                                                       ),
                                                                     ),
                                                                   );
@@ -328,13 +328,13 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                                           if (!snapshot.hasData) {
                                             return Center(
                                               child: SizedBox(
-                                                width: 42,
-                                                height: 42,
-                                                child: SpinKitChasingDots(
+                                                width: 36,
+                                                height: 36,
+                                                child: SpinKitThreeBounce(
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryColor,
-                                                  size: 42,
+                                                  size: 36,
                                                 ),
                                               ),
                                             );
@@ -420,12 +420,12 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                             if (!snapshot.hasData) {
                               return Center(
                                 child: SizedBox(
-                                  width: 42,
-                                  height: 42,
-                                  child: SpinKitChasingDots(
+                                  width: 36,
+                                  height: 36,
+                                  child: SpinKitThreeBounce(
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
-                                    size: 42,
+                                    size: 36,
                                   ),
                                 ),
                               );

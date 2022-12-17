@@ -22,6 +22,7 @@ Future unlinkAllTransCategories(
       ),
       'transactionCategory': FieldValue.delete(),
       'recurringRef': FieldValue.delete(),
+      'incomeCategory': FieldValue.delete(),
       'transactionBudget': FieldValue.delete(),
       'dateAssigned': FieldValue.delete(),
     };

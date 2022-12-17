@@ -1140,14 +1140,14 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                               .hasData) {
                                                             return Center(
                                                               child: SizedBox(
-                                                                width: 42,
-                                                                height: 42,
+                                                                width: 36,
+                                                                height: 36,
                                                                 child:
-                                                                    SpinKitChasingDots(
+                                                                    SpinKitThreeBounce(
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryColor,
-                                                                  size: 42,
+                                                                  size: 36,
                                                                 ),
                                                               ),
                                                             );
