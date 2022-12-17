@@ -50,11 +50,11 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
         if (!snapshot.hasData) {
           return Center(
             child: SizedBox(
-              width: 42,
-              height: 42,
-              child: SpinKitChasingDots(
+              width: 36,
+              height: 36,
+              child: SpinKitThreeBounce(
                 color: FlutterFlowTheme.of(context).primaryColor,
-                size: 42,
+                size: 36,
               ),
             ),
           );
@@ -98,12 +98,12 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                         if (!snapshot.hasData) {
                           return Center(
                             child: SizedBox(
-                              width: 42,
-                              height: 42,
-                              child: SpinKitChasingDots(
+                              width: 36,
+                              height: 36,
+                              child: SpinKitThreeBounce(
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
-                                size: 42,
+                                size: 36,
                               ),
                             ),
                           );
@@ -502,13 +502,13 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                           child:
                                                                               SizedBox(
                                                                             width:
-                                                                                42,
+                                                                                36,
                                                                             height:
-                                                                                42,
+                                                                                36,
                                                                             child:
-                                                                                SpinKitChasingDots(
+                                                                                SpinKitThreeBounce(
                                                                               color: FlutterFlowTheme.of(context).primaryColor,
-                                                                              size: 42,
+                                                                              size: 36,
                                                                             ),
                                                                           ),
                                                                         );
@@ -824,11 +824,11 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                           return Center(
                                                                             child:
                                                                                 SizedBox(
-                                                                              width: 42,
-                                                                              height: 42,
-                                                                              child: SpinKitChasingDots(
+                                                                              width: 36,
+                                                                              height: 36,
+                                                                              child: SpinKitThreeBounce(
                                                                                 color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                size: 42,
+                                                                                size: 36,
                                                                               ),
                                                                             ),
                                                                           );
@@ -944,14 +944,14 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                               if (!snapshot.hasData) {
                                                 return Center(
                                                   child: SizedBox(
-                                                    width: 42,
-                                                    height: 42,
-                                                    child: SpinKitChasingDots(
+                                                    width: 36,
+                                                    height: 36,
+                                                    child: SpinKitThreeBounce(
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primaryColor,
-                                                      size: 42,
+                                                      size: 36,
                                                     ),
                                                   ),
                                                 );
