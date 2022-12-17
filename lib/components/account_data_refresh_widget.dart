@@ -193,6 +193,7 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                                       (reauthCode?.jsonBody ?? ''),
                                       r'''$.token''',
                                     ).toString(),
+                                    widget.account!,
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(

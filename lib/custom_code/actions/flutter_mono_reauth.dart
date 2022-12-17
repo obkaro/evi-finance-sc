@@ -27,6 +27,7 @@ extension CustomContext on BuildContext {
 Future flutterMonoReauth(
   BuildContext context,
   String reauthCode,
+  AccountsRecord account,
 ) async =>
     showDialog(
         context: context,
@@ -85,6 +86,12 @@ Future flutterMonoReauth(
                             ).toString(),
                             accountOwner: currentUserReference,
                           );
+
+                          final accountsUpdateData = createAccountsRecordData(
+                            awaitingWebhook: true,
+                            // lastSync: getCurrentTimestamp,
+                          );
+                          await account.reference.update(accountsUpdateData);
                           // onClosed: () {
                           //   print('Modal closed');
                           // },
