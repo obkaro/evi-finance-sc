@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-// Begin custom action code
 //import '../mono_custom/mono_flutter.dart';
 import 'package:evi/auth/auth_util.dart';
 import 'package:evi/backend/api_requests/api_calls.dart';
@@ -164,6 +163,7 @@ Future flutterMono(
                             // ).toString(),
                             dateLinked: getCurrentTimestamp,
                             reauthRequired: false,
+                            awaitingWebhook: true,
                             // lastSync: getCurrentTimestamp,
                           );
                           await newacct.reference.update(accountsUpdateData);

@@ -926,7 +926,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                     color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                                   ),
                                                                                                   child: Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 16),
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
                                                                                                     child: Row(
                                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
