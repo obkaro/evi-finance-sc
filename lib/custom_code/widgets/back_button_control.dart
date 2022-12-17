@@ -61,7 +61,7 @@ class _BackButtonControlState extends State<BackButtonControl> {
             SystemChannels.platform.invokeMethod('SystemNavigator.pop');
           } else {
             _androidAppRetain.invokeMethod("sendToBackground");
-            //MinimizeApp.minimizeApp(); ASDFASDFASDG
+            //MinimizeApp.minimizeApp();
           }
           return true;
         }
