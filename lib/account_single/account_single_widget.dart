@@ -80,6 +80,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
         return;
       }
     });
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'AccountSingle'});
   }
 
   @override

@@ -49,6 +49,8 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
   @override
   void initState() {
     super.initState();
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Budgets'});
   }
 
   @override
@@ -109,7 +111,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
             IconThemeData(color: FlutterFlowTheme.of(context).secondaryPrimary),
         automaticallyImplyLeading: true,
         title: Text(
-          'Budget Archives',
+          'Budget Archive',
           style: FlutterFlowTheme.of(context).title3.override(
                 fontFamily: FlutterFlowTheme.of(context).title3Family,
                 color: FlutterFlowTheme.of(context).secondaryPrimary,
@@ -226,38 +228,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
                                                               .reference ==
                                                           currentUserDocument!
                                                               .activeBudget) {
-                                                        var confirmDialogResponse =
-                                                            await showDialog<
-                                                                    bool>(
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (alertDialogContext) {
-                                                                    return AlertDialog(
-                                                                      title: Text(
-                                                                          'Are you sure?'),
-                                                                      content: Text(
-                                                                          'This is your current active budget'),
-                                                                      actions: [
-                                                                        TextButton(
-                                                                          onPressed: () => Navigator.pop(
-                                                                              alertDialogContext,
-                                                                              false),
-                                                                          child:
-                                                                              Text('Cancel'),
-                                                                        ),
-                                                                        TextButton(
-                                                                          onPressed: () => Navigator.pop(
-                                                                              alertDialogContext,
-                                                                              true),
-                                                                          child:
-                                                                              Text('Delete'),
-                                                                        ),
-                                                                      ],
-                                                                    );
-                                                                  },
-                                                                ) ??
-                                                                false;
                                                         setState(() {
                                                           FFAppState()
                                                                   .dialogBoxReturn =
@@ -329,24 +299,6 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
                                                             .reference
                                                             .delete();
                                                       }
-                                                    },
-                                                  ),
-                                                  IconSlideAction(
-                                                    caption: 'Activate',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .tertiaryColor,
-                                                    icon: Icons.check_rounded,
-                                                    onTap: () async {
-                                                      final usersUpdateData =
-                                                          createUsersRecordData(
-                                                        activeBudget:
-                                                            columnBudgetsRecord
-                                                                .reference,
-                                                      );
-                                                      await currentUserReference!
-                                                          .update(
-                                                              usersUpdateData);
                                                     },
                                                   ),
                                                 ],

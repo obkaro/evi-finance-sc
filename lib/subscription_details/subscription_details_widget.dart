@@ -33,6 +33,13 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'subscriptionDetails'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
@@ -247,28 +254,28 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                                             color: Colors.transparent,
                                             textStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText2
+                                                    .bodyText1
                                                     .override(
                                                       fontFamily:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText2Family,
+                                                              .bodyText1Family,
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .secondaryText,
+                                                              .primaryColor,
                                                       useGoogleFonts: GoogleFonts
                                                               .asMap()
                                                           .containsKey(
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodyText2Family),
+                                                                  .bodyText1Family),
                                                     ),
                                             elevation: 0,
                                             borderSide: BorderSide(
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                                      .fadedDivider,
                                               width: 1,
                                             ),
                                             borderRadius:

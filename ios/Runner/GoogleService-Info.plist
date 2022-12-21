@@ -32,5 +32,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:1086289327978:ios:80491a80e7a6279ce5d713</string>
+	<key>DATABASE_URL</key>
+	<string>https://evi-finance-prod-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

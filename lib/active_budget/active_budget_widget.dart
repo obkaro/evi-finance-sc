@@ -98,8 +98,11 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
             budgetsCreateData, budgetsRecordReference);
         await Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => CreateBudgetWidget(
+          PageTransition(
+            type: PageTransitionType.bottomToTop,
+            duration: Duration(milliseconds: 400),
+            reverseDuration: Duration(milliseconds: 400),
+            child: CreateBudgetWidget(
               budget: newcreatedBudget,
             ),
           ),
@@ -107,6 +110,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
       }
     });
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ActiveBudget'});
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||

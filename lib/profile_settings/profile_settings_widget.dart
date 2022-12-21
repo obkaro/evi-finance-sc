@@ -29,6 +29,8 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
   @override
   void initState() {
     super.initState();
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ProfileSettings'});
     textController1 = TextEditingController(
         text: valueOrDefault(currentUserDocument?.username, ''));
     textController2 = TextEditingController(text: currentUserEmail);

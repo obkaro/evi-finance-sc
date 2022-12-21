@@ -2,13 +2,17 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/circular_indicator_big_widget.dart';
 import '../components/edit_category_widget.dart';
+import '../components/loading_empty_widget.dart';
 import '../components/loading_transaction_widget.dart';
 import '../components/transaction_list_item_widget.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -25,8 +29,31 @@ class CategorySingleWidget extends StatefulWidget {
   _CategorySingleWidgetState createState() => _CategorySingleWidgetState();
 }
 
-class _CategorySingleWidgetState extends State<CategorySingleWidget> {
+class _CategorySingleWidgetState extends State<CategorySingleWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'containerOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 150.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'CategorySingle'});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,105 +109,127 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                 children: [
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
-                    child: InkWell(
-                      onTap: () async {
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          context: context,
-                          builder: (context) {
-                            return Padding(
-                              padding: MediaQuery.of(context).viewInsets,
-                              child: EditCategoryWidget(),
-                            );
+                    child: FutureBuilder<BudgetsRecord>(
+                      future: BudgetsRecord.getDocumentOnce(
+                          widget.category!.parentReference),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: LoadingEmptyWidget(),
+                          );
+                        }
+                        final containerBudgetsRecord = snapshot.data!;
+                        return InkWell(
+                          onTap: () async {
+                            await showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              builder: (context) {
+                                return Padding(
+                                  padding: MediaQuery.of(context).viewInsets,
+                                  child: EditCategoryWidget(
+                                    budget: containerBudgetsRecord,
+                                    categoryToEdit: widget.category,
+                                  ),
+                                );
+                              },
+                            ).then((value) => setState(() {}));
                           },
-                        ).then((value) => setState(() {}));
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(32),
-                        ),
-                        child: Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Row(
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(32),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  20, 20, 20, 20),
+                              child: Column(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 20, 0, 20),
-                                    child: CircularIndicatorBigWidget(
-                                      totalAmount:
-                                          widget.category!.categoryAmount,
-                                      spentAmount: valueOrDefault<int>(
-                                        widget.category!.spentAmount,
-                                        0,
-                                      ),
-                                      centerText: functions.subtractCurrency(
-                                          widget.category!.categoryAmount,
-                                          valueOrDefault<int>(
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 20, 0, 20),
+                                        child: CircularIndicatorBigWidget(
+                                          totalAmount:
+                                              widget.category!.categoryAmount,
+                                          spentAmount: valueOrDefault<int>(
                                             widget.category!.spentAmount,
                                             0,
-                                          )),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Spent',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2,
-                                      ),
-                                      Text(
-                                        functions.formatTransCurrency(
-                                            widget.category!.spentAmount),
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle1,
+                                          ),
+                                          centerText:
+                                              functions.subtractCurrency(
+                                                  widget
+                                                      .category!.categoryAmount,
+                                                  valueOrDefault<int>(
+                                                    widget
+                                                        .category!.spentAmount,
+                                                    0,
+                                                  )),
+                                        ),
                                       ),
                                     ],
                                   ),
-                                  Column(
+                                  Row(
                                     mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Column(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Text(
-                                                'Target',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText2,
-                                              ),
-                                            ],
+                                          Text(
+                                            'Spent',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2,
                                           ),
                                           Text(
-                                            functions.formatTransCurrency(widget
-                                                .category!.categoryAmount),
+                                            functions.formatTransCurrency(
+                                                widget.category!.spentAmount),
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle1,
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Text(
+                                                    'Target',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText2,
+                                                  ),
+                                                ],
+                                              ),
+                                              Text(
+                                                functions.formatTransCurrency(
+                                                    widget.category!
+                                                        .categoryAmount),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle1,
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -188,10 +237,11 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget> {
                                   ),
                                 ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
+                        ).animateOnPageLoad(
+                            animationsMap['containerOnPageLoadAnimation']!);
+                      },
                     ),
                   ),
                   Padding(

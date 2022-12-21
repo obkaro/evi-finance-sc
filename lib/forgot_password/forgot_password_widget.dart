@@ -23,6 +23,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
   @override
   void initState() {
     super.initState();
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ForgotPassword'});
     signInEmailController = TextEditingController();
   }
 
