@@ -82,6 +82,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
   @override
   void initState() {
     super.initState();
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'TransactionSingle'});
   }
 
   @override
@@ -1484,7 +1487,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                         ),
                                                                                     elevation: 0,
                                                                                     borderSide: BorderSide(
-                                                                                      color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                      color: FlutterFlowTheme.of(context).fadedDivider,
                                                                                       width: 1,
                                                                                     ),
                                                                                     borderRadius: BorderRadius.circular(32),
@@ -1622,7 +1625,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                       transactionBudget: currentUserDocument!.activeBudget,
                                                                                       recurringRef: wrapSubscriptionsRecord.reference,
                                                                                       categoryDetails: createCategoryDetailsStruct(
-                                                                                        name: wrapSubscriptionsRecord.name,
+                                                                                        name: wrapSubscriptionsRecord.categoryDetails.name,
                                                                                         clearUnsetFields: false,
                                                                                       ),
                                                                                       subscriptionDetails: createSubscriptionDetailsStruct(
@@ -1711,7 +1714,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                       ),
                                                                                   elevation: 0,
                                                                                   borderSide: BorderSide(
-                                                                                    color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                    color: FlutterFlowTheme.of(context).fadedDivider,
                                                                                     width: 1,
                                                                                   ),
                                                                                   borderRadius: BorderRadius.circular(32),
@@ -2131,7 +2134,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                       ),
                                                                                   elevation: 0,
                                                                                   borderSide: BorderSide(
-                                                                                    color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                    color: FlutterFlowTheme.of(context).fadedDivider,
                                                                                     width: 1,
                                                                                   ),
                                                                                   borderRadius: BorderRadius.circular(32),

@@ -1,8 +1,11 @@
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -14,9 +17,43 @@ class PaywallWidget extends StatefulWidget {
   _PaywallWidgetState createState() => _PaywallWidgetState();
 }
 
-class _PaywallWidgetState extends State<PaywallWidget> {
+class _PaywallWidgetState extends State<PaywallWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'textOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(0, 30),
+          end: Offset(0, 0),
+        ),
+      ],
+    ),
+    'columnOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 150.ms,
+          duration: 300.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   bool? didPurchase;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Paywall'});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +86,8 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                                   FlutterFlowTheme.of(context).title1Family),
                               lineHeight: 1.3,
                             ),
-                      ),
+                      ).animateOnPageLoad(
+                          animationsMap['textOnPageLoadAnimation']!),
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(12, 0, 20, 20),
@@ -179,7 +217,8 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                             ),
                           ),
                         ],
-                      ),
+                      ).animateOnPageLoad(
+                          animationsMap['columnOnPageLoadAnimation']!),
                     ),
                   ],
                 ),
@@ -191,11 +230,14 @@ class _PaywallWidgetState extends State<PaywallWidget> {
                   children: [
                     FFButtonWidget(
                       onPressed: () async {
+                        logFirebaseEvent('subscribe_attempt');
                         didPurchase = await revenue_cat.purchasePackage(
                             revenue_cat
                                 .offerings!.current!.monthly!.identifier);
                         if (didPurchase == true) {
                           Navigator.pop(context);
+                        } else {
+                          logFirebaseEvent('subscribe_didnotpurchase');
                         }
 
                         setState(() {});

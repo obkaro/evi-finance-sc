@@ -54,6 +54,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
       ).then((value) => setState(() {}));
     });
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'FirstBudget'});
     calendarSelectedDay = DateTimeRange(
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,

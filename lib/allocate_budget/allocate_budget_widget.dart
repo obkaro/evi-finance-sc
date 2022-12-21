@@ -36,6 +36,13 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'AllocateBudget'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
@@ -571,7 +578,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                                   ),
                                                                               elevation: 0,
                                                                               borderSide: BorderSide(
-                                                                                color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                color: FlutterFlowTheme.of(context).fadedDivider,
                                                                                 width: 1,
                                                                               ),
                                                                               borderRadius: BorderRadius.circular(32),
@@ -1158,7 +1165,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                               borderSide: BorderSide(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .primaryColor,
+                                                        .fadedDivider,
                                                 width: 1,
                                               ),
                                               borderRadius:

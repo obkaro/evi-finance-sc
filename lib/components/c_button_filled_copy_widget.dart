@@ -36,7 +36,7 @@ class _CButtonFilledCopyWidgetState extends State<CButtonFilledCopyWidget> {
       icon: widget.icon,
       options: FFButtonOptions(
         width: double.infinity,
-        height: 48,
+        height: 55,
         color: Color(0x00FF0054),
         textStyle: FlutterFlowTheme.of(context).bodyText1.override(
               fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
@@ -46,7 +46,7 @@ class _CButtonFilledCopyWidgetState extends State<CButtonFilledCopyWidget> {
             ),
         elevation: 0,
         borderSide: BorderSide(
-          color: FlutterFlowTheme.of(context).primaryColor,
+          color: FlutterFlowTheme.of(context).fadedDivider,
           width: 1,
         ),
         borderRadius: BorderRadius.circular(16),

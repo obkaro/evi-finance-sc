@@ -48,6 +48,8 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'editSubsciption'});
   }
 
   @override
@@ -145,7 +147,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                             border: Border.all(
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryColor,
+                                                      .fadedDivider,
                                               width: 0,
                                             ),
                                           ),

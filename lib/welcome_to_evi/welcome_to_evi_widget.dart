@@ -93,6 +93,8 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
       this,
     );
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'WelcomeToEvi'});
     textController = TextEditingController();
   }
 
@@ -406,11 +408,12 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                             },
                           ).then((value) => setState(() {}));
 
-                          await Navigator.push(
+                          await Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
                               builder: (context) => InitPaywallWidget(),
                             ),
+                            (r) => false,
                           );
                         }
                       },

@@ -43,6 +43,8 @@ class _AccountsWidgetState extends State<AccountsWidget>
   @override
   void initState() {
     super.initState();
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Accounts'});
   }
 
   @override

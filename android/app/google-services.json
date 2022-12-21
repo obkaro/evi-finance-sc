@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1086289327978",
+    "firebase_url": "https://evi-finance-prod-default-rtdb.firebaseio.com",
     "project_id": "evi-finance-prod",
     "storage_bucket": "evi-finance-prod.appspot.com"
   },
