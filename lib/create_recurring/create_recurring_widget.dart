@@ -51,6 +51,8 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'CreateRecurring'});
   }
 
   @override
@@ -151,7 +153,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                               border: Border.all(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .primaryColor,
+                                                        .fadedDivider,
                                                 width: 0,
                                               ),
                                             ),

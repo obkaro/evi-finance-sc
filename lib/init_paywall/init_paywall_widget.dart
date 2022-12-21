@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../first_budget/first_budget_widget.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -9,6 +10,8 @@ import '../flutter_flow/random_data_util.dart' as random_data;
 import '../flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -20,10 +23,44 @@ class InitPaywallWidget extends StatefulWidget {
   _InitPaywallWidgetState createState() => _InitPaywallWidgetState();
 }
 
-class _InitPaywallWidgetState extends State<InitPaywallWidget> {
+class _InitPaywallWidgetState extends State<InitPaywallWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'textOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(0, 30),
+          end: Offset(0, 0),
+        ),
+      ],
+    ),
+    'columnOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 150.ms,
+          duration: 300.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   BudgetsRecord? createdBudget;
   bool? didPurchase;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'InitPaywall'});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,16 +83,19 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget> {
                   children: [
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(32, 36, 32, 20),
-                      child: Text(
-                        'Cheers to a fresh journey into financial bliss, Karo',
-                        style: FlutterFlowTheme.of(context).title1.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).title1Family,
-                              fontSize: 36,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).title1Family),
-                              lineHeight: 1.3,
-                            ),
+                      child: AuthUserStreamWidget(
+                        child: Text(
+                          'Cheers to a fresh journey into financial bliss, ${valueOrDefault(currentUserDocument?.username, '')}',
+                          style: FlutterFlowTheme.of(context).title1.override(
+                                fontFamily:
+                                    FlutterFlowTheme.of(context).title1Family,
+                                fontSize: 36,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context).title1Family),
+                                lineHeight: 1.3,
+                              ),
+                        ).animateOnPageLoad(
+                            animationsMap['textOnPageLoadAnimation']!),
                       ),
                     ),
                     Padding(
@@ -186,7 +226,8 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget> {
                             ),
                           ),
                         ],
-                      ),
+                      ).animateOnPageLoad(
+                          animationsMap['columnOnPageLoadAnimation']!),
                     ),
                   ],
                 ),
@@ -207,6 +248,7 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget> {
                     ),
                     FFButtonWidget(
                       onPressed: () async {
+                        logFirebaseEvent('subscribe_attempt');
                         didPurchase = await revenue_cat.purchasePackage(
                             revenue_cat
                                 .offerings!.current!.monthly!.identifier);
@@ -238,6 +280,8 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget> {
                             ),
                             (r) => false,
                           );
+                        } else {
+                          logFirebaseEvent('subscribe_didnotpurchase');
                         }
 
                         setState(() {});

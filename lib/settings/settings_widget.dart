@@ -28,6 +28,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       versionNumber = await actions.getVersionNumber();
     });
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Settings'});
   }
 
   @override

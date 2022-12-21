@@ -111,6 +111,9 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
         return;
       }
     });
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'assignTransactions'});
   }
 
   @override
@@ -528,7 +531,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                     mainAxisSize: MainAxisSize.max,
                                                                                     children: [
                                                                                       Padding(
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                                                                                        padding: EdgeInsetsDirectional.fromSTEB(16, 20, 16, 16),
                                                                                         child: Container(
                                                                                           width: double.infinity,
                                                                                           decoration: BoxDecoration(

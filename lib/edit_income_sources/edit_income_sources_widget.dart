@@ -47,6 +47,9 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
   @override
   void initState() {
     super.initState();
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'EditIncomeSources'});
   }
 
   @override
@@ -205,7 +208,7 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primaryColor,
+                                                                .fadedDivider,
                                                       ),
                                                     ),
                                                     child: Padding(
