@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import '../../flutter_flow/flutter_flow_util.dart';
 
@@ -29,6 +30,7 @@ class GetPermanentAuthCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -48,6 +50,7 @@ class GetAccountInfoCall {
       },
       params: {},
       returnBody: true,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -112,6 +115,7 @@ class GetTransactionsCall {
       },
       params: {},
       returnBody: true,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -132,6 +136,7 @@ class UnlinkMonoCall {
       params: {},
       bodyType: BodyType.NONE,
       returnBody: true,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -152,6 +157,7 @@ class DataSyncMonoCall {
       params: {},
       bodyType: BodyType.NONE,
       returnBody: true,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -172,6 +178,7 @@ class ReauthMonoCall {
       params: {},
       bodyType: BodyType.NONE,
       returnBody: true,
+      decodeUtf8: false,
       cache: false,
     );
   }

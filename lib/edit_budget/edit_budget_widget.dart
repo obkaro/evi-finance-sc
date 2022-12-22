@@ -545,7 +545,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
                                           .languageCode,
                                     )}',
                                     style:
-                                        FlutterFlowTheme.of(context).subtitle2,
+                                        FlutterFlowTheme.of(context).subtitle1,
                                   ),
                                 ],
                               ),

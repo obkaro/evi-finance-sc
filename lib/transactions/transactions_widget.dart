@@ -144,25 +144,25 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                           );
                                         }
                                         List<TransactionsRecord>
-                                            columnTransactionsRecordList =
+                                            listViewTransactionsRecordList =
                                             snapshot.data!;
-                                        return SingleChildScrollView(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: List.generate(
-                                                columnTransactionsRecordList
-                                                    .length, (columnIndex) {
-                                              final columnTransactionsRecord =
-                                                  columnTransactionsRecordList[
-                                                      columnIndex];
-                                              return TransactionListItemWidget(
-                                                key: Key(
-                                                    'transactionListItem_${columnIndex}'),
-                                                transactionDoc:
-                                                    columnTransactionsRecord,
-                                              );
-                                            }),
-                                          ),
+                                        return ListView.builder(
+                                          padding: EdgeInsets.zero,
+                                          scrollDirection: Axis.vertical,
+                                          itemCount:
+                                              listViewTransactionsRecordList
+                                                  .length,
+                                          itemBuilder:
+                                              (context, listViewIndex) {
+                                            final listViewTransactionsRecord =
+                                                listViewTransactionsRecordList[
+                                                    listViewIndex];
+                                            return TransactionListItemWidget(
+                                              key: UniqueKey(),
+                                              transactionDoc:
+                                                  listViewTransactionsRecord,
+                                            );
+                                          },
                                         );
                                       },
                                     ),
@@ -191,25 +191,25 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                           );
                                         }
                                         List<TransactionsRecord>
-                                            columnTransactionsRecordList =
+                                            listViewTransactionsRecordList =
                                             snapshot.data!;
-                                        return SingleChildScrollView(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: List.generate(
-                                                columnTransactionsRecordList
-                                                    .length, (columnIndex) {
-                                              final columnTransactionsRecord =
-                                                  columnTransactionsRecordList[
-                                                      columnIndex];
-                                              return TransactionListItemWidget(
-                                                key: Key(
-                                                    'transactionListItem_${columnIndex}'),
-                                                transactionDoc:
-                                                    columnTransactionsRecord,
-                                              );
-                                            }),
-                                          ),
+                                        return ListView.builder(
+                                          padding: EdgeInsets.zero,
+                                          scrollDirection: Axis.vertical,
+                                          itemCount:
+                                              listViewTransactionsRecordList
+                                                  .length,
+                                          itemBuilder:
+                                              (context, listViewIndex) {
+                                            final listViewTransactionsRecord =
+                                                listViewTransactionsRecordList[
+                                                    listViewIndex];
+                                            return TransactionListItemWidget(
+                                              key: UniqueKey(),
+                                              transactionDoc:
+                                                  listViewTransactionsRecord,
+                                            );
+                                          },
                                         );
                                       },
                                     ),

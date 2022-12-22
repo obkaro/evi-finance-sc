@@ -421,7 +421,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                          padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 4),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -438,7 +438,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 16),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
@@ -700,7 +700,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                         if (currentUserDocument!.activeBudget != null)
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(24, 0, 24, 8),
+                                EdgeInsetsDirectional.fromSTEB(24, 0, 24, 4),
                             child: AuthUserStreamWidget(
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -893,7 +893,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                           ),
                         Padding(
                           padding:
-                              EdgeInsetsDirectional.fromSTEB(32, 16, 32, 8),
+                              EdgeInsetsDirectional.fromSTEB(32, 16, 32, 4),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -943,6 +943,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                   ),
                                   borderRadius: BorderRadius.circular(16),
                                 ),
+                                showLoadingIndicator: false,
                               ),
                               Icon(
                                 Icons.keyboard_arrow_right_rounded,
@@ -971,9 +972,12 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                   StreamBuilder<List<TransactionsRecord>>(
                                     stream: queryTransactionsRecord(
                                       queryBuilder: (transactionsRecord) =>
-                                          transactionsRecord.where(
-                                              'transactionOwner',
-                                              isEqualTo: currentUserReference),
+                                          transactionsRecord
+                                              .where('transactionOwner',
+                                                  isEqualTo:
+                                                      currentUserReference)
+                                              .orderBy('trasactionDate',
+                                                  descending: true),
                                       limit: 7,
                                     ),
                                     builder: (context, snapshot) {
@@ -1019,8 +1023,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                               listViewTransactionsRecordList[
                                                   listViewIndex];
                                           return TransactionListItemWidget(
-                                            key: Key(
-                                                'transactionListItem_${listViewIndex}'),
+                                            key: UniqueKey(),
                                             transactionDoc:
                                                 listViewTransactionsRecord,
                                           );

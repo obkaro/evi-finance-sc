@@ -638,7 +638,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                               isEqualTo: currentUserReference)
                                           .where('account',
                                               isEqualTo:
-                                                  widget.account!.reference),
+                                                  widget.account!.reference)
+                                          .orderBy('trasactionDate',
+                                              descending: true),
                                 ),
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
@@ -680,8 +682,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                           listViewTransactionsRecordList[
                                               listViewIndex];
                                       return TransactionListItemWidget(
-                                        key: Key(
-                                            'transactionListItem_${listViewIndex}'),
+                                        key: UniqueKey(),
                                         transactionDoc:
                                             listViewTransactionsRecord,
                                       );
