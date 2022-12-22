@@ -4,7 +4,7 @@ const admin = require('firebase-admin');
 const postmark = require('postmark');
 
 //WEBFLOW FORM SUBMISSIONS
-exports.webflowformshook = functions.https.onRequest(async (req, res) => {
+exports.emailMainCTA = functions.https.onRequest(async (req, res) => {
   functions.logger.log('WEBFLOW FORM SUBMISSION');
   functions.logger.log(req.body);
   functions.logger.log(req.body.data.email);

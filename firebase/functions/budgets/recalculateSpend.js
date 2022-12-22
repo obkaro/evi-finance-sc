@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
-exports.calculateSpend = functions.firestore.document('transactions/{id}')
+exports.recalculateSpend = functions.firestore.document('transactions/{id}')
   .onWrite(async (change, context) => {
     const oldDoc = change.before.data();
     const newDoc = change.after.data();
