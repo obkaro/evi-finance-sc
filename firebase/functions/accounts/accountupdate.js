@@ -9,6 +9,11 @@ const axios = require('axios');
 exports.accountUpdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', })
   .https.onRequest(async (req, res) => {
 
+    if (req.headers['mono-webhook-secret'] != "sec_HmoYplYXAyDKvlXLAOYv") {
+      res.status(403).send('Forbidden');
+      return;
+    }
+
     functions.logger.log("REQUEST BODY", req.body);
 
     let payload = req.body;

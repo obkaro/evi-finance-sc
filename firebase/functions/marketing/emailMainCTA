@@ -7,10 +7,8 @@ const postmark = require('postmark');
 exports.emailMainCTA = functions.https.onRequest(async (req, res) => {
   functions.logger.log('WEBFLOW FORM SUBMISSION');
   functions.logger.log(req.body);
-  functions.logger.log(req.body.data.email);
-  const payload = req.body;
+  functions.logger.log(req.body.data.Email);
   const formid = req.body._id;
-  const formdata = req.body.data;
   functions.logger.log(formid);
 
   const time = admin.firestore.Timestamp.now();
