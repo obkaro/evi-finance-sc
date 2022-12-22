@@ -6,7 +6,7 @@ const sdk = require('api')('@mono/v1.0#33hmc2izkyejmoej');
 const axios = require('axios');
 
 // UPDATE ACCOUNTS
-exports.accountupdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', })
+exports.accountUpdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', })
   .https.onRequest(async (req, res) => {
 
     functions.logger.log("REQUEST BODY", req.body);

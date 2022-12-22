@@ -2,7 +2,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
 //SCHEDULE NOTIFICAITON TO CHECK TRANSACTIONS
-exports.checkreminder = functions.pubsub.schedule('0 15 */2 * *').onRun(async (context) => {
+exports.checkAppPrompt = functions.pubsub.schedule('0 15 */2 * *').onRun(async (context) => {
     const userlist = await admin.firestore().collection('users').get();
   
     const time = admin.firestore.Timestamp.now();

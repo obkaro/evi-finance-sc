@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
-exports.needsreauth = functions.runWith({ timeoutSeconds: 300 }).https.onRequest(async (req, res) => {
+exports.reauthFlag = functions.runWith({ timeoutSeconds: 300 }).https.onRequest(async (req, res) => {
 
     if (req.body.event == "mono.events.reauthorisation_required") {
       let accountid = req.body.data.account._id;

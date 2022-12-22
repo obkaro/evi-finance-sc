@@ -6,7 +6,7 @@ const axios = require('axios');
 
 
 //PERIODIC DATA SYNC
-exports.datasync = functions.pubsub.schedule('0 */14 * * *').onRun(async (context) => {
+exports.dataSync = functions.pubsub.schedule('0 */14 * * *').onRun(async (context) => {
 
     const accounts = await admin.firestore().collection('accounts').get();
   

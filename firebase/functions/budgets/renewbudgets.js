@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
-exports.renewbudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (context) => {
+exports.renewBudgets = functions.pubsub.schedule('*/15 * * * *').onRun(async (context) => {
 
     const time = admin.firestore.Timestamp.now();
   

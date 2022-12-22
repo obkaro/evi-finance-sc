@@ -7,7 +7,7 @@ const client = new firestore.v1.FirestoreAdminClient();
 // BACKUP FIRESTORE
 const bucket = 'gs://evi-prod-backups';
 
-exports.scheduledbackup24 = functions.pubsub
+exports.dailyFirestoreBackup = functions.pubsub
                                             .schedule('every 24 hours')
                                             .onRun((context) => {
 
