@@ -143,11 +143,11 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                           width: double.infinity,
                                           height: double.infinity,
                                           decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
                                             shape: BoxShape.circle,
                                             border: Border.all(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .fadedDivider,
+                                              color: Colors.transparent,
                                               width: 0,
                                             ),
                                           ),

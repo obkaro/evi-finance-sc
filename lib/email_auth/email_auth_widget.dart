@@ -21,15 +21,12 @@ class EmailAuthWidget extends StatefulWidget {
 
 class _EmailAuthWidgetState extends State<EmailAuthWidget> {
   TextEditingController? confirmPasswordController;
-
   late bool confirmPasswordVisibility;
   TextEditingController? newPasswordController;
-
   late bool newPasswordVisibility;
   TextEditingController? signUpEmailController;
   TextEditingController? signInEmailController;
   TextEditingController? signInPasswordController;
-
   late bool signInPasswordVisibility;
   final formKey1 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();

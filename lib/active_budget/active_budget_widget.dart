@@ -647,6 +647,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                                                           Expanded(
                                                                             child:
                                                                                 ProgressBarWidget(
+                                                                              key: UniqueKey(),
                                                                               totalAmount: listViewCategoriesRecord.categoryAmount,
                                                                               spentAmount: listViewCategoriesRecord.spentAmount,
                                                                             ),

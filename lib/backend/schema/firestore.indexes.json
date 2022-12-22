@@ -9,7 +9,57 @@
           "order": "ASCENDING"
         },
         {
+          "fieldPath": "trasactionDate",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "transactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "transactionOwner",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "transactionType",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "trasactionDate",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "transactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "transactionOwner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "transactionCategory",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "trasactionDate",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "transactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "transactionOwner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "account",
           "order": "ASCENDING"
         },
         {
@@ -84,6 +134,24 @@
         },
         {
           "fieldPath": "transactionOwner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "trasactionDate",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "transactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "transactionOwner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "isAssigned",
           "order": "ASCENDING"
         },
         {

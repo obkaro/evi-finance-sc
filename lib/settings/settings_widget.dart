@@ -81,8 +81,11 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                             onTap: () async {
                               await Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProfileSettingsWidget(),
+                                PageTransition(
+                                  type: PageTransitionType.rightToLeft,
+                                  duration: Duration(milliseconds: 200),
+                                  reverseDuration: Duration(milliseconds: 200),
+                                  child: ProfileSettingsWidget(),
                                 ),
                               );
                             },
@@ -107,7 +110,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                     ),
                               ),
                               subtitle: Text(
-                                'Edit profile settings',
+                                'Edit profile details',
                                 style: FlutterFlowTheme.of(context).bodyText2,
                               ),
                               trailing: Icon(
@@ -120,38 +123,33 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                   20, 10, 20, 16),
                             ),
                           ),
-                          InkWell(
-                            onTap: () async {
-                              logFirebaseEvent('premiumClick');
-                            },
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.star_rounded,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                size: 32,
-                              ),
-                              title: Text(
-                                'Premium Plan',
-                                style: FlutterFlowTheme.of(context)
-                                    .subtitle1
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle1Family,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle1Family),
-                                      lineHeight: 1.6,
-                                    ),
-                              ),
-                              subtitle: Text(
-                                'Get in on Evi premium options',
-                                style: FlutterFlowTheme.of(context).bodyText2,
-                              ),
-                              dense: false,
-                              contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                  20, 10, 20, 16),
+                          ListTile(
+                            leading: Icon(
+                              Icons.star_rounded,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 32,
                             ),
+                            title: Text(
+                              'Subscription Plan',
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .subtitle1Family,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .subtitle1Family),
+                                    lineHeight: 1.6,
+                                  ),
+                            ),
+                            subtitle: Text(
+                              'Get in on Evi premium options',
+                              style: FlutterFlowTheme.of(context).bodyText2,
+                            ),
+                            dense: false,
+                            contentPadding:
+                                EdgeInsetsDirectional.fromSTEB(20, 10, 20, 16),
                           ),
                           InkWell(
                             onTap: () async {

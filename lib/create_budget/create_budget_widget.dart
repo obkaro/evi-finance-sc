@@ -603,7 +603,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
                                           .languageCode,
                                     )}',
                                     style:
-                                        FlutterFlowTheme.of(context).subtitle2,
+                                        FlutterFlowTheme.of(context).subtitle1,
                                   ),
                                 ],
                               ),
