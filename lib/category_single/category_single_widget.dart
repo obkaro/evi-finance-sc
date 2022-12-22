@@ -259,7 +259,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget>
                                   .where('transactionOwner',
                                       isEqualTo: currentUserReference)
                                   .where('transactionCategory',
-                                      isEqualTo: widget.category!.reference),
+                                      isEqualTo: widget.category!.reference)
+                                  .orderBy('trasactionDate', descending: true),
                         ),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
@@ -282,6 +283,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget>
                               return Container(
                                 decoration: BoxDecoration(),
                                 child: TransactionListItemWidget(
+                                  key: UniqueKey(),
                                   transactionDoc: listViewTransactionsRecord,
                                 ),
                               );

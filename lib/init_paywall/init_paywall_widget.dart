@@ -26,18 +26,6 @@ class InitPaywallWidget extends StatefulWidget {
 class _InitPaywallWidgetState extends State<InitPaywallWidget>
     with TickerProviderStateMixin {
   final animationsMap = {
-    'textOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0, 30),
-          end: Offset(0, 0),
-        ),
-      ],
-    ),
     'columnOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
@@ -94,8 +82,7 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget>
                                     FlutterFlowTheme.of(context).title1Family),
                                 lineHeight: 1.3,
                               ),
-                        ).animateOnPageLoad(
-                            animationsMap['textOnPageLoadAnimation']!),
+                        ),
                       ),
                     ),
                     Padding(

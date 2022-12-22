@@ -151,7 +151,8 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                   queryBuilder: (transactionsRecord) => transactionsRecord
                       .where('transactionOwner',
                           isEqualTo: currentUserReference)
-                      .where('isAssigned', isEqualTo: false),
+                      .where('isAssigned', isEqualTo: false)
+                      .orderBy('trasactionDate', descending: true),
                 ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
@@ -531,7 +532,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                     mainAxisSize: MainAxisSize.max,
                                                                                     children: [
                                                                                       Padding(
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(16, 20, 16, 16),
+                                                                                        padding: EdgeInsetsDirectional.fromSTEB(16, 20, 16, 20),
                                                                                         child: Container(
                                                                                           width: double.infinity,
                                                                                           decoration: BoxDecoration(
@@ -555,11 +556,6 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                           ),
                                                                                         ),
                                                                                       ),
-                                                                                      Divider(
-                                                                                        height: 0,
-                                                                                        thickness: 1,
-                                                                                        color: FlutterFlowTheme.of(context).fadedDivider,
-                                                                                      ),
                                                                                       Stack(
                                                                                         children: [
                                                                                           if (unassignedtransactionsItem.transactionType == 'debit')
@@ -572,7 +568,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                     color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                                   ),
                                                                                                   child: Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                                                                                                     child: Row(
                                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -725,7 +721,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                                             ),
                                                                                                                         elevation: 0,
                                                                                                                         borderSide: BorderSide(
-                                                                                                                          color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                                                          color: FlutterFlowTheme.of(context).fadedDivider,
                                                                                                                           width: 1,
                                                                                                                         ),
                                                                                                                         borderRadius: BorderRadius.circular(32),
@@ -901,7 +897,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                                             ),
                                                                                                                         elevation: 0,
                                                                                                                         borderSide: BorderSide(
-                                                                                                                          color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                                                          color: FlutterFlowTheme.of(context).fadedDivider,
                                                                                                                           width: 1,
                                                                                                                         ),
                                                                                                                         borderRadius: BorderRadius.circular(32),
@@ -1038,7 +1034,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                                     ),
                                                                                                                 elevation: 0,
                                                                                                                 borderSide: BorderSide(
-                                                                                                                  color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                                                  color: FlutterFlowTheme.of(context).fadedDivider,
                                                                                                                   width: 1,
                                                                                                                 ),
                                                                                                                 borderRadius: BorderRadius.circular(32),
