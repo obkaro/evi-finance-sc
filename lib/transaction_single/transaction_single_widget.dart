@@ -77,6 +77,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
     ),
   };
   DateTime? datePicked;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -85,6 +86,12 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'TransactionSingle'});
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -114,7 +121,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: StreamBuilder<TransactionsRecord>(
             stream:
                 TransactionsRecord.getDocument(widget.transaction!.reference),
@@ -1314,9 +1321,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                             FFButtonWidget(
                                                                           onPressed:
                                                                               () async {
-                                                                            setState(() {
-                                                                              FFAppState().showCategoryOrSub = 'category';
-                                                                            });
+                                                                            FFAppState().showCategoryOrSub =
+                                                                                'category';
                                                                           },
                                                                           text:
                                                                               'Categories',
@@ -1359,9 +1365,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                             FFButtonWidget(
                                                                           onPressed:
                                                                               () async {
-                                                                            setState(() {
-                                                                              FFAppState().showCategoryOrSub = 'sub';
-                                                                            });
+                                                                            FFAppState().showCategoryOrSub =
+                                                                                'sub';
                                                                           },
                                                                           text:
                                                                               'Subscriptions',

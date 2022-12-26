@@ -54,6 +54,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
   };
   ApiCallResponse? dataSyncResponse;
   ApiCallResponse? reauthCode;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -86,6 +87,12 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
   }
 
   @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
@@ -112,7 +119,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: AuthUserStreamWidget(
             child: StreamBuilder<List<CategoriesRecord>>(
               stream: queryCategoriesRecord(
@@ -139,12 +146,10 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                       dataSyncResponse = await DataSyncMonoCall.call(
                         authID: widget.account!.authID,
                       );
-                      setState(() {
-                        FFAppState().dataSyncCode = getJsonField(
-                          (dataSyncResponse?.jsonBody ?? ''),
-                          r'''$.code''',
-                        ).toString();
-                      });
+                      FFAppState().dataSyncCode = getJsonField(
+                        (dataSyncResponse?.jsonBody ?? ''),
+                        r'''$.code''',
+                      ).toString();
                       if (FFAppState().dataSyncCode ==
                           'REAUTHORISATION_REQUIRED') {
                         // Action_ReauthCall
@@ -735,9 +740,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                     },
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        setState(() {
-                                          FFAppState().dialogBoxReturn = false;
-                                        });
+                                        FFAppState().dialogBoxReturn = false;
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
                                           backgroundColor: Colors.transparent,

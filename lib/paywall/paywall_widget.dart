@@ -34,6 +34,7 @@ class _PaywallWidgetState extends State<PaywallWidget>
     ),
   };
   bool? didPurchase;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -41,6 +42,12 @@ class _PaywallWidgetState extends State<PaywallWidget>
     super.initState();
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Paywall'});
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -52,7 +59,7 @@ class _PaywallWidgetState extends State<PaywallWidget>
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,

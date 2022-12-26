@@ -41,8 +41,9 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
   DateTimeRange? calendarSelectedDay;
   String? durationValue;
   bool? switchListTileValue;
-  final formKey = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -57,6 +58,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
 
   @override
   void dispose() {
+    _unfocusNode.dispose();
     nameController?.dispose();
     super.dispose();
   }
@@ -105,7 +107,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
           ),
           body: SafeArea(
             child: GestureDetector(
-              onTap: () => FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,

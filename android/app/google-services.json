@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "1086289327978-mbg33nnvdlqll1oug1iuigheijebeega.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.evi.finance",
+            "certificate_hash": "c10324d3fbaa8fd0a29b294e3e37872709b94717"
+          }
+        },
+        {
           "client_id": "1086289327978-itdau2g49bl0sjs1pbevbtplm99gkjer.apps.googleusercontent.com",
           "client_type": 3
         }

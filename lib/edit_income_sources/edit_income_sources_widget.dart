@@ -42,6 +42,7 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
       ],
     ),
   };
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -50,6 +51,12 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'EditIncomeSources'});
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -78,7 +85,7 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
         elevation: 0,
       ),
       body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
+        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
         child: StreamBuilder<List<IncomeCategoriesRecord>>(
           stream: queryIncomeCategoriesRecord(
             parent: currentUserReference,
