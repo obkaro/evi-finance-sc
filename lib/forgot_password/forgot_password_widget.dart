@@ -17,8 +17,9 @@ class ForgotPasswordWidget extends StatefulWidget {
 
 class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
   TextEditingController? signInEmailController;
-  final formKey = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -30,6 +31,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
 
   @override
   void dispose() {
+    _unfocusNode.dispose();
     signInEmailController?.dispose();
     super.dispose();
   }
@@ -42,7 +44,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
+        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,

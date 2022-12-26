@@ -138,9 +138,7 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                             Expanded(
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  setState(() {
-                                    FFAppState().dialogBoxReturn = false;
-                                  });
+                                  FFAppState().dialogBoxReturn = false;
                                   Navigator.pop(context);
                                 },
                                 text: widget.buttonNo!,
@@ -170,9 +168,7 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
-                                setState(() {
-                                  FFAppState().dialogBoxReturn = true;
-                                });
+                                FFAppState().dialogBoxReturn = true;
                                 await widget.yesAction?.call();
                                 Navigator.pop(context);
                               },

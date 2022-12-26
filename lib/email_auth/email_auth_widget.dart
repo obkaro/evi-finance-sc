@@ -28,9 +28,10 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
   TextEditingController? signInEmailController;
   TextEditingController? signInPasswordController;
   late bool signInPasswordVisibility;
-  final formKey1 = GlobalKey<FormState>();
-  final formKey2 = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey2 = GlobalKey<FormState>();
+  final formKey1 = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -48,6 +49,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
 
   @override
   void dispose() {
+    _unfocusNode.dispose();
     confirmPasswordController?.dispose();
     newPasswordController?.dispose();
     signUpEmailController?.dispose();
@@ -64,7 +66,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
+        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -499,7 +501,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     child: TextFormField(
                                                       controller:
                                                           signUpEmailController,
-                                                      autofocus: true,
                                                       obscureText: false,
                                                       decoration:
                                                           InputDecoration(
@@ -597,7 +598,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     child: TextFormField(
                                                       controller:
                                                           newPasswordController,
-                                                      autofocus: true,
                                                       obscureText:
                                                           !newPasswordVisibility,
                                                       decoration:
@@ -710,7 +710,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     child: TextFormField(
                                                       controller:
                                                           confirmPasswordController,
-                                                      autofocus: true,
                                                       obscureText:
                                                           !confirmPasswordVisibility,
                                                       decoration:

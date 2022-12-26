@@ -30,6 +30,7 @@ class EditBudgetWidget extends StatefulWidget {
 class _EditBudgetWidgetState extends State<EditBudgetWidget> {
   DateTimeRange? calendarSelectedDay;
   String? dropDownValue;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -40,6 +41,12 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
       end: DateTime.now().endOfDay,
     );
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'EditBudget'});
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -69,7 +76,7 @@ class _EditBudgetWidgetState extends State<EditBudgetWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: StreamBuilder<BudgetsRecord>(
             stream: BudgetsRecord.getDocument(widget.budgetRef!),
             builder: (context, snapshot) {

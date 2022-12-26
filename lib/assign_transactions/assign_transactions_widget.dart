@@ -73,6 +73,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
       ],
     ),
   };
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -104,9 +105,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
           },
         ).then((value) => setState(() {}));
 
-        setState(() {
-          FFAppState().showQuickTransAssign = false;
-        });
+        FFAppState().showQuickTransAssign = false;
       } else {
         return;
       }
@@ -114,6 +113,12 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'assignTransactions'});
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -143,7 +148,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Stack(
             children: [
               StreamBuilder<List<TransactionsRecord>>(
@@ -578,9 +583,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
                                                                                                             child: FFButtonWidget(
                                                                                                               onPressed: () async {
-                                                                                                                setState(() {
-                                                                                                                  FFAppState().showCategoryOrSub = 'category';
-                                                                                                                });
+                                                                                                                FFAppState().showCategoryOrSub = 'category';
                                                                                                               },
                                                                                                               text: 'Categories',
                                                                                                               options: FFButtonOptions(
@@ -607,9 +610,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                             padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                                                                                                             child: FFButtonWidget(
                                                                                                               onPressed: () async {
-                                                                                                                setState(() {
-                                                                                                                  FFAppState().showCategoryOrSub = 'sub';
-                                                                                                                });
+                                                                                                                FFAppState().showCategoryOrSub = 'sub';
                                                                                                               },
                                                                                                               text: 'Subscriptions',
                                                                                                               options: FFButtonOptions(

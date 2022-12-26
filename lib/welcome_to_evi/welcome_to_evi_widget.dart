@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../init_paywall/init_paywall_widget.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -80,8 +81,9 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
   };
   String? dropDownValue;
   TextEditingController? textController;
-  final formKey = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -100,6 +102,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
 
   @override
   void dispose() {
+    _unfocusNode.dispose();
     textController?.dispose();
     super.dispose();
   }
@@ -113,7 +116,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -392,7 +395,9 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
 
                         if (FFAppState().currencyTextField != null) {
                           final usersUpdateData = createUsersRecordData(
-                            username: textController!.text,
+                            username:
+                                functions.toTitleCase(textController!.text),
+                            acqChannel: dropDownValue,
                           );
                           await currentUserReference!.update(usersUpdateData);
                           await showModalBottomSheet(

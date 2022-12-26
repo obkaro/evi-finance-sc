@@ -71,6 +71,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
   BudgetsRecord? createdBudget2;
   BudgetsRecord? createdBudget;
   BudgetsRecord? newcreatedBudget;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -118,6 +119,12 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
           !anim.applyInitialState),
       this,
     );
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -175,7 +182,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: AuthUserStreamWidget(
             child: StreamBuilder<BudgetsRecord>(
               stream:

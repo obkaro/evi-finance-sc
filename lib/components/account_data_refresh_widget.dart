@@ -174,12 +174,10 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                                 dataSyncResponse = await DataSyncMonoCall.call(
                                   authID: widget.account!.authID,
                                 );
-                                setState(() {
-                                  FFAppState().dataSyncCode = getJsonField(
-                                    (dataSyncResponse?.jsonBody ?? ''),
-                                    r'''$.code''',
-                                  ).toString();
-                                });
+                                FFAppState().dataSyncCode = getJsonField(
+                                  (dataSyncResponse?.jsonBody ?? ''),
+                                  r'''$.code''',
+                                ).toString();
                                 if (FFAppState().dataSyncCode ==
                                     'REAUTHORISATION_REQUIRED') {
                                   // Action_ReauthCall

@@ -39,6 +39,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
   DateTimeRange? calendarSelectedDay;
   String? durationValue;
   bool? switchListTileValue;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -54,6 +55,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
 
   @override
   void dispose() {
+    _unfocusNode.dispose();
     nameController?.dispose();
     super.dispose();
   }
@@ -102,7 +104,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
           ),
           body: SafeArea(
             child: GestureDetector(
-              onTap: () => FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,

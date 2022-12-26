@@ -40,6 +40,7 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget>
       ],
     ),
   };
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -48,6 +49,12 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'RecurringPayments'});
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -99,7 +106,7 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget>
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [

@@ -39,6 +39,7 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
       ],
     ),
   };
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -46,6 +47,12 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
     super.initState();
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Menu'});
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -101,7 +108,7 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [

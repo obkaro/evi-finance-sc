@@ -23,47 +23,11 @@
           }
         },
         {
-          "client_id": "1086289327978-itdau2g49bl0sjs1pbevbtplm99gkjer.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDns72oOF0pebitosEzn2gnlRD9J2I1POQ"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1086289327978-itdau2g49bl0sjs1pbevbtplm99gkjer.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "1086289327978-2qaa8h22iak7t5586m4rcs28nbft2clm.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.evitech.evifinance"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1086289327978:android:0cc6853d0ab8ed93e5d713",
-        "android_client_info": {
-          "package_name": "com.evitech.evifinance"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1086289327978-lf2msm0hd2ouutoj9hf3lfeu8tmjdaum.apps.googleusercontent.com",
+          "client_id": "1086289327978-mbg33nnvdlqll1oug1iuigheijebeega.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.evitech.evifinance",
-            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+            "package_name": "com.evi.finance",
+            "certificate_hash": "c10324d3fbaa8fd0a29b294e3e37872709b94717"
           }
         },
         {
