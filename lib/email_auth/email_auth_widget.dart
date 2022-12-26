@@ -501,7 +501,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     child: TextFormField(
                                                       controller:
                                                           signUpEmailController,
-                                                      autofocus: true,
                                                       obscureText: false,
                                                       decoration:
                                                           InputDecoration(
@@ -599,7 +598,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     child: TextFormField(
                                                       controller:
                                                           newPasswordController,
-                                                      autofocus: true,
                                                       obscureText:
                                                           !newPasswordVisibility,
                                                       decoration:
@@ -712,7 +710,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     child: TextFormField(
                                                       controller:
                                                           confirmPasswordController,
-                                                      autofocus: true,
                                                       obscureText:
                                                           !confirmPasswordVisibility,
                                                       decoration:
