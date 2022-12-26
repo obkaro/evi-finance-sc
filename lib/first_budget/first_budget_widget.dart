@@ -33,8 +33,9 @@ class FirstBudgetWidget extends StatefulWidget {
 class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
   DateTimeRange? calendarSelectedDay;
   String? dropDownValue;
-  final formKey = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -62,6 +63,12 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
   }
 
   @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
@@ -86,7 +93,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: StreamBuilder<BudgetsRecord>(
             stream: BudgetsRecord.getDocument(widget.budget!.reference),
             builder: (context, snapshot) {

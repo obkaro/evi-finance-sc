@@ -20,45 +20,55 @@ class FFAppState extends ChangeNotifier {
         prefs.getBool('ff_showQuickTransAssign') ?? _showQuickTransAssign;
   }
 
+  static bool _shouldNotify = true;
+  void _maybeNotifyListeners() {
+    if (_shouldNotify) notifyListeners();
+  }
+
+  // Update FFAppState without notifying and rebuilding all widgets.
+  static void updateSilently(VoidCallback callback) {
+    try {
+      _shouldNotify = false;
+      callback();
+    } finally {
+      _shouldNotify = true;
+    }
+  }
+
   late SharedPreferences prefs;
 
   int _currencyTextField = 0;
   int get currencyTextField => _currencyTextField;
   set currencyTextField(int _value) {
-    notifyListeners();
-
+    _maybeNotifyListeners();
     _currencyTextField = _value;
   }
 
   String _dataSyncStatus = '';
   String get dataSyncStatus => _dataSyncStatus;
   set dataSyncStatus(String _value) {
-    notifyListeners();
-
+    _maybeNotifyListeners();
     _dataSyncStatus = _value;
   }
 
   bool _hasNewData = false;
   bool get hasNewData => _hasNewData;
   set hasNewData(bool _value) {
-    notifyListeners();
-
+    _maybeNotifyListeners();
     _hasNewData = _value;
   }
 
   String _dataSyncCode = '';
   String get dataSyncCode => _dataSyncCode;
   set dataSyncCode(String _value) {
-    notifyListeners();
-
+    _maybeNotifyListeners();
     _dataSyncCode = _value;
   }
 
   bool _dialogBoxReturn = false;
   bool get dialogBoxReturn => _dialogBoxReturn;
   set dialogBoxReturn(bool _value) {
-    notifyListeners();
-
+    _maybeNotifyListeners();
     _dialogBoxReturn = _value;
   }
 
@@ -70,50 +80,45 @@ class FFAppState extends ChangeNotifier {
   ];
   List<dynamic> get durations => _durations;
   set durations(List<dynamic> _value) {
-    notifyListeners();
-
+    _maybeNotifyListeners();
     _durations = _value;
   }
 
   void addToDurations(dynamic _value) {
-    notifyListeners();
+    _maybeNotifyListeners();
     _durations.add(_value);
   }
 
   void removeFromDurations(dynamic _value) {
-    notifyListeners();
+    _maybeNotifyListeners();
     _durations.remove(_value);
   }
 
   bool _hasUpdatePromptShown = false;
   bool get hasUpdatePromptShown => _hasUpdatePromptShown;
   set hasUpdatePromptShown(bool _value) {
-    notifyListeners();
-
+    _maybeNotifyListeners();
     _hasUpdatePromptShown = _value;
   }
 
   String _showCategoryOrSub = 'category';
   String get showCategoryOrSub => _showCategoryOrSub;
   set showCategoryOrSub(String _value) {
-    notifyListeners();
-
+    _maybeNotifyListeners();
     _showCategoryOrSub = _value;
   }
 
   bool _pageOverlayVisible = true;
   bool get pageOverlayVisible => _pageOverlayVisible;
   set pageOverlayVisible(bool _value) {
-    notifyListeners();
-
+    _maybeNotifyListeners();
     _pageOverlayVisible = _value;
   }
 
   bool _showQuickTransAssign = true;
   bool get showQuickTransAssign => _showQuickTransAssign;
   set showQuickTransAssign(bool _value) {
-    notifyListeners();
-
+    _maybeNotifyListeners();
     _showQuickTransAssign = _value;
     prefs.setBool('ff_showQuickTransAssign', _value);
   }

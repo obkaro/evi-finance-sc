@@ -30,8 +30,9 @@ class CreateBudgetWidget extends StatefulWidget {
 class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
   DateTimeRange? calendarSelectedDay;
   String? dropDownValue;
-  final formKey = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -42,6 +43,12 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
     );
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'CreateBudget'});
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -71,7 +78,7 @@ class _CreateBudgetWidgetState extends State<CreateBudgetWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: StreamBuilder<BudgetsRecord>(
             stream: BudgetsRecord.getDocument(widget.budget!.reference),
             builder: (context, snapshot) {

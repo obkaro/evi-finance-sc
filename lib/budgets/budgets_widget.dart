@@ -44,6 +44,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
     ),
   };
   BudgetsRecord? newBudg;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -51,6 +52,12 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
     super.initState();
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Budgets'});
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -125,7 +132,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -228,11 +235,9 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
                                                               .reference ==
                                                           currentUserDocument!
                                                               .activeBudget) {
-                                                        setState(() {
-                                                          FFAppState()
-                                                                  .dialogBoxReturn =
-                                                              false;
-                                                        });
+                                                        FFAppState()
+                                                                .dialogBoxReturn =
+                                                            false;
                                                         await showModalBottomSheet(
                                                           isScrollControlled:
                                                               true,

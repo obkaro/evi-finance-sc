@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
+import '../welcome_to_evi/welcome_to_evi_widget.dart';
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
@@ -23,6 +24,7 @@ class LandingPageViewWidget extends StatefulWidget {
 
 class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
   PageController? pageViewController;
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -30,6 +32,12 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'LandingPageView'});
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -41,7 +49,7 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -244,6 +252,31 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                       if (user == null) {
                                         return;
                                       }
+                                      if (valueOrDefault(
+                                                  currentUserDocument?.username,
+                                                  '') ==
+                                              null ||
+                                          valueOrDefault(
+                                                  currentUserDocument?.username,
+                                                  '') ==
+                                              '') {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                WelcomeToEviWidget(),
+                                          ),
+                                        );
+                                      } else {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => NavBarPage(
+                                                initialPage: 'Dashboard'),
+                                          ),
+                                        );
+                                      }
+
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(

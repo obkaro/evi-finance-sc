@@ -45,6 +45,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget>
       ],
     ),
   };
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -53,6 +54,12 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'CategorySingle'});
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -100,7 +107,7 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget>
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
             child: SingleChildScrollView(

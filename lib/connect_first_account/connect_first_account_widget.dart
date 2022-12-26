@@ -36,8 +36,9 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
       ],
     ),
   };
-  final formKey = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -54,6 +55,12 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
   }
 
   @override
+  void dispose() {
+    _unfocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
@@ -62,7 +69,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
