@@ -394,7 +394,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           AuthUserStreamWidget(
-                                            child: FutureBuilder<
+                                            builder: (context) => FutureBuilder<
                                                 List<CategoriesRecord>>(
                                               future: queryCategoriesRecordOnce(
                                                 parent: currentUserDocument!
@@ -429,7 +429,8 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                   options:
                                                       categoryCategoriesRecordList
                                                           .map((e) =>
-                                                              e.categoryName!)
+                                                              e.categoryName)
+                                                          .withoutNulls
                                                           .toList()
                                                           .toList(),
                                                   onChanged: (val) => setState(
@@ -752,7 +753,8 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
                           child: AuthUserStreamWidget(
-                            child: StreamBuilder<List<CategoriesRecord>>(
+                            builder: (context) =>
+                                StreamBuilder<List<CategoriesRecord>>(
                               stream: queryCategoriesRecord(
                                 parent: currentUserDocument!.activeBudget,
                                 queryBuilder: (categoriesRecord) =>

@@ -105,7 +105,9 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
           },
         ).then((value) => setState(() {}));
 
-        FFAppState().showQuickTransAssign = false;
+        FFAppState().update(() {
+          FFAppState().showQuickTransAssign = false;
+        });
       } else {
         return;
       }
@@ -179,7 +181,8 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                     child: Stack(
                       children: [
                         AuthUserStreamWidget(
-                          child: FutureBuilder<List<CategoriesRecord>>(
+                          builder: (context) =>
+                              FutureBuilder<List<CategoriesRecord>>(
                             future: queryCategoriesRecordOnce(
                               parent: currentUserDocument!.activeBudget,
                             ),
@@ -583,7 +586,9 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
                                                                                                             child: FFButtonWidget(
                                                                                                               onPressed: () async {
-                                                                                                                FFAppState().showCategoryOrSub = 'category';
+                                                                                                                FFAppState().update(() {
+                                                                                                                  FFAppState().showCategoryOrSub = 'category';
+                                                                                                                });
                                                                                                               },
                                                                                                               text: 'Categories',
                                                                                                               options: FFButtonOptions(
@@ -610,7 +615,9 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                             padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                                                                                                             child: FFButtonWidget(
                                                                                                               onPressed: () async {
-                                                                                                                FFAppState().showCategoryOrSub = 'sub';
+                                                                                                                FFAppState().update(() {
+                                                                                                                  FFAppState().showCategoryOrSub = 'sub';
+                                                                                                                });
                                                                                                               },
                                                                                                               text: 'Subscriptions',
                                                                                                               options: FFButtonOptions(

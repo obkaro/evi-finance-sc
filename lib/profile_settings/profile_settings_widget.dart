@@ -92,7 +92,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         AuthUserStreamWidget(
-                          child: TextFormField(
+                          builder: (context) => TextFormField(
                             controller: textController1,
                             onChanged: (_) => EasyDebounce.debounce(
                               'textController1',
@@ -192,7 +192,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: AuthUserStreamWidget(
-                            child: TextFormField(
+                            builder: (context) => TextFormField(
                               controller: textController3,
                               onChanged: (_) => EasyDebounce.debounce(
                                 'textController3',
