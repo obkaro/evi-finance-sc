@@ -929,59 +929,141 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                     ],
                                   ),
                                 ),
-                                Align(
-                                  alignment: AlignmentDirectional(0, 0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 16, 0, 0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        final user =
-                                            await signInWithGoogle(context);
-                                        if (user == null) {
-                                          return;
-                                        }
-                                        if (valueOrDefault(
-                                                    currentUserDocument
-                                                        ?.username,
-                                                    '') ==
-                                                null ||
-                                            valueOrDefault(
-                                                    currentUserDocument
-                                                        ?.username,
-                                                    '') ==
-                                                '') {
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  WelcomeToEviWidget(),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 16, 0, 0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 16, 0),
+                                        child: Container(
+                                          width: 48,
+                                          height: 48,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Align(
+                                            alignment:
+                                                AlignmentDirectional(0, 0),
+                                            child: InkWell(
+                                              onTap: () async {
+                                                final user =
+                                                    await signInWithGoogle(
+                                                        context);
+                                                if (user == null) {
+                                                  return;
+                                                }
+                                                if (valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.username,
+                                                            '') ==
+                                                        null ||
+                                                    valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.username,
+                                                            '') ==
+                                                        '') {
+                                                  await Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          WelcomeToEviWidget(),
+                                                    ),
+                                                  );
+                                                } else {
+                                                  await Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          NavBarPage(
+                                                              initialPage:
+                                                                  'Dashboard'),
+                                                    ),
+                                                  );
+                                                }
+                                              },
+                                              child: Container(
+                                                width: 32,
+                                                height: 32,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Image.asset(
+                                                  'assets/images/google-color-icon.png',
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              ),
                                             ),
-                                          );
-                                        } else {
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => NavBarPage(
-                                                  initialPage: 'Dashboard'),
-                                            ),
-                                          );
-                                        }
-                                      },
-                                      child: Container(
-                                        width: 40,
-                                        height: 40,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: CachedNetworkImage(
-                                          imageUrl:
-                                              'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
-                                          fit: BoxFit.contain,
+                                          ),
                                         ),
                                       ),
-                                    ),
+                                      Container(
+                                        width: 48,
+                                        height: 48,
+                                        decoration: BoxDecoration(
+                                          color: Colors.black,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Align(
+                                          alignment: AlignmentDirectional(0, 0),
+                                          child: InkWell(
+                                            onTap: () async {
+                                              final user =
+                                                  await signInWithApple(
+                                                      context);
+                                              if (user == null) {
+                                                return;
+                                              }
+                                              if (valueOrDefault(
+                                                          currentUserDocument
+                                                              ?.username,
+                                                          '') ==
+                                                      null ||
+                                                  valueOrDefault(
+                                                          currentUserDocument
+                                                              ?.username,
+                                                          '') ==
+                                                      '') {
+                                                await Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        WelcomeToEviWidget(),
+                                                  ),
+                                                );
+                                              } else {
+                                                await Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        NavBarPage(
+                                                            initialPage:
+                                                                'Dashboard'),
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                            child: Container(
+                                              width: 32,
+                                              height: 32,
+                                              clipBehavior: Clip.antiAlias,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Image.asset(
+                                                'assets/images/apple-xxl.png',
+                                                fit: BoxFit.contain,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 Spacer(),
