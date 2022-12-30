@@ -1321,8 +1321,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                             FFButtonWidget(
                                                                           onPressed:
                                                                               () async {
-                                                                            FFAppState().showCategoryOrSub =
-                                                                                'category';
+                                                                            FFAppState().update(() {
+                                                                              FFAppState().showCategoryOrSub = 'category';
+                                                                            });
                                                                           },
                                                                           text:
                                                                               'Categories',
@@ -1365,8 +1366,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                             FFButtonWidget(
                                                                           onPressed:
                                                                               () async {
-                                                                            FFAppState().showCategoryOrSub =
-                                                                                'sub';
+                                                                            FFAppState().update(() {
+                                                                              FFAppState().showCategoryOrSub = 'sub';
+                                                                            });
                                                                           },
                                                                           text:
                                                                               'Subscriptions',
@@ -1420,8 +1422,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                             .showCategoryOrSub ==
                                                                         'category')
                                                                       AuthUserStreamWidget(
-                                                                        child: FutureBuilder<
-                                                                            List<CategoriesRecord>>(
+                                                                        builder:
+                                                                            (context) =>
+                                                                                FutureBuilder<List<CategoriesRecord>>(
                                                                           future:
                                                                               queryCategoriesRecordOnce(
                                                                             parent:
@@ -1752,8 +1755,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                         .center,
                                                                 children: [
                                                                   AuthUserStreamWidget(
-                                                                    child: FutureBuilder<
-                                                                        BudgetsRecord>(
+                                                                    builder: (context) =>
+                                                                        FutureBuilder<
+                                                                            BudgetsRecord>(
                                                                       future: BudgetsRecord.getDocumentOnce(
                                                                           currentUserDocument!
                                                                               .activeBudget!),

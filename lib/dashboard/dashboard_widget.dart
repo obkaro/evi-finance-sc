@@ -198,7 +198,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                             ),
                                       ),
                                       AuthUserStreamWidget(
-                                        child: Text(
+                                        builder: (context) => Text(
                                           valueOrDefault(
                                               currentUserDocument?.username,
                                               ''),
@@ -709,7 +709,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(24, 0, 24, 4),
                             child: AuthUserStreamWidget(
-                              child: Row(
+                              builder: (context) => Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -731,7 +731,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                             child: AuthUserStreamWidget(
-                              child: StreamBuilder<BudgetsRecord>(
+                              builder: (context) =>
+                                  StreamBuilder<BudgetsRecord>(
                                 stream: BudgetsRecord.getDocument(
                                     currentUserDocument!.activeBudget!),
                                 builder: (context, snapshot) {
@@ -841,7 +842,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                             Text(
                                                                           '${functions.subtractCurrencyText(containerBudgetsRecord.budgetAmount, containerBudgetsRecord.budgetSpent)}',
                                                                           style:
-                                                                              FlutterFlowTheme.of(context).subtitle2,
+                                                                              FlutterFlowTheme.of(context).bodyText2,
                                                                         ),
                                                                       ),
                                                                     ),
@@ -866,19 +867,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                 )}',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyText1Family,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryText,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).bodyText1Family),
-                                                                    ),
+                                                                    .bodyText2,
                                                               ),
                                                             ],
                                                           ),

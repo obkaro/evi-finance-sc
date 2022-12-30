@@ -125,7 +125,7 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                     children: [
                       if (currentUserDocument!.activeBudget != null)
                         AuthUserStreamWidget(
-                          child: Column(
+                          builder: (context) => Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Container(
@@ -706,7 +706,7 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                           padding:
                               EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                           child: AuthUserStreamWidget(
-                            child: InkWell(
+                            builder: (context) => InkWell(
                               onTap: () async {
                                 final budgetsCreateData =
                                     createBudgetsRecordData(

@@ -122,13 +122,7 @@ class _CircularIndicatorBigWidgetState
                   center: Text(
                     widget.centerText!,
                     textAlign: TextAlign.center,
-                    style: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).subtitle2Family,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).subtitle2Family),
-                        ),
+                    style: FlutterFlowTheme.of(context).subtitle1,
                   ),
                   startAngle: 0,
                 ),

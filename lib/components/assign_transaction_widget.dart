@@ -76,7 +76,8 @@ class _AssignTransactionWidgetState extends State<AssignTransactionWidget> {
                     child: TabBarView(
                       children: [
                         AuthUserStreamWidget(
-                          child: StreamBuilder<List<CategoriesRecord>>(
+                          builder: (context) =>
+                              StreamBuilder<List<CategoriesRecord>>(
                             stream: queryCategoriesRecord(
                               parent: currentUserDocument!.activeBudget,
                             ),

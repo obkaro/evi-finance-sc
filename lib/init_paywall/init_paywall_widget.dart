@@ -48,6 +48,17 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget>
   void initState() {
     super.initState();
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent(
+        'subscribe_pageview',
+        parameters: {
+          'acquisitionChannel':
+              valueOrDefault(currentUserDocument?.acqChannel, ''),
+        },
+      );
+    });
+
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'InitPaywall'});
   }
 
@@ -79,7 +90,7 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget>
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(32, 36, 32, 20),
                       child: AuthUserStreamWidget(
-                        child: Text(
+                        builder: (context) => Text(
                           'Cheers to a fresh journey into financial bliss, ${valueOrDefault(currentUserDocument?.username, '')}',
                           style: FlutterFlowTheme.of(context).title1.override(
                                 fontFamily:
@@ -242,11 +253,18 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget>
                     ),
                     FFButtonWidget(
                       onPressed: () async {
-                        logFirebaseEvent('subscribe_attempt');
                         didPurchase = await revenue_cat.purchasePackage(
                             revenue_cat
                                 .offerings!.current!.monthly!.identifier);
                         if (didPurchase == true) {
+                          logFirebaseEvent(
+                            'subscribe_success',
+                            parameters: {
+                              'acquisitionChannel': valueOrDefault(
+                                  currentUserDocument?.acqChannel, ''),
+                            },
+                          );
+
                           final budgetsCreateData = createBudgetsRecordData(
                             budgetID: random_data.randomString(
                               24,
@@ -275,7 +293,13 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget>
                             (r) => false,
                           );
                         } else {
-                          logFirebaseEvent('subscribe_didnotpurchase');
+                          logFirebaseEvent(
+                            'subscribe_didnotpurchase',
+                            parameters: {
+                              'acquisitionChannel': valueOrDefault(
+                                  currentUserDocument?.acqChannel, ''),
+                            },
+                          );
                         }
 
                         setState(() {});
