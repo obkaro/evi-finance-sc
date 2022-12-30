@@ -409,19 +409,19 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                   textStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .subtitle2
+                                                          .subtitle1
                                                           .override(
                                                             fontFamily:
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .subtitle2Family,
+                                                                    .subtitle1Family,
                                                             color: Colors.white,
                                                             useGoogleFonts: GoogleFonts
                                                                     .asMap()
                                                                 .containsKey(
                                                                     FlutterFlowTheme.of(
                                                                             context)
-                                                                        .subtitle2Family),
+                                                                        .subtitle1Family),
                                                           ),
                                                   elevation: 2,
                                                   borderSide: BorderSide(
@@ -871,19 +871,19 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                   textStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .subtitle2
+                                                          .subtitle1
                                                           .override(
                                                             fontFamily:
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .subtitle2Family,
+                                                                    .subtitle1Family,
                                                             color: Colors.white,
                                                             useGoogleFonts: GoogleFonts
                                                                     .asMap()
                                                                 .containsKey(
                                                                     FlutterFlowTheme.of(
                                                                             context)
-                                                                        .subtitle2Family),
+                                                                        .subtitle1Family),
                                                           ),
                                                   elevation: 2,
                                                   borderSide: BorderSide(

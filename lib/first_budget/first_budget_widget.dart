@@ -702,15 +702,15 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                               height: 60,
                               color: FlutterFlowTheme.of(context).primaryColor,
                               textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
+                                  .subtitle1
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
-                                        .subtitle2Family,
+                                        .subtitle1Family,
                                     color: Colors.white,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey(
                                             FlutterFlowTheme.of(context)
-                                                .subtitle2Family),
+                                                .subtitle1Family),
                                   ),
                               elevation: 2,
                               borderSide: BorderSide(

@@ -310,13 +310,13 @@ class _InitPaywallWidgetState extends State<InitPaywallWidget>
                         height: 60,
                         color: FlutterFlowTheme.of(context).primaryColor,
                         textStyle: FlutterFlowTheme.of(context)
-                            .subtitle2
+                            .subtitle1
                             .override(
                               fontFamily:
-                                  FlutterFlowTheme.of(context).subtitle2Family,
+                                  FlutterFlowTheme.of(context).subtitle1Family,
                               color: Colors.white,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).subtitle2Family),
+                                  FlutterFlowTheme.of(context).subtitle1Family),
                             ),
                         borderSide: BorderSide(
                           color: Colors.transparent,

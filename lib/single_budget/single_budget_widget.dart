@@ -285,15 +285,7 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                                                       ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .subtitle1
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).subtitle1Family,
-                                                                            fontSize:
-                                                                                20,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
-                                                                          ),
+                                                                          .subtitle1,
                                                                     ),
                                                                   ],
                                                                 ),
@@ -570,7 +562,7 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                                                               listViewCategoriesRecord.categoryAmount,
                                                                               listViewCategoriesRecord.spentAmount),
                                                                           style:
-                                                                              FlutterFlowTheme.of(context).bodyText1,
+                                                                              FlutterFlowTheme.of(context).bodyText2,
                                                                         ),
                                                                       ],
                                                                     ),
