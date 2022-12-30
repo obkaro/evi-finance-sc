@@ -1487,6 +1487,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                   text: wrapCategoriesRecord.categoryName!,
                                                                                   options: FFButtonOptions(
                                                                                     height: 32,
+                                                                                    padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                                                                                     color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                     textStyle: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                           fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
@@ -1714,6 +1715,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                 text: wrapSubscriptionsRecord.name!,
                                                                                 options: FFButtonOptions(
                                                                                   height: 32,
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                                                                                   color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                   textStyle: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
@@ -2135,6 +2137,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                 text: wrapIncomeCategoriesRecord.categoryName!,
                                                                                 options: FFButtonOptions(
                                                                                   height: 32,
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                                                                                   color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                   textStyle: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: FlutterFlowTheme.of(context).bodyText1Family,

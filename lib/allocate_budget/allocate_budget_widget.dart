@@ -204,8 +204,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Expanded(
-                                                child: Padding(
+                                              if (false)
+                                                Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 0, 10, 0),
                                                   child: Container(
@@ -219,27 +219,23 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                     alignment:
                                                         AlignmentDirectional(
                                                             0, 0),
-                                                    child: Visibility(
-                                                      visible: false,
-                                                      child: Text(
-                                                        'From ${dateTimeFormat(
-                                                          'MMMEd',
-                                                          columnBudgetsRecord
-                                                              .budgetStart,
-                                                          locale:
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .languageCode,
-                                                        )}',
-                                                        style:
-                                                            FlutterFlowTheme.of(
+                                                    child: Text(
+                                                      'From ${dateTimeFormat(
+                                                        'MMMEd',
+                                                        columnBudgetsRecord
+                                                            .budgetStart,
+                                                        locale:
+                                                            FFLocalizations.of(
                                                                     context)
-                                                                .subtitle1,
-                                                      ),
+                                                                .languageCode,
+                                                      )}',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle1,
                                                     ),
                                                   ),
                                                 ),
-                                              ),
                                               FlutterFlowIconButton(
                                                 borderColor: Colors.transparent,
                                                 borderRadius: 30,

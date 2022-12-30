@@ -390,7 +390,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryPrimary,
-                                                  fontSize: 32,
+                                                  fontSize: 28,
                                                   useGoogleFonts: GoogleFonts
                                                           .asMap()
                                                       .containsKey(
@@ -923,16 +923,17 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
                                   textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyText2
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText1Family,
+                                            .bodyText2Family,
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
+                                        fontWeight: FontWeight.w500,
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family),
+                                                    .bodyText2Family),
                                       ),
                                   elevation: 0,
                                   borderSide: BorderSide(

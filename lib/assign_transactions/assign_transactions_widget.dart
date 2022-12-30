@@ -713,6 +713,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                                       text: categoriesItem.categoryName!,
                                                                                                                       options: FFButtonOptions(
                                                                                                                         height: 32,
+                                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                                                                                                                         color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                                                         textStyle: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                                                               fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
@@ -889,6 +890,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                                       text: subscriptionsItem.name!,
                                                                                                                       options: FFButtonOptions(
                                                                                                                         height: 32,
+                                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                                                                                                                         color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                                                         textStyle: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                                                               fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
@@ -1026,6 +1028,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                               text: incomeSourcesItem.categoryName!,
                                                                                                               options: FFButtonOptions(
                                                                                                                 height: 32,
+                                                                                                                padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                                                                                                                 color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                                                 textStyle: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                                                       fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
