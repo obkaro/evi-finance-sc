@@ -145,70 +145,64 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 20, 0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Expanded(
-                                                  child: Container(
-                                                    width: 100,
-                                                    height: 30,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12),
-                                                    ),
-                                                    alignment:
-                                                        AlignmentDirectional(
-                                                            1, 0),
-                                                    child: Text(
-                                                      'Left to allocate: ',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText2,
-                                                    ),
-                                                  ),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                width: 100,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
                                                 ),
-                                                Container(
-                                                  height: 30,
-                                                  decoration: BoxDecoration(),
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0, 0),
-                                                  child: Text(
-                                                    functions.formatBudgetCurrency(
-                                                        columnBudgetsRecord
-                                                            .unallocatedAmount),
-                                                    textAlign: TextAlign.start,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText1Family,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryColor,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1Family),
-                                                        ),
-                                                  ),
+                                                alignment:
+                                                    AlignmentDirectional(1, 0),
+                                                child: Text(
+                                                  'Left to allocate: ',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText2,
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                              Container(
+                                                height: 30,
+                                                decoration: BoxDecoration(),
+                                                alignment:
+                                                    AlignmentDirectional(0, 0),
+                                                child: Text(
+                                                  functions.formatBudgetCurrency(
+                                                      columnBudgetsRecord
+                                                          .unallocatedAmount),
+                                                  textAlign: TextAlign.start,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1Family,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
+                                                      ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Expanded(
                                                 child: Padding(
@@ -225,20 +219,23 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                     alignment:
                                                         AlignmentDirectional(
                                                             0, 0),
-                                                    child: Text(
-                                                      'From ${dateTimeFormat(
-                                                        'MMMEd',
-                                                        columnBudgetsRecord
-                                                            .budgetStart,
-                                                        locale:
-                                                            FFLocalizations.of(
+                                                    child: Visibility(
+                                                      visible: false,
+                                                      child: Text(
+                                                        'From ${dateTimeFormat(
+                                                          'MMMEd',
+                                                          columnBudgetsRecord
+                                                              .budgetStart,
+                                                          locale:
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .languageCode,
+                                                        )}',
+                                                        style:
+                                                            FlutterFlowTheme.of(
                                                                     context)
-                                                                .languageCode,
-                                                      )}',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle1,
+                                                                .subtitle1,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -352,7 +349,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .subtitle1Family,
-                                                          fontSize: 22,
+                                                          fontSize: 20,
                                                           useGoogleFonts: GoogleFonts
                                                                   .asMap()
                                                               .containsKey(
@@ -577,6 +574,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                             options:
                                                                                 FFButtonOptions(
                                                                               height: 32,
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                                                                               color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                               textStyle: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                     fontFamily: FlutterFlowTheme.of(context).bodyText1Family,

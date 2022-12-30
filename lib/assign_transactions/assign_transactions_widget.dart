@@ -462,11 +462,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                                                                                                   child: Text(
                                                                                                     functions.formatTransCurrency(unassignedtransactionsItem.transactionAmount),
-                                                                                                    style: FlutterFlowTheme.of(context).subtitle1.override(
-                                                                                                          fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
-                                                                                                          fontSize: 20,
-                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
-                                                                                                        ),
+                                                                                                    style: FlutterFlowTheme.of(context).subtitle1,
                                                                                                   ),
                                                                                                 ),
                                                                                               ],
@@ -481,11 +477,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                     unassignedtransactionsItem.trasactionDate!,
                                                                                                     locale: FFLocalizations.of(context).languageCode,
                                                                                                   ),
-                                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
-                                                                                                        color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
-                                                                                                      ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyText2,
                                                                                                 ),
                                                                                               ],
                                                                                             ),
@@ -933,7 +925,7 @@ class _AssignTransactionsWidgetState extends State<AssignTransactionsWidget>
                                                                                                     color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                                   ),
                                                                                                   child: Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                                                                                                     child: Row(
                                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
