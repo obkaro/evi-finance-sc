@@ -375,15 +375,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                                                       ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .subtitle1
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).subtitle1Family,
-                                                                            fontSize:
-                                                                                20,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
-                                                                          ),
+                                                                          .subtitle1,
                                                                     ),
                                                                   ],
                                                                 ),

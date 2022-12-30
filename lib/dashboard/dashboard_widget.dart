@@ -384,9 +384,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .title1
                                               .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title1Family,
+                                                fontFamily: 'Source Sans Pro',
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryPrimary,
