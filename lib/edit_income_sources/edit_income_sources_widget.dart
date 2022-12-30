@@ -118,7 +118,8 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
                               constIncomeCategoriesRecord.whereNotIn(
                                   'categoryName',
                                   containerIncomeCategoriesRecordList
-                                      .map((e) => e.categoryName!)
+                                      .map((e) => e.categoryName)
+                                      .withoutNulls
                                       .toList()),
                         ),
                         builder: (context, snapshot) {

@@ -235,9 +235,11 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
                                                               .reference ==
                                                           currentUserDocument!
                                                               .activeBudget) {
-                                                        FFAppState()
-                                                                .dialogBoxReturn =
-                                                            false;
+                                                        FFAppState().update(() {
+                                                          FFAppState()
+                                                                  .dialogBoxReturn =
+                                                              false;
+                                                        });
                                                         await showModalBottomSheet(
                                                           isScrollControlled:
                                                               true,

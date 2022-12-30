@@ -121,7 +121,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
         child: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: AuthUserStreamWidget(
-            child: StreamBuilder<List<CategoriesRecord>>(
+            builder: (context) => StreamBuilder<List<CategoriesRecord>>(
               stream: queryCategoriesRecord(
                 parent: currentUserDocument!.activeBudget,
               ),
@@ -146,10 +146,12 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                       dataSyncResponse = await DataSyncMonoCall.call(
                         authID: widget.account!.authID,
                       );
-                      FFAppState().dataSyncCode = getJsonField(
-                        (dataSyncResponse?.jsonBody ?? ''),
-                        r'''$.code''',
-                      ).toString();
+                      FFAppState().update(() {
+                        FFAppState().dataSyncCode = getJsonField(
+                          (dataSyncResponse?.jsonBody ?? ''),
+                          r'''$.code''',
+                        ).toString();
+                      });
                       if (FFAppState().dataSyncCode ==
                           'REAUTHORISATION_REQUIRED') {
                         // Action_ReauthCall
@@ -290,14 +292,17 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                               size: 24,
                                             ).animateOnPageLoad(animationsMap[
                                                 'iconOnPageLoadAnimation']!),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(8, 0, 0, 0),
-                                              child: Text(
-                                                'Fetching account data. Please check back soon.',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1,
+                                            Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(8, 0, 0, 0),
+                                                child: Text(
+                                                  'Fetching account data. Please check back soon.',
+                                                  textAlign: TextAlign.start,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -740,7 +745,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                     },
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        FFAppState().dialogBoxReturn = false;
+                                        FFAppState().update(() {
+                                          FFAppState().dialogBoxReturn = false;
+                                        });
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
                                           backgroundColor: Colors.transparent,

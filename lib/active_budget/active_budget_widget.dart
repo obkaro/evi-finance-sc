@@ -100,9 +100,9 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
         await Navigator.push(
           context,
           PageTransition(
-            type: PageTransitionType.bottomToTop,
-            duration: Duration(milliseconds: 400),
-            reverseDuration: Duration(milliseconds: 400),
+            type: PageTransitionType.fade,
+            duration: Duration(milliseconds: 250),
+            reverseDuration: Duration(milliseconds: 250),
             child: CreateBudgetWidget(
               budget: newcreatedBudget,
             ),
@@ -184,7 +184,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
         child: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: AuthUserStreamWidget(
-            child: StreamBuilder<BudgetsRecord>(
+            builder: (context) => StreamBuilder<BudgetsRecord>(
               stream:
                   BudgetsRecord.getDocument(currentUserDocument!.activeBudget!),
               builder: (context, snapshot) {
@@ -375,15 +375,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                                                       ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .subtitle1
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).subtitle1Family,
-                                                                            fontSize:
-                                                                                20,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
-                                                                          ),
+                                                                          .subtitle1,
                                                                     ),
                                                                   ],
                                                                 ),
@@ -678,7 +670,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                                                             functions.subtractCurrencyOf(listViewCategoriesRecord.categoryAmount,
                                                                                 listViewCategoriesRecord.spentAmount),
                                                                             style:
-                                                                                FlutterFlowTheme.of(context).bodyText1,
+                                                                                FlutterFlowTheme.of(context).bodyText2,
                                                                           ),
                                                                         ],
                                                                       ),

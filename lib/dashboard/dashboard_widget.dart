@@ -198,7 +198,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                             ),
                                       ),
                                       AuthUserStreamWidget(
-                                        child: Text(
+                                        builder: (context) => Text(
                                           valueOrDefault(
                                               currentUserDocument?.username,
                                               ''),
@@ -329,79 +329,81 @@ class _DashboardWidgetState extends State<DashboardWidget>
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 8),
-                                      child: Text(
-                                        'Your Total Balance',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1Family,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondarySecondary,
-                                              useGoogleFonts:
-                                                  GoogleFonts.asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1Family),
-                                            ),
-                                      ),
-                                    ),
-                                    StreamBuilder<List<AccountsRecord>>(
-                                      stream: queryAccountsRecord(
-                                        queryBuilder: (accountsRecord) =>
-                                            accountsRecord.where('accountOwner',
-                                                isEqualTo:
-                                                    currentUserReference),
-                                      ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: Center(
-                                              child:
-                                                  LoadingNothingtextTitle1Widget(),
-                                            ),
-                                          );
-                                        }
-                                        List<AccountsRecord>
-                                            textAccountsRecordList =
-                                            snapshot.data!;
-                                        return Text(
-                                          functions.formatTransCurrency(
-                                              functions.sumAccountBalances(
-                                                  textAccountsRecordList
-                                                      .toList())),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 8),
+                                        child: Text(
+                                          'Your Total Balance',
                                           style: FlutterFlowTheme.of(context)
-                                              .title1
+                                              .bodyText1
                                               .override(
                                                 fontFamily:
                                                     FlutterFlowTheme.of(context)
-                                                        .title1Family,
+                                                        .bodyText1Family,
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryPrimary,
-                                                useGoogleFonts:
-                                                    GoogleFonts.asMap()
-                                                        .containsKey(
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .title1Family),
+                                                        .secondarySecondary,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1Family),
                                               ),
-                                        ).animateOnPageLoad(animationsMap[
-                                            'textOnPageLoadAnimation']!);
-                                      },
-                                    ),
-                                  ],
+                                        ),
+                                      ),
+                                      StreamBuilder<List<AccountsRecord>>(
+                                        stream: queryAccountsRecord(
+                                          queryBuilder: (accountsRecord) =>
+                                              accountsRecord.where(
+                                                  'accountOwner',
+                                                  isEqualTo:
+                                                      currentUserReference),
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: Center(
+                                                child:
+                                                    LoadingNothingtextTitle1Widget(),
+                                              ),
+                                            );
+                                          }
+                                          List<AccountsRecord>
+                                              textAccountsRecordList =
+                                              snapshot.data!;
+                                          return Text(
+                                            functions.formatTransCurrency(
+                                                functions.sumAccountBalances(
+                                                    textAccountsRecordList
+                                                        .toList())),
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Work Sans',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryPrimary,
+                                                  fontSize: 28,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .title1Family),
+                                                ),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'textOnPageLoadAnimation']!);
+                                        },
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -709,7 +711,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(24, 0, 24, 4),
                             child: AuthUserStreamWidget(
-                              child: Row(
+                              builder: (context) => Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -731,7 +733,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                             child: AuthUserStreamWidget(
-                              child: StreamBuilder<BudgetsRecord>(
+                              builder: (context) =>
+                                  StreamBuilder<BudgetsRecord>(
                                 stream: BudgetsRecord.getDocument(
                                     currentUserDocument!.activeBudget!),
                                 builder: (context, snapshot) {
@@ -841,7 +844,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                             Text(
                                                                           '${functions.subtractCurrencyText(containerBudgetsRecord.budgetAmount, containerBudgetsRecord.budgetSpent)}',
                                                                           style:
-                                                                              FlutterFlowTheme.of(context).subtitle2,
+                                                                              FlutterFlowTheme.of(context).bodyText2,
                                                                         ),
                                                                       ),
                                                                     ),
@@ -866,19 +869,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                 )}',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyText1Family,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryText,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).bodyText1Family),
-                                                                    ),
+                                                                    .bodyText2,
                                                               ),
                                                             ],
                                                           ),
@@ -932,16 +923,17 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
                                   textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyText2
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText1Family,
+                                            .bodyText2Family,
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
+                                        fontWeight: FontWeight.w500,
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family),
+                                                    .bodyText2Family),
                                       ),
                                   elevation: 0,
                                   borderSide: BorderSide(
