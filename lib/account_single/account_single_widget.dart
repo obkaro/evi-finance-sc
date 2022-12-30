@@ -292,14 +292,17 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                               size: 24,
                                             ).animateOnPageLoad(animationsMap[
                                                 'iconOnPageLoadAnimation']!),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(8, 0, 0, 0),
-                                              child: Text(
-                                                'Fetching account data. Please check back soon.',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1,
+                                            Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(8, 0, 0, 0),
+                                                child: Text(
+                                                  'Fetching account data. Please check back soon.',
+                                                  textAlign: TextAlign.start,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1,
+                                                ),
                                               ),
                                             ),
                                           ],

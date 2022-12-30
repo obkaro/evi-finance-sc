@@ -242,41 +242,29 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                             children: [
                               Align(
                                 alignment: AlignmentDirectional(0, 0),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 1),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      final user =
-                                          await signInWithGoogle(context);
-                                      if (user == null) {
-                                        return;
-                                      }
-                                      if (valueOrDefault(
-                                                  currentUserDocument?.username,
-                                                  '') ==
-                                              null ||
-                                          valueOrDefault(
-                                                  currentUserDocument?.username,
-                                                  '') ==
-                                              '') {
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                WelcomeToEviWidget(),
-                                          ),
-                                        );
-                                      } else {
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => NavBarPage(
-                                                initialPage: 'Dashboard'),
-                                          ),
-                                        );
-                                      }
-
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    final user =
+                                        await signInWithGoogle(context);
+                                    if (user == null) {
+                                      return;
+                                    }
+                                    if (valueOrDefault(
+                                                currentUserDocument?.username,
+                                                '') ==
+                                            null ||
+                                        valueOrDefault(
+                                                currentUserDocument?.username,
+                                                '') ==
+                                            '') {
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              WelcomeToEviWidget(),
+                                        ),
+                                      );
+                                    } else {
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -284,36 +272,44 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                               initialPage: 'Dashboard'),
                                         ),
                                       );
-                                    },
-                                    text: 'Sign in with Google',
-                                    icon: Icon(
-                                      Icons.add,
-                                      color: Colors.transparent,
-                                      size: 20,
-                                    ),
-                                    options: FFButtonOptions(
-                                      width: double.infinity,
-                                      height: 60,
-                                      color: Colors.white,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .subtitle2
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2Family,
-                                            color: Color(0xFF0C0C0C),
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle2Family),
-                                          ),
-                                      elevation: 2,
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 0,
+                                    }
+
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => NavBarPage(
+                                            initialPage: 'Dashboard'),
                                       ),
-                                      borderRadius: BorderRadius.circular(16),
+                                    );
+                                  },
+                                  text: 'Sign in with Google',
+                                  icon: Icon(
+                                    Icons.add,
+                                    color: Colors.transparent,
+                                    size: 20,
+                                  ),
+                                  options: FFButtonOptions(
+                                    width: double.infinity,
+                                    height: 60,
+                                    color: Colors.white,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2Family,
+                                          color: Color(0xFF0C0C0C),
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2Family),
+                                        ),
+                                    elevation: 2,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 0,
                                     ),
+                                    borderRadius: BorderRadius.circular(16),
                                   ),
                                 ),
                               ),
@@ -326,9 +322,124 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                   ),
-                                  child: CachedNetworkImage(
-                                    imageUrl:
-                                        'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
+                                  child: Image.asset(
+                                    'assets/images/google-color-icon.png',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(0, 0),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                        child: Container(
+                          width: double.infinity,
+                          height: 60,
+                          child: Stack(
+                            children: [
+                              if (isiOS)
+                                isAndroid
+                                    ? Container()
+                                    : Align(
+                                        alignment: AlignmentDirectional(0, 0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            final user =
+                                                await signInWithApple(context);
+                                            if (user == null) {
+                                              return;
+                                            }
+                                            if (valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.username,
+                                                        '') ==
+                                                    null ||
+                                                valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.username,
+                                                        '') ==
+                                                    '') {
+                                              await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      WelcomeToEviWidget(),
+                                                ),
+                                              );
+                                            } else {
+                                              await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      NavBarPage(
+                                                          initialPage:
+                                                              'Dashboard'),
+                                                ),
+                                              );
+                                            }
+
+                                            await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    NavBarPage(
+                                                        initialPage:
+                                                            'Dashboard'),
+                                              ),
+                                            );
+                                          },
+                                          text: 'Sign in with Apple',
+                                          icon: Icon(
+                                            Icons.add,
+                                            color: Colors.transparent,
+                                            size: 20,
+                                          ),
+                                          options: FFButtonOptions(
+                                            width: double.infinity,
+                                            height: 60,
+                                            color: Colors.black,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2Family,
+                                                      color: Colors.white,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle2Family),
+                                                    ),
+                                            elevation: 2,
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                          ),
+                                        ),
+                                      ),
+                              Align(
+                                alignment: AlignmentDirectional(-0.83, 0),
+                                child: Container(
+                                  width: 22,
+                                  height: 22,
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Image.asset(
+                                    'assets/images/apple-xxl.png',
                                     fit: BoxFit.contain,
                                   ),
                                 ),
