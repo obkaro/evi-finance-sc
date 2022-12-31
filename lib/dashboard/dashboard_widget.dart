@@ -93,24 +93,26 @@ class _DashboardWidgetState extends State<DashboardWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      final isEntitled = await revenue_cat.isEntitled('starter');
-      if (isEntitled == null) {
-        return;
-      } else if (!isEntitled) {
-        await revenue_cat.loadOfferings();
-      }
+      if (false) {
+        final isEntitled = await revenue_cat.isEntitled('starter');
+        if (isEntitled == null) {
+          return;
+        } else if (!isEntitled) {
+          await revenue_cat.loadOfferings();
+        }
 
-      if (!isEntitled) {
-        await Navigator.pushAndRemoveUntil(
-          context,
-          PageTransition(
-            type: PageTransitionType.bottomToTop,
-            duration: Duration(milliseconds: 400),
-            reverseDuration: Duration(milliseconds: 400),
-            child: PaywallWidget(),
-          ),
-          (r) => false,
-        );
+        if (!isEntitled) {
+          await Navigator.pushAndRemoveUntil(
+            context,
+            PageTransition(
+              type: PageTransitionType.fade,
+              duration: Duration(milliseconds: 250),
+              reverseDuration: Duration(milliseconds: 250),
+              child: PaywallWidget(),
+            ),
+            (r) => false,
+          );
+        }
       }
     });
 
