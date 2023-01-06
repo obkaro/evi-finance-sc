@@ -27,3 +27,5 @@ exports.subscriptionReminder = require('./subscriptions/subscriptionReminder').s
 //* USERS
 exports.checkAppPrompt = require('./users/checkAppPrompt').checkAppPrompt;
 
+//* IMPORT CONTACTS
+exports.mailchimpImport = require('./marketing/mailchimpImport').mailchimpImport;
