@@ -333,16 +333,16 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                         ),
                       ),
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(0, 0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                        child: Container(
-                          width: double.infinity,
-                          height: 60,
-                          child: Stack(
-                            children: [
-                              if (isiOS)
+                    if (isiOS)
+                      Align(
+                        alignment: AlignmentDirectional(0, 0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                          child: Container(
+                            width: double.infinity,
+                            height: 60,
+                            child: Stack(
+                              children: [
                                 isAndroid
                                     ? Container()
                                     : Align(
@@ -429,26 +429,26 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                           ),
                                         ),
                                       ),
-                              Align(
-                                alignment: AlignmentDirectional(-0.83, 0),
-                                child: Container(
-                                  width: 22,
-                                  height: 22,
-                                  clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Image.asset(
-                                    'assets/images/apple-xxl.png',
-                                    fit: BoxFit.contain,
+                                Align(
+                                  alignment: AlignmentDirectional(-0.83, 0),
+                                  child: Container(
+                                    width: 22,
+                                    height: 22,
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Image.asset(
+                                      'assets/images/apple-xxl.png',
+                                      fit: BoxFit.contain,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
                     Align(
                       alignment: AlignmentDirectional(0, 0),
                       child: Container(
