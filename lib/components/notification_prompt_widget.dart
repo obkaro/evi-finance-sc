@@ -1,8 +1,12 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../first_budget/first_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/permissions_util.dart';
+import '../flutter_flow/random_data_util.dart' as random_data;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,6 +30,8 @@ class NotificationPromptWidget extends StatefulWidget {
 }
 
 class _NotificationPromptWidgetState extends State<NotificationPromptWidget> {
+  BudgetsRecord? createdBudget;
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -125,6 +131,35 @@ class _NotificationPromptWidgetState extends State<NotificationPromptWidget> {
                           onPressed: () async {
                             await requestPermission(notificationsPermission);
                             Navigator.pop(context);
+
+                            final budgetsCreateData = createBudgetsRecordData(
+                              budgetID: random_data.randomString(
+                                24,
+                                24,
+                                true,
+                                true,
+                                true,
+                              ),
+                              budgetDateCreated: getCurrentTimestamp,
+                              status: 'no_parent',
+                              budgetSpent: 0,
+                              budgetOwner: currentUserReference,
+                            );
+                            var budgetsRecordReference =
+                                BudgetsRecord.collection.doc();
+                            await budgetsRecordReference.set(budgetsCreateData);
+                            createdBudget = BudgetsRecord.getDocumentFromData(
+                                budgetsCreateData, budgetsRecordReference);
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FirstBudgetWidget(
+                                  budget: createdBudget,
+                                ),
+                              ),
+                            );
+
+                            setState(() {});
                           },
                           text: 'Okay',
                           options: FFButtonOptions(
