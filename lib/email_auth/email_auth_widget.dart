@@ -1,6 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../first_budget/first_budget_widget.dart';
+import '../components/notification_prompt_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -416,13 +416,25 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                             ),
                                                           );
                                                         } else {
-                                                          await Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  FirstBudgetWidget(),
-                                                            ),
-                                                          );
+                                                          await showModalBottomSheet(
+                                                            isScrollControlled:
+                                                                true,
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            enableDrag: false,
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return Padding(
+                                                                padding: MediaQuery.of(
+                                                                        context)
+                                                                    .viewInsets,
+                                                                child:
+                                                                    NotificationPromptWidget(),
+                                                              );
+                                                            },
+                                                          ).then((value) =>
+                                                              setState(() {}));
                                                         }
                                                       }
                                                     } else {
