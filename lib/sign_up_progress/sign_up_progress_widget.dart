@@ -36,10 +36,16 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
       instantTimer = InstantTimer.periodic(
         duration: Duration(milliseconds: 1000),
         callback: (timer) async {
+          await actions.printConsole(
+            'PERIOD COUNT',
+          );
           if (currentUserDocument!.paymentInfo != null) {
             payInfo = await actions.fetchPayInfo(
               context,
               currentUserDocument!.paymentInfo,
+            );
+            await actions.printConsole(
+              payInfo!.payStatus,
             );
             if (payInfo!.payStatus == 'active') {
               if (valueOrDefault(currentUserDocument?.username, '') == null ||
