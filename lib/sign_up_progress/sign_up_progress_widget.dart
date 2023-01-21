@@ -1,6 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../first_budget/first_budget_widget.dart';
+import '../components/notification_prompt_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -60,12 +60,18 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
                     ),
                   );
                 } else {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FirstBudgetWidget(),
-                    ),
-                  );
+                  await showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    enableDrag: false,
+                    context: context,
+                    builder: (context) {
+                      return Padding(
+                        padding: MediaQuery.of(context).viewInsets,
+                        child: NotificationPromptWidget(),
+                      );
+                    },
+                  ).then((value) => setState(() {}));
                 }
               }
             }
@@ -105,7 +111,7 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
             icon: Icon(
               Icons.logout,
               color: Colors.white,
-              size: 30,
+              size: 24,
             ),
             onPressed: () async {
               await signOut();
