@@ -350,7 +350,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                           amount:
                                               editSubsciptionSubscriptionsRecord
                                                   .expCharge.amount,
-                                          labelText: 'Enter amount',
+                                          labelText: 'Amount',
                                           hintText: 'Enter amount',
                                           bgcolor: FlutterFlowTheme.of(context)
                                               .secondaryBackground,

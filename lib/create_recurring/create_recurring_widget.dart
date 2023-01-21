@@ -377,7 +377,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                             height: 55,
                                             amount: 0,
                                             labelText: 'Enter amount',
-                                            hintText: 'Enter amount',
+                                            hintText: '₦ 5000',
                                             bgcolor:
                                                 FlutterFlowTheme.of(context)
                                                     .secondaryBackground,

@@ -154,6 +154,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'EmailAuth': (data) async => EmailAuthWidget(),
   'InitPaywall': (data) async => InitPaywallWidget(),
   'Paywall': (data) async => PaywallWidget(),
+  'SignUpProgress': (data) async => SignUpProgressWidget(),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

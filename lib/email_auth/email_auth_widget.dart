@@ -1,11 +1,14 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../first_budget/first_budget_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../forgot_password/forgot_password_widget.dart';
 import '../main.dart';
+import '../sign_up_progress/sign_up_progress_widget.dart';
 import '../welcome_to_evi/welcome_to_evi_widget.dart';
+import '../custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -20,14 +23,15 @@ class EmailAuthWidget extends StatefulWidget {
 }
 
 class _EmailAuthWidgetState extends State<EmailAuthWidget> {
+  PaymentInfoRecord? payInfo;
+  TextEditingController? signInEmailController;
+  TextEditingController? signInPasswordController;
+  late bool signInPasswordVisibility;
   TextEditingController? confirmPasswordController;
   late bool confirmPasswordVisibility;
   TextEditingController? newPasswordController;
   late bool newPasswordVisibility;
   TextEditingController? signUpEmailController;
-  TextEditingController? signInEmailController;
-  TextEditingController? signInPasswordController;
-  late bool signInPasswordVisibility;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final formKey2 = GlobalKey<FormState>();
@@ -370,34 +374,77 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     return;
                                                   }
 
-                                                  if (valueOrDefault(
-                                                              currentUserDocument
-                                                                  ?.username,
-                                                              '') ==
-                                                          null ||
-                                                      valueOrDefault(
-                                                              currentUserDocument
-                                                                  ?.username,
-                                                              '') ==
-                                                          '') {
-                                                    await Navigator.push(
+                                                  if (currentUserDocument!
+                                                          .paymentInfo !=
+                                                      null) {
+                                                    payInfo = await actions
+                                                        .fetchPayInfo(
                                                       context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            WelcomeToEviWidget(),
-                                                      ),
+                                                      currentUserDocument!
+                                                          .paymentInfo,
                                                     );
+                                                    if (payInfo!.payStatus ==
+                                                        'active') {
+                                                      if (valueOrDefault(
+                                                                  currentUserDocument
+                                                                      ?.username,
+                                                                  '') ==
+                                                              null ||
+                                                          valueOrDefault(
+                                                                  currentUserDocument
+                                                                      ?.username,
+                                                                  '') ==
+                                                              '') {
+                                                        await Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                WelcomeToEviWidget(),
+                                                          ),
+                                                        );
+                                                      } else {
+                                                        if (currentUserDocument!
+                                                                .activeBudget !=
+                                                            null) {
+                                                          await Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  NavBarPage(
+                                                                      initialPage:
+                                                                          'Dashboard'),
+                                                            ),
+                                                          );
+                                                        } else {
+                                                          await Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  FirstBudgetWidget(),
+                                                            ),
+                                                          );
+                                                        }
+                                                      }
+                                                    } else {
+                                                      await Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              SignUpProgressWidget(),
+                                                        ),
+                                                      );
+                                                    }
                                                   } else {
                                                     await Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
-                                                            NavBarPage(
-                                                                initialPage:
-                                                                    'Dashboard'),
+                                                            SignUpProgressWidget(),
                                                       ),
                                                     );
                                                   }
+
+                                                  setState(() {});
                                                 },
                                                 text: 'Sign in',
                                                 options: FFButtonOptions(
@@ -856,7 +903,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          WelcomeToEviWidget(),
+                                                          SignUpProgressWidget(),
                                                     ),
                                                     (r) => false,
                                                   );

@@ -46,6 +46,8 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   @BuiltValueField(wireName: 'acq_channel')
   String? get acqChannel;
 
+  DocumentReference? get paymentInfo;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -101,6 +103,7 @@ Map<String, dynamic> createUsersRecordData({
   String? experience,
   String? username,
   String? acqChannel,
+  DocumentReference? paymentInfo,
 }) {
   final firestoreData = serializers.toFirestore(
     UsersRecord.serializer,
@@ -121,7 +124,8 @@ Map<String, dynamic> createUsersRecordData({
         ..onboardingStep = onboardingStep
         ..experience = experience
         ..username = username
-        ..acqChannel = acqChannel,
+        ..acqChannel = acqChannel
+        ..paymentInfo = paymentInfo,
     ),
   );
 
