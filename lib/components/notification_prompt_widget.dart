@@ -130,7 +130,6 @@ class _NotificationPromptWidgetState extends State<NotificationPromptWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             await requestPermission(notificationsPermission);
-                            Navigator.pop(context);
 
                             final budgetsCreateData = createBudgetsRecordData(
                               budgetID: random_data.randomString(
@@ -158,6 +157,7 @@ class _NotificationPromptWidgetState extends State<NotificationPromptWidget> {
                                 ),
                               ),
                             );
+                            Navigator.pop(context);
 
                             setState(() {});
                           },
