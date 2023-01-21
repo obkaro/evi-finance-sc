@@ -13,9 +13,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 Future<PaymentInfoRecord> fetchPayInfo(
     BuildContext context, DocumentReference? paymentInfoRef) async {
   // Add your function code here!
-  if (paymentInfoRef == null) {
-    return PaymentInfoRecord();
-  }
-  final paymentInfo = await paymentInfoRef.get();
-  return paymentInfo.data() as PaymentInfoRecord;
+
+  final paymentInfo = PaymentInfoRecord.getDocument(paymentInfoRef!);
+  return paymentInfo.first;
 }

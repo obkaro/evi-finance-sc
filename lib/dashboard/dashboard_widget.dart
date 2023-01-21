@@ -17,12 +17,11 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
-import '../paywall/paywall_widget.dart';
+import '../sign_up_progress/sign_up_progress_widget.dart';
 import '../transactions/transactions_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
-import '../flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +83,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
       ],
     ),
   };
+  PaymentInfoRecord? payInfo;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -93,26 +93,18 @@ class _DashboardWidgetState extends State<DashboardWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (false) {
-        final isEntitled = await revenue_cat.isEntitled('starter');
-        if (isEntitled == null) {
-          return;
-        } else if (!isEntitled) {
-          await revenue_cat.loadOfferings();
-        }
-
-        if (!isEntitled) {
-          await Navigator.pushAndRemoveUntil(
-            context,
-            PageTransition(
-              type: PageTransitionType.fade,
-              duration: Duration(milliseconds: 250),
-              reverseDuration: Duration(milliseconds: 250),
-              child: PaywallWidget(),
-            ),
-            (r) => false,
-          );
-        }
+      payInfo = await actions.fetchPayInfo(
+        context,
+        currentUserDocument!.paymentInfo,
+      );
+      if (payInfo!.payStatus != 'active') {
+        await Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SignUpProgressWidget(),
+          ),
+          (r) => false,
+        );
       }
     });
 
