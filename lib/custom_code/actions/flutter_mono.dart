@@ -81,7 +81,7 @@ Future flutterMono(
 
                           //Use temporary key to get permanent key, save to variable: permKey
                           ApiCallResponse permKey =
-                              await FetchPermanentIDCall.call(
+                              await MonoGroup.fetchPermanentIDCall.call(
                                   tempKey: (currentUserDocument?.tempAuthCode));
 
                           // print(getJsonField(
@@ -113,7 +113,7 @@ Future flutterMono(
                           await currentUserReference!.update(usersUpdateData2);
 
                           ApiCallResponse acctInfoResponse =
-                              await FetchAccountDataCall.call(
+                              await MonoGroup.fetchAccountDataCall.call(
                             authID: newacct.authID,
                           );
 

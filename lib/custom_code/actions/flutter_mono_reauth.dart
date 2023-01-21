@@ -72,7 +72,7 @@ Future flutterMonoReauth(
 
                           //Use temporary key to get permanent key, save to variable: permKey
                           ApiCallResponse permKey =
-                              await FetchPermanentIDCall.call(
+                              await MonoGroup.fetchPermanentIDCall.call(
                                   tempKey: (currentUserDocument?.tempAuthCode));
 
                           print(getJsonField(
