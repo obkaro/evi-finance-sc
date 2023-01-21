@@ -98,6 +98,9 @@ class _DashboardWidgetState extends State<DashboardWidget>
           context,
           currentUserDocument!.paymentInfo,
         );
+        await actions.printConsole(
+          'PAY STATUS - ${payInfo!.payStatus}',
+        );
         if (payInfo!.payStatus != 'active') {
           await Navigator.pushAndRemoveUntil(
             context,
