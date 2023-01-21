@@ -15,6 +15,8 @@ import 'income_categories_record.dart';
 import 'const_income_categories_record.dart';
 import 'const_merchants_record.dart';
 import 'defaultimages_record.dart';
+import 'billing_events_record.dart';
+import 'payment_info_record.dart';
 
 import 'index.dart';
 
@@ -39,6 +41,8 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   ConstIncomeCategoriesRecord,
   ConstMerchantsRecord,
   DefaultimagesRecord,
+  BillingEventsRecord,
+  PaymentInfoRecord,
   VersionStruct,
   MoneyStruct,
   PaymentPlanStruct,

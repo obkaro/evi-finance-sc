@@ -259,6 +259,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                             child: custom_widgets.CurrencyTextField(
                               width: MediaQuery.of(context).size.width,
                               height: 55,
+                              amount: 0,
                               labelText: 'Amount',
                               hintText: 'Enter amount',
                               bgcolor: FlutterFlowTheme.of(context)

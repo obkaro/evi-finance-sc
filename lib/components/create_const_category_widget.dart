@@ -8,9 +8,11 @@ import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 
 class CreateConstCategoryWidget extends StatefulWidget {
@@ -29,6 +31,21 @@ class CreateConstCategoryWidget extends StatefulWidget {
 }
 
 class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
+  TextEditingController? textController;
+  final textFieldMask = MaskTextInputFormatter(mask: '₦ ###,###,###');
+
+  @override
+  void initState() {
+    super.initState();
+    textController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    textController?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -108,9 +125,74 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                   child: custom_widgets.CurrencyTextField(
                     width: MediaQuery.of(context).size.width,
                     height: 55,
+                    amount: 0,
                     labelText: 'Amount',
                     hintText: 'Enter amount',
                     bgcolor: FlutterFlowTheme.of(context).primaryBackground,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                  child: TextFormField(
+                    controller: textController,
+                    onChanged: (_) => EasyDebounce.debounce(
+                      'textController',
+                      Duration(milliseconds: 2000),
+                      () => setState(() {}),
+                    ),
+                    autofocus: true,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      hintText: 'Enter category amount',
+                      hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      filled: true,
+                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                      suffixIcon: textController!.text.isNotEmpty
+                          ? InkWell(
+                              onTap: () async {
+                                textController?.clear();
+                                setState(() {});
+                              },
+                              child: Icon(
+                                Icons.clear,
+                                color:
+                                    FlutterFlowTheme.of(context).fadedDivider,
+                                size: 22,
+                              ),
+                            )
+                          : null,
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [textFieldMask],
                   ),
                 ),
                 Divider(
@@ -154,7 +236,7 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                                 widget.budget!.unallocatedAmount!) {
                               final budgetsUpdateData = {
                                 'unallocatedAmount': FieldValue.increment(
-                                    -(FFAppState().currencyTextField)),
+                                    -(int.parse(textController!.text))),
                               };
                               await widget.budget!.reference
                                   .update(budgetsUpdateData);

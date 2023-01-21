@@ -98,5 +98,29 @@ service cloud.firestore {
       allow write: if false;
       allow delete: if false;
     }
+
+    match /users/{parent}/billingEvents/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /{path=**}/billingEvents/{document} {
+      allow read: if true;
+    }
+
+
+    match /users/{parent}/paymentInfo/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /{path=**}/paymentInfo/{document} {
+      allow read: if true;
+    }
+
   }
 }
