@@ -19,19 +19,19 @@ abstract class PaymentInfoRecord
 
   String? get planId;
 
-  String? get ownerId;
-
   DateTime? get expireDate;
 
   DateTime? get firstPurchaseDate;
 
   DateTime? get lastPayment;
 
+  String? get ownerId;
+
   String? get paymentUrl;
 
-  String? get billingEventId;
-
   String? get subscriptionId;
+
+  String? get billingEventId;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -46,8 +46,8 @@ abstract class PaymentInfoRecord
     ..planId = ''
     ..ownerId = ''
     ..paymentUrl = ''
-    ..billingEventId = ''
-    ..subscriptionId = '';
+    ..subscriptionId = ''
+    ..billingEventId = '';
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -80,13 +80,13 @@ Map<String, dynamic> createPaymentInfoRecordData({
   String? email,
   String? username,
   String? planId,
-  String? ownerId,
   DateTime? expireDate,
   DateTime? firstPurchaseDate,
   DateTime? lastPayment,
+  String? ownerId,
   String? paymentUrl,
-  String? billingEventId,
   String? subscriptionId,
+  String? billingEventId,
 }) {
   final firestoreData = serializers.toFirestore(
     PaymentInfoRecord.serializer,
@@ -96,13 +96,13 @@ Map<String, dynamic> createPaymentInfoRecordData({
         ..email = email
         ..username = username
         ..planId = planId
-        ..ownerId = ownerId
         ..expireDate = expireDate
         ..firstPurchaseDate = firstPurchaseDate
         ..lastPayment = lastPayment
+        ..ownerId = ownerId
         ..paymentUrl = paymentUrl
-        ..billingEventId = billingEventId
-        ..subscriptionId = subscriptionId,
+        ..subscriptionId = subscriptionId
+        ..billingEventId = billingEventId,
     ),
   );
 

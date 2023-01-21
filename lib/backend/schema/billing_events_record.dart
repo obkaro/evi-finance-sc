@@ -13,8 +13,6 @@ abstract class BillingEventsRecord
 
   String? get billingStatus;
 
-  String? get eventDate;
-
   String? get id;
 
   String? get email;
@@ -27,6 +25,8 @@ abstract class BillingEventsRecord
 
   String? get txRef;
 
+  String? get eventDate;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -35,12 +35,12 @@ abstract class BillingEventsRecord
 
   static void _initializeBuilder(BillingEventsRecordBuilder builder) => builder
     ..billingStatus = ''
-    ..eventDate = ''
     ..id = ''
     ..email = ''
     ..username = ''
     ..status = ''
-    ..txRef = '';
+    ..txRef = ''
+    ..eventDate = '';
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -71,26 +71,26 @@ abstract class BillingEventsRecord
 
 Map<String, dynamic> createBillingEventsRecordData({
   String? billingStatus,
-  String? eventDate,
   String? id,
   String? email,
   String? username,
   DateTime? timeCreated,
   String? status,
   String? txRef,
+  String? eventDate,
 }) {
   final firestoreData = serializers.toFirestore(
     BillingEventsRecord.serializer,
     BillingEventsRecord(
       (b) => b
         ..billingStatus = billingStatus
-        ..eventDate = eventDate
         ..id = id
         ..email = email
         ..username = username
         ..timeCreated = timeCreated
         ..status = status
-        ..txRef = txRef,
+        ..txRef = txRef
+        ..eventDate = eventDate,
     ),
   );
 
