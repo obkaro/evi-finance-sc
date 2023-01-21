@@ -4,6 +4,7 @@ import '../components/notification_prompt_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/instant_timer.dart';
 import '../landing_page_view/landing_page_view_widget.dart';
 import '../main.dart';
@@ -82,6 +83,7 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
               }
             }
           }
+          instantTimer?.cancel();
         },
         startImmediately: true,
       );
@@ -196,47 +198,34 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Expanded(
-                                child: InkWell(
-                                  onTap: () async {
+                                child: FFButtonWidget(
+                                  onPressed: () async {
                                     await launchURL('https://app.evi.finance');
                                   },
-                                  child: Material(
-                                    color: Colors.transparent,
+                                  text:
+                                      'Visit app.evi.finance to finish signing in.',
+                                  options: FFButtonOptions(
+                                    height: 60,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2Family,
+                                          color: Colors.white,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2Family),
+                                        ),
                                     elevation: 2,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16),
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
                                     ),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        borderRadius: BorderRadius.circular(16),
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            16, 16, 16, 16),
-                                        child: SelectionArea(
-                                            child: Text(
-                                          'Visit app.evi.finance to finish signing in.',
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1Family,
-                                                color: Colors.white,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyText1Family),
-                                                lineHeight: 1.5,
-                                              ),
-                                        )),
-                                      ),
-                                    ),
+                                    borderRadius: BorderRadius.circular(16),
                                   ),
                                 ),
                               ),
