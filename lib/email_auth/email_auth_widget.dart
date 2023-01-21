@@ -383,6 +383,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                       currentUserDocument!
                                                           .paymentInfo,
                                                     );
+                                                    await actions.printConsole(
+                                                      'PAY STATUS - ${payInfo!.payStatus}',
+                                                    );
                                                     if (payInfo!.payStatus ==
                                                         'active') {
                                                       if (valueOrDefault(
@@ -395,18 +398,21 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                                       ?.username,
                                                                   '') ==
                                                               '') {
-                                                        await Navigator.push(
+                                                        await Navigator
+                                                            .pushAndRemoveUntil(
                                                           context,
                                                           MaterialPageRoute(
                                                             builder: (context) =>
                                                                 WelcomeToEviWidget(),
                                                           ),
+                                                          (r) => false,
                                                         );
                                                       } else {
                                                         if (currentUserDocument!
                                                                 .activeBudget !=
                                                             null) {
-                                                          await Navigator.push(
+                                                          await Navigator
+                                                              .pushAndRemoveUntil(
                                                             context,
                                                             MaterialPageRoute(
                                                               builder: (context) =>
@@ -414,6 +420,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                                       initialPage:
                                                                           'Dashboard'),
                                                             ),
+                                                            (r) => false,
                                                           );
                                                         } else {
                                                           await showModalBottomSheet(
@@ -438,21 +445,25 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                         }
                                                       }
                                                     } else {
-                                                      await Navigator.push(
+                                                      await Navigator
+                                                          .pushAndRemoveUntil(
                                                         context,
                                                         MaterialPageRoute(
                                                           builder: (context) =>
                                                               SignUpProgressWidget(),
                                                         ),
+                                                        (r) => false,
                                                       );
                                                     }
                                                   } else {
-                                                    await Navigator.push(
+                                                    await Navigator
+                                                        .pushAndRemoveUntil(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             SignUpProgressWidget(),
                                                       ),
+                                                      (r) => false,
                                                     );
                                                   }
 
