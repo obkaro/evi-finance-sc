@@ -15,5 +15,5 @@ Future<PaymentInfoRecord> fetchPayInfo(
   // Add your function code here!
 
   var paymentInfo = PaymentInfoRecord.getDocument(paymentInfoRef!);
-  return paymentInfo.last;
+  return paymentInfo.single;
 }
