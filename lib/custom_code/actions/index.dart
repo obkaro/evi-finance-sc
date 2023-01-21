@@ -8,3 +8,4 @@ export 'launch_store.dart' show launchStore;
 export 'get_version_number.dart' show getVersionNumber;
 export 'normalize_trans_sub.dart' show normalizeTransSub;
 export 'fetch_pay_info.dart' show fetchPayInfo;
+export 'print_console.dart' show printConsole;

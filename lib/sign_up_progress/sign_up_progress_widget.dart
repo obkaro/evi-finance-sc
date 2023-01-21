@@ -1,6 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../first_budget/first_budget_widget.dart';
+import '../components/notification_prompt_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -36,10 +36,16 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
       instantTimer = InstantTimer.periodic(
         duration: Duration(milliseconds: 1000),
         callback: (timer) async {
+          await actions.printConsole(
+            'PERIOD COUNT',
+          );
           if (currentUserDocument!.paymentInfo != null) {
             payInfo = await actions.fetchPayInfo(
               context,
               currentUserDocument!.paymentInfo,
+            );
+            await actions.printConsole(
+              payInfo!.payStatus,
             );
             if (payInfo!.payStatus == 'active') {
               if (valueOrDefault(currentUserDocument?.username, '') == null ||
@@ -60,12 +66,18 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
                     ),
                   );
                 } else {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FirstBudgetWidget(),
-                    ),
-                  );
+                  await showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    enableDrag: false,
+                    context: context,
+                    builder: (context) {
+                      return Padding(
+                        padding: MediaQuery.of(context).viewInsets,
+                        child: NotificationPromptWidget(),
+                      );
+                    },
+                  ).then((value) => setState(() {}));
                 }
               }
             }
@@ -105,7 +117,7 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
             icon: Icon(
               Icons.logout,
               color: Colors.white,
-              size: 30,
+              size: 24,
             ),
             onPressed: () async {
               await signOut();
@@ -184,11 +196,63 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Expanded(
+                                child: InkWell(
+                                  onTap: () async {
+                                    await launchURL('https://app.evi.finance');
+                                  },
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    elevation: 2,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16, 16, 16, 16),
+                                        child: SelectionArea(
+                                            child: Text(
+                                          'Visit app.evi.finance to finish signing in.',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1Family,
+                                                color: Colors.white,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1Family),
+                                                lineHeight: 1.5,
+                                              ),
+                                        )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 16, 16, 16),
-                                  child: Text(
-                                    'Visit app.evi.finance to finish signing in. As an Evi user, you can unleash the power of an informed and healthy financial life without stress.',
+                                  child: SelectionArea(
+                                      child: Text(
+                                    'After that, you can unleash the power of an informed, healthy, and stress free financial life with Evi.',
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
@@ -202,7 +266,7 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
                                                       .bodyText1Family),
                                           lineHeight: 1.5,
                                         ),
-                                  ),
+                                  )),
                                 ),
                               ),
                             ],
