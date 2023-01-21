@@ -171,7 +171,8 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                             child: FFButtonWidget(
                               onPressed: () async {
                                 // Action_dataSyncCall
-                                dataSyncResponse = await DataSyncMonoCall.call(
+                                dataSyncResponse =
+                                    await MonoGroup.dataSyncCall.call(
                                   authID: widget.account!.authID,
                                 );
                                 FFAppState().update(() {
@@ -183,7 +184,8 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                                 if (FFAppState().dataSyncCode ==
                                     'REAUTHORISATION_REQUIRED') {
                                   // Action_ReauthCall
-                                  reauthCode = await ReauthMonoCall.call(
+                                  reauthCode =
+                                      await MonoGroup.reauthenticateCall.call(
                                     authID: widget.account!.authID,
                                   );
                                   // Action_ReauthAcct

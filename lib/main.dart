@@ -27,8 +27,6 @@ void main() async {
   await revenue_cat.initialize(
     "appl_aeKzFymPWckfjOYAgWkgfGfPSda",
     "goog_RRbRBosEHJVeJGgBddaWnGJnXXB",
-    debugLogEnabled: true,
-    loadDataAfterLaunch: true,
   );
 
   runApp(ChangeNotifierProvider(

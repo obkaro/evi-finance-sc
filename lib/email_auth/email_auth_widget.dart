@@ -983,77 +983,11 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 16, 0),
-                                        child: Container(
-                                          width: 48,
-                                          height: 48,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Align(
-                                            alignment:
-                                                AlignmentDirectional(0, 0),
-                                            child: InkWell(
-                                              onTap: () async {
-                                                final user =
-                                                    await signInWithGoogle(
-                                                        context);
-                                                if (user == null) {
-                                                  return;
-                                                }
-                                                if (valueOrDefault(
-                                                            currentUserDocument
-                                                                ?.username,
-                                                            '') ==
-                                                        null ||
-                                                    valueOrDefault(
-                                                            currentUserDocument
-                                                                ?.username,
-                                                            '') ==
-                                                        '') {
-                                                  await Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          WelcomeToEviWidget(),
-                                                    ),
-                                                  );
-                                                } else {
-                                                  await Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          NavBarPage(
-                                                              initialPage:
-                                                                  'Dashboard'),
-                                                    ),
-                                                  );
-                                                }
-                                              },
-                                              child: Container(
-                                                width: 32,
-                                                height: 32,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Image.asset(
-                                                  'assets/images/google-color-icon.png',
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
                                       Container(
                                         width: 48,
                                         height: 48,
                                         decoration: BoxDecoration(
-                                          color: Colors.black,
+                                          color: Colors.white,
                                           shape: BoxShape.circle,
                                         ),
                                         child: Align(
@@ -1061,7 +995,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                           child: InkWell(
                                             onTap: () async {
                                               final user =
-                                                  await signInWithApple(
+                                                  await signInWithGoogle(
                                                       context);
                                               if (user == null) {
                                                 return;
@@ -1103,13 +1037,81 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                 shape: BoxShape.circle,
                                               ),
                                               child: Image.asset(
-                                                'assets/images/apple-xxl.png',
+                                                'assets/images/google-color-icon.png',
                                                 fit: BoxFit.contain,
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
+                                      if (isiOS)
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 0, 0, 0),
+                                          child: Container(
+                                            width: 48,
+                                            height: 48,
+                                            decoration: BoxDecoration(
+                                              color: Colors.black,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Align(
+                                              alignment:
+                                                  AlignmentDirectional(0, 0),
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  final user =
+                                                      await signInWithApple(
+                                                          context);
+                                                  if (user == null) {
+                                                    return;
+                                                  }
+                                                  if (valueOrDefault(
+                                                              currentUserDocument
+                                                                  ?.username,
+                                                              '') ==
+                                                          null ||
+                                                      valueOrDefault(
+                                                              currentUserDocument
+                                                                  ?.username,
+                                                              '') ==
+                                                          '') {
+                                                    await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            WelcomeToEviWidget(),
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            NavBarPage(
+                                                                initialPage:
+                                                                    'Dashboard'),
+                                                      ),
+                                                    );
+                                                  }
+                                                },
+                                                child: Container(
+                                                  width: 32,
+                                                  height: 32,
+                                                  clipBehavior: Clip.antiAlias,
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                  child: Image.asset(
+                                                    'assets/images/apple-xxl.png',
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                     ],
                                   ),
                                 ),

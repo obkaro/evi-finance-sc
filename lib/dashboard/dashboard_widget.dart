@@ -93,11 +93,21 @@ class _DashboardWidgetState extends State<DashboardWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      payInfo = await actions.fetchPayInfo(
-        context,
-        currentUserDocument!.paymentInfo,
-      );
-      if (payInfo!.payStatus != 'active') {
+      if (currentUserDocument!.paymentInfo != null) {
+        payInfo = await actions.fetchPayInfo(
+          context,
+          currentUserDocument!.paymentInfo,
+        );
+        if (payInfo!.payStatus != 'active') {
+          await Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SignUpProgressWidget(),
+            ),
+            (r) => false,
+          );
+        }
+      } else {
         await Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
