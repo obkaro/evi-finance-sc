@@ -196,11 +196,63 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Expanded(
+                                child: InkWell(
+                                  onTap: () async {
+                                    await launchURL('https://app.evi.finance');
+                                  },
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    elevation: 2,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16, 16, 16, 16),
+                                        child: SelectionArea(
+                                            child: Text(
+                                          'Visit app.evi.finance to finish signing in.',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1Family,
+                                                color: Colors.white,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1Family),
+                                                lineHeight: 1.5,
+                                              ),
+                                        )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 16, 16, 16),
-                                  child: Text(
-                                    'Visit app.evi.finance to finish signing in. As an Evi user, you can unleash the power of an informed and healthy financial life without stress.',
+                                  child: SelectionArea(
+                                      child: Text(
+                                    'After that, you can unleash the power of an informed, healthy, and stress free financial life with Evi.',
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
@@ -214,7 +266,7 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
                                                       .bodyText1Family),
                                           lineHeight: 1.5,
                                         ),
-                                  ),
+                                  )),
                                 ),
                               ),
                             ],
