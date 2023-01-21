@@ -14,6 +14,7 @@ Future<PaymentInfoRecord> fetchPayInfo(
     BuildContext context, DocumentReference? paymentInfoRef) async {
   // Add your function code here!
 
-  var paymentInfo = PaymentInfoRecord.getDocument(paymentInfoRef!);
-  return paymentInfo.single;
+  var paymentInfo = PaymentInfoRecord.getDocumentOnce(paymentInfoRef!);
+
+  return paymentInfo;
 }

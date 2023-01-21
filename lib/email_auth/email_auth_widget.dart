@@ -374,6 +374,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     return;
                                                   }
 
+                                                  await Future.delayed(
+                                                      const Duration(
+                                                          milliseconds: 5000));
                                                   if (currentUserDocument!
                                                           .paymentInfo !=
                                                       null) {
