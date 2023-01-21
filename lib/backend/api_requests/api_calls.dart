@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import '../../flutter_flow/flutter_flow_util.dart';
+import '../cloud_functions/cloud_functions.dart';
 
 import 'api_manager.dart';
 
@@ -9,186 +10,225 @@ export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
-class GetPermanentAuthCall {
-  static Future<ApiCallResponse> call({
-    String? tempKey = 'no temp key',
-  }) {
-    final body = '''
-{
-  "code": "${tempKey}"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Get Permanent Auth',
-      apiUrl: 'https://api.withmono.com/account/auth',
-      callType: ApiCallType.POST,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid',
+/// Start Mono Group Code
+
+class MonoGroup {
+  static FetchPermanentIDCall fetchPermanentIDCall = FetchPermanentIDCall();
+  static FetchAccountDataCall fetchAccountDataCall = FetchAccountDataCall();
+  static FetchTransactionsCall fetchTransactionsCall = FetchTransactionsCall();
+  static UnlinkAccountCall unlinkAccountCall = UnlinkAccountCall();
+  static DataSyncCall dataSyncCall = DataSyncCall();
+  static ReauthenticateCall reauthenticateCall = ReauthenticateCall();
+}
+
+class FetchPermanentIDCall {
+  Future<ApiCallResponse> call({
+    String? tempKey = '',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'FetchPermanentIDCall',
+        'variables': {
+          'tempKey': tempKey,
+        },
       },
-      params: {},
-      body: body,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
     );
+    return ApiCallResponse.fromCloudCallResponse(response);
   }
 }
 
-class GetAccountInfoCall {
-  static Future<ApiCallResponse> call({
+class FetchAccountDataCall {
+  Future<ApiCallResponse> call({
     String? authID = '',
-  }) {
-    return ApiManager.instance.makeApiCall(
-      callName: 'getAccountInfo',
-      apiUrl: 'https://api.withmono.com/accounts/${authID}',
-      callType: ApiCallType.GET,
-      headers: {
-        'Accept': 'application/json',
-        'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'FetchAccountDataCall',
+        'variables': {
+          'authID': authID,
+        },
       },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
     );
+    return ApiCallResponse.fromCloudCallResponse(response);
   }
-
-  static dynamic dataStatus(dynamic response) => getJsonField(
-        response,
-        r'''$.meta.data_status''',
-      );
-  static dynamic authMethod(dynamic response) => getJsonField(
-        response,
-        r'''$.meta.auth_method''',
-      );
-  static dynamic accountName(dynamic response) => getJsonField(
-        response,
-        r'''$.account.name''',
-      );
-  static dynamic accountCurrency(dynamic response) => getJsonField(
-        response,
-        r'''$.account.currency''',
-      );
-  static dynamic accountType(dynamic response) => getJsonField(
-        response,
-        r'''$.account.type''',
-      );
-  static dynamic accountNumber(dynamic response) => getJsonField(
-        response,
-        r'''$.account.accountNumber''',
-      );
-  static dynamic accountBalance(dynamic response) => getJsonField(
-        response,
-        r'''$.account.balance''',
-      );
-  static dynamic bvn(dynamic response) => getJsonField(
-        response,
-        r'''$.account.bvn''',
-      );
-  static dynamic institutionName(dynamic response) => getJsonField(
-        response,
-        r'''$.account.institution.name''',
-      );
-  static dynamic institutionCode(dynamic response) => getJsonField(
-        response,
-        r'''$.account.institution.code''',
-      );
-  static dynamic institutionType(dynamic response) => getJsonField(
-        response,
-        r'''$.account.institution.type''',
-      );
 }
 
-class GetTransactionsCall {
-  static Future<ApiCallResponse> call({
+class FetchTransactionsCall {
+  Future<ApiCallResponse> call({
     String? authID = '',
-  }) {
-    return ApiManager.instance.makeApiCall(
-      callName: 'getTransactions',
-      apiUrl: 'https://api.withmono.com/accounts/${authID}/transactions',
-      callType: ApiCallType.GET,
-      headers: {
-        'Accept': 'application/json',
-        'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'FetchTransactionsCall',
+        'variables': {
+          'authID': authID,
+        },
       },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
     );
+    return ApiCallResponse.fromCloudCallResponse(response);
   }
 }
 
-class UnlinkMonoCall {
-  static Future<ApiCallResponse> call({
+class UnlinkAccountCall {
+  Future<ApiCallResponse> call({
     String? authID = '',
-  }) {
-    return ApiManager.instance.makeApiCall(
-      callName: 'unlinkMono',
-      apiUrl: 'https://api.withmono.com/accounts/${authID}/unlink',
-      callType: ApiCallType.POST,
-      headers: {
-        'Accept': 'application/json',
-        'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'UnlinkAccountCall',
+        'variables': {
+          'authID': authID,
+        },
       },
-      params: {},
-      bodyType: BodyType.NONE,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
     );
+    return ApiCallResponse.fromCloudCallResponse(response);
   }
 }
 
-class DataSyncMonoCall {
-  static Future<ApiCallResponse> call({
+class DataSyncCall {
+  Future<ApiCallResponse> call({
     String? authID = '',
-  }) {
-    return ApiManager.instance.makeApiCall(
-      callName: 'dataSyncMono',
-      apiUrl: 'https://api.withmono.com/accounts/${authID}/sync',
-      callType: ApiCallType.POST,
-      headers: {
-        'Accept': 'application/json',
-        'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'DataSyncCall',
+        'variables': {
+          'authID': authID,
+        },
       },
-      params: {},
-      bodyType: BodyType.NONE,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
     );
+    return ApiCallResponse.fromCloudCallResponse(response);
   }
 }
 
-class ReauthMonoCall {
-  static Future<ApiCallResponse> call({
+class ReauthenticateCall {
+  Future<ApiCallResponse> call({
     String? authID = '',
-  }) {
-    return ApiManager.instance.makeApiCall(
-      callName: 'reauthMono',
-      apiUrl: 'https://api.withmono.com/accounts/${authID}/reauthorise',
-      callType: ApiCallType.POST,
-      headers: {
-        'Accept': 'application/json',
-        'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'ReauthenticateCall',
+        'variables': {
+          'authID': authID,
+        },
       },
-      params: {},
-      bodyType: BodyType.NONE,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
     );
+    return ApiCallResponse.fromCloudCallResponse(response);
   }
 }
+
+/// End Mono Group Code
+
+/// Start Flutterwave Group Code
+
+class FlutterwaveGroup {
+  static NewPaymentCall newPaymentCall = NewPaymentCall();
+  static VerifyPaymentCall verifyPaymentCall = VerifyPaymentCall();
+  static FetchSubscriptionCall fetchSubscriptionCall = FetchSubscriptionCall();
+  static CancelSubscriptionCall cancelSubscriptionCall =
+      CancelSubscriptionCall();
+  static ActivateSubscriptionCall activateSubscriptionCall =
+      ActivateSubscriptionCall();
+}
+
+class NewPaymentCall {
+  Future<ApiCallResponse> call({
+    String? eventid = '',
+    String? userid = '',
+    String? username = '',
+    String? email = '',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'NewPaymentCall',
+        'variables': {
+          'eventid': eventid,
+          'userid': userid,
+          'username': username,
+          'email': email,
+        },
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
+}
+
+class VerifyPaymentCall {
+  Future<ApiCallResponse> call({
+    String? txRef = '',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'VerifyPaymentCall',
+        'variables': {
+          'txRef': txRef,
+        },
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
+}
+
+class FetchSubscriptionCall {
+  Future<ApiCallResponse> call({
+    String? transactionId = '',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'FetchSubscriptionCall',
+        'variables': {
+          'transactionId': transactionId,
+        },
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
+}
+
+class CancelSubscriptionCall {
+  Future<ApiCallResponse> call({
+    String? subscriptionId = '',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'CancelSubscriptionCall',
+        'variables': {
+          'subscriptionId': subscriptionId,
+        },
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
+}
+
+class ActivateSubscriptionCall {
+  Future<ApiCallResponse> call({
+    String? subscriptionId = '',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'ActivateSubscriptionCall',
+        'variables': {
+          'subscriptionId': subscriptionId,
+        },
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
+}
+
+/// End Flutterwave Group Code
 
 class ApiPagingParams {
   int nextPageNumber = 0;
