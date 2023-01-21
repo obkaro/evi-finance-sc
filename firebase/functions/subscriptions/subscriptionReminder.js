@@ -4,6 +4,8 @@ const admin = require('firebase-admin');
 exports.subscriptionReminder = functions.firestore.document('subscriptions/{Id}')
   .onWrite(async (change, context) => {
 
+    // TODO: ADD CASE FOR WHEN SUBSCRIPTION ALREADY EXISTS
+    
     functions.logger.log(change.after.data());
     const doc = change.after.exists ? change.after.data() : null;
 
