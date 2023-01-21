@@ -438,7 +438,3 @@ String toTitleCase(String string) {
 String fiftyPercent(double numberValue) {
   return (numberValue / 2).toStringAsFixed(2);
 }
-
-String? fetchPayStatus(DocumentReference? paymentInfo) {
-  return paymentInfo;
-}

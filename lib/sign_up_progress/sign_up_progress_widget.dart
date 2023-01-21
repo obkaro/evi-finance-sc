@@ -1,6 +1,8 @@
+import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../landing_page_view/landing_page_view_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,8 +53,15 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
               color: Colors.white,
               size: 30,
             ),
-            onPressed: () {
-              print('IconButton pressed ...');
+            onPressed: () async {
+              await signOut();
+              await Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LandingPageViewWidget(),
+                ),
+                (r) => false,
+              );
             },
           ),
         ],
@@ -125,7 +134,7 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 16, 16, 16),
                                   child: Text(
-                                    'Visit app.evi.finance to finish signing in. As an Evi user, you can access all your financial data in one place on all your devices.',
+                                    'Visit app.evi.finance to finish signing in. As an Evi user, you can unleash the power of an informed and healthy financial life without stress.',
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
