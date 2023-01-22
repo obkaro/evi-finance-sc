@@ -29,7 +29,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:provider/provider.dart';
 
 class DashboardWidget extends StatefulWidget {
@@ -85,7 +84,6 @@ class _DashboardWidgetState extends State<DashboardWidget>
     ),
   };
   PaymentInfoRecord? payInfo;
-  bool bio = false;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -95,28 +93,31 @@ class _DashboardWidgetState extends State<DashboardWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      final _localAuth = LocalAuthentication();
-      bool _isBiometricSupported = await _localAuth.isDeviceSupported();
-
-      if (_isBiometricSupported) {
-        bio = await _localAuth.authenticate(
-            localizedReason:
-                'Please authenticate to access your secure financial information.');
-        setState(() {});
-      }
-
       await actions.printConsole(
         'CURRENT USER - ${currentUserEmail}',
       );
-      if (currentUserDocument!.paymentInfo != null) {
-        payInfo = await actions.fetchPayInfo(
-          context,
-          currentUserDocument!.paymentInfo,
-        );
+      if (currentUserReference != null) {
         await actions.printConsole(
-          'PAY STATUS - ${payInfo!.payStatus}',
+          'CURRENT Email verified - ${currentUserEmailVerified.toString()}',
         );
-        if (payInfo!.payStatus != 'active') {
+        if (currentUserDocument!.paymentInfo != null) {
+          payInfo = await actions.fetchPayInfo(
+            context,
+            currentUserDocument!.paymentInfo,
+          );
+          await actions.printConsole(
+            'PAY STATUS - ${payInfo!.payStatus}',
+          );
+          if (payInfo!.payStatus != 'active') {
+            await Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SignUpProgressWidget(),
+              ),
+              (r) => false,
+            );
+          }
+        } else {
           await Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
@@ -125,14 +126,6 @@ class _DashboardWidgetState extends State<DashboardWidget>
             (r) => false,
           );
         }
-      } else {
-        await Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SignUpProgressWidget(),
-          ),
-          (r) => false,
-        );
       }
     });
 
@@ -169,6 +162,10 @@ class _DashboardWidgetState extends State<DashboardWidget>
           );
         }
         List<PaymentInfoRecord> dashboardPaymentInfoRecordList = snapshot.data!;
+        // Return an empty Container when the item does not exist.
+        if (snapshot.data!.isEmpty) {
+          return Container();
+        }
         final dashboardPaymentInfoRecord =
             dashboardPaymentInfoRecordList.isNotEmpty
                 ? dashboardPaymentInfoRecordList.first
