@@ -10,5 +10,5 @@ import 'package:flutter/material.dart';
 
 Future archiveBudget(DocumentReference? budgetRef) async {
   // Add your function code here!
-  await budgetRef.update({'status': 'archived'});
+  await budgetRef!.update({'status': 'archived'});
 }
