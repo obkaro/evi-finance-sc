@@ -82,9 +82,10 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
                   ).then((value) => setState(() {}));
                 }
               }
+
+              instantTimer?.cancel();
             }
           }
-          instantTimer?.cancel();
         },
         startImmediately: true,
       );

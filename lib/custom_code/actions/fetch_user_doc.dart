@@ -10,5 +10,5 @@ import 'package:flutter/material.dart';
 
 Future<UsersRecord> fetchUserDoc(DocumentReference? userRef) async {
   // Add your function code here!
-  return userRef!.getDocumentOnce(userRef);
+  return UsersRecord.getDocumentOnce(userRef!);
 }

@@ -155,30 +155,30 @@ class MobileTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 18,
       );
-  String get subtitle1Family => 'Encode Sans';
+  String get subtitle1Family => 'Urbanist';
   TextStyle get subtitle1 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16,
       );
-  String get subtitle2Family => 'Encode Sans';
+  String get subtitle2Family => 'Urbanist';
   TextStyle get subtitle2 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 14,
       );
-  String get bodyText1Family => 'Encode Sans';
+  String get bodyText1Family => 'Urbanist';
   TextStyle get bodyText1 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 14,
       );
-  String get bodyText2Family => 'Encode Sans';
+  String get bodyText2Family => 'Urbanist';
   TextStyle get bodyText2 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12,
@@ -190,51 +190,51 @@ class TabletTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Encode Sans';
+  String get title1Family => 'Urbanist';
   TextStyle get title1 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 24,
       );
-  String get title2Family => 'Encode Sans';
+  String get title2Family => 'Urbanist';
   TextStyle get title2 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.secondaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get title3Family => 'Encode Sans';
+  String get title3Family => 'Urbanist';
   TextStyle get title3 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get subtitle1Family => 'Encode Sans';
+  String get subtitle1Family => 'Urbanist';
   TextStyle get subtitle1 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 18,
       );
-  String get subtitle2Family => 'Encode Sans';
+  String get subtitle2Family => 'Urbanist';
   TextStyle get subtitle2 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.secondaryText,
         fontWeight: FontWeight.bold,
         fontSize: 16,
       );
-  String get bodyText1Family => 'Encode Sans';
+  String get bodyText1Family => 'Urbanist';
   TextStyle get bodyText1 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 14,
       );
-  String get bodyText2Family => 'Encode Sans';
+  String get bodyText2Family => 'Urbanist';
   TextStyle get bodyText2 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 12,
@@ -246,51 +246,51 @@ class DesktopTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Encode Sans';
+  String get title1Family => 'Urbanist';
   TextStyle get title1 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 24,
       );
-  String get title2Family => 'Encode Sans';
+  String get title2Family => 'Urbanist';
   TextStyle get title2 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.secondaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get title3Family => 'Encode Sans';
+  String get title3Family => 'Urbanist';
   TextStyle get title3 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get subtitle1Family => 'Encode Sans';
+  String get subtitle1Family => 'Urbanist';
   TextStyle get subtitle1 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 18,
       );
-  String get subtitle2Family => 'Encode Sans';
+  String get subtitle2Family => 'Urbanist';
   TextStyle get subtitle2 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.secondaryText,
         fontWeight: FontWeight.bold,
         fontSize: 16,
       );
-  String get bodyText1Family => 'Encode Sans';
+  String get bodyText1Family => 'Urbanist';
   TextStyle get bodyText1 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 14,
       );
-  String get bodyText2Family => 'Encode Sans';
+  String get bodyText2Family => 'Urbanist';
   TextStyle get bodyText2 => GoogleFonts.getFont(
-        'Encode Sans',
+        'Urbanist',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 12,
