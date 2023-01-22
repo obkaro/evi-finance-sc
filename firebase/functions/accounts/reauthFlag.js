@@ -1,9 +1,9 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
-exports.reauthFlag = functions.runWith({ timeoutSeconds: 300 }).https.onRequest(async (req, res) => {
+exports.reauthFlag = functions.runWith({ timeoutSeconds: 300, secrets: ['MONO_SEC_REAUTH_FLAG'] }).https.onRequest(async (req, res) => {
 
-  if (req.headers['mono-webhook-secret'] != "sec_e4zIE8VmXkMPegEaDuBm") {
+  if (req.headers['mono-webhook-secret'] != process.env.MONO_SEC_REAUTH_FLAG) {
     res.status(403).send('Forbidden');
     return;
   }

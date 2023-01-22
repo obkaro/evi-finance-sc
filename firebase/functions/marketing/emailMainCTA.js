@@ -4,7 +4,7 @@ const admin = require('firebase-admin');
 const postmark = require('postmark');
 
 //WEBFLOW FORM SUBMISSIONS
-exports.emailMainCTA = functions.https.onRequest(async (req, res) => {
+exports.emailMainCTA = functions.runWith({secrets: ['POSTMARK_TRANS_TOKEN']}).https.onRequest(async (req, res) => {
   functions.logger.log('WEBFLOW FORM SUBMISSION');
   functions.logger.log(req.body);
   functions.logger.log(req.body.data.Email);
@@ -13,7 +13,7 @@ exports.emailMainCTA = functions.https.onRequest(async (req, res) => {
 
   const time = admin.firestore.Timestamp.now();
 
-  const client = new postmark.Client('019168a8-a6f5-43c1-a968-52ba0284f79e');
+  const client = new postmark.Client(process.env.POSTMARK_TRANS_TOKEN);
 
   client.sendEmailWithTemplate({
     "From": "hello@evifinance.com",

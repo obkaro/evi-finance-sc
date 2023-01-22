@@ -3,13 +3,13 @@ const admin = require('firebase-admin');
 
 const client = require("@mailchimp/mailchimp_marketing");
 
-exports.mailchimpImport = functions.firestore.document('subscriptions/{Id}')
+exports.mailchimpImport = functions.runWith({ secrets: ['MAILCHIMP_KEY']}).firestore.document('subscriptions/{Id}')
 .onWrite(async (change, context) => {
     
     //const payload = req.body;
 
     client.setConfig({
-        apiKey: "f299542910cb80897eb6a551e4eb3c74-us17",
+        apiKey: process.env.MAILCHIMP_KEY,
         server: "us17",
     });
 

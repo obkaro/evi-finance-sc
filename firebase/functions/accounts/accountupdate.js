@@ -6,10 +6,14 @@ const sdk = require('api')('@mono/v1.0#33hmc2izkyejmoej');
 const axios = require('axios');
 
 // UPDATE ACCOUNTS
-exports.accountUpdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', })
+exports.accountUpdate = functions.runWith({ 
+  timeoutSeconds: 300, 
+  memory: '1GB', 
+  secrets: ['MONO_SK', 'MONO_SEC_ACCT_UPDATE']
+})
   .https.onRequest(async (req, res) => {
 
-    if (req.headers['mono-webhook-secret'] != "sec_HmoYplYXAyDKvlXLAOYv") {
+    if (req.headers['mono-webhook-secret'] != process.env.MONO_SEC_ACCT_UPDATE) {
       res.status(403).send('Forbidden');
       return;
     }
@@ -63,7 +67,7 @@ exports.accountUpdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', 
         const options = {
           method: 'GET',
           url: 'https://api.withmono.com/accounts/' + req.body.data.account._id + '/transactions',
-          headers: { Accept: 'application/json', 'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid' }
+          headers: { Accept: 'application/json', 'mono-sec-key': process.env.MONO_SK }
         };
         axios
           .request(options)

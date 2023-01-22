@@ -865,7 +865,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                       '${functions.subtractCurrencyText(containerBudgetsRecord!.budgetAmount, containerBudgetsRecord!.budgetSpent)}',
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .bodyText2,
+                                                                          .subtitle2,
                                                                     ),
                                                                   ),
                                                                 ),
@@ -890,7 +890,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                             )}',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText2,
+                                                                .subtitle2,
                                                           ),
                                                         ],
                                                       ),
