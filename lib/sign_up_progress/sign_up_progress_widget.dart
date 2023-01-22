@@ -50,6 +50,7 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
               payInfo!.payStatus,
             );
             if (payInfo!.payStatus == 'active') {
+              instantTimer?.cancel();
               if (valueOrDefault(currentUserDocument?.username, '') == null ||
                   valueOrDefault(currentUserDocument?.username, '') == '') {
                 await Navigator.push(
@@ -82,8 +83,6 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
                   ).then((value) => setState(() {}));
                 }
               }
-
-              instantTimer?.cancel();
             }
           }
         },
