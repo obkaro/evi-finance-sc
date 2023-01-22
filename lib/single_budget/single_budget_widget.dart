@@ -390,7 +390,7 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                                         padding:
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(0, 0,
-                                                                    0, 16),
+                                                                    0, 12),
                                                         child: InkWell(
                                                           onTap: () async {
                                                             // Action_ViewSingleCategory
