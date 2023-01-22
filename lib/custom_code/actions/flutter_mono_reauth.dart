@@ -45,7 +45,7 @@ Future flutterMonoReauth(
                         const Radius.circular(24.0),
                       ),
                       child: MonoWebView(
-                        apiKey: 'live_pk_dNWUp8sYwG5mGXq3mFOT',
+                        apiKey: 'live_pk_GqeoUpzmIjfSENjpYCdT',
                         //config: "abc",
                         reAuthCode: reauthCode,
                         onEvent: (event, data) {
