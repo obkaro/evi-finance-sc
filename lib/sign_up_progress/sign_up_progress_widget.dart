@@ -10,6 +10,7 @@ import '../landing_page_view/landing_page_view_widget.dart';
 import '../main.dart';
 import '../welcome_to_evi/welcome_to_evi_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -163,17 +164,18 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
                                 EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
                             child: ClipRRect(
                               child: Container(
-                                width: 200,
+                                width: 240,
                                 height: 240,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
                                   shape: BoxShape.rectangle,
                                 ),
-                                child: Image.network(
-                                  'https://media.giphy.com/media/Tzstx0wv1Siztoaybi/giphy.gif',
-                                  width: 160,
-                                  height: 160,
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      'https://media.giphy.com/media/Tzstx0wv1Siztoaybi/giphy.gif',
+                                  width: 240,
+                                  height: 240,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -197,36 +199,35 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Expanded(
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    await launchURL('https://app.evi.finance');
-                                  },
-                                  text:
-                                      'Visit app.evi.finance to finish signing in.',
-                                  options: FFButtonOptions(
-                                    height: 60,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2Family,
-                                          color: Colors.white,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2Family),
-                                        ),
-                                    elevation: 2,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(16),
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  await launchURL('https://app.evi.finance');
+                                },
+                                text:
+                                    'Visit app.evi.finance to finish signing in.',
+                                options: FFButtonOptions(
+                                  height: 60,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16, 0, 16, 0),
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .subtitle2Family,
+                                        color: Colors.white,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2Family),
+                                      ),
+                                  elevation: 2,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
                                   ),
+                                  borderRadius: BorderRadius.circular(16),
                                 ),
                               ),
                             ],
