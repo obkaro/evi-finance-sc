@@ -6,7 +6,9 @@ const axios = require('axios');
 
 
 //PERIODIC DATA SYNC
-exports.dataSync = functions.pubsub.schedule('0 */14 * * *').onRun(async (context) => {
+exports.dataSync = functions.runWith({
+  secrets: ['MONO_SK']
+}).pubsub.schedule('0 */14 * * *').onRun(async (context) => {
 
     const accounts = await admin.firestore().collection('accounts').get();
   
@@ -14,23 +16,12 @@ exports.dataSync = functions.pubsub.schedule('0 */14 * * *').onRun(async (contex
       const options = {
         method: 'POST',
         url: 'https://api.withmono.com/accounts/' + account.data().authID + '/sync?allow_incomplete_statement=false',
-        headers: { Accept: 'application/json', 'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid' }
+        headers: { Accept: 'application/json', 'mono-sec-key': process.env.MONO_SK }
       };
       axios
         .request(options)
         .then(async function (response) {
   
-          // if(response.data.event === "mono.events.account_synced") {
-  
-          //     const options = {
-          //       method: 'GET',
-          //       url: 'https://api.withmono.com/accounts/' + req.body.data.account._id + '/transactions',
-          //       headers: { Accept: 'application/json', 'mono-sec-key': 'live_sk_k7LNk7ovmMi9CsrmCUid' }
-          //     };
-          //     axios
-          //       .request(options)
-          //       .then(async function (response) {});
-          // }
   
           functions.logger.log(account.data().authID, response.data);
   

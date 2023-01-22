@@ -22,7 +22,7 @@ exports.newPaymentListener = functions.firestore.document('users/{userid}/billin
         //     method: 'POST',
         //     url: 'https://api.flutterwave.com/v3/payments',
         //     headers: {
-        //         Authorization: `Bearer FLWSECK_TEST-b933938ca1b4b9f4ff523514f494ba61-X`
+        //         Authorization: `Bearer `
         //     },
         //     data: {
         //         tx_ref: eventid,
@@ -79,7 +79,7 @@ exports.newPaymentListener = functions.firestore.document('users/{userid}/billin
         // try {
         //     const response = await got.post("https://api.flutterwave.com/v3/payments", {
         //         headers: {
-        //             Authorization: `Bearer FLWSECK_TEST-b933938ca1b4b9f4ff523514f494ba61-X`
+        //             Authorization: `Bearer `
         //         },
         //         json: {
         //             tx_ref: hashed_id,
