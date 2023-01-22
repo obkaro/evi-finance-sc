@@ -1,7 +1,5 @@
 export 'flutter_mono.dart' show flutterMono;
 export 'flutter_mono_reauth.dart' show flutterMonoReauth;
-export 'write_transactions.dart' show writeTransactions;
-export 'write_new_acct_transactions.dart' show writeNewAcctTransactions;
 export 'delete_categories.dart' show deleteCategories;
 export 'delete_transactions.dart' show deleteTransactions;
 export 'unlink_all_trans_categories.dart' show unlinkAllTransCategories;
@@ -9,3 +7,7 @@ export 'update_category.dart' show updateCategory;
 export 'launch_store.dart' show launchStore;
 export 'get_version_number.dart' show getVersionNumber;
 export 'normalize_trans_sub.dart' show normalizeTransSub;
+export 'fetch_pay_info.dart' show fetchPayInfo;
+export 'print_console.dart' show printConsole;
+export 'archive_budget.dart' show archiveBudget;
+export 'fetch_user_doc.dart' show fetchUserDoc;

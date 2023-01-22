@@ -138,6 +138,14 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.paymentInfo;
+    if (value != null) {
+      result
+        ..add('paymentInfo')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -234,6 +242,12 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
           result.acqChannel = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'paymentInfo':
+          result.paymentInfo = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -281,6 +295,8 @@ class _$UsersRecord extends UsersRecord {
   @override
   final String? acqChannel;
   @override
+  final DocumentReference<Object?>? paymentInfo;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
@@ -303,6 +319,7 @@ class _$UsersRecord extends UsersRecord {
       this.experience,
       this.username,
       this.acqChannel,
+      this.paymentInfo,
       this.ffRef})
       : super._();
 
@@ -333,6 +350,7 @@ class _$UsersRecord extends UsersRecord {
         experience == other.experience &&
         username == other.username &&
         acqChannel == other.acqChannel &&
+        paymentInfo == other.paymentInfo &&
         ffRef == other.ffRef;
   }
 
@@ -355,26 +373,29 @@ class _$UsersRecord extends UsersRecord {
                                                             $jc(
                                                                 $jc(
                                                                     $jc(
-                                                                        0,
-                                                                        email
+                                                                        $jc(
+                                                                            0,
+                                                                            email
+                                                                                .hashCode),
+                                                                        displayName
                                                                             .hashCode),
-                                                                    displayName
+                                                                    photoUrl
                                                                         .hashCode),
-                                                                photoUrl
-                                                                    .hashCode),
-                                                            uid.hashCode),
-                                                        createdTime.hashCode),
-                                                    phoneNumber.hashCode),
-                                                income.hashCode),
-                                            tempAuthCode.hashCode),
-                                        accountsList.hashCode),
-                                    budgetList.hashCode),
-                                activeBudget.hashCode),
-                            defaultAccount.hashCode),
-                        onboardingStep.hashCode),
-                    experience.hashCode),
-                username.hashCode),
-            acqChannel.hashCode),
+                                                                uid.hashCode),
+                                                            createdTime
+                                                                .hashCode),
+                                                        phoneNumber.hashCode),
+                                                    income.hashCode),
+                                                tempAuthCode.hashCode),
+                                            accountsList.hashCode),
+                                        budgetList.hashCode),
+                                    activeBudget.hashCode),
+                                defaultAccount.hashCode),
+                            onboardingStep.hashCode),
+                        experience.hashCode),
+                    username.hashCode),
+                acqChannel.hashCode),
+            paymentInfo.hashCode),
         ffRef.hashCode));
   }
 
@@ -397,6 +418,7 @@ class _$UsersRecord extends UsersRecord {
           ..add('experience', experience)
           ..add('username', username)
           ..add('acqChannel', acqChannel)
+          ..add('paymentInfo', paymentInfo)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -476,6 +498,11 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   String? get acqChannel => _$this._acqChannel;
   set acqChannel(String? acqChannel) => _$this._acqChannel = acqChannel;
 
+  DocumentReference<Object?>? _paymentInfo;
+  DocumentReference<Object?>? get paymentInfo => _$this._paymentInfo;
+  set paymentInfo(DocumentReference<Object?>? paymentInfo) =>
+      _$this._paymentInfo = paymentInfo;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -503,6 +530,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _experience = $v.experience;
       _username = $v.username;
       _acqChannel = $v.acqChannel;
+      _paymentInfo = $v.paymentInfo;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -544,6 +572,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
               experience: experience,
               username: username,
               acqChannel: acqChannel,
+              paymentInfo: paymentInfo,
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;

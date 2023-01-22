@@ -1,11 +1,14 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/notification_prompt_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../forgot_password/forgot_password_widget.dart';
 import '../main.dart';
+import '../sign_up_progress/sign_up_progress_widget.dart';
 import '../welcome_to_evi/welcome_to_evi_widget.dart';
+import '../custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -20,14 +23,15 @@ class EmailAuthWidget extends StatefulWidget {
 }
 
 class _EmailAuthWidgetState extends State<EmailAuthWidget> {
+  PaymentInfoRecord? payInfo;
+  TextEditingController? signInEmailController;
+  TextEditingController? signInPasswordController;
+  late bool signInPasswordVisibility;
   TextEditingController? confirmPasswordController;
   late bool confirmPasswordVisibility;
   TextEditingController? newPasswordController;
   late bool newPasswordVisibility;
   TextEditingController? signUpEmailController;
-  TextEditingController? signInEmailController;
-  TextEditingController? signInPasswordController;
-  late bool signInPasswordVisibility;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final formKey2 = GlobalKey<FormState>();
@@ -370,34 +374,103 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     return;
                                                   }
 
-                                                  if (valueOrDefault(
-                                                              currentUserDocument
-                                                                  ?.username,
-                                                              '') ==
-                                                          null ||
-                                                      valueOrDefault(
-                                                              currentUserDocument
-                                                                  ?.username,
-                                                              '') ==
-                                                          '') {
-                                                    await Navigator.push(
+                                                  await Future.delayed(
+                                                      const Duration(
+                                                          milliseconds: 5000));
+                                                  if (currentUserDocument!
+                                                          .paymentInfo !=
+                                                      null) {
+                                                    payInfo = await actions
+                                                        .fetchPayInfo(
                                                       context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            WelcomeToEviWidget(),
-                                                      ),
+                                                      currentUserDocument!
+                                                          .paymentInfo,
                                                     );
+                                                    await actions.printConsole(
+                                                      'PAY STATUS - ${payInfo!.payStatus}',
+                                                    );
+                                                    if (payInfo!.payStatus ==
+                                                        'active') {
+                                                      if (valueOrDefault(
+                                                                  currentUserDocument
+                                                                      ?.username,
+                                                                  '') ==
+                                                              null ||
+                                                          valueOrDefault(
+                                                                  currentUserDocument
+                                                                      ?.username,
+                                                                  '') ==
+                                                              '') {
+                                                        await Navigator
+                                                            .pushAndRemoveUntil(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                WelcomeToEviWidget(),
+                                                          ),
+                                                          (r) => false,
+                                                        );
+                                                      } else {
+                                                        if (currentUserDocument!
+                                                                .activeBudget !=
+                                                            null) {
+                                                          await Navigator
+                                                              .pushAndRemoveUntil(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  NavBarPage(
+                                                                      initialPage:
+                                                                          'Dashboard'),
+                                                            ),
+                                                            (r) => false,
+                                                          );
+                                                        } else {
+                                                          await showModalBottomSheet(
+                                                            isScrollControlled:
+                                                                true,
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            enableDrag: false,
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return Padding(
+                                                                padding: MediaQuery.of(
+                                                                        context)
+                                                                    .viewInsets,
+                                                                child:
+                                                                    NotificationPromptWidget(),
+                                                              );
+                                                            },
+                                                          ).then((value) =>
+                                                              setState(() {}));
+                                                        }
+                                                      }
+                                                    } else {
+                                                      await Navigator
+                                                          .pushAndRemoveUntil(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              SignUpProgressWidget(),
+                                                        ),
+                                                        (r) => false,
+                                                      );
+                                                    }
                                                   } else {
-                                                    await Navigator.push(
+                                                    await Navigator
+                                                        .pushAndRemoveUntil(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
-                                                            NavBarPage(
-                                                                initialPage:
-                                                                    'Dashboard'),
+                                                            SignUpProgressWidget(),
                                                       ),
+                                                      (r) => false,
                                                     );
                                                   }
+
+                                                  setState(() {});
                                                 },
                                                 text: 'Sign in',
                                                 options: FFButtonOptions(
@@ -856,7 +929,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          WelcomeToEviWidget(),
+                                                          SignUpProgressWidget(),
                                                     ),
                                                     (r) => false,
                                                   );
@@ -936,77 +1009,11 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 16, 0),
-                                        child: Container(
-                                          width: 48,
-                                          height: 48,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Align(
-                                            alignment:
-                                                AlignmentDirectional(0, 0),
-                                            child: InkWell(
-                                              onTap: () async {
-                                                final user =
-                                                    await signInWithGoogle(
-                                                        context);
-                                                if (user == null) {
-                                                  return;
-                                                }
-                                                if (valueOrDefault(
-                                                            currentUserDocument
-                                                                ?.username,
-                                                            '') ==
-                                                        null ||
-                                                    valueOrDefault(
-                                                            currentUserDocument
-                                                                ?.username,
-                                                            '') ==
-                                                        '') {
-                                                  await Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          WelcomeToEviWidget(),
-                                                    ),
-                                                  );
-                                                } else {
-                                                  await Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          NavBarPage(
-                                                              initialPage:
-                                                                  'Dashboard'),
-                                                    ),
-                                                  );
-                                                }
-                                              },
-                                              child: Container(
-                                                width: 32,
-                                                height: 32,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Image.asset(
-                                                  'assets/images/google-color-icon.png',
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
                                       Container(
                                         width: 48,
                                         height: 48,
                                         decoration: BoxDecoration(
-                                          color: Colors.black,
+                                          color: Colors.white,
                                           shape: BoxShape.circle,
                                         ),
                                         child: Align(
@@ -1014,7 +1021,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                           child: InkWell(
                                             onTap: () async {
                                               final user =
-                                                  await signInWithApple(
+                                                  await signInWithGoogle(
                                                       context);
                                               if (user == null) {
                                                 return;
@@ -1056,13 +1063,81 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                 shape: BoxShape.circle,
                                               ),
                                               child: Image.asset(
-                                                'assets/images/apple-xxl.png',
+                                                'assets/images/google-color-icon.png',
                                                 fit: BoxFit.contain,
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
+                                      if (isiOS)
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 0, 0, 0),
+                                          child: Container(
+                                            width: 48,
+                                            height: 48,
+                                            decoration: BoxDecoration(
+                                              color: Colors.black,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Align(
+                                              alignment:
+                                                  AlignmentDirectional(0, 0),
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  final user =
+                                                      await signInWithApple(
+                                                          context);
+                                                  if (user == null) {
+                                                    return;
+                                                  }
+                                                  if (valueOrDefault(
+                                                              currentUserDocument
+                                                                  ?.username,
+                                                              '') ==
+                                                          null ||
+                                                      valueOrDefault(
+                                                              currentUserDocument
+                                                                  ?.username,
+                                                              '') ==
+                                                          '') {
+                                                    await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            WelcomeToEviWidget(),
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            NavBarPage(
+                                                                initialPage:
+                                                                    'Dashboard'),
+                                                      ),
+                                                    );
+                                                  }
+                                                },
+                                                child: Container(
+                                                  width: 32,
+                                                  height: 32,
+                                                  clipBehavior: Clip.antiAlias,
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                  child: Image.asset(
+                                                    'assets/images/apple-xxl.png',
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                     ],
                                   ),
                                 ),

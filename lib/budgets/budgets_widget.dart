@@ -84,29 +84,55 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
             size: 30,
           ),
           onPressed: () async {
-            final budgetsCreateData = createBudgetsRecordData(
-              budgetDateCreated: getCurrentTimestamp,
-              budgetID: random_data.randomString(
-                32,
-                32,
-                true,
-                true,
-                true,
-              ),
-              budgetOwner: currentUserReference,
-            );
-            var budgetsRecordReference = BudgetsRecord.collection.doc();
-            await budgetsRecordReference.set(budgetsCreateData);
-            newBudg = BudgetsRecord.getDocumentFromData(
-                budgetsCreateData, budgetsRecordReference);
-            await Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CreateBudgetWidget(
-                  budget: newBudg,
+            FFAppState().update(() {
+              FFAppState().dialogBoxReturn = false;
+            });
+            await showModalBottomSheet(
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              enableDrag: false,
+              context: context,
+              builder: (context) {
+                return Padding(
+                  padding: MediaQuery.of(context).viewInsets,
+                  child: DialogBoxWidget(
+                    heading: 'Create New Budget',
+                    body:
+                        'Your current active budget will be archived and replaced with the new one. This cannot be undone.',
+                    buttonYes: 'Create',
+                    buttonNo: 'Back',
+                    information: false,
+                    yesAction: () async {},
+                  ),
+                );
+              },
+            ).then((value) => setState(() {}));
+
+            if (FFAppState().dialogBoxReturn) {
+              final budgetsCreateData = createBudgetsRecordData(
+                budgetDateCreated: getCurrentTimestamp,
+                budgetID: random_data.randomString(
+                  32,
+                  32,
+                  true,
+                  true,
+                  true,
                 ),
-              ),
-            );
+                budgetOwner: currentUserReference,
+              );
+              var budgetsRecordReference = BudgetsRecord.collection.doc();
+              await budgetsRecordReference.set(budgetsCreateData);
+              newBudg = BudgetsRecord.getDocumentFromData(
+                  budgetsCreateData, budgetsRecordReference);
+              await Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CreateBudgetWidget(
+                    budget: newBudg,
+                  ),
+                ),
+              );
+            }
 
             setState(() {});
           },
@@ -118,7 +144,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
             IconThemeData(color: FlutterFlowTheme.of(context).secondaryPrimary),
         automaticallyImplyLeading: true,
         title: Text(
-          'Budget Archive',
+          'Budgets Archive',
           style: FlutterFlowTheme.of(context).title3.override(
                 fontFamily: FlutterFlowTheme.of(context).title3Family,
                 color: FlutterFlowTheme.of(context).secondaryPrimary,
@@ -418,7 +444,7 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'This is where your archived budgets live. \nSwipe left on a single budget for more options.',
+                              'This is where your previous budgets live. \nSwipe left on a single budget for more options.',
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .bodyText2

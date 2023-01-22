@@ -29,3 +29,12 @@ exports.checkAppPrompt = require('./users/checkAppPrompt').checkAppPrompt;
 
 //* IMPORT CONTACTS
 exports.mailchimpImport = require('./marketing/mailchimpImport').mailchimpImport;
+
+//* LISTEN FOR PAYMENT
+exports.newPaymentListener = require('./payment/newPaymentListener').newPaymentListener;
+
+//* WEBHOOK FOR PAYMENT
+exports.newPaymentWebhook = require('./payment/newPaymentWebhook').newPaymentWebhook;
+
+//* CANCEL SUBSCRIPTIONS PERIODICALLY
+exports.cancelSubscriptions = require('./payment/cancelSubscriptions').cancelSubscriptions;

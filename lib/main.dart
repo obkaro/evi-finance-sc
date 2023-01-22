@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'auth/firebase_user_provider.dart';
@@ -26,8 +27,6 @@ void main() async {
   await revenue_cat.initialize(
     "appl_aeKzFymPWckfjOYAgWkgfGfPSda",
     "goog_RRbRBosEHJVeJGgBddaWnGJnXXB",
-    debugLogEnabled: true,
-    loadDataAfterLaunch: true,
   );
 
   runApp(ChangeNotifierProvider(

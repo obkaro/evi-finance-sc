@@ -108,6 +108,7 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
                   child: custom_widgets.CurrencyTextField(
                     width: MediaQuery.of(context).size.width,
                     height: 55,
+                    amount: 0,
                     labelText: 'Amount',
                     hintText: 'Enter amount',
                     bgcolor: FlutterFlowTheme.of(context).primaryBackground,

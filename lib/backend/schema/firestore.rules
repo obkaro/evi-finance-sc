@@ -98,5 +98,19 @@ service cloud.firestore {
       allow write: if false;
       allow delete: if false;
     }
+
+    match /users/{parent}/billingEvents/{document} {
+      allow create: if request.auth.uid == parent;
+      allow read: if request.auth.uid == parent;
+      allow write: if request.auth.uid == parent;
+      allow delete: if false;
+    }
+
+    match /users/{parent}/paymentInfo/{document} {
+      allow create: if request.auth.uid == parent;
+      allow read: if request.auth.uid == parent;
+      allow write: if request.auth.uid == parent;
+      allow delete: if false;
+    }
   }
 }

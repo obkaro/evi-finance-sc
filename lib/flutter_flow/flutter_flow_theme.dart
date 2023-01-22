@@ -134,23 +134,23 @@ class MobileTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Fira Sans';
+  String get title1Family => 'Work Sans';
   TextStyle get title1 => GoogleFonts.getFont(
-        'Fira Sans',
+        'Work Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 24,
       );
-  String get title2Family => 'Fira Sans';
+  String get title2Family => 'Work Sans';
   TextStyle get title2 => GoogleFonts.getFont(
-        'Fira Sans',
+        'Work Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.bold,
         fontSize: 20,
       );
-  String get title3Family => 'Fira Sans';
+  String get title3Family => 'Work Sans';
   TextStyle get title3 => GoogleFonts.getFont(
-        'Fira Sans',
+        'Work Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18,

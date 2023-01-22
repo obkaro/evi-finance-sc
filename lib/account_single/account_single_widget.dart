@@ -143,7 +143,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                   child: RefreshIndicator(
                     onRefresh: () async {
                       // Action_dataSyncCall
-                      dataSyncResponse = await DataSyncMonoCall.call(
+                      dataSyncResponse = await MonoGroup.dataSyncCall.call(
                         authID: widget.account!.authID,
                       );
                       FFAppState().update(() {
@@ -155,7 +155,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                       if (FFAppState().dataSyncCode ==
                           'REAUTHORISATION_REQUIRED') {
                         // Action_ReauthCall
-                        reauthCode = await ReauthMonoCall.call(
+                        reauthCode = await MonoGroup.reauthenticateCall.call(
                           authID: widget.account!.authID,
                         );
                         // Action_ReauthAcct
@@ -776,7 +776,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                         await actions.deleteTransactions(
                                           buttonTransactionsRecordList.toList(),
                                         );
-                                        await UnlinkMonoCall.call(
+                                        await MonoGroup.unlinkAccountCall.call(
                                           authID: widget.account!.authID,
                                         );
                                         await widget.account!.reference

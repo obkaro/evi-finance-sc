@@ -96,7 +96,7 @@ exports.accountUpdate = functions.runWith({ timeoutSeconds: 300, memory: '1GB', 
                 return 4294967296 * (2097151 & h2) + (h1 >>> 0);
               };
 
-              functions.logger.log(hash(id));
+              //functions.logger.log(hash(id));
 
               const exisiting = await admin.firestore().collection('transactions').doc(hash(id).toString()).get();
 

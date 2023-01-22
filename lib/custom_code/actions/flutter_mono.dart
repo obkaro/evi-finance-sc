@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import '../../backend/api_requests/api_calls.dart';
+
 //import '../mono_custom/mono_flutter.dart';
 import 'package:evi/auth/auth_util.dart';
 import 'package:evi/backend/api_requests/api_calls.dart';
@@ -79,7 +81,7 @@ Future flutterMono(
 
                           //Use temporary key to get permanent key, save to variable: permKey
                           ApiCallResponse permKey =
-                              await GetPermanentAuthCall.call(
+                              await MonoGroup.fetchPermanentIDCall.call(
                                   tempKey: (currentUserDocument?.tempAuthCode));
 
                           // print(getJsonField(
@@ -111,7 +113,7 @@ Future flutterMono(
                           await currentUserReference!.update(usersUpdateData2);
 
                           ApiCallResponse acctInfoResponse =
-                              await GetAccountInfoCall.call(
+                              await MonoGroup.fetchAccountDataCall.call(
                             authID: newacct.authID,
                           );
 

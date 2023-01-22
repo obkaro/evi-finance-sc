@@ -17,12 +17,11 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
-import '../paywall/paywall_widget.dart';
+import '../sign_up_progress/sign_up_progress_widget.dart';
 import '../transactions/transactions_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
-import '../flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +83,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
       ],
     ),
   };
+  PaymentInfoRecord? payInfo;
+  UsersRecord? user;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -93,22 +94,41 @@ class _DashboardWidgetState extends State<DashboardWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (false) {
-        final isEntitled = await revenue_cat.isEntitled('starter');
-        if (isEntitled == null) {
-          return;
-        } else if (!isEntitled) {
-          await revenue_cat.loadOfferings();
-        }
-
-        if (!isEntitled) {
+      if (!FFAppState().paymentVerified) {
+        FFAppState().update(() {
+          FFAppState().paymentVerified = true;
+        });
+        user = await actions.fetchUserDoc(
+          currentUserReference,
+        );
+        await actions.printConsole(
+          'CURRENT USER - ${currentUserEmail}',
+        );
+        await actions.printConsole(
+          'CURRENT Email verified - ${user!.email}',
+        );
+        if (user!.paymentInfo != null) {
+          payInfo = await actions.fetchPayInfo(
+            context,
+            user!.paymentInfo,
+          );
+          await actions.printConsole(
+            'PAY STATUS - ${payInfo!.payStatus}',
+          );
+          if (payInfo!.payStatus != 'active') {
+            await Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SignUpProgressWidget(),
+              ),
+              (r) => false,
+            );
+          }
+        } else {
           await Navigator.pushAndRemoveUntil(
             context,
-            PageTransition(
-              type: PageTransitionType.fade,
-              duration: Duration(milliseconds: 250),
-              reverseDuration: Duration(milliseconds: 250),
-              child: PaywallWidget(),
+            MaterialPageRoute(
+              builder: (context) => SignUpProgressWidget(),
             ),
             (r) => false,
           );
@@ -708,189 +728,187 @@ class _DashboardWidgetState extends State<DashboardWidget>
                             ),
                           ),
                         ),
-                        if (currentUserDocument!.activeBudget != null)
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(24, 0, 24, 4),
-                            child: AuthUserStreamWidget(
-                              builder: (context) => Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 8, 0),
-                                    child: Text(
-                                      'Active Budget',
-                                      style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
-                                    ),
-                                  ),
-                                ],
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 4),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
+                                child: Text(
+                                  'Active Budget',
+                                  style: FlutterFlowTheme.of(context).subtitle2,
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                        if (currentUserDocument!.activeBudget != null)
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                            child: AuthUserStreamWidget(
-                              builder: (context) =>
-                                  StreamBuilder<BudgetsRecord>(
-                                stream: BudgetsRecord.getDocument(
-                                    currentUserDocument!.activeBudget!),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: LoadingBudgetSummaryWidget(),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                          child: StreamBuilder<List<BudgetsRecord>>(
+                            stream: queryBudgetsRecord(
+                              queryBuilder: (budgetsRecord) => budgetsRecord
+                                  .where('status', isEqualTo: 'active')
+                                  .where('budgetOwner',
+                                      isEqualTo: currentUserReference),
+                              singleRecord: true,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: LoadingBudgetSummaryWidget(),
+                                );
+                              }
+                              List<BudgetsRecord> containerBudgetsRecordList =
+                                  snapshot.data!;
+                              final containerBudgetsRecord =
+                                  containerBudgetsRecordList.isNotEmpty
+                                      ? containerBudgetsRecordList.first
+                                      : null;
+                              return Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(32),
+                                ),
+                                child: InkWell(
+                                  onTap: () async {
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => NavBarPage(
+                                            initialPage: 'ActiveBudget'),
+                                      ),
                                     );
-                                  }
-                                  final containerBudgetsRecord = snapshot.data!;
-                                  return Container(
+                                  },
+                                  child: Container(
                                     width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      borderRadius: BorderRadius.circular(32),
-                                    ),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => NavBarPage(
-                                                initialPage: 'ActiveBudget'),
-                                          ),
-                                        );
-                                      },
-                                      child: Container(
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  20, 20, 20, 20),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Expanded(
-                                                child: Container(
-                                                  width: 100,
-                                                  decoration: BoxDecoration(),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      CircularIndicatorSmallWidget(
-                                                        totalAmount:
-                                                            containerBudgetsRecord
-                                                                .budgetAmount,
-                                                        spentAmount:
-                                                            containerBudgetsRecord
-                                                                .budgetSpent,
-                                                      ),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(20,
-                                                                      0, 0, 0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
+                                    decoration: BoxDecoration(),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          20, 20, 20, 20),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              width: 100,
+                                              decoration: BoxDecoration(),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  CircularIndicatorSmallWidget(
+                                                    totalAmount:
+                                                        containerBudgetsRecord!
+                                                            .budgetAmount,
+                                                    spentAmount:
+                                                        containerBudgetsRecord!
+                                                            .budgetSpent,
+                                                  ),
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  20, 0, 0, 0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        0,
+                                                                        8),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Text(
+                                                                  functions.subtractCurrencyDecimal(
+                                                                      containerBudgetsRecord!
+                                                                          .budgetAmount,
+                                                                      containerBudgetsRecord!
+                                                                          .budgetSpent),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1,
+                                                                ),
+                                                                Expanded(
+                                                                  flex: 2,
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            0,
-                                                                            0,
-                                                                            0,
-                                                                            8),
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Text(
-                                                                      functions.subtractCurrencyDecimal(
-                                                                          containerBudgetsRecord
-                                                                              .budgetAmount,
-                                                                          containerBudgetsRecord
-                                                                              .budgetSpent),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .subtitle1,
-                                                                    ),
-                                                                    Expanded(
-                                                                      flex: 2,
-                                                                      child:
-                                                                          Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             4,
                                                                             0,
                                                                             0,
                                                                             0),
-                                                                        child:
-                                                                            Text(
-                                                                          '${functions.subtractCurrencyText(containerBudgetsRecord.budgetAmount, containerBudgetsRecord.budgetSpent)}',
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodyText2,
-                                                                        ),
-                                                                      ),
+                                                                    child: Text(
+                                                                      '${functions.subtractCurrencyText(containerBudgetsRecord!.budgetAmount, containerBudgetsRecord!.budgetSpent)}',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText2,
                                                                     ),
-                                                                  ],
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                              Text(
-                                                                '${dateTimeFormat(
-                                                                  'MMMEd',
-                                                                  containerBudgetsRecord
-                                                                      .budgetStart,
-                                                                  locale: FFLocalizations.of(
-                                                                          context)
-                                                                      .languageCode,
-                                                                )} - ${dateTimeFormat(
-                                                                  'MMMEd',
-                                                                  containerBudgetsRecord
-                                                                      .budgetEnd,
-                                                                  locale: FFLocalizations.of(
-                                                                          context)
-                                                                      .languageCode,
-                                                                )}',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText2,
-                                                              ),
-                                                            ],
+                                                              ],
+                                                            ),
                                                           ),
-                                                        ),
+                                                          Text(
+                                                            '${dateTimeFormat(
+                                                              'MMMEd',
+                                                              containerBudgetsRecord!
+                                                                  .budgetStart,
+                                                              locale: FFLocalizations
+                                                                      .of(context)
+                                                                  .languageCode,
+                                                            )} - ${dateTimeFormat(
+                                                              'MMMEd',
+                                                              containerBudgetsRecord!
+                                                                  .budgetEnd,
+                                                              locale: FFLocalizations
+                                                                      .of(context)
+                                                                  .languageCode,
+                                                            )}',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText2,
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ],
+                                                    ),
                                                   ),
-                                                ),
+                                                ],
                                               ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ),
-                                  );
-                                },
-                              ),
-                            ),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
+                        ),
                         Padding(
                           padding:
                               EdgeInsetsDirectional.fromSTEB(32, 16, 32, 4),
@@ -925,17 +943,16 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
                                   textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .subtitle2
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText2Family,
+                                            .subtitle2Family,
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
-                                        fontWeight: FontWeight.w500,
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText2Family),
+                                                    .subtitle2Family),
                                       ),
                                   elevation: 0,
                                   borderSide: BorderSide(

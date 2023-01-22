@@ -38,3 +38,5 @@ export 'menu/menu_widget.dart' show MenuWidget;
 export 'email_auth/email_auth_widget.dart' show EmailAuthWidget;
 export 'init_paywall/init_paywall_widget.dart' show InitPaywallWidget;
 export 'paywall/paywall_widget.dart' show PaywallWidget;
+export 'sign_up_progress/sign_up_progress_widget.dart'
+    show SignUpProgressWidget;
