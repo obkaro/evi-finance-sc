@@ -10,3 +10,4 @@ export 'normalize_trans_sub.dart' show normalizeTransSub;
 export 'fetch_pay_info.dart' show fetchPayInfo;
 export 'print_console.dart' show printConsole;
 export 'archive_budget.dart' show archiveBudget;
+export 'fetch_user_doc.dart' show fetchUserDoc;

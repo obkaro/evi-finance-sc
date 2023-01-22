@@ -100,6 +100,12 @@ class FFAppState extends ChangeNotifier {
     _showQuickTransAssign = _value;
     prefs.setBool('ff_showQuickTransAssign', _value);
   }
+
+  bool _paymentVerified = false;
+  bool get paymentVerified => _paymentVerified;
+  set paymentVerified(bool _value) {
+    _paymentVerified = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
