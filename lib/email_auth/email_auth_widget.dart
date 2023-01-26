@@ -23,15 +23,17 @@ class EmailAuthWidget extends StatefulWidget {
 }
 
 class _EmailAuthWidgetState extends State<EmailAuthWidget> {
-  PaymentInfoRecord? payInfo;
-  TextEditingController? signInEmailController;
-  TextEditingController? signInPasswordController;
-  late bool signInPasswordVisibility;
+  PaymentInfoRecord? payInfo2;
+  PaymentInfoRecord? payInfo3;
   TextEditingController? confirmPasswordController;
   late bool confirmPasswordVisibility;
   TextEditingController? newPasswordController;
   late bool newPasswordVisibility;
   TextEditingController? signUpEmailController;
+  PaymentInfoRecord? payInfo;
+  TextEditingController? signInEmailController;
+  TextEditingController? signInPasswordController;
+  late bool signInPasswordVisibility;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final formKey2 = GlobalKey<FormState>();
@@ -374,9 +376,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     return;
                                                   }
 
-                                                  await Future.delayed(
-                                                      const Duration(
-                                                          milliseconds: 5000));
                                                   if (currentUserDocument!
                                                           .paymentInfo !=
                                                       null) {
@@ -1009,23 +1008,26 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Container(
-                                        width: 48,
-                                        height: 48,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Align(
-                                          alignment: AlignmentDirectional(0, 0),
-                                          child: InkWell(
-                                            onTap: () async {
-                                              final user =
-                                                  await signInWithGoogle(
-                                                      context);
-                                              if (user == null) {
-                                                return;
-                                              }
+                                      InkWell(
+                                        onTap: () async {
+                                          final user =
+                                              await signInWithGoogle(context);
+                                          if (user == null) {
+                                            return;
+                                          }
+                                          if (currentUserDocument!
+                                                  .paymentInfo !=
+                                              null) {
+                                            payInfo3 =
+                                                await actions.fetchPayInfo(
+                                              context,
+                                              currentUserDocument!.paymentInfo,
+                                            );
+                                            await actions.printConsole(
+                                              'PAY STATUS - ${payInfo3!.payStatus}',
+                                            );
+                                            if (payInfo3!.payStatus ==
+                                                'active') {
                                               if (valueOrDefault(
                                                           currentUserDocument
                                                               ?.username,
@@ -1036,35 +1038,132 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                               ?.username,
                                                           '') ==
                                                       '') {
-                                                await Navigator.push(
+                                                await Navigator
+                                                    .pushAndRemoveUntil(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         WelcomeToEviWidget(),
                                                   ),
+                                                  (r) => false,
                                                 );
                                               } else {
-                                                await Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        NavBarPage(
-                                                            initialPage:
-                                                                'Dashboard'),
-                                                  ),
-                                                );
+                                                if (currentUserDocument!
+                                                        .activeBudget !=
+                                                    null) {
+                                                  await Navigator
+                                                      .pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          NavBarPage(
+                                                              initialPage:
+                                                                  'Dashboard'),
+                                                    ),
+                                                    (r) => false,
+                                                  );
+                                                } else {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    enableDrag: false,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Padding(
+                                                        padding: MediaQuery.of(
+                                                                context)
+                                                            .viewInsets,
+                                                        child:
+                                                            NotificationPromptWidget(),
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      setState(() {}));
+                                                }
                                               }
-                                            },
-                                            child: Container(
-                                              width: 32,
-                                              height: 32,
-                                              clipBehavior: Clip.antiAlias,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
+                                            } else {
+                                              await Navigator
+                                                  .pushAndRemoveUntil(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SignUpProgressWidget(),
+                                                ),
+                                                (r) => false,
+                                              );
+                                            }
+                                          } else {
+                                            await Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SignUpProgressWidget(),
                                               ),
-                                              child: Image.asset(
-                                                'assets/images/google-color-icon.png',
-                                                fit: BoxFit.contain,
+                                              (r) => false,
+                                            );
+                                          }
+
+                                          setState(() {});
+                                        },
+                                        child: Container(
+                                          width: 48,
+                                          height: 48,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Align(
+                                            alignment:
+                                                AlignmentDirectional(0, 0),
+                                            child: InkWell(
+                                              onTap: () async {
+                                                final user =
+                                                    await signInWithGoogle(
+                                                        context);
+                                                if (user == null) {
+                                                  return;
+                                                }
+                                                if (valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.username,
+                                                            '') ==
+                                                        null ||
+                                                    valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.username,
+                                                            '') ==
+                                                        '') {
+                                                  await Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          WelcomeToEviWidget(),
+                                                    ),
+                                                  );
+                                                } else {
+                                                  await Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          NavBarPage(
+                                                              initialPage:
+                                                                  'Dashboard'),
+                                                    ),
+                                                  );
+                                                }
+                                              },
+                                              child: Container(
+                                                width: 32,
+                                                height: 32,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Image.asset(
+                                                  'assets/images/google-color-icon.png',
+                                                  fit: BoxFit.contain,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -1075,24 +1174,28 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16, 0, 0, 0),
-                                          child: Container(
-                                            width: 48,
-                                            height: 48,
-                                            decoration: BoxDecoration(
-                                              color: Colors.black,
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Align(
-                                              alignment:
-                                                  AlignmentDirectional(0, 0),
-                                              child: InkWell(
-                                                onTap: () async {
-                                                  final user =
-                                                      await signInWithApple(
-                                                          context);
-                                                  if (user == null) {
-                                                    return;
-                                                  }
+                                          child: InkWell(
+                                            onTap: () async {
+                                              final user =
+                                                  await signInWithApple(
+                                                      context);
+                                              if (user == null) {
+                                                return;
+                                              }
+                                              if (currentUserDocument!
+                                                      .paymentInfo !=
+                                                  null) {
+                                                payInfo2 =
+                                                    await actions.fetchPayInfo(
+                                                  context,
+                                                  currentUserDocument!
+                                                      .paymentInfo,
+                                                );
+                                                await actions.printConsole(
+                                                  'PAY STATUS - ${payInfo2!.payStatus}',
+                                                );
+                                                if (payInfo2!.payStatus ==
+                                                    'active') {
                                                   if (valueOrDefault(
                                                               currentUserDocument
                                                                   ?.username,
@@ -1103,35 +1206,136 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                                   ?.username,
                                                               '') ==
                                                           '') {
-                                                    await Navigator.push(
+                                                    await Navigator
+                                                        .pushAndRemoveUntil(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             WelcomeToEviWidget(),
                                                       ),
+                                                      (r) => false,
                                                     );
                                                   } else {
-                                                    await Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            NavBarPage(
-                                                                initialPage:
-                                                                    'Dashboard'),
-                                                      ),
-                                                    );
+                                                    if (currentUserDocument!
+                                                            .activeBudget !=
+                                                        null) {
+                                                      await Navigator
+                                                          .pushAndRemoveUntil(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              NavBarPage(
+                                                                  initialPage:
+                                                                      'Dashboard'),
+                                                        ),
+                                                        (r) => false,
+                                                      );
+                                                    } else {
+                                                      await showModalBottomSheet(
+                                                        isScrollControlled:
+                                                            true,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        enableDrag: false,
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return Padding(
+                                                            padding:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .viewInsets,
+                                                            child:
+                                                                NotificationPromptWidget(),
+                                                          );
+                                                        },
+                                                      ).then((value) =>
+                                                          setState(() {}));
+                                                    }
                                                   }
-                                                },
-                                                child: Container(
-                                                  width: 32,
-                                                  height: 32,
-                                                  clipBehavior: Clip.antiAlias,
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
+                                                } else {
+                                                  await Navigator
+                                                      .pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          SignUpProgressWidget(),
+                                                    ),
+                                                    (r) => false,
+                                                  );
+                                                }
+                                              } else {
+                                                await Navigator
+                                                    .pushAndRemoveUntil(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SignUpProgressWidget(),
                                                   ),
-                                                  child: Image.asset(
-                                                    'assets/images/apple-xxl.png',
-                                                    fit: BoxFit.contain,
+                                                  (r) => false,
+                                                );
+                                              }
+
+                                              setState(() {});
+                                            },
+                                            child: Container(
+                                              width: 48,
+                                              height: 48,
+                                              decoration: BoxDecoration(
+                                                color: Colors.black,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Align(
+                                                alignment:
+                                                    AlignmentDirectional(0, 0),
+                                                child: InkWell(
+                                                  onTap: () async {
+                                                    final user =
+                                                        await signInWithApple(
+                                                            context);
+                                                    if (user == null) {
+                                                      return;
+                                                    }
+                                                    if (valueOrDefault(
+                                                                currentUserDocument
+                                                                    ?.username,
+                                                                '') ==
+                                                            null ||
+                                                        valueOrDefault(
+                                                                currentUserDocument
+                                                                    ?.username,
+                                                                '') ==
+                                                            '') {
+                                                      await Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              WelcomeToEviWidget(),
+                                                        ),
+                                                      );
+                                                    } else {
+                                                      await Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              NavBarPage(
+                                                                  initialPage:
+                                                                      'Dashboard'),
+                                                        ),
+                                                      );
+                                                    }
+                                                  },
+                                                  child: Container(
+                                                    width: 32,
+                                                    height: 32,
+                                                    clipBehavior:
+                                                        Clip.antiAlias,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: Image.asset(
+                                                      'assets/images/apple-xxl.png',
+                                                      fit: BoxFit.contain,
+                                                    ),
                                                   ),
                                                 ),
                                               ),

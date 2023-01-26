@@ -165,7 +165,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                 listViewTransactionsRecordList[
                                                     listViewIndex];
                                             return TransactionListItemWidget(
-                                              key: UniqueKey(),
+                                              key: Key(
+                                                  'transactionListItem_${listViewIndex}'),
                                               transactionDoc:
                                                   listViewTransactionsRecord,
                                             );
@@ -212,7 +213,8 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                 listViewTransactionsRecordList[
                                                     listViewIndex];
                                             return TransactionListItemWidget(
-                                              key: UniqueKey(),
+                                              key: Key(
+                                                  'transactionListItem_${listViewIndex}'),
                                               transactionDoc:
                                                   listViewTransactionsRecord,
                                             );

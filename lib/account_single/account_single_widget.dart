@@ -692,7 +692,8 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                           listViewTransactionsRecordList[
                                               listViewIndex];
                                       return TransactionListItemWidget(
-                                        key: UniqueKey(),
+                                        key: Key(
+                                            'transactionListItem_${listViewIndex}'),
                                         transactionDoc:
                                             listViewTransactionsRecord,
                                       );

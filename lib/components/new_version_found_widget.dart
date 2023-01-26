@@ -143,14 +143,15 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
                                 ),
                               ),
                             ),
-                          Container(
-                            width: 20,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                          if (!widget.forceUpdate!)
+                            Container(
+                              width: 20,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
                             ),
-                          ),
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
