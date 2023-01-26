@@ -290,7 +290,6 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget>
                               return Container(
                                 decoration: BoxDecoration(),
                                 child: TransactionListItemWidget(
-                                  key: UniqueKey(),
                                   transactionDoc: listViewTransactionsRecord,
                                 ),
                               );

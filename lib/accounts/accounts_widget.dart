@@ -63,6 +63,12 @@ class _AccountsWidgetState extends State<AccountsWidget>
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          logFirebaseEvent(
+            'app_acct_single_connet_acct',
+            parameters: {
+              'user_email': currentUserEmail,
+            },
+          );
           // Action_LinkNewAcct
           await actions.flutterMono(
             context,

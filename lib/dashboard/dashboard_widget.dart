@@ -677,6 +677,13 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                       size: 30,
                                                     ),
                                                     onPressed: () async {
+                                                      logFirebaseEvent(
+                                                        'app_home_connect_acct',
+                                                        parameters: {
+                                                          'user_email':
+                                                              currentUserEmail,
+                                                        },
+                                                      );
                                                       await actions.flutterMono(
                                                         context,
                                                       );
@@ -1041,7 +1048,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                               listViewTransactionsRecordList[
                                                   listViewIndex];
                                           return TransactionListItemWidget(
-                                            key: UniqueKey(),
+                                            key: Key(
+                                                'transactionListItem_${listViewIndex}'),
                                             transactionDoc:
                                                 listViewTransactionsRecord,
                                           );

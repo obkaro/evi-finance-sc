@@ -35,6 +35,12 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
     super.initState();
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent(
+        'app_pay_redirect_pageview',
+        parameters: {
+          'user_email': currentUserEmail,
+        },
+      );
       instantTimer = InstantTimer.periodic(
         duration: Duration(milliseconds: 1000),
         callback: (timer) async {
@@ -201,6 +207,12 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
                             children: [
                               FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                    'app_pay_redirect_attempt',
+                                    parameters: {
+                                      'user_email': currentUserEmail,
+                                    },
+                                  );
                                   await launchURL('https://app.evi.finance');
                                 },
                                 text:
