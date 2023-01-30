@@ -92,7 +92,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (functions.addHoursToTimestamp(FFAppState().lastSignIn!, 1) <
+      if (functions.addHoursToTimestamp(FFAppState().lastSignIn!, 0) <
           getCurrentTimestamp) {
         await Navigator.push(
           context,
