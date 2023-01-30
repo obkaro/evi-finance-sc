@@ -375,6 +375,8 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     return;
                                                   }
 
+                                                  FFAppState().lastSignIn =
+                                                      getCurrentTimestamp;
                                                   if (valueOrDefault(
                                                               currentUserDocument
                                                                   ?.subStatus,
@@ -924,6 +926,8 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                       .doc(user.uid)
                                                       .update(usersCreateData);
 
+                                                  FFAppState().lastSignIn =
+                                                      getCurrentTimestamp;
                                                   await Navigator
                                                       .pushAndRemoveUntil(
                                                     context,
@@ -1016,6 +1020,8 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                           if (user == null) {
                                             return;
                                           }
+                                          FFAppState().lastSignIn =
+                                              getCurrentTimestamp;
                                           if (currentUserDocument!
                                                   .paymentInfo !=
                                               null) {
@@ -1183,6 +1189,8 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                               if (user == null) {
                                                 return;
                                               }
+                                              FFAppState().lastSignIn =
+                                                  getCurrentTimestamp;
                                               if (currentUserDocument!
                                                       .paymentInfo !=
                                                   null) {

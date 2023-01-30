@@ -1,10 +1,12 @@
 import '../auth/auth_util.dart';
+import '../backend/backend.dart';
+import '../email_auth/email_auth_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../forgot_password/forgot_password_widget.dart';
-import '../main.dart';
+import '../sign_up_progress/sign_up_progress_widget.dart';
+import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,6 +23,7 @@ class BiometricAuthWidget extends StatefulWidget {
 class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
   TextEditingController? signInEmailController;
   TextEditingController? signInPasswordController;
+  UsersRecord? user;
   bool auth2 = false;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -267,7 +270,7 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
                                   borderColor: Colors.transparent,
                                   borderRadius: 30,
                                   borderWidth: 1,
-                                  buttonSize: 60,
+                                  buttonSize: 180,
                                   icon: Icon(
                                     Icons.fingerprint_rounded,
                                     color: FlutterFlowTheme.of(context)
@@ -287,13 +290,41 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
                                     }
 
                                     if (auth2!) {
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => NavBarPage(
-                                              initialPage: 'Dashboard'),
-                                        ),
-                                      );
+                                      FFAppState().lastSignIn =
+                                          getCurrentTimestamp;
+                                      if (!FFAppState().paymentVerified) {
+                                        FFAppState().update(() {
+                                          FFAppState().paymentVerified = true;
+                                        });
+                                        user = await actions.fetchUserDoc(
+                                          currentUserReference,
+                                        );
+                                        if (user!.subStatus != null &&
+                                            user!.subStatus != '') {
+                                          await actions.printConsole(
+                                            'PAY STATUS - ${user!.subStatus}',
+                                          );
+                                          if (user!.subStatus != 'active') {
+                                            await Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SignUpProgressWidget(),
+                                              ),
+                                              (r) => false,
+                                            );
+                                          }
+                                        } else {
+                                          await Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SignUpProgressWidget(),
+                                            ),
+                                            (r) => false,
+                                          );
+                                        }
+                                      }
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
@@ -337,11 +368,11 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  await signOut();
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          ForgotPasswordWidget(),
+                                      builder: (context) => EmailAuthWidget(),
                                     ),
                                   );
                                 },

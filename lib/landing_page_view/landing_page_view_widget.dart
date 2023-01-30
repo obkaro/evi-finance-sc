@@ -255,6 +255,8 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                     if (user == null) {
                                       return;
                                     }
+                                    FFAppState().lastSignIn =
+                                        getCurrentTimestamp;
                                     if (currentUserDocument!.paymentInfo !=
                                         null) {
                                       payInfo = await actions.fetchPayInfo(
@@ -411,6 +413,8 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                             if (user == null) {
                                               return;
                                             }
+                                            FFAppState().lastSignIn =
+                                                getCurrentTimestamp;
                                             if (currentUserDocument!
                                                     .paymentInfo !=
                                                 null) {

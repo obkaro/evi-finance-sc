@@ -97,7 +97,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
             data, 'transaction', TransactionsRecord.serializer),
       ),
   'ForgotPassword': (data) async => ForgotPasswordWidget(),
-  'Dashboard': (data) async => NavBarPage(initialPage: 'Dashboard'),
   'ActiveBudget': (data) async => hasMatchingParameters(data, {'command'})
       ? ActiveBudgetWidget(
           command: getParameter(data, 'command'),
@@ -156,6 +155,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'InitPaywall': (data) async => InitPaywallWidget(),
   'Paywall': (data) async => PaywallWidget(),
   'SignUpProgress': (data) async => SignUpProgressWidget(),
+  'BiometricAuth': (data) async => BiometricAuthWidget(),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>
