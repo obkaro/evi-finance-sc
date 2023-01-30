@@ -2,6 +2,7 @@ import '../account_single/account_single_widget.dart';
 import '../assign_transactions/assign_transactions_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../biometric_auth/biometric_auth_widget.dart';
 import '../components/circular_indicator_small_widget.dart';
 import '../components/empty_list_widget.dart';
 import '../components/loading_budget_summary_widget.dart';
@@ -152,6 +153,16 @@ class _DashboardWidgetState extends State<DashboardWidget>
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(0),
+        child: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          actions: [],
+          centerTitle: true,
+          elevation: 0,
+        ),
+      ),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
@@ -170,267 +181,289 @@ class _DashboardWidgetState extends State<DashboardWidget>
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryColor,
-                      borderRadius: BorderRadius.circular(32),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(24, 24, 24, 24),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Image.asset(
-                                  'assets/images/Group_22.png',
-                                  width: 24,
-                                  height: 24,
-                                  fit: BoxFit.cover,
-                                ),
-                                Expanded(
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Welcome back, ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle2
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2Family,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondarySecondary,
-                                              fontStyle: FontStyle.italic,
-                                              useGoogleFonts:
-                                                  GoogleFonts.asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle2Family),
-                                            ),
-                                      ),
-                                      AuthUserStreamWidget(
-                                        builder: (context) => Text(
-                                          valueOrDefault(
-                                              currentUserDocument?.username,
-                                              ''),
+                  child: InkWell(
+                    onLongPress: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BiometricAuthWidget(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryColor,
+                        borderRadius: BorderRadius.circular(32),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(24, 24, 24, 24),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Image.asset(
+                                    'assets/images/Group_22.png',
+                                    width: 24,
+                                    height: 24,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Welcome back, ',
                                           style: FlutterFlowTheme.of(context)
-                                              .subtitle1
+                                              .subtitle2
                                               .override(
                                                 fontFamily:
                                                     FlutterFlowTheme.of(context)
-                                                        .subtitle1Family,
+                                                        .subtitle2Family,
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryPrimary,
+                                                        .secondarySecondary,
                                                 fontStyle: FontStyle.italic,
                                                 useGoogleFonts: GoogleFonts
                                                         .asMap()
                                                     .containsKey(
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .subtitle1Family),
+                                                            .subtitle2Family),
                                               ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                StreamBuilder<List<TransactionsRecord>>(
-                                  stream: queryTransactionsRecord(
-                                    queryBuilder: (transactionsRecord) =>
-                                        transactionsRecord
-                                            .where('transactionOwner',
-                                                isEqualTo: currentUserReference)
-                                            .where('isAssigned',
-                                                isEqualTo: false),
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: LoadingTestWidget(),
-                                      );
-                                    }
-                                    List<TransactionsRecord>
-                                        badgeTransactionsRecordList =
-                                        snapshot.data!;
-                                    return InkWell(
-                                      onTap: () async {
-                                        if (badgeTransactionsRecordList.length >
-                                            0) {
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AssignTransactionsWidget(),
-                                            ),
-                                          );
-                                        } else {
-                                          return;
-                                        }
-                                      },
-                                      child: Badge(
-                                        badgeContent: Text(
-                                          badgeTransactionsRecordList.length
-                                              .toString(),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1Family,
-                                                color: Colors.white,
-                                                fontSize: 8,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyText1Family),
-                                              ),
-                                        ),
-                                        showBadge:
-                                            badgeTransactionsRecordList.length >
-                                                0,
-                                        shape: BadgeShape.circle,
-                                        badgeColor: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        elevation: 4,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            6, 6, 6, 6),
-                                        position: BadgePosition.topEnd(),
-                                        animationType: BadgeAnimationType.scale,
-                                        toAnimate: true,
-                                        child: Stack(
-                                          children: [
-                                            if (badgeTransactionsRecordList
-                                                    .length ==
-                                                0)
-                                              Icon(
-                                                Icons.notifications,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryPrimary,
-                                                size: 24,
-                                              ),
-                                            if (badgeTransactionsRecordList
-                                                    .length >
-                                                0)
-                                              Icon(
-                                                Icons.notifications,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryPrimary,
-                                                size: 24,
-                                              ).animateOnPageLoad(animationsMap[
-                                                  'iconOnPageLoadAnimation1']!),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 8),
-                                        child: Text(
-                                          'Your Total Balance',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1Family,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondarySecondary,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyText1Family),
-                                              ),
-                                        ),
-                                      ),
-                                      StreamBuilder<List<AccountsRecord>>(
-                                        stream: queryAccountsRecord(
-                                          queryBuilder: (accountsRecord) =>
-                                              accountsRecord.where(
-                                                  'accountOwner',
-                                                  isEqualTo:
-                                                      currentUserReference),
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: Center(
-                                                child:
-                                                    LoadingNothingtextTitle1Widget(),
-                                              ),
-                                            );
-                                          }
-                                          List<AccountsRecord>
-                                              textAccountsRecordList =
-                                              snapshot.data!;
-                                          return Text(
-                                            functions.formatTransCurrency(
-                                                functions.sumAccountBalances(
-                                                    textAccountsRecordList
-                                                        .toList())),
+                                        AuthUserStreamWidget(
+                                          builder: (context) => Text(
+                                            valueOrDefault(
+                                                currentUserDocument?.username,
+                                                ''),
                                             style: FlutterFlowTheme.of(context)
-                                                .title1
+                                                .subtitle1
                                                 .override(
-                                                  fontFamily: 'Work Sans',
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .subtitle1Family,
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryPrimary,
-                                                  fontSize: 28,
+                                                  fontStyle: FontStyle.italic,
                                                   useGoogleFonts: GoogleFonts
                                                           .asMap()
                                                       .containsKey(
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .title1Family),
+                                                              .subtitle1Family),
                                                 ),
-                                          ).animateOnPageLoad(animationsMap[
-                                              'textOnPageLoadAnimation']!);
-                                        },
-                                      ),
-                                    ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  StreamBuilder<List<TransactionsRecord>>(
+                                    stream: queryTransactionsRecord(
+                                      queryBuilder: (transactionsRecord) =>
+                                          transactionsRecord
+                                              .where('transactionOwner',
+                                                  isEqualTo:
+                                                      currentUserReference)
+                                              .where('isAssigned',
+                                                  isEqualTo: false),
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: LoadingTestWidget(),
+                                        );
+                                      }
+                                      List<TransactionsRecord>
+                                          badgeTransactionsRecordList =
+                                          snapshot.data!;
+                                      return InkWell(
+                                        onTap: () async {
+                                          if (badgeTransactionsRecordList
+                                                  .length >
+                                              0) {
+                                            await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AssignTransactionsWidget(),
+                                              ),
+                                            );
+                                          } else {
+                                            return;
+                                          }
+                                        },
+                                        child: Badge(
+                                          badgeContent: Text(
+                                            badgeTransactionsRecordList.length
+                                                .toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyText1Family,
+                                                  color: Colors.white,
+                                                  fontSize: 8,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1Family),
+                                                ),
+                                          ),
+                                          showBadge: badgeTransactionsRecordList
+                                                  .length >
+                                              0,
+                                          shape: BadgeShape.circle,
+                                          badgeColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryColor,
+                                          elevation: 4,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  6, 6, 6, 6),
+                                          position: BadgePosition.topEnd(),
+                                          animationType:
+                                              BadgeAnimationType.scale,
+                                          toAnimate: true,
+                                          child: Stack(
+                                            children: [
+                                              if (badgeTransactionsRecordList
+                                                      .length ==
+                                                  0)
+                                                Icon(
+                                                  Icons.notifications,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryPrimary,
+                                                  size: 24,
+                                                ),
+                                              if (badgeTransactionsRecordList
+                                                      .length >
+                                                  0)
+                                                Icon(
+                                                  Icons.notifications,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryPrimary,
+                                                  size: 24,
+                                                ).animateOnPageLoad(animationsMap[
+                                                    'iconOnPageLoadAnimation1']!),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  20, 20, 20, 20),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 0, 8),
+                                          child: Text(
+                                            'Your Total Balance',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyText1Family,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondarySecondary,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1Family),
+                                                ),
+                                          ),
+                                        ),
+                                        StreamBuilder<List<AccountsRecord>>(
+                                          stream: queryAccountsRecord(
+                                            queryBuilder: (accountsRecord) =>
+                                                accountsRecord.where(
+                                                    'accountOwner',
+                                                    isEqualTo:
+                                                        currentUserReference),
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: Center(
+                                                  child:
+                                                      LoadingNothingtextTitle1Widget(),
+                                                ),
+                                              );
+                                            }
+                                            List<AccountsRecord>
+                                                textAccountsRecordList =
+                                                snapshot.data!;
+                                            return Text(
+                                              functions.formatTransCurrency(
+                                                  functions.sumAccountBalances(
+                                                      textAccountsRecordList
+                                                          .toList())),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .title1
+                                                      .override(
+                                                        fontFamily: 'Work Sans',
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryPrimary,
+                                                        fontSize: 28,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .title1Family),
+                                                      ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'textOnPageLoadAnimation']!);
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
