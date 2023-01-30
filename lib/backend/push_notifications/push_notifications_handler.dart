@@ -97,6 +97,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
             data, 'transaction', TransactionsRecord.serializer),
       ),
   'ForgotPassword': (data) async => ForgotPasswordWidget(),
+  'Dashboard': (data) async => NavBarPage(initialPage: 'Dashboard'),
   'ActiveBudget': (data) async => hasMatchingParameters(data, {'command'})
       ? ActiveBudgetWidget(
           command: getParameter(data, 'command'),

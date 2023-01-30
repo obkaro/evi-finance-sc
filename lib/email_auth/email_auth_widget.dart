@@ -30,7 +30,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
   TextEditingController? newPasswordController;
   late bool newPasswordVisibility;
   TextEditingController? signUpEmailController;
-  PaymentInfoRecord? payInfo;
   TextEditingController? signInEmailController;
   TextEditingController? signInPasswordController;
   late bool signInPasswordVisibility;
@@ -376,19 +375,23 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     return;
                                                   }
 
-                                                  if (currentUserDocument!
-                                                          .paymentInfo !=
-                                                      null) {
-                                                    payInfo = await actions
-                                                        .fetchPayInfo(
-                                                      context,
-                                                      currentUserDocument!
-                                                          .paymentInfo,
-                                                    );
+                                                  if (valueOrDefault(
+                                                              currentUserDocument
+                                                                  ?.subStatus,
+                                                              '') !=
+                                                          null &&
+                                                      valueOrDefault(
+                                                              currentUserDocument
+                                                                  ?.subStatus,
+                                                              '') !=
+                                                          '') {
                                                     await actions.printConsole(
-                                                      'PAY STATUS - ${payInfo!.payStatus}',
+                                                      'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
                                                     );
-                                                    if (payInfo!.payStatus ==
+                                                    if (valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.subStatus,
+                                                            '') ==
                                                         'active') {
                                                       if (valueOrDefault(
                                                                   currentUserDocument
@@ -468,8 +471,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                       (r) => false,
                                                     );
                                                   }
-
-                                                  setState(() {});
                                                 },
                                                 text: 'Sign in',
                                                 options: FFButtonOptions(
