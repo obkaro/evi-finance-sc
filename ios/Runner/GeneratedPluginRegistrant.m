@@ -72,6 +72,12 @@
 @import launch_review;
 #endif
 
+#if __has_include(<local_auth_ios/FLTLocalAuthPlugin.h>)
+#import <local_auth_ios/FLTLocalAuthPlugin.h>
+#else
+@import local_auth_ios;
+#endif
+
 #if __has_include(<package_info_plus/FLTPackageInfoPlusPlugin.h>)
 #import <package_info_plus/FLTPackageInfoPlusPlugin.h>
 #else
@@ -140,6 +146,7 @@
   [FLTGoogleSignInPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleSignInPlugin"]];
   [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];
   [LaunchReviewPlugin registerWithRegistrar:[registry registrarForPlugin:@"LaunchReviewPlugin"]];
+  [FLTLocalAuthPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTLocalAuthPlugin"]];
   [FLTPackageInfoPlusPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPackageInfoPlusPlugin"]];
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
   [PermissionHandlerPlugin registerWithRegistrar:[registry registrarForPlugin:@"PermissionHandlerPlugin"]];

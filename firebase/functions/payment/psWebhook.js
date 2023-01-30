@@ -57,7 +57,7 @@ exports.psWebhook = functions.runWith({
 
                         functions.logger.log('USER', user.ref.id);
                         
-                        await admin.firestore().collection('users').doc(user.ref.id).update({
+                        await admin.firestore().collection('users').doc(user.ref.id).set({
                             sub_status: 'active',
                             sub_code: payload.data.subscription_code,
                             plan_code: payload.data.plan.plan_code,
@@ -66,7 +66,7 @@ exports.psWebhook = functions.runWith({
                             payment_auth_code: payload.data.authorization.authorization_code,
                             ps_email_token: payload.data.email_token,
                             expire_date: admin.firestore.FieldValue.delete(),
-                        })
+                        }, { merge: true })
                             .then(async () => {
                                 
                                 await admin.firestore().collection(`users/${user.ref.id}/psWebhooks`)
@@ -88,12 +88,12 @@ exports.psWebhook = functions.runWith({
                         const user = snapshot.docs[0];
                         functions.logger.log('USER', user.ref.id);
 
-                        await admin.firestore().collection('users').doc(user.ref.id).update({
+                        await admin.firestore().collection('users').doc(user.ref.id).set({
                             sub_status: 'expired',
                             // next_payment_date: admin.firestore.FieldValue.delete(),
                             expire_date: user.data().next_payment_date,
                             ps_email_token: payload.data.email_token
-                        })
+                        }, { merge: true })
                             .then(async () => {
 
                                 await admin.firestore().collection(`users/${user.ref.id}/psWebhooks`)
@@ -115,12 +115,12 @@ exports.psWebhook = functions.runWith({
                                 const user = snapshot.docs[0];
                                 functions.logger.log('USER', user.ref.id);
     
-                                await admin.firestore().collection('users').doc(user.ref.id).update({
+                                await admin.firestore().collection('users').doc(user.ref.id).set({
                                     // sub_status: 'expired',
                                     next_payment_date: admin.firestore.FieldValue.delete(),
                                     expire_date: user.data().next_payment_date,
                                     ps_email_token: payload.data.email_token
-                                })
+                                }, { merge: true })
                                     .then(async () => {
     
                                         await admin.firestore().collection(`users/${user.ref.id}/psWebhooks`)

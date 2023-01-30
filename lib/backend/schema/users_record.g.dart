@@ -146,6 +146,20 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
+    value = object.subStatus;
+    if (value != null) {
+      result
+        ..add('sub_status')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.nextPaymentDate;
+    if (value != null) {
+      result
+        ..add('next_payment_date')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -248,6 +262,14 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
+        case 'sub_status':
+          result.subStatus = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'next_payment_date':
+          result.nextPaymentDate = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -297,6 +319,10 @@ class _$UsersRecord extends UsersRecord {
   @override
   final DocumentReference<Object?>? paymentInfo;
   @override
+  final String? subStatus;
+  @override
+  final DateTime? nextPaymentDate;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
@@ -320,6 +346,8 @@ class _$UsersRecord extends UsersRecord {
       this.username,
       this.acqChannel,
       this.paymentInfo,
+      this.subStatus,
+      this.nextPaymentDate,
       this.ffRef})
       : super._();
 
@@ -351,6 +379,8 @@ class _$UsersRecord extends UsersRecord {
         username == other.username &&
         acqChannel == other.acqChannel &&
         paymentInfo == other.paymentInfo &&
+        subStatus == other.subStatus &&
+        nextPaymentDate == other.nextPaymentDate &&
         ffRef == other.ffRef;
   }
 
@@ -374,28 +404,25 @@ class _$UsersRecord extends UsersRecord {
                                                                 $jc(
                                                                     $jc(
                                                                         $jc(
-                                                                            0,
-                                                                            email
-                                                                                .hashCode),
-                                                                        displayName
-                                                                            .hashCode),
-                                                                    photoUrl
-                                                                        .hashCode),
-                                                                uid.hashCode),
-                                                            createdTime
-                                                                .hashCode),
-                                                        phoneNumber.hashCode),
-                                                    income.hashCode),
-                                                tempAuthCode.hashCode),
-                                            accountsList.hashCode),
-                                        budgetList.hashCode),
-                                    activeBudget.hashCode),
-                                defaultAccount.hashCode),
-                            onboardingStep.hashCode),
-                        experience.hashCode),
-                    username.hashCode),
-                acqChannel.hashCode),
-            paymentInfo.hashCode),
+                                                                            $jc($jc(0, email.hashCode),
+                                                                                displayName.hashCode),
+                                                                            photoUrl.hashCode),
+                                                                        uid.hashCode),
+                                                                    createdTime.hashCode),
+                                                                phoneNumber.hashCode),
+                                                            income.hashCode),
+                                                        tempAuthCode.hashCode),
+                                                    accountsList.hashCode),
+                                                budgetList.hashCode),
+                                            activeBudget.hashCode),
+                                        defaultAccount.hashCode),
+                                    onboardingStep.hashCode),
+                                experience.hashCode),
+                            username.hashCode),
+                        acqChannel.hashCode),
+                    paymentInfo.hashCode),
+                subStatus.hashCode),
+            nextPaymentDate.hashCode),
         ffRef.hashCode));
   }
 
@@ -419,6 +446,8 @@ class _$UsersRecord extends UsersRecord {
           ..add('username', username)
           ..add('acqChannel', acqChannel)
           ..add('paymentInfo', paymentInfo)
+          ..add('subStatus', subStatus)
+          ..add('nextPaymentDate', nextPaymentDate)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -503,6 +532,15 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   set paymentInfo(DocumentReference<Object?>? paymentInfo) =>
       _$this._paymentInfo = paymentInfo;
 
+  String? _subStatus;
+  String? get subStatus => _$this._subStatus;
+  set subStatus(String? subStatus) => _$this._subStatus = subStatus;
+
+  DateTime? _nextPaymentDate;
+  DateTime? get nextPaymentDate => _$this._nextPaymentDate;
+  set nextPaymentDate(DateTime? nextPaymentDate) =>
+      _$this._nextPaymentDate = nextPaymentDate;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -531,6 +569,8 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _username = $v.username;
       _acqChannel = $v.acqChannel;
       _paymentInfo = $v.paymentInfo;
+      _subStatus = $v.subStatus;
+      _nextPaymentDate = $v.nextPaymentDate;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -573,6 +613,8 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
               username: username,
               acqChannel: acqChannel,
               paymentInfo: paymentInfo,
+              subStatus: subStatus,
+              nextPaymentDate: nextPaymentDate,
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;
