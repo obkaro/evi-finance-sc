@@ -1,5 +1,4 @@
 import '../auth/auth_util.dart';
-import '../backend/backend.dart';
 import '../components/notification_prompt_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -26,7 +25,6 @@ class SignUpProgressWidget extends StatefulWidget {
 
 class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
   InstantTimer? instantTimer;
-  PaymentInfoRecord? payInfo;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -47,15 +45,13 @@ class _SignUpProgressWidgetState extends State<SignUpProgressWidget> {
           await actions.printConsole(
             'PERIOD COUNT',
           );
-          if (currentUserDocument!.paymentInfo != null) {
-            payInfo = await actions.fetchPayInfo(
-              context,
-              currentUserDocument!.paymentInfo,
-            );
+          if (valueOrDefault(currentUserDocument?.subStatus, '') != null &&
+              valueOrDefault(currentUserDocument?.subStatus, '') != '') {
             await actions.printConsole(
-              payInfo!.payStatus,
+              valueOrDefault(currentUserDocument?.subStatus, ''),
             );
-            if (payInfo!.payStatus == 'active') {
+            if (valueOrDefault(currentUserDocument?.subStatus, '') ==
+                'active') {
               instantTimer?.cancel();
               if (valueOrDefault(currentUserDocument?.username, '') == null ||
                   valueOrDefault(currentUserDocument?.username, '') == '') {

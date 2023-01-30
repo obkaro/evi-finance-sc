@@ -18,7 +18,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
-import '../sign_up_progress/sign_up_progress_widget.dart';
 import '../transactions/transactions_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
@@ -84,8 +83,6 @@ class _DashboardWidgetState extends State<DashboardWidget>
       ],
     ),
   };
-  PaymentInfoRecord? payInfo;
-  UsersRecord? user;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -95,45 +92,14 @@ class _DashboardWidgetState extends State<DashboardWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (!FFAppState().paymentVerified) {
-        FFAppState().update(() {
-          FFAppState().paymentVerified = true;
-        });
-        user = await actions.fetchUserDoc(
-          currentUserReference,
+      if (functions.addHoursToTimestamp(FFAppState().lastSignIn!, 1) <
+          getCurrentTimestamp) {
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BiometricAuthWidget(),
+          ),
         );
-        await actions.printConsole(
-          'CURRENT USER - ${currentUserEmail}',
-        );
-        await actions.printConsole(
-          'CURRENT Email verified - ${user!.email}',
-        );
-        if (user!.paymentInfo != null) {
-          payInfo = await actions.fetchPayInfo(
-            context,
-            user!.paymentInfo,
-          );
-          await actions.printConsole(
-            'PAY STATUS - ${payInfo!.payStatus}',
-          );
-          if (payInfo!.payStatus != 'active') {
-            await Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SignUpProgressWidget(),
-              ),
-              (r) => false,
-            );
-          }
-        } else {
-          await Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SignUpProgressWidget(),
-            ),
-            (r) => false,
-          );
-        }
       }
     });
 
