@@ -14,6 +14,7 @@ import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,8 +29,6 @@ class LandingPageViewWidget extends StatefulWidget {
 
 class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
   PageController? pageViewController;
-  PaymentInfoRecord? payInfo2;
-  PaymentInfoRecord? payInfo;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -257,16 +256,28 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                     }
                                     FFAppState().lastSignIn =
                                         getCurrentTimestamp;
-                                    if (currentUserDocument!.paymentInfo !=
-                                        null) {
-                                      payInfo = await actions.fetchPayInfo(
-                                        context,
-                                        currentUserDocument!.paymentInfo,
-                                      );
+
+                                    final usersUpdateData =
+                                        createUsersRecordData(
+                                      lastActive: getCurrentTimestamp,
+                                    );
+                                    await currentUserReference!
+                                        .update(usersUpdateData);
+                                    if (valueOrDefault(
+                                                currentUserDocument?.subStatus,
+                                                '') !=
+                                            null &&
+                                        valueOrDefault(
+                                                currentUserDocument?.subStatus,
+                                                '') !=
+                                            '') {
                                       await actions.printConsole(
-                                        'PAY STATUS - ${payInfo!.payStatus}',
+                                        'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
                                       );
-                                      if (payInfo!.payStatus == 'active') {
+                                      if (valueOrDefault(
+                                              currentUserDocument?.subStatus,
+                                              '') ==
+                                          'active') {
                                         if (valueOrDefault(
                                                     currentUserDocument
                                                         ?.username,
@@ -338,8 +349,6 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                         (r) => false,
                                       );
                                     }
-
-                                    setState(() {});
                                   },
                                   text: 'Sign in with Google',
                                   icon: Icon(
@@ -415,19 +424,27 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                             }
                                             FFAppState().lastSignIn =
                                                 getCurrentTimestamp;
-                                            if (currentUserDocument!
-                                                    .paymentInfo !=
-                                                null) {
-                                              payInfo2 =
-                                                  await actions.fetchPayInfo(
-                                                context,
-                                                currentUserDocument!
-                                                    .paymentInfo,
-                                              );
-                                              await actions.printConsole(
-                                                'PAY STATUS - ${payInfo2!.payStatus}',
-                                              );
-                                              if (payInfo2!.payStatus ==
+
+                                            final usersUpdateData =
+                                                createUsersRecordData(
+                                              lastActive: getCurrentTimestamp,
+                                            );
+                                            await currentUserReference!
+                                                .update(usersUpdateData);
+                                            if (valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.subStatus,
+                                                        '') !=
+                                                    null &&
+                                                valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.subStatus,
+                                                        '') !=
+                                                    '') {
+                                              if (valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.subStatus,
+                                                      '') ==
                                                   'active') {
                                                 if (valueOrDefault(
                                                             currentUserDocument
@@ -506,8 +523,6 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                                 (r) => false,
                                               );
                                             }
-
-                                            setState(() {});
                                           },
                                           text: 'Sign in with Apple',
                                           icon: Icon(

@@ -10,6 +10,7 @@ import '../sign_up_progress/sign_up_progress_widget.dart';
 import '../welcome_to_evi/welcome_to_evi_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -377,6 +378,14 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
 
                                                   FFAppState().lastSignIn =
                                                       getCurrentTimestamp;
+
+                                                  final usersUpdateData =
+                                                      createUsersRecordData(
+                                                    lastActive:
+                                                        getCurrentTimestamp,
+                                                  );
+                                                  await currentUserReference!
+                                                      .update(usersUpdateData);
                                                   if (valueOrDefault(
                                                               currentUserDocument
                                                                   ?.subStatus,
@@ -928,6 +937,14 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
 
                                                   FFAppState().lastSignIn =
                                                       getCurrentTimestamp;
+
+                                                  final usersUpdateData =
+                                                      createUsersRecordData(
+                                                    lastActive:
+                                                        getCurrentTimestamp,
+                                                  );
+                                                  await currentUserReference!
+                                                      .update(usersUpdateData);
                                                   await Navigator
                                                       .pushAndRemoveUntil(
                                                     context,
