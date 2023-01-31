@@ -160,6 +160,13 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
+    value = object.lastActive;
+    if (value != null) {
+      result
+        ..add('lastActive')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -270,6 +277,10 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
           result.nextPaymentDate = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
+        case 'lastActive':
+          result.lastActive = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -323,6 +334,8 @@ class _$UsersRecord extends UsersRecord {
   @override
   final DateTime? nextPaymentDate;
   @override
+  final DateTime? lastActive;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
@@ -348,6 +361,7 @@ class _$UsersRecord extends UsersRecord {
       this.paymentInfo,
       this.subStatus,
       this.nextPaymentDate,
+      this.lastActive,
       this.ffRef})
       : super._();
 
@@ -381,6 +395,7 @@ class _$UsersRecord extends UsersRecord {
         paymentInfo == other.paymentInfo &&
         subStatus == other.subStatus &&
         nextPaymentDate == other.nextPaymentDate &&
+        lastActive == other.lastActive &&
         ffRef == other.ffRef;
   }
 
@@ -404,25 +419,25 @@ class _$UsersRecord extends UsersRecord {
                                                                 $jc(
                                                                     $jc(
                                                                         $jc(
-                                                                            $jc($jc(0, email.hashCode),
-                                                                                displayName.hashCode),
-                                                                            photoUrl.hashCode),
-                                                                        uid.hashCode),
-                                                                    createdTime.hashCode),
-                                                                phoneNumber.hashCode),
-                                                            income.hashCode),
-                                                        tempAuthCode.hashCode),
-                                                    accountsList.hashCode),
-                                                budgetList.hashCode),
-                                            activeBudget.hashCode),
-                                        defaultAccount.hashCode),
-                                    onboardingStep.hashCode),
-                                experience.hashCode),
-                            username.hashCode),
-                        acqChannel.hashCode),
-                    paymentInfo.hashCode),
-                subStatus.hashCode),
-            nextPaymentDate.hashCode),
+                                                                            $jc($jc($jc(0, email.hashCode), displayName.hashCode),
+                                                                                photoUrl.hashCode),
+                                                                            uid.hashCode),
+                                                                        createdTime.hashCode),
+                                                                    phoneNumber.hashCode),
+                                                                income.hashCode),
+                                                            tempAuthCode.hashCode),
+                                                        accountsList.hashCode),
+                                                    budgetList.hashCode),
+                                                activeBudget.hashCode),
+                                            defaultAccount.hashCode),
+                                        onboardingStep.hashCode),
+                                    experience.hashCode),
+                                username.hashCode),
+                            acqChannel.hashCode),
+                        paymentInfo.hashCode),
+                    subStatus.hashCode),
+                nextPaymentDate.hashCode),
+            lastActive.hashCode),
         ffRef.hashCode));
   }
 
@@ -448,6 +463,7 @@ class _$UsersRecord extends UsersRecord {
           ..add('paymentInfo', paymentInfo)
           ..add('subStatus', subStatus)
           ..add('nextPaymentDate', nextPaymentDate)
+          ..add('lastActive', lastActive)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -541,6 +557,10 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   set nextPaymentDate(DateTime? nextPaymentDate) =>
       _$this._nextPaymentDate = nextPaymentDate;
 
+  DateTime? _lastActive;
+  DateTime? get lastActive => _$this._lastActive;
+  set lastActive(DateTime? lastActive) => _$this._lastActive = lastActive;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -571,6 +591,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _paymentInfo = $v.paymentInfo;
       _subStatus = $v.subStatus;
       _nextPaymentDate = $v.nextPaymentDate;
+      _lastActive = $v.lastActive;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -615,6 +636,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
               paymentInfo: paymentInfo,
               subStatus: subStatus,
               nextPaymentDate: nextPaymentDate,
+              lastActive: lastActive,
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;
