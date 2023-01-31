@@ -5,8 +5,9 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../main.dart';
 import '../sign_up_progress/sign_up_progress_widget.dart';
-import '../custom_code/actions/index.dart' as actions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +24,6 @@ class BiometricAuthWidget extends StatefulWidget {
 class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
   TextEditingController? signInEmailController;
   TextEditingController? signInPasswordController;
-  UsersRecord? user;
   bool auth2 = false;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -259,6 +259,14 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
                                 ),
                               ),
                             ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                              child: Text(
+                                'Please verify this is you',
+                                style: FlutterFlowTheme.of(context).subtitle1,
+                              ),
+                            ),
                             Container(
                               width: 180,
                               height: 180,
@@ -268,9 +276,11 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                                 child: FlutterFlowIconButton(
                                   borderColor: Colors.transparent,
-                                  borderRadius: 30,
+                                  borderRadius: 32,
                                   borderWidth: 1,
                                   buttonSize: 180,
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
                                   icon: Icon(
                                     Icons.fingerprint_rounded,
                                     color: FlutterFlowTheme.of(context)
@@ -292,28 +302,34 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
                                     if (auth2!) {
                                       FFAppState().lastSignIn =
                                           getCurrentTimestamp;
-                                      if (!FFAppState().paymentVerified) {
-                                        FFAppState().update(() {
-                                          FFAppState().paymentVerified = true;
-                                        });
-                                        user = await actions.fetchUserDoc(
-                                          currentUserReference,
-                                        );
-                                        if (user!.subStatus != null &&
-                                            user!.subStatus != '') {
-                                          await actions.printConsole(
-                                            'PAY STATUS - ${user!.subStatus}',
+
+                                      final usersUpdateData =
+                                          createUsersRecordData(
+                                        lastActive: getCurrentTimestamp,
+                                      );
+                                      await currentUserReference!
+                                          .update(usersUpdateData);
+                                      if (valueOrDefault(
+                                                  currentUserDocument
+                                                      ?.subStatus,
+                                                  '') !=
+                                              null &&
+                                          valueOrDefault(
+                                                  currentUserDocument
+                                                      ?.subStatus,
+                                                  '') !=
+                                              '') {
+                                        if (valueOrDefault(
+                                                currentUserDocument?.subStatus,
+                                                '') ==
+                                            'active') {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => NavBarPage(
+                                                  initialPage: 'Dashboard'),
+                                            ),
                                           );
-                                          if (user!.subStatus != 'active') {
-                                            await Navigator.pushAndRemoveUntil(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    SignUpProgressWidget(),
-                                              ),
-                                              (r) => false,
-                                            );
-                                          }
                                         } else {
                                           await Navigator.pushAndRemoveUntil(
                                             context,
@@ -324,6 +340,15 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
                                             (r) => false,
                                           );
                                         }
+                                      } else {
+                                        await Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                SignUpProgressWidget(),
+                                          ),
+                                          (r) => false,
+                                        );
                                       }
                                     } else {
                                       ScaffoldMessenger.of(context)
