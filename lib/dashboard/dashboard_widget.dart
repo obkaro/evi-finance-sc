@@ -174,11 +174,23 @@ class _DashboardWidgetState extends State<DashboardWidget>
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Image.asset(
-                                    'assets/images/Group_22.png',
-                                    width: 24,
-                                    height: 24,
-                                    fit: BoxFit.cover,
+                                  InkWell(
+                                    onTap: () async {
+                                      logFirebaseEvent(
+                                        'app_launch_blog',
+                                        parameters: {
+                                          'user_email': currentUserEmail,
+                                        },
+                                      );
+                                      await launchURL(
+                                          'https://evifinance.com/blog');
+                                    },
+                                    child: Image.asset(
+                                      'assets/images/Group_22.png',
+                                      width: 24,
+                                      height: 24,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                   Expanded(
                                     child: Row(
@@ -189,11 +201,11 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                         Text(
                                           'Welcome back, ',
                                           style: FlutterFlowTheme.of(context)
-                                              .subtitle2
+                                              .subtitle1
                                               .override(
                                                 fontFamily:
                                                     FlutterFlowTheme.of(context)
-                                                        .subtitle2Family,
+                                                        .subtitle1Family,
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .secondarySecondary,
@@ -203,7 +215,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                     .containsKey(
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .subtitle2Family),
+                                                            .subtitle1Family),
                                               ),
                                         ),
                                         AuthUserStreamWidget(
@@ -221,7 +233,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryPrimary,
-                                                  fontStyle: FontStyle.italic,
+                                                  fontWeight: FontWeight.w600,
                                                   useGoogleFonts: GoogleFonts
                                                           .asMap()
                                                       .containsKey(
