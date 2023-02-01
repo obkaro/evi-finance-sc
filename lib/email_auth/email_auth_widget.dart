@@ -24,8 +24,6 @@ class EmailAuthWidget extends StatefulWidget {
 }
 
 class _EmailAuthWidgetState extends State<EmailAuthWidget> {
-  PaymentInfoRecord? payInfo2;
-  PaymentInfoRecord? payInfo3;
   TextEditingController? confirmPasswordController;
   late bool confirmPasswordVisibility;
   TextEditingController? newPasswordController;
@@ -167,6 +165,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                       controller:
                                                           signInEmailController,
                                                       autofocus: true,
+                                                      autofillHints: [
+                                                        AutofillHints.email
+                                                      ],
                                                       obscureText: false,
                                                       decoration:
                                                           InputDecoration(
@@ -265,6 +266,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                       controller:
                                                           signInPasswordController,
                                                       autofocus: true,
+                                                      autofillHints: [
+                                                        AutofillHints.password
+                                                      ],
                                                       obscureText:
                                                           !signInPasswordVisibility,
                                                       decoration:
@@ -595,6 +599,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     child: TextFormField(
                                                       controller:
                                                           signUpEmailController,
+                                                      autofillHints: [
+                                                        AutofillHints.email
+                                                      ],
                                                       obscureText: false,
                                                       decoration:
                                                           InputDecoration(
@@ -692,6 +699,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     child: TextFormField(
                                                       controller:
                                                           newPasswordController,
+                                                      autofillHints: [
+                                                        AutofillHints.password
+                                                      ],
                                                       obscureText:
                                                           !newPasswordVisibility,
                                                       decoration:
@@ -783,10 +793,15 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                           return 'Field is required';
                                                         }
 
-                                                        if (val.length < 6) {
-                                                          return 'Requires at least 6 characters.';
+                                                        if (val.length < 8) {
+                                                          return 'Requires at least 8 characters.';
                                                         }
 
+                                                        if (!RegExp(
+                                                                '^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&])[A-Za-z\\d@\$!%*#?&]{8,}\$')
+                                                            .hasMatch(val)) {
+                                                          return 'Password must contain a minimum of eight characters, at least one letter, one number and one special character';
+                                                        }
                                                         return null;
                                                       },
                                                     ),
@@ -804,6 +819,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     child: TextFormField(
                                                       controller:
                                                           confirmPasswordController,
+                                                      autofillHints: [
+                                                        AutofillHints.password
+                                                      ],
                                                       obscureText:
                                                           !confirmPasswordVisibility,
                                                       decoration:
@@ -1049,18 +1067,30 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                           }
                                           FFAppState().lastSignIn =
                                               getCurrentTimestamp;
-                                          if (currentUserDocument!
-                                                  .paymentInfo !=
-                                              null) {
-                                            payInfo3 =
-                                                await actions.fetchPayInfo(
-                                              context,
-                                              currentUserDocument!.paymentInfo,
-                                            );
+
+                                          final usersUpdateData =
+                                              createUsersRecordData(
+                                            lastActive: getCurrentTimestamp,
+                                          );
+                                          await currentUserReference!
+                                              .update(usersUpdateData);
+                                          if (valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.subStatus,
+                                                      '') !=
+                                                  null &&
+                                              valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.subStatus,
+                                                      '') !=
+                                                  '') {
                                             await actions.printConsole(
-                                              'PAY STATUS - ${payInfo3!.payStatus}',
+                                              'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
                                             );
-                                            if (payInfo3!.payStatus ==
+                                            if (valueOrDefault(
+                                                    currentUserDocument
+                                                        ?.subStatus,
+                                                    '') ==
                                                 'active') {
                                               if (valueOrDefault(
                                                           currentUserDocument
@@ -1137,8 +1167,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                               (r) => false,
                                             );
                                           }
-
-                                          setState(() {});
                                         },
                                         child: Container(
                                           width: 48,
@@ -1218,19 +1246,30 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                               }
                                               FFAppState().lastSignIn =
                                                   getCurrentTimestamp;
-                                              if (currentUserDocument!
-                                                      .paymentInfo !=
-                                                  null) {
-                                                payInfo2 =
-                                                    await actions.fetchPayInfo(
-                                                  context,
-                                                  currentUserDocument!
-                                                      .paymentInfo,
-                                                );
+
+                                              final usersUpdateData =
+                                                  createUsersRecordData(
+                                                lastActive: getCurrentTimestamp,
+                                              );
+                                              await currentUserReference!
+                                                  .update(usersUpdateData);
+                                              if (valueOrDefault(
+                                                          currentUserDocument
+                                                              ?.subStatus,
+                                                          '') !=
+                                                      null &&
+                                                  valueOrDefault(
+                                                          currentUserDocument
+                                                              ?.subStatus,
+                                                          '') !=
+                                                      '') {
                                                 await actions.printConsole(
-                                                  'PAY STATUS - ${payInfo2!.payStatus}',
+                                                  'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
                                                 );
-                                                if (payInfo2!.payStatus ==
+                                                if (valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.subStatus,
+                                                        '') ==
                                                     'active') {
                                                   if (valueOrDefault(
                                                               currentUserDocument
@@ -1310,8 +1349,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                   (r) => false,
                                                 );
                                               }
-
-                                              setState(() {});
                                             },
                                             child: Container(
                                               width: 48,

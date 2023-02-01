@@ -77,8 +77,20 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
             );
           },
         ).then((value) => setState(() {}));
+
+        logFirebaseEvent(
+          'app_acct_data_refresh',
+          parameters: {
+            'user_email': currentUserEmail,
+          },
+        );
       } else {
-        return;
+        logFirebaseEvent(
+          'app_acct_data_refresh',
+          parameters: {
+            'user_email': currentUserEmail,
+          },
+        );
       }
     });
 
@@ -172,21 +184,21 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                             content: Text(
                               'Refreshing transactions. This might take a minute...',
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText1
+                                  .bodyText2
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyText1Family,
-                                    color: Color(0xFFD1D1D1),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.normal,
+                                        .bodyText2Family,
+                                    color: FlutterFlowTheme.of(context)
+                                        .tertiaryColor,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey(
                                             FlutterFlowTheme.of(context)
-                                                .bodyText1Family),
+                                                .bodyText2Family),
                                   ),
                             ),
                             duration: Duration(milliseconds: 8000),
-                            backgroundColor: Colors.black,
+                            backgroundColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                           ),
                         );
                       } else {
@@ -196,21 +208,21 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                               content: Text(
                                 'Refreshing transactions. This might take a minute...',
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyText2
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
-                                      color: Color(0xFFC1C1C1),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
+                                          .bodyText2Family,
+                                      color: FlutterFlowTheme.of(context)
+                                          .tertiaryColor,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
+                                                  .bodyText2Family),
                                     ),
                               ),
                               duration: Duration(milliseconds: 8000),
-                              backgroundColor: Colors.black,
+                              backgroundColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                             ),
                           );
                         } else {
@@ -219,21 +231,20 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                               content: Text(
                                 'Synchronization Error: Please try again later',
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyText2
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
-                                      color: Color(0xFFE7E7E7),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
+                                          .bodyText2Family,
+                                      color: Color(0xFFFF0004),
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
+                                                  .bodyText2Family),
                                     ),
                               ),
                               duration: Duration(milliseconds: 4000),
-                              backgroundColor: Colors.black,
+                              backgroundColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                             ),
                           );
                         }

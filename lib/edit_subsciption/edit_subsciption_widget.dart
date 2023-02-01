@@ -495,7 +495,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       8, 0, 0, 0),
                                   child: Text(
-                                    'Edit expected charge date',
+                                    'Edit next charge date',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText2,
                                   ),
@@ -548,18 +548,9 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                 initialDate: editSubsciptionSubscriptionsRecord
                                     .expChargeDate,
                                 rowHeight: 40,
-                                onChange:
-                                    (DateTimeRange? newSelectedDate) async {
-                                  calendarSelectedDay = newSelectedDate;
-
-                                  final subscriptionsUpdateData =
-                                      createSubscriptionsRecordData(
-                                    expChargeDate: calendarSelectedDay?.start,
-                                  );
-                                  await editSubsciptionSubscriptionsRecord
-                                      .reference
-                                      .update(subscriptionsUpdateData);
-                                  setState(() {});
+                                onChange: (DateTimeRange? newSelectedDate) {
+                                  setState(() =>
+                                      calendarSelectedDay = newSelectedDate);
                                 },
                                 titleStyle: FlutterFlowTheme.of(context)
                                     .subtitle2
@@ -790,23 +781,87 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                         : null;
                                 return FFButtonWidget(
                                   onPressed: () async {
-                                    final subscriptionsUpdateData =
-                                        createSubscriptionsRecordData(
-                                      name: nameController?.text ?? '',
-                                      expChargeDate: calendarSelectedDay?.start,
-                                      category:
-                                          buttonCategoriesRecord!.reference,
-                                      expCharge: createMoneyStruct(
-                                        amount: FFAppState().currencyTextField,
-                                        clearUnsetFields: false,
-                                      ),
-                                      notification: switchListTileValue,
-                                      recurrence: durationValue,
-                                    );
-                                    await editSubsciptionSubscriptionsRecord
-                                        .reference
-                                        .update(subscriptionsUpdateData);
-                                    Navigator.pop(context);
+                                    if (calendarSelectedDay!.end >=
+                                        getCurrentTimestamp) {
+                                      final subscriptionsUpdateData =
+                                          createSubscriptionsRecordData(
+                                        name: nameController?.text ?? '',
+                                        expChargeDate:
+                                            calendarSelectedDay?.start,
+                                        category:
+                                            buttonCategoriesRecord!.reference,
+                                        expCharge: createMoneyStruct(
+                                          amount:
+                                              FFAppState().currencyTextField,
+                                          clearUnsetFields: false,
+                                        ),
+                                        notification: switchListTileValue,
+                                        recurrence: durationValue,
+                                      );
+                                      await editSubsciptionSubscriptionsRecord
+                                          .reference
+                                          .update(subscriptionsUpdateData);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Saved',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyText2Family,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .tertiaryColor,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText2Family),
+                                                ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 4000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                        ),
+                                      );
+                                      Navigator.pop(context);
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Cannot set a subscription to a past date',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyText2Family,
+                                                  color: Color(0xFFFF0000),
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText2Family),
+                                                ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 4000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                        ),
+                                      );
+                                    }
                                   },
                                   text: 'Save Details',
                                   options: FFButtonOptions(

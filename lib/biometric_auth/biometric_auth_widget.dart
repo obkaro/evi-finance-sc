@@ -11,6 +11,7 @@ import '../sign_up_progress/sign_up_progress_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -309,6 +310,13 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
                                     size: 120,
                                   ),
                                   onPressed: () async {
+                                    HapticFeedback.lightImpact();
+                                    logFirebaseEvent(
+                                      'bio_auth',
+                                      parameters: {
+                                        'user_email': currentUserEmail,
+                                      },
+                                    );
                                     final _localAuth = LocalAuthentication();
                                     bool _isBiometricSupported =
                                         await _localAuth.isDeviceSupported();

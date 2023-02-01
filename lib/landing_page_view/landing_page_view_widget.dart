@@ -451,6 +451,9 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                                             ?.subStatus,
                                                         '') !=
                                                     '') {
+                                              await actions.printConsole(
+                                                'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
+                                              );
                                               if (valueOrDefault(
                                                       currentUserDocument
                                                           ?.subStatus,

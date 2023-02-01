@@ -192,6 +192,14 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
                                                     .fromSTEB(10, 0, 0, 0),
                                                 child: InkWell(
                                                   onTap: () async {
+                                                    logFirebaseEvent(
+                                                      'app_add_income',
+                                                      parameters: {
+                                                        'user_email':
+                                                            currentUserEmail,
+                                                      },
+                                                    );
+
                                                     final incomeCategoriesCreateData =
                                                         createIncomeCategoriesRecordData(
                                                       categoryName:

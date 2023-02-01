@@ -225,6 +225,11 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                                     0, 4, 0, 0),
                                             child: TextFormField(
                                               controller: textController,
+                                              autofillHints: [
+                                                AutofillHints.name
+                                              ],
+                                              textCapitalization:
+                                                  TextCapitalization.words,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 hintText: 'Username',

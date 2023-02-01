@@ -88,6 +88,13 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                 gridViewConstMerchantsRecordList[gridViewIndex];
                             return InkWell(
                               onTap: () async {
+                                logFirebaseEvent(
+                                  'app_create_subscription',
+                                  parameters: {
+                                    'user_email': currentUserEmail,
+                                  },
+                                );
+
                                 final subscriptionsCreateData =
                                     createSubscriptionsRecordData(
                                   name: gridViewConstMerchantsRecord.name,
