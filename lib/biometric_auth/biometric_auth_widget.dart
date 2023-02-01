@@ -267,18 +267,18 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
                                 style: FlutterFlowTheme.of(context).subtitle1,
                               ),
                             ),
-                            Container(
-                              width: 180,
-                              height: 180,
-                              decoration: BoxDecoration(),
-                              child: Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                              child: Container(
+                                width: 160,
+                                height: 160,
+                                decoration: BoxDecoration(),
                                 child: FlutterFlowIconButton(
                                   borderColor: Colors.transparent,
-                                  borderRadius: 32,
+                                  borderRadius: 1200,
                                   borderWidth: 1,
-                                  buttonSize: 180,
+                                  buttonSize: 160,
                                   fillColor: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
                                   icon: Icon(
