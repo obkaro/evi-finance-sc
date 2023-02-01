@@ -105,11 +105,11 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'SingleBudget': (data) async => SingleBudgetWidget(
         budgetRef: getParameter(data, 'budgetRef'),
       ),
-  'ConnectFirstAccount': (data) async => ConnectFirstAccountWidget(),
   'CreateBudget': (data) async => CreateBudgetWidget(
         budget: await getDocumentParameter(
             data, 'budget', BudgetsRecord.serializer),
       ),
+  'ConnectFirstAccount': (data) async => ConnectFirstAccountWidget(),
   'EditBudget': (data) async => EditBudgetWidget(
         budgetRef: getParameter(data, 'budgetRef'),
       ),
@@ -152,8 +152,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'EditIncomeSources': (data) async => EditIncomeSourcesWidget(),
   'Menu': (data) async => NavBarPage(initialPage: 'Menu'),
   'EmailAuth': (data) async => EmailAuthWidget(),
-  'InitPaywall': (data) async => InitPaywallWidget(),
-  'Paywall': (data) async => PaywallWidget(),
   'SignUpProgress': (data) async => SignUpProgressWidget(),
   'BiometricAuth': (data) async => BiometricAuthWidget(),
 };
