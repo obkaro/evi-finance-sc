@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -155,6 +156,12 @@ class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent(
+                                  'app_update_tap',
+                                  parameters: {
+                                    'user_email': currentUserEmail,
+                                  },
+                                );
                                 await actions.launchStore();
                               },
                               text: 'Update now',

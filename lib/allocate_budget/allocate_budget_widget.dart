@@ -4,6 +4,7 @@ import '../components/create_const_category_widget.dart';
 import '../components/create_custom_category_widget.dart';
 import '../components/edit_budget_amount_widget.dart';
 import '../components/edit_category_widget.dart';
+import '../connect_first_account/connect_first_account_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -161,6 +162,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                     AlignmentDirectional(1, 0),
                                                 child: Text(
                                                   'Left to allocate: ',
+                                                  textAlign: TextAlign.start,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText2,
@@ -1208,8 +1210,9 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                 fontFamily: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText2Family,
-                                                                color: Color(
-                                                                    0xFFF9F9F9),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .tertiaryColor,
                                                                 useGoogleFonts: GoogleFonts
                                                                         .asMap()
                                                                     .containsKey(
@@ -1220,18 +1223,37 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                         duration: Duration(
                                                             milliseconds: 4000),
                                                         backgroundColor:
-                                                            Colors.black,
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
                                                       ),
                                                     );
-                                                    await Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            NavBarPage(
-                                                                initialPage:
-                                                                    'ActiveBudget'),
-                                                      ),
-                                                    );
+                                                    if ((currentUserDocument
+                                                                    ?.accountsList
+                                                                    ?.toList() ??
+                                                                [])
+                                                            .length <
+                                                        1) {
+                                                      await Navigator
+                                                          .pushAndRemoveUntil(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ConnectFirstAccountWidget(),
+                                                        ),
+                                                        (r) => false,
+                                                      );
+                                                    } else {
+                                                      await Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              NavBarPage(
+                                                                  initialPage:
+                                                                      'ActiveBudget'),
+                                                        ),
+                                                      );
+                                                    }
                                                   },
                                                   text: 'Save',
                                                   options: FFButtonOptions(

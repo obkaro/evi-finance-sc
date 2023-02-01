@@ -124,6 +124,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                       child: TextFormField(
                                         controller: signInEmailController,
                                         autofocus: true,
+                                        autofillHints: [AutofillHints.email],
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           hintText: 'Enter your email address',

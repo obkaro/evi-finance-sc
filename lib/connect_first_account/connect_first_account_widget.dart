@@ -153,7 +153,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Text(
-                                                  'Evi will not have the ability to credit, debit or perform any transactions on your accounts.',
+                                                  'Evi will not have the ability to debit or perform any transactions on your behalf.',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1,
@@ -272,73 +272,143 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  await actions.flutterMono(
-                                    context,
-                                  );
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Fetching account data. This might take a minute...',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 20),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => NavBarPage(
+                                                initialPage: 'Dashboard'),
+                                          ),
+                                        );
+                                      },
+                                      text: 'Go Home',
+                                      icon: Icon(
+                                        Icons.home_rounded,
+                                        size: 15,
+                                      ),
+                                      options: FFButtonOptions(
+                                        height: 60,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .subtitle1
                                             .override(
                                               fontFamily:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText1Family,
-                                              color: Color(0xFFC1C1C1),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.normal,
+                                                      .subtitle1Family,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
                                               useGoogleFonts:
                                                   GoogleFonts.asMap()
                                                       .containsKey(
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1Family),
+                                                              .subtitle1Family),
                                             ),
+                                        elevation: 0,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(16),
                                       ),
-                                      duration: Duration(milliseconds: 8000),
-                                      backgroundColor: Colors.black,
+                                      showLoadingIndicator: false,
                                     ),
-                                  );
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          NavBarPage(initialPage: 'Dashboard'),
-                                    ),
-                                  );
-                                },
-                                text: 'Continue',
-                                options: FFButtonOptions(
-                                  width: double.infinity,
-                                  height: 60,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle1
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .subtitle1Family,
-                                        color: Colors.white,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle1Family),
-                                      ),
-                                  elevation: 2,
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1,
                                   ),
-                                  borderRadius: BorderRadius.circular(16),
                                 ),
-                                showLoadingIndicator: false,
-                              ),
+                                Container(
+                                  width: 20,
+                                  decoration: BoxDecoration(),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 20),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        await actions.flutterMono(
+                                          context,
+                                        );
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Fetching account data. This might take a minute...',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText2Family,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText2Family),
+                                                      ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 8000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                          ),
+                                        );
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => NavBarPage(
+                                                initialPage: 'Dashboard'),
+                                          ),
+                                        );
+                                      },
+                                      text: 'Continue',
+                                      options: FFButtonOptions(
+                                        height: 60,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .subtitle1
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle1Family,
+                                              color: Colors.white,
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle1Family),
+                                            ),
+                                        elevation: 2,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      showLoadingIndicator: false,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),

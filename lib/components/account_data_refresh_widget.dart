@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -222,6 +223,12 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                                       backgroundColor: Colors.black,
                                     ),
                                   );
+                                  logFirebaseEvent(
+                                    'app_account_refresh',
+                                    parameters: {
+                                      'user_email': currentUserEmail,
+                                    },
+                                  );
                                 } else {
                                   if (FFAppState().dataSyncCode ==
                                       'SYNC_SUCCESSFUL') {
@@ -249,6 +256,12 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                                         duration: Duration(milliseconds: 8000),
                                         backgroundColor: Colors.black,
                                       ),
+                                    );
+                                    logFirebaseEvent(
+                                      'app_account_refresh',
+                                      parameters: {
+                                        'user_email': currentUserEmail,
+                                      },
                                     );
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
