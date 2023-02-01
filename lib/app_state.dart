@@ -18,6 +18,9 @@ class FFAppState extends ChangeNotifier {
     prefs = await SharedPreferences.getInstance();
     _showQuickTransAssign =
         prefs.getBool('ff_showQuickTransAssign') ?? _showQuickTransAssign;
+    _lastSignIn = prefs.containsKey('ff_lastSignIn')
+        ? DateTime.fromMillisecondsSinceEpoch(prefs.getInt('ff_lastSignIn')!)
+        : null;
   }
 
   void update(VoidCallback callback) {
@@ -105,6 +108,15 @@ class FFAppState extends ChangeNotifier {
   bool get paymentVerified => _paymentVerified;
   set paymentVerified(bool _value) {
     _paymentVerified = _value;
+  }
+
+  DateTime? _lastSignIn;
+  DateTime? get lastSignIn => _lastSignIn;
+  set lastSignIn(DateTime? _value) {
+    _lastSignIn = _value;
+    _value != null
+        ? prefs.setInt('ff_lastSignIn', _value.millisecondsSinceEpoch)
+        : prefs.remove('ff_lastSignIn');
   }
 }
 

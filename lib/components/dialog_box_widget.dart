@@ -159,14 +159,15 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
                                 ),
                               ),
                             ),
-                          Container(
-                            width: 20,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                          if (widget.information ?? true)
+                            Container(
+                              width: 20,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
                             ),
-                          ),
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {

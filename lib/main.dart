@@ -15,7 +15,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'index.dart';
-import 'flutter_flow/revenue_cat_util.dart' as revenue_cat;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,10 +23,6 @@ void main() async {
   await FlutterFlowTheme.initialize();
 
   final appState = FFAppState(); // Initialize FFAppState
-  await revenue_cat.initialize(
-    "appl_aeKzFymPWckfjOYAgWkgfGfPSda",
-    "goog_RRbRBosEHJVeJGgBddaWnGJnXXB",
-  );
 
   runApp(ChangeNotifierProvider(
     create: (context) => appState,
@@ -52,9 +47,7 @@ class _MyAppState extends State<MyApp> {
   EviFirebaseUser? initialUser;
   bool displaySplashImage = true;
 
-  final authUserSub = authenticatedUserStream.listen((user) {
-    revenue_cat.login(user?.uid);
-  });
+  final authUserSub = authenticatedUserStream.listen((_) {});
   final fcmTokenSub = fcmTokenUserStream.listen((_) {});
 
   @override
@@ -179,6 +172,7 @@ class _NavBarPageState extends State<NavBarPage> {
           GButton(
             icon: currentIndex == 0 ? Icons.home_rounded : Icons.home_rounded,
             text: 'Dashboard',
+            textStyle: FlutterFlowTheme.of(context).bodyText1,
             iconSize: 24,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           ),
@@ -187,12 +181,14 @@ class _NavBarPageState extends State<NavBarPage> {
                 ? Icons.pie_chart_rounded
                 : Icons.pie_chart_rounded,
             text: 'Active Budget',
+            textStyle: FlutterFlowTheme.of(context).bodyText1,
             iconSize: 24,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           ),
           GButton(
             icon: currentIndex == 2 ? Icons.apps_rounded : Icons.apps_rounded,
             text: 'Menu',
+            textStyle: FlutterFlowTheme.of(context).bodyText1,
             iconSize: 24,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           )

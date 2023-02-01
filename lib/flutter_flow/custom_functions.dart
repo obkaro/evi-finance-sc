@@ -27,6 +27,15 @@ int calculateRemBudgetCat(
   return remaining;
 }
 
+DateTime addHoursToTimestamp(
+  DateTime startTime,
+  int hoursToAdd,
+) {
+  // Add your function code here!
+
+  return startTime.add(Duration(hours: hoursToAdd));
+}
+
 String calcRemCatCurrency(
   List<CategoriesRecord> categoriesToCalc,
   BudgetsRecord budget,

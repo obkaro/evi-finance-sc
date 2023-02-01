@@ -38,3 +38,6 @@ exports.newPaymentWebhook = require('./payment/newPaymentWebhook').newPaymentWeb
 
 //* CANCEL SUBSCRIPTIONS PERIODICALLY
 exports.cancelSubscriptions = require('./payment/cancelSubscriptions').cancelSubscriptions;
+
+//* WEBHOOK FOR PAYSTACK
+exports.psWebhook = require('./payment/psWebhook').psWebhook;

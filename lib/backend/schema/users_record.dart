@@ -48,6 +48,14 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
 
   DocumentReference? get paymentInfo;
 
+  @BuiltValueField(wireName: 'sub_status')
+  String? get subStatus;
+
+  @BuiltValueField(wireName: 'next_payment_date')
+  DateTime? get nextPaymentDate;
+
+  DateTime? get lastActive;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -65,7 +73,8 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..onboardingStep = 0
     ..experience = ''
     ..username = ''
-    ..acqChannel = '';
+    ..acqChannel = ''
+    ..subStatus = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -104,6 +113,9 @@ Map<String, dynamic> createUsersRecordData({
   String? username,
   String? acqChannel,
   DocumentReference? paymentInfo,
+  String? subStatus,
+  DateTime? nextPaymentDate,
+  DateTime? lastActive,
 }) {
   final firestoreData = serializers.toFirestore(
     UsersRecord.serializer,
@@ -125,7 +137,10 @@ Map<String, dynamic> createUsersRecordData({
         ..experience = experience
         ..username = username
         ..acqChannel = acqChannel
-        ..paymentInfo = paymentInfo,
+        ..paymentInfo = paymentInfo
+        ..subStatus = subStatus
+        ..nextPaymentDate = nextPaymentDate
+        ..lastActive = lastActive,
     ),
   );
 

@@ -1,15 +1,20 @@
 import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../components/new_version_found_widget.dart';
+import '../components/notification_prompt_widget.dart';
 import '../email_auth/email_auth_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
+import '../sign_up_progress/sign_up_progress_widget.dart';
 import '../welcome_to_evi/welcome_to_evi_widget.dart';
+import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -47,6 +52,16 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(0),
+        child: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          actions: [],
+          centerTitle: true,
+          elevation: 0,
+        ),
+      ),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
@@ -249,38 +264,101 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                     if (user == null) {
                                       return;
                                     }
+                                    FFAppState().lastSignIn =
+                                        getCurrentTimestamp;
+
+                                    final usersUpdateData =
+                                        createUsersRecordData(
+                                      lastActive: getCurrentTimestamp,
+                                    );
+                                    await currentUserReference!
+                                        .update(usersUpdateData);
                                     if (valueOrDefault(
-                                                currentUserDocument?.username,
-                                                '') ==
-                                            null ||
+                                                currentUserDocument?.subStatus,
+                                                '') !=
+                                            null &&
                                         valueOrDefault(
-                                                currentUserDocument?.username,
-                                                '') ==
+                                                currentUserDocument?.subStatus,
+                                                '') !=
                                             '') {
-                                      await Navigator.push(
+                                      await actions.printConsole(
+                                        'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
+                                      );
+                                      if (valueOrDefault(
+                                              currentUserDocument?.subStatus,
+                                              '') ==
+                                          'active') {
+                                        if (valueOrDefault(
+                                                    currentUserDocument
+                                                        ?.username,
+                                                    '') ==
+                                                null ||
+                                            valueOrDefault(
+                                                    currentUserDocument
+                                                        ?.username,
+                                                    '') ==
+                                                '') {
+                                          await Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  WelcomeToEviWidget(),
+                                            ),
+                                            (r) => false,
+                                          );
+                                        } else {
+                                          if (currentUserDocument!
+                                                  .activeBudget !=
+                                              null) {
+                                            await Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    NavBarPage(
+                                                        initialPage:
+                                                            'Dashboard'),
+                                              ),
+                                              (r) => false,
+                                            );
+                                          } else {
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return Padding(
+                                                  padding:
+                                                      MediaQuery.of(context)
+                                                          .viewInsets,
+                                                  child:
+                                                      NotificationPromptWidget(),
+                                                );
+                                              },
+                                            ).then((value) => setState(() {}));
+                                          }
+                                        }
+                                      } else {
+                                        await Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                SignUpProgressWidget(),
+                                          ),
+                                          (r) => false,
+                                        );
+                                      }
+                                    } else {
+                                      await Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              WelcomeToEviWidget(),
+                                              SignUpProgressWidget(),
                                         ),
-                                      );
-                                    } else {
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => NavBarPage(
-                                              initialPage: 'Dashboard'),
-                                        ),
+                                        (r) => false,
                                       );
                                     }
-
-                                    await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => NavBarPage(
-                                            initialPage: 'Dashboard'),
-                                      ),
-                                    );
                                   },
                                   text: 'Sign in with Google',
                                   icon: Icon(
@@ -354,44 +432,110 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                             if (user == null) {
                                               return;
                                             }
+                                            FFAppState().lastSignIn =
+                                                getCurrentTimestamp;
+
+                                            final usersUpdateData =
+                                                createUsersRecordData(
+                                              lastActive: getCurrentTimestamp,
+                                            );
+                                            await currentUserReference!
+                                                .update(usersUpdateData);
                                             if (valueOrDefault(
                                                         currentUserDocument
-                                                            ?.username,
-                                                        '') ==
-                                                    null ||
+                                                            ?.subStatus,
+                                                        '') !=
+                                                    null &&
                                                 valueOrDefault(
                                                         currentUserDocument
-                                                            ?.username,
-                                                        '') ==
+                                                            ?.subStatus,
+                                                        '') !=
                                                     '') {
-                                              await Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      WelcomeToEviWidget(),
-                                                ),
+                                              await actions.printConsole(
+                                                'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
                                               );
+                                              if (valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.subStatus,
+                                                      '') ==
+                                                  'active') {
+                                                if (valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.username,
+                                                            '') ==
+                                                        null ||
+                                                    valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.username,
+                                                            '') ==
+                                                        '') {
+                                                  await Navigator
+                                                      .pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          WelcomeToEviWidget(),
+                                                    ),
+                                                    (r) => false,
+                                                  );
+                                                } else {
+                                                  if (currentUserDocument!
+                                                          .activeBudget !=
+                                                      null) {
+                                                    await Navigator
+                                                        .pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            NavBarPage(
+                                                                initialPage:
+                                                                    'Dashboard'),
+                                                      ),
+                                                      (r) => false,
+                                                    );
+                                                  } else {
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      enableDrag: false,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return Padding(
+                                                          padding:
+                                                              MediaQuery.of(
+                                                                      context)
+                                                                  .viewInsets,
+                                                          child:
+                                                              NotificationPromptWidget(),
+                                                        );
+                                                      },
+                                                    ).then((value) =>
+                                                        setState(() {}));
+                                                  }
+                                                }
+                                              } else {
+                                                await Navigator
+                                                    .pushAndRemoveUntil(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SignUpProgressWidget(),
+                                                  ),
+                                                  (r) => false,
+                                                );
+                                              }
                                             } else {
-                                              await Navigator.push(
+                                              await Navigator
+                                                  .pushAndRemoveUntil(
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      NavBarPage(
-                                                          initialPage:
-                                                              'Dashboard'),
+                                                      SignUpProgressWidget(),
                                                 ),
+                                                (r) => false,
                                               );
                                             }
-
-                                            await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    NavBarPage(
-                                                        initialPage:
-                                                            'Dashboard'),
-                                              ),
-                                            );
                                           },
                                           text: 'Sign in with Apple',
                                           icon: Icon(

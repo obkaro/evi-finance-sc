@@ -184,6 +184,12 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
                             await IncomeCategoriesRecord.createDoc(
                                     currentUserReference!)
                                 .set(incomeCategoriesCreateData);
+                            logFirebaseEvent(
+                              'app_add_income',
+                              parameters: {
+                                'user_email': currentUserEmail,
+                              },
+                            );
                             Navigator.pop(context);
                           },
                           text: 'Save',

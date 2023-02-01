@@ -518,7 +518,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                                           padding:
                                                               EdgeInsetsDirectional
                                                                   .fromSTEB(0,
-                                                                      0, 0, 16),
+                                                                      0, 0, 10),
                                                           child: InkWell(
                                                             onTap: () async {
                                                               // Action_ViewSingleCategory
@@ -646,7 +646,6 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                                                           Expanded(
                                                                             child:
                                                                                 ProgressBarWidget(
-                                                                              key: UniqueKey(),
                                                                               totalAmount: listViewCategoriesRecord.categoryAmount,
                                                                               spentAmount: listViewCategoriesRecord.spentAmount,
                                                                             ),

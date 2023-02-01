@@ -100,6 +100,8 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               () => setState(() {}),
                             ),
                             autofocus: true,
+                            autofillHints: [AutofillHints.name],
+                            textCapitalization: TextCapitalization.words,
                             obscureText: false,
                             decoration: InputDecoration(
                               hintText: 'New username here',
@@ -149,6 +151,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               () => setState(() {}),
                             ),
                             autofocus: true,
+                            autofillHints: [AutofillHints.email],
                             readOnly: true,
                             obscureText: false,
                             decoration: InputDecoration(
@@ -200,6 +203,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                 () => setState(() {}),
                               ),
                               autofocus: true,
+                              autofillHints: [AutofillHints.telephoneNumber],
                               readOnly: true,
                               obscureText: false,
                               decoration: InputDecoration(

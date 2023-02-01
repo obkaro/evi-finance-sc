@@ -43,6 +43,16 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(0),
+        child: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          actions: [],
+          centerTitle: true,
+          elevation: 0,
+        ),
+      ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
         child: Column(
@@ -114,6 +124,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                       child: TextFormField(
                                         controller: signInEmailController,
                                         autofocus: true,
+                                        autofillHints: [AutofillHints.email],
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           hintText: 'Enter your email address',

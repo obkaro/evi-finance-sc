@@ -10,6 +10,7 @@ import '../sign_up_progress/sign_up_progress_widget.dart';
 import '../welcome_to_evi/welcome_to_evi_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,15 +24,14 @@ class EmailAuthWidget extends StatefulWidget {
 }
 
 class _EmailAuthWidgetState extends State<EmailAuthWidget> {
-  PaymentInfoRecord? payInfo;
-  TextEditingController? signInEmailController;
-  TextEditingController? signInPasswordController;
-  late bool signInPasswordVisibility;
   TextEditingController? confirmPasswordController;
   late bool confirmPasswordVisibility;
   TextEditingController? newPasswordController;
   late bool newPasswordVisibility;
   TextEditingController? signUpEmailController;
+  TextEditingController? signInEmailController;
+  TextEditingController? signInPasswordController;
+  late bool signInPasswordVisibility;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final formKey2 = GlobalKey<FormState>();
@@ -69,6 +69,16 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(0),
+        child: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          actions: [],
+          centerTitle: true,
+          elevation: 0,
+        ),
+      ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
         child: Column(
@@ -155,6 +165,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                       controller:
                                                           signInEmailController,
                                                       autofocus: true,
+                                                      autofillHints: [
+                                                        AutofillHints.email
+                                                      ],
                                                       obscureText: false,
                                                       decoration:
                                                           InputDecoration(
@@ -253,6 +266,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                       controller:
                                                           signInPasswordController,
                                                       autofocus: true,
+                                                      autofillHints: [
+                                                        AutofillHints.password
+                                                      ],
                                                       obscureText:
                                                           !signInPasswordVisibility,
                                                       decoration:
@@ -374,22 +390,33 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     return;
                                                   }
 
-                                                  await Future.delayed(
-                                                      const Duration(
-                                                          milliseconds: 5000));
-                                                  if (currentUserDocument!
-                                                          .paymentInfo !=
-                                                      null) {
-                                                    payInfo = await actions
-                                                        .fetchPayInfo(
-                                                      context,
-                                                      currentUserDocument!
-                                                          .paymentInfo,
-                                                    );
+                                                  FFAppState().lastSignIn =
+                                                      getCurrentTimestamp;
+
+                                                  final usersUpdateData =
+                                                      createUsersRecordData(
+                                                    lastActive:
+                                                        getCurrentTimestamp,
+                                                  );
+                                                  await currentUserReference!
+                                                      .update(usersUpdateData);
+                                                  if (valueOrDefault(
+                                                              currentUserDocument
+                                                                  ?.subStatus,
+                                                              '') !=
+                                                          null &&
+                                                      valueOrDefault(
+                                                              currentUserDocument
+                                                                  ?.subStatus,
+                                                              '') !=
+                                                          '') {
                                                     await actions.printConsole(
-                                                      'PAY STATUS - ${payInfo!.payStatus}',
+                                                      'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
                                                     );
-                                                    if (payInfo!.payStatus ==
+                                                    if (valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.subStatus,
+                                                            '') ==
                                                         'active') {
                                                       if (valueOrDefault(
                                                                   currentUserDocument
@@ -469,8 +496,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                       (r) => false,
                                                     );
                                                   }
-
-                                                  setState(() {});
                                                 },
                                                 text: 'Sign in',
                                                 options: FFButtonOptions(
@@ -574,6 +599,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     child: TextFormField(
                                                       controller:
                                                           signUpEmailController,
+                                                      autofillHints: [
+                                                        AutofillHints.email
+                                                      ],
                                                       obscureText: false,
                                                       decoration:
                                                           InputDecoration(
@@ -671,6 +699,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     child: TextFormField(
                                                       controller:
                                                           newPasswordController,
+                                                      autofillHints: [
+                                                        AutofillHints.password
+                                                      ],
                                                       obscureText:
                                                           !newPasswordVisibility,
                                                       decoration:
@@ -762,10 +793,15 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                           return 'Field is required';
                                                         }
 
-                                                        if (val.length < 6) {
-                                                          return 'Requires at least 6 characters.';
+                                                        if (val.length < 8) {
+                                                          return 'Requires at least 8 characters.';
                                                         }
 
+                                                        if (!RegExp(
+                                                                '^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&])[A-Za-z\\d@\$!%*#?&]{8,}\$')
+                                                            .hasMatch(val)) {
+                                                          return 'Password must contain a minimum of eight characters, at least one letter, one number and one special character';
+                                                        }
                                                         return null;
                                                       },
                                                     ),
@@ -783,6 +819,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     child: TextFormField(
                                                       controller:
                                                           confirmPasswordController,
+                                                      autofillHints: [
+                                                        AutofillHints.password
+                                                      ],
                                                       obscureText:
                                                           !confirmPasswordVisibility,
                                                       decoration:
@@ -924,6 +963,16 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                       .doc(user.uid)
                                                       .update(usersCreateData);
 
+                                                  FFAppState().lastSignIn =
+                                                      getCurrentTimestamp;
+
+                                                  final usersUpdateData =
+                                                      createUsersRecordData(
+                                                    lastActive:
+                                                        getCurrentTimestamp,
+                                                  );
+                                                  await currentUserReference!
+                                                      .update(usersUpdateData);
                                                   await Navigator
                                                       .pushAndRemoveUntil(
                                                     context,
@@ -1009,23 +1058,40 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Container(
-                                        width: 48,
-                                        height: 48,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Align(
-                                          alignment: AlignmentDirectional(0, 0),
-                                          child: InkWell(
-                                            onTap: () async {
-                                              final user =
-                                                  await signInWithGoogle(
-                                                      context);
-                                              if (user == null) {
-                                                return;
-                                              }
+                                      InkWell(
+                                        onTap: () async {
+                                          final user =
+                                              await signInWithGoogle(context);
+                                          if (user == null) {
+                                            return;
+                                          }
+                                          FFAppState().lastSignIn =
+                                              getCurrentTimestamp;
+
+                                          final usersUpdateData =
+                                              createUsersRecordData(
+                                            lastActive: getCurrentTimestamp,
+                                          );
+                                          await currentUserReference!
+                                              .update(usersUpdateData);
+                                          if (valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.subStatus,
+                                                      '') !=
+                                                  null &&
+                                              valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.subStatus,
+                                                      '') !=
+                                                  '') {
+                                            await actions.printConsole(
+                                              'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
+                                            );
+                                            if (valueOrDefault(
+                                                    currentUserDocument
+                                                        ?.subStatus,
+                                                    '') ==
+                                                'active') {
                                               if (valueOrDefault(
                                                           currentUserDocument
                                                               ?.username,
@@ -1036,35 +1102,130 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                               ?.username,
                                                           '') ==
                                                       '') {
-                                                await Navigator.push(
+                                                await Navigator
+                                                    .pushAndRemoveUntil(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         WelcomeToEviWidget(),
                                                   ),
+                                                  (r) => false,
                                                 );
                                               } else {
-                                                await Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        NavBarPage(
-                                                            initialPage:
-                                                                'Dashboard'),
-                                                  ),
-                                                );
+                                                if (currentUserDocument!
+                                                        .activeBudget !=
+                                                    null) {
+                                                  await Navigator
+                                                      .pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          NavBarPage(
+                                                              initialPage:
+                                                                  'Dashboard'),
+                                                    ),
+                                                    (r) => false,
+                                                  );
+                                                } else {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    enableDrag: false,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Padding(
+                                                        padding: MediaQuery.of(
+                                                                context)
+                                                            .viewInsets,
+                                                        child:
+                                                            NotificationPromptWidget(),
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      setState(() {}));
+                                                }
                                               }
-                                            },
-                                            child: Container(
-                                              width: 32,
-                                              height: 32,
-                                              clipBehavior: Clip.antiAlias,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
+                                            } else {
+                                              await Navigator
+                                                  .pushAndRemoveUntil(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SignUpProgressWidget(),
+                                                ),
+                                                (r) => false,
+                                              );
+                                            }
+                                          } else {
+                                            await Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SignUpProgressWidget(),
                                               ),
-                                              child: Image.asset(
-                                                'assets/images/google-color-icon.png',
-                                                fit: BoxFit.contain,
+                                              (r) => false,
+                                            );
+                                          }
+                                        },
+                                        child: Container(
+                                          width: 48,
+                                          height: 48,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Align(
+                                            alignment:
+                                                AlignmentDirectional(0, 0),
+                                            child: InkWell(
+                                              onTap: () async {
+                                                final user =
+                                                    await signInWithGoogle(
+                                                        context);
+                                                if (user == null) {
+                                                  return;
+                                                }
+                                                if (valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.username,
+                                                            '') ==
+                                                        null ||
+                                                    valueOrDefault(
+                                                            currentUserDocument
+                                                                ?.username,
+                                                            '') ==
+                                                        '') {
+                                                  await Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          WelcomeToEviWidget(),
+                                                    ),
+                                                  );
+                                                } else {
+                                                  await Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          NavBarPage(
+                                                              initialPage:
+                                                                  'Dashboard'),
+                                                    ),
+                                                  );
+                                                }
+                                              },
+                                              child: Container(
+                                                width: 32,
+                                                height: 32,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Image.asset(
+                                                  'assets/images/google-color-icon.png',
+                                                  fit: BoxFit.contain,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -1075,24 +1236,41 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16, 0, 0, 0),
-                                          child: Container(
-                                            width: 48,
-                                            height: 48,
-                                            decoration: BoxDecoration(
-                                              color: Colors.black,
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Align(
-                                              alignment:
-                                                  AlignmentDirectional(0, 0),
-                                              child: InkWell(
-                                                onTap: () async {
-                                                  final user =
-                                                      await signInWithApple(
-                                                          context);
-                                                  if (user == null) {
-                                                    return;
-                                                  }
+                                          child: InkWell(
+                                            onTap: () async {
+                                              final user =
+                                                  await signInWithApple(
+                                                      context);
+                                              if (user == null) {
+                                                return;
+                                              }
+                                              FFAppState().lastSignIn =
+                                                  getCurrentTimestamp;
+
+                                              final usersUpdateData =
+                                                  createUsersRecordData(
+                                                lastActive: getCurrentTimestamp,
+                                              );
+                                              await currentUserReference!
+                                                  .update(usersUpdateData);
+                                              if (valueOrDefault(
+                                                          currentUserDocument
+                                                              ?.subStatus,
+                                                          '') !=
+                                                      null &&
+                                                  valueOrDefault(
+                                                          currentUserDocument
+                                                              ?.subStatus,
+                                                          '') !=
+                                                      '') {
+                                                await actions.printConsole(
+                                                  'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
+                                                );
+                                                if (valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.subStatus,
+                                                        '') ==
+                                                    'active') {
                                                   if (valueOrDefault(
                                                               currentUserDocument
                                                                   ?.username,
@@ -1103,35 +1281,134 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                                   ?.username,
                                                               '') ==
                                                           '') {
-                                                    await Navigator.push(
+                                                    await Navigator
+                                                        .pushAndRemoveUntil(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             WelcomeToEviWidget(),
                                                       ),
+                                                      (r) => false,
                                                     );
                                                   } else {
-                                                    await Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            NavBarPage(
-                                                                initialPage:
-                                                                    'Dashboard'),
-                                                      ),
-                                                    );
+                                                    if (currentUserDocument!
+                                                            .activeBudget !=
+                                                        null) {
+                                                      await Navigator
+                                                          .pushAndRemoveUntil(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              NavBarPage(
+                                                                  initialPage:
+                                                                      'Dashboard'),
+                                                        ),
+                                                        (r) => false,
+                                                      );
+                                                    } else {
+                                                      await showModalBottomSheet(
+                                                        isScrollControlled:
+                                                            true,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        enableDrag: false,
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return Padding(
+                                                            padding:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .viewInsets,
+                                                            child:
+                                                                NotificationPromptWidget(),
+                                                          );
+                                                        },
+                                                      ).then((value) =>
+                                                          setState(() {}));
+                                                    }
                                                   }
-                                                },
-                                                child: Container(
-                                                  width: 32,
-                                                  height: 32,
-                                                  clipBehavior: Clip.antiAlias,
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
+                                                } else {
+                                                  await Navigator
+                                                      .pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          SignUpProgressWidget(),
+                                                    ),
+                                                    (r) => false,
+                                                  );
+                                                }
+                                              } else {
+                                                await Navigator
+                                                    .pushAndRemoveUntil(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SignUpProgressWidget(),
                                                   ),
-                                                  child: Image.asset(
-                                                    'assets/images/apple-xxl.png',
-                                                    fit: BoxFit.contain,
+                                                  (r) => false,
+                                                );
+                                              }
+                                            },
+                                            child: Container(
+                                              width: 48,
+                                              height: 48,
+                                              decoration: BoxDecoration(
+                                                color: Colors.black,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Align(
+                                                alignment:
+                                                    AlignmentDirectional(0, 0),
+                                                child: InkWell(
+                                                  onTap: () async {
+                                                    final user =
+                                                        await signInWithApple(
+                                                            context);
+                                                    if (user == null) {
+                                                      return;
+                                                    }
+                                                    if (valueOrDefault(
+                                                                currentUserDocument
+                                                                    ?.username,
+                                                                '') ==
+                                                            null ||
+                                                        valueOrDefault(
+                                                                currentUserDocument
+                                                                    ?.username,
+                                                                '') ==
+                                                            '') {
+                                                      await Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              WelcomeToEviWidget(),
+                                                        ),
+                                                      );
+                                                    } else {
+                                                      await Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              NavBarPage(
+                                                                  initialPage:
+                                                                      'Dashboard'),
+                                                        ),
+                                                      );
+                                                    }
+                                                  },
+                                                  child: Container(
+                                                    width: 32,
+                                                    height: 32,
+                                                    clipBehavior:
+                                                        Clip.antiAlias,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: Image.asset(
+                                                      'assets/images/apple-xxl.png',
+                                                      fit: BoxFit.contain,
+                                                    ),
                                                   ),
                                                 ),
                                               ),

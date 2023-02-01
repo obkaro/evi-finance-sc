@@ -1,11 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/c_button_filled_copy_widget.dart';
 import '../components/loading_gridlogos_widget.dart';
 import '../create_recurring/create_recurring_widget.dart';
 import '../edit_subsciption/edit_subsciption_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -88,6 +88,13 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                 gridViewConstMerchantsRecordList[gridViewIndex];
                             return InkWell(
                               onTap: () async {
+                                logFirebaseEvent(
+                                  'app_create_subscription',
+                                  parameters: {
+                                    'user_email': currentUserEmail,
+                                  },
+                                );
+
                                 final subscriptionsCreateData =
                                     createSubscriptionsRecordData(
                                   name: gridViewConstMerchantsRecord.name,
@@ -124,13 +131,19 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       10, 10, 10, 10),
                                   child: Hero(
-                                    tag: gridViewConstMerchantsRecord.logo!,
+                                    tag: valueOrDefault<String>(
+                                      gridViewConstMerchantsRecord.logo,
+                                      'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif' +
+                                          '$gridViewIndex',
+                                    ),
                                     transitionOnUserGestures: true,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
                                       child: CachedNetworkImage(
-                                        imageUrl:
-                                            gridViewConstMerchantsRecord.logo!,
+                                        imageUrl: valueOrDefault<String>(
+                                          gridViewConstMerchantsRecord.logo,
+                                          'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif',
+                                        ),
                                         fit: BoxFit.scaleDown,
                                       ),
                                     ),
@@ -146,41 +159,51 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-              child: InkWell(
-                onTap: () async {
-                  final subscriptionsCreateData = createSubscriptionsRecordData(
-                    owner: currentUserReference,
-                  );
-                  var subscriptionsRecordReference =
-                      SubscriptionsRecord.collection.doc();
-                  await subscriptionsRecordReference
-                      .set(subscriptionsCreateData);
-                  newSub2 = SubscriptionsRecord.getDocumentFromData(
-                      subscriptionsCreateData, subscriptionsRecordReference);
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditSubsciptionWidget(
-                        subscriptionRecord: newSub2!.reference,
-                      ),
+            FFButtonWidget(
+              onPressed: () async {
+                final subscriptionsCreateData = createSubscriptionsRecordData(
+                  owner: currentUserReference,
+                );
+                var subscriptionsRecordReference =
+                    SubscriptionsRecord.collection.doc();
+                await subscriptionsRecordReference.set(subscriptionsCreateData);
+                newSub2 = SubscriptionsRecord.getDocumentFromData(
+                    subscriptionsCreateData, subscriptionsRecordReference);
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditSubsciptionWidget(
+                      subscriptionRecord: newSub2!.reference,
                     ),
-                  );
-                  Navigator.pop(context);
-
-                  setState(() {});
-                },
-                child: CButtonFilledCopyWidget(
-                  text: 'Custom',
-                  icon: Icon(
-                    Icons.add_rounded,
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    size: 20,
                   ),
-                  action: () async {},
-                ),
+                );
+                Navigator.pop(context);
+
+                setState(() {});
+              },
+              text: 'Custom',
+              icon: Icon(
+                Icons.add_rounded,
+                size: 18,
               ),
+              options: FFButtonOptions(
+                width: double.infinity,
+                height: 48,
+                color: FlutterFlowTheme.of(context).secondaryBackground,
+                textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                      fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).subtitle2Family),
+                    ),
+                elevation: 0,
+                borderSide: BorderSide(
+                  color: FlutterFlowTheme.of(context).fadedDivider,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              showLoadingIndicator: false,
             ),
           ],
         ),
