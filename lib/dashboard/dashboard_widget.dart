@@ -576,8 +576,12 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                               child:
                                                                   CachedNetworkImage(
                                                                 imageUrl:
-                                                                    rowAccountsRecord
-                                                                        .accountLogo!,
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                  rowAccountsRecord
+                                                                      .accountLogo,
+                                                                  'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif',
+                                                                ),
                                                                 width: 40,
                                                                 height: 40,
                                                                 fit: BoxFit

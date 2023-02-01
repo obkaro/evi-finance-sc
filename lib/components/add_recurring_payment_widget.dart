@@ -131,13 +131,19 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       10, 10, 10, 10),
                                   child: Hero(
-                                    tag: gridViewConstMerchantsRecord.logo!,
+                                    tag: valueOrDefault<String>(
+                                      gridViewConstMerchantsRecord.logo,
+                                      'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif' +
+                                          '$gridViewIndex',
+                                    ),
                                     transitionOnUserGestures: true,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
                                       child: CachedNetworkImage(
-                                        imageUrl:
-                                            gridViewConstMerchantsRecord.logo!,
+                                        imageUrl: valueOrDefault<String>(
+                                          gridViewConstMerchantsRecord.logo,
+                                          'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif',
+                                        ),
                                         fit: BoxFit.scaleDown,
                                       ),
                                     ),
