@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../email_auth/email_auth_widget.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -9,6 +10,8 @@ import '../main.dart';
 import '../sign_up_progress/sign_up_progress_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
@@ -21,7 +24,24 @@ class BiometricAuthWidget extends StatefulWidget {
   _BiometricAuthWidgetState createState() => _BiometricAuthWidgetState();
 }
 
-class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
+class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'iconButtonOnPageLoadAnimation': AnimationInfo(
+      loop: true,
+      reverse: true,
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 1350.ms,
+          begin: 0.99,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   TextEditingController? signInEmailController;
   TextEditingController? signInPasswordController;
   bool auth2 = false;
@@ -31,6 +51,7 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
   @override
   void initState() {
     super.initState();
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'BiometricAuth'});
     signInEmailController = TextEditingController(text: currentUserEmail);
@@ -385,7 +406,8 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget> {
 
                                     setState(() {});
                                   },
-                                ),
+                                ).animateOnPageLoad(animationsMap[
+                                    'iconButtonOnPageLoadAnimation']!),
                               ),
                             ),
                             Padding(
