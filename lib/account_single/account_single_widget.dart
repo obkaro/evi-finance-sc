@@ -63,6 +63,45 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (functions.addHoursToTimestamp(widget.account!.dateLinked!, 2) <
+          getCurrentTimestamp) {
+        FFAppState().update(() {
+          FFAppState().dialogBoxReturn = false;
+        });
+        await showModalBottomSheet(
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          context: context,
+          builder: (context) {
+            return Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: DialogBoxWidget(
+                heading: 'Disconnect Account',
+                body:
+                    'We have attempted to fetch your account data from your bank, but have not recieved a response. This is usually due to temporary network issues with the bank. We recommend you cancel this request and try connecting your account again after some time. Sincere apologies for this inconvinience 🙏',
+                buttonYes: 'Proceed',
+                buttonNo: 'Wait',
+                information: false,
+                yesAction: () async {},
+              ),
+            );
+          },
+        ).then((value) => setState(() {}));
+
+        if (FFAppState().dialogBoxReturn) {
+          await MonoGroup.unlinkAccountCall.call(
+            authID: widget.account!.authID,
+          );
+          await widget.account!.reference.delete();
+          await Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NavBarPage(initialPage: 'Dashboard'),
+            ),
+            (r) => false,
+          );
+        }
+      }
       if (widget.account!.reauthRequired == true) {
         showModalBottomSheet(
           isScrollControlled: true,
@@ -655,66 +694,71 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                     .secondaryBackground,
                                 borderRadius: BorderRadius.circular(32),
                               ),
-                              child: StreamBuilder<List<TransactionsRecord>>(
-                                stream: queryTransactionsRecord(
-                                  queryBuilder: (transactionsRecord) =>
-                                      transactionsRecord
-                                          .where('transactionOwner',
-                                              isEqualTo: currentUserReference)
-                                          .where('account',
-                                              isEqualTo:
-                                                  widget.account!.reference)
-                                          .orderBy('trasactionDate',
-                                              descending: true),
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: LoadingTransactionWidget(),
-                                    );
-                                  }
-                                  List<TransactionsRecord>
-                                      listViewTransactionsRecordList =
-                                      snapshot.data!;
-                                  if (listViewTransactionsRecordList.isEmpty) {
-                                    return Center(
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: 300,
-                                        child: EmptyListWidget(
-                                          text:
-                                              'Connect an account to import transactions',
-                                          icon: Icon(
-                                            Icons.compare_arrows_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 64,
+                              child: Visibility(
+                                visible: widget.account!.lastSync != null,
+                                child: StreamBuilder<List<TransactionsRecord>>(
+                                  stream: queryTransactionsRecord(
+                                    queryBuilder: (transactionsRecord) =>
+                                        transactionsRecord
+                                            .where('transactionOwner',
+                                                isEqualTo: currentUserReference)
+                                            .where('account',
+                                                isEqualTo:
+                                                    widget.account!.reference)
+                                            .orderBy('trasactionDate',
+                                                descending: true),
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: LoadingTransactionWidget(),
+                                      );
+                                    }
+                                    List<TransactionsRecord>
+                                        listViewTransactionsRecordList =
+                                        snapshot.data!;
+                                    if (listViewTransactionsRecordList
+                                        .isEmpty) {
+                                      return Center(
+                                        child: Container(
+                                          width: double.infinity,
+                                          height: 300,
+                                          child: EmptyListWidget(
+                                            text:
+                                                'Connect an account to import transactions',
+                                            icon: Icon(
+                                              Icons.compare_arrows_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 64,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  }
-                                  return ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount:
-                                        listViewTransactionsRecordList.length,
-                                    itemBuilder: (context, listViewIndex) {
-                                      final listViewTransactionsRecord =
-                                          listViewTransactionsRecordList[
-                                              listViewIndex];
-                                      return TransactionListItemWidget(
-                                        key: Key(
-                                            'transactionListItem_${listViewIndex}'),
-                                        transactionDoc:
-                                            listViewTransactionsRecord,
                                       );
-                                    },
-                                  );
-                                },
+                                    }
+                                    return ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      primary: false,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount:
+                                          listViewTransactionsRecordList.length,
+                                      itemBuilder: (context, listViewIndex) {
+                                        final listViewTransactionsRecord =
+                                            listViewTransactionsRecordList[
+                                                listViewIndex];
+                                        return TransactionListItemWidget(
+                                          key: Key(
+                                              'transactionListItem_${listViewIndex}'),
+                                          transactionDoc:
+                                              listViewTransactionsRecord,
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           ),
