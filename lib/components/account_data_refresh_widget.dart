@@ -93,7 +93,7 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                                 'Due to connection protocols from ${valueOrDefault<String>(
                                   widget.account!.institutionName,
                                   'your bank',
-                                )}, you need to authenticate before an account data and transactions refresh.',
+                                )}, you may need to provide authentication to get your account data up to date.',
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
@@ -105,6 +105,7 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
                                                   .bodyText1Family),
+                                      lineHeight: 1.2,
                                     ),
                               ),
                             ),
