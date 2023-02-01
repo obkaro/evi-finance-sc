@@ -413,8 +413,12 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                                         child:
                                                             CachedNetworkImage(
                                                           imageUrl:
-                                                              columnAccountsRecord
-                                                                  .accountLogo!,
+                                                              valueOrDefault<
+                                                                  String>(
+                                                            columnAccountsRecord
+                                                                .accountLogo,
+                                                            'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif',
+                                                          ),
                                                           width: 80,
                                                           height: 80,
                                                           fit: BoxFit.cover,
