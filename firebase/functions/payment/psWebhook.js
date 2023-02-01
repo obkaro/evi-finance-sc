@@ -7,11 +7,11 @@ const crypto = require('crypto');
 exports.psWebhook = functions.runWith({
     timeoutSeconds: 300,
     memory: '1GB',
-    secrets: ["PS_TEST_SK"],
+    secrets: ["PS_LIVE_SK"],
 })
     .https.onRequest(async (req, res) => {
 
-        const hash = crypto.createHmac('sha512', process.env.PS_TEST_SK)
+        const hash = crypto.createHmac('sha512', process.env.PS_LIVE_SK)
             .update(JSON.stringify(req.body)).digest('hex');
 
         functions.logger.log('HASH', hash);
