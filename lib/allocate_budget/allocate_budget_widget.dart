@@ -1210,9 +1210,8 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                                 fontFamily: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText2Family,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .tertiaryColor,
+                                                                color: Colors
+                                                                    .white,
                                                                 useGoogleFonts: GoogleFonts
                                                                         .asMap()
                                                                     .containsKey(
@@ -1225,7 +1224,7 @@ class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
                                                         backgroundColor:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
+                                                                .tertiaryColor,
                                                       ),
                                                     );
                                                     if ((currentUserDocument

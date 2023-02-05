@@ -11,6 +11,9 @@ exports.psWebhook = functions.runWith({
 })
     .https.onRequest(async (req, res) => {
 
+        const payload = req.body;
+        functions.logger.log('PAYLOAD', payload);
+
         const hash = crypto.createHmac('sha512', process.env.PS_LIVE_SK)
             .update(JSON.stringify(req.body)).digest('hex');
 
@@ -21,11 +24,8 @@ exports.psWebhook = functions.runWith({
             return;
         }
 
-        const payload = req.body;
-        functions.logger.log('PAYLOAD', payload);
-        res.sendStatus(200);
-
         const event = payload.event;
+        res.sendStatus(200);
 
         switch (event) {
             case 'charge.success':
