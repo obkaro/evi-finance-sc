@@ -63,8 +63,9 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (functions.addHoursToTimestamp(widget.account!.dateLinked!, 2) <
-          getCurrentTimestamp) {
+      if ((functions.addHoursToTimestamp(widget.account!.dateLinked!, 2) <
+              getCurrentTimestamp) &&
+          (widget.account!.lastSync == null)) {
         FFAppState().update(() {
           FFAppState().dialogBoxReturn = false;
         });
@@ -101,35 +102,36 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
             (r) => false,
           );
         }
-      }
-      if (widget.account!.reauthRequired == true) {
-        showModalBottomSheet(
-          isScrollControlled: true,
-          backgroundColor: Colors.transparent,
-          context: context,
-          builder: (context) {
-            return Padding(
-              padding: MediaQuery.of(context).viewInsets,
-              child: AccountDataRefreshWidget(
-                account: widget.account,
-              ),
-            );
-          },
-        ).then((value) => setState(() {}));
-
-        logFirebaseEvent(
-          'app_acct_data_refresh',
-          parameters: {
-            'user_email': currentUserEmail,
-          },
-        );
       } else {
-        logFirebaseEvent(
-          'app_acct_data_refresh',
-          parameters: {
-            'user_email': currentUserEmail,
-          },
-        );
+        if (widget.account!.reauthRequired == true) {
+          showModalBottomSheet(
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (context) {
+              return Padding(
+                padding: MediaQuery.of(context).viewInsets,
+                child: AccountDataRefreshWidget(
+                  account: widget.account,
+                ),
+              );
+            },
+          ).then((value) => setState(() {}));
+
+          logFirebaseEvent(
+            'app_acct_data_refresh',
+            parameters: {
+              'user_email': currentUserEmail,
+            },
+          );
+        } else {
+          logFirebaseEvent(
+            'app_acct_data_refresh',
+            parameters: {
+              'user_email': currentUserEmail,
+            },
+          );
+        }
       }
     });
 

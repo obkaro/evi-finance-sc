@@ -1,6 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/loading_gridlogos_widget.dart';
+import '../components/spinning_default_img_grid_widget.dart';
 import '../create_recurring/create_recurring_widget.dart';
 import '../edit_subsciption/edit_subsciption_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -67,7 +67,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                         // Customize what your widget looks like when it's loading.
                         if (!snapshot.hasData) {
                           return Center(
-                            child: LoadingGridlogosWidget(),
+                            child: SpinningDefaultImgGridWidget(),
                           );
                         }
                         List<ConstMerchantsRecord>
