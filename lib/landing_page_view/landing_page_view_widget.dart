@@ -7,7 +7,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
-import '../sign_up_progress/sign_up_progress_widget.dart';
+import '../sign_up_paywall/sign_up_paywall_widget.dart';
 import '../welcome_to_evi/welcome_to_evi_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
@@ -344,7 +344,7 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                SignUpProgressWidget(),
+                                                SignUpPaywallWidget(),
                                           ),
                                           (r) => false,
                                         );
@@ -354,7 +354,7 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              SignUpProgressWidget(),
+                                              SignUpPaywallWidget(),
                                         ),
                                         (r) => false,
                                       );
@@ -520,7 +520,7 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        SignUpProgressWidget(),
+                                                        SignUpPaywallWidget(),
                                                   ),
                                                   (r) => false,
                                                 );
@@ -531,7 +531,7 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      SignUpProgressWidget(),
+                                                      SignUpPaywallWidget(),
                                                 ),
                                                 (r) => false,
                                               );

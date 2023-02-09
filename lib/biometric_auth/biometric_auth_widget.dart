@@ -7,7 +7,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
-import '../sign_up_progress/sign_up_progress_widget.dart';
+import '../sign_up_paywall/sign_up_paywall_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -364,7 +364,7 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  SignUpProgressWidget(),
+                                                  SignUpPaywallWidget(),
                                             ),
                                             (r) => false,
                                           );
@@ -374,7 +374,7 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                SignUpProgressWidget(),
+                                                SignUpPaywallWidget(),
                                           ),
                                           (r) => false,
                                         );

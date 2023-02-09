@@ -11,3 +11,4 @@ export 'fetch_pay_info.dart' show fetchPayInfo;
 export 'print_console.dart' show printConsole;
 export 'archive_budget.dart' show archiveBudget;
 export 'fetch_user_doc.dart' show fetchUserDoc;
+export 'launch_url.dart' show launchUrl;

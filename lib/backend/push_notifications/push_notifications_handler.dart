@@ -152,7 +152,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'EditIncomeSources': (data) async => EditIncomeSourcesWidget(),
   'Menu': (data) async => NavBarPage(initialPage: 'Menu'),
   'EmailAuth': (data) async => EmailAuthWidget(),
-  'SignUpProgress': (data) async => SignUpProgressWidget(),
+  'SignUpPaywall': (data) async => SignUpPaywallWidget(),
   'BiometricAuth': (data) async => BiometricAuthWidget(),
 };
 

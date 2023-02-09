@@ -230,6 +230,95 @@ class ActivateSubscriptionCall {
 
 /// End Flutterwave Group Code
 
+/// Start Paystack Group Code
+
+class PaystackGroup {
+  static PsInitiatePaymentCall psInitiatePaymentCall = PsInitiatePaymentCall();
+  static PsVerifyPaymentCall psVerifyPaymentCall = PsVerifyPaymentCall();
+  static PsEnableSubscriptionCall psEnableSubscriptionCall =
+      PsEnableSubscriptionCall();
+  static PsCancelSubscriptionCall psCancelSubscriptionCall =
+      PsCancelSubscriptionCall();
+}
+
+class PsInitiatePaymentCall {
+  Future<ApiCallResponse> call({
+    String? email = '',
+    String? amount = '',
+    String? txRef = '',
+    String? callbackUrl = '',
+    String? plan = '',
+    String? displayName = '',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'PsInitiatePaymentCall',
+        'variables': {
+          'email': email,
+          'amount': amount,
+          'txRef': txRef,
+          'callbackUrl': callbackUrl,
+          'plan': plan,
+          'displayName': displayName,
+        },
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
+}
+
+class PsVerifyPaymentCall {
+  Future<ApiCallResponse> call({
+    String? txRef = '',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'PsVerifyPaymentCall',
+        'variables': {
+          'txRef': txRef,
+        },
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
+}
+
+class PsEnableSubscriptionCall {
+  Future<ApiCallResponse> call() async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'PsEnableSubscriptionCall',
+        'variables': {},
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
+}
+
+class PsCancelSubscriptionCall {
+  Future<ApiCallResponse> call({
+    String? subCode = '',
+    String? emailToken = '',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'PsCancelSubscriptionCall',
+        'variables': {
+          'subCode': subCode,
+          'emailToken': emailToken,
+        },
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
+}
+
+/// End Paystack Group Code
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;
