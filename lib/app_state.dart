@@ -21,6 +21,9 @@ class FFAppState extends ChangeNotifier {
     _lastSignIn = prefs.containsKey('ff_lastSignIn')
         ? DateTime.fromMillisecondsSinceEpoch(prefs.getInt('ff_lastSignIn')!)
         : null;
+    _callbackUrl = prefs.getString('ff_callbackUrl') ?? _callbackUrl;
+    _planCode = prefs.getString('ff_planCode') ?? _planCode;
+    _subAmount = prefs.getInt('ff_subAmount') ?? _subAmount;
   }
 
   void update(VoidCallback callback) {
@@ -79,6 +82,10 @@ class FFAppState extends ChangeNotifier {
     _durations.remove(_value);
   }
 
+  void removeAtIndexFromDurations(int _index) {
+    _durations.removeAt(_index);
+  }
+
   bool _hasUpdatePromptShown = false;
   bool get hasUpdatePromptShown => _hasUpdatePromptShown;
   set hasUpdatePromptShown(bool _value) {
@@ -117,6 +124,27 @@ class FFAppState extends ChangeNotifier {
     _value != null
         ? prefs.setInt('ff_lastSignIn', _value.millisecondsSinceEpoch)
         : prefs.remove('ff_lastSignIn');
+  }
+
+  String _callbackUrl = 'https://app.evi.finance/verify';
+  String get callbackUrl => _callbackUrl;
+  set callbackUrl(String _value) {
+    _callbackUrl = _value;
+    prefs.setString('ff_callbackUrl', _value);
+  }
+
+  String _planCode = 'PLN_71dnbwrfu02osyk';
+  String get planCode => _planCode;
+  set planCode(String _value) {
+    _planCode = _value;
+    prefs.setString('ff_planCode', _value);
+  }
+
+  int _subAmount = 90000;
+  int get subAmount => _subAmount;
+  set subAmount(int _value) {
+    _subAmount = _value;
+    prefs.setInt('ff_subAmount', _value);
   }
 }
 

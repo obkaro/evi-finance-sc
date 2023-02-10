@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'allocate_first_budget_model.dart';
+export 'allocate_first_budget_model.dart';
 
 class AllocateFirstBudgetWidget extends StatefulWidget {
   const AllocateFirstBudgetWidget({
@@ -25,6 +27,27 @@ class AllocateFirstBudgetWidget extends StatefulWidget {
 }
 
 class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
+  late AllocateFirstBudgetModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => AllocateFirstBudgetModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

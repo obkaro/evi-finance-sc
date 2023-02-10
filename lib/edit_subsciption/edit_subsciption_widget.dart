@@ -17,6 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'edit_subsciption_model.dart';
+export 'edit_subsciption_model.dart';
 
 class EditSubsciptionWidget extends StatefulWidget {
   const EditSubsciptionWidget({
@@ -31,32 +33,25 @@ class EditSubsciptionWidget extends StatefulWidget {
 }
 
 class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
-  bool isMediaUploading = false;
-  String uploadedFileUrl = '';
+  late EditSubsciptionModel _model;
 
-  TextEditingController? nameController;
-  String? categoryValue;
-  DateTimeRange? calendarSelectedDay;
-  String? durationValue;
-  bool? switchListTileValue;
-  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    calendarSelectedDay = DateTimeRange(
-      start: DateTime.now().startOfDay,
-      end: DateTime.now().endOfDay,
-    );
+    _model = createModel(context, () => EditSubsciptionModel());
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'editSubsciption'});
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
-    nameController?.dispose();
     super.dispose();
   }
 
@@ -213,8 +208,10 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                     validateFileFormat(
                                                         m.storagePath,
                                                         context))) {
-                                              setState(() =>
-                                                  isMediaUploading = true);
+                                              setState(() => _model
+                                                  .isMediaUploading = true);
+                                              var selectedUploadedFiles =
+                                                  <FFUploadedFile>[];
                                               var downloadUrls = <String>[];
                                               try {
                                                 showUploadMessage(
@@ -222,6 +219,24 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                   'Uploading file...',
                                                   showLoading: true,
                                                 );
+                                                selectedUploadedFiles =
+                                                    selectedMedia
+                                                        .map((m) =>
+                                                            FFUploadedFile(
+                                                              name: m
+                                                                  .storagePath
+                                                                  .split('/')
+                                                                  .last,
+                                                              bytes: m.bytes,
+                                                              height: m
+                                                                  .dimensions
+                                                                  ?.height,
+                                                              width: m
+                                                                  .dimensions
+                                                                  ?.width,
+                                                            ))
+                                                        .toList();
+
                                                 downloadUrls =
                                                     (await Future.wait(
                                                   selectedMedia.map(
@@ -237,12 +252,20 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                               } finally {
                                                 ScaffoldMessenger.of(context)
                                                     .hideCurrentSnackBar();
-                                                isMediaUploading = false;
+                                                _model.isMediaUploading = false;
                                               }
-                                              if (downloadUrls.length ==
-                                                  selectedMedia.length) {
-                                                setState(() => uploadedFileUrl =
-                                                    downloadUrls.first);
+                                              if (selectedUploadedFiles
+                                                          .length ==
+                                                      selectedMedia.length &&
+                                                  downloadUrls.length ==
+                                                      selectedMedia.length) {
+                                                setState(() {
+                                                  _model.uploadedLocalFile =
+                                                      selectedUploadedFiles
+                                                          .first;
+                                                  _model.uploadedFileUrl =
+                                                      downloadUrls.first;
+                                                });
                                                 showUploadMessage(
                                                     context, 'Success!');
                                               } else {
@@ -255,7 +278,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
 
                                             final subscriptionsUpdateData =
                                                 createSubscriptionsRecordData(
-                                              icon: uploadedFileUrl,
+                                              icon: _model.uploadedFileUrl,
                                             );
                                             await editSubsciptionSubscriptionsRecord
                                                 .reference
@@ -270,7 +293,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                               ),
                               Expanded(
                                 child: TextFormField(
-                                  controller: nameController ??=
+                                  controller: _model.nameController ??=
                                       TextEditingController(
                                     text: valueOrDefault<String>(
                                       editSubsciptionSubscriptionsRecord.name,
@@ -327,6 +350,8 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                   ),
                                   style: FlutterFlowTheme.of(context).bodyText1,
                                   keyboardType: TextInputType.name,
+                                  validator: _model.nameControllerValidator
+                                      .asValidator(context),
                                 ),
                               ),
                             ],
@@ -424,7 +449,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                 return FlutterFlowDropDown<
                                                     String>(
                                                   initialOption:
-                                                      categoryValue ??=
+                                                      _model.categoryValue ??=
                                                           columnCategoriesRecord
                                                               .categoryName,
                                                   options:
@@ -435,8 +460,8 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                                           .toList()
                                                           .toList(),
                                                   onChanged: (val) => setState(
-                                                      () =>
-                                                          categoryValue = val),
+                                                      () => _model
+                                                          .categoryValue = val),
                                                   width: double.infinity,
                                                   height: 55,
                                                   textStyle: FlutterFlowTheme
@@ -549,8 +574,8 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                     .expChargeDate,
                                 rowHeight: 40,
                                 onChange: (DateTimeRange? newSelectedDate) {
-                                  setState(() =>
-                                      calendarSelectedDay = newSelectedDate);
+                                  setState(() => _model.calendarSelectedDay =
+                                      newSelectedDate);
                                 },
                                 titleStyle: FlutterFlowTheme.of(context)
                                     .subtitle2
@@ -638,8 +663,8 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                         ChipData('Quarterly'),
                                         ChipData('Yearly')
                                       ],
-                                      onChanged: (val) => setState(
-                                          () => durationValue = val?.first),
+                                      onChanged: (val) => setState(() =>
+                                          _model.durationValue = val?.first),
                                       selectedChipStyle: ChipStyle(
                                         backgroundColor:
                                             FlutterFlowTheme.of(context)
@@ -688,7 +713,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                       ),
                                       chipSpacing: 8,
                                       multiselect: false,
-                                      initialized: durationValue != null,
+                                      initialized: _model.durationValue != null,
                                       alignment: WrapAlignment.start,
                                     ),
                                   ),
@@ -710,12 +735,12 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
                                 child: SwitchListTile(
-                                  value: switchListTileValue ??=
+                                  value: _model.switchListTileValue ??=
                                       editSubsciptionSubscriptionsRecord
                                           .notification!,
                                   onChanged: (newValue) async {
-                                    setState(
-                                        () => switchListTileValue = newValue!);
+                                    setState(() =>
+                                        _model.switchListTileValue = newValue!);
                                   },
                                   title: Text(
                                     'Remind me',
@@ -751,7 +776,7 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                 parent: currentUserDocument!.activeBudget,
                                 queryBuilder: (categoriesRecord) =>
                                     categoriesRecord.where('category_name',
-                                        isEqualTo: categoryValue),
+                                        isEqualTo: _model.categoryValue),
                                 singleRecord: true,
                               ),
                               builder: (context, snapshot) {
@@ -781,13 +806,13 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                         : null;
                                 return FFButtonWidget(
                                   onPressed: () async {
-                                    if (calendarSelectedDay!.end >=
+                                    if (_model.calendarSelectedDay!.end >=
                                         getCurrentTimestamp) {
                                       final subscriptionsUpdateData =
                                           createSubscriptionsRecordData(
-                                        name: nameController?.text ?? '',
+                                        name: _model.nameController.text,
                                         expChargeDate:
-                                            calendarSelectedDay?.start,
+                                            _model.calendarSelectedDay?.start,
                                         category:
                                             buttonCategoriesRecord!.reference,
                                         expCharge: createMoneyStruct(
@@ -795,8 +820,9 @@ class _EditSubsciptionWidgetState extends State<EditSubsciptionWidget> {
                                               FFAppState().currencyTextField,
                                           clearUnsetFields: false,
                                         ),
-                                        notification: switchListTileValue,
-                                        recurrence: durationValue,
+                                        notification:
+                                            _model.switchListTileValue,
+                                        recurrence: _model.durationValue,
                                       );
                                       await editSubsciptionSubscriptionsRecord
                                           .reference

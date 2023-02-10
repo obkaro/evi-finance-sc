@@ -7,7 +7,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
-import '../sign_up_progress/sign_up_progress_widget.dart';
+import '../sign_up_paywall/sign_up_paywall_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -17,6 +17,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:provider/provider.dart';
+import 'biometric_auth_model.dart';
+export 'biometric_auth_model.dart';
 
 class BiometricAuthWidget extends StatefulWidget {
   const BiometricAuthWidget({Key? key}) : super(key: key);
@@ -27,6 +29,11 @@ class BiometricAuthWidget extends StatefulWidget {
 
 class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
     with TickerProviderStateMixin {
+  late BiometricAuthModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   final animationsMap = {
     'iconButtonOnPageLoadAnimation': AnimationInfo(
       loop: true,
@@ -43,27 +50,24 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
       ],
     ),
   };
-  TextEditingController? signInEmailController;
-  TextEditingController? signInPasswordController;
-  bool auth2 = false;
-  final _unfocusNode = FocusNode();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => BiometricAuthModel());
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'BiometricAuth'});
-    signInEmailController = TextEditingController(text: currentUserEmail);
-    signInPasswordController = TextEditingController(text: '********');
+    _model.signInEmailController =
+        TextEditingController(text: currentUserEmail);
+    _model.signInPasswordController = TextEditingController(text: '********');
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
-    signInEmailController?.dispose();
-    signInPasswordController?.dispose();
     super.dispose();
   }
 
@@ -163,7 +167,7 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                                 child: TextFormField(
-                                  controller: signInEmailController,
+                                  controller: _model.signInEmailController,
                                   autofocus: true,
                                   readOnly: true,
                                   obscureText: false,
@@ -216,6 +220,9 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
                                                     .bodyText1Family),
                                       ),
                                   keyboardType: TextInputType.emailAddress,
+                                  validator: _model
+                                      .signInEmailControllerValidator
+                                      .asValidator(context),
                                 ),
                               ),
                             ),
@@ -226,7 +233,7 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
                                 child: TextFormField(
-                                  controller: signInPasswordController,
+                                  controller: _model.signInPasswordController,
                                   autofocus: true,
                                   readOnly: true,
                                   obscureText: false,
@@ -278,6 +285,9 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
                                                 FlutterFlowTheme.of(context)
                                                     .bodyText1Family),
                                       ),
+                                  validator: _model
+                                      .signInPasswordControllerValidator
+                                      .asValidator(context),
                                 ),
                               ),
                             ),
@@ -322,13 +332,13 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
                                         await _localAuth.isDeviceSupported();
 
                                     if (_isBiometricSupported) {
-                                      auth2 = await _localAuth.authenticate(
+                                      _model.auth2 = await _localAuth.authenticate(
                                           localizedReason:
                                               'Please authenticate to continue');
                                       setState(() {});
                                     }
 
-                                    if (auth2!) {
+                                    if (_model.auth2!) {
                                       FFAppState().lastSignIn =
                                           getCurrentTimestamp;
 
@@ -364,7 +374,7 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  SignUpProgressWidget(),
+                                                  SignUpPaywallWidget(),
                                             ),
                                             (r) => false,
                                           );
@@ -374,7 +384,7 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                SignUpProgressWidget(),
+                                                SignUpPaywallWidget(),
                                           ),
                                           (r) => false,
                                         );

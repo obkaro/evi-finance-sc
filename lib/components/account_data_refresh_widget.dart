@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'account_data_refresh_model.dart';
+export 'account_data_refresh_model.dart';
 
 class AccountDataRefreshWidget extends StatefulWidget {
   const AccountDataRefreshWidget({
@@ -24,8 +26,26 @@ class AccountDataRefreshWidget extends StatefulWidget {
 }
 
 class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
-  ApiCallResponse? dataSyncResponse;
-  ApiCallResponse? reauthCode;
+  late AccountDataRefreshModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => AccountDataRefreshModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -153,20 +173,20 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             // Action_dataSyncCall
-                            dataSyncResponse =
+                            _model.dataSyncResponse =
                                 await MonoGroup.dataSyncCall.call(
                               authID: widget.account!.authID,
                             );
                             FFAppState().update(() {
                               FFAppState().dataSyncCode = getJsonField(
-                                (dataSyncResponse?.jsonBody ?? ''),
+                                (_model.dataSyncResponse?.jsonBody ?? ''),
                                 r'''$.code''',
                               ).toString();
                             });
                             if (FFAppState().dataSyncCode ==
                                 'REAUTHORISATION_REQUIRED') {
                               // Action_ReauthCall
-                              reauthCode =
+                              _model.reauthCode =
                                   await MonoGroup.reauthenticateCall.call(
                                 authID: widget.account!.authID,
                               );
@@ -174,7 +194,7 @@ class _AccountDataRefreshWidgetState extends State<AccountDataRefreshWidget> {
                               await actions.flutterMonoReauth(
                                 context,
                                 getJsonField(
-                                  (reauthCode?.jsonBody ?? ''),
+                                  (_model.reauthCode?.jsonBody ?? ''),
                                   r'''$.token''',
                                 ).toString(),
                                 widget.account!,

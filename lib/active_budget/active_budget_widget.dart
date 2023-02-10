@@ -26,6 +26,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'active_budget_model.dart';
+export 'active_budget_model.dart';
 
 class ActiveBudgetWidget extends StatefulWidget {
   const ActiveBudgetWidget({
@@ -41,6 +43,11 @@ class ActiveBudgetWidget extends StatefulWidget {
 
 class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
     with TickerProviderStateMixin {
+  late ActiveBudgetModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   final animationsMap = {
     'containerOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -68,15 +75,14 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
       ],
     ),
   };
-  BudgetsRecord? createdBudget2;
-  BudgetsRecord? createdBudget;
-  BudgetsRecord? newcreatedBudget;
-  final _unfocusNode = FocusNode();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => ActiveBudgetModel());
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ActiveBudget'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (currentUserDocument!.activeBudget == null) {
@@ -95,7 +101,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
         );
         var budgetsRecordReference = BudgetsRecord.collection.doc();
         await budgetsRecordReference.set(budgetsCreateData);
-        newcreatedBudget = BudgetsRecord.getDocumentFromData(
+        _model.newcreatedBudget = BudgetsRecord.getDocumentFromData(
             budgetsCreateData, budgetsRecordReference);
         await Navigator.push(
           context,
@@ -104,15 +110,13 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
             duration: Duration(milliseconds: 250),
             reverseDuration: Duration(milliseconds: 250),
             child: CreateBudgetWidget(
-              budget: newcreatedBudget,
+              budget: _model.newcreatedBudget,
             ),
           ),
         );
       }
     });
 
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'ActiveBudget'});
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -123,6 +127,8 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -147,31 +153,35 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,
               ),
-              child: MAppbarWidget(
-                titleText: 'Active Budget',
-                icon: Icon(
-                  Icons.pie_chart_rounded,
-                  color: FlutterFlowTheme.of(context).secondaryPrimary,
-                  size: 32,
-                ),
-                bgColor: FlutterFlowTheme.of(context).secondaryColor,
-                fgColor: FlutterFlowTheme.of(context).primaryBackground,
-                textColor: FlutterFlowTheme.of(context).secondaryPrimary,
-                actionIcon: Icon(
-                  Icons.edit_rounded,
-                  color: FlutterFlowTheme.of(context).secondaryPrimary,
-                  size: 20,
-                ),
-                iconAction: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditBudgetWidget(
-                        budgetRef: currentUserDocument!.activeBudget,
+              child: wrapWithModel(
+                model: _model.mAppbarModel,
+                updateCallback: () => setState(() {}),
+                child: MAppbarWidget(
+                  titleText: 'Active Budget',
+                  icon: Icon(
+                    Icons.pie_chart_rounded,
+                    color: FlutterFlowTheme.of(context).secondaryPrimary,
+                    size: 32,
+                  ),
+                  bgColor: FlutterFlowTheme.of(context).secondaryColor,
+                  fgColor: FlutterFlowTheme.of(context).primaryBackground,
+                  textColor: FlutterFlowTheme.of(context).secondaryPrimary,
+                  actionIcon: Icon(
+                    Icons.edit_rounded,
+                    color: FlutterFlowTheme.of(context).secondaryPrimary,
+                    size: 20,
+                  ),
+                  iconAction: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditBudgetWidget(
+                          budgetRef: currentUserDocument!.activeBudget,
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
             centerTitle: true,
@@ -281,18 +291,26 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                                                           0,
                                                                           20),
                                                                   child:
-                                                                      CircularIndicatorBigWidget(
-                                                                    totalAmount:
-                                                                        pageBudgetBudgetsRecord
-                                                                            .budgetAmount,
-                                                                    spentAmount:
-                                                                        pageBudgetBudgetsRecord
-                                                                            .budgetSpent,
-                                                                    centerText: functions.subtractCurrency(
-                                                                        pageBudgetBudgetsRecord
-                                                                            .budgetAmount,
-                                                                        pageBudgetBudgetsRecord
-                                                                            .budgetSpent),
+                                                                      wrapWithModel(
+                                                                    model: _model
+                                                                        .circularIndicatorBigModel,
+                                                                    updateCallback: () =>
+                                                                        setState(
+                                                                            () {}),
+                                                                    child:
+                                                                        CircularIndicatorBigWidget(
+                                                                      totalAmount:
+                                                                          pageBudgetBudgetsRecord
+                                                                              .budgetAmount,
+                                                                      spentAmount:
+                                                                          pageBudgetBudgetsRecord
+                                                                              .budgetSpent,
+                                                                      centerText: functions.subtractCurrency(
+                                                                          pageBudgetBudgetsRecord
+                                                                              .budgetAmount,
+                                                                          pageBudgetBudgetsRecord
+                                                                              .budgetSpent),
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ],
@@ -646,6 +664,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                                                           Expanded(
                                                                             child:
                                                                                 ProgressBarWidget(
+                                                                              key: Key('Keyju4_${listViewIndex}_of_${listViewCategoriesRecordList.length}'),
                                                                               totalAmount: listViewCategoriesRecord.categoryAmount,
                                                                               spentAmount: listViewCategoriesRecord.spentAmount,
                                                                             ),
@@ -823,7 +842,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                     BudgetsRecord.collection.doc();
                                 await budgetsRecordReference
                                     .set(budgetsCreateData);
-                                createdBudget =
+                                _model.createdBudget =
                                     BudgetsRecord.getDocumentFromData(
                                         budgetsCreateData,
                                         budgetsRecordReference);
@@ -831,7 +850,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => CreateBudgetWidget(
-                                      budget: createdBudget,
+                                      budget: _model.createdBudget,
                                     ),
                                   ),
                                 );
@@ -900,7 +919,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                               BudgetsRecord.collection.doc();
                                           await budgetsRecordReference
                                               .set(budgetsCreateData);
-                                          createdBudget2 =
+                                          _model.createdBudget2 =
                                               BudgetsRecord.getDocumentFromData(
                                                   budgetsCreateData,
                                                   budgetsRecordReference);
@@ -909,7 +928,7 @@ class _ActiveBudgetWidgetState extends State<ActiveBudgetWidget>
                                             MaterialPageRoute(
                                               builder: (context) =>
                                                   CreateBudgetWidget(
-                                                budget: createdBudget2,
+                                                budget: _model.createdBudget2,
                                               ),
                                             ),
                                           );

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'gray_circle_container_model.dart';
+export 'gray_circle_container_model.dart';
 
 class GrayCircleContainerWidget extends StatefulWidget {
   const GrayCircleContainerWidget({Key? key}) : super(key: key);
@@ -14,6 +16,27 @@ class GrayCircleContainerWidget extends StatefulWidget {
 }
 
 class _GrayCircleContainerWidgetState extends State<GrayCircleContainerWidget> {
+  late GrayCircleContainerModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => GrayCircleContainerModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

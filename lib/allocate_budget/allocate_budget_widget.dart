@@ -20,6 +20,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'allocate_budget_model.dart';
+export 'allocate_budget_model.dart';
 
 class AllocateBudgetWidget extends StatefulWidget {
   const AllocateBudgetWidget({
@@ -34,18 +36,24 @@ class AllocateBudgetWidget extends StatefulWidget {
 }
 
 class _AllocateBudgetWidgetState extends State<AllocateBudgetWidget> {
-  final _unfocusNode = FocusNode();
+  late AllocateBudgetModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => AllocateBudgetModel());
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AllocateBudget'});
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }

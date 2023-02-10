@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'loading_catlist_model.dart';
+export 'loading_catlist_model.dart';
 
 class LoadingCatlistWidget extends StatefulWidget {
   const LoadingCatlistWidget({Key? key}) : super(key: key);
@@ -13,6 +15,27 @@ class LoadingCatlistWidget extends StatefulWidget {
 }
 
 class _LoadingCatlistWidgetState extends State<LoadingCatlistWidget> {
+  late LoadingCatlistModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => LoadingCatlistModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

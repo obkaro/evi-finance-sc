@@ -66,6 +66,9 @@ exports.psWebhook = functions.runWith({
                             payment_auth_code: payload.data.authorization.authorization_code,
                             ps_email_token: payload.data.email_token,
                             expire_date: admin.firestore.FieldValue.delete(),
+                            first_name: payload.data.customer.first_name ?? "",
+                            last_name: payload.data.customer.last_name ?? "",
+                            phone_number: payload.data.customer.phone ?? "",
                         }, { merge: true })
                             .then(async () => {
                                 

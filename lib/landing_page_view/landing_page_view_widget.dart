@@ -7,7 +7,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
-import '../sign_up_progress/sign_up_progress_widget.dart';
+import '../sign_up_paywall/sign_up_paywall_widget.dart';
 import '../welcome_to_evi/welcome_to_evi_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
@@ -19,6 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'landing_page_view_model.dart';
+export 'landing_page_view_model.dart';
 
 class LandingPageViewWidget extends StatefulWidget {
   const LandingPageViewWidget({Key? key}) : super(key: key);
@@ -28,19 +30,24 @@ class LandingPageViewWidget extends StatefulWidget {
 }
 
 class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
-  PageController? pageViewController;
-  final _unfocusNode = FocusNode();
+  late LandingPageViewModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => LandingPageViewModel());
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'LandingPageView'});
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -87,7 +94,7 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 50),
                           child: PageView(
-                            controller: pageViewController ??=
+                            controller: _model.pageViewController ??=
                                 PageController(initialPage: 0),
                             scrollDirection: Axis.horizontal,
                             children: [
@@ -209,12 +216,12 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                             child: smooth_page_indicator.SmoothPageIndicator(
-                              controller: pageViewController ??=
+                              controller: _model.pageViewController ??=
                                   PageController(initialPage: 0),
                               count: 3,
                               axisDirection: Axis.horizontal,
                               onDotClicked: (i) {
-                                pageViewController!.animateToPage(
+                                _model.pageViewController!.animateToPage(
                                   i,
                                   duration: Duration(milliseconds: 500),
                                   curve: Curves.ease,
@@ -344,7 +351,7 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                SignUpProgressWidget(),
+                                                SignUpPaywallWidget(),
                                           ),
                                           (r) => false,
                                         );
@@ -354,7 +361,7 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              SignUpProgressWidget(),
+                                              SignUpPaywallWidget(),
                                         ),
                                         (r) => false,
                                       );
@@ -520,7 +527,7 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        SignUpProgressWidget(),
+                                                        SignUpPaywallWidget(),
                                                   ),
                                                   (r) => false,
                                                 );
@@ -531,7 +538,7 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      SignUpProgressWidget(),
+                                                      SignUpPaywallWidget(),
                                                 ),
                                                 (r) => false,
                                               );

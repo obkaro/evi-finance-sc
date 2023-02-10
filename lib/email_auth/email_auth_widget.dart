@@ -6,7 +6,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../forgot_password/forgot_password_widget.dart';
 import '../main.dart';
-import '../sign_up_progress/sign_up_progress_widget.dart';
+import '../sign_up_paywall/sign_up_paywall_widget.dart';
 import '../welcome_to_evi/welcome_to_evi_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -15,6 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'email_auth_model.dart';
+export 'email_auth_model.dart';
 
 class EmailAuthWidget extends StatefulWidget {
   const EmailAuthWidget({Key? key}) : super(key: key);
@@ -24,41 +26,29 @@ class EmailAuthWidget extends StatefulWidget {
 }
 
 class _EmailAuthWidgetState extends State<EmailAuthWidget> {
-  TextEditingController? confirmPasswordController;
-  late bool confirmPasswordVisibility;
-  TextEditingController? newPasswordController;
-  late bool newPasswordVisibility;
-  TextEditingController? signUpEmailController;
-  TextEditingController? signInEmailController;
-  TextEditingController? signInPasswordController;
-  late bool signInPasswordVisibility;
-  final _unfocusNode = FocusNode();
+  late EmailAuthModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final formKey2 = GlobalKey<FormState>();
-  final formKey1 = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    confirmPasswordController = TextEditingController();
-    confirmPasswordVisibility = false;
-    newPasswordController = TextEditingController();
-    newPasswordVisibility = false;
-    signUpEmailController = TextEditingController();
-    signInEmailController = TextEditingController();
-    signInPasswordController = TextEditingController();
-    signInPasswordVisibility = false;
+    _model = createModel(context, () => EmailAuthModel());
+
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'EmailAuth'});
+    _model.signInEmailController = TextEditingController();
+    _model.signInPasswordController = TextEditingController();
+    _model.signUpEmailController = TextEditingController();
+    _model.newPasswordController = TextEditingController();
+    _model.confirmPasswordController = TextEditingController();
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
-    confirmPasswordController?.dispose();
-    newPasswordController?.dispose();
-    signUpEmailController?.dispose();
-    signInEmailController?.dispose();
-    signInPasswordController?.dispose();
     super.dispose();
   }
 
@@ -148,7 +138,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Form(
-                                        key: formKey2,
+                                        key: _model.formKey2,
                                         autovalidateMode:
                                             AutovalidateMode.disabled,
                                         child: Column(
@@ -162,8 +152,8 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                 children: [
                                                   Expanded(
                                                     child: TextFormField(
-                                                      controller:
-                                                          signInEmailController,
+                                                      controller: _model
+                                                          .signInEmailController,
                                                       autofocus: true,
                                                       autofillHints: [
                                                         AutofillHints.email
@@ -237,19 +227,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                       keyboardType:
                                                           TextInputType
                                                               .emailAddress,
-                                                      validator: (val) {
-                                                        if (val == null ||
-                                                            val.isEmpty) {
-                                                          return 'Field is required';
-                                                        }
-
-                                                        if (!RegExp(
-                                                                kTextValidatorEmailRegex)
-                                                            .hasMatch(val)) {
-                                                          return 'Has to be a valid email address.';
-                                                        }
-                                                        return null;
-                                                      },
+                                                      validator: _model
+                                                          .signInEmailControllerValidator
+                                                          .asValidator(context),
                                                     ),
                                                   ),
                                                 ],
@@ -263,14 +243,14 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                 children: [
                                                   Expanded(
                                                     child: TextFormField(
-                                                      controller:
-                                                          signInPasswordController,
+                                                      controller: _model
+                                                          .signInPasswordController,
                                                       autofocus: true,
                                                       autofillHints: [
                                                         AutofillHints.password
                                                       ],
-                                                      obscureText:
-                                                          !signInPasswordVisibility,
+                                                      obscureText: !_model
+                                                          .signInPasswordVisibility,
                                                       decoration:
                                                           InputDecoration(
                                                         hintText: 'Password',
@@ -332,14 +312,16 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                             .secondaryBackground,
                                                         suffixIcon: InkWell(
                                                           onTap: () => setState(
-                                                            () => signInPasswordVisibility =
-                                                                !signInPasswordVisibility,
+                                                            () => _model
+                                                                    .signInPasswordVisibility =
+                                                                !_model
+                                                                    .signInPasswordVisibility,
                                                           ),
                                                           focusNode: FocusNode(
                                                               skipTraversal:
                                                                   true),
                                                           child: Icon(
-                                                            signInPasswordVisibility
+                                                            _model.signInPasswordVisibility
                                                                 ? Icons
                                                                     .visibility_outlined
                                                                 : Icons
@@ -354,14 +336,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .bodyText1,
-                                                      validator: (val) {
-                                                        if (val == null ||
-                                                            val.isEmpty) {
-                                                          return 'Field is required';
-                                                        }
-
-                                                        return null;
-                                                      },
+                                                      validator: _model
+                                                          .signInPasswordControllerValidator
+                                                          .asValidator(context),
                                                     ),
                                                   ),
                                                 ],
@@ -372,9 +349,11 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                   .fromSTEB(0, 0, 0, 16),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
-                                                  if (formKey2.currentState ==
+                                                  if (_model.formKey2
+                                                              .currentState ==
                                                           null ||
-                                                      !formKey2.currentState!
+                                                      !_model.formKey2
+                                                          .currentState!
                                                           .validate()) {
                                                     return;
                                                   }
@@ -382,8 +361,10 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                   final user =
                                                       await signInWithEmail(
                                                     context,
-                                                    signInEmailController!.text,
-                                                    signInPasswordController!
+                                                    _model.signInEmailController
+                                                        .text,
+                                                    _model
+                                                        .signInPasswordController
                                                         .text,
                                                   );
                                                   if (user == null) {
@@ -480,7 +461,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                         context,
                                                         MaterialPageRoute(
                                                           builder: (context) =>
-                                                              SignUpProgressWidget(),
+                                                              SignUpPaywallWidget(),
                                                         ),
                                                         (r) => false,
                                                       );
@@ -491,7 +472,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
-                                                            SignUpProgressWidget(),
+                                                            SignUpPaywallWidget(),
                                                       ),
                                                       (r) => false,
                                                     );
@@ -583,7 +564,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Form(
-                                        key: formKey1,
+                                        key: _model.formKey1,
                                         autovalidateMode:
                                             AutovalidateMode.disabled,
                                         child: Column(
@@ -597,8 +578,8 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                 children: [
                                                   Expanded(
                                                     child: TextFormField(
-                                                      controller:
-                                                          signUpEmailController,
+                                                      controller: _model
+                                                          .signUpEmailController,
                                                       autofillHints: [
                                                         AutofillHints.email
                                                       ],
@@ -671,19 +652,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                       keyboardType:
                                                           TextInputType
                                                               .emailAddress,
-                                                      validator: (val) {
-                                                        if (val == null ||
-                                                            val.isEmpty) {
-                                                          return 'Field is required';
-                                                        }
-
-                                                        if (!RegExp(
-                                                                kTextValidatorEmailRegex)
-                                                            .hasMatch(val)) {
-                                                          return 'Has to be a valid email address.';
-                                                        }
-                                                        return null;
-                                                      },
+                                                      validator: _model
+                                                          .signUpEmailControllerValidator
+                                                          .asValidator(context),
                                                     ),
                                                   ),
                                                 ],
@@ -697,13 +668,13 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                 children: [
                                                   Expanded(
                                                     child: TextFormField(
-                                                      controller:
-                                                          newPasswordController,
+                                                      controller: _model
+                                                          .newPasswordController,
                                                       autofillHints: [
                                                         AutofillHints.password
                                                       ],
-                                                      obscureText:
-                                                          !newPasswordVisibility,
+                                                      obscureText: !_model
+                                                          .newPasswordVisibility,
                                                       decoration:
                                                           InputDecoration(
                                                         hintText: 'Password',
@@ -765,14 +736,16 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                             .secondaryBackground,
                                                         suffixIcon: InkWell(
                                                           onTap: () => setState(
-                                                            () => newPasswordVisibility =
-                                                                !newPasswordVisibility,
+                                                            () => _model
+                                                                    .newPasswordVisibility =
+                                                                !_model
+                                                                    .newPasswordVisibility,
                                                           ),
                                                           focusNode: FocusNode(
                                                               skipTraversal:
                                                                   true),
                                                           child: Icon(
-                                                            newPasswordVisibility
+                                                            _model.newPasswordVisibility
                                                                 ? Icons
                                                                     .visibility_outlined
                                                                 : Icons
@@ -787,23 +760,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .bodyText1,
-                                                      validator: (val) {
-                                                        if (val == null ||
-                                                            val.isEmpty) {
-                                                          return 'Field is required';
-                                                        }
-
-                                                        if (val.length < 8) {
-                                                          return 'Requires at least 8 characters.';
-                                                        }
-
-                                                        if (!RegExp(
-                                                                '^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&])[A-Za-z\\d@\$!%*#?&]{8,}\$')
-                                                            .hasMatch(val)) {
-                                                          return 'Password must contain a minimum of eight characters, at least one letter, one number and one special character';
-                                                        }
-                                                        return null;
-                                                      },
+                                                      validator: _model
+                                                          .newPasswordControllerValidator
+                                                          .asValidator(context),
                                                     ),
                                                   ),
                                                 ],
@@ -817,13 +776,13 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                 children: [
                                                   Expanded(
                                                     child: TextFormField(
-                                                      controller:
-                                                          confirmPasswordController,
+                                                      controller: _model
+                                                          .confirmPasswordController,
                                                       autofillHints: [
                                                         AutofillHints.password
                                                       ],
-                                                      obscureText:
-                                                          !confirmPasswordVisibility,
+                                                      obscureText: !_model
+                                                          .confirmPasswordVisibility,
                                                       decoration:
                                                           InputDecoration(
                                                         hintText:
@@ -886,14 +845,16 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                             .secondaryBackground,
                                                         suffixIcon: InkWell(
                                                           onTap: () => setState(
-                                                            () => confirmPasswordVisibility =
-                                                                !confirmPasswordVisibility,
+                                                            () => _model
+                                                                    .confirmPasswordVisibility =
+                                                                !_model
+                                                                    .confirmPasswordVisibility,
                                                           ),
                                                           focusNode: FocusNode(
                                                               skipTraversal:
                                                                   true),
                                                           child: Icon(
-                                                            confirmPasswordVisibility
+                                                            _model.confirmPasswordVisibility
                                                                 ? Icons
                                                                     .visibility_outlined
                                                                 : Icons
@@ -908,6 +869,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .bodyText1,
+                                                      validator: _model
+                                                          .confirmPasswordControllerValidator
+                                                          .asValidator(context),
                                                     ),
                                                   ),
                                                 ],
@@ -918,17 +882,20 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                   .fromSTEB(0, 0, 0, 16),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
-                                                  if (formKey1.currentState ==
+                                                  if (_model.formKey1
+                                                              .currentState ==
                                                           null ||
-                                                      !formKey1.currentState!
+                                                      !_model.formKey1
+                                                          .currentState!
                                                           .validate()) {
                                                     return;
                                                   }
-
-                                                  if (newPasswordController
-                                                          ?.text !=
-                                                      confirmPasswordController
-                                                          ?.text) {
+                                                  if (_model
+                                                          .newPasswordController
+                                                          .text !=
+                                                      _model
+                                                          .confirmPasswordController
+                                                          .text) {
                                                     ScaffoldMessenger.of(
                                                             context)
                                                         .showSnackBar(
@@ -944,8 +911,10 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                   final user =
                                                       await createAccountWithEmail(
                                                     context,
-                                                    signUpEmailController!.text,
-                                                    newPasswordController!.text,
+                                                    _model.signUpEmailController
+                                                        .text,
+                                                    _model.newPasswordController
+                                                        .text,
                                                   );
                                                   if (user == null) {
                                                     return;
@@ -953,9 +922,9 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
 
                                                   final usersCreateData =
                                                       createUsersRecordData(
-                                                    email:
-                                                        signUpEmailController!
-                                                            .text,
+                                                    email: _model
+                                                        .signUpEmailController
+                                                        .text,
                                                     createdTime:
                                                         getCurrentTimestamp,
                                                   );
@@ -978,7 +947,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          SignUpProgressWidget(),
+                                                          SignUpPaywallWidget(),
                                                     ),
                                                     (r) => false,
                                                   );
@@ -1152,7 +1121,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      SignUpProgressWidget(),
+                                                      SignUpPaywallWidget(),
                                                 ),
                                                 (r) => false,
                                               );
@@ -1162,7 +1131,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    SignUpProgressWidget(),
+                                                    SignUpPaywallWidget(),
                                               ),
                                               (r) => false,
                                             );
@@ -1333,7 +1302,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          SignUpProgressWidget(),
+                                                          SignUpPaywallWidget(),
                                                     ),
                                                     (r) => false,
                                                   );
@@ -1344,7 +1313,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        SignUpProgressWidget(),
+                                                        SignUpPaywallWidget(),
                                                   ),
                                                   (r) => false,
                                                 );

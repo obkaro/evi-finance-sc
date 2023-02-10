@@ -14,6 +14,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'accounts_model.dart';
+export 'accounts_model.dart';
 
 class AccountsWidget extends StatefulWidget {
   const AccountsWidget({Key? key}) : super(key: key);
@@ -24,6 +26,11 @@ class AccountsWidget extends StatefulWidget {
 
 class _AccountsWidgetState extends State<AccountsWidget>
     with TickerProviderStateMixin {
+  late AccountsModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   final animationsMap = {
     'listViewOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -38,18 +45,19 @@ class _AccountsWidgetState extends State<AccountsWidget>
       ],
     ),
   };
-  final _unfocusNode = FocusNode();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => AccountsModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Accounts'});
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }

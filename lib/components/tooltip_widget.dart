@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'tooltip_model.dart';
+export 'tooltip_model.dart';
 
 class TooltipWidget extends StatefulWidget {
   const TooltipWidget({
@@ -18,6 +20,27 @@ class TooltipWidget extends StatefulWidget {
 }
 
 class _TooltipWidgetState extends State<TooltipWidget> {
+  late TooltipModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => TooltipModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

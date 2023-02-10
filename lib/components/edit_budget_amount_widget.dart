@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'edit_budget_amount_model.dart';
+export 'edit_budget_amount_model.dart';
 
 class EditBudgetAmountWidget extends StatefulWidget {
   const EditBudgetAmountWidget({
@@ -26,6 +28,27 @@ class EditBudgetAmountWidget extends StatefulWidget {
 }
 
 class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
+  late EditBudgetAmountModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => EditBudgetAmountModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

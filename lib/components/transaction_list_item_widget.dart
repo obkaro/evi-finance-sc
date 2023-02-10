@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'transaction_list_item_model.dart';
+export 'transaction_list_item_model.dart';
 
 class TransactionListItemWidget extends StatefulWidget {
   const TransactionListItemWidget({
@@ -24,6 +26,27 @@ class TransactionListItemWidget extends StatefulWidget {
 }
 
 class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
+  late TransactionListItemModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => TransactionListItemModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

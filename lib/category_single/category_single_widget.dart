@@ -16,6 +16,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'category_single_model.dart';
+export 'category_single_model.dart';
 
 class CategorySingleWidget extends StatefulWidget {
   const CategorySingleWidget({
@@ -31,6 +33,11 @@ class CategorySingleWidget extends StatefulWidget {
 
 class _CategorySingleWidgetState extends State<CategorySingleWidget>
     with TickerProviderStateMixin {
+  late CategorySingleModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   final animationsMap = {
     'containerOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -45,12 +52,11 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget>
       ],
     ),
   };
-  final _unfocusNode = FocusNode();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => CategorySingleModel());
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'CategorySingle'});
@@ -58,6 +64,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget>
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -164,22 +172,27 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget>
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 20, 0, 20),
-                                        child: CircularIndicatorBigWidget(
-                                          totalAmount:
-                                              widget.category!.categoryAmount,
-                                          spentAmount: valueOrDefault<int>(
-                                            widget.category!.spentAmount,
-                                            0,
+                                        child: wrapWithModel(
+                                          model:
+                                              _model.circularIndicatorBigModel,
+                                          updateCallback: () => setState(() {}),
+                                          child: CircularIndicatorBigWidget(
+                                            totalAmount:
+                                                widget.category!.categoryAmount,
+                                            spentAmount: valueOrDefault<int>(
+                                              widget.category!.spentAmount,
+                                              0,
+                                            ),
+                                            centerText:
+                                                functions.subtractCurrency(
+                                                    widget.category!
+                                                        .categoryAmount,
+                                                    valueOrDefault<int>(
+                                                      widget.category!
+                                                          .spentAmount,
+                                                      0,
+                                                    )),
                                           ),
-                                          centerText:
-                                              functions.subtractCurrency(
-                                                  widget
-                                                      .category!.categoryAmount,
-                                                  valueOrDefault<int>(
-                                                    widget
-                                                        .category!.spentAmount,
-                                                    0,
-                                                  )),
                                         ),
                                       ),
                                     ],
@@ -290,6 +303,8 @@ class _CategorySingleWidgetState extends State<CategorySingleWidget>
                               return Container(
                                 decoration: BoxDecoration(),
                                 child: TransactionListItemWidget(
+                                  key: Key(
+                                      'Keybt6_${listViewIndex}_of_${listViewTransactionsRecordList.length}'),
                                   transactionDoc: listViewTransactionsRecord,
                                 ),
                               );

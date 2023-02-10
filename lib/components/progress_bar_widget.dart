@@ -6,6 +6,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'progress_bar_model.dart';
+export 'progress_bar_model.dart';
 
 class ProgressBarWidget extends StatefulWidget {
   const ProgressBarWidget({
@@ -22,6 +24,27 @@ class ProgressBarWidget extends StatefulWidget {
 }
 
 class _ProgressBarWidgetState extends State<ProgressBarWidget> {
+  late ProgressBarModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => ProgressBarModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

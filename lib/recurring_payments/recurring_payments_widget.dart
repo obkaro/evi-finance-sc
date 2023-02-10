@@ -15,6 +15,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'recurring_payments_model.dart';
+export 'recurring_payments_model.dart';
 
 class RecurringPaymentsWidget extends StatefulWidget {
   const RecurringPaymentsWidget({Key? key}) : super(key: key);
@@ -26,6 +28,11 @@ class RecurringPaymentsWidget extends StatefulWidget {
 
 class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget>
     with TickerProviderStateMixin {
+  late RecurringPaymentsModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   final animationsMap = {
     'containerOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -40,12 +47,11 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget>
       ],
     ),
   };
-  final _unfocusNode = FocusNode();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => RecurringPaymentsModel());
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'RecurringPayments'});
@@ -53,6 +59,8 @@ class _RecurringPaymentsWidgetState extends State<RecurringPaymentsWidget>
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }

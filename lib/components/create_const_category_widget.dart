@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'create_const_category_model.dart';
+export 'create_const_category_model.dart';
 
 class CreateConstCategoryWidget extends StatefulWidget {
   const CreateConstCategoryWidget({
@@ -29,6 +31,27 @@ class CreateConstCategoryWidget extends StatefulWidget {
 }
 
 class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
+  late CreateConstCategoryModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => CreateConstCategoryModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

@@ -41,3 +41,6 @@ exports.cancelSubscriptions = require('./payment/cancelSubscriptions').cancelSub
 
 //* WEBHOOK FOR PAYSTACK
 exports.psWebhook = require('./payment/psWebhook').psWebhook;
+
+//* SEND WELCOME EMAIL
+exports.sendWelcomeEmail = require('./users/sendWelcomeEmail').sendWelcomeEmail;
