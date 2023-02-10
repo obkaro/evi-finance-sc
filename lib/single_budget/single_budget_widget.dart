@@ -18,6 +18,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'single_budget_model.dart';
+export 'single_budget_model.dart';
 
 class SingleBudgetWidget extends StatefulWidget {
   const SingleBudgetWidget({
@@ -32,18 +34,24 @@ class SingleBudgetWidget extends StatefulWidget {
 }
 
 class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
-  final _unfocusNode = FocusNode();
+  late SingleBudgetModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => SingleBudgetModel());
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'SingleBudget'});
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -177,18 +185,26 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                                                             0,
                                                                             20),
                                                                 child:
-                                                                    CircularIndicatorBigWidget(
-                                                                  totalAmount:
-                                                                      containerBudgetsRecord
-                                                                          .budgetAmount,
-                                                                  spentAmount:
-                                                                      containerBudgetsRecord
-                                                                          .budgetSpent,
-                                                                  centerText: functions.subtractCurrency(
-                                                                      containerBudgetsRecord
-                                                                          .budgetAmount,
-                                                                      containerBudgetsRecord
-                                                                          .budgetSpent),
+                                                                    wrapWithModel(
+                                                                  model: _model
+                                                                      .circularIndicatorBigModel,
+                                                                  updateCallback:
+                                                                      () => setState(
+                                                                          () {}),
+                                                                  child:
+                                                                      CircularIndicatorBigWidget(
+                                                                    totalAmount:
+                                                                        containerBudgetsRecord
+                                                                            .budgetAmount,
+                                                                    spentAmount:
+                                                                        containerBudgetsRecord
+                                                                            .budgetSpent,
+                                                                    centerText: functions.subtractCurrency(
+                                                                        containerBudgetsRecord
+                                                                            .budgetAmount,
+                                                                        containerBudgetsRecord
+                                                                            .budgetSpent),
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ],
@@ -522,6 +538,8 @@ class _SingleBudgetWidgetState extends State<SingleBudgetWidget> {
                                                                         Expanded(
                                                                           child:
                                                                               ProgressBarWidget(
+                                                                            key:
+                                                                                Key('Keyiuf_${listViewIndex}_of_${listViewCategoriesRecordList.length}'),
                                                                             totalAmount:
                                                                                 listViewCategoriesRecord.categoryAmount,
                                                                             spentAmount:

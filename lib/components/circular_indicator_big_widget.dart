@@ -6,6 +6,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'circular_indicator_big_model.dart';
+export 'circular_indicator_big_model.dart';
 
 class CircularIndicatorBigWidget extends StatefulWidget {
   const CircularIndicatorBigWidget({
@@ -26,6 +28,27 @@ class CircularIndicatorBigWidget extends StatefulWidget {
 
 class _CircularIndicatorBigWidgetState
     extends State<CircularIndicatorBigWidget> {
+  late CircularIndicatorBigModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => CircularIndicatorBigModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

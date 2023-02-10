@@ -22,7 +22,7 @@ import '../transactions/transactions_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -30,6 +30,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'dashboard_model.dart';
+export 'dashboard_model.dart';
 
 class DashboardWidget extends StatefulWidget {
   const DashboardWidget({Key? key}) : super(key: key);
@@ -40,6 +42,11 @@ class DashboardWidget extends StatefulWidget {
 
 class _DashboardWidgetState extends State<DashboardWidget>
     with TickerProviderStateMixin {
+  late DashboardModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   final animationsMap = {
     'iconOnPageLoadAnimation1': AnimationInfo(
       loop: true,
@@ -83,13 +90,13 @@ class _DashboardWidgetState extends State<DashboardWidget>
       ],
     ),
   };
-  final _unfocusNode = FocusNode();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => DashboardModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (functions.addHoursToTimestamp(FFAppState().lastSignIn!, 1) <
@@ -102,12 +109,12 @@ class _DashboardWidgetState extends State<DashboardWidget>
         );
       }
     });
-
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Dashboard'});
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -282,7 +289,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                             return;
                                           }
                                         },
-                                        child: Badge(
+                                        child: badges.Badge(
                                           badgeContent: Text(
                                             badgeTransactionsRecordList.length
                                                 .toString(),
@@ -306,7 +313,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                           showBadge: badgeTransactionsRecordList
                                                   .length >
                                               0,
-                                          shape: BadgeShape.circle,
+                                          shape: badges.BadgeShape.circle,
                                           badgeColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryColor,
@@ -314,9 +321,10 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   6, 6, 6, 6),
-                                          position: BadgePosition.topEnd(),
+                                          position:
+                                              badges.BadgePosition.topEnd(),
                                           animationType:
-                                              BadgeAnimationType.scale,
+                                              badges.BadgeAnimationType.scale,
                                           toAnimate: true,
                                           child: Stack(
                                             children: [
@@ -822,13 +830,20 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
-                                                  CircularIndicatorSmallWidget(
-                                                    totalAmount:
-                                                        containerBudgetsRecord!
-                                                            .budgetAmount,
-                                                    spentAmount:
-                                                        containerBudgetsRecord!
-                                                            .budgetSpent,
+                                                  wrapWithModel(
+                                                    model: _model
+                                                        .circularIndicatorSmallModel,
+                                                    updateCallback: () =>
+                                                        setState(() {}),
+                                                    child:
+                                                        CircularIndicatorSmallWidget(
+                                                      totalAmount:
+                                                          containerBudgetsRecord!
+                                                              .budgetAmount,
+                                                      spentAmount:
+                                                          containerBudgetsRecord!
+                                                              .budgetSpent,
+                                                    ),
                                                   ),
                                                   Expanded(
                                                     child: Padding(
@@ -1063,7 +1078,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                   listViewIndex];
                                           return TransactionListItemWidget(
                                             key: Key(
-                                                'transactionListItem_${listViewIndex}'),
+                                                'Key28d_${listViewIndex}_of_${listViewTransactionsRecordList.length}'),
                                             transactionDoc:
                                                 listViewTransactionsRecord,
                                           );

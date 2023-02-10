@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'c_button_filled_model.dart';
+export 'c_button_filled_model.dart';
 
 class CButtonFilledWidget extends StatefulWidget {
   const CButtonFilledWidget({
@@ -19,6 +21,27 @@ class CButtonFilledWidget extends StatefulWidget {
 }
 
 class _CButtonFilledWidgetState extends State<CButtonFilledWidget> {
+  late CButtonFilledModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => CButtonFilledModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

@@ -9,6 +9,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'settings_model.dart';
+export 'settings_model.dart';
 
 class SettingsWidget extends StatefulWidget {
   const SettingsWidget({Key? key}) : super(key: key);
@@ -18,23 +20,27 @@ class SettingsWidget extends StatefulWidget {
 }
 
 class _SettingsWidgetState extends State<SettingsWidget> {
-  String? versionNumber;
-  final _unfocusNode = FocusNode();
+  late SettingsModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      versionNumber = await actions.getVersionNumber();
-    });
+    _model = createModel(context, () => SettingsModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Settings'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.versionNumber = await actions.getVersionNumber();
+    });
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -357,7 +363,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Evi  v${versionNumber}',
+                            'Evi  v${_model.versionNumber}',
                             style: FlutterFlowTheme.of(context).bodyText2,
                           ),
                         ],

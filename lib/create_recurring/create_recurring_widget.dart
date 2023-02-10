@@ -19,6 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'create_recurring_model.dart';
+export 'create_recurring_model.dart';
 
 class CreateRecurringWidget extends StatefulWidget {
   const CreateRecurringWidget({
@@ -33,33 +35,25 @@ class CreateRecurringWidget extends StatefulWidget {
 }
 
 class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
-  bool isMediaUploading = false;
-  String uploadedFileUrl = '';
+  late CreateRecurringModel _model;
 
-  TextEditingController? nameController;
-  String? categoryValue;
-  DateTimeRange? calendarSelectedDay;
-  String? durationValue;
-  bool? switchListTileValue;
-  final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final formKey = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    calendarSelectedDay = DateTimeRange(
-      start: DateTime.now().startOfDay,
-      end: DateTime.now().endOfDay,
-    );
+    _model = createModel(context, () => CreateRecurringModel());
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'CreateRecurring'});
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
-    nameController?.dispose();
     super.dispose();
   }
 
@@ -113,7 +107,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Form(
-                      key: formKey,
+                      key: _model.formKey,
                       autovalidateMode: AutovalidateMode.disabled,
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
@@ -221,8 +215,10 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                       validateFileFormat(
                                                           m.storagePath,
                                                           context))) {
-                                                setState(() =>
-                                                    isMediaUploading = true);
+                                                setState(() => _model
+                                                    .isMediaUploading = true);
+                                                var selectedUploadedFiles =
+                                                    <FFUploadedFile>[];
                                                 var downloadUrls = <String>[];
                                                 try {
                                                   showUploadMessage(
@@ -230,6 +226,24 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                     'Uploading file...',
                                                     showLoading: true,
                                                   );
+                                                  selectedUploadedFiles =
+                                                      selectedMedia
+                                                          .map((m) =>
+                                                              FFUploadedFile(
+                                                                name: m
+                                                                    .storagePath
+                                                                    .split('/')
+                                                                    .last,
+                                                                bytes: m.bytes,
+                                                                height: m
+                                                                    .dimensions
+                                                                    ?.height,
+                                                                width: m
+                                                                    .dimensions
+                                                                    ?.width,
+                                                              ))
+                                                          .toList();
+
                                                   downloadUrls =
                                                       (await Future.wait(
                                                     selectedMedia.map(
@@ -246,13 +260,21 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                 } finally {
                                                   ScaffoldMessenger.of(context)
                                                       .hideCurrentSnackBar();
-                                                  isMediaUploading = false;
+                                                  _model.isMediaUploading =
+                                                      false;
                                                 }
-                                                if (downloadUrls.length ==
-                                                    selectedMedia.length) {
-                                                  setState(() =>
-                                                      uploadedFileUrl =
-                                                          downloadUrls.first);
+                                                if (selectedUploadedFiles
+                                                            .length ==
+                                                        selectedMedia.length &&
+                                                    downloadUrls.length ==
+                                                        selectedMedia.length) {
+                                                  setState(() {
+                                                    _model.uploadedLocalFile =
+                                                        selectedUploadedFiles
+                                                            .first;
+                                                    _model.uploadedFileUrl =
+                                                        downloadUrls.first;
+                                                  });
                                                   showUploadMessage(
                                                       context, 'Success!');
                                                 } else {
@@ -265,7 +287,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
 
                                               final subscriptionsUpdateData =
                                                   createSubscriptionsRecordData(
-                                                icon: uploadedFileUrl,
+                                                icon: _model.uploadedFileUrl,
                                               );
                                               await createRecurringSubscriptionsRecord
                                                   .reference
@@ -280,7 +302,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                 ),
                                 Expanded(
                                   child: TextFormField(
-                                    controller: nameController ??=
+                                    controller: _model.nameController ??=
                                         TextEditingController(
                                       text: valueOrDefault<String>(
                                         createRecurringSubscriptionsRecord.name,
@@ -340,17 +362,8 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
                                     keyboardType: TextInputType.name,
-                                    validator: (val) {
-                                      if (val == null || val.isEmpty) {
-                                        return 'Field is required';
-                                      }
-
-                                      if (val.length < 1) {
-                                        return 'Requires at least 1 characters.';
-                                      }
-
-                                      return null;
-                                    },
+                                    validator: _model.nameControllerValidator
+                                        .asValidator(context),
                                   ),
                                 ),
                               ],
@@ -436,7 +449,8 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                                         .toList()
                                                         .toList(),
                                                 onChanged: (val) => setState(
-                                                    () => categoryValue = val),
+                                                    () => _model.categoryValue =
+                                                        val),
                                                 width: double.infinity,
                                                 height: 55,
                                                 textStyle:
@@ -547,12 +561,13 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                     rowHeight: 40,
                                     onChange:
                                         (DateTimeRange? newSelectedDate) async {
-                                      calendarSelectedDay = newSelectedDate;
+                                      _model.calendarSelectedDay =
+                                          newSelectedDate;
 
                                       final subscriptionsUpdateData =
                                           createSubscriptionsRecordData(
                                         expChargeDate:
-                                            calendarSelectedDay?.start,
+                                            _model.calendarSelectedDay?.start,
                                       );
                                       await createRecurringSubscriptionsRecord
                                           .reference
@@ -653,8 +668,8 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                             .toList()
                                             .map((label) => ChipData(label))
                                             .toList(),
-                                        onChanged: (val) => setState(
-                                            () => durationValue = val?.first),
+                                        onChanged: (val) => setState(() =>
+                                            _model.durationValue = val?.first),
                                         selectedChipStyle: ChipStyle(
                                           backgroundColor:
                                               FlutterFlowTheme.of(context)
@@ -705,7 +720,8 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                         ),
                                         chipSpacing: 8,
                                         multiselect: false,
-                                        initialized: durationValue != null,
+                                        initialized:
+                                            _model.durationValue != null,
                                         alignment: WrapAlignment.start,
                                       ),
                                     ),
@@ -727,10 +743,10 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       8, 8, 8, 8),
                                   child: SwitchListTile(
-                                    value: switchListTileValue ??= true,
+                                    value: _model.switchListTileValue ??= true,
                                     onChanged: (newValue) async {
-                                      setState(() =>
-                                          switchListTileValue = newValue!);
+                                      setState(() => _model
+                                          .switchListTileValue = newValue!);
                                     },
                                     title: Text(
                                       'Set reminder',
@@ -767,7 +783,7 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                 parent: currentUserDocument!.activeBudget,
                                 queryBuilder: (categoriesRecord) =>
                                     categoriesRecord.where('category_name',
-                                        isEqualTo: categoryValue),
+                                        isEqualTo: _model.categoryValue),
                                 singleRecord: true,
                               ),
                               builder: (context, snapshot) {
@@ -797,12 +813,12 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                         : null;
                                 return FFButtonWidget(
                                   onPressed: () async {
-                                    if (formKey.currentState == null ||
-                                        !formKey.currentState!.validate()) {
+                                    if (_model.formKey.currentState == null ||
+                                        !_model.formKey.currentState!
+                                            .validate()) {
                                       return;
                                     }
-
-                                    if (categoryValue == null) {
+                                    if (_model.categoryValue == null) {
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
                                         backgroundColor: Colors.transparent,
@@ -831,16 +847,17 @@ class _CreateRecurringWidgetState extends State<CreateRecurringWidget> {
                                     final subscriptionsUpdateData =
                                         createSubscriptionsRecordData(
                                       owner: currentUserReference,
-                                      name: nameController?.text ?? '',
-                                      expChargeDate: calendarSelectedDay?.start,
+                                      name: _model.nameController.text,
+                                      expChargeDate:
+                                          _model.calendarSelectedDay?.start,
                                       category:
                                           buttonCategoriesRecord!.reference,
                                       expCharge: createMoneyStruct(
                                         amount: FFAppState().currencyTextField,
                                         clearUnsetFields: false,
                                       ),
-                                      notification: switchListTileValue,
-                                      recurrence: durationValue,
+                                      notification: _model.switchListTileValue,
+                                      recurrence: _model.durationValue,
                                       categoryDetails:
                                           createCategoryDetailsStruct(
                                         name: buttonCategoriesRecord!

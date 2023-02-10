@@ -17,6 +17,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'first_budget_model.dart';
+export 'first_budget_model.dart';
 
 class FirstBudgetWidget extends StatefulWidget {
   const FirstBudgetWidget({
@@ -31,15 +33,17 @@ class FirstBudgetWidget extends StatefulWidget {
 }
 
 class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
-  DateTimeRange? calendarSelectedDay;
-  String? dropDownValue;
-  final _unfocusNode = FocusNode();
+  late FirstBudgetModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final formKey = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => FirstBudgetModel());
+
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'FirstBudget'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await showModalBottomSheet(
@@ -54,16 +58,12 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
         },
       ).then((value) => setState(() {}));
     });
-
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'FirstBudget'});
-    calendarSelectedDay = DateTimeRange(
-      start: DateTime.now().startOfDay,
-      end: DateTime.now().endOfDay,
-    );
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -140,7 +140,7 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                             ),
                           ),
                           Form(
-                            key: formKey,
+                            key: _model.formKey,
                             autovalidateMode: AutovalidateMode.disabled,
                             child: Padding(
                               padding:
@@ -148,46 +148,51 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                               child: FlutterFlowDropDown<String>(
                                 options: ['Weekly', 'Monthly'],
                                 onChanged: (val) async {
-                                  setState(() => dropDownValue = val);
-                                  if (dropDownValue == 'Monthly') {
-                                    final budgetsUpdateData =
+                                  setState(() => _model.dropDownValue = val);
+                                  if (_model.dropDownValue == 'Monthly') {
+                                    final budgetsUpdateData1 =
                                         createBudgetsRecordData(
-                                      budgetStart: calendarSelectedDay?.start,
+                                      budgetStart:
+                                          _model.calendarSelectedDay?.start,
                                       isRecurring: true,
-                                      budgetDuration: dropDownValue,
+                                      budgetDuration: _model.dropDownValue,
                                       duration: 30,
                                       budgetEnd: functions.addDaysToDate(
-                                          calendarSelectedDay?.start, 30),
+                                          _model.calendarSelectedDay?.start,
+                                          30),
                                     );
                                     await widget.budget!.reference
-                                        .update(budgetsUpdateData);
+                                        .update(budgetsUpdateData1);
                                   } else {
-                                    if (dropDownValue == 'Weekly') {
-                                      final budgetsUpdateData =
+                                    if (_model.dropDownValue == 'Weekly') {
+                                      final budgetsUpdateData2 =
                                           createBudgetsRecordData(
-                                        budgetStart: calendarSelectedDay?.start,
+                                        budgetStart:
+                                            _model.calendarSelectedDay?.start,
                                         isRecurring: true,
-                                        budgetDuration: dropDownValue,
+                                        budgetDuration: _model.dropDownValue,
                                         duration: 7,
                                         budgetEnd: functions.addDaysToDate(
-                                            calendarSelectedDay?.start, 7),
+                                            _model.calendarSelectedDay?.start,
+                                            7),
                                       );
                                       await widget.budget!.reference
-                                          .update(budgetsUpdateData);
+                                          .update(budgetsUpdateData2);
                                     } else {
-                                      if (dropDownValue == 'Daily') {
-                                        final budgetsUpdateData =
+                                      if (_model.dropDownValue == 'Daily') {
+                                        final budgetsUpdateData3 =
                                             createBudgetsRecordData(
                                           budgetStart:
-                                              calendarSelectedDay?.start,
+                                              _model.calendarSelectedDay?.start,
                                           isRecurring: true,
-                                          budgetDuration: dropDownValue,
+                                          budgetDuration: _model.dropDownValue,
                                           duration: 30,
                                           budgetEnd: functions.addDaysToDate(
-                                              calendarSelectedDay?.start, 1),
+                                              _model.calendarSelectedDay?.start,
+                                              1),
                                         );
                                         await widget.budget!.reference
-                                            .update(budgetsUpdateData);
+                                            .update(budgetsUpdateData3);
                                       } else {
                                         return;
                                       }
@@ -312,67 +317,73 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                             rowHeight: 40,
                                             onChange: (DateTimeRange?
                                                 newSelectedDate) async {
-                                              calendarSelectedDay =
+                                              _model.calendarSelectedDay =
                                                   newSelectedDate;
-                                              if (dropDownValue == 'Monthly') {
-                                                final budgetsUpdateData =
+                                              if (_model.dropDownValue ==
+                                                  'Monthly') {
+                                                final budgetsUpdateData1 =
                                                     createBudgetsRecordData(
-                                                  budgetStart:
-                                                      calendarSelectedDay
-                                                          ?.start,
+                                                  budgetStart: _model
+                                                      .calendarSelectedDay
+                                                      ?.start,
                                                   isRecurring: true,
-                                                  budgetDuration: dropDownValue,
+                                                  budgetDuration:
+                                                      _model.dropDownValue,
                                                   duration: 30,
                                                   budgetEnd:
                                                       functions.addDaysToDate(
-                                                          calendarSelectedDay
+                                                          _model
+                                                              .calendarSelectedDay
                                                               ?.start,
                                                           30),
                                                 );
                                                 await widget.budget!.reference
-                                                    .update(budgetsUpdateData);
+                                                    .update(budgetsUpdateData1);
                                               } else {
-                                                if (dropDownValue == 'Weekly') {
-                                                  final budgetsUpdateData =
+                                                if (_model.dropDownValue ==
+                                                    'Weekly') {
+                                                  final budgetsUpdateData2 =
                                                       createBudgetsRecordData(
-                                                    budgetStart:
-                                                        calendarSelectedDay
-                                                            ?.start,
+                                                    budgetStart: _model
+                                                        .calendarSelectedDay
+                                                        ?.start,
                                                     isRecurring: true,
                                                     budgetDuration:
-                                                        dropDownValue,
+                                                        _model.dropDownValue,
                                                     duration: 7,
                                                     budgetEnd:
                                                         functions.addDaysToDate(
-                                                            calendarSelectedDay
+                                                            _model
+                                                                .calendarSelectedDay
                                                                 ?.start,
                                                             7),
                                                   );
                                                   await widget.budget!.reference
                                                       .update(
-                                                          budgetsUpdateData);
+                                                          budgetsUpdateData2);
                                                 } else {
-                                                  if (dropDownValue ==
+                                                  if (_model.dropDownValue ==
                                                       'Daily') {
-                                                    final budgetsUpdateData =
+                                                    final budgetsUpdateData3 =
                                                         createBudgetsRecordData(
-                                                      budgetStart:
-                                                          calendarSelectedDay
-                                                              ?.start,
+                                                      budgetStart: _model
+                                                          .calendarSelectedDay
+                                                          ?.start,
                                                       isRecurring: true,
                                                       budgetDuration:
-                                                          dropDownValue,
+                                                          _model.dropDownValue,
                                                       duration: 30,
                                                       budgetEnd: functions
                                                           .addDaysToDate(
-                                                              calendarSelectedDay
+                                                              _model
+                                                                  .calendarSelectedDay
                                                                   ?.start,
                                                               1),
                                                     );
                                                     await widget
                                                         .budget!.reference
                                                         .update(
-                                                            budgetsUpdateData);
+                                                            budgetsUpdateData3);
                                                   } else {
                                                     return;
                                                   }
@@ -517,12 +528,11 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                               EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              if (formKey.currentState == null ||
-                                  !formKey.currentState!.validate()) {
+                              if (_model.formKey.currentState == null ||
+                                  !_model.formKey.currentState!.validate()) {
                                 return;
                               }
-
-                              if (dropDownValue == null) {
+                              if (_model.dropDownValue == null) {
                                 await showModalBottomSheet(
                                   isScrollControlled: true,
                                   backgroundColor: Colors.transparent,
@@ -546,16 +556,16 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
 
                                 return;
                               }
-
                               if (FFAppState().currencyTextField > 0) {
-                                if (dropDownValue != null &&
-                                    dropDownValue != '') {
-                                  if (dropDownValue == 'Monthly') {
-                                    final budgetsUpdateData =
+                                if (_model.dropDownValue != null &&
+                                    _model.dropDownValue != '') {
+                                  if (_model.dropDownValue == 'Monthly') {
+                                    final budgetsUpdateData1 =
                                         createBudgetsRecordData(
                                       budgetAmount:
                                           FFAppState().currencyTextField,
-                                      budgetStart: calendarSelectedDay?.start,
+                                      budgetStart:
+                                          _model.calendarSelectedDay?.start,
                                       isRecurring: true,
                                       unallocatedAmount: functions.subInt(
                                           FFAppState().currencyTextField,
@@ -564,19 +574,21 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                       status: 'active',
                                       duration: 30,
                                       budgetEnd: functions.addDaysToDate(
-                                          calendarSelectedDay?.start, 30),
+                                          _model.calendarSelectedDay?.start,
+                                          30),
                                       budgetOwner: currentUserReference,
                                       budgetSpent: 0,
                                     );
                                     await widget.budget!.reference
-                                        .update(budgetsUpdateData);
+                                        .update(budgetsUpdateData1);
                                   } else {
-                                    if (dropDownValue == 'Weekly') {
-                                      final budgetsUpdateData =
+                                    if (_model.dropDownValue == 'Weekly') {
+                                      final budgetsUpdateData2 =
                                           createBudgetsRecordData(
                                         budgetAmount:
                                             FFAppState().currencyTextField,
-                                        budgetStart: calendarSelectedDay?.start,
+                                        budgetStart:
+                                            _model.calendarSelectedDay?.start,
                                         isRecurring: true,
                                         unallocatedAmount: functions.subInt(
                                             FFAppState().currencyTextField,
@@ -585,20 +597,21 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                         status: 'active',
                                         duration: 7,
                                         budgetEnd: functions.addDaysToDate(
-                                            calendarSelectedDay?.start, 7),
+                                            _model.calendarSelectedDay?.start,
+                                            7),
                                         budgetOwner: currentUserReference,
                                         budgetSpent: 0,
                                       );
                                       await widget.budget!.reference
-                                          .update(budgetsUpdateData);
+                                          .update(budgetsUpdateData2);
                                     } else {
-                                      if (dropDownValue == 'Daily') {
-                                        final budgetsUpdateData =
+                                      if (_model.dropDownValue == 'Daily') {
+                                        final budgetsUpdateData3 =
                                             createBudgetsRecordData(
                                           budgetAmount:
                                               FFAppState().currencyTextField,
                                           budgetStart:
-                                              calendarSelectedDay?.start,
+                                              _model.calendarSelectedDay?.start,
                                           isRecurring: true,
                                           unallocatedAmount: functions.subInt(
                                               FFAppState().currencyTextField,
@@ -607,12 +620,13 @@ class _FirstBudgetWidgetState extends State<FirstBudgetWidget> {
                                           status: 'active',
                                           duration: 1,
                                           budgetEnd: functions.addDaysToDate(
-                                              calendarSelectedDay?.start, 1),
+                                              _model.calendarSelectedDay?.start,
+                                              1),
                                           budgetOwner: currentUserReference,
                                           budgetSpent: 0,
                                         );
                                         await widget.budget!.reference
-                                            .update(budgetsUpdateData);
+                                            .update(budgetsUpdateData3);
                                       } else {
                                         return;
                                       }

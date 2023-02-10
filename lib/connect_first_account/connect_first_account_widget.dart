@@ -10,6 +10,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'connect_first_account_model.dart';
+export 'connect_first_account_model.dart';
 
 class ConnectFirstAccountWidget extends StatefulWidget {
   const ConnectFirstAccountWidget({Key? key}) : super(key: key);
@@ -21,6 +23,11 @@ class ConnectFirstAccountWidget extends StatefulWidget {
 
 class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
     with TickerProviderStateMixin {
+  late ConnectFirstAccountModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   final animationsMap = {
     'columnOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -36,26 +43,26 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
       ],
     ),
   };
-  final _unfocusNode = FocusNode();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => ConnectFirstAccountModel());
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ConnectFirstAccount'});
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
           !anim.applyInitialState),
       this,
     );
-
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'ConnectFirstAccount'});
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -103,7 +110,7 @@ class _ConnectFirstAccountWidgetState extends State<ConnectFirstAccountWidget>
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                         child: Form(
-                          key: formKey,
+                          key: _model.formKey,
                           autovalidateMode: AutovalidateMode.disabled,
                           child: Column(
                             mainAxisSize: MainAxisSize.max,

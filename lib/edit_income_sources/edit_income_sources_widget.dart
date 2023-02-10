@@ -17,6 +17,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'edit_income_sources_model.dart';
+export 'edit_income_sources_model.dart';
 
 class EditIncomeSourcesWidget extends StatefulWidget {
   const EditIncomeSourcesWidget({Key? key}) : super(key: key);
@@ -28,6 +30,11 @@ class EditIncomeSourcesWidget extends StatefulWidget {
 
 class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
     with TickerProviderStateMixin {
+  late EditIncomeSourcesModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   final animationsMap = {
     'containerOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -42,12 +49,11 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
       ],
     ),
   };
-  final _unfocusNode = FocusNode();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => EditIncomeSourcesModel());
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'EditIncomeSources'});
@@ -55,6 +61,8 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -421,25 +429,29 @@ class _EditIncomeSourcesWidgetState extends State<EditIncomeSourcesWidget>
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                    child: CButtonFilledCopyWidget(
-                      text: 'New',
-                      icon: Icon(
-                        Icons.add_rounded,
-                        size: 16,
+                    child: wrapWithModel(
+                      model: _model.cButtonFilledCopyModel,
+                      updateCallback: () => setState(() {}),
+                      child: CButtonFilledCopyWidget(
+                        text: 'New',
+                        icon: Icon(
+                          Icons.add_rounded,
+                          size: 16,
+                        ),
+                        action: () async {
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            context: context,
+                            builder: (context) {
+                              return Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: NewIncomeSourceWidget(),
+                              );
+                            },
+                          ).then((value) => setState(() {}));
+                        },
                       ),
-                      action: () async {
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          context: context,
-                          builder: (context) {
-                            return Padding(
-                              padding: MediaQuery.of(context).viewInsets,
-                              child: NewIncomeSourceWidget(),
-                            );
-                          },
-                        ).then((value) => setState(() {}));
-                      },
                     ),
                   ),
                   Padding(

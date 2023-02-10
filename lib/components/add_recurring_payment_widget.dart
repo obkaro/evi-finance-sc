@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'add_recurring_payment_model.dart';
+export 'add_recurring_payment_model.dart';
 
 class AddRecurringPaymentWidget extends StatefulWidget {
   const AddRecurringPaymentWidget({Key? key}) : super(key: key);
@@ -22,8 +24,26 @@ class AddRecurringPaymentWidget extends StatefulWidget {
 }
 
 class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
-  SubscriptionsRecord? newSub2;
-  SubscriptionsRecord? newSub;
+  late AddRecurringPaymentModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => AddRecurringPaymentModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +125,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                     SubscriptionsRecord.collection.doc();
                                 await subscriptionsRecordReference
                                     .set(subscriptionsCreateData);
-                                newSub =
+                                _model.newSub =
                                     SubscriptionsRecord.getDocumentFromData(
                                         subscriptionsCreateData,
                                         subscriptionsRecordReference);
@@ -113,7 +133,8 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => CreateRecurringWidget(
-                                      subscriptionRecord: newSub!.reference,
+                                      subscriptionRecord:
+                                          _model.newSub!.reference,
                                     ),
                                   ),
                                 );
@@ -167,13 +188,13 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
                 var subscriptionsRecordReference =
                     SubscriptionsRecord.collection.doc();
                 await subscriptionsRecordReference.set(subscriptionsCreateData);
-                newSub2 = SubscriptionsRecord.getDocumentFromData(
+                _model.newSub2 = SubscriptionsRecord.getDocumentFromData(
                     subscriptionsCreateData, subscriptionsRecordReference);
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => EditSubsciptionWidget(
-                      subscriptionRecord: newSub2!.reference,
+                      subscriptionRecord: _model.newSub2!.reference,
                     ),
                   ),
                 );
