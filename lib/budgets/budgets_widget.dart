@@ -19,6 +19,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'budgets_model.dart';
+export 'budgets_model.dart';
 
 class BudgetsWidget extends StatefulWidget {
   const BudgetsWidget({Key? key}) : super(key: key);
@@ -29,6 +31,11 @@ class BudgetsWidget extends StatefulWidget {
 
 class _BudgetsWidgetState extends State<BudgetsWidget>
     with TickerProviderStateMixin {
+  late BudgetsModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   final animationsMap = {
     'columnOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -43,19 +50,19 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
       ],
     ),
   };
-  BudgetsRecord? newBudg;
-  final _unfocusNode = FocusNode();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => BudgetsModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Budgets'});
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -122,13 +129,13 @@ class _BudgetsWidgetState extends State<BudgetsWidget>
               );
               var budgetsRecordReference = BudgetsRecord.collection.doc();
               await budgetsRecordReference.set(budgetsCreateData);
-              newBudg = BudgetsRecord.getDocumentFromData(
+              _model.newBudg = BudgetsRecord.getDocumentFromData(
                   budgetsCreateData, budgetsRecordReference);
               await Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => CreateBudgetWidget(
-                    budget: newBudg,
+                    budget: _model.newBudg,
                   ),
                 ),
               );

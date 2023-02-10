@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'new_income_source_model.dart';
+export 'new_income_source_model.dart';
 
 class NewIncomeSourceWidget extends StatefulWidget {
   const NewIncomeSourceWidget({Key? key}) : super(key: key);
@@ -17,18 +19,26 @@ class NewIncomeSourceWidget extends StatefulWidget {
 }
 
 class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
-  TextEditingController? textController;
-  final formKey = GlobalKey<FormState>();
+  late NewIncomeSourceModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
 
   @override
   void initState() {
     super.initState();
-    textController = TextEditingController();
+    _model = createModel(context, () => NewIncomeSourceModel());
+
+    _model.textController = TextEditingController();
   }
 
   @override
   void dispose() {
-    textController?.dispose();
+    _model.dispose();
+
     super.dispose();
   }
 
@@ -77,12 +87,12 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
                   ),
                 ),
                 Form(
-                  key: formKey,
+                  key: _model.formKey,
                   autovalidateMode: AutovalidateMode.disabled,
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                     child: TextFormField(
-                      controller: textController,
+                      controller: _model.textController,
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: 'Enter name',
@@ -121,13 +131,8 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
                       ),
                       style: FlutterFlowTheme.of(context).bodyText1,
                       keyboardType: TextInputType.name,
-                      validator: (val) {
-                        if (val == null || val.isEmpty) {
-                          return 'Field is required';
-                        }
-
-                        return null;
-                      },
+                      validator:
+                          _model.textControllerValidator.asValidator(context),
                     ),
                   ),
                 ),
@@ -172,14 +177,14 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
-                            if (formKey.currentState == null ||
-                                !formKey.currentState!.validate()) {
+                            if (_model.formKey.currentState == null ||
+                                !_model.formKey.currentState!.validate()) {
                               return;
                             }
 
                             final incomeCategoriesCreateData =
                                 createIncomeCategoriesRecordData(
-                              categoryName: textController!.text,
+                              categoryName: _model.textController.text,
                             );
                             await IncomeCategoriesRecord.createDoc(
                                     currentUserReference!)

@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../components/notification_prompt_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -9,11 +10,14 @@ import '../main.dart';
 import '../welcome_to_evi/welcome_to_evi_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'sign_up_paywall_model.dart';
+export 'sign_up_paywall_model.dart';
 
 class SignUpPaywallWidget extends StatefulWidget {
   const SignUpPaywallWidget({Key? key}) : super(key: key);
@@ -23,13 +27,18 @@ class SignUpPaywallWidget extends StatefulWidget {
 }
 
 class _SignUpPaywallWidgetState extends State<SignUpPaywallWidget> {
-  InstantTimer? instantTimer;
-  final _unfocusNode = FocusNode();
+  late SignUpPaywallModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => SignUpPaywallModel());
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'SignUpPaywall'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent(
@@ -38,7 +47,13 @@ class _SignUpPaywallWidgetState extends State<SignUpPaywallWidget> {
           'user_email': currentUserEmail,
         },
       );
-      instantTimer = InstantTimer.periodic(
+
+      final billingEventsCreateData = createBillingEventsRecordData(
+        eventDate: getCurrentTimestamp.toString(),
+      );
+      await BillingEventsRecord.createDoc(currentUserReference!)
+          .set(billingEventsCreateData);
+      _model.instantTimer = InstantTimer.periodic(
         duration: Duration(milliseconds: 1000),
         callback: (timer) async {
           await actions.printConsole(
@@ -51,7 +66,7 @@ class _SignUpPaywallWidgetState extends State<SignUpPaywallWidget> {
             );
             if (valueOrDefault(currentUserDocument?.subStatus, '') ==
                 'active') {
-              instantTimer?.cancel();
+              _model.instantTimer?.cancel();
               if (valueOrDefault(currentUserDocument?.username, '') == null ||
                   valueOrDefault(currentUserDocument?.username, '') == '') {
                 await Navigator.push(
@@ -90,15 +105,13 @@ class _SignUpPaywallWidgetState extends State<SignUpPaywallWidget> {
         startImmediately: true,
       );
     });
-
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'SignUpPaywall'});
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
-    instantTimer?.cancel();
     super.dispose();
   }
 
@@ -159,11 +172,11 @@ class _SignUpPaywallWidgetState extends State<SignUpPaywallWidget> {
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                                  EdgeInsetsDirectional.fromSTEB(0, 21, 0, 16),
                               child: ClipRRect(
                                 child: Container(
                                   width: 200,
@@ -207,7 +220,7 @@ class _SignUpPaywallWidgetState extends State<SignUpPaywallWidget> {
                                         16, 16, 16, 16),
                                     child: SelectionArea(
                                         child: Text(
-                                      'Please check your email for next steps to complete account setup.',
+                                      'Please check your email for verification and account setup.',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
@@ -226,47 +239,48 @@ class _SignUpPaywallWidgetState extends State<SignUpPaywallWidget> {
                                 ),
                               ],
                             ),
-                            InkWell(
-                              onTap: () async {
-                                await actions.launchUrl(
-                                  'https://app.evi.finance/#?reference=mobile-app-android',
-                                );
-                              },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 16, 16, 16),
-                                      child: SelectionArea(
-                                          child: Text(
-                                        'OR click here to continue in your browser.',
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1Family,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              useGoogleFonts:
-                                                  GoogleFonts.asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1Family),
-                                              lineHeight: 1.5,
-                                            ),
-                                      )),
+                            if (false)
+                              InkWell(
+                                onTap: () async {
+                                  await actions.launchUrl(
+                                    'https://app.evi.finance/#?reference=mobile-app-android',
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16, 16, 16, 16),
+                                        child: SelectionArea(
+                                            child: Text(
+                                          'OR click here to continue in your browser.',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1Family,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1Family),
+                                                lineHeight: 1.5,
+                                              ),
+                                        )),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
                           ],
                         ),
                       ),

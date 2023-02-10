@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'dialog_box_model.dart';
+export 'dialog_box_model.dart';
 
 class DialogBoxWidget extends StatefulWidget {
   const DialogBoxWidget({
@@ -30,6 +32,27 @@ class DialogBoxWidget extends StatefulWidget {
 }
 
 class _DialogBoxWidgetState extends State<DialogBoxWidget> {
+  late DialogBoxModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => DialogBoxModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

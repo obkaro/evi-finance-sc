@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'text_transaction_type_model.dart';
+export 'text_transaction_type_model.dart';
 
 class TextTransactionTypeWidget extends StatefulWidget {
   const TextTransactionTypeWidget({
@@ -19,6 +21,27 @@ class TextTransactionTypeWidget extends StatefulWidget {
 }
 
 class _TextTransactionTypeWidgetState extends State<TextTransactionTypeWidget> {
+  late TextTransactionTypeModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => TextTransactionTypeModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

@@ -14,6 +14,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'welcome_to_evi_model.dart';
+export 'welcome_to_evi_model.dart';
 
 class WelcomeToEviWidget extends StatefulWidget {
   const WelcomeToEviWidget({Key? key}) : super(key: key);
@@ -24,6 +26,11 @@ class WelcomeToEviWidget extends StatefulWidget {
 
 class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
     with TickerProviderStateMixin {
+  late WelcomeToEviModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   final animationsMap = {
     'rowOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -78,31 +85,28 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
       ],
     ),
   };
-  String? dropDownValue;
-  TextEditingController? textController;
-  final _unfocusNode = FocusNode();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => WelcomeToEviModel());
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'WelcomeToEvi'});
+    _model.textController = TextEditingController();
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
           !anim.applyInitialState),
       this,
     );
-
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'WelcomeToEvi'});
-    textController = TextEditingController();
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
-    textController?.dispose();
     super.dispose();
   }
 
@@ -188,7 +192,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 32, 0, 0),
                         child: Form(
-                          key: formKey,
+                          key: _model.formKey,
                           autovalidateMode: AutovalidateMode.always,
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -224,7 +228,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0, 4, 0, 0),
                                             child: TextFormField(
-                                              controller: textController,
+                                              controller: _model.textController,
                                               autofillHints: [
                                                 AutofillHints.name
                                               ],
@@ -295,23 +299,9 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .bodyText1,
                                               keyboardType: TextInputType.name,
-                                              validator: (val) {
-                                                if (val == null ||
-                                                    val.isEmpty) {
-                                                  return 'Field is required';
-                                                }
-
-                                                if (val.length < 2) {
-                                                  return 'Requires at least 2 characters.';
-                                                }
-
-                                                if (!RegExp(
-                                                        kTextValidatorUsernameRegex)
-                                                    .hasMatch(val)) {
-                                                  return 'Must start with a letter and can only contain letters, digits and - or _.';
-                                                }
-                                                return null;
-                                              },
+                                              validator: _model
+                                                  .textControllerValidator
+                                                  .asValidator(context),
                                             ),
                                           ),
                                         ),
@@ -350,8 +340,8 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                                         'From paid advertisements',
                                         'None of the above'
                                       ],
-                                      onChanged: (val) =>
-                                          setState(() => dropDownValue = val),
+                                      onChanged: (val) => setState(
+                                          () => _model.dropDownValue = val),
                                       width: MediaQuery.of(context).size.width,
                                       height: 55,
                                       textStyle: FlutterFlowTheme.of(context)
@@ -398,20 +388,18 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
                     padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        if (formKey.currentState == null ||
-                            !formKey.currentState!.validate()) {
+                        if (_model.formKey.currentState == null ||
+                            !_model.formKey.currentState!.validate()) {
                           return;
                         }
-
-                        if (dropDownValue == null) {
+                        if (_model.dropDownValue == null) {
                           return;
                         }
-
                         if (FFAppState().currencyTextField != null) {
                           final usersUpdateData = createUsersRecordData(
-                            username:
-                                functions.toTitleCase(textController!.text),
-                            acqChannel: dropDownValue,
+                            username: functions
+                                .toTitleCase(_model.textController.text),
+                            acqChannel: _model.dropDownValue,
                           );
                           await currentUserReference!.update(usersUpdateData);
                           await showModalBottomSheet(

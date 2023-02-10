@@ -22,6 +22,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'transaction_single_model.dart';
+export 'transaction_single_model.dart';
 
 class TransactionSingleWidget extends StatefulWidget {
   const TransactionSingleWidget({
@@ -38,6 +40,11 @@ class TransactionSingleWidget extends StatefulWidget {
 
 class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
     with TickerProviderStateMixin {
+  late TransactionSingleModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   final animationsMap = {
     'wrapOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -76,13 +83,11 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
       ],
     ),
   };
-  DateTime? datePicked;
-  final _unfocusNode = FocusNode();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => TransactionSingleModel());
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'TransactionSingle'});
@@ -90,6 +95,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -251,9 +258,16 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            TextTransactionTypeWidget(
-                                              transactionType: widget
-                                                  .transaction!.transactionType,
+                                            wrapWithModel(
+                                              model: _model
+                                                  .textTransactionTypeModel,
+                                              updateCallback: () =>
+                                                  setState(() {}),
+                                              child: TextTransactionTypeWidget(
+                                                transactionType: widget
+                                                    .transaction!
+                                                    .transactionType,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -395,8 +409,8 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                         );
                                                         if (_datePickedTime !=
                                                             null) {
-                                                          setState(
-                                                            () => datePicked =
+                                                          setState(() {
+                                                            _model.datePicked =
                                                                 DateTime(
                                                               widget
                                                                   .transaction!
@@ -414,14 +428,14 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                   .hour,
                                                               _datePickedTime
                                                                   .minute,
-                                                            ),
-                                                          );
+                                                            );
+                                                          });
                                                         }
 
                                                         final transactionsUpdateData =
                                                             createTransactionsRecordData(
                                                           trasactionDate:
-                                                              datePicked,
+                                                              _model.datePicked,
                                                         );
                                                         await widget
                                                             .transaction!
@@ -924,7 +938,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                     subscriptionsUpdateData);
                                                             // Action_CategorizeTrans
 
-                                                            final transactionsUpdateData =
+                                                            final transactionsUpdateData1 =
                                                                 {
                                                               ...createTransactionsRecordData(
                                                                 categoryDetails:
@@ -955,11 +969,11 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                 .transaction!
                                                                 .reference
                                                                 .update(
-                                                                    transactionsUpdateData);
+                                                                    transactionsUpdateData1);
                                                           } else {
                                                             // Action_CategorizeTrans
 
-                                                            final transactionsUpdateData =
+                                                            final transactionsUpdateData2 =
                                                                 {
                                                               ...createTransactionsRecordData(
                                                                 categoryDetails:
@@ -983,7 +997,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                 .transaction!
                                                                 .reference
                                                                 .update(
-                                                                    transactionsUpdateData);
+                                                                    transactionsUpdateData2);
                                                           }
                                                         },
                                                         child: Icon(
@@ -1563,7 +1577,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                       widget.transaction!,
                                                                                     );
 
-                                                                                    final transactionsUpdateData = createTransactionsRecordData(
+                                                                                    final transactionsUpdateData1 = createTransactionsRecordData(
                                                                                       transactionCategory: wrapSubscriptionsRecord.category,
                                                                                       transactionBudget: currentUserDocument!.activeBudget,
                                                                                       recurringRef: wrapSubscriptionsRecord.reference,
@@ -1578,10 +1592,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                       isAssigned: true,
                                                                                       dateAssigned: getCurrentTimestamp,
                                                                                     );
-                                                                                    await widget.transaction!.reference.update(transactionsUpdateData);
+                                                                                    await widget.transaction!.reference.update(transactionsUpdateData1);
                                                                                     if (wrapSubscriptionsRecord.lastChargeDate != null) {
                                                                                       if (widget.transaction!.trasactionDate! > wrapSubscriptionsRecord.lastChargeDate!) {
-                                                                                        final subscriptionsUpdateData = {
+                                                                                        final subscriptionsUpdateData1 = {
                                                                                           ...createSubscriptionsRecordData(
                                                                                             lastChargeDate: widget.transaction!.trasactionDate,
                                                                                             lastCharge: createMoneyStruct(
@@ -1597,9 +1611,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                             widget.transaction!.transactionNarration
                                                                                           ]),
                                                                                         };
-                                                                                        await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData);
+                                                                                        await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData1);
                                                                                       } else {
-                                                                                        final subscriptionsUpdateData = {
+                                                                                        final subscriptionsUpdateData2 = {
                                                                                           'transactions': FieldValue.arrayUnion([
                                                                                             widget.transaction!.reference
                                                                                           ]),
@@ -1607,10 +1621,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                             widget.transaction!.transactionNarration
                                                                                           ]),
                                                                                         };
-                                                                                        await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData);
+                                                                                        await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData2);
                                                                                       }
                                                                                     } else {
-                                                                                      final subscriptionsUpdateData = {
+                                                                                      final subscriptionsUpdateData3 = {
                                                                                         ...createSubscriptionsRecordData(
                                                                                           lastChargeDate: widget.transaction!.trasactionDate,
                                                                                           lastCharge: createMoneyStruct(
@@ -1626,10 +1640,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                           widget.transaction!.transactionNarration
                                                                                         ]),
                                                                                       };
-                                                                                      await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData);
+                                                                                      await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData3);
                                                                                     }
                                                                                   } else {
-                                                                                    final transactionsUpdateData = createTransactionsRecordData(
+                                                                                    final transactionsUpdateData2 = createTransactionsRecordData(
                                                                                       transactionCategory: wrapSubscriptionsRecord.category,
                                                                                       transactionBudget: currentUserDocument!.activeBudget,
                                                                                       recurringRef: wrapSubscriptionsRecord.reference,
@@ -1644,10 +1658,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                       isAssigned: true,
                                                                                       dateAssigned: getCurrentTimestamp,
                                                                                     );
-                                                                                    await widget.transaction!.reference.update(transactionsUpdateData);
+                                                                                    await widget.transaction!.reference.update(transactionsUpdateData2);
                                                                                     if (wrapSubscriptionsRecord.lastChargeDate != null) {
                                                                                       if (widget.transaction!.trasactionDate! > wrapSubscriptionsRecord.lastChargeDate!) {
-                                                                                        final subscriptionsUpdateData = {
+                                                                                        final subscriptionsUpdateData4 = {
                                                                                           ...createSubscriptionsRecordData(
                                                                                             lastChargeDate: widget.transaction!.trasactionDate,
                                                                                             lastCharge: createMoneyStruct(
@@ -1663,9 +1677,9 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                             widget.transaction!.transactionNarration
                                                                                           ]),
                                                                                         };
-                                                                                        await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData);
+                                                                                        await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData4);
                                                                                       } else {
-                                                                                        final subscriptionsUpdateData = {
+                                                                                        final subscriptionsUpdateData5 = {
                                                                                           'transactions': FieldValue.arrayUnion([
                                                                                             widget.transaction!.reference
                                                                                           ]),
@@ -1673,10 +1687,10 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                             widget.transaction!.transactionNarration
                                                                                           ]),
                                                                                         };
-                                                                                        await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData);
+                                                                                        await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData5);
                                                                                       }
                                                                                     } else {
-                                                                                      final subscriptionsUpdateData = {
+                                                                                      final subscriptionsUpdateData6 = {
                                                                                         ...createSubscriptionsRecordData(
                                                                                           lastChargeDate: widget.transaction!.trasactionDate,
                                                                                           lastCharge: createMoneyStruct(
@@ -1692,7 +1706,7 @@ class _TransactionSingleWidgetState extends State<TransactionSingleWidget>
                                                                                           widget.transaction!.transactionNarration
                                                                                         ]),
                                                                                       };
-                                                                                      await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData);
+                                                                                      await wrapSubscriptionsRecord.reference.update(subscriptionsUpdateData6);
                                                                                     }
                                                                                   }
 

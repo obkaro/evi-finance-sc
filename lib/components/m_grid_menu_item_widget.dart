@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'm_grid_menu_item_model.dart';
+export 'm_grid_menu_item_model.dart';
 
 class MGridMenuItemWidget extends StatefulWidget {
   const MGridMenuItemWidget({
@@ -26,6 +28,27 @@ class MGridMenuItemWidget extends StatefulWidget {
 }
 
 class _MGridMenuItemWidgetState extends State<MGridMenuItemWidget> {
+  late MGridMenuItemModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => MGridMenuItemModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

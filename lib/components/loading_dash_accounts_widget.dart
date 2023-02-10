@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'loading_dash_accounts_model.dart';
+export 'loading_dash_accounts_model.dart';
 
 class LoadingDashAccountsWidget extends StatefulWidget {
   const LoadingDashAccountsWidget({Key? key}) : super(key: key);
@@ -14,6 +16,27 @@ class LoadingDashAccountsWidget extends StatefulWidget {
 }
 
 class _LoadingDashAccountsWidgetState extends State<LoadingDashAccountsWidget> {
+  late LoadingDashAccountsModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => LoadingDashAccountsModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

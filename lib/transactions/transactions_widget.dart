@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'transactions_model.dart';
+export 'transactions_model.dart';
 
 class TransactionsWidget extends StatefulWidget {
   const TransactionsWidget({Key? key}) : super(key: key);
@@ -17,18 +19,24 @@ class TransactionsWidget extends StatefulWidget {
 }
 
 class _TransactionsWidgetState extends State<TransactionsWidget> {
-  final _unfocusNode = FocusNode();
+  late TransactionsModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => TransactionsModel());
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'Transactions'});
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -166,7 +174,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                     listViewIndex];
                                             return TransactionListItemWidget(
                                               key: Key(
-                                                  'transactionListItem_${listViewIndex}'),
+                                                  'Keyabg_${listViewIndex}_of_${listViewTransactionsRecordList.length}'),
                                               transactionDoc:
                                                   listViewTransactionsRecord,
                                             );
@@ -214,7 +222,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                                                     listViewIndex];
                                             return TransactionListItemWidget(
                                               key: Key(
-                                                  'transactionListItem_${listViewIndex}'),
+                                                  'Key9g3_${listViewIndex}_of_${listViewTransactionsRecordList.length}'),
                                               transactionDoc:
                                                   listViewTransactionsRecord,
                                             );

@@ -82,6 +82,10 @@ class FFAppState extends ChangeNotifier {
     _durations.remove(_value);
   }
 
+  void removeAtIndexFromDurations(int _index) {
+    _durations.removeAt(_index);
+  }
+
   bool _hasUpdatePromptShown = false;
   bool get hasUpdatePromptShown => _hasUpdatePromptShown;
   set hasUpdatePromptShown(bool _value) {

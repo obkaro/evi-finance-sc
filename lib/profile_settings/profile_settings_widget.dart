@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'profile_settings_model.dart';
+export 'profile_settings_model.dart';
 
 class ProfileSettingsWidget extends StatefulWidget {
   const ProfileSettingsWidget({Key? key}) : super(key: key);
@@ -20,30 +22,29 @@ class ProfileSettingsWidget extends StatefulWidget {
 }
 
 class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
-  TextEditingController? textController1;
-  TextEditingController? textController2;
-  TextEditingController? textController3;
-  final _unfocusNode = FocusNode();
+  late ProfileSettingsModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final formKey = GlobalKey<FormState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => ProfileSettingsModel());
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ProfileSettings'});
-    textController1 = TextEditingController(
+    _model.textController1 = TextEditingController(
         text: valueOrDefault(currentUserDocument?.username, ''));
-    textController2 = TextEditingController(text: currentUserEmail);
-    textController3 = TextEditingController(text: currentPhoneNumber);
+    _model.textController2 = TextEditingController(text: currentUserEmail);
+    _model.textController3 = TextEditingController(text: currentPhoneNumber);
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
-    textController1?.dispose();
-    textController2?.dispose();
-    textController3?.dispose();
     super.dispose();
   }
 
@@ -86,16 +87,16 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(24, 24, 24, 24),
                   child: Form(
-                    key: formKey,
+                    key: _model.formKey,
                     autovalidateMode: AutovalidateMode.disabled,
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         AuthUserStreamWidget(
                           builder: (context) => TextFormField(
-                            controller: textController1,
+                            controller: _model.textController1,
                             onChanged: (_) => EasyDebounce.debounce(
-                              'textController1',
+                              '_model.textController1',
                               Duration(milliseconds: 2000),
                               () => setState(() {}),
                             ),
@@ -139,14 +140,16 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                             ),
                             style: FlutterFlowTheme.of(context).bodyText1,
                             keyboardType: TextInputType.name,
+                            validator: _model.textController1Validator
+                                .asValidator(context),
                           ),
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: TextFormField(
-                            controller: textController2,
+                            controller: _model.textController2,
                             onChanged: (_) => EasyDebounce.debounce(
-                              'textController2',
+                              '_model.textController2',
                               Duration(milliseconds: 2000),
                               () => setState(() {}),
                             ),
@@ -190,15 +193,17 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                             ),
                             style: FlutterFlowTheme.of(context).bodyText1,
                             keyboardType: TextInputType.emailAddress,
+                            validator: _model.textController2Validator
+                                .asValidator(context),
                           ),
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: AuthUserStreamWidget(
                             builder: (context) => TextFormField(
-                              controller: textController3,
+                              controller: _model.textController3,
                               onChanged: (_) => EasyDebounce.debounce(
-                                'textController3',
+                                '_model.textController3',
                                 Duration(milliseconds: 2000),
                                 () => setState(() {}),
                               ),
@@ -242,41 +247,47 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                               ),
                               style: FlutterFlowTheme.of(context).bodyText1,
                               keyboardType: TextInputType.phone,
+                              validator: _model.textController3Validator
+                                  .asValidator(context),
                             ),
                           ),
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                          child: CButtonFilledCopyWidget(
-                            text: 'Edit Income Sources',
-                            icon: Icon(
-                              Icons.edit_rounded,
-                              size: 16,
+                          child: wrapWithModel(
+                            model: _model.cButtonFilledCopyModel,
+                            updateCallback: () => setState(() {}),
+                            child: CButtonFilledCopyWidget(
+                              text: 'Edit Income Sources',
+                              icon: Icon(
+                                Icons.edit_rounded,
+                                size: 16,
+                              ),
+                              action: () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        EditIncomeSourcesWidget(),
+                                  ),
+                                );
+                              },
                             ),
-                            action: () async {
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      EditIncomeSourcesWidget(),
-                                ),
-                              );
-                            },
                           ),
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              if (formKey.currentState == null ||
-                                  !formKey.currentState!.validate()) {
+                              if (_model.formKey.currentState == null ||
+                                  !_model.formKey.currentState!.validate()) {
                                 return;
                               }
 
                               final usersUpdateData = createUsersRecordData(
-                                email: textController2!.text,
-                                phoneNumber: textController3!.text,
-                                username: textController1!.text,
+                                email: _model.textController2.text,
+                                phoneNumber: _model.textController3.text,
+                                username: _model.textController1.text,
                               );
                               await currentUserReference!
                                   .update(usersUpdateData);

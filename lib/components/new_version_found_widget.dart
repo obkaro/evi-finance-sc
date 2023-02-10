@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'new_version_found_model.dart';
+export 'new_version_found_model.dart';
 
 class NewVersionFoundWidget extends StatefulWidget {
   const NewVersionFoundWidget({
@@ -21,6 +23,27 @@ class NewVersionFoundWidget extends StatefulWidget {
 }
 
 class _NewVersionFoundWidgetState extends State<NewVersionFoundWidget> {
+  late NewVersionFoundModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => NewVersionFoundModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

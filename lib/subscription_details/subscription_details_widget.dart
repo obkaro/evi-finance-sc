@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'subscription_details_model.dart';
+export 'subscription_details_model.dart';
 
 class SubscriptionDetailsWidget extends StatefulWidget {
   const SubscriptionDetailsWidget({
@@ -29,19 +31,24 @@ class SubscriptionDetailsWidget extends StatefulWidget {
 }
 
 class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
-  Completer<List<TransactionsRecord>>? _firestoreRequestCompleter;
-  final _unfocusNode = FocusNode();
+  late SubscriptionDetailsModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => SubscriptionDetailsModel());
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'subscriptionDetails'});
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -417,7 +424,7 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
                           child: FutureBuilder<List<TransactionsRecord>>(
-                            future: (_firestoreRequestCompleter ??=
+                            future: (_model.firestoreRequestCompleter ??=
                                     Completer<List<TransactionsRecord>>()
                                       ..complete(queryTransactionsRecordOnce(
                                         queryBuilder: (transactionsRecord) =>
@@ -466,9 +473,10 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
                               }
                               return RefreshIndicator(
                                 onRefresh: () async {
-                                  setState(
-                                      () => _firestoreRequestCompleter = null);
-                                  await waitForFirestoreRequestCompleter();
+                                  setState(() =>
+                                      _model.firestoreRequestCompleter = null);
+                                  await _model
+                                      .waitForFirestoreRequestCompleter();
                                 },
                                 child: ListView.builder(
                                   padding: EdgeInsets.zero,
@@ -569,20 +577,5 @@ class _SubscriptionDetailsWidgetState extends State<SubscriptionDetailsWidget> {
         ),
       ),
     );
-  }
-
-  Future waitForFirestoreRequestCompleter({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = _firestoreRequestCompleter?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
   }
 }

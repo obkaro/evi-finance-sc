@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'spinning_default_img_grid_model.dart';
+export 'spinning_default_img_grid_model.dart';
 
 class SpinningDefaultImgGridWidget extends StatefulWidget {
   const SpinningDefaultImgGridWidget({Key? key}) : super(key: key);
@@ -17,6 +19,27 @@ class SpinningDefaultImgGridWidget extends StatefulWidget {
 
 class _SpinningDefaultImgGridWidgetState
     extends State<SpinningDefaultImgGridWidget> {
+  late SpinningDefaultImgGridModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => SpinningDefaultImgGridModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'notification_prompt_model.dart';
+export 'notification_prompt_model.dart';
 
 class NotificationPromptWidget extends StatefulWidget {
   const NotificationPromptWidget({
@@ -30,7 +32,26 @@ class NotificationPromptWidget extends StatefulWidget {
 }
 
 class _NotificationPromptWidgetState extends State<NotificationPromptWidget> {
-  BudgetsRecord? createdBudget;
+  late NotificationPromptModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => NotificationPromptModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -147,13 +168,14 @@ class _NotificationPromptWidgetState extends State<NotificationPromptWidget> {
                             var budgetsRecordReference =
                                 BudgetsRecord.collection.doc();
                             await budgetsRecordReference.set(budgetsCreateData);
-                            createdBudget = BudgetsRecord.getDocumentFromData(
-                                budgetsCreateData, budgetsRecordReference);
+                            _model.createdBudget =
+                                BudgetsRecord.getDocumentFromData(
+                                    budgetsCreateData, budgetsRecordReference);
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => FirstBudgetWidget(
-                                  budget: createdBudget,
+                                  budget: _model.createdBudget,
                                 ),
                               ),
                             );

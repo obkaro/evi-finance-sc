@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'edit_category_model.dart';
+export 'edit_category_model.dart';
 
 class EditCategoryWidget extends StatefulWidget {
   const EditCategoryWidget({
@@ -26,18 +28,27 @@ class EditCategoryWidget extends StatefulWidget {
 }
 
 class _EditCategoryWidgetState extends State<EditCategoryWidget> {
-  TextEditingController? textController;
+  late EditCategoryModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
 
   @override
   void initState() {
     super.initState();
-    textController =
+    _model = createModel(context, () => EditCategoryModel());
+
+    _model.textController =
         TextEditingController(text: widget.categoryToEdit!.categoryName);
   }
 
   @override
   void dispose() {
-    textController?.dispose();
+    _model.dispose();
+
     super.dispose();
   }
 
@@ -97,7 +108,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
                   child: TextFormField(
-                    controller: textController,
+                    controller: _model.textController,
                     obscureText: false,
                     decoration: InputDecoration(
                       hintText: 'Enter Amount',
@@ -135,6 +146,8 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1,
                     keyboardType: TextInputType.name,
+                    validator:
+                        _model.textControllerValidator.asValidator(context),
                   ),
                 ),
                 Padding(
@@ -195,7 +208,7 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                                 0) {
                               if (FFAppState().currencyTextField >
                                   widget.categoryToEdit!.categoryAmount!) {
-                                final budgetsUpdateData = {
+                                final budgetsUpdateData1 = {
                                   'unallocatedAmount': FieldValue.increment(
                                       -(functions.subInt(
                                           FFAppState().currencyTextField,
@@ -203,22 +216,22 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
                                               .categoryAmount))),
                                 };
                                 await widget.budget!.reference
-                                    .update(budgetsUpdateData);
+                                    .update(budgetsUpdateData1);
                               } else {
-                                final budgetsUpdateData = {
+                                final budgetsUpdateData2 = {
                                   'unallocatedAmount': FieldValue.increment(
                                       functions.subInt(
                                           widget.categoryToEdit!.categoryAmount,
                                           FFAppState().currencyTextField)),
                                 };
                                 await widget.budget!.reference
-                                    .update(budgetsUpdateData);
+                                    .update(budgetsUpdateData2);
                               }
 
                               final categoriesUpdateData =
                                   createCategoriesRecordData(
                                 categoryAmount: FFAppState().currencyTextField,
-                                categoryName: textController!.text,
+                                categoryName: _model.textController.text,
                               );
                               await widget.categoryToEdit!.reference
                                   .update(categoriesUpdateData);

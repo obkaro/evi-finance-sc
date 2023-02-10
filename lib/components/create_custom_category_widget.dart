@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'create_custom_category_model.dart';
+export 'create_custom_category_model.dart';
 
 class CreateCustomCategoryWidget extends StatefulWidget {
   const CreateCustomCategoryWidget({
@@ -27,17 +29,26 @@ class CreateCustomCategoryWidget extends StatefulWidget {
 
 class _CreateCustomCategoryWidgetState
     extends State<CreateCustomCategoryWidget> {
-  TextEditingController? textController;
+  late CreateCustomCategoryModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
 
   @override
   void initState() {
     super.initState();
-    textController = TextEditingController();
+    _model = createModel(context, () => CreateCustomCategoryModel());
+
+    _model.textController = TextEditingController();
   }
 
   @override
   void dispose() {
-    textController?.dispose();
+    _model.dispose();
+
     super.dispose();
   }
 
@@ -98,7 +109,7 @@ class _CreateCustomCategoryWidgetState
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
                   child: TextFormField(
-                    controller: textController,
+                    controller: _model.textController,
                     obscureText: false,
                     decoration: InputDecoration(
                       labelStyle: FlutterFlowTheme.of(context).bodyText2,
@@ -137,6 +148,8 @@ class _CreateCustomCategoryWidgetState
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1,
                     keyboardType: TextInputType.name,
+                    validator:
+                        _model.textControllerValidator.asValidator(context),
                   ),
                 ),
                 Padding(
@@ -200,7 +213,7 @@ class _CreateCustomCategoryWidgetState
 
                               final categoriesCreateData =
                                   createCategoriesRecordData(
-                                categoryName: textController!.text,
+                                categoryName: _model.textController.text,
                                 categoryAmount: FFAppState().currencyTextField,
                                 categoryBudget: widget.budget!.reference,
                                 categoryId: random_data.randomString(

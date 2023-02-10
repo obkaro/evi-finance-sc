@@ -5,7 +5,6 @@ import '../components/account_data_refresh_widget.dart';
 import '../components/dialog_box_widget.dart';
 import '../components/empty_list_widget.dart';
 import '../components/loading_empty_widget.dart';
-import '../components/loading_transaction_widget.dart';
 import '../components/transaction_list_item_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -22,6 +21,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'account_single_model.dart';
+export 'account_single_model.dart';
 
 class AccountSingleWidget extends StatefulWidget {
   const AccountSingleWidget({
@@ -37,6 +38,11 @@ class AccountSingleWidget extends StatefulWidget {
 
 class _AccountSingleWidgetState extends State<AccountSingleWidget>
     with TickerProviderStateMixin {
+  late AccountSingleModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   final animationsMap = {
     'iconOnPageLoadAnimation': AnimationInfo(
       loop: true,
@@ -52,15 +58,14 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
       ],
     ),
   };
-  ApiCallResponse? dataSyncResponse;
-  ApiCallResponse? reauthCode;
-  final _unfocusNode = FocusNode();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => AccountSingleModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'AccountSingle'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if ((functions.addHoursToTimestamp(widget.account!.dateLinked!, 2) <
@@ -134,13 +139,12 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
         }
       }
     });
-
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'AccountSingle'});
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -196,26 +200,28 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                   child: RefreshIndicator(
                     onRefresh: () async {
                       // Action_dataSyncCall
-                      dataSyncResponse = await MonoGroup.dataSyncCall.call(
+                      _model.dataSyncResponse =
+                          await MonoGroup.dataSyncCall.call(
                         authID: widget.account!.authID,
                       );
                       FFAppState().update(() {
                         FFAppState().dataSyncCode = getJsonField(
-                          (dataSyncResponse?.jsonBody ?? ''),
+                          (_model.dataSyncResponse?.jsonBody ?? ''),
                           r'''$.code''',
                         ).toString();
                       });
                       if (FFAppState().dataSyncCode ==
                           'REAUTHORISATION_REQUIRED') {
                         // Action_ReauthCall
-                        reauthCode = await MonoGroup.reauthenticateCall.call(
+                        _model.reauthCode =
+                            await MonoGroup.reauthenticateCall.call(
                           authID: widget.account!.authID,
                         );
                         // Action_ReauthAcct
                         await actions.flutterMonoReauth(
                           context,
                           getJsonField(
-                            (reauthCode?.jsonBody ?? ''),
+                            (_model.reauthCode?.jsonBody ?? ''),
                             r'''$.token''',
                           ).toString(),
                           widget.account!,
@@ -714,7 +720,15 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                     // Customize what your widget looks like when it's loading.
                                     if (!snapshot.hasData) {
                                       return Center(
-                                        child: LoadingTransactionWidget(),
+                                        child: SizedBox(
+                                          width: 36,
+                                          height: 36,
+                                          child: SpinKitThreeBounce(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            size: 36,
+                                          ),
+                                        ),
                                       );
                                     }
                                     List<TransactionsRecord>
@@ -753,7 +767,7 @@ class _AccountSingleWidgetState extends State<AccountSingleWidget>
                                                 listViewIndex];
                                         return TransactionListItemWidget(
                                           key: Key(
-                                              'transactionListItem_${listViewIndex}'),
+                                              'Keyqqm_${listViewIndex}_of_${listViewTransactionsRecordList.length}'),
                                           transactionDoc:
                                               listViewTransactionsRecord,
                                         );
