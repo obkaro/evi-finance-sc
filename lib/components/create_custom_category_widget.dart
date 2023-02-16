@@ -42,12 +42,12 @@ class _CreateCustomCategoryWidgetState
     super.initState();
     _model = createModel(context, () => CreateCustomCategoryModel());
 
-    _model.textController = TextEditingController();
+    _model.textController ??= TextEditingController();
   }
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

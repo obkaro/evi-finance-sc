@@ -32,7 +32,7 @@ class _LoadingGridlogosWidgetState extends State<LoadingGridlogosWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

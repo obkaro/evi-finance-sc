@@ -7,6 +7,7 @@ import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'settings_model.dart';
@@ -136,34 +137,35 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                   20, 10, 20, 16),
                             ),
                           ),
-                          ListTile(
-                            leading: Icon(
-                              Icons.star_rounded,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 32,
+                          if (false)
+                            ListTile(
+                              leading: Icon(
+                                Icons.star_rounded,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 32,
+                              ),
+                              title: Text(
+                                'Subscription Plan',
+                                style: FlutterFlowTheme.of(context)
+                                    .subtitle1
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .subtitle1Family,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle1Family),
+                                      lineHeight: 1.6,
+                                    ),
+                              ),
+                              subtitle: Text(
+                                'Get in on Evi premium options',
+                                style: FlutterFlowTheme.of(context).bodyText2,
+                              ),
+                              dense: false,
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                  20, 10, 20, 16),
                             ),
-                            title: Text(
-                              'Subscription Plan',
-                              style: FlutterFlowTheme.of(context)
-                                  .subtitle1
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .subtitle1Family,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .subtitle1Family),
-                                    lineHeight: 1.6,
-                                  ),
-                            ),
-                            subtitle: Text(
-                              'Get in on Evi premium options',
-                              style: FlutterFlowTheme.of(context).bodyText2,
-                            ),
-                            dense: false,
-                            contentPadding:
-                                EdgeInsetsDirectional.fromSTEB(20, 10, 20, 16),
-                          ),
                           InkWell(
                             onTap: () async {
                               if ((Theme.of(context).brightness ==
@@ -310,6 +312,39 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           ),
                           InkWell(
                             onTap: () async {
+                              await launchURL('https://www.evifinance.com');
+                            },
+                            child: ListTile(
+                              leading: FaIcon(
+                                FontAwesomeIcons.whatsapp,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 32,
+                              ),
+                              title: Text(
+                                'Need Help?',
+                                style: FlutterFlowTheme.of(context)
+                                    .subtitle1
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .subtitle1Family,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle1Family),
+                                      lineHeight: 1.6,
+                                    ),
+                              ),
+                              subtitle: Text(
+                                'Reach out via WhatsApp',
+                                style: FlutterFlowTheme.of(context).bodyText2,
+                              ),
+                              dense: false,
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                  20, 10, 20, 16),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () async {
                               await signOut();
                               await Navigator.pushAndRemoveUntil(
                                 context,
@@ -362,10 +397,12 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            'Evi  v${_model.versionNumber}',
-                            style: FlutterFlowTheme.of(context).bodyText2,
-                          ),
+                          if (_model.versionNumber != null &&
+                              _model.versionNumber != '')
+                            Text(
+                              'Evi  v${_model.versionNumber}',
+                              style: FlutterFlowTheme.of(context).bodyText2,
+                            ),
                         ],
                       ),
                     ),

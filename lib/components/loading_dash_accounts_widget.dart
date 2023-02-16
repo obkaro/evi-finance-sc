@@ -32,7 +32,7 @@ class _LoadingDashAccountsWidgetState extends State<LoadingDashAccountsWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

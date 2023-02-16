@@ -33,7 +33,7 @@ class _LoadingNothingtextTitle1WidgetState
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

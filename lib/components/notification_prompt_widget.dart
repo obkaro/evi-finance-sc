@@ -48,7 +48,7 @@ class _NotificationPromptWidgetState extends State<NotificationPromptWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

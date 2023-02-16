@@ -37,11 +37,11 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
     _model = createModel(context, () => EmailAuthModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'EmailAuth'});
-    _model.signInEmailController = TextEditingController();
-    _model.signInPasswordController = TextEditingController();
-    _model.signUpEmailController = TextEditingController();
-    _model.newPasswordController = TextEditingController();
-    _model.confirmPasswordController = TextEditingController();
+    _model.signInEmailController ??= TextEditingController();
+    _model.signInPasswordController ??= TextEditingController();
+    _model.signUpEmailController ??= TextEditingController();
+    _model.newPasswordController ??= TextEditingController();
+    _model.confirmPasswordController ??= TextEditingController();
   }
 
   @override
@@ -381,24 +381,11 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                   );
                                                   await currentUserReference!
                                                       .update(usersUpdateData);
-                                                  if (valueOrDefault(
-                                                              currentUserDocument
-                                                                  ?.subStatus,
-                                                              '') !=
-                                                          null &&
-                                                      valueOrDefault(
-                                                              currentUserDocument
-                                                                  ?.subStatus,
-                                                              '') !=
-                                                          '') {
+                                                  if (true) {
                                                     await actions.printConsole(
                                                       'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
                                                     );
-                                                    if (valueOrDefault(
-                                                            currentUserDocument
-                                                                ?.subStatus,
-                                                            '') ==
-                                                        'active') {
+                                                    if (true) {
                                                       if (valueOrDefault(
                                                                   currentUserDocument
                                                                       ?.username,
@@ -456,25 +443,21 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                         }
                                                       }
                                                     } else {
-                                                      await Navigator
-                                                          .pushAndRemoveUntil(
+                                                      await Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
                                                           builder: (context) =>
                                                               SignUpPaywallWidget(),
                                                         ),
-                                                        (r) => false,
                                                       );
                                                     }
                                                   } else {
-                                                    await Navigator
-                                                        .pushAndRemoveUntil(
+                                                    await Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             SignUpPaywallWidget(),
                                                       ),
-                                                      (r) => false,
                                                     );
                                                   }
                                                 },
@@ -942,14 +925,12 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                   );
                                                   await currentUserReference!
                                                       .update(usersUpdateData);
-                                                  await Navigator
-                                                      .pushAndRemoveUntil(
+                                                  await Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          SignUpPaywallWidget(),
+                                                          WelcomeToEviWidget(),
                                                     ),
-                                                    (r) => false,
                                                   );
                                                 },
                                                 text: 'Sign up',
@@ -1043,24 +1024,11 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                           );
                                           await currentUserReference!
                                               .update(usersUpdateData);
-                                          if (valueOrDefault(
-                                                      currentUserDocument
-                                                          ?.subStatus,
-                                                      '') !=
-                                                  null &&
-                                              valueOrDefault(
-                                                      currentUserDocument
-                                                          ?.subStatus,
-                                                      '') !=
-                                                  '') {
+                                          if (true) {
                                             await actions.printConsole(
                                               'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
                                             );
-                                            if (valueOrDefault(
-                                                    currentUserDocument
-                                                        ?.subStatus,
-                                                    '') ==
-                                                'active') {
+                                            if (true) {
                                               if (valueOrDefault(
                                                           currentUserDocument
                                                               ?.username,
@@ -1116,24 +1084,21 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                 }
                                               }
                                             } else {
-                                              await Navigator
-                                                  .pushAndRemoveUntil(
+                                              await Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       SignUpPaywallWidget(),
                                                 ),
-                                                (r) => false,
                                               );
                                             }
                                           } else {
-                                            await Navigator.pushAndRemoveUntil(
+                                            await Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     SignUpPaywallWidget(),
                                               ),
-                                              (r) => false,
                                             );
                                           }
                                         },
@@ -1222,24 +1187,11 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                               );
                                               await currentUserReference!
                                                   .update(usersUpdateData);
-                                              if (valueOrDefault(
-                                                          currentUserDocument
-                                                              ?.subStatus,
-                                                          '') !=
-                                                      null &&
-                                                  valueOrDefault(
-                                                          currentUserDocument
-                                                              ?.subStatus,
-                                                          '') !=
-                                                      '') {
+                                              if (true) {
                                                 await actions.printConsole(
                                                   'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
                                                 );
-                                                if (valueOrDefault(
-                                                        currentUserDocument
-                                                            ?.subStatus,
-                                                        '') ==
-                                                    'active') {
+                                                if (true) {
                                                   if (valueOrDefault(
                                                               currentUserDocument
                                                                   ?.username,
@@ -1263,8 +1215,7 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     if (currentUserDocument!
                                                             .activeBudget !=
                                                         null) {
-                                                      await Navigator
-                                                          .pushAndRemoveUntil(
+                                                      await Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
                                                           builder: (context) =>
@@ -1272,7 +1223,6 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                                   initialPage:
                                                                       'Dashboard'),
                                                         ),
-                                                        (r) => false,
                                                       );
                                                     } else {
                                                       await showModalBottomSheet(
@@ -1297,25 +1247,21 @@ class _EmailAuthWidgetState extends State<EmailAuthWidget> {
                                                     }
                                                   }
                                                 } else {
-                                                  await Navigator
-                                                      .pushAndRemoveUntil(
+                                                  await Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
                                                           SignUpPaywallWidget(),
                                                     ),
-                                                    (r) => false,
                                                   );
                                                 }
                                               } else {
-                                                await Navigator
-                                                    .pushAndRemoveUntil(
+                                                await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         SignUpPaywallWidget(),
                                                   ),
-                                                  (r) => false,
                                                 );
                                               }
                                             },

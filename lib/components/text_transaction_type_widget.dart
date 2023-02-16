@@ -37,7 +37,7 @@ class _TextTransactionTypeWidgetState extends State<TextTransactionTypeWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

@@ -36,7 +36,7 @@ class _EmptyLoadingTextWidgetState extends State<EmptyLoadingTextWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

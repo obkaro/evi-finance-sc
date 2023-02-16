@@ -43,7 +43,7 @@ class _AllocateFirstBudgetWidgetState extends State<AllocateFirstBudgetWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

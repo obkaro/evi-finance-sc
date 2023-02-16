@@ -47,7 +47,15 @@ class MenuModel extends FlutterFlowModel {
     mAppbarModel = createModel(context, () => MAppbarModel());
   }
 
-  void dispose() {}
+  void dispose() {
+    mGridMenuItemModel1.dispose();
+    mGridMenuItemModel2.dispose();
+    mGridMenuItemModel3.dispose();
+    mGridMenuItemModel4.dispose();
+    mGridMenuItemModel5.dispose();
+    mGridMenuItemModel6.dispose();
+    mAppbarModel.dispose();
+  }
 
   /// Additional helper methods are added here.
 

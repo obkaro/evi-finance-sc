@@ -42,7 +42,7 @@ class _TransactionListItemWidgetState extends State<TransactionListItemWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }
