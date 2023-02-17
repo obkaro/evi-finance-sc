@@ -48,7 +48,7 @@ class _DialogBoxWidgetState extends State<DialogBoxWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

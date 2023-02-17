@@ -36,7 +36,7 @@ class _TooltipWidgetState extends State<TooltipWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

@@ -58,9 +58,9 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'BiometricAuth'});
-    _model.signInEmailController =
+    _model.signInEmailController ??=
         TextEditingController(text: currentUserEmail);
-    _model.signInPasswordController = TextEditingController(text: '********');
+    _model.signInPasswordController ??= TextEditingController(text: '********');
   }
 
   @override

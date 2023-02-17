@@ -37,7 +37,7 @@ class _CButtonFilledWidgetState extends State<CButtonFilledWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

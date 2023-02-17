@@ -93,7 +93,7 @@ class _WelcomeToEviWidgetState extends State<WelcomeToEviWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'WelcomeToEvi'});
-    _model.textController = TextEditingController();
+    _model.textController ??= TextEditingController();
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||

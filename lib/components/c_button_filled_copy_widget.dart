@@ -42,7 +42,7 @@ class _CButtonFilledCopyWidgetState extends State<CButtonFilledCopyWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

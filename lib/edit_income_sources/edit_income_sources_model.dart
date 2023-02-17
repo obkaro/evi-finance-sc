@@ -31,7 +31,9 @@ class EditIncomeSourcesModel extends FlutterFlowModel {
         createModel(context, () => CButtonFilledCopyModel());
   }
 
-  void dispose() {}
+  void dispose() {
+    cButtonFilledCopyModel.dispose();
+  }
 
   /// Additional helper methods are added here.
 

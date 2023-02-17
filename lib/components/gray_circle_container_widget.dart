@@ -32,7 +32,7 @@ class _GrayCircleContainerWidgetState extends State<GrayCircleContainerWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

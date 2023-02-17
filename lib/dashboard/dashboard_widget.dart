@@ -18,6 +18,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
+import '../sign_up_paywall/sign_up_paywall_widget.dart';
 import '../transactions/transactions_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
@@ -107,6 +108,16 @@ class _DashboardWidgetState extends State<DashboardWidget>
             builder: (context) => BiometricAuthWidget(),
           ),
         );
+      }
+      if (false) {
+        if (valueOrDefault(currentUserDocument?.subStatus, '') != 'active') {
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SignUpPaywallWidget(),
+            ),
+          );
+        }
       }
     });
   }
@@ -973,22 +984,24 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                     ),
                                   );
                                 },
-                                text: 'View All',
+                                text: 'View all',
                                 options: FFButtonOptions(
                                   height: 24,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      24, 0, 0, 0),
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
                                   textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
+                                      .bodyText1
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
-                                            .subtitle2Family,
+                                            .bodyText1Family,
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .subtitle2Family),
+                                                    .bodyText1Family),
                                       ),
                                   elevation: 0,
                                   borderSide: BorderSide(
@@ -1003,7 +1016,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                 Icons.keyboard_arrow_right_rounded,
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
-                                size: 18,
+                                size: 24,
                               ),
                             ],
                           ),

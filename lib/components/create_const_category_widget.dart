@@ -47,7 +47,7 @@ class _CreateConstCategoryWidgetState extends State<CreateConstCategoryWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

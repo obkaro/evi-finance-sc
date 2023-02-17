@@ -34,10 +34,10 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ProfileSettings'});
-    _model.textController1 = TextEditingController(
+    _model.textController1 ??= TextEditingController(
         text: valueOrDefault(currentUserDocument?.username, ''));
-    _model.textController2 = TextEditingController(text: currentUserEmail);
-    _model.textController3 = TextEditingController(text: currentPhoneNumber);
+    _model.textController2 ??= TextEditingController(text: currentUserEmail);
+    _model.textController3 ??= TextEditingController(text: currentPhoneNumber);
   }
 
   @override

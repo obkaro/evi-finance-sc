@@ -79,7 +79,24 @@ class LoadingGridlogosModel extends FlutterFlowModel {
         createModel(context, () => GrayCircleContainerModel());
   }
 
-  void dispose() {}
+  void dispose() {
+    grayCircleContainerModel1.dispose();
+    grayCircleContainerModel2.dispose();
+    grayCircleContainerModel3.dispose();
+    grayCircleContainerModel4.dispose();
+    grayCircleContainerModel5.dispose();
+    grayCircleContainerModel6.dispose();
+    grayCircleContainerModel7.dispose();
+    grayCircleContainerModel8.dispose();
+    grayCircleContainerModel9.dispose();
+    grayCircleContainerModel10.dispose();
+    grayCircleContainerModel11.dispose();
+    grayCircleContainerModel12.dispose();
+    grayCircleContainerModel13.dispose();
+    grayCircleContainerModel14.dispose();
+    grayCircleContainerModel15.dispose();
+    grayCircleContainerModel16.dispose();
+  }
 
   /// Additional helper methods are added here.
 

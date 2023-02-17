@@ -41,13 +41,13 @@ class _EditCategoryWidgetState extends State<EditCategoryWidget> {
     super.initState();
     _model = createModel(context, () => EditCategoryModel());
 
-    _model.textController =
+    _model.textController ??=
         TextEditingController(text: widget.categoryToEdit!.categoryName);
   }
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

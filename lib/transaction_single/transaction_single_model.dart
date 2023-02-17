@@ -37,7 +37,9 @@ class TransactionSingleModel extends FlutterFlowModel {
         createModel(context, () => TextTransactionTypeModel());
   }
 
-  void dispose() {}
+  void dispose() {
+    textTransactionTypeModel.dispose();
+  }
 
   /// Additional helper methods are added here.
 
