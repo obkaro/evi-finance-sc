@@ -280,21 +280,11 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                     );
                                     await currentUserReference!
                                         .update(usersUpdateData);
-                                    if (valueOrDefault(
-                                                currentUserDocument?.subStatus,
-                                                '') !=
-                                            null &&
-                                        valueOrDefault(
-                                                currentUserDocument?.subStatus,
-                                                '') !=
-                                            '') {
+                                    if (true) {
                                       await actions.printConsole(
                                         'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
                                       );
-                                      if (valueOrDefault(
-                                              currentUserDocument?.subStatus,
-                                              '') ==
-                                          'active') {
+                                      if (true) {
                                         if (valueOrDefault(
                                                     currentUserDocument
                                                         ?.username,
@@ -448,24 +438,11 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                             );
                                             await currentUserReference!
                                                 .update(usersUpdateData);
-                                            if (valueOrDefault(
-                                                        currentUserDocument
-                                                            ?.subStatus,
-                                                        '') !=
-                                                    null &&
-                                                valueOrDefault(
-                                                        currentUserDocument
-                                                            ?.subStatus,
-                                                        '') !=
-                                                    '') {
+                                            if (true) {
                                               await actions.printConsole(
                                                 'PAY STATUS - ${valueOrDefault(currentUserDocument?.subStatus, '')}',
                                               );
-                                              if (valueOrDefault(
-                                                      currentUserDocument
-                                                          ?.subStatus,
-                                                      '') ==
-                                                  'active') {
+                                              if (true) {
                                                 if (valueOrDefault(
                                                             currentUserDocument
                                                                 ?.username,
