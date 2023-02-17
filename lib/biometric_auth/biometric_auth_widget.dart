@@ -348,20 +348,8 @@ class _BiometricAuthWidgetState extends State<BiometricAuthWidget>
                                       );
                                       await currentUserReference!
                                           .update(usersUpdateData);
-                                      if (valueOrDefault(
-                                                  currentUserDocument
-                                                      ?.subStatus,
-                                                  '') !=
-                                              null &&
-                                          valueOrDefault(
-                                                  currentUserDocument
-                                                      ?.subStatus,
-                                                  '') !=
-                                              '') {
-                                        if (valueOrDefault(
-                                                currentUserDocument?.subStatus,
-                                                '') ==
-                                            'active') {
+                                      if (true) {
+                                        if (true) {
                                           await Navigator.push(
                                             context,
                                             MaterialPageRoute(
