@@ -18,6 +18,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
+import '../sign_up_paywall/sign_up_paywall_widget.dart';
 import '../transactions/transactions_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../custom_code/widgets/index.dart' as custom_widgets;
@@ -44,7 +45,9 @@ class DashboardModel extends FlutterFlowModel {
         createModel(context, () => CircularIndicatorSmallModel());
   }
 
-  void dispose() {}
+  void dispose() {
+    circularIndicatorSmallModel.dispose();
+  }
 
   /// Additional helper methods are added here.
 

@@ -32,12 +32,12 @@ class _NewIncomeSourceWidgetState extends State<NewIncomeSourceWidget> {
     super.initState();
     _model = createModel(context, () => NewIncomeSourceModel());
 
-    _model.textController = TextEditingController();
+    _model.textController ??= TextEditingController();
   }
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

@@ -44,7 +44,7 @@ class _EditBudgetAmountWidgetState extends State<EditBudgetAmountWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

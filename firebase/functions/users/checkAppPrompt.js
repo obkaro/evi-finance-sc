@@ -11,7 +11,7 @@ exports.checkAppPrompt = functions.pubsub.schedule('0 15 * * *').onRun(async (co
       const checknotif = await admin.firestore().collection('ff_push_notifications').add({
         initial_page_name: 'dashboard',
         notification_sound: 'default',
-        notification_text: `Hey ${user.data().username}, come see what's happened on your accounts over the last couple of days!`,
+        notification_text: `Hey ${user.data().username ?? ""}, come see what's happened on your accounts over the last couple of days!`,
         notification_title: 'Stay on track',
         timestamp: time,
         user_refs: user.ref.path.toString()

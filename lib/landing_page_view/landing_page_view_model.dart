@@ -1,6 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/new_version_found_widget.dart';
+import '../components/loading_empty_widget.dart';
 import '../components/notification_prompt_widget.dart';
 import '../email_auth/email_auth_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';

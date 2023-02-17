@@ -39,6 +39,7 @@ class ProfileSettingsModel extends FlutterFlowModel {
     textController1?.dispose();
     textController2?.dispose();
     textController3?.dispose();
+    cButtonFilledCopyModel.dispose();
   }
 
   /// Additional helper methods are added here.

@@ -32,7 +32,9 @@ class SingleBudgetModel extends FlutterFlowModel {
         createModel(context, () => CircularIndicatorBigModel());
   }
 
-  void dispose() {}
+  void dispose() {
+    circularIndicatorBigModel.dispose();
+  }
 
   /// Additional helper methods are added here.
 

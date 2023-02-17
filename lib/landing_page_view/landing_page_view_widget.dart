@@ -1,6 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/new_version_found_widget.dart';
+import '../components/loading_empty_widget.dart';
 import '../components/notification_prompt_widget.dart';
 import '../email_auth/email_auth_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -617,20 +617,6 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                                       builder: (context) => EmailAuthWidget(),
                                     ),
                                   );
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    context: context,
-                                    builder: (context) {
-                                      return Padding(
-                                        padding:
-                                            MediaQuery.of(context).viewInsets,
-                                        child: NewVersionFoundWidget(
-                                          forceUpdate: false,
-                                        ),
-                                      );
-                                    },
-                                  ).then((value) => setState(() {}));
                                 },
                                 text: 'Continue with Email',
                                 icon: Icon(
@@ -677,6 +663,38 @@ class _LandingPageViewWidgetState extends State<LandingPageViewWidget> {
                     ),
                   ],
                 ),
+              ),
+              StreamBuilder<List<VersionsRecord>>(
+                stream: queryVersionsRecord(
+                  queryBuilder: (versionsRecord) => versionsRecord
+                      .where('releaseDate', isGreaterThan: getCurrentTimestamp)
+                      .orderBy('releaseDate', descending: true),
+                  singleRecord: true,
+                ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: Center(
+                        child: LoadingEmptyWidget(),
+                      ),
+                    );
+                  }
+                  List<VersionsRecord> forceUpdateWidgetVersionsRecordList =
+                      snapshot.data!;
+                  final forceUpdateWidgetVersionsRecord =
+                      forceUpdateWidgetVersionsRecordList.isNotEmpty
+                          ? forceUpdateWidgetVersionsRecordList.first
+                          : null;
+                  return Container(
+                    width: 0,
+                    height: 0,
+                    child: custom_widgets.ForceUpdateWidget(
+                      width: 0,
+                      height: 0,
+                    ),
+                  );
+                },
               ),
             ],
           ),

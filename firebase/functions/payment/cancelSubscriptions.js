@@ -12,37 +12,37 @@ exports.cancelSubscriptions = functions.runWith({
 
         const time = admin.firestore.Timestamp.now();
 
-        const subscriptions = await admin.firestore().collectionGroup('paymentInfo')
-            .where('payStatus', '==', 'active')
-            .where('expireDate', '<', time)
-            .get();
+        // const subscriptions = await admin.firestore().collectionGroup('paymentInfo')
+        //     .where('payStatus', '==', 'active')
+        //     .where('expireDate', '<', time)
+        //     .get();
 
-        subscriptions.forEach(async documentSnapshot => {
+        // subscriptions.forEach(async documentSnapshot => {
 
-            const subscriptionId = documentSnapshot.data().subscriptionId;
+        //     const subscriptionId = documentSnapshot.data().subscriptionId;
 
-            const options = {
-                method: 'PUT',
-                url: `https://api.flutterwave.com/v3/subscriptions/${subscriptionId}/cancel`,
-                headers: {
-                    Authorization: `Bearer ${process.env.FW_KEY}`
-                },
-                data: {
-                    id: subscriptionId
-                }
-            };
+        //     const options = {
+        //         method: 'PUT',
+        //         url: `https://api.flutterwave.com/v3/subscriptions/${subscriptionId}/cancel`,
+        //         headers: {
+        //             Authorization: `Bearer ${process.env.FW_KEY}`
+        //         },
+        //         data: {
+        //             id: subscriptionId
+        //         }
+        //     };
 
-            axios.request(options)
-                .then(async function (response) {
-                    functions.logger.log('RESPONSE', response.data);
-                    await documentSnapshot.ref.update({
-                        payStatus: 'expired'
-                    });
-                })
-                .catch(function (error) {
-                    functions.logger.log('ERROR', error);
-                });
+        //     axios.request(options)
+        //         .then(async function (response) {
+        //             functions.logger.log('RESPONSE', response.data);
+        //             await documentSnapshot.ref.update({
+        //                 payStatus: 'expired'
+        //             });
+        //         })
+        //         .catch(function (error) {
+        //             functions.logger.log('ERROR', error);
+        //         });
 
-        });
+        // });
 
     });

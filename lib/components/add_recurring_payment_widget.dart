@@ -40,7 +40,7 @@ class _AddRecurringPaymentWidgetState extends State<AddRecurringPaymentWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

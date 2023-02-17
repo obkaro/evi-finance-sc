@@ -5,8 +5,8 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/instant_timer.dart';
-import '../landing_page_view/landing_page_view_widget.dart';
 import '../main.dart';
+import '../settings/settings_widget.dart';
 import '../welcome_to_evi/welcome_to_evi_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -132,18 +132,16 @@ class _SignUpPaywallWidgetState extends State<SignUpPaywallWidget> {
             borderWidth: 1,
             buttonSize: 60,
             icon: Icon(
-              Icons.logout,
+              Icons.settings_rounded,
               color: Colors.white,
               size: 24,
             ),
             onPressed: () async {
-              await signOut();
-              await Navigator.pushAndRemoveUntil(
+              await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LandingPageViewWidget(),
+                  builder: (context) => SettingsWidget(),
                 ),
-                (r) => false,
               );
             },
           ),

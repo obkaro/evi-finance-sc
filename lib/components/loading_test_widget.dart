@@ -31,7 +31,7 @@ class _LoadingTestWidgetState extends State<LoadingTestWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

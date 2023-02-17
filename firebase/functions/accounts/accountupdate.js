@@ -117,7 +117,7 @@ exports.accountUpdate = functions.runWith({
                     transactionMonoID: element._id,
                     transactionType: element.type,
                     transactionNarration: element.narration,
-                    monoCategory: element.category,
+                    monoCategory: element.category ?? "",
                     accountDetails: {
                       logo: logo.docs[0].data().institutionLogo
                     },

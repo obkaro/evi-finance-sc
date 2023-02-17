@@ -44,7 +44,7 @@ class _MGridMenuItemWidgetState extends State<MGridMenuItemWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }
