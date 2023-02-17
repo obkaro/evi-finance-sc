@@ -109,8 +109,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
           ),
         );
       }
-      if (valueOrDefault(currentUserDocument?.subStatus, '') != null &&
-          valueOrDefault(currentUserDocument?.subStatus, '') != '') {
+      if (false) {
         if (valueOrDefault(currentUserDocument?.subStatus, '') != 'active') {
           await Navigator.push(
             context,
